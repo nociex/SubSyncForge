@@ -174,7 +174,7 @@ async function fetchAndMergeAllNodes(converter) {
     }
     
     try {
-      console.log(`处理订阅: ${subscription.name}, 类型: ${subscription.type}, URL: ${subscription.url || '(BASE64/直接内容)'}`);
+      console.log(`处理订阅: ${subscription.name}, 类型: ${subscription.type || 'url'}, URL: ${subscription.url || '(BASE64/直接内容)'}`);
       
       let result;
       
@@ -194,26 +194,24 @@ async function fetchAndMergeAllNodes(converter) {
         // 获取URL订阅
         console.log(`从URL获取订阅: ${subscription.url}`);
         try {
-          const rawResult = await converter.convert(
-            subscription.url, 
-            'raw', 
-            { dedup: false, nodeManagement: false }
-          );
+          // 直接使用fetcher获取数据，而不是通过convert方法
+          const fetchResult = await converter.fetcher.fetch(subscription.url);
+          const rawData = fetchResult.data;
           
-          if (!rawResult.success) {
-            throw new Error(`获取订阅失败: ${rawResult.error}`);
-          }
-          
-          console.log(`成功获取订阅: ${subscription.name}, 原始数据大小: ${rawResult.data.length} 字节`);
+          console.log(`成功获取订阅: ${subscription.name}, 原始数据大小: ${rawData.length} 字节`);
           
           // 保存原始数据
           const dataDir = path.join(CONFIG.rootDir, CONFIG.options.dataDir);
           ensureDirectoryExists(dataDir);
           const rawFile = path.join(dataDir, `${subscription.name}.txt`);
-          fs.writeFileSync(rawFile, rawResult.data);
-          console.log(`保存原始订阅到: ${rawFile} (${rawResult.nodeCount} 个节点)`);
+          fs.writeFileSync(rawFile, rawData);
           
-          result = rawResult.nodes;
+          // 解析节点
+          console.log(`解析订阅数据...`);
+          result = await converter.parser.parse(rawData);
+          console.log(`从 ${subscription.name} 解析出 ${result.length} 个节点`);
+          
+          console.log(`保存原始订阅到: ${rawFile} (${result.length} 个节点)`);
         } catch (fetchError) {
           console.error(`获取订阅 ${subscription.url} 时出错:`, fetchError);
           throw new Error(`获取订阅失败: ${fetchError.message}`);
