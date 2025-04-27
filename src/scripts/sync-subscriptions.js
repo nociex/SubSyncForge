@@ -260,10 +260,91 @@ async function fetchAndMergeAllNodes(converter) {
           
           // 解析节点
           console.log(`解析订阅数据...`);
-          result = await converter.parser.parse(rawData);
-          console.log(`从 ${subscription.name} 解析出 ${result.length} 个节点`);
+          try {
+            // 增加更详细的解析过程日志
+            console.log(`开始使用订阅解析器解析数据`);
+            result = await converter.parser.parse(rawData);
+            console.log(`从 ${subscription.name} 解析出 ${result.length} 个节点`);
+            
+            // 输出解析结果的第一个节点以供调试
+            if (result.length > 0) {
+              console.log(`第一个节点示例:`, JSON.stringify(result[0], null, 2).substring(0, 200) + '...');
+            }
+          } catch (parseError) {
+            console.error(`解析订阅数据时出错:`, parseError.message);
+            console.error(`错误堆栈:`, parseError.stack);
+            
+            // 尝试使用备用解析方法
+            console.log(`尝试使用备用解析方法...`);
+            
+            // 尝试作为Clash格式强制解析
+            if (detectedFormat === 'clash' || rawData.includes('proxies:')) {
+              console.log(`尝试强制作为Clash格式解析`);
+              try {
+                // 动态导入yaml解析库
+                const yaml = await import('js-yaml');
+                const clashConfig = yaml.load(rawData);
+                
+                if (clashConfig && clashConfig.proxies && Array.isArray(clashConfig.proxies)) {
+                  console.log(`成功解析Clash配置，找到 ${clashConfig.proxies.length} 个代理节点`);
+                  
+                  // 手动转换节点
+                  result = clashConfig.proxies.map(proxy => {
+                    try {
+                      return {
+                        type: proxy.type,
+                        name: proxy.name || '',
+                        server: proxy.server || '',
+                        port: parseInt(proxy.port) || 0,
+                        settings: {
+                          // VMess特殊处理
+                          ...(proxy.type === 'vmess' && {
+                            id: proxy.uuid || '',
+                            alterId: proxy.alterId || 0,
+                            security: proxy.cipher || 'auto',
+                            network: proxy.network || 'tcp',
+                            tls: proxy.tls === true,
+                            wsPath: proxy['ws-path'] || (proxy['ws-opts'] && proxy['ws-opts'].path) || '',
+                            wsHeaders: proxy['ws-headers'] || (proxy['ws-opts'] && proxy['ws-opts'].headers) || {}
+                          }),
+                          // SS特殊处理
+                          ...(proxy.type === 'ss' && {
+                            method: proxy.cipher || '',
+                            password: proxy.password || ''
+                          }),
+                          // Trojan特殊处理
+                          ...(proxy.type === 'trojan' && {
+                            password: proxy.password || '',
+                            sni: proxy.sni || '',
+                            allowInsecure: proxy['skip-cert-verify'] === true
+                          })
+                        },
+                        extra: {
+                          raw: proxy
+                        }
+                      };
+                    } catch (e) {
+                      console.error(`转换Clash节点失败:`, e.message);
+                      return null;
+                    }
+                  }).filter(Boolean);
+                  
+                  console.log(`成功转换 ${result.length} 个Clash节点`);
+                } else {
+                  console.log(`Clash配置解析失败或未找到有效的proxies字段`);
+                }
+              } catch (e) {
+                console.error(`强制解析Clash失败:`, e.message);
+              }
+            }
+            
+            // 如果仍然没有结果，记录错误
+            if (!result || result.length === 0) {
+              console.error(`所有解析方法都失败，无法解析订阅数据`);
+            }
+          }
           
-          if (result.length === 0) {
+          if (!result || result.length === 0) {
             console.warn(`解析结果为空，尝试查看原始数据的前200个字符:`);
             console.warn(rawData.substring(0, 200));
             
@@ -379,6 +460,11 @@ async function generateConfigs(nodes, outputConfigs, options) {
   
   console.log(`准备生成 ${outputConfigs.length} 个配置文件`);
   console.log(`输出目录: ${outputDir}`);
+  console.log(`节点数量: ${nodes.length}`);
+  
+  if (nodes.length > 0) {
+    console.log(`第一个节点示例: ${JSON.stringify(nodes[0], null, 2).substring(0, 200)}...`);
+  }
   
   for (const output of outputConfigs) {
     try {
@@ -403,16 +489,54 @@ async function generateConfigs(nodes, outputConfigs, options) {
       
       // 处理模板
       if (templateFile) {
-        const templatePath = path.join(rootDir, templateFile);
+        // 支持多种模板路径格式
+        let templatePath = '';
+        if (path.isAbsolute(templateFile)) {
+          // 绝对路径
+          templatePath = templateFile;
+        } else if (templateFile.startsWith('templates/')) {
+          // 相对于项目根目录的templates目录
+          templatePath = path.join(rootDir, templateFile);
+        } else {
+          // 尝试其他可能的路径
+          const possiblePaths = [
+            path.join(rootDir, templateFile),
+            path.join(rootDir, 'templates', templateFile),
+            path.join(rootDir, 'config', 'templates', templateFile)
+          ];
+          
+          for (const possiblePath of possiblePaths) {
+            if (fs.existsSync(possiblePath)) {
+              templatePath = possiblePath;
+              break;
+            }
+          }
+          
+          if (!templatePath) {
+            // 默认使用第一个路径
+            templatePath = possiblePaths[0];
+          }
+        }
+        
         console.log(`使用模板: ${templatePath}`);
         
         if (!fs.existsSync(templatePath)) {
           console.error(`模板文件不存在: ${templatePath}`);
+          // 列出可能的模板目录内容
+          try {
+            const templatesDir = path.join(rootDir, 'templates');
+            if (fs.existsSync(templatesDir)) {
+              console.log(`templates目录内容: ${fs.readdirSync(templatesDir).join(', ')}`);
+            }
+          } catch (e) {
+            console.error(`无法列出templates目录内容: ${e.message}`);
+          }
           continue;
         }
         
         let templateContent = fs.readFileSync(templatePath, 'utf-8');
         console.log(`模板大小: ${templateContent.length} 字节`);
+        console.log(`模板内容片段: ${templateContent.substring(0, 200)}...`);
         
         // 替换一些通用变量
         templateContent = templateContent.replace(/\{\{random\}\}/g, Math.random().toString(36).substring(2));
@@ -686,18 +810,34 @@ async function generateConfigs(nodes, outputConfigs, options) {
               const formatted = converter.formatNodeForTarget(node, 'clash');
               if (!formatted) {
                 console.warn(`无法格式化节点 ${node.name} 为Clash格式`);
+                return null;
               }
               return formatted;
             }).filter(Boolean).join('\n');
             
-            console.log(`生成的${actualFormat}节点数: ${formattedNodes.split('\n').length / 4}`); // 每个节点大约4行
+            console.log(`生成的${actualFormat}节点文本长度: ${formattedNodes.length} 字节`);
             
-            // 替换代理部分
+            // 检查模板中是否有proxies部分
             if (templateContent.includes('proxies:')) {
-              console.log(`替换proxies部分`);
-              templateContent = templateContent.replace(/proxies:\s*(\{\{\s*proxies\s*\}\})/gi, `proxies:\n${formattedNodes}`);
+              console.log(`模板中包含proxies部分`);
+              
+              // 检查是否有proxies标记
+              if (templateContent.includes('{{proxies}}')) {
+                console.log(`替换{{proxies}}标记`);
+                templateContent = templateContent.replace(/\{\{\s*proxies\s*\}\}/gi, formattedNodes);
+              } else {
+                // 没有标记，尝试在proxies:后插入
+                console.log(`在proxies:后插入节点`);
+                templateContent = templateContent.replace(/proxies:\s*$/mi, `proxies:\n${formattedNodes}`);
+              }
+            } else {
+              // 没有proxies部分，添加一个
+              console.log(`模板中不存在proxies部分，添加新部分`);
+              const insertPos = templateContent.lastIndexOf('}') !== -1 ? templateContent.lastIndexOf('}') + 1 : templateContent.length;
+              templateContent = templateContent.substring(0, insertPos) + 
+                `\n\nproxies:\n${formattedNodes}` + 
+                templateContent.substring(insertPos);
             }
-            templateContent = templateContent.replace(/\{\{\s*proxies\s*\}\}/gi, formattedNodes);
             
             // 替换代理名称列表
             const proxyNames = nodes.map(node => `  - ${node.name}`).join('\n');

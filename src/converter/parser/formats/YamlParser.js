@@ -34,12 +34,21 @@ export class YamlParser {
       // 解析YAML数据
       const data = parseFunc(raw);
       
+      if (!data) {
+        console.error('YAML parsed to null or undefined');
+        return [];
+      }
+      
+      console.log('成功解析YAML，开始提取节点信息');
+      
       // 处理不同的YAML格式（主要是Clash配置格式）
       if (data.proxies) {
         // Clash格式
+        console.log(`找到proxies字段，包含 ${data.proxies.length} 个节点`);
         return data.proxies.map(node => this.normalizeNode(node)).filter(Boolean);
       } else if (data.Proxy) {
         // 某些自定义格式
+        console.log('找到Proxy字段');
         if (Array.isArray(data.Proxy)) {
           return data.Proxy.map(node => this.normalizeNode(node)).filter(Boolean);
         } else {
@@ -48,6 +57,7 @@ export class YamlParser {
         }
       } else if (data['proxy-providers']) {
         // Clash格式的provider
+        console.log('找到proxy-providers字段');
         const providers = data['proxy-providers'];
         const nodes = [];
         
@@ -58,9 +68,11 @@ export class YamlParser {
           }
         }
         
+        console.log(`从proxy-providers提取了 ${nodes.length} 个节点`);
         return nodes;
       } else if (data['proxy-groups']) {
         // 尝试从代理组提取节点
+        console.log('找到proxy-groups字段');
         const groups = data['proxy-groups'];
         const nodes = [];
         
@@ -76,10 +88,35 @@ export class YamlParser {
           }
         }
         
+        console.log(`从proxy-groups提取了 ${nodes.length} 个节点`);
         return nodes;
+      } else {
+        // 输出YAML结构以便调试
+        console.log('YAML结构中没有找到proxies、Proxy等标准字段，尝试查找其他可能包含节点的字段');
+        console.log('YAML顶级键:',  Object.keys(data).join(', '));
+        
+        // 检查是否有任何字段包含可能的节点数组
+        for (const key of Object.keys(data)) {
+          if (Array.isArray(data[key])) {
+            const possibleNodes = data[key].filter(item => 
+              typeof item === 'object' && item !== null && 
+              (item.type || item.server || item.host || item.port)
+            );
+            
+            if (possibleNodes.length > 0) {
+              console.log(`在字段 ${key} 中发现 ${possibleNodes.length} 个可能的节点`);
+              const nodes = possibleNodes.map(node => this.normalizeNode(node)).filter(Boolean);
+              if (nodes.length > 0) {
+                console.log(`成功从字段 ${key} 解析出 ${nodes.length} 个节点`);
+                return nodes;
+              }
+            }
+          }
+        }
       }
       
       // 尝试将整个文档作为单个节点
+      console.log('尝试将整个文档作为单个节点处理');
       const node = this.normalizeNode(data);
       return node ? [node] : [];
     } catch (error) {

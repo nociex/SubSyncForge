@@ -87,12 +87,15 @@ export class SubscriptionParser {
   detectFormat(raw) {
     this.logger.log(`检测订阅格式...`);
     
-    // 检查纯文本格式（v2ray、ss、ssr等）
-    if (raw.includes('vmess://') || raw.includes('ss://') || 
-        raw.includes('ssr://') || raw.includes('trojan://') ||
-        raw.includes('http://') || raw.includes('https://')) {
-      this.logger.log(`检测到纯文本格式 (含有URI链接)`);
-      return 'plain';
+    // 首先检查是否是Clash/YAML格式(优先级最高)
+    // Clash配置特征更明显，应该优先检测
+    if (
+        (raw.includes('proxies:') && (raw.includes('rules:') || raw.includes('proxy-groups:'))) || 
+        raw.includes('port: ') && raw.includes('mode: ') && raw.includes('proxies:') ||
+        (raw.includes('- name:') && raw.includes('server:') && raw.includes('port:') && raw.includes('type:'))
+    ) {
+      this.logger.log(`检测到Clash/YAML格式配置`);
+      return 'yaml';
     }
     
     // 检查JSON格式
@@ -104,12 +107,16 @@ export class SubscriptionParser {
       // 不是有效JSON
     }
     
-    // 检查YAML格式 (有一些关键特征)
-    if (raw.includes('proxies:') || raw.includes('Proxy:') || 
-        (raw.includes('- name:') && raw.includes('type:'))) {
-      this.logger.log(`检测到YAML格式`);
-      return 'yaml';
+    // 检查纯文本格式（v2ray、ss、ssr等）
+    // 确保内容以这些协议开头，或者包含多个这样的URL
+    const protocolUrls = (raw.match(/(vmess|ss|ssr|trojan):\/\/[^\s]+/g) || []);
+    if (protocolUrls.length > 0) {
+      this.logger.log(`检测到纯文本格式 (含有 ${protocolUrls.length} 个协议URI链接)`);
+      return 'plain';
     }
+    
+    // 普通URL不应该用于判断节点格式
+    // 如果只是配置文件中包含了一些http/https链接，不应该判定为plain
     
     // 尝试base64解码
     try {
@@ -119,17 +126,35 @@ export class SubscriptionParser {
       
       // 检查是否是纯base64字符
       if (base64Regex.test(cleanedRaw)) {
-        const decoded = atob(cleanedRaw);
+        // 尝试解码
+        let decoded;
+        if (typeof atob !== 'undefined') {
+          decoded = atob(cleanedRaw);
+        } else if (typeof Buffer !== 'undefined') {
+          decoded = Buffer.from(cleanedRaw, 'base64').toString('utf-8');
+        }
+        
         if (decoded && decoded.length > 0) {
-          this.logger.log(`检测到Base64格式`);
-          return 'base64';
+          // 检查解码后内容是否包含协议前缀
+          if (decoded.includes('vmess://') || decoded.includes('ss://') || 
+              decoded.includes('ssr://') || decoded.includes('trojan://')) {
+            this.logger.log(`检测到Base64格式，解码后包含节点URI`);
+            return 'base64';
+          }
         }
       }
     } catch (e) {
       // 解码失败
     }
     
-    // 默认YAML，因为它最灵活
+    // 再次检查是否是其他类型的YAML
+    if (raw.includes('Proxy:') || 
+        (raw.includes('- name:') && raw.includes('type:'))) {
+      this.logger.log(`检测到其他YAML格式`);
+      return 'yaml';
+    }
+    
+    // 默认使用YAML解析器
     this.logger.log(`无法确定格式，默认使用YAML解析器`);
     return 'yaml';
   }
