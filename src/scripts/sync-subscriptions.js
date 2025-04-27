@@ -399,6 +399,26 @@ async function fetchAndMergeAllNodes(converter) {
     console.log(`节点去重: ${allNodes.length} -> ${finalNodes.length}`);
   }
   
+  // 对节点进行分析和重命名
+  if (finalNodes.length > 0) {
+    console.log(`正在对节点进行分析和重命名...`);
+    // 使用nodeManager处理节点
+    const processedResult = converter.nodeManager.processNodes(finalNodes);
+    finalNodes = processedResult.nodes;
+    
+    // 重命名节点
+    finalNodes = converter.nodeManager.renameNodes(finalNodes, {
+      format: '{country}{protocol}{tags}{number}',
+      includeCountry: true,
+      includeProtocol: true,
+      includeNumber: true,
+      includeTags: true,
+      tagLimit: 2
+    });
+    
+    console.log(`完成节点分析和重命名，节点数量: ${finalNodes.length}`);
+  }
+  
   // 如果没有获取到任何节点，尝试使用备用节点
   if (finalNodes.length === 0) {
     console.warn(`未获取到任何节点，尝试使用备用示例节点...`);
@@ -453,7 +473,12 @@ async function fetchAndMergeAllNodes(converter) {
  * @param {Object} options 全局选项
  */
 async function generateConfigs(nodes, outputConfigs, options) {
-  const converter = new SubscriptionConverter();
+  // 创建转换器时传入节点重命名相关配置
+  const converter = new SubscriptionConverter({
+    nodeManagement: true,
+    renameNodes: true,
+    renameFormat: '{country}{protocol}{tags}{number}'
+  });
   const rootDir = options.rootDir || process.cwd();
   const outputDir = path.join(rootDir, options.outputDir || 'output');
   ensureDirectoryExists(outputDir);
