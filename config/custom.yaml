@@ -40,25 +40,25 @@ output:
     # Mihomo (Clash Meta) 配置
     - name: "mihomo"
       template: "templates/mihomo.yaml"
-      path: "output/mihomo.yaml"
+      path: "mihomo.yaml"
       enabled: true
     
     # Surge 配置
     - name: "surge"
       template: "templates/surge.conf"
-      path: "output/surge.conf"
+      path: "surge.conf"
       enabled: true
     
     # Sing-box 配置
     - name: "singbox"
       template: "templates/singbox.json"
-      path: "output/singbox.json"
+      path: "singbox.json"
       enabled: true
     
     # V2Ray 配置 (选择第一个节点作为默认)
     - name: "v2ray"
       template: "templates/v2ray.json"
-      path: "output/v2ray.json"
+      path: "v2ray.json"
       enabled: true
       options:
         use_first_node: true
