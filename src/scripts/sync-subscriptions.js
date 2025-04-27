@@ -395,7 +395,7 @@ async function fetchAndMergeAllNodes(converter) {
   let finalNodes = allNodes;
   if (CONFIG.options.deduplication && allNodes.length > 0) {
     console.log(`正在进行节点去重...`);
-    finalNodes = await converter.deduplicator.dedup(allNodes);
+    finalNodes = converter.deduplicator.deduplicate(allNodes);
     console.log(`节点去重: ${allNodes.length} -> ${finalNodes.length}`);
   }
   
