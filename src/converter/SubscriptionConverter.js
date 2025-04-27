@@ -352,6 +352,8 @@ export class SubscriptionConverter {
               includeTags: true,
               tagLimit: 2
             });
+
+            this.logger.debug(`Renamed ${nodes.length} nodes with sequential numbers`);
           }
 
           // 将分组信息添加到转换选项中，以便在转换时使用

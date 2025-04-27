@@ -1026,7 +1026,8 @@ async function main() {
       recordMetrics: true,
       emitEvents: true,
       nodeManagement: CONFIG.advanced.sortNodes,
-      renameNodes: false,
+      renameNodes: true,
+      renameFormat: '{country}{protocol}{tags}{number}',
       groupingMode: 'advanced',
       applyRules: true,
       fetch: {

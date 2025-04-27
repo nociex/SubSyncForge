@@ -425,9 +425,12 @@ export class NodeGrouper {
     const result = [];
     const groupMap = new Map();
 
-    // 首先创建区域节点组
-    const regionGroups = {};
+    // 首先创建特殊标签分组（如Netflix、Disney+、OpenAI等）
+    this.createSpecialTagGroups(nodes, result, groupMap);
 
+    // 创建区域节点组
+    const regionGroups = {};
+    
     // 获取所有国家/地区
     const countries = new Set();
     for (const node of nodes) {
@@ -589,8 +592,54 @@ export class NodeGrouper {
         result.push(customGroups[key]);
       }
     }
-
+    
     return result;
+  }
+  
+  /**
+   * 创建特殊标签分组（如Netflix、Disney+、OpenAI等）
+   * @param {Array} nodes 节点数组
+   * @param {Array} result 结果数组
+   * @param {Map} groupMap 分组映射
+   */
+  createSpecialTagGroups(nodes, result, groupMap) {
+    // 定义特殊标签及其图标
+    const specialTags = [
+      { tag: 'Netflix', name: '🎬 Netflix节点', icon: '🎬' },
+      { tag: 'Disney+', name: '🎪 Disney+节点', icon: '🎪' },
+      { tag: 'OpenAI', name: '🤖 OpenAI节点', icon: '🤖' },
+      { tag: 'YouTube', name: '📺 YouTube节点', icon: '📺' },
+      { tag: 'Telegram', name: '📨 Telegram节点', icon: '📨' },
+      { tag: '流媒体', name: '🎭 流媒体节点', icon: '🎭' },
+      { tag: '游戏', name: '🎮 游戏节点', icon: '🎮' },
+      { tag: 'TikTok', name: '📱 TikTok节点', icon: '📱' }
+    ];
+    
+    // 为每个特殊标签创建分组
+    for (const { tag, name, icon } of specialTags) {
+      // 找出包含该标签的所有节点
+      const taggedNodes = nodes.filter(node => 
+        node.analysis && 
+        node.analysis.tags && 
+        node.analysis.tags.includes(tag)
+      );
+      
+      // 如果找到了包含该标签的节点，创建对应的分组
+      if (taggedNodes.length > 0) {
+        const tagGroup = {
+          name,
+          type: 'select',
+          nodes: taggedNodes,
+          url: 'http://www.gstatic.com/generate_204',
+          interval: 300,
+          tolerance: 150
+        };
+        
+        // 将分组添加到结果和映射
+        groupMap.set(name, tagGroup);
+        result.push(tagGroup);
+      }
+    }
   }
 
   /**

@@ -402,45 +402,48 @@ export class NodeAnalyzer {
    * 根据分析结果生成节点名称
    * @param {Object} analysis 分析结果
    * @param {Object} options 选项
+   * @param {number} index 节点索引（用于生成顺序编号）
    * @returns {string} 生成的节点名称
    */
-  generateName(analysis, options = {}) {
+  generateName(analysis, options = {}, index = null) {
     const {
       includeCountry = true,
       includeProtocol = true,
       includeNumber = true,
       includeTags = true,
       tagLimit = 2,
-      format = '{country}{protocol}{number}{tags}'
+      format = '{country}{protocol}{tags}{number}'
     } = options;
 
     let name = format;
 
-    // 替换国家/地区
+    // 替换国家/地区（同时显示旗帜和国家代码）
     if (includeCountry && analysis.country) {
+      // 查找国旗表情符号，通常是以🇦-🇿开头的双字母组合
       const countryEmoji = Object.keys(this.countryMap).find(
-        key => this.countryMap[key] === analysis.countryCode && key.startsWith('�')
+        key => this.countryMap[key] === analysis.countryCode && 
+               key.length >= 2 && 
+               key.codePointAt(0) >= 127462 && key.codePointAt(0) <= 127487
       );
-      name = name.replace('{country}', countryEmoji ? `${countryEmoji}${analysis.country}` : analysis.country);
+      
+      // 确保同时显示旗帜和国家代码，格式为: 🇺🇸 US
+      if (countryEmoji && analysis.countryCode) {
+        name = name.replace('{country}', `${countryEmoji} ${analysis.countryCode}`);
+      } else {
+        name = name.replace('{country}', analysis.countryCode ? `${analysis.countryCode}` : analysis.country);
+      }
     } else {
       name = name.replace('{country}', '');
     }
 
     // 替换协议
     if (includeProtocol && analysis.protocol) {
-      name = name.replace('{protocol}', `-${analysis.protocol}`);
+      name = name.replace('{protocol}', ` ${analysis.protocol}`);
     } else {
       name = name.replace('{protocol}', '');
     }
 
-    // 替换编号
-    if (includeNumber && analysis.number !== null) {
-      name = name.replace('{number}', `-${analysis.number.toString().padStart(2, '0')}`);
-    } else {
-      name = name.replace('{number}', '');
-    }
-
-    // 替换标签
+    // 替换标签（作为备注，若无备注则不填）
     if (includeTags && analysis.tags.length > 0) {
       const specialTags = analysis.tags.filter(tag =>
         tag !== analysis.protocol &&
@@ -451,16 +454,26 @@ export class NodeAnalyzer {
 
       const limitedTags = specialTags.slice(0, tagLimit);
       if (limitedTags.length > 0) {
-        name = name.replace('{tags}', `-${limitedTags.join('/')}`);
+        name = name.replace('{tags}', ` ${limitedTags.join('/')}`);
       } else {
+        // 如果没有特殊标签作为备注，则完全移除标签部分
         name = name.replace('{tags}', '');
       }
     } else {
       name = name.replace('{tags}', '');
     }
 
-    // 清理多余的连字符
-    name = name.replace(/--+/g, '-').replace(/^-|-$/g, '');
+    // 替换编号（使用传入的索引生成编号，而不是节点原有的编号）
+    if (includeNumber && index !== null) {
+      // 从1开始编号，并确保至少两位数
+      const sequentialNumber = (index + 1).toString().padStart(2, '0');
+      name = name.replace('{number}', ` ${sequentialNumber}`);
+    } else {
+      name = name.replace('{number}', '');
+    }
+
+    // 清理多余的空格
+    name = name.replace(/\s+/g, ' ').trim();
 
     return name || analysis.originalName;
   }

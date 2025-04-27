@@ -66,12 +66,12 @@ export class NodeManager {
    * @returns {Array} 重命名后的节点数组
    */
   renameNodes(nodes, options = {}) {
-    return nodes.map(node => {
+    return nodes.map((node, index) => {
       if (!node.analysis) {
         node.analysis = this.analyzer.analyze(node);
       }
 
-      const newName = this.analyzer.generateName(node.analysis, options);
+      const newName = this.analyzer.generateName(node.analysis, options, index);
 
       return {
         ...node,
