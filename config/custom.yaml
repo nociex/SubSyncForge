@@ -1,104 +1,81 @@
 # SubSyncForge 自定义节点配置
-# 此文件用于添加自定义节点和订阅源
+# 此文件用于配置订阅源和输出格式
 
-# 订阅源列表
+# 订阅源配置 - 所有订阅将被合并
 subscriptions:
-  # 从 URL 获取订阅
-  - type: url
-    value: "https://freesu7.flyi.me/storage?token=tva&filename=all.yaml"
-    # 备注: freesu7
+  # 订阅源列表
+  - name: "freesu7"
+    url: "https://freesu7.flyi.me/storage?token=tva&filename=all.yaml"
+    enabled: true
+  
+  - name: "alalbb"
+    url: "https://c.alalbb.top/clash"
+    enabled: true
+  
+  # 示例：Base64编码的节点
+  - name: "base64示例"
+    type: "base64"
+    content: "dm1lc3M6Ly9leUoySWpvaU1pSXNJbkJ6SWpvaVhIVTVPVGs1WEhVMlpUSm1MakY4WjJOd2ZGeDFOV1UzWmx4MU5tVXlabHgxT1dGa09GeDFPVEF4WmlJc0ltRmtaQ0k2SW5Ob2F5NWpaREV5TXpRdWVIbDZJaXdpY0c5eWRDSTZJakkyT0RFNUlpd2lhV1FpT2lKbVpqTmxOak01TkMwMll6TmxMVFJpWVdFdFlUUTROaTFrWWpnMU5XWmtORFV4TURRaUxDSmhhV1FpT2lJd0lpd2libVYwSWpvaWQzTWlMQ0owZVhCbElqb2libTl1WlNJc0ltaHZjM1FpT2lKc2FXNTFhR0Z2TG1OdmJTSXNJbkJoZEdnaU9pSmNMM05vYXk1alpERXlNelF1ZUhsNklpd2lkR3h6SWpvaUluMD0="
+    enabled: false  # 默认禁用示例
+    
+  # 示例：直接添加VMess节点
+  - name: "VMess示例"
+    type: "vmess"
+    content: "vmess://eyJ2IjoiMiIsInBzIjoiXHU5OTk5XHU2ZTJmLjFefmdjcH5cdTVlN2ZcdTZlMmZcdTlhZDhcdTkwMWYiLCJhZGQiOiJzaGsuY2QxMjM0LnNpdGUiLCJwb3J0IjoiMjY4MTkiLCJpZCI6ImZmM2U2Mzk0LTZjM2UtNGJhYS1hNDg2LWRiODU1ZmQ0NTEwNCIsImFpZCI6IjAiLCJuZXQiOiJ3cyIsInR5cGUiOiJub25lIiwiaG9zdCI6ImxpbnVoYW8uY29tIiwicGF0aCI6IlwvIiwidGxzIjoiIn0="
+    enabled: false  # 默认禁用示例
 
-  # 添加 alalbb 订阅源
-  - type: url
-    value: "https://c.alalbb.top/clash"
-    # 备注: alalbb
+# 输出配置
+output:
+  # 是否将节点去重
+  deduplication: true
+  
+  # 输出目录
+  dir: "output"
+  
+  # 数据存储目录
+  data_dir: "data"
+  
+  # 生成的配置文件
+  configs:
+    # Mihomo (Clash Meta) 配置
+    - name: "mihomo"
+      template: "templates/mihomo.yaml"
+      path: "output/mihomo.yaml"
+      enabled: true
+    
+    # Surge 配置
+    - name: "surge"
+      template: "templates/surge.conf"
+      path: "output/surge.conf"
+      enabled: true
+    
+    # Sing-box 配置
+    - name: "singbox"
+      template: "templates/singbox.json"
+      path: "output/singbox.json"
+      enabled: true
+    
+    # V2Ray 配置 (选择第一个节点作为默认)
+    - name: "v2ray"
+      template: "templates/v2ray.json"
+      path: "output/v2ray.json"
+      enabled: true
+      options:
+        use_first_node: true
 
-  # 直接使用 Base64 编码的节点列表
-  - type: base64
-    value: "dm1lc3M6Ly9leUoySWpvaU1pSXNJbkJ6SWpvaVhIVTVPVGs1WEhVMlpUSm1MakY4WjJOd2ZGeDFOV1UzWmx4MU5tVXlabHgxT1dGa09GeDFPVEF4WmlJc0ltRmtaQ0k2SW5Ob2F5NWpaREV5TXpRdWVIbDZJaXdpY0c5eWRDSTZJakkyT0RFNUlpd2lhV1FpT2lKbVpqTmxOak01TkMwMll6TmxMVFJpWVdFdFlUUTROaTFrWWpnMU5XWmtORFV4TURRaUxDSmhhV1FpT2lJd0lpd2libVYwSWpvaWQzTWlMQ0owZVhCbElqb2libTl1WlNJc0ltaHZjM1FpT2lKc2FXNTFhR0Z2TG1OdmJTSXNJbkJoZEdnaU9pSmNMM05vYXk1alpERXlNelF1ZUhsNklpd2lkR3h6SWpvaUluMD0="
-    # 备注: Base64示例
-
-  # 直接添加 VMess 节点
-  - type: vmess
-    value: "vmess://eyJ2IjoiMiIsInBzIjoiXHU5OTk5XHU2ZTJmLjFefmdjcH5cdTVlN2ZcdTZlMmZcdTlhZDhcdTkwMWYiLCJhZGQiOiJzaGsuY2QxMjM0LnNpdGUiLCJwb3J0IjoiMjY4MTkiLCJpZCI6ImZmM2U2Mzk0LTZjM2UtNGJhYS1hNDg2LWRiODU1ZmQ0NTEwNCIsImFpZCI6IjAiLCJuZXQiOiJ3cyIsInR5cGUiOiJub25lIiwiaG9zdCI6ImxpbnVoYW8uY29tIiwicGF0aCI6IlwvIiwidGxzIjoiIn0="
-    # 备注: VMess示例
-
-  # 直接添加 Shadowsocks 节点
-  - type: ss
-    value: "ss://YWVzLTI1Ni1nY206cEtFVzhKUEJ5VFZUTHRN@169.197.142.99:443#SS%E7%A4%BA%E4%BE%8B"
-    # 备注: SS示例
-
-  # 直接添加 Trojan 节点
-  - type: trojan
-    value: "trojan://password@example.com:443?security=tls&type=tcp#Trojan%E7%A4%BA%E4%BE%8B"
-    # 备注: Trojan示例
-
-# 自定义节点
-nodes:
-  # VMess 节点示例
-  - type: vmess
-    name: "自定义VMess节点"
-    server: example.com
-    port: 443
-    uuid: "1386f85e-657d-4d6e-9d56-78badb75e1fd"
-    alterId: 0
-    cipher: "auto"
-    tls: true
-    network: ws
-    ws-opts:
-      path: /vmess
-      headers:
-        Host: example.com
-
-  # Shadowsocks 节点示例
-  - type: ss
-    name: "自定义SS节点"
-    server: example.com
-    port: 8388
-    cipher: aes-256-gcm
-    password: "password123"
-
-  # Trojan 节点示例
-  - type: trojan
-    name: "自定义Trojan节点"
-    server: example.com
-    port: 443
-    password: "password123"
-    sni: example.com
-
-  # ShadowsocksR 节点示例
-  - type: ssr
-    name: "自定义SSR节点"
-    server: example.com
-    port: 8388
-    protocol: auth_aes128_md5
-    protocol-param: "16384:123456"
-    cipher: aes-256-cfb
-    obfs: tls1.2_ticket_auth
-    obfs-param: "bing.com"
-    password: "password123"
-
-# 节点分组
-groups:
-  - name: "香港节点"
-    type: select
-    proxies:
-      - "自定义VMess节点"
-      - "VMess示例"
-      - "SS示例"
-
-  - name: "美国节点"
-    type: url-test
-    proxies:
-      - "自定义SS节点"
-      - "自定义Trojan节点"
-    url: "http://www.gstatic.com/generate_204"
-    interval: 300
-
-# 规则设置
-rules:
-  - DOMAIN-SUFFIX,google.com,香港节点
-  - DOMAIN-SUFFIX,netflix.com,美国节点
-  - DOMAIN-SUFFIX,github.com,DIRECT
-  - GEOIP,CN,DIRECT
-  - MATCH,香港节点
+# 高级设置
+advanced:
+  # 缓存过期时间（秒）
+  cache_ttl: 3600
+  
+  # 日志级别: debug, info, warn, error
+  log_level: "info"
+  
+  # 使用代理获取订阅内容
+  proxy_for_subscription: false
+  
+  # 节点排序
+  sort_nodes: true
+  
+  # 定时同步设置（分钟）
+  sync_interval: 360

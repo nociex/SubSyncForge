@@ -16,33 +16,46 @@ const __dirname = path.dirname(__filename);
 
 // 配置日志级别
 const LOG_LEVEL = process.env.LOG_LEVEL || 'info';
+console.log(`[Logger] Setting log level to: ${LOG_LEVEL}`);
 const DEBUG = LOG_LEVEL === 'debug';
 
 // 订阅类型
 const SubscriptionType = {
-  V2RAY: 'v2ray',
-  CLASH: 'clash',
-  SHADOWSOCKS: 'ss',
-  TROJAN: 'trojan',
-  MIXED: 'mixed'
+  URL: 'url',
+  BASE64: 'base64',
+  VMESS: 'vmess',
+  SS: 'ss',
+  SSR: 'ssr',
+  TROJAN: 'trojan'
 };
 
 // 目标转换格式
 const ConversionFormat = {
   CLASH: 'clash',
+  MIHOMO: 'mihomo',
   SURGE: 'surge',
-  QUANTUMULT: 'quantumult',
-  QUANTUMULTX: 'quantumultx',
-  LOON: 'loon',
-  SHADOWROCKET: 'shadowrocket'
+  SINGBOX: 'singbox',
+  V2RAY: 'v2ray'
 };
 
 // 基本配置
 const CONFIG = {
-  dataDir: path.resolve(__dirname, '../../data'),
-  outputDir: path.resolve(__dirname, '../../output'),
+  rootDir: path.resolve(__dirname, '../..'),
   configFile: path.resolve(__dirname, '../../config/custom.yaml'),
-  subscriptions: []
+  subscriptions: [],
+  outputConfigs: [],
+  options: {
+    deduplication: true,
+    dataDir: 'data',
+    outputDir: 'output'
+  },
+  advanced: {
+    logLevel: 'info',
+    cacheTtl: 3600,
+    proxyForSubscription: false,
+    sortNodes: true,
+    syncInterval: 360
+  }
 };
 
 // 确保目录存在
@@ -53,43 +66,480 @@ function ensureDirectoryExists(directory) {
   }
 }
 
-// 从配置文件中读取订阅源
-function loadSubscriptionsFromConfig() {
+// 从配置文件中读取订阅源和配置
+function loadConfig() {
   try {
     if (!fs.existsSync(CONFIG.configFile)) {
       console.warn(`配置文件不存在: ${CONFIG.configFile}`);
-      return [];
+      return false;
     }
 
     const content = fs.readFileSync(CONFIG.configFile, 'utf-8');
     const config = yaml.load(content);
 
-    if (!config || !config.subscriptions || !Array.isArray(config.subscriptions)) {
-      console.warn('配置文件中未找到有效的订阅源配置');
-      return [];
+    if (!config) {
+      console.warn('配置文件内容为空');
+      return false;
     }
 
-    // 处理配置文件中的订阅源
-    return config.subscriptions.map((sub, index) => {
-      // 提取注释中的备注信息
-      const remarkMatch = content.split('\n')
-        .find(line => line.includes(`# 备注: `) && content.indexOf(line) > content.indexOf(sub.value || ''))?.match(/# 备注: (.+)/);
+    // 加载订阅源
+    if (config.subscriptions && Array.isArray(config.subscriptions)) {
+      CONFIG.subscriptions = config.subscriptions;
+    } else if (typeof config.subscriptions === 'object') {
+      // 处理对象格式的订阅源
+      CONFIG.subscriptions = Object.entries(config.subscriptions).map(([key, sub]) => ({
+        name: key,
+        url: sub.url,
+        enabled: sub.enabled !== false,
+        type: 'url'
+      }));
+    } else {
+      console.warn('配置文件中未找到有效的订阅源配置');
+      CONFIG.subscriptions = [];
+    }
+
+    // 加载输出配置
+    if (config.output) {
+      if (config.output.deduplication !== undefined) {
+        CONFIG.options.deduplication = config.output.deduplication;
+      }
       
-      const remark = remarkMatch ? remarkMatch[1].trim() : null;
-      const id = `sub-${index + 1}`;
-      const name = remark || `订阅源 ${index + 1}`;
+      if (config.output.dir) {
+        CONFIG.options.outputDir = config.output.dir;
+      }
       
-      return {
-        id,
-        name,
-        url: sub.value,
-        type: sub.type,
-        enabled: true
-      };
-    }).filter(sub => sub.url); // 过滤掉没有 URL 的订阅
+      if (config.output.data_dir) {
+        CONFIG.options.dataDir = config.output.data_dir;
+      }
+      
+      if (config.output.configs && Array.isArray(config.output.configs)) {
+        CONFIG.outputConfigs = config.output.configs;
+      }
+    }
+
+    // 加载高级设置
+    if (config.advanced) {
+      if (config.advanced.log_level) {
+        CONFIG.advanced.logLevel = config.advanced.log_level;
+      }
+      
+      if (config.advanced.cache_ttl) {
+        CONFIG.advanced.cacheTtl = config.advanced.cache_ttl;
+      }
+      
+      if (config.advanced.proxy_for_subscription !== undefined) {
+        CONFIG.advanced.proxyForSubscription = config.advanced.proxy_for_subscription;
+      }
+      
+      if (config.advanced.sort_nodes !== undefined) {
+        CONFIG.advanced.sortNodes = config.advanced.sort_nodes;
+      }
+      
+      if (config.advanced.sync_interval) {
+        CONFIG.advanced.syncInterval = config.advanced.sync_interval;
+      }
+    }
+
+    return CONFIG.subscriptions.length > 0;
   } catch (error) {
     console.error('解析配置文件失败:', error.message);
-    return [];
+    return false;
+  }
+}
+
+// 合并所有订阅节点
+async function fetchAndMergeAllNodes(converter) {
+  const allNodes = [];
+  
+  for (const subscription of CONFIG.subscriptions) {
+    if (!subscription.enabled) {
+      console.log(`跳过禁用的订阅: ${subscription.name}`);
+      continue;
+    }
+    
+    try {
+      console.log(`处理订阅: ${subscription.name}`);
+      
+      let result;
+      
+      // 根据订阅类型处理
+      if (subscription.type === SubscriptionType.BASE64 && subscription.content) {
+        // 处理Base64内容
+        result = await converter.parser.parse(subscription.content);
+        console.log(`解析Base64订阅: ${subscription.name}, 获取 ${result.length} 个节点`);
+      } else if ([SubscriptionType.VMESS, SubscriptionType.SS, SubscriptionType.SSR, SubscriptionType.TROJAN].includes(subscription.type) && subscription.content) {
+        // 处理单个节点
+        const node = await converter.parser.parseLine(subscription.content);
+        result = node ? [node] : [];
+        console.log(`解析${subscription.type}节点: ${subscription.name}`);
+      } else if (subscription.url) {
+        // 获取URL订阅
+        const rawResult = await converter.convert(
+          subscription.url, 
+          'raw', 
+          { dedup: false, nodeManagement: false }
+        );
+        
+        if (!rawResult.success) {
+          throw new Error(`获取订阅失败: ${rawResult.error}`);
+        }
+        
+        // 保存原始数据
+        const dataDir = path.join(CONFIG.rootDir, CONFIG.options.dataDir);
+        ensureDirectoryExists(dataDir);
+        const rawFile = path.join(dataDir, `${subscription.name}.txt`);
+        fs.writeFileSync(rawFile, rawResult.data);
+        console.log(`保存原始订阅到: ${rawFile} (${rawResult.nodeCount} 个节点)`);
+        
+        result = rawResult.nodes;
+      }
+      
+      if (result && result.length > 0) {
+        // 添加订阅源信息
+        result.forEach(node => {
+          if (!node.extra) node.extra = {};
+          node.extra.source = subscription.name;
+        });
+        
+        allNodes.push(...result);
+      }
+    } catch (error) {
+      console.error(`处理订阅 ${subscription.name} 时出错:`, error.message);
+    }
+  }
+  
+  // 如果启用去重，进行节点去重
+  let finalNodes = allNodes;
+  if (CONFIG.options.deduplication && allNodes.length > 0) {
+    finalNodes = await converter.deduplicator.dedup(allNodes);
+    console.log(`节点去重: ${allNodes.length} -> ${finalNodes.length}`);
+  }
+  
+  return finalNodes;
+}
+
+/**
+ * 生成各种配置文件
+ * @param {Array} nodes 所有节点
+ * @param {Object} outputConfigs 输出配置
+ * @param {Object} options 全局选项
+ */
+async function generateConfigs(nodes, outputConfigs, options) {
+  const converter = new SubscriptionConverter();
+  const rootDir = options.rootDir || process.cwd();
+  const outputDir = path.join(rootDir, options.outputDir || 'output');
+  ensureDirectoryExists(outputDir);
+  
+  for (const output of outputConfigs) {
+    try {
+      // 如果配置被禁用，则跳过
+      if (output.enabled === false) {
+        console.log(`跳过禁用的输出配置: ${output.name}`);
+        continue;
+      }
+      
+      const { name, format, template: templateFile, path: outputFile } = output;
+      const actualFormat = format || name; // 兼容旧格式，使用name作为format的备选
+      
+      if (!actualFormat || !outputFile) {
+        console.error(`输出配置缺少必要参数: ${JSON.stringify(output)}`);
+        continue;
+      }
+      
+      const outputPath = path.join(outputDir, outputFile);
+      ensureDirectoryExists(path.dirname(outputPath));
+      
+      // 处理模板
+      if (templateFile) {
+        const templatePath = path.join(rootDir, templateFile);
+        if (!fs.existsSync(templatePath)) {
+          console.error(`模板文件不存在: ${templatePath}`);
+          continue;
+        }
+        
+        let templateContent = fs.readFileSync(templatePath, 'utf-8');
+        
+        // 替换一些通用变量
+        templateContent = templateContent.replace(/\{\{random\}\}/g, Math.random().toString(36).substring(2));
+        templateContent = templateContent.replace(/\{\{generateUrl\}\}/g, `https://example.com/${name}.conf`);
+        
+        // 根据不同格式处理模板
+        if (actualFormat.toUpperCase() === 'SINGBOX' || actualFormat.toUpperCase() === 'V2RAY') {
+          // JSON 格式的配置
+          try {
+            const templateJson = JSON.parse(templateContent);
+            let configWithNodes = { ...templateJson };
+            
+            if (actualFormat.toUpperCase() === 'SINGBOX') {
+              // Sing-box 格式处理
+              if (!configWithNodes.outbounds) {
+                configWithNodes.outbounds = [];
+              }
+              
+              // 添加代理节点
+              const proxyOutbounds = nodes.map(node => {
+                switch (node.type) {
+                  case 'vmess':
+                    return {
+                      type: 'vmess',
+                      tag: node.name,
+                      server: node.server,
+                      server_port: parseInt(node.port),
+                      uuid: node.settings.id,
+                      security: node.settings.security || 'auto',
+                      alter_id: parseInt(node.settings.alterId || 0),
+                      ...(node.settings.network === 'ws' && {
+                        transport: {
+                          type: 'ws',
+                          path: node.settings.wsPath || '/',
+                          headers: {
+                            Host: (node.settings.wsHeaders && node.settings.wsHeaders.Host) || node.server
+                          }
+                        }
+                      }),
+                      ...(node.settings.tls && {
+                        tls: {
+                          enabled: true,
+                          server_name: node.settings.serverName || node.server,
+                          insecure: node.settings.allowInsecure || false
+                        }
+                      })
+                    };
+                  case 'ss':
+                    return {
+                      type: 'shadowsocks',
+                      tag: node.name,
+                      server: node.server,
+                      server_port: parseInt(node.port),
+                      method: node.settings.method,
+                      password: node.settings.password
+                    };
+                  case 'trojan':
+                    return {
+                      type: 'trojan',
+                      tag: node.name,
+                      server: node.server,
+                      server_port: parseInt(node.port),
+                      password: node.settings.password,
+                      ...(node.settings.sni && {
+                        tls: {
+                          enabled: true,
+                          server_name: node.settings.sni,
+                          insecure: node.settings.allowInsecure || false
+                        }
+                      })
+                    };
+                  default:
+                    return null;
+                }
+              }).filter(Boolean);
+              
+              // 找到模板中的outbounds占位符位置
+              const existingOutboundsIndex = configWithNodes.outbounds.findIndex(outbound => outbound === '{{outbounds}}');
+              if (existingOutboundsIndex !== -1) {
+                // 在占位符位置插入节点
+                configWithNodes.outbounds.splice(existingOutboundsIndex, 1, ...proxyOutbounds);
+              } else {
+                // 没有占位符，直接添加到outbounds数组
+                configWithNodes.outbounds = [
+                  ...configWithNodes.outbounds,
+                  ...proxyOutbounds
+                ];
+              }
+              
+              // 添加代理群组标签
+              const proxyTags = nodes.map(node => `"${node.name}"`).join(', ');
+              
+              // 替换proxyTags占位符
+              if (templateContent.includes('{{proxyTags}}')) {
+                const configStr = JSON.stringify(configWithNodes, null, 2).replace(/"{{proxyTags}}"/g, proxyTags);
+                fs.writeFileSync(outputPath, configStr);
+              } else {
+                // 添加节点到现有selector
+                const existingSelectors = configWithNodes.outbounds.filter(outbound => outbound.type === 'selector');
+                if (existingSelectors.length > 0) {
+                  for (const selector of existingSelectors) {
+                    selector.outbounds = [
+                      ...(selector.outbounds || []),
+                      ...proxyOutbounds.map(p => p.tag)
+                    ];
+                  }
+                }
+                
+                fs.writeFileSync(outputPath, JSON.stringify(configWithNodes, null, 2));
+              }
+              
+              console.log(`已生成 ${actualFormat} 配置: ${outputPath} (${nodes.length} 个节点)`);
+            } else if (actualFormat.toUpperCase() === 'V2RAY') {
+              // V2Ray 格式处理
+              // 如果只使用第一个节点
+              const useFirstNode = output.options?.use_first_node === true;
+              const nodeToUse = useFirstNode ? nodes[0] : null;
+              
+              if (useFirstNode && nodeToUse) {
+                // 使用第一个节点替换模板中的变量
+                let contentStr = JSON.stringify(configWithNodes, null, 2);
+                
+                // 替换变量
+                contentStr = contentStr.replace(/{{server}}/g, nodeToUse.server)
+                  .replace(/{{port}}/g, nodeToUse.port)
+                  .replace(/{{uuid}}/g, nodeToUse.settings.id || '')
+                  .replace(/{{alterId}}/g, nodeToUse.settings.alterId || 0)
+                  .replace(/{{network}}/g, nodeToUse.settings.network || 'tcp')
+                  .replace(/{{security}}/g, nodeToUse.settings.tls ? 'tls' : 'none')
+                  .replace(/{{serverName}}/g, nodeToUse.settings.serverName || nodeToUse.server)
+                  .replace(/{{path}}/g, (nodeToUse.settings.wsPath || '/'))
+                  .replace(/{{host}}/g, (nodeToUse.settings.wsHeaders && nodeToUse.settings.wsHeaders.Host) || nodeToUse.server);
+                
+                fs.writeFileSync(outputPath, contentStr);
+                console.log(`已生成 ${actualFormat} 配置: ${outputPath} (使用第1个节点)`);
+              } else {
+                // 添加全部节点
+                if (!configWithNodes.outbounds) {
+                  configWithNodes.outbounds = [];
+                }
+                
+                // 添加代理节点
+                const proxyOutbounds = nodes.map(node => {
+                  switch (node.type) {
+                    case 'vmess':
+                      return {
+                        protocol: 'vmess',
+                        tag: node.name,
+                        settings: {
+                          vnext: [{
+                            address: node.server,
+                            port: parseInt(node.port),
+                            users: [{
+                              id: node.settings.id,
+                              alterId: parseInt(node.settings.alterId || 0),
+                              security: node.settings.security || 'auto'
+                            }]
+                          }]
+                        },
+                        ...(node.settings.network === 'ws' && {
+                          streamSettings: {
+                            network: 'ws',
+                            wsSettings: {
+                              path: node.settings.wsPath || '/',
+                              headers: {
+                                Host: (node.settings.wsHeaders && node.settings.wsHeaders.Host) || node.server
+                              }
+                            },
+                            ...(node.settings.tls && {
+                              security: 'tls',
+                              tlsSettings: {
+                                serverName: node.settings.serverName || node.server,
+                                allowInsecure: node.settings.allowInsecure || false
+                              }
+                            })
+                          }
+                        })
+                      };
+                    case 'ss':
+                      return {
+                        protocol: 'shadowsocks',
+                        tag: node.name,
+                        settings: {
+                          servers: [{
+                            address: node.server,
+                            port: parseInt(node.port),
+                            method: node.settings.method,
+                            password: node.settings.password
+                          }]
+                        }
+                      };
+                    case 'trojan':
+                      return {
+                        protocol: 'trojan',
+                        tag: node.name,
+                        settings: {
+                          servers: [{
+                            address: node.server,
+                            port: parseInt(node.port),
+                            password: node.settings.password
+                          }]
+                        },
+                        ...(node.settings.sni && {
+                          streamSettings: {
+                            security: 'tls',
+                            tlsSettings: {
+                              serverName: node.settings.sni,
+                              allowInsecure: node.settings.allowInsecure || false
+                            }
+                          }
+                        })
+                      };
+                    default:
+                      return null;
+                  }
+                }).filter(Boolean);
+                
+                // 在第一个outbound前插入所有代理节点
+                if (configWithNodes.outbounds.length > 0) {
+                  configWithNodes.outbounds.splice(1, 0, ...proxyOutbounds);
+                } else {
+                  configWithNodes.outbounds = proxyOutbounds;
+                }
+                
+                fs.writeFileSync(outputPath, JSON.stringify(configWithNodes, null, 2));
+                console.log(`已生成 ${actualFormat} 配置: ${outputPath} (${nodes.length} 个节点)`);
+              }
+            }
+          } catch (error) {
+            console.error(`处理 ${actualFormat} 模板时出错:`, error);
+          }
+        } else {
+          // 文本格式使用字符串替换
+          let formattedNodes = '';
+          
+          if (actualFormat.toUpperCase() === 'SURGE') {
+            // Surge格式
+            formattedNodes = nodes.map(node => converter.formatNodeForTarget(node, 'surge')).filter(Boolean).join('\n');
+            // 在模板中查找 [Proxy] 部分并插入节点
+            const proxySection = templateContent.match(/\[Proxy\]([\s\S]*?)(?=\[)/);
+            if (proxySection) {
+              // 如果存在[Proxy]部分，保留它的任何现有内容
+              const existingProxies = proxySection[1].trim();
+              const newProxies = existingProxies ? existingProxies + "\n" + formattedNodes : formattedNodes;
+              templateContent = templateContent.replace(/\[Proxy\]([\s\S]*?)(?=\[)/, `[Proxy]\n${newProxies}\n\n`);
+            } else {
+              // 如果不存在，直接查找{{NODES}}标记
+              templateContent = templateContent.replace(/\{\{\s*NODES\s*\}\}/gi, formattedNodes);
+            }
+          } else if (actualFormat.toUpperCase() === 'CLASH' || actualFormat.toUpperCase() === 'MIHOMO') {
+            // Clash/Mihomo格式
+            formattedNodes = nodes.map(node => converter.formatNodeForTarget(node, 'clash')).filter(Boolean).join('\n');
+            
+            // 替换代理部分
+            templateContent = templateContent.replace(/proxies:\s*(\{\{\s*proxies\s*\}\})/gi, `proxies:\n${formattedNodes}`);
+            templateContent = templateContent.replace(/\{\{\s*proxies\s*\}\}/gi, formattedNodes);
+            
+            // 替换代理名称列表
+            const proxyNames = nodes.map(node => `- ${node.name}`).join('\n      ');
+            templateContent = templateContent.replace(/\{\{\s*proxyNames\s*\}\}/gi, proxyNames);
+          } else {
+            console.error(`不支持的格式: ${actualFormat}`);
+            continue;
+          }
+          
+          fs.writeFileSync(outputPath, templateContent);
+          console.log(`已生成 ${actualFormat} 配置: ${outputPath} (${nodes.length} 个节点)`);
+        }
+      } else {
+        // 无模板，只输出节点列表
+        if (actualFormat.toUpperCase() === 'URL') {
+          const base64Nodes = Buffer.from(JSON.stringify(nodes)).toString('base64');
+          fs.writeFileSync(outputPath, base64Nodes);
+        } else {
+          const nodeList = nodes.map(node => JSON.stringify(node)).join('\n');
+          fs.writeFileSync(outputPath, nodeList);
+        }
+        console.log(`已生成节点列表: ${outputPath} (${nodes.length} 个节点)`);
+      }
+    } catch (error) {
+      console.error(`生成配置文件时出错:`, error);
+    }
   }
 }
 
@@ -97,15 +547,8 @@ function loadSubscriptionsFromConfig() {
 async function main() {
   console.log('开始同步订阅...');
   
-  // 确保目录存在
-  ensureDirectoryExists(CONFIG.dataDir);
-  ensureDirectoryExists(CONFIG.outputDir);
-  
-  // 加载订阅源配置
-  CONFIG.subscriptions = loadSubscriptionsFromConfig();
-  
-  if (CONFIG.subscriptions.length === 0) {
-    console.warn('未找到有效的订阅源配置，同步过程已终止');
+  // 加载配置
+  if (!loadConfig()) {
     return;
   }
   
@@ -113,67 +556,29 @@ async function main() {
 
   // 创建转换器实例
   const converter = new SubscriptionConverter({
-    dedup: true,
+    dedup: CONFIG.options.deduplication,
     validateInput: true,
     validateOutput: true,
     recordMetrics: true,
     emitEvents: true,
-    nodeManagement: true,
+    nodeManagement: CONFIG.advanced.sortNodes,
     renameNodes: false,
     groupingMode: 'advanced',
     applyRules: true
   });
   
-  // 依次处理每个订阅
-  for (const subscription of CONFIG.subscriptions) {
-    if (!subscription.enabled) {
-      console.log(`跳过禁用的订阅: ${subscription.name}`);
-      continue;
-    }
-    
-    console.log(`处理订阅: ${subscription.name} (${subscription.url})`);
-    
-    try {
-      // 保存原始数据到 data 目录
-      const rawResult = await converter.convert(
-        subscription.url, 
-        'raw', 
-        { dedup: false, nodeManagement: false }
-      );
-      
-      if (!rawResult.success) {
-        throw new Error(`获取订阅失败: ${rawResult.error}`);
-      }
-      
-      // 保存原始数据
-      const rawFile = path.join(CONFIG.dataDir, `${subscription.id}.txt`);
-      fs.writeFileSync(rawFile, rawResult.data);
-      console.log(`保存原始订阅到: ${rawFile} (${rawResult.nodeCount} 个节点)`);
-      
-      // 转换为 Clash 格式并保存到 output 目录
-      const clashResult = await converter.convert(
-        subscription.url, 
-        ConversionFormat.CLASH, 
-        {
-          template: {
-            name: subscription.name,
-            updated: new Date().toISOString()
-          }
-        }
-      );
-      
-      if (clashResult.success) {
-        const clashFile = path.join(CONFIG.outputDir, `${subscription.id}.yaml`);
-        fs.writeFileSync(clashFile, clashResult.data);
-        console.log(`保存 Clash 配置到: ${clashFile} (${clashResult.nodeCount} 个节点)`);
-      } else {
-        console.error(`转换为 Clash 格式失败: ${clashResult.error}`);
-      }
-      
-    } catch (error) {
-      console.error(`处理订阅 ${subscription.name} 时出错:`, error.message);
-    }
+  // 获取并合并所有节点
+  const allNodes = await fetchAndMergeAllNodes(converter);
+  
+  if (allNodes.length === 0) {
+    console.warn('未获取到任何有效节点，生成过程已终止');
+    return;
   }
+  
+  console.log(`共获取 ${allNodes.length} 个有效节点`);
+  
+  // 生成各种格式的配置文件
+  await generateConfigs(allNodes, CONFIG.outputConfigs, CONFIG.options);
   
   console.log('订阅同步完成');
 }

@@ -480,4 +480,144 @@ export class SubscriptionConverter {
       };
     }
   }
+
+  /**
+   * 将节点转换为目标格式的字符串表示
+   * @param {Object} node 节点对象
+   * @param {string} format 目标格式，如'clash', 'mihomo', 'surge'等
+   * @returns {string} 格式化后的节点字符串
+   */
+  formatNodeForTarget(node, format) {
+    if (!node) return '';
+    
+    try {
+      switch (format) {
+        case 'mihomo':
+        case 'clash':
+          return this.formatNodeForClash(node);
+        case 'surge':
+          return this.formatNodeForSurge(node);
+        case 'singbox':
+          return this.formatNodeForSingBox(node);
+        case 'v2ray':
+          return this.formatNodeForV2Ray(node);
+        default:
+          return '';
+      }
+    } catch (error) {
+      console.error(`Error formatting node for ${format}:`, error);
+      return '';
+    }
+  }
+  
+  /**
+   * 将节点转换为Clash格式
+   * @param {Object} node 节点对象
+   * @returns {string} Clash格式的节点字符串
+   */
+  formatNodeForClash(node) {
+    switch (node.type) {
+      case 'vmess':
+        return `  - name: ${node.name}
+    type: vmess
+    server: ${node.server}
+    port: ${node.port}
+    uuid: ${node.settings.id}
+    alterId: ${node.settings.alterId || 0}
+    cipher: ${node.settings.security || 'auto'}
+    network: ${node.settings.network || 'tcp'}
+    ${node.settings.network === 'ws' ? `ws-path: ${node.settings.wsPath || ''}
+    ws-headers:
+      Host: ${Object.values(node.settings.wsHeaders || {})[0] || node.server}` : ''}
+    tls: ${node.settings.tls || false}
+    ${node.settings.tls ? `servername: ${node.settings.serverName || ''}` : ''}`;
+      
+      case 'ss':
+        return `  - name: ${node.name}
+    type: ss
+    server: ${node.server}
+    port: ${node.port}
+    cipher: ${node.settings.method}
+    password: ${node.settings.password}
+    udp: true`;
+      
+      case 'trojan':
+        return `  - name: ${node.name}
+    type: trojan
+    server: ${node.server}
+    port: ${node.port}
+    password: ${node.settings.password}
+    ${node.settings.sni ? `sni: ${node.settings.sni}` : ''}
+    ${node.settings.allowInsecure ? 'skip-cert-verify: true' : ''}`;
+      
+      case 'http':
+      case 'https':
+        return `  - name: ${node.name}
+    type: http
+    server: ${node.server}
+    port: ${node.port}
+    ${node.settings.username ? `username: ${node.settings.username}` : ''}
+    ${node.settings.password ? `password: ${node.settings.password}` : ''}
+    tls: ${node.protocol === 'https' || node.settings.tls ? 'true' : 'false'}`;
+      
+      case 'socks':
+        return `  - name: ${node.name}
+    type: socks5
+    server: ${node.server}
+    port: ${node.port}
+    ${node.settings.username ? `username: ${node.settings.username}` : ''}
+    ${node.settings.password ? `password: ${node.settings.password}` : ''}`;
+      
+      default:
+        return '';
+    }
+  }
+  
+  /**
+   * 将节点转换为Surge格式
+   * @param {Object} node 节点对象
+   * @returns {string} Surge格式的节点字符串
+   */
+  formatNodeForSurge(node) {
+    switch (node.type) {
+      case 'vmess':
+        return `${node.name} = vmess, ${node.server}, ${node.port}, username=${node.settings.id}, tls=${node.settings.tls ? 'true' : 'false'}, vmess-aead=true${node.settings.tls ? `, sni=${node.settings.serverName || node.server}` : ''}${node.settings.network === 'ws' ? `, ws=true, ws-path=${node.settings.wsPath || '/'}, ws-headers=Host:${Object.values(node.settings.wsHeaders || {})[0] || node.server}` : ''}`;
+      
+      case 'ss':
+        return `${node.name} = ss, ${node.server}, ${node.port}, encrypt-method=${node.settings.method}, password=${node.settings.password}, udp-relay=true`;
+      
+      case 'trojan':
+        return `${node.name} = trojan, ${node.server}, ${node.port}, password=${node.settings.password}${node.settings.sni ? `, sni=${node.settings.sni}` : ''}${node.settings.allowInsecure ? ', skip-cert-verify=true' : ''}`;
+      
+      case 'http':
+      case 'https':
+        return `${node.name} = http, ${node.server}, ${node.port}${node.settings.username ? `, username=${node.settings.username}` : ''}${node.settings.password ? `, password=${node.settings.password}` : ''}${node.protocol === 'https' || node.settings.tls ? ', tls=true' : ''}`;
+      
+      case 'socks':
+        return `${node.name} = socks5, ${node.server}, ${node.port}${node.settings.username ? `, username=${node.settings.username}` : ''}${node.settings.password ? `, password=${node.settings.password}` : ''}`;
+      
+      default:
+        return '';
+    }
+  }
+  
+  /**
+   * 将节点转换为Sing-box格式
+   * @param {Object} node 节点对象
+   * @returns {string} Sing-box格式的节点字符串(为空，因为在模板中直接处理)
+   */
+  formatNodeForSingBox(node) {
+    // SingBox格式在模板中直接处理
+    return '';
+  }
+  
+  /**
+   * 将节点转换为V2Ray格式
+   * @param {Object} node 节点对象
+   * @returns {string} V2Ray格式的节点字符串
+   */
+  formatNodeForV2Ray(node) {
+    // V2Ray格式在模板中直接处理
+    return '';
+  }
 }
