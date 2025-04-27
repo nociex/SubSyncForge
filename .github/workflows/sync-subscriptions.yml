@@ -30,10 +30,20 @@ jobs:
         run: |
           echo "检查目录结构..."
           ls -la
-          echo "检查templates目录..."
-          ls -la templates || echo "templates目录不存在"
           echo "检查config目录..."
           ls -la config || echo "config目录不存在"
+          echo "检查config目录内容..."
+          ls -la config/* || echo "config目录为空"
+          echo "检查output目录..."
+          mkdir -p output
+          ls -la output
+          echo "检查data目录..."
+          mkdir -p data
+          ls -la data
+          echo "检查当前工作目录..."
+          pwd
+          echo "确认GitHub工作路径..."
+          echo "GITHUB_WORKSPACE: $GITHUB_WORKSPACE"
           
       - name: Install Dependencies
         run: pnpm install
@@ -72,8 +82,14 @@ jobs:
           LOG_LEVEL: debug
         run: |
           echo "运行同步脚本..."
+          echo "验证配置文件存在..."
+          cat config/custom.yaml || echo "无法读取配置文件"
+          # 确保配置可用
+          ls -la config/
+          echo "执行同步脚本..."
           node dist/sync-subscriptions.js || echo "同步脚本执行失败"
           echo "检查output目录..."
+          find output -type f | sort
           ls -la output || echo "output目录为空或不存在"
           
       - name: Commit Changes
@@ -81,18 +97,25 @@ jobs:
           echo "准备提交更改..."
           git config --local user.email "action@github.com"
           git config --local user.name "github-actions[bot]"
+          echo "检查Git状态..."
           git status
-          # 检查output目录中是否有任何文件
-          if [ -n "$(ls -A output 2>/dev/null)" ]; then
-            echo "发现output目录中有文件，添加到Git..."
-            git add data/ output/
-            git commit -m "chore: update subscriptions" || echo "没有更改需要提交"
-          else
-            echo "output目录为空，没有文件需要提交"
-            # 创建一个示例文件以确保workflow正常工作
-            echo "本文件由GitHub Actions自动生成，用于测试工作流" > output/test.txt
+          
+          # 确保pnpm-lock.yaml不会干扰提交
+          git checkout -- pnpm-lock.yaml || echo "无法还原pnpm-lock.yaml"
+          
+          # 手动添加data和output目录中的所有文件
+          echo "添加data目录和output目录的所有文件..."
+          git add data/ output/ --force
+          
+          # 检查是否有变化
+          if git diff --cached --quiet; then
+            echo "没有检测到变化，创建测试文件..."
+            echo "本文件由GitHub Actions自动生成，用于测试工作流 $(date)" > output/test.txt
             git add output/test.txt
             git commit -m "chore: add test file to verify workflow" || echo "无法提交测试文件"
+          else
+            echo "检测到文件变化，提交更改..."
+            git commit -m "chore: update subscriptions" || echo "提交失败"
           fi
           
       - name: Push Changes

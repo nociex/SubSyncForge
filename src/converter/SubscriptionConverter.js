@@ -482,18 +482,23 @@ export class SubscriptionConverter {
   }
 
   /**
-   * 将节点转换为目标格式的字符串表示
+   * 将节点格式化为指定目标格式
    * @param {Object} node 节点对象
-   * @param {string} format 目标格式，如'clash', 'mihomo', 'surge'等
-   * @returns {string} 格式化后的节点字符串
+   * @param {string} format 目标格式
+   * @returns {string} 格式化后的节点配置字符串
    */
   formatNodeForTarget(node, format) {
-    if (!node) return '';
-    
     try {
-      switch (format) {
-        case 'mihomo':
+      // 确保节点有效
+      if (!node || !node.type || !node.name) {
+        this.logger.warn(`Invalid node object: missing required fields`);
+        return null;
+      }
+
+      // 按照目标格式调用对应的格式化函数
+      switch (format.toLowerCase()) {
         case 'clash':
+        case 'mihomo':
           return this.formatNodeForClash(node);
         case 'surge':
           return this.formatNodeForSurge(node);
@@ -501,123 +506,261 @@ export class SubscriptionConverter {
           return this.formatNodeForSingBox(node);
         case 'v2ray':
           return this.formatNodeForV2Ray(node);
+        case 'raw':
+          // 直接返回原始节点数据的字符串表示
+          return JSON.stringify(node);
         default:
-          return '';
+          this.logger.warn(`Unsupported format: ${format}`);
+          return null;
       }
     } catch (error) {
-      console.error(`Error formatting node for ${format}:`, error);
-      return '';
+      this.logger.error(`Error formatting node for ${format}: ${error.message}`, {
+        nodeName: node?.name,
+        error: error.message
+      });
+      return null;
     }
   }
-  
+
   /**
-   * 将节点转换为Clash格式
+   * 将节点格式化为Clash/Mihomo格式
    * @param {Object} node 节点对象
-   * @returns {string} Clash格式的节点字符串
+   * @returns {string} Clash格式的节点配置
    */
   formatNodeForClash(node) {
-    switch (node.type) {
-      case 'vmess':
-        return `  - name: ${node.name}
-    type: vmess
-    server: ${node.server}
-    port: ${node.port}
-    uuid: ${node.settings.id}
-    alterId: ${node.settings.alterId || 0}
-    cipher: ${node.settings.security || 'auto'}
-    network: ${node.settings.network || 'tcp'}
-    ${node.settings.network === 'ws' ? `ws-path: ${node.settings.wsPath || ''}
-    ws-headers:
-      Host: ${Object.values(node.settings.wsHeaders || {})[0] || node.server}` : ''}
-    tls: ${node.settings.tls || false}
-    ${node.settings.tls ? `servername: ${node.settings.serverName || ''}` : ''}`;
-      
-      case 'ss':
-        return `  - name: ${node.name}
-    type: ss
-    server: ${node.server}
-    port: ${node.port}
-    cipher: ${node.settings.method}
-    password: ${node.settings.password}
-    udp: true`;
-      
-      case 'trojan':
-        return `  - name: ${node.name}
-    type: trojan
-    server: ${node.server}
-    port: ${node.port}
-    password: ${node.settings.password}
-    ${node.settings.sni ? `sni: ${node.settings.sni}` : ''}
-    ${node.settings.allowInsecure ? 'skip-cert-verify: true' : ''}`;
-      
-      case 'http':
-      case 'https':
-        return `  - name: ${node.name}
-    type: http
-    server: ${node.server}
-    port: ${node.port}
-    ${node.settings.username ? `username: ${node.settings.username}` : ''}
-    ${node.settings.password ? `password: ${node.settings.password}` : ''}
-    tls: ${node.protocol === 'https' || node.settings.tls ? 'true' : 'false'}`;
-      
-      case 'socks':
-        return `  - name: ${node.name}
-    type: socks5
-    server: ${node.server}
-    port: ${node.port}
-    ${node.settings.username ? `username: ${node.settings.username}` : ''}
-    ${node.settings.password ? `password: ${node.settings.password}` : ''}`;
-      
-      default:
-        return '';
+    try {
+      // 基本配置
+      let config = `  - name: ${node.name}\n    type: ${node.type}\n    server: ${node.server}\n    port: ${node.port}`;
+
+      // 根据不同协议添加特定配置
+      switch (node.type) {
+        case 'vmess':
+          config += `\n    uuid: ${node.settings.id}`;
+          if (node.settings.alterId !== undefined) {
+            config += `\n    alterId: ${node.settings.alterId}`;
+          }
+          if (node.settings.network) {
+            config += `\n    network: ${node.settings.network}`;
+          }
+          if (node.settings.tls) {
+            config += `\n    tls: true`;
+            if (node.settings.serverName) {
+              config += `\n    servername: ${node.settings.serverName}`;
+            }
+          }
+          if (node.settings.network === 'ws') {
+            config += `\n    ws-opts:`;
+            if (node.settings.wsPath) {
+              config += `\n      path: ${node.settings.wsPath}`;
+            }
+            if (node.settings.wsHeaders && Object.keys(node.settings.wsHeaders).length > 0) {
+              config += `\n      headers:`;
+              for (const [key, value] of Object.entries(node.settings.wsHeaders)) {
+                config += `\n        ${key}: ${value}`;
+              }
+            }
+          }
+          break;
+        case 'ss':
+          config += `\n    cipher: ${node.settings.method}`;
+          config += `\n    password: ${node.settings.password}`;
+          break;
+        case 'ssr':
+          config += `\n    cipher: ${node.settings.method}`;
+          config += `\n    password: ${node.settings.password}`;
+          config += `\n    obfs: ${node.settings.obfs}`;
+          config += `\n    protocol: ${node.settings.protocol}`;
+          if (node.settings.obfsParam) {
+            config += `\n    obfs-param: ${node.settings.obfsParam}`;
+          }
+          if (node.settings.protocolParam) {
+            config += `\n    protocol-param: ${node.settings.protocolParam}`;
+          }
+          break;
+        case 'trojan':
+          config += `\n    password: ${node.settings.password}`;
+          if (node.settings.sni) {
+            config += `\n    sni: ${node.settings.sni}`;
+          }
+          if (node.settings.skipCertVerify !== undefined) {
+            config += `\n    skip-cert-verify: ${node.settings.skipCertVerify}`;
+          }
+          break;
+        default:
+          throw new Error(`Unsupported node type for Clash: ${node.type}`);
+      }
+
+      // 添加标签和分组信息
+      if (node.extra && node.extra.tags && Array.isArray(node.extra.tags) && node.extra.tags.length > 0) {
+        config += `\n    tags: [${node.extra.tags.map(tag => `"${tag}"`).join(', ')}]`;
+      }
+
+      return config;
+    } catch (error) {
+      this.logger.error(`Error formatting node for Clash: ${error.message}`);
+      return null;
     }
   }
-  
+
   /**
-   * 将节点转换为Surge格式
+   * 将节点格式化为Surge格式
    * @param {Object} node 节点对象
-   * @returns {string} Surge格式的节点字符串
+   * @returns {string} Surge格式的节点配置
    */
   formatNodeForSurge(node) {
-    switch (node.type) {
-      case 'vmess':
-        return `${node.name} = vmess, ${node.server}, ${node.port}, username=${node.settings.id}, tls=${node.settings.tls ? 'true' : 'false'}, vmess-aead=true${node.settings.tls ? `, sni=${node.settings.serverName || node.server}` : ''}${node.settings.network === 'ws' ? `, ws=true, ws-path=${node.settings.wsPath || '/'}, ws-headers=Host:${Object.values(node.settings.wsHeaders || {})[0] || node.server}` : ''}`;
+    try {
+      let config = '';
       
-      case 'ss':
-        return `${node.name} = ss, ${node.server}, ${node.port}, encrypt-method=${node.settings.method}, password=${node.settings.password}, udp-relay=true`;
+      switch (node.type) {
+        case 'vmess':
+          config = `${node.name} = vmess, ${node.server}, ${node.port}, username=${node.settings.id}`;
+          if (node.settings.network === 'ws') {
+            config += `, ws=true`;
+            if (node.settings.wsPath) {
+              config += `, ws-path=${node.settings.wsPath}`;
+            }
+            if (node.settings.wsHeaders && node.settings.wsHeaders.Host) {
+              config += `, ws-headers=Host:${node.settings.wsHeaders.Host}`;
+            }
+          }
+          if (node.settings.tls) {
+            config += `, tls=true`;
+            if (node.settings.serverName) {
+              config += `, sni=${node.settings.serverName}`;
+            }
+          }
+          break;
+        case 'ss':
+          config = `${node.name} = ss, ${node.server}, ${node.port}, encrypt-method=${node.settings.method}, password=${node.settings.password}`;
+          break;
+        case 'trojan':
+          config = `${node.name} = trojan, ${node.server}, ${node.port}, password=${node.settings.password}`;
+          if (node.settings.sni) {
+            config += `, sni=${node.settings.sni}`;
+          }
+          break;
+        default:
+          throw new Error(`Unsupported node type for Surge: ${node.type}`);
+      }
       
-      case 'trojan':
-        return `${node.name} = trojan, ${node.server}, ${node.port}, password=${node.settings.password}${node.settings.sni ? `, sni=${node.settings.sni}` : ''}${node.settings.allowInsecure ? ', skip-cert-verify=true' : ''}`;
-      
-      case 'http':
-      case 'https':
-        return `${node.name} = http, ${node.server}, ${node.port}${node.settings.username ? `, username=${node.settings.username}` : ''}${node.settings.password ? `, password=${node.settings.password}` : ''}${node.protocol === 'https' || node.settings.tls ? ', tls=true' : ''}`;
-      
-      case 'socks':
-        return `${node.name} = socks5, ${node.server}, ${node.port}${node.settings.username ? `, username=${node.settings.username}` : ''}${node.settings.password ? `, password=${node.settings.password}` : ''}`;
-      
-      default:
-        return '';
+      return config;
+    } catch (error) {
+      this.logger.error(`Error formatting node for Surge: ${error.message}`);
+      return null;
     }
   }
-  
+
   /**
-   * 将节点转换为Sing-box格式
+   * 将节点格式化为SingBox格式
    * @param {Object} node 节点对象
-   * @returns {string} Sing-box格式的节点字符串(为空，因为在模板中直接处理)
+   * @returns {string} SingBox格式的节点配置JSON字符串
    */
   formatNodeForSingBox(node) {
-    // SingBox格式在模板中直接处理
-    return '';
+    try {
+      // 这个方法通常直接在generateConfigs中使用，不需要单独格式化为字符串
+      // 但为了保持API一致性，这里返回一个JSON字符串
+      let config = {};
+      
+      switch (node.type) {
+        case 'vmess':
+          config = {
+            type: 'vmess',
+            tag: node.name,
+            server: node.server,
+            server_port: parseInt(node.port),
+            uuid: node.settings.id,
+            security: node.settings.security || 'auto',
+            alter_id: parseInt(node.settings.alterId || 0)
+          };
+          
+          if (node.settings.network === 'ws') {
+            config.transport = {
+              type: 'ws',
+              path: node.settings.wsPath || '/',
+              headers: {
+                Host: (node.settings.wsHeaders && node.settings.wsHeaders.Host) || node.server
+              }
+            };
+          }
+          
+          if (node.settings.tls) {
+            config.tls = {
+              enabled: true,
+              server_name: node.settings.serverName || node.server,
+              insecure: node.settings.allowInsecure || false
+            };
+          }
+          break;
+        default:
+          return null;
+      }
+      
+      return JSON.stringify(config);
+    } catch (error) {
+      this.logger.error(`Error formatting node for SingBox: ${error.message}`);
+      return null;
+    }
   }
-  
+
   /**
-   * 将节点转换为V2Ray格式
+   * 将节点格式化为V2Ray格式
    * @param {Object} node 节点对象
-   * @returns {string} V2Ray格式的节点字符串
+   * @returns {string} V2Ray格式的节点配置JSON字符串
    */
   formatNodeForV2Ray(node) {
-    // V2Ray格式在模板中直接处理
-    return '';
+    try {
+      // 这个方法通常直接在generateConfigs中使用，不需要单独格式化为字符串
+      // 但为了保持API一致性，这里返回一个JSON字符串
+      let config = {};
+      
+      switch (node.type) {
+        case 'vmess':
+          config = {
+            protocol: 'vmess',
+            tag: node.name,
+            settings: {
+              vnext: [{
+                address: node.server,
+                port: parseInt(node.port),
+                users: [{
+                  id: node.settings.id,
+                  alterId: parseInt(node.settings.alterId || 0),
+                  security: node.settings.security || 'auto'
+                }]
+              }]
+            }
+          };
+          
+          if (node.settings.network === 'ws' || node.settings.tls) {
+            config.streamSettings = {};
+            
+            if (node.settings.network === 'ws') {
+              config.streamSettings.network = 'ws';
+              config.streamSettings.wsSettings = {
+                path: node.settings.wsPath || '/',
+                headers: {
+                  Host: (node.settings.wsHeaders && node.settings.wsHeaders.Host) || node.server
+                }
+              };
+            }
+            
+            if (node.settings.tls) {
+              config.streamSettings.security = 'tls';
+              config.streamSettings.tlsSettings = {
+                serverName: node.settings.serverName || node.server,
+                allowInsecure: node.settings.allowInsecure || false
+              };
+            }
+          }
+          break;
+        default:
+          return null;
+      }
+      
+      return JSON.stringify(config);
+    } catch (error) {
+      this.logger.error(`Error formatting node for V2Ray: ${error.message}`);
+      return null;
+    }
   }
 }

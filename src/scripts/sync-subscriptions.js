@@ -19,6 +19,10 @@ const LOG_LEVEL = process.env.LOG_LEVEL || 'info';
 console.log(`[Logger] Setting log level to: ${LOG_LEVEL}`);
 const DEBUG = LOG_LEVEL === 'debug';
 
+// 获取项目根目录
+const rootDir = path.resolve(__dirname, '../..');
+console.log(`项目根目录: ${rootDir}`);
+
 // 订阅类型
 const SubscriptionType = {
   URL: 'url',
@@ -40,8 +44,8 @@ const ConversionFormat = {
 
 // 基本配置
 const CONFIG = {
-  rootDir: path.resolve(__dirname, '../..'),
-  configFile: path.resolve(__dirname, '../../config/custom.yaml'),
+  rootDir: rootDir,
+  configFile: path.resolve(rootDir, 'config/custom.yaml'),
   subscriptions: [],
   outputConfigs: [],
   options: {
@@ -71,7 +75,17 @@ function loadConfig() {
   try {
     if (!fs.existsSync(CONFIG.configFile)) {
       console.warn(`配置文件不存在: ${CONFIG.configFile}`);
-      return false;
+      
+      // 尝试在当前工作目录下查找
+      const cwdConfigPath = path.resolve(process.cwd(), 'config/custom.yaml');
+      console.log(`尝试在当前工作目录查找配置: ${cwdConfigPath}`);
+      
+      if (fs.existsSync(cwdConfigPath)) {
+        CONFIG.configFile = cwdConfigPath;
+        console.log(`找到配置文件: ${CONFIG.configFile}`);
+      } else {
+        return false;
+      }
     }
 
     const content = fs.readFileSync(CONFIG.configFile, 'utf-8');
@@ -151,6 +165,8 @@ function loadConfig() {
 async function fetchAndMergeAllNodes(converter) {
   const allNodes = [];
   
+  console.log(`准备获取 ${CONFIG.subscriptions.length} 个订阅源的节点`);
+  
   for (const subscription of CONFIG.subscriptions) {
     if (!subscription.enabled) {
       console.log(`跳过禁用的订阅: ${subscription.name}`);
@@ -158,43 +174,55 @@ async function fetchAndMergeAllNodes(converter) {
     }
     
     try {
-      console.log(`处理订阅: ${subscription.name}`);
+      console.log(`处理订阅: ${subscription.name}, 类型: ${subscription.type}, URL: ${subscription.url || '(BASE64/直接内容)'}`);
       
       let result;
       
       // 根据订阅类型处理
       if (subscription.type === SubscriptionType.BASE64 && subscription.content) {
         // 处理Base64内容
+        console.log(`解析Base64订阅内容: ${subscription.name}`);
         result = await converter.parser.parse(subscription.content);
         console.log(`解析Base64订阅: ${subscription.name}, 获取 ${result.length} 个节点`);
       } else if ([SubscriptionType.VMESS, SubscriptionType.SS, SubscriptionType.SSR, SubscriptionType.TROJAN].includes(subscription.type) && subscription.content) {
         // 处理单个节点
+        console.log(`解析单个${subscription.type}节点: ${subscription.name}`);
         const node = await converter.parser.parseLine(subscription.content);
         result = node ? [node] : [];
-        console.log(`解析${subscription.type}节点: ${subscription.name}`);
+        console.log(`解析${subscription.type}节点: ${subscription.name}, 成功: ${result.length > 0}`);
       } else if (subscription.url) {
         // 获取URL订阅
-        const rawResult = await converter.convert(
-          subscription.url, 
-          'raw', 
-          { dedup: false, nodeManagement: false }
-        );
-        
-        if (!rawResult.success) {
-          throw new Error(`获取订阅失败: ${rawResult.error}`);
+        console.log(`从URL获取订阅: ${subscription.url}`);
+        try {
+          const rawResult = await converter.convert(
+            subscription.url, 
+            'raw', 
+            { dedup: false, nodeManagement: false }
+          );
+          
+          if (!rawResult.success) {
+            throw new Error(`获取订阅失败: ${rawResult.error}`);
+          }
+          
+          console.log(`成功获取订阅: ${subscription.name}, 原始数据大小: ${rawResult.data.length} 字节`);
+          
+          // 保存原始数据
+          const dataDir = path.join(CONFIG.rootDir, CONFIG.options.dataDir);
+          ensureDirectoryExists(dataDir);
+          const rawFile = path.join(dataDir, `${subscription.name}.txt`);
+          fs.writeFileSync(rawFile, rawResult.data);
+          console.log(`保存原始订阅到: ${rawFile} (${rawResult.nodeCount} 个节点)`);
+          
+          result = rawResult.nodes;
+        } catch (fetchError) {
+          console.error(`获取订阅 ${subscription.url} 时出错:`, fetchError);
+          throw new Error(`获取订阅失败: ${fetchError.message}`);
         }
-        
-        // 保存原始数据
-        const dataDir = path.join(CONFIG.rootDir, CONFIG.options.dataDir);
-        ensureDirectoryExists(dataDir);
-        const rawFile = path.join(dataDir, `${subscription.name}.txt`);
-        fs.writeFileSync(rawFile, rawResult.data);
-        console.log(`保存原始订阅到: ${rawFile} (${rawResult.nodeCount} 个节点)`);
-        
-        result = rawResult.nodes;
       }
       
       if (result && result.length > 0) {
+        console.log(`从 ${subscription.name} 获取到 ${result.length} 个节点`);
+        
         // 添加订阅源信息
         result.forEach(node => {
           if (!node.extra) node.extra = {};
@@ -202,15 +230,20 @@ async function fetchAndMergeAllNodes(converter) {
         });
         
         allNodes.push(...result);
+      } else {
+        console.warn(`从 ${subscription.name} 未获取到任何节点`);
       }
     } catch (error) {
       console.error(`处理订阅 ${subscription.name} 时出错:`, error.message);
     }
   }
   
+  console.log(`从所有订阅源共获取到 ${allNodes.length} 个节点`);
+  
   // 如果启用去重，进行节点去重
   let finalNodes = allNodes;
   if (CONFIG.options.deduplication && allNodes.length > 0) {
+    console.log(`正在进行节点去重...`);
     finalNodes = await converter.deduplicator.dedup(allNodes);
     console.log(`节点去重: ${allNodes.length} -> ${finalNodes.length}`);
   }
@@ -230,6 +263,9 @@ async function generateConfigs(nodes, outputConfigs, options) {
   const outputDir = path.join(rootDir, options.outputDir || 'output');
   ensureDirectoryExists(outputDir);
   
+  console.log(`准备生成 ${outputConfigs.length} 个配置文件`);
+  console.log(`输出目录: ${outputDir}`);
+  
   for (const output of outputConfigs) {
     try {
       // 如果配置被禁用，则跳过
@@ -246,18 +282,23 @@ async function generateConfigs(nodes, outputConfigs, options) {
         continue;
       }
       
+      console.log(`生成 ${actualFormat} 格式配置: ${outputFile}`);
+      
       const outputPath = path.join(outputDir, outputFile);
       ensureDirectoryExists(path.dirname(outputPath));
       
       // 处理模板
       if (templateFile) {
         const templatePath = path.join(rootDir, templateFile);
+        console.log(`使用模板: ${templatePath}`);
+        
         if (!fs.existsSync(templatePath)) {
           console.error(`模板文件不存在: ${templatePath}`);
           continue;
         }
         
         let templateContent = fs.readFileSync(templatePath, 'utf-8');
+        console.log(`模板大小: ${templateContent.length} 字节`);
         
         // 替换一些通用变量
         templateContent = templateContent.replace(/\{\{random\}\}/g, Math.random().toString(36).substring(2));
@@ -267,11 +308,13 @@ async function generateConfigs(nodes, outputConfigs, options) {
         if (actualFormat.toUpperCase() === 'SINGBOX' || actualFormat.toUpperCase() === 'V2RAY') {
           // JSON 格式的配置
           try {
+            console.log(`处理JSON格式模板: ${actualFormat}`);
             const templateJson = JSON.parse(templateContent);
             let configWithNodes = { ...templateJson };
             
             if (actualFormat.toUpperCase() === 'SINGBOX') {
               // Sing-box 格式处理
+              console.log(`处理SingBox格式，节点数: ${nodes.length}`);
               if (!configWithNodes.outbounds) {
                 configWithNodes.outbounds = [];
               }
@@ -372,6 +415,7 @@ async function generateConfigs(nodes, outputConfigs, options) {
               console.log(`已生成 ${actualFormat} 配置: ${outputPath} (${nodes.length} 个节点)`);
             } else if (actualFormat.toUpperCase() === 'V2RAY') {
               // V2Ray 格式处理
+              console.log(`处理V2Ray格式，节点数: ${nodes.length}`);
               // 如果只使用第一个节点
               const useFirstNode = output.options?.use_first_node === true;
               const nodeToUse = useFirstNode ? nodes[0] : null;
@@ -488,35 +532,62 @@ async function generateConfigs(nodes, outputConfigs, options) {
             }
           } catch (error) {
             console.error(`处理 ${actualFormat} 模板时出错:`, error);
+            console.error(`错误堆栈: ${error.stack}`);
           }
         } else {
           // 文本格式使用字符串替换
+          console.log(`处理文本格式模板: ${actualFormat}`);
           let formattedNodes = '';
           
           if (actualFormat.toUpperCase() === 'SURGE') {
             // Surge格式
-            formattedNodes = nodes.map(node => converter.formatNodeForTarget(node, 'surge')).filter(Boolean).join('\n');
+            console.log(`处理Surge格式，节点数: ${nodes.length}`);
+            formattedNodes = nodes.map(node => {
+              const formatted = converter.formatNodeForTarget(node, 'surge');
+              if (!formatted) {
+                console.warn(`无法格式化节点 ${node.name} 为Surge格式`);
+              }
+              return formatted;
+            }).filter(Boolean).join('\n');
+            
+            console.log(`生成的Surge节点数: ${formattedNodes.split('\n').length}`);
+            
             // 在模板中查找 [Proxy] 部分并插入节点
             const proxySection = templateContent.match(/\[Proxy\]([\s\S]*?)(?=\[)/);
             if (proxySection) {
               // 如果存在[Proxy]部分，保留它的任何现有内容
+              console.log(`在[Proxy]部分插入节点`);
               const existingProxies = proxySection[1].trim();
               const newProxies = existingProxies ? existingProxies + "\n" + formattedNodes : formattedNodes;
               templateContent = templateContent.replace(/\[Proxy\]([\s\S]*?)(?=\[)/, `[Proxy]\n${newProxies}\n\n`);
             } else {
               // 如果不存在，直接查找{{NODES}}标记
+              console.log(`替换{{NODES}}标记`);
               templateContent = templateContent.replace(/\{\{\s*NODES\s*\}\}/gi, formattedNodes);
             }
           } else if (actualFormat.toUpperCase() === 'CLASH' || actualFormat.toUpperCase() === 'MIHOMO') {
             // Clash/Mihomo格式
-            formattedNodes = nodes.map(node => converter.formatNodeForTarget(node, 'clash')).filter(Boolean).join('\n');
+            console.log(`处理${actualFormat}格式，节点数: ${nodes.length}`);
+            formattedNodes = nodes.map(node => {
+              const formatted = converter.formatNodeForTarget(node, 'clash');
+              if (!formatted) {
+                console.warn(`无法格式化节点 ${node.name} 为Clash格式`);
+              }
+              return formatted;
+            }).filter(Boolean).join('\n');
+            
+            console.log(`生成的${actualFormat}节点数: ${formattedNodes.split('\n').length / 4}`); // 每个节点大约4行
             
             // 替换代理部分
-            templateContent = templateContent.replace(/proxies:\s*(\{\{\s*proxies\s*\}\})/gi, `proxies:\n${formattedNodes}`);
+            if (templateContent.includes('proxies:')) {
+              console.log(`替换proxies部分`);
+              templateContent = templateContent.replace(/proxies:\s*(\{\{\s*proxies\s*\}\})/gi, `proxies:\n${formattedNodes}`);
+            }
             templateContent = templateContent.replace(/\{\{\s*proxies\s*\}\}/gi, formattedNodes);
             
             // 替换代理名称列表
-            const proxyNames = nodes.map(node => `- ${node.name}`).join('\n      ');
+            const proxyNames = nodes.map(node => `  - ${node.name}`).join('\n');
+            console.log(`生成代理名称列表，数量: ${nodes.length}`);
             templateContent = templateContent.replace(/\{\{\s*proxyNames\s*\}\}/gi, proxyNames);
           } else {
             console.error(`不支持的格式: ${actualFormat}`);
@@ -525,9 +596,11 @@ async function generateConfigs(nodes, outputConfigs, options) {
           
           fs.writeFileSync(outputPath, templateContent);
           console.log(`已生成 ${actualFormat} 配置: ${outputPath} (${nodes.length} 个节点)`);
+          console.log(`配置文件大小: ${fs.statSync(outputPath).size} 字节`);
         }
       } else {
         // 无模板，只输出节点列表
+        console.log(`无模板，直接输出节点列表: ${outputFile}`);
         if (actualFormat.toUpperCase() === 'URL') {
           const base64Nodes = Buffer.from(JSON.stringify(nodes)).toString('base64');
           fs.writeFileSync(outputPath, base64Nodes);
@@ -536,9 +609,11 @@ async function generateConfigs(nodes, outputConfigs, options) {
           fs.writeFileSync(outputPath, nodeList);
         }
         console.log(`已生成节点列表: ${outputPath} (${nodes.length} 个节点)`);
+        console.log(`文件大小: ${fs.statSync(outputPath).size} 字节`);
       }
     } catch (error) {
       console.error(`生成配置文件时出错:`, error);
+      console.error(`错误堆栈: ${error.stack}`);
     }
   }
 }
