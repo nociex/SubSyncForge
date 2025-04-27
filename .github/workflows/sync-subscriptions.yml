@@ -1,0 +1,38 @@
+name: Sync Subscriptions
+
+on:
+  schedule:
+    - cron: '0 */6 * * *'  # 每6小时运行一次
+  workflow_dispatch:        # 支持手动触发
+  
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          
+      - name: Install Dependencies
+        run: npm install
+        
+      - name: Fetch and Convert Subscriptions
+        env:
+          PRIVATE_SUBSCRIPTIONS: ${{ secrets.PRIVATE_SUBSCRIPTIONS }}
+          LOG_LEVEL: debug
+        run: node src/scripts/sync-subscriptions.js
+        
+      - name: Commit Changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add data/
+          git commit -m "chore: update subscriptions" || exit 0
+          
+      - name: Push Changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}

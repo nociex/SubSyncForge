@@ -1,0 +1,17 @@
+name = "subsyncforge"
+main = "src/worker/index.js"
+compatibility_date = "2025-04-27"
+
+[vars]
+ENVIRONMENT = "development"
+
+[build]
+command = "node build.js"
+
+[build.upload]
+format = "modules"
+main = "./index.js"
+
+[dev]
+port = 8787
+local = true

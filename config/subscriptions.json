@@ -1,0 +1,26 @@
+{
+  "version": "1.0",
+  "sources": [
+    {
+      "id": "public-source-1",
+      "name": "Public Source 1",
+      "url": "https://example.com/subscription1",
+      "type": "v2ray",
+      "updateInterval": 21600,
+      "enabled": true
+    }
+  ],
+  "conversionRules": {
+    "clash": {
+      "enabledByDefault": true,
+      "template": "config/templates/clash.yaml"
+    },
+    "surge": {
+      "enabledByDefault": true,
+      "template": "config/templates/surge.conf"
+    },
+    "v2ray": {
+      "enabledByDefault": true
+    }
+  }
+}

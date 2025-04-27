@@ -1,0 +1,23 @@
+name = "subsyncforge"
+main = "src/worker/index.js"
+compatibility_date = "2023-01-01"
+
+[vars]
+ENVIRONMENT = "production"
+
+# 可选的环境变量配置
+# [vars]
+# PRIVATE_SUBSCRIPTIONS = ""
+
+[build]
+command = "pnpm install && pnpm build"
+
+[build.upload]
+format = "modules"
+main = "./index.js"
+
+[triggers]
+crons = ["0 */6 * * *"]  # 每6小时同步一次订阅
+
+[env.production]
+workers_dev = true
