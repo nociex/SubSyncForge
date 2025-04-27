@@ -194,8 +194,23 @@ async function fetchAndMergeAllNodes(converter) {
         // 获取URL订阅
         console.log(`从URL获取订阅: ${subscription.url}`);
         try {
+          // 根据URL自定义请求头，部分订阅源需要特殊处理
+          const customHeaders = {};
+          const fetchOptions = { headers: customHeaders };
+          
+          // 为某些域名设置特殊请求头
+          const url = new URL(subscription.url);
+          const domain = url.hostname;
+          
+          // 为特定域名添加Referer
+          if (domain.includes('alalbb.top')) {
+            customHeaders['Referer'] = 'https://alalbb.top/';
+          } else if (domain.includes('flyi.me')) {
+            customHeaders['Referer'] = 'https://freesu7.flyi.me/';
+          }
+          
           // 直接使用fetcher获取数据，而不是通过convert方法
-          const fetchResult = await converter.fetcher.fetch(subscription.url);
+          const fetchResult = await converter.fetcher.fetch(subscription.url, fetchOptions);
           const rawData = fetchResult.data;
           
           console.log(`成功获取订阅: ${subscription.name}, 原始数据大小: ${rawData.length} 字节`);
@@ -627,6 +642,20 @@ async function main() {
   
   console.log(`发现 ${CONFIG.subscriptions.length} 个订阅源`);
 
+  // 如果没有可用的订阅源，添加一个备用订阅
+  if (CONFIG.subscriptions.length === 0 || CONFIG.subscriptions.every(sub => !sub.enabled)) {
+    console.log('未找到启用的订阅源，添加一个测试订阅源');
+    
+    // 添加一个备用订阅源
+    CONFIG.subscriptions.push({
+      name: "测试订阅源",
+      url: "https://api.v1.mk/sub?target=clash&url=https%3A%2F%2Fghproxy.com%2Fhttps%3A%2F%2Fraw.githubusercontent.com%2Fmkht%2Ffree-node%2Fmain%2Fbase64",
+      enabled: true
+    });
+    
+    console.log('添加测试订阅源完成');
+  }
+
   // 创建转换器实例
   const converter = new SubscriptionConverter({
     dedup: CONFIG.options.deduplication,
@@ -637,7 +666,12 @@ async function main() {
     nodeManagement: CONFIG.advanced.sortNodes,
     renameNodes: false,
     groupingMode: 'advanced',
-    applyRules: true
+    applyRules: true,
+    fetch: {
+      timeout: 60000,  // 增加超时时间到60秒
+      maxRetries: 3,   // 每个UA尝试3次
+      userAgent: 'v2rayN/5.29' // 使用v2rayN作为UA
+    }
   });
   
   // 获取并合并所有节点
