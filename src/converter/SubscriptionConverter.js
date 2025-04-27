@@ -586,6 +586,30 @@ export class SubscriptionConverter {
             config += `\n    skip-cert-verify: ${node.settings.skipCertVerify}`;
           }
           break;
+        case 'http':
+          config += `\n    username: ${node.settings.username || ''}`;
+          config += `\n    password: ${node.settings.password || ''}`;
+          if (node.settings.tls) {
+            config += `\n    tls: true`;
+            if (node.settings.skipCertVerify !== undefined) {
+              config += `\n    skip-cert-verify: ${node.settings.skipCertVerify}`;
+            }
+          }
+          break;
+        case 'socks':
+          if (node.settings.username) {
+            config += `\n    username: ${node.settings.username}`;
+          }
+          if (node.settings.password) {
+            config += `\n    password: ${node.settings.password}`;
+          }
+          if (node.settings.tls) {
+            config += `\n    tls: true`;
+            if (node.settings.skipCertVerify !== undefined) {
+              config += `\n    skip-cert-verify: ${node.settings.skipCertVerify}`;
+            }
+          }
+          break;
         default:
           throw new Error(`Unsupported node type for Clash: ${node.type}`);
       }
@@ -639,6 +663,36 @@ export class SubscriptionConverter {
             config += `, sni=${node.settings.sni}`;
           }
           break;
+        case 'http':
+          config = `${node.name} = http, ${node.server}, ${node.port}`;
+          if (node.settings.username) {
+            config += `, username=${node.settings.username}`;
+          }
+          if (node.settings.password) {
+            config += `, password=${node.settings.password}`;
+          }
+          if (node.settings.tls) {
+            config += `, tls=true`;
+            if (node.settings.skipCertVerify !== undefined && node.settings.skipCertVerify) {
+              config += `, skip-cert-verify=true`;
+            }
+          }
+          break;
+        case 'socks':
+          config = `${node.name} = socks5, ${node.server}, ${node.port}`;
+          if (node.settings.username) {
+            config += `, username=${node.settings.username}`;
+          }
+          if (node.settings.password) {
+            config += `, password=${node.settings.password}`;
+          }
+          if (node.settings.tls) {
+            config += `, tls=true`;
+            if (node.settings.skipCertVerify !== undefined && node.settings.skipCertVerify) {
+              config += `, skip-cert-verify=true`;
+            }
+          }
+          break;
         default:
           throw new Error(`Unsupported node type for Surge: ${node.type}`);
       }
@@ -688,6 +742,79 @@ export class SubscriptionConverter {
               enabled: true,
               server_name: node.settings.serverName || node.server,
               insecure: node.settings.allowInsecure || false
+            };
+          }
+          break;
+        case 'ss':
+          config = {
+            type: 'shadowsocks',
+            tag: node.name,
+            server: node.server,
+            server_port: parseInt(node.port),
+            method: node.settings.method,
+            password: node.settings.password
+          };
+          break;
+        case 'trojan':
+          config = {
+            type: 'trojan',
+            tag: node.name,
+            server: node.server,
+            server_port: parseInt(node.port),
+            password: node.settings.password
+          };
+          
+          if (node.settings.sni) {
+            config.tls = {
+              enabled: true,
+              server_name: node.settings.sni,
+              insecure: node.settings.allowInsecure || false
+            };
+          }
+          break;
+        case 'http':
+          config = {
+            type: 'http',
+            tag: node.name,
+            server: node.server,
+            server_port: parseInt(node.port)
+          };
+          
+          if (node.settings.username) {
+            config.username = node.settings.username;
+          }
+          
+          if (node.settings.password) {
+            config.password = node.settings.password;
+          }
+          
+          if (node.settings.tls) {
+            config.tls = {
+              enabled: true,
+              insecure: node.settings.skipCertVerify || false
+            };
+          }
+          break;
+        case 'socks':
+          config = {
+            type: 'socks',
+            tag: node.name,
+            server: node.server,
+            server_port: parseInt(node.port)
+          };
+          
+          if (node.settings.username) {
+            config.username = node.settings.username;
+          }
+          
+          if (node.settings.password) {
+            config.password = node.settings.password;
+          }
+          
+          if (node.settings.tls) {
+            config.tls = {
+              enabled: true,
+              insecure: node.settings.skipCertVerify || false
             };
           }
           break;
@@ -751,6 +878,99 @@ export class SubscriptionConverter {
                 allowInsecure: node.settings.allowInsecure || false
               };
             }
+          }
+          break;
+        case 'ss':
+          config = {
+            protocol: 'shadowsocks',
+            tag: node.name,
+            settings: {
+              servers: [{
+                address: node.server,
+                port: parseInt(node.port),
+                method: node.settings.method,
+                password: node.settings.password
+              }]
+            }
+          };
+          break;
+        case 'trojan':
+          config = {
+            protocol: 'trojan',
+            tag: node.name,
+            settings: {
+              servers: [{
+                address: node.server,
+                port: parseInt(node.port),
+                password: node.settings.password
+              }]
+            }
+          };
+          
+          if (node.settings.sni) {
+            config.streamSettings = {
+              security: 'tls',
+              tlsSettings: {
+                serverName: node.settings.sni,
+                allowInsecure: node.settings.allowInsecure || false
+              }
+            };
+          }
+          break;
+        case 'http':
+          config = {
+            protocol: 'http',
+            tag: node.name,
+            settings: {
+              servers: [{
+                address: node.server,
+                port: parseInt(node.port)
+              }]
+            }
+          };
+          
+          if (node.settings.username && node.settings.password) {
+            config.settings.servers[0].users = [{
+              user: node.settings.username,
+              pass: node.settings.password
+            }];
+          }
+          
+          if (node.settings.tls) {
+            config.streamSettings = {
+              security: 'tls',
+              tlsSettings: {
+                allowInsecure: node.settings.skipCertVerify || false
+              }
+            };
+          }
+          break;
+        case 'socks':
+          config = {
+            protocol: 'socks',
+            tag: node.name,
+            settings: {
+              servers: [{
+                address: node.server,
+                port: parseInt(node.port)
+              }]
+            }
+          };
+          
+          if (node.settings.username && node.settings.password) {
+            config.settings.servers[0].users = [{
+              user: node.settings.username,
+              pass: node.settings.password
+            }];
+          }
+          
+          if (node.settings.tls) {
+            config.streamSettings = {
+              security: 'tls',
+              tlsSettings: {
+                allowInsecure: node.settings.skipCertVerify || false
+              }
+            };
           }
           break;
         default:

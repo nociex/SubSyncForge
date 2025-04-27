@@ -59,7 +59,7 @@
       "tag": "proxy",
       "outbounds": [
         "auto",
-        {{proxyTags}}
+        "__PROXY_TAGS__"
       ],
       "default": "auto"
     },
@@ -67,13 +67,13 @@
       "type": "urltest",
       "tag": "auto",
       "outbounds": [
-        {{proxyTags}}
+        "__PROXY_TAGS__"
       ],
       "url": "https://www.gstatic.com/generate_204",
       "interval": "5m",
       "tolerance": 100
     },
-    {{outbounds}},
+    "__OUTBOUNDS__",
     {
       "type": "direct",
       "tag": "direct"

@@ -538,16 +538,62 @@ async function generateConfigs(nodes, outputConfigs, options) {
         console.log(`模板大小: ${templateContent.length} 字节`);
         console.log(`模板内容片段: ${templateContent.substring(0, 200)}...`);
         
-        // 替换一些通用变量
-        templateContent = templateContent.replace(/\{\{random\}\}/g, Math.random().toString(36).substring(2));
-        templateContent = templateContent.replace(/\{\{generateUrl\}\}/g, `https://example.com/${name}.conf`);
-        
         // 根据不同格式处理模板
         if (actualFormat.toUpperCase() === 'SINGBOX' || actualFormat.toUpperCase() === 'V2RAY') {
           // JSON 格式的配置
           try {
             console.log(`处理JSON格式模板: ${actualFormat}`);
-            const templateJson = JSON.parse(templateContent);
+            
+            // 预处理 - 替换特殊格式的占位符，使其成为有效的JSON
+            let processedTemplate = templateContent;
+            
+            // 替换SingBox特殊占位符
+            if (actualFormat.toUpperCase() === 'SINGBOX') {
+              // 将__PROXY_TAGS__替换为数组占位符
+              processedTemplate = processedTemplate.replace(/"__PROXY_TAGS__"/g, '[]');
+              // 将__OUTBOUNDS__替换为空对象，稍后会替换为真实节点
+              processedTemplate = processedTemplate.replace(/"__OUTBOUNDS__"/g, '{}');
+            }
+            
+            // 替换V2Ray特殊占位符 
+            if (actualFormat.toUpperCase() === 'V2RAY') {
+              console.log(`V2Ray模板替换前第一部分内容: ${processedTemplate.substring(0, 200)}...`);
+              
+              // 正确的替换方式应该是：不去除外层引号，只替换内部的变量值
+              processedTemplate = processedTemplate.replace(/"{{port}}"/g, '"1080"');
+              processedTemplate = processedTemplate.replace(/"{{alterId}}"/g, '"0"');
+              processedTemplate = processedTemplate.replace(/"{{uuid}}"/g, '"00000000-0000-0000-0000-000000000000"');
+              processedTemplate = processedTemplate.replace(/"{{server}}"/g, '"127.0.0.1"');
+              processedTemplate = processedTemplate.replace(/"{{network}}"/g, '"tcp"');
+              processedTemplate = processedTemplate.replace(/"{{security}}"/g, '"none"');
+              processedTemplate = processedTemplate.replace(/"{{serverName}}"/g, '""');
+              processedTemplate = processedTemplate.replace(/"{{path}}"/g, '"/"');
+              processedTemplate = processedTemplate.replace(/"{{host}}"/g, '""');
+              
+              console.log(`V2Ray模板替换后的前200个字符: ${processedTemplate.substring(0, 200)}...`);
+              
+              try {
+                const testParse = JSON.parse(processedTemplate);
+                console.log('JSON解析成功');
+              } catch (e) {
+                console.error(`JSON解析错误: ${e.message}`);
+                // 打印整个文件内容，分行显示，带行号
+                const lines = processedTemplate.split('\n');
+                console.error('模板内容（带行号）:');
+                lines.forEach((line, i) => {
+                  console.error(`${i+1}: ${line}`);
+                });
+                
+                // 尝试获取错误位置
+                const errorMatch = e.message.match(/position (\d+)/);
+                if (errorMatch && errorMatch[1]) {
+                  const pos = parseInt(errorMatch[1]);
+                  console.error(`错误位置前后内容: ${processedTemplate.substring(Math.max(0, pos - 50), Math.min(processedTemplate.length, pos + 50))}`);
+                }
+              }
+            }
+            
+            const templateJson = JSON.parse(processedTemplate);
             let configWithNodes = { ...templateJson };
             
             if (actualFormat.toUpperCase() === 'SINGBOX') {
@@ -621,57 +667,65 @@ async function generateConfigs(nodes, outputConfigs, options) {
                 // 在占位符位置插入节点
                 configWithNodes.outbounds.splice(existingOutboundsIndex, 1, ...proxyOutbounds);
               } else {
-                // 没有占位符，直接添加到outbounds数组
-                configWithNodes.outbounds = [
-                  ...configWithNodes.outbounds,
-                  ...proxyOutbounds
-                ];
-              }
-              
-              // 添加代理群组标签
-              const proxyTags = nodes.map(node => `"${node.name}"`).join(', ');
-              
-              // 替换proxyTags占位符
-              if (templateContent.includes('{{proxyTags}}')) {
-                const configStr = JSON.stringify(configWithNodes, null, 2).replace(/"{{proxyTags}}"/g, proxyTags);
-                fs.writeFileSync(outputPath, configStr);
-              } else {
-                // 添加节点到现有selector
-                const existingSelectors = configWithNodes.outbounds.filter(outbound => outbound.type === 'selector');
-                if (existingSelectors.length > 0) {
-                  for (const selector of existingSelectors) {
-                    selector.outbounds = [
-                      ...(selector.outbounds || []),
-                      ...proxyOutbounds.map(p => p.tag)
-                    ];
+                // 没有占位符，尝试查找空对象占位符
+                for (let i = 0; i < configWithNodes.outbounds.length; i++) {
+                  if (configWithNodes.outbounds[i] && Object.keys(configWithNodes.outbounds[i]).length === 0) {
+                    // 删除空对象占位符
+                    configWithNodes.outbounds.splice(i, 1);
+                    // 在此位置插入所有节点
+                    configWithNodes.outbounds.splice(i, 0, ...proxyOutbounds);
+                    break;
                   }
                 }
-                
-                fs.writeFileSync(outputPath, JSON.stringify(configWithNodes, null, 2));
               }
               
+              // 添加节点到selector和urltest组
+              const selectorIndex = configWithNodes.outbounds.findIndex(o => o.type === 'selector');
+              const urltestIndex = configWithNodes.outbounds.findIndex(o => o.type === 'urltest');
+              
+              if (selectorIndex !== -1) {
+                configWithNodes.outbounds[selectorIndex].outbounds = 
+                  ['auto', ...proxyOutbounds.map(p => p.tag)];
+              }
+              
+              if (urltestIndex !== -1) {
+                configWithNodes.outbounds[urltestIndex].outbounds = 
+                  [...proxyOutbounds.map(p => p.tag)];
+              }
+              
+              // 保存处理后的配置到文件
+              fs.writeFileSync(outputPath, JSON.stringify(configWithNodes, null, 2));
               console.log(`已生成 ${actualFormat} 配置: ${outputPath} (${nodes.length} 个节点)`);
             } else if (actualFormat.toUpperCase() === 'V2RAY') {
               // V2Ray 格式处理
               console.log(`处理V2Ray格式，节点数: ${nodes.length}`);
               // 如果只使用第一个节点
               const useFirstNode = output.options?.use_first_node === true;
-              const nodeToUse = useFirstNode ? nodes[0] : null;
               
-              if (useFirstNode && nodeToUse) {
-                // 使用第一个节点替换模板中的变量
+              if (useFirstNode && nodes.length > 0) {
+                // 使用第一个节点
+                const nodeToUse = nodes[0];
+                
+                // 准备替换值
+                const replaceValues = {
+                  server: nodeToUse.server,
+                  port: nodeToUse.port,
+                  uuid: nodeToUse.settings.id || '',
+                  alterId: nodeToUse.settings.alterId || 0,
+                  network: nodeToUse.settings.network || 'tcp',
+                  security: nodeToUse.settings.tls ? 'tls' : 'none',
+                  serverName: nodeToUse.settings.serverName || nodeToUse.server,
+                  path: nodeToUse.settings.wsPath || '/',
+                  host: (nodeToUse.settings.wsHeaders && nodeToUse.settings.wsHeaders.Host) || nodeToUse.server
+                };
+                
+                // 创建JSON字符串
                 let contentStr = JSON.stringify(configWithNodes, null, 2);
                 
-                // 替换变量
-                contentStr = contentStr.replace(/{{server}}/g, nodeToUse.server)
-                  .replace(/{{port}}/g, nodeToUse.port)
-                  .replace(/{{uuid}}/g, nodeToUse.settings.id || '')
-                  .replace(/{{alterId}}/g, nodeToUse.settings.alterId || 0)
-                  .replace(/{{network}}/g, nodeToUse.settings.network || 'tcp')
-                  .replace(/{{security}}/g, nodeToUse.settings.tls ? 'tls' : 'none')
-                  .replace(/{{serverName}}/g, nodeToUse.settings.serverName || nodeToUse.server)
-                  .replace(/{{path}}/g, (nodeToUse.settings.wsPath || '/'))
-                  .replace(/{{host}}/g, (nodeToUse.settings.wsHeaders && nodeToUse.settings.wsHeaders.Host) || nodeToUse.server);
+                // 替换字符串中的占位符
+                Object.entries(replaceValues).forEach(([key, value]) => {
+                  contentStr = contentStr.replace(new RegExp(`"{{${key}}}"`, 'g'), typeof value === 'string' ? `"${value}"` : value);
+                });
                 
                 fs.writeFileSync(outputPath, contentStr);
                 console.log(`已生成 ${actualFormat} 配置: ${outputPath} (使用第1个节点)`);
@@ -752,12 +806,62 @@ async function generateConfigs(nodes, outputConfigs, options) {
                           }
                         })
                       };
+                    case 'http':
+                      return {
+                        protocol: 'http',
+                        tag: node.name,
+                        settings: {
+                          servers: [{
+                            address: node.server,
+                            port: parseInt(node.port),
+                            ...(node.settings.username && node.settings.password && {
+                              users: [{
+                                user: node.settings.username,
+                                pass: node.settings.password
+                              }]
+                            })
+                          }]
+                        },
+                        ...(node.settings.tls && {
+                          streamSettings: {
+                            security: 'tls',
+                            tlsSettings: {
+                              allowInsecure: node.settings.skipCertVerify || false
+                            }
+                          }
+                        })
+                      };
+                    case 'socks':
+                      return {
+                        protocol: 'socks',
+                        tag: node.name,
+                        settings: {
+                          servers: [{
+                            address: node.server,
+                            port: parseInt(node.port),
+                            ...(node.settings.username && node.settings.password && {
+                              users: [{
+                                user: node.settings.username,
+                                pass: node.settings.password
+                              }]
+                            })
+                          }]
+                        },
+                        ...(node.settings.tls && {
+                          streamSettings: {
+                            security: 'tls',
+                            tlsSettings: {
+                              allowInsecure: node.settings.skipCertVerify || false
+                            }
+                          }
+                        })
+                      };
                     default:
                       return null;
                   }
                 }).filter(Boolean);
                 
-                // 在第一个outbound前插入所有代理节点
+                // 在第一个outbound后插入所有节点
                 if (configWithNodes.outbounds.length > 0) {
                   configWithNodes.outbounds.splice(1, 0, ...proxyOutbounds);
                 } else {
