@@ -30,12 +30,12 @@ jobs:
         run: |
           mkdir -p data
           mkdir -p output
+          mkdir -p dist
         
-      - name: Fetch and Convert Subscriptions
+      - name: Build and Run Sync Script
         env:
-          PRIVATE_SUBSCRIPTIONS: ${{ secrets.PRIVATE_SUBSCRIPTIONS }}
           LOG_LEVEL: debug
-        run: node src/scripts/sync-subscriptions.js
+        run: pnpm run build && node dist/sync-subscriptions.js
         
       - name: Commit Changes
         run: |

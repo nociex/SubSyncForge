@@ -7,15 +7,19 @@
   "scripts": {
     "dev": "wrangler dev",
     "deploy": "wrangler deploy",
-    "build": "node build.js",
-    "sync": "node src/scripts/sync-subscriptions.js"
+    "build": "rollup -c",
+    "sync": "npm run build && node dist/sync-subscriptions.js"
   },
   "dependencies": {
     "node-fetch": "^3.3.2",
     "js-yaml": "^4.1.0"
   },
   "devDependencies": {
-    "wrangler": "^3.0.0"
+    "wrangler": "^3.0.0",
+    "@rollup/plugin-commonjs": "^25.0.0",
+    "@rollup/plugin-json": "^6.0.0",
+    "@rollup/plugin-node-resolve": "^15.0.0",
+    "rollup": "^3.25.0"
   },
   "engines": {
     "node": ">=18.0.0"

@@ -1,9 +1,9 @@
-import { SubscriptionFetcher } from './fetcher/SubscriptionFetcher';
-import { SubscriptionParser } from './parser/SubscriptionParser';
-import { NodeDeduplicator } from './dedup/NodeDeduplicator';
-import { FormatConverter } from './formats/FormatConverter';
-import { NodeManager } from './analyzer';
-import { RuleManager } from './rules';
+import { SubscriptionFetcher } from './fetcher/SubscriptionFetcher.js';
+import { SubscriptionParser } from './parser/SubscriptionParser.js';
+import { NodeDeduplicator } from './dedup/NodeDeduplicator.js';
+import { FormatConverter } from './formats/FormatConverter.js';
+import { NodeManager } from './analyzer/index.js';
+import { RuleManager } from './rules/index.js';
 
 // 导入工具模块
 import {
@@ -11,7 +11,7 @@ import {
   events,
   validation,
   metrics
-} from '../utils';
+} from '../utils/index.js';
 
 // 导入具体类和常量（使用防御性编程方式）
 // 如果模块不存在，提供默认实现
