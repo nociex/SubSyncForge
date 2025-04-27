@@ -1,0 +1,29 @@
+{
+  "name": "subsyncforge",
+  "version": "1.0.0",
+  "description": "同步和转换订阅源的工具",
+  "main": "src/worker/index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "build": "node build.js",
+    "sync": "node src/scripts/sync-subscriptions.js"
+  },
+  "dependencies": {
+    "node-fetch": "^3.3.2",
+    "js-yaml": "^4.1.0"
+  },
+  "devDependencies": {
+    "wrangler": "^3.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yourusername/SubSyncForge.git"
+  },
+  "author": "",
+  "license": "MIT"
+} 

@@ -16,8 +16,20 @@ jobs:
         with:
           node-version: '18'
           
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 7
+          run_install: false
+          
       - name: Install Dependencies
-        run: npm install
+        run: pnpm install
+        working-directory: ${{ github.workspace }}
+        
+      - name: Create Directories
+        run: |
+          mkdir -p data
+          mkdir -p output
         
       - name: Fetch and Convert Subscriptions
         env:
@@ -29,7 +41,7 @@ jobs:
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git add data/
+          git add data/ output/
           git commit -m "chore: update subscriptions" || exit 0
           
       - name: Push Changes
