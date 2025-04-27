@@ -39,39 +39,169 @@ proxies:
 {{proxies}}
 
 proxy-groups:
-  - name: "PROXY"
+  - name: "🛫 节点切换"
     type: select
     proxies:
-      - AUTO
-      {{proxyNames}}
-      
-  - name: "AUTO"
-    type: url-test
-    url: http://www.gstatic.com/generate_204
-    interval: 300
-    tolerance: 50
-    proxies:
-      {{proxyNames}}
-      
-  - name: "Streaming"
-    type: select
-    proxies:
-      - PROXY
+      - "🕋 自建节点"
+      - "🌈 手动选择"
+      - "🇸🇬 新加坡节点"
+      - "🇭🇰 香港节点"
+      - "🇺🇲 美国节点"
+      - "🌍 其他节点"
       - DIRECT
+      
+  - name: "🌈 手动选择"
+    type: select
+    proxies:
       {{proxyNames}}
       
-  - name: "StreamingSE"
+  - name: "📲 电报消息"
+    type: select
+    proxies:
+      - "🕋 自建节点"
+      - "🌈 手动选择"
+      - "🇸🇬 新加坡节点"
+      - "🇭🇰 香港节点"
+      - "🇺🇲 美国节点"
+      - "🌍 其他节点"
+      - DIRECT
+      
+  - name: "🧬 OpenAi"
+    type: select
+    proxies:
+      - "🕋 自建节点"
+      - "🌈 手动选择"
+      - "🇸🇬 新加坡节点"
+      - "🇺🇲 美国节点"
+      - "🌍 其他节点"
+      - DIRECT
+      
+  - name: "📹 油管视频"
+    type: select
+    proxies:
+      - "🕋 自建节点"
+      - "🌈 手动选择"
+      - "🇸🇬 新加坡节点"
+      - "🇭🇰 香港节点"
+      - "🇺🇲 美国节点"
+      - "🌍 其他节点"
+      - DIRECT
+      
+  - name: "🎥 奈飞视频"
+    type: select
+    proxies:
+      - "🕋 自建节点"
+      - "🌈 手动选择" 
+      - "🇸🇬 新加坡节点"
+      - "🇭🇰 香港节点"
+      - "🇺🇲 美国节点"
+      - "🌍 其他节点"
+      - DIRECT
+      
+  - name: "🎬 迪士尼+"
+    type: select
+    proxies:
+      - "🕋 自建节点"
+      - "🌈 手动选择"
+      - "🇸🇬 新加坡节点"
+      - "🇭🇰 香港节点"
+      - "🇺🇲 美国节点"
+      - "🌍 其他节点"
+      - DIRECT
+      
+  - name: "📢 谷歌FCM"
+    type: select
+    proxies:
+      - "🕋 自建节点"
+      - "🌈 手动选择"
+      - "🇸🇬 新加坡节点"
+      - "🇭🇰 香港节点"
+      - "🇺🇲 美国节点"
+      - "🌍 其他节点"
+      - DIRECT
+      
+  - name: "Ⓜ️ 微软服务"
+    type: select
+    proxies:
+      - "🕋 自建节点"
+      - "🌈 手动选择"
+      - "🇸🇬 新加坡节点"
+      - "🇭🇰 香港节点"
+      - "🇺🇲 美国节点"
+      - "🌍 其他节点"
+      - DIRECT
+      
+  - name: "🍎 苹果服务"
+    type: select
+    proxies:
+      - "🕋 自建节点"
+      - "🌈 手动选择"
+      - "🇸🇬 新加坡节点"
+      - "🇭🇰 香港节点"
+      - "🇺🇲 美国节点"
+      - "🌍 其他节点"
+      - DIRECT
+      
+  - name: "🎮 游戏平台"
+    type: select
+    proxies:
+      - "🕋 自建节点"
+      - "🌈 手动选择"
+      - "🇸🇬 新加坡节点"
+      - "🇭🇰 香港节点"
+      - "🇺🇲 美国节点"
+      - "🌍 其他节点"
+      - DIRECT
+      
+  - name: "🚈 全球直连"
     type: select
     proxies:
       - DIRECT
-      - PROXY
-      {{proxyNames}}
+      - "🕋 自建节点"
       
-  - name: "Final"
+  - name: "🛑 广告拦截"
     type: select
     proxies:
-      - PROXY
+      - REJECT
       - DIRECT
+      
+  - name: "🌀 漏网之鱼"
+    type: select
+    proxies:
+      - "🕋 自建节点"
+      - "🌈 手动选择"
+      - "🌍 其他节点"
+      - DIRECT
+      
+  - name: "🇭🇰 香港节点"
+    type: select
+    proxies:
+      - DIRECT
+    filter: "(?=.*(港|HK|Hong))^((?!(台|日|韩|新|美)).)*$"
+      
+  - name: "🇺🇲 美国节点"
+    type: select
+    proxies:
+      - DIRECT
+    filter: "(?=.*(美|US|United States))^((?!(港|台|日|韩|新)).)*$"
+      
+  - name: "🇸🇬 新加坡节点"
+    type: select
+    proxies:
+      - DIRECT
+    filter: "(?=.*(新|狮|獅|SG|Singapore))^((?!(港|台|日|韩|美)).)*$"
+      
+  - name: "🌍 其他节点"
+    type: select
+    proxies:
+      - DIRECT
+    filter: "^((?!(港|HK|Hong|美|US|United States|新|狮|獅|SG|Singapore)).)*$"
+      
+  - name: "🕋 自建节点"
+    type: select
+    proxies:
+      - DIRECT
+    filter: "(?=.*(自建|self))"
 
 rule-providers:
   reject:
@@ -176,16 +306,14 @@ rules:
   - RULE-SET,applications,DIRECT
   - DOMAIN,clash.razord.top,DIRECT
   - DOMAIN,yacd.haishan.me,DIRECT
+  - DOMAIN-SUFFIX,openrouter.ai,🧬 OpenAi
+  - RULE-SET,reject,🛑 广告拦截
+  - RULE-SET,icloud,🍎 苹果服务
+  - RULE-SET,apple,🍎 苹果服务
+  - RULE-SET,google,📢 谷歌FCM
+  - RULE-SET,proxy,🛫 节点切换
+  - RULE-SET,direct,🚈 全球直连
   - RULE-SET,private,DIRECT
-  - RULE-SET,reject,REJECT
-  - RULE-SET,icloud,DIRECT
-  - RULE-SET,apple,DIRECT
-  - RULE-SET,google,PROXY
-  - RULE-SET,proxy,PROXY
-  - RULE-SET,direct,DIRECT
-  - RULE-SET,lancidr,DIRECT
-  - RULE-SET,cncidr,DIRECT
-  - RULE-SET,telegramcidr,PROXY
-  - GEOIP,LAN,DIRECT
-  - GEOIP,CN,DIRECT
-  - MATCH,Final
+  - RULE-SET,telegramcidr,📲 电报消息
+  - GEOIP,CN,🚈 全球直连
+  - MATCH,🌀 漏网之鱼

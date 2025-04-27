@@ -56,22 +56,133 @@
   "outbounds": [
     {
       "type": "selector",
-      "tag": "proxy",
+      "tag": "🛫 节点切换",
       "outbounds": [
-        "auto",
-        "__PROXY_TAGS__"
+        "🕋 自建节点",
+        "🌈 手动选择",
+        "🇸🇬 新加坡节点",
+        "🇭🇰 香港节点",
+        "🇺🇲 美国节点",
+        "🌍 其他节点",
+        "direct"
       ],
-      "default": "auto"
+      "default": "🕋 自建节点"
     },
     {
-      "type": "urltest",
-      "tag": "auto",
+      "type": "selector",
+      "tag": "🌈 手动选择",
       "outbounds": [
         "__PROXY_TAGS__"
-      ],
-      "url": "https://www.gstatic.com/generate_204",
-      "interval": "5m",
-      "tolerance": 100
+      ]
+    },
+    {
+      "type": "selector",
+      "tag": "📲 电报消息",
+      "outbounds": [
+        "🕋 自建节点",
+        "🌈 手动选择",
+        "🇸🇬 新加坡节点",
+        "🇭🇰 香港节点",
+        "🇺🇲 美国节点",
+        "🌍 其他节点",
+        "direct"
+      ]
+    },
+    {
+      "type": "selector",
+      "tag": "🧬 OpenAi",
+      "outbounds": [
+        "🕋 自建节点",
+        "🌈 手动选择",
+        "🇸🇬 新加坡节点",
+        "🇺🇲 美国节点",
+        "🌍 其他节点",
+        "direct"
+      ]
+    },
+    {
+      "type": "selector",
+      "tag": "📹 油管视频",
+      "outbounds": [
+        "🕋 自建节点",
+        "🌈 手动选择",
+        "🇸🇬 新加坡节点",
+        "🇭🇰 香港节点",
+        "🇺🇲 美国节点",
+        "🌍 其他节点",
+        "direct"
+      ]
+    },
+    {
+      "type": "selector",
+      "tag": "🎥 奈飞视频",
+      "outbounds": [
+        "🕋 自建节点",
+        "🌈 手动选择",
+        "🇸🇬 新加坡节点",
+        "🇭🇰 香港节点",
+        "🇺🇲 美国节点",
+        "🌍 其他节点",
+        "direct"
+      ]
+    },
+    {
+      "type": "selector",
+      "tag": "🍎 苹果服务",
+      "outbounds": [
+        "🕋 自建节点",
+        "🌈 手动选择",
+        "🇸🇬 新加坡节点",
+        "🇭🇰 香港节点",
+        "🇺🇲 美国节点",
+        "🌍 其他节点",
+        "direct"
+      ]
+    },
+    {
+      "type": "selector",
+      "tag": "🌀 漏网之鱼",
+      "outbounds": [
+        "🕋 自建节点",
+        "🌈 手动选择",
+        "🌍 其他节点",
+        "direct"
+      ]
+    },
+    {
+      "type": "selector",
+      "tag": "🇭🇰 香港节点",
+      "outbounds": [
+        "__HK_PROXY_TAGS__"
+      ]
+    },
+    {
+      "type": "selector",
+      "tag": "🇺🇲 美国节点",
+      "outbounds": [
+        "__US_PROXY_TAGS__"
+      ]
+    },
+    {
+      "type": "selector",
+      "tag": "🇸🇬 新加坡节点",
+      "outbounds": [
+        "__SG_PROXY_TAGS__"
+      ]
+    },
+    {
+      "type": "selector",
+      "tag": "🌍 其他节点",
+      "outbounds": [
+        "__OTHER_PROXY_TAGS__"
+      ]
+    },
+    {
+      "type": "selector",
+      "tag": "🕋 自建节点",
+      "outbounds": [
+        "__CUSTOM_PROXY_TAGS__"
+      ]
     },
     "__OUTBOUNDS__",
     {
@@ -101,6 +212,36 @@
       },
       {
         "domain": [
+          "geosite:openai"
+        ],
+        "outbound": "🧬 OpenAi"
+      },
+      {
+        "domain": [
+          "geosite:telegram"
+        ],
+        "outbound": "📲 电报消息"
+      },
+      {
+        "domain": [
+          "geosite:youtube"
+        ],
+        "outbound": "📹 油管视频"
+      },
+      {
+        "domain": [
+          "geosite:netflix"
+        ],
+        "outbound": "🎥 奈飞视频"
+      },
+      {
+        "domain": [
+          "geosite:apple"
+        ],
+        "outbound": "🍎 苹果服务"
+      },
+      {
+        "domain": [
           "geosite:cn"
         ],
         "outbound": "direct"
@@ -116,7 +257,7 @@
         "domain": [
           "geosite:geolocation-!cn"
         ],
-        "outbound": "proxy"
+        "outbound": "🛫 节点切换"
       }
     ],
     "auto_detect_interface": true

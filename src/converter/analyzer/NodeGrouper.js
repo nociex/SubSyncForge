@@ -18,25 +18,25 @@ export class NodeGrouper {
     // 高级分组（参考用户提供的标准）
     this.advancedGroups = [
       // 主要选择组
-      { name: '🛫 节点切换', type: 'select', includeGroups: ['🕋 自建节点', '🌈 手动选择', '🇸🇬 新加坡节点', '🇭🇰 香港节点', '🇺🇲 美国节点'], includeDirect: true },
+      { name: '🛫 节点切换', type: 'select', includeGroups: ['🕋 自建节点', '🌈 手动选择', '🇸🇬 新加坡节点', '🇭🇰 香港节点', '🇺🇲 美国节点', '🌍 其他节点'], includeDirect: true },
       { name: '🌈 手动选择', type: 'select', includeGroups: [], includeDirect: true },
 
       // 应用/服务专用组
-      { name: '📲 电报消息', type: 'select', includeGroups: ['🕋 自建节点', '🌈 手动选择', '🇸🇬 新加坡节点', '🇭🇰 香港节点', '🇺🇲 美国节点'], includeDirect: true },
-      { name: '🧬 OpenAi', type: 'select', includeGroups: ['🕋 自建节点', '🌈 手动选择', '🇸🇬 新加坡节点', '🇺🇲 美国节点'], includeDirect: true, includeByTag: ['OpenAI'] },
-      { name: '📹 油管视频', type: 'select', includeGroups: ['🕋 自建节点', '🌈 手动选择', '🇸🇬 新加坡节点', '🇭🇰 香港节点', '🇺🇲 美国节点'], includeDirect: true, includeByTag: ['YouTube'] },
-      { name: '🎥 奈飞视频', type: 'select', includeGroups: ['🕋 自建节点', '🌈 手动选择', '🇸🇬 新加坡节点', '🇭🇰 香港节点', '🇺🇲 美国节点'], includeDirect: true, includeByTag: ['Netflix'] },
-      { name: '🎬 迪士尼+', type: 'select', includeGroups: ['🕋 自建节点', '🌈 手动选择', '🇸🇬 新加坡节点', '🇭🇰 香港节点', '🇺🇲 美国节点'], includeDirect: true, includeByTag: ['Disney+'] },
-      { name: '📢 谷歌FCM', type: 'select', includeGroups: ['🕋 自建节点', '🌈 手动选择', '🇸🇬 新加坡节点', '🇭🇰 香港节点', '🇺🇲 美国节点'], includeDirect: true },
-      { name: 'Ⓜ️ 微软服务', type: 'select', includeGroups: ['🕋 自建节点', '🌈 手动选择', '🇸🇬 新加坡节点', '🇭🇰 香港节点', '🇺🇲 美国节点'], includeDirect: true, includeByTag: ['Microsoft'] },
-      { name: '🍎 苹果服务', type: 'select', includeGroups: ['🕋 自建节点', '🌈 手动选择', '🇸🇬 新加坡节点', '🇭🇰 香港节点', '🇺🇲 美国节点'], includeDirect: true, includeByTag: ['Apple'] },
-      { name: '🎮 游戏平台', type: 'select', includeGroups: ['🕋 自建节点', '🌈 手动选择', '🇸🇬 新加坡节点', '🇭🇰 香港节点', '🇺🇲 美国节点'], includeDirect: true, includeByTag: ['游戏'] },
+      { name: '📲 电报消息', type: 'select', includeGroups: ['🕋 自建节点', '🌈 手动选择', '🇸🇬 新加坡节点', '🇭🇰 香港节点', '🇺🇲 美国节点', '🌍 其他节点'], includeDirect: true },
+      { name: '🧬 OpenAi', type: 'select', includeGroups: ['🕋 自建节点', '🌈 手动选择', '🇸🇬 新加坡节点', '🇺🇲 美国节点', '🌍 其他节点'], includeDirect: true, includeByTag: ['OpenAI'] },
+      { name: '📹 油管视频', type: 'select', includeGroups: ['🕋 自建节点', '🌈 手动选择', '🇸🇬 新加坡节点', '🇭🇰 香港节点', '🇺🇲 美国节点', '🌍 其他节点'], includeDirect: true, includeByTag: ['YouTube'] },
+      { name: '🎥 奈飞视频', type: 'select', includeGroups: ['🕋 自建节点', '🌈 手动选择', '🇸🇬 新加坡节点', '🇭🇰 香港节点', '🇺🇲 美国节点', '🌍 其他节点'], includeDirect: true, includeByTag: ['Netflix'] },
+      { name: '🎬 迪士尼+', type: 'select', includeGroups: ['🕋 自建节点', '🌈 手动选择', '🇸🇬 新加坡节点', '🇭🇰 香港节点', '🇺🇲 美国节点', '🌍 其他节点'], includeDirect: true, includeByTag: ['Disney+'] },
+      { name: '📢 谷歌FCM', type: 'select', includeGroups: ['🕋 自建节点', '🌈 手动选择', '🇸🇬 新加坡节点', '🇭🇰 香港节点', '🇺🇲 美国节点', '🌍 其他节点'], includeDirect: true },
+      { name: 'Ⓜ️ 微软服务', type: 'select', includeGroups: ['🕋 自建节点', '🌈 手动选择', '🇸🇬 新加坡节点', '🇭🇰 香港节点', '🇺🇲 美国节点', '🌍 其他节点'], includeDirect: true, includeByTag: ['Microsoft'] },
+      { name: '🍎 苹果服务', type: 'select', includeGroups: ['🕋 自建节点', '🌈 手动选择', '🇸🇬 新加坡节点', '🇭🇰 香港节点', '🇺🇲 美国节点', '🌍 其他节点'], includeDirect: true, includeByTag: ['Apple'] },
+      { name: '🎮 游戏平台', type: 'select', includeGroups: ['🕋 自建节点', '🌈 手动选择', '🇸🇬 新加坡节点', '🇭🇰 香港节点', '🇺🇲 美国节点', '🌍 其他节点'], includeDirect: true, includeByTag: ['游戏'] },
 
       // 特殊用途组
       { name: '🕋 自建节点', type: 'select', includeCustom: true },
       { name: '🚈 全球直连', type: 'select', includeDirect: true, includeGroups: ['🕋 自建节点'] },
       { name: '🛑 广告拦截', type: 'select', includeReject: true, includeDirect: true },
-      { name: '🌀 漏网之鱼', type: 'select', includeGroups: ['🕋 自建节点', '🌈 手动选择'], includeDirect: true },
+      { name: '🌀 漏网之鱼', type: 'select', includeGroups: ['🕋 自建节点', '🌈 手动选择', '🌍 其他节点'], includeDirect: true },
     ];
 
     // 区域节点组会在 generateGroups 方法中动态创建
@@ -477,6 +477,28 @@ export class NodeGrouper {
     // 添加区域节点组到结果
     for (const key in regionGroups) {
       result.push(regionGroups[key]);
+    }
+
+    // 创建其他节点组（不是香港、新加坡和美国的节点）
+    const otherNodes = nodes.filter(node => {
+      if (!node.analysis || !node.analysis.country || !node.analysis.countryCode) {
+        return true; // 没有国家信息的节点也归为其他节点
+      }
+      const code = node.analysis.countryCode;
+      return code !== 'HK' && code !== 'SG' && code !== 'US';
+    });
+
+    if (otherNodes.length > 0) {
+      const otherNodeGroup = {
+        name: '🌍 其他节点',
+        type: 'select',
+        nodes: otherNodes,
+        url: 'http://www.gstatic.com/generate_204',
+        interval: 300,
+        tolerance: 150
+      };
+      groupMap.set('🌍 其他节点', otherNodeGroup);
+      result.push(otherNodeGroup);
     }
 
     // 创建自建节点组
