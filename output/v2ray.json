@@ -86,6 +86,41 @@
       {
         "type": "field",
         "domain": [
+          "geosite:openai"
+        ],
+        "outboundTag": "proxy"
+      },
+      {
+        "type": "field",
+        "domain": [
+          "geosite:telegram"
+        ],
+        "outboundTag": "proxy"
+      },
+      {
+        "type": "field",
+        "domain": [
+          "geosite:youtube"
+        ],
+        "outboundTag": "proxy"
+      },
+      {
+        "type": "field",
+        "domain": [
+          "geosite:netflix"
+        ],
+        "outboundTag": "proxy"
+      },
+      {
+        "type": "field",
+        "domain": [
+          "geosite:apple"
+        ],
+        "outboundTag": "proxy"
+      },
+      {
+        "type": "field",
+        "domain": [
           "geosite:cn"
         ],
         "outboundTag": "direct"
