@@ -8,8 +8,12 @@ on:
 jobs:
   sync:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write       # 显式授予写入权限
     steps:
       - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0    # 获取完整历史记录
       
       - name: Setup Node.js
         uses: actions/setup-node@v3
@@ -40,7 +44,7 @@ jobs:
       - name: Commit Changes
         run: |
           git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
+          git config --local user.name "github-actions[bot]"
           git add data/ output/
           git commit -m "chore: update subscriptions" || exit 0
           
@@ -48,3 +52,4 @@ jobs:
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}    # 明确指定推送到当前分支
