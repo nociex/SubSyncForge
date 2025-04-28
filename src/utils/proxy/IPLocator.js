@@ -16,6 +16,7 @@ export class IPLocator {
     
     // 配置多个备选API
     this.apiProviders = [
+      // 优先使用免费、无需Key的API
       {
         name: 'ip-api',
         url: 'http://ip-api.com/json/{ip}',
@@ -25,27 +26,19 @@ export class IPLocator {
         status: 'ready' // ready, limited, failed
       },
       {
-        name: 'ipinfo',
-        url: 'https://ipinfo.io/{ip}/json',
-        needsKey: true,
-        rateLimit: 50000 / (30 * 24 * 60), // 每月50000次，转换为每分钟
-        parser: this.parseIpinfoResponse,
-        status: 'ready'
-      },
-      {
-        name: 'ipgeolocation',
-        url: 'https://api.ipgeolocation.io/ipgeo',
-        needsKey: true,
-        rateLimit: 30000 / (30 * 24 * 60), // 每月30000次，转换为每分钟
-        parser: this.parseIpgeolocationResponse,
-        status: 'ready'
-      },
-      {
-        name: 'freegeoip',
-        url: 'https://freegeoip.app/json/{ip}',
+        name: 'freeipapi',
+        url: 'https://freeipapi.com/api/json/{ip}',
         needsKey: false,
-        rateLimit: 15, // 估计的每分钟限制
-        parser: this.parseFreegeoipResponse,
+        rateLimit: 30, // 估计的每分钟限制 (保守估计)
+        parser: this.parseGenericResponse, // 尝试通用解析器
+        status: 'ready'
+      },
+      {
+        name: 'iplocation.net',
+        url: 'https://api.iplocation.net/?ip={ip}', // 使用查询参数
+        needsKey: false,
+        rateLimit: 30, // 估计的每分钟限制 (保守估计)
+        parser: this.parseIplocationNetResponse, // 需要特定解析器
         status: 'ready'
       }
     ];
@@ -429,27 +422,7 @@ export class IPLocator {
   }
   
   /**
-   * 解析freegeoip.app的响应
-   */
-  parseFreegeoipResponse(data, ip) {
-    // 如果没有国家代码，设置为null以便触发"其他"分类
-    const countryCode = data.country_code || null;
-    
-    return {
-      ip: data.ip || ip,
-      country: countryCode,
-      countryName: this.getCountryName(countryCode) || data.country_name || '其他',
-      region: data.region_name,
-      city: data.city,
-      org: data.org || '',
-      loc: data.latitude && data.longitude ? `${data.latitude},${data.longitude}` : '',
-      timezone: data.time_zone || '',
-      timestamp: new Date().toISOString()
-    };
-  }
-  
-  /**
-   * 通用响应解析器
+   * 解析freeipapi.com的响应
    */
   parseGenericResponse(data, ip) {
     // 尝试智能识别字段
@@ -459,8 +432,8 @@ export class IPLocator {
     };
     
     // 尝试识别国家代码
-    if (data.country_code || data.countryCode || data.country) {
-      const countryCode = data.country_code || data.countryCode || data.country;
+    if (data.country_code || data.countryCode || data.country_code2 || data.country) {
+      const countryCode = data.country_code || data.countryCode || data.country_code2 || data.country;
       result.country = countryCode;
       result.countryName = this.getCountryName(countryCode) || data.country_name || data.countryName || '其他';
     } else {
@@ -470,7 +443,7 @@ export class IPLocator {
     }
     
     // 尝试识别地区
-    result.region = data.region_name || data.regionName || data.region || '';
+    result.region = data.region_name || data.regionName || data.region || data.state_prov || '';
     
     // 尝试识别城市
     result.city = data.city || '';
@@ -490,8 +463,34 @@ export class IPLocator {
     }
     
     // 尝试识别时区
-    result.timezone = data.timezone || data.time_zone || '';
+    result.timezone = data.timezone || data.time_zone || (data.time_zone && data.time_zone.name) || '';
     
+    // 针对 freeipapi 可能的字段
+    if (!result.country && data.countryCode) {
+        result.country = data.countryCode;
+        result.countryName = this.getCountryName(data.countryCode) || data.countryName || '其他';
+    }
+     if (!result.region && data.regionName) {
+        result.region = data.regionName;
+    }
+     if (!result.city && data.cityName) {
+        result.city = data.cityName;
+    }
+    if (!result.org && data.asn && data.asnOwner) {
+       result.org = `${data.asn} ${data.asnOwner}`;
+    }
+     if (!result.loc && data.latitude && data.longitude) {
+        result.loc = `${data.latitude},${data.longitude}`;
+    }
+    if (!result.timezone && data.timeZone) {
+       result.timezone = data.timeZone;
+    }
+
+    // 再次检查 countryName，确保有默认值
+    if (!result.countryName) {
+        result.countryName = '其他';
+    }
+
     return result;
   }
   
@@ -500,9 +499,16 @@ export class IPLocator {
    */
   checkAndResetCounter() {
     const now = Date.now();
-    // 如果上次重置时间超过1分钟，则重置计数器
+    // 如果上次重置时间超过1分钟，则重置计数器并重置 limited 状态
     if (now - this.counterResetTime > 60000) {
+      this.logger.debug('重置API请求计数器和限制状态');
       this.requestCounter = {};
+      this.apiProviders.forEach(p => {
+         // 只重置 limited 状态，failed 和 timeout 可能需要更长时间恢复
+         if (p.status === 'limited') {
+            p.status = 'ready';
+         }
+      });
       this.counterResetTime = now;
     }
   }
@@ -518,45 +524,58 @@ export class IPLocator {
    * 检查提供商是否达到限制
    */
   isProviderLimited(provider) {
-    if (provider.status === 'limited' || provider.status === 'failed') {
+    // 如果状态不是 ready，则认为受限/不可用
+    if (provider.status !== 'ready') {
       return true;
     }
-    
+    // 如果需要 Key 但没有提供，则不可用
+    if (provider.needsKey && !this.apiKey) {
+       this.logger.warn(`提供商 ${provider.name} 需要 API Key，但未配置`);
+       provider.status = 'no_key'; // 标记为特殊状态
+       return true;
+    }
     const count = this.requestCounter[provider.name] || 0;
-    return count >= provider.rateLimit;
+    // 检查是否超过速率限制
+    if (count >= provider.rateLimit) {
+       provider.status = 'limited'; // 显式标记状态
+       return true;
+    }
+    return false;
   }
   
   /**
    * 切换到下一个可用的提供商
    */
   switchToNextProvider() {
-    const availableProviders = this.apiProviders.filter(p => 
-      p.status === 'ready' && 
-      p !== this.currentProvider && 
-      (!p.needsKey || this.apiKey)
-    );
-    
-    if (availableProviders.length > 0) {
-      this.currentProvider = availableProviders[0];
-      this.logger.info(`切换到下一个可用提供商: ${this.currentProvider.name}`);
-    } else {
-      // 如果没有可用的提供商，重置所有提供商状态
-      this.apiProviders.forEach(p => p.status = 'ready');
-      
-      // 重新选择第一个不需要密钥的提供商
-      const noKeyProviders = this.apiProviders.filter(p => !p.needsKey);
-      if (noKeyProviders.length > 0) {
-        this.currentProvider = noKeyProviders[0];
-      } else if (this.apiKey) {
-        // 如果有API密钥，选择第一个需要密钥的提供商
-        this.currentProvider = this.apiProviders.find(p => p.needsKey);
-      } else {
-        // 没办法了，只能用第一个
-        this.currentProvider = this.apiProviders[0];
+    const currentIndex = this.apiProviders.findIndex(p => p === this.currentProvider);
+    let nextIndex = (currentIndex + 1) % this.apiProviders.length;
+
+    // 循环查找下一个状态为 'ready' 且满足 Key 条件的提供商
+    for (let i = 0; i < this.apiProviders.length; i++) {
+      const nextProvider = this.apiProviders[nextIndex];
+      // 检查状态是否 ready 并且 Key 条件满足
+      if (nextProvider.status === 'ready' && (!nextProvider.needsKey || this.apiKey)) {
+        this.currentProvider = nextProvider;
+        return true; // 成功找到并切换
       }
-      
-      this.logger.warn(`所有提供商都已达到限制，重置状态并使用: ${this.currentProvider.name}`);
+       // 检查是否是因没key导致不可用
+       if (nextProvider.needsKey && !this.apiKey && nextProvider.status !== 'no_key') {
+           this.logger.debug(`跳过需要Key的提供商 ${nextProvider.name}`);
+           nextProvider.status = 'no_key'; // 标记一下避免重复日志
+       }
+
+      nextIndex = (nextIndex + 1) % this.apiProviders.length;
+       // 如果绕了一圈回到原来的，说明没有可用的了
+       if (nextIndex === (currentIndex + 1) % this.apiProviders.length && i > 0) break;
     }
+
+    // 如果循环一圈都找不到可用的 'ready' 提供商
+    this.logger.error('没有找到其他可用的API提供商');
+    // 可以考虑在这里尝试重置 'failed' 或 'timeout' 的状态，给它们一个机会
+    // 例如： this.apiProviders.forEach(p => { if (p.status !== 'limited' && p.status !== 'no_key') p.status = 'ready'; });
+    // 但现在暂时不加这个逻辑，避免潜在问题
+
+    return false; // 未能切换
   }
 
   /**
@@ -683,6 +702,37 @@ export class IPLocator {
     const ipv6Pattern = /^([0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|:((:[0-9a-fA-F]{1,4}){1,7}|:)$/;
     
     return ipv4Pattern.test(str) || ipv6Pattern.test(str);
+  }
+
+  /**
+   * 解析 api.iplocation.net 的响应
+   */
+  parseIplocationNetResponse(data, ip) {
+    // {
+    //   "ip": "8.8.8.8",
+    //   "ip_number": "134744072",
+    //   "ip_version": 4,
+    //   "country_name": "United States",
+    //   "country_code2": "US",
+    //   "isp": "Google LLC",
+    //   "response_code": "200",
+    //   "response_message": "OK"
+    // }
+    if (data.response_code !== "200") {
+       throw new Error(`iplocation.net错误: ${data.response_message} (Code: ${data.response_code})`);
+    }
+    const countryCode = data.country_code2 || null;
+    return {
+      ip: data.ip || ip,
+      country: countryCode,
+      countryName: this.getCountryName(countryCode) || data.country_name || '其他',
+      region: '', // 这个API不提供region/city
+      city: '',
+      org: data.isp || '',
+      loc: '', // 不提供坐标
+      timezone: '', // 不提供时区
+      timestamp: new Date().toISOString()
+    };
   }
 }
 
