@@ -6,7 +6,7 @@ SubSyncForge 是一个强大的订阅转换工具，支持自动化订阅源管�
 
 ## 项目状态
 
-![版本](https://img.shields.io/badge/版本-1.3.2-blue)
+![版本](https://img.shields.io/badge/版本-1.3.3-blue)
 ![状态](https://img.shields.io/badge/状态-开发中-yellow)
 
 查看[更新日志](CHANGELOG.md)了解详细变更记录。

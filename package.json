@@ -1,8 +1,8 @@
 {
   "name": "subsyncforge",
-  "version": "1.0.0",
-  "description": "同步和转换订阅源的工具",
-  "main": "src/worker/index.js",
+  "version": "1.3.3",
+  "description": "SubSyncForge - 强大的订阅转换工具",
+  "main": "dist/index.js",
   "type": "module",
   "scripts": {
     "dev": "wrangler dev",
@@ -11,7 +11,8 @@
     "sync": "npm run build && node dist/sync-subscriptions.js",
     "test": "node src/scripts/sync-subscriptions.js",
     "clean": "node src/scripts/clean-cache.js",
-    "schedule": "node src/scripts/schedule.js"
+    "schedule": "node src/scripts/schedule.js",
+    "generate-icons": "node src/scripts/generateGroupIcons.js"
   },
   "dependencies": {
     "node-fetch": "^3.3.2",
