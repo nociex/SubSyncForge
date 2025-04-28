@@ -48,7 +48,15 @@ export class GroupManager {
     const mediaMap = {
       'OpenAI': { name: 'OpenAI', icon: this.iconGenerator.getIcon('OpenAI'), nodes: [] },
       'Disney+': { name: 'Disney+', icon: this.iconGenerator.getIcon('Disney+'), nodes: [] },
-      'Netflix': { name: 'Netflix', icon: this.iconGenerator.getIcon('Netflix'), nodes: [] }
+      'Netflix': { name: 'Netflix', icon: this.iconGenerator.getIcon('Netflix'), nodes: [] },
+      'YouTube': { name: 'YouTube', icon: this.iconGenerator.getIcon('YouTube'), nodes: [] },
+      'Hulu': { name: 'Hulu', icon: this.iconGenerator.getIcon('Hulu'), nodes: [] },
+      'HBO': { name: 'HBO', icon: this.iconGenerator.getIcon('HBO'), nodes: [] },
+      'AmazonPrime': { name: 'Amazon Prime', icon: this.iconGenerator.getIcon('AmazonPrime'), nodes: [] },
+      'BBC': { name: 'BBC', icon: this.iconGenerator.getIcon('BBC'), nodes: [] },
+      'Emby': { name: 'Emby', icon: this.iconGenerator.getIcon('Emby'), nodes: [] },
+      'Spotify': { name: 'Spotify', icon: this.iconGenerator.getIcon('Spotify'), nodes: [] },
+      'Bilibili': { name: 'Bilibili', icon: this.iconGenerator.getIcon('Bilibili'), nodes: [] }
     };
 
     // 遍历节点进行分类
@@ -120,6 +128,46 @@ export class GroupManager {
     // Netflix 相关节点
     if (name.includes('NETFLIX') || name.includes('NF')) {
       mediaMap['Netflix'].nodes.push(node);
+    }
+
+    // YouTube 相关节点
+    if (name.includes('YOUTUBE') || name.includes('YT')) {
+      mediaMap['YouTube'].nodes.push(node);
+    }
+    
+    // Hulu 相关节点
+    if (name.includes('HULU')) {
+      mediaMap['Hulu'].nodes.push(node);
+    }
+    
+    // HBO 相关节点
+    if (name.includes('HBO') || name.includes('MAX')) {
+      mediaMap['HBO'].nodes.push(node);
+    }
+    
+    // Amazon Prime 相关节点
+    if (name.includes('AMAZON') || name.includes('PRIME')) {
+      mediaMap['AmazonPrime'].nodes.push(node);
+    }
+    
+    // BBC 相关节点
+    if (name.includes('BBC')) {
+      mediaMap['BBC'].nodes.push(node);
+    }
+    
+    // Emby 相关节点
+    if (name.includes('EMBY')) {
+      mediaMap['Emby'].nodes.push(node);
+    }
+    
+    // Spotify 相关节点
+    if (name.includes('SPOTIFY') || name.includes('MUSIC')) {
+      mediaMap['Spotify'].nodes.push(node);
+    }
+    
+    // Bilibili 相关节点
+    if (name.includes('BILIBILI') || name.includes('B站') || name.includes('哔哩')) {
+      mediaMap['Bilibili'].nodes.push(node);
     }
   }
 }
