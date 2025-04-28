@@ -1228,6 +1228,7 @@ async function generateGroupedNodeFiles(nodes, options) {
               else if (group.name === '新加坡') prefix = '🇸🇬 新加坡 ';
               else if (group.name === '美国') prefix = '🇺🇸 美国 ';
               else if (group.name === '日本') prefix = '🇯🇵 日本 ';
+              else if (group.name === '其他') prefix = '🌍 其他 ';
               else prefix = '';
               
               // 构造完整节点名称
@@ -1344,6 +1345,7 @@ async function generateGroupedNodeFiles(nodes, options) {
               else if (group.name === '新加坡') prefix = '🇸🇬 新加坡 ';
               else if (group.name === '美国') prefix = '🇺🇸 美国 ';
               else if (group.name === '日本') prefix = '🇯🇵 日本 ';
+              else if (group.name === '其他') prefix = '🌍 其他 ';
               else prefix = '';
               
               // 构造完整节点名称
