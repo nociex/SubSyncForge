@@ -64,19 +64,8 @@ const MetricName = metrics?.MetricName || {
   DEDUP_TIME: 'dedup.time'
 };
 
-// 确保指标记录函数存在
-if (!metrics?.recordFetch) {
-  metrics.recordFetch = () => {};
-}
-if (!metrics?.recordParse) {
-  metrics.recordParse = () => {};
-}
-if (!metrics?.recordDedup) {
-  metrics.recordDedup = () => {};
-}
-if (!metrics?.recordConversion) {
-  metrics.recordConversion = () => {};
-}
+// 不再在全局作用域设置this属性，移除这些代码
+// 而是在构造函数中进行初始化
 
 export class SubscriptionConverter {
   constructor(options = {}) {
@@ -100,6 +89,12 @@ export class SubscriptionConverter {
 
     // 初始化日志器
     this.logger = options.logger || defaultLogger.child({ component: 'SubscriptionConverter' });
+
+    // 初始化指标记录函数
+    this.recordFetch = metrics?.recordFetch || (() => {});
+    this.recordParse = metrics?.recordParse || (() => {});
+    this.recordDedup = metrics?.recordDedup || (() => {});
+    this.recordConversion = metrics?.recordConversion || (() => {});
 
     // 配置选项
     this.options = {
@@ -187,8 +182,8 @@ export class SubscriptionConverter {
 
         if (this.options.recordMetrics) {
           // 使用安全的方式调用指标记录函数
-          if (metrics?.recordFetch) {
-            metrics.recordFetch(source, true, fetchTime, fetchData.data.length);
+          if (this.recordFetch) {
+            this.recordFetch(source, true, fetchTime, fetchData.data.length);
           }
         }
 
@@ -212,8 +207,8 @@ export class SubscriptionConverter {
 
         if (this.options.recordMetrics) {
           // 使用安全的方式调用指标记录函数
-          if (metrics?.recordFetch) {
-            metrics.recordFetch(source, false);
+          if (this.recordFetch) {
+            this.recordFetch(source, false);
           }
         }
 
@@ -249,8 +244,8 @@ export class SubscriptionConverter {
 
         if (this.options.recordMetrics) {
           // 使用安全的方式调用指标记录函数
-          if (metrics?.recordParse) {
-            metrics.recordParse('auto', true, parseTime, nodes.length);
+          if (this.recordParse) {
+            this.recordParse('auto', true, parseTime, nodes.length);
           }
         }
 
@@ -274,8 +269,8 @@ export class SubscriptionConverter {
 
         if (this.options.recordMetrics) {
           // 使用安全的方式调用指标记录函数
-          if (metrics?.recordParse) {
-            metrics.recordParse('auto', false);
+          if (this.recordParse) {
+            this.recordParse('auto', false);
           }
         }
 
@@ -311,8 +306,8 @@ export class SubscriptionConverter {
 
         if (this.options.recordMetrics) {
           // 使用安全的方式调用指标记录函数
-          if (metrics?.recordDedup) {
-            metrics.recordDedup(beforeCount, afterCount, dedupTime);
+          if (this.recordDedup) {
+            this.recordDedup(beforeCount, afterCount, dedupTime);
           }
         }
 
@@ -419,8 +414,8 @@ export class SubscriptionConverter {
       if (this.options.recordMetrics && timer) {
         timer.stop();
         // 使用安全的方式调用指标记录函数
-        if (metrics?.recordConversion) {
-          metrics.recordConversion(targetFormat, true, totalTime, nodes.length);
+        if (this.recordConversion) {
+          this.recordConversion(targetFormat, true, totalTime, nodes.length);
         }
       }
 
@@ -452,8 +447,8 @@ export class SubscriptionConverter {
       if (this.options.recordMetrics && timer) {
         timer.stop();
         // 使用安全的方式调用指标记录函数
-        if (metrics?.recordConversion) {
-          metrics.recordConversion(targetFormat, false);
+        if (this.recordConversion) {
+          this.recordConversion(targetFormat, false);
         }
       }
 

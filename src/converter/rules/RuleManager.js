@@ -1,4 +1,4 @@
-import { RuleParser } from './RuleParser';
+import { RuleParser } from './RuleParser.js';
 
 /**
  * 规则管理器

@@ -1,7 +1,7 @@
-import { Base64Parser } from './formats/Base64Parser';
-import { JsonParser } from './formats/JsonParser';
-import { YamlParser } from './formats/YamlParser';
-import { PlainTextParser } from './formats/PlainTextParser';
+import { Base64Parser } from './formats/Base64Parser.js';
+import { JsonParser } from './formats/JsonParser.js';
+import { YamlParser } from './formats/YamlParser.js';
+import { PlainTextParser } from './formats/PlainTextParser.js';
 
 export class SubscriptionParser {
   constructor(options = {}) {

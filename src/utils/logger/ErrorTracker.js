@@ -1,4 +1,4 @@
-import { Logger, LogLevel } from './Logger';
+import { Logger, LogLevel } from './Logger.js';
 
 /**
  * 错误类型定义

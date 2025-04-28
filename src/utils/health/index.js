@@ -1,4 +1,4 @@
-import { HealthCheck, HealthStatus, createDefaultHealthCheck } from './HealthCheck';
+import { HealthCheck, HealthStatus, createDefaultHealthCheck } from './HealthCheck.js';
 
 // 创建全局默认健康检查实例
 export const healthCheck = createDefaultHealthCheck();

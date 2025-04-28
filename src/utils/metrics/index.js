@@ -3,7 +3,7 @@ import {
   MetricType, 
   ConsoleMetricsExporter, 
   createDefaultMetrics 
-} from './Metrics';
+} from './Metrics.js';
 
 // 创建全局默认指标收集器实例
 export const metrics = createDefaultMetrics();

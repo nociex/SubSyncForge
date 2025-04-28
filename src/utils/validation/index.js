@@ -1,4 +1,4 @@
-import { Validator, RuleType } from './Validator';
+import { Validator, RuleType } from './Validator.js';
 
 // 预定义的验证模式
 export const ValidationSchemas = {

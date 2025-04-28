@@ -1,4 +1,4 @@
-import { NodeAnalyzer } from './NodeAnalyzer';
+import { NodeAnalyzer } from './NodeAnalyzer.js';
 
 /**
  * 节点标签器

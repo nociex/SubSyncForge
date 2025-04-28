@@ -1147,7 +1147,7 @@ async function generateConfigs(nodes, outputConfigs, options) {
 }
 
 /**
- * 将分组节点以base64格式输出到对应文件
+ * 将分组节点直接输出到对应文件而非使用base64编码
  * @param {Array} nodes 所有节点
  * @param {Object} options 全局选项
  */
@@ -1156,7 +1156,7 @@ async function generateGroupedNodeFiles(nodes, options) {
   const outputDir = path.join(rootDir, options.outputDir || 'output');
   ensureDirectoryExists(outputDir);
   
-  console.log(`准备生成分组节点base64文件...`);
+  console.log(`准备生成分组节点文件...`);
   
   if (nodes.length === 0) {
     console.warn('没有节点数据，无法生成分组节点文件');
@@ -1211,7 +1211,7 @@ async function generateGroupedNodeFiles(nodes, options) {
           
           const outputPath = path.join(groupDir, filename);
           
-          // 将节点原始链接拼接为字符串，然后Base64编码
+          // 将节点原始链接拼接为字符串
           const rawNodes = group.nodes
             .map(node => {
               // 优先使用原始URI
@@ -1303,11 +1303,9 @@ async function generateGroupedNodeFiles(nodes, options) {
           const uriCount = rawNodes.split('\n').length;
           console.log(`${filename} 生成了 ${uriCount} 个节点URI，原始节点数 ${group.nodes.length}`);
           
-          // 编码为Base64
-          const base64Nodes = Buffer.from(rawNodes).toString('base64');
-          
+          // 直接写入原始节点链接，不再使用base64编码
           try {
-            fs.writeFileSync(outputPath, base64Nodes);
+            fs.writeFileSync(outputPath, rawNodes);
             console.log(`已生成地区分组节点文件: ${filename} (${group.nodes.length} 个节点)`);
             console.log(`文件完整路径: ${path.resolve(outputPath)}`);
             generatedFiles++;
@@ -1328,7 +1326,7 @@ async function generateGroupedNodeFiles(nodes, options) {
           const filename = `${group.name}.txt`;
           const outputPath = path.join(groupDir, filename);
           
-          // 将节点原始链接拼接为字符串，然后Base64编码
+          // 将节点原始链接拼接为字符串
           const rawNodes = group.nodes
             .map(node => {
               // 优先使用原始URI
@@ -1420,11 +1418,9 @@ async function generateGroupedNodeFiles(nodes, options) {
           const uriCount = rawNodes.split('\n').length;
           console.log(`${filename} 生成了 ${uriCount} 个节点URI，原始节点数 ${group.nodes.length}`);
           
-          // 编码为Base64
-          const base64Nodes = Buffer.from(rawNodes).toString('base64');
-          
+          // 直接写入原始节点链接，不再使用base64编码
           try {
-            fs.writeFileSync(outputPath, base64Nodes);
+            fs.writeFileSync(outputPath, rawNodes);
             console.log(`已生成流媒体分组节点文件: ${filename} (${group.nodes.length} 个节点)`);
             console.log(`文件完整路径: ${path.resolve(outputPath)}`);
             generatedFiles++;
@@ -1435,7 +1431,7 @@ async function generateGroupedNodeFiles(nodes, options) {
       }
     }
     
-    const message = `分组节点base64文件生成完成，共生成 ${generatedFiles} 个文件`;
+    const message = `分组节点文件生成完成，共生成 ${generatedFiles} 个文件`;
     console.log(message);
     
     // 触发转换完成事件，发送Bark通知

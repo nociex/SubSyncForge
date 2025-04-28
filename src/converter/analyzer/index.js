@@ -1,7 +1,7 @@
-import { NodeAnalyzer } from './NodeAnalyzer';
-import { NodeTagger } from './NodeTagger';
-import { NodeGrouper } from './NodeGrouper';
-import { NodeFilter } from './NodeFilter';
+import { NodeAnalyzer } from './NodeAnalyzer.js';
+import { NodeTagger } from './NodeTagger.js';
+import { NodeGrouper } from './NodeGrouper.js';
+import { NodeFilter } from './NodeFilter.js';
 
 /**
  * 节点管理器

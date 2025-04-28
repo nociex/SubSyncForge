@@ -1,6 +1,6 @@
 /**
  * 生成包含分组节点的配置文件
- * 此脚本用于读取output/groups目录下的base64节点文件，
+ * 此脚本用于读取output/groups目录下的节点文件，
  * 然后将这些节点插入到各个代理软件的配置模板中
  */
 
@@ -16,28 +16,42 @@ const __dirname = path.dirname(__filename);
 const rootDir = path.resolve(__dirname, '../../');
 
 /**
- * 从base64文件读取节点数据
+ * 从节点文件读取节点数据
  * @param {string} filePath 文件路径
  * @returns {Array} 节点数组，如果读取失败则返回空数组
  */
-function readNodesFromBase64File(filePath) {
+function readNodesFromFile(filePath) {
   try {
     if (!fs.existsSync(filePath)) {
       console.warn(`文件不存在: ${filePath}`);
       return [];
     }
     
-    const base64Content = fs.readFileSync(filePath, 'utf8');
-    const rawContent = Buffer.from(base64Content, 'base64').toString('utf8');
+    const fileContent = fs.readFileSync(filePath, 'utf8');
     
-    // 检查内容是否为节点URI链接（新格式）或JSON字符串（旧格式）
+    // 尝试检测内容是否为base64编码(兼容旧格式文件)
+    let rawContent = fileContent;
+    if (/^[A-Za-z0-9+/=]+$/.test(fileContent.trim())) {
+      // 看起来是base64编码，尝试解码
+      try {
+        console.log(`文件 ${path.basename(filePath)} 似乎是base64编码，尝试解码`);
+        rawContent = Buffer.from(fileContent, 'base64').toString('utf8');
+      } catch (decodeError) {
+        console.log(`解码失败，将作为普通文本处理: ${decodeError.message}`);
+        rawContent = fileContent;
+      }
+    } else {
+      console.log(`文件 ${path.basename(filePath)} 使用普通文本格式解析`);
+    }
+    
+    // 检查内容是否为节点URI链接或JSON字符串
     if (rawContent.trim().startsWith('{') || rawContent.trim().startsWith('[')) {
-      // 旧格式：直接解析JSON
-      console.log(`文件 ${path.basename(filePath)} 使用旧格式（JSON）解析`);
+      // JSON格式：直接解析
+      console.log(`文件 ${path.basename(filePath)} 使用JSON格式解析`);
       return JSON.parse(rawContent);
     } else {
-      // 新格式：节点URI链接，需要解析
-      console.log(`文件 ${path.basename(filePath)} 使用新格式（URI链接）解析`);
+      // 节点URI链接格式：需要解析
+      console.log(`文件 ${path.basename(filePath)} 使用URI链接格式解析`);
       
       // 按行分割URI
       const lines = rawContent.split('\n').filter(line => line.trim().length > 0);
@@ -131,7 +145,15 @@ function readAllGroupNodes() {
   const mediaMapping = {
     'OpenAI.txt': { key: 'OpenAI', name: 'OpenAI' },
     'Disney+.txt': { key: 'Disney+', name: 'Disney+' },
-    'Netflix.txt': { key: 'Netflix', name: 'Netflix' }
+    'Netflix.txt': { key: 'Netflix', name: 'Netflix' },
+    'YouTube.txt': { key: 'YouTube', name: 'YouTube' },
+    'Hulu.txt': { key: 'Hulu', name: 'Hulu' },
+    'HBO.txt': { key: 'HBO', name: 'HBO' },
+    'AmazonPrime.txt': { key: 'AmazonPrime', name: 'Amazon Prime' },
+    'BBC.txt': { key: 'BBC', name: 'BBC' },
+    'Emby.txt': { key: 'Emby', name: 'Emby' },
+    'Spotify.txt': { key: 'Spotify', name: 'Spotify' },
+    'Bilibili.txt': { key: 'Bilibili', name: 'Bilibili' }
   };
   
   // 读取所有文件
@@ -141,7 +163,7 @@ function readAllGroupNodes() {
     if (!file.endsWith('.txt')) continue;
     
     const filePath = path.join(groupsDir, file);
-    const nodes = readNodesFromBase64File(filePath);
+    const nodes = readNodesFromFile(filePath);
     
     // 检查是哪种分组类型
     if (regionFileMapping[file]) {

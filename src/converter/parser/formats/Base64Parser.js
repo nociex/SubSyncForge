@@ -29,73 +29,75 @@ export class Base64Parser {
 
   /**
    * 解码Base64字符串
-   * @param {string} str Base64字符串
+   * @param {string} str Base64编码的字符串
    * @returns {string} 解码后的字符串
    */
   decodeBase64(str) {
-    // 在Node.js和浏览器环境中使用不同的解码方法
-    if (typeof window !== 'undefined' && window.atob) {
-      return window.atob(str);
-    } else if (typeof Buffer !== 'undefined') {
-      return Buffer.from(str, 'base64').toString('utf-8');
-    } else {
-      throw new Error('No Base64 decode method available');
+    try {
+      return Buffer.from(str, 'base64').toString('utf8');
+    } catch (error) {
+      console.error('Base64 decode error:', error);
+      throw new Error('Invalid Base64 encoding');
     }
   }
 
   /**
-   * 解析单个节点
-   * @param {string} line 节点文本行
+   * 解析节点字符串
+   * @param {string} line 节点字符串
    * @returns {Object|null} 解析后的节点对象
    */
   parseNode(line) {
-    // 识别节点类型
+    if (!line) return null;
+    
+    // 根据协议前缀来选择解析方法
     if (line.startsWith('vmess://')) {
       return this.parseVmess(line);
     } else if (line.startsWith('ss://')) {
       return this.parseShadowsocks(line);
+    } else if (line.startsWith('ssr://')) {
+      return this.parseShadowsocksR(line);
     } else if (line.startsWith('trojan://')) {
       return this.parseTrojan(line);
     } else {
-      // 其他类型或无法识别的类型
+      console.warn(`Unsupported protocol: ${line.substring(0, 10)}...`);
       return null;
     }
   }
 
   /**
-   * 解析Vmess节点
-   * @param {string} line Vmess节点文本
-   * @returns {Object} 解析后的Vmess节点对象
+   * 解析VMess节点
+   * @param {string} line VMess节点文本
+   * @returns {Object} 解析后的VMess节点对象
    */
   parseVmess(line) {
     try {
-      // vmess://后面是Base64编码的JSON
-      const base64Json = line.replace('vmess://', '');
-      const jsonStr = this.decodeBase64(base64Json);
-      const data = JSON.parse(jsonStr);
+      // vmess://后面是Base64编码的JSON配置
+      const base64Config = line.substring(8);
+      const configStr = this.decodeBase64(base64Config);
+      const config = JSON.parse(configStr);
       
       return {
         type: 'vmess',
-        name: data.ps || data.name || '',
-        server: data.add || data.host || data.server || '',
-        port: data.port,
+        name: config.ps || config.remarks || `VMess ${config.add}:${config.port}`,
+        server: config.add,
+        port: config.port,
         protocol: 'vmess',
         settings: {
-          id: data.id,
-          alterId: data.aid || 0,
-          security: data.scy || data.security || 'auto',
-          network: data.net || 'tcp',
-          wsPath: data.path || '',
-          wsHeaders: data.host ? { Host: data.host } : {},
-          tls: data.tls === 'tls',
-          serverName: data.sni || ''
+          id: config.id,
+          alterId: config.aid || 0,
+          security: config.security || 'auto',
+          network: config.net || 'tcp',
+          ws: config.net === 'ws',
+          wsPath: config.path || '/',
+          wsHeaders: config.host ? { Host: config.host } : {},
+          tls: config.tls === 'tls'
         },
         extra: {
-          raw: data
+          raw: line
         }
       };
     } catch (error) {
-      console.error('Failed to parse Vmess node:', error);
+      console.error('Failed to parse VMess node:', error);
       return null;
     }
   }
@@ -150,33 +152,77 @@ export class Base64Parser {
   }
 
   /**
+   * 解析ShadowsocksR节点
+   * @param {string} line ShadowsocksR节点文本
+   * @returns {Object} 解析后的ShadowsocksR节点对象
+   */
+  parseShadowsocksR(line) {
+    try {
+      // ssr://后面是Base64编码的所有配置
+      const base64Config = line.substring(6);
+      const config = this.decodeBase64(base64Config);
+      
+      // 从配置字符串中提取各部分
+      // 格式: server:port:protocol:method:obfs:base64pass/?params
+      const mainParts = config.split('/?');
+      const baseParts = mainParts[0].split(':');
+      const paramsPart = mainParts.length > 1 ? mainParts[1] : '';
+      
+      // 解析参数
+      const params = new URLSearchParams(paramsPart);
+      const remarks = params.get('remarks') ? this.decodeBase64(params.get('remarks')) : '';
+      
+      return {
+        type: 'ssr',
+        name: remarks || `SSR ${baseParts[0]}:${baseParts[1]}`,
+        server: baseParts[0],
+        port: parseInt(baseParts[1]),
+        protocol: 'shadowsocksr',
+        settings: {
+          protocol: baseParts[2],
+          method: baseParts[3],
+          obfs: baseParts[4],
+          password: this.decodeBase64(baseParts[5]),
+          obfsParam: params.get('obfsparam') ? this.decodeBase64(params.get('obfsparam')) : '',
+          protocolParam: params.get('protoparam') ? this.decodeBase64(params.get('protoparam')) : ''
+        },
+        extra: {
+          raw: line
+        }
+      };
+    } catch (error) {
+      console.error('Failed to parse ShadowsocksR node:', error);
+      return null;
+    }
+  }
+
+  /**
    * 解析Trojan节点
    * @param {string} line Trojan节点文本
    * @returns {Object} 解析后的Trojan节点对象
    */
   parseTrojan(line) {
     try {
-      // trojan://password@server:port?allowInsecure=1&sni=sni#name
+      // trojan://password@server:port?params#name
       const url = new URL(line);
+      
+      // 提取密码（在用户名部分）
+      const password = url.username;
+      
+      // 提取服务器和端口
+      const server = url.hostname;
+      const port = url.port || 443;
       
       // 提取名称
       const name = decodeURIComponent(url.hash.substring(1) || '');
       
-      // 提取服务器和端口
-      const server = url.hostname;
-      const port = url.port;
-      
-      // 提取密码
-      const password = url.username;
-      
-      // 提取SNI和其他参数
-      const params = new URLSearchParams(url.search);
-      const sni = params.get('sni') || '';
-      const allowInsecure = params.get('allowInsecure') === '1';
+      // 提取参数
+      const sni = url.searchParams.get('sni') || server;
+      const allowInsecure = url.searchParams.get('allowInsecure') === '1';
       
       return {
         type: 'trojan',
-        name: name,
+        name: name || `Trojan ${server}:${port}`,
         server: server,
         port: port,
         protocol: 'trojan',

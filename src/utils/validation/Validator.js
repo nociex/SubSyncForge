@@ -1,4 +1,4 @@
-import { ValidationError } from '../logger';
+import { ValidationError } from '../logger/index.js';
 
 /**
  * 验证规则类型

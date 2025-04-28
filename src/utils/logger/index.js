@@ -5,7 +5,7 @@ import {
   ConsoleLogHandler, 
   FileLogHandler, 
   createDefaultLogger 
-} from './Logger';
+} from './Logger.js';
 
 import {
   ErrorTracker,
@@ -16,7 +16,7 @@ import {
   ConversionError,
   ErrorType,
   createDefaultErrorTracker
-} from './ErrorTracker';
+} from './ErrorTracker.js';
 
 // Determine log level from environment variable, default to INFO
 // @ts-ignore - process is not defined in CF Worker global scope but might be in Actions Node env
