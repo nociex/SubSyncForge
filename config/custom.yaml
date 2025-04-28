@@ -4,6 +4,15 @@
 # 订阅源配置 - 所有订阅将被合并
 subscriptions:
   # 订阅源列表
+
+  - name:"cmm"
+    url: "https://subcheck.fiz.dpdns.org/download/sub"
+    enabled: true 
+
+  - name:"ppua"
+    url: "https://sub-store.isfree.pp.ua/download/sub?target=URI"
+    enabled: true 
+
   - name: "loc"
     url: "https://kkb.9901158.xyz/loc.yaml"
     enabled: true
@@ -19,19 +28,7 @@ subscriptions:
   - name: "ss"
     url: "https://mxlsub.me/newfull"
     enabled: true
-
-  # 示例：Base64编码的节点
-  - name: "base64示例"
-    type: "base64"
-    content: "dm1lc3M6Ly9leUoySWpvaU1pSXNJbkJ6SWpvaVhIVTVPVGs1WEhVMlpUSm1MakY4WjJOd2ZGeDFOV1UzWmx4MU5tVXlabHgxT1dGa09GeDFPVEF4WmlJc0ltRmtaQ0k2SW5Ob2F5NWpaREV5TXpRdWVIbDZJaXdpY0c5eWRDSTZJakkyT0RFNUlpd2lhV1FpT2lKbVpqTmxOak01TkMwMll6TmxMVFJpWVdFdFlUUTROaTFrWWpnMU5XWmtORFV4TURRaUxDSmhhV1FpT2lJd0lpd2libVYwSWpvaWQzTWlMQ0owZVhCbElqb2libTl1WlNJc0ltaHZjM1FpT2lKc2FXNTFhR0Z2TG1OdmJTSXNJbkJoZEdnaU9pSmNMM05vYXk1alpERXlNelF1ZUhsNklpd2lkR3h6SWpvaUluMD0="
-    enabled: false  # 默认禁用示例
     
-  # 示例：直接添加VMess节点
-  - name: "VMess示例"
-    type: "vmess"
-    content: "vmess://eyJ2IjoiMiIsInBzIjoiXHU5OTk5XHU2ZTJmLjFefmdjcH5cdTVlN2ZcdTZlMmZcdTlhZDhcdTkwMWYiLCJhZGQiOiJzaGsuY2QxMjM0LnNpdGUiLCJwb3J0IjoiMjY4MTkiLCJpZCI6ImZmM2U2Mzk0LTZjM2UtNGJhYS1hNDg2LWRiODU1ZmQ0NTEwNCIsImFpZCI6IjAiLCJuZXQiOiJ3cyIsInR5cGUiOiJub25lIiwiaG9zdCI6ImxpbnVoYW8uY29tIiwicGF0aCI6IlwvIiwidGxzIjoiIn0="
-    enabled: false  # 默认禁用示例
-
 # 输出配置
 output:
   # 是否将节点去重
@@ -92,10 +89,10 @@ testing:
   sort_by_latency: true
   
   # 保留延迟低于此值的节点（毫秒，0表示不限制）
-  max_latency: 2000
+  max_latency: 1500
   
   # 保留最大节点数量（0表示不限制）
-  max_nodes: 100
+  max_nodes: 0
   
   # 是否验证并更正节点地区信息
   verify_location: true
