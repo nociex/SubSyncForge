@@ -1210,7 +1210,100 @@ async function generateGroupedNodeFiles(nodes, options) {
           else filename = `${group.name}.txt`;
           
           const outputPath = path.join(groupDir, filename);
-          const base64Nodes = Buffer.from(JSON.stringify(group.nodes)).toString('base64');
+          
+          // 将节点原始链接拼接为字符串，然后Base64编码
+          const rawNodes = group.nodes
+            .map(node => {
+              // 优先使用原始URI
+              if (node.extra?.raw && node.extra.raw.trim().length > 0) {
+                console.log(`节点 ${node.name} 使用原始URI: ${node.extra.raw.substring(0, 30)}...`);
+                return node.extra.raw;
+              }
+              
+              // 构造节点名称，遵循分组格式
+              // 获取国家/地区前缀
+              let prefix = '';
+              if (group.name === '香港') prefix = '🇭🇰 香港 ';
+              else if (group.name === '台湾') prefix = '🇹🇼 台湾 ';
+              else if (group.name === '新加坡') prefix = '🇸🇬 新加坡 ';
+              else if (group.name === '美国') prefix = '🇺🇸 美国 ';
+              else if (group.name === '日本') prefix = '🇯🇵 日本 ';
+              else prefix = '';
+              
+              // 构造完整节点名称
+              const nodeName = node.name.includes(group.name) ? node.name : `${prefix}${node.name}`;
+              console.log(`为节点 ${node.name} 构造URI，修正名称为: ${nodeName}`);
+              
+              // 如果没有原始URI，尝试根据节点属性构造
+              if (node.type === 'vmess' && node.settings?.id) {
+                // 构造VMess节点URI
+                const vmessInfo = {
+                  v: "2",
+                  ps: nodeName,
+                  add: node.server,
+                  port: parseInt(node.port) || 443,
+                  id: node.settings.id,
+                  aid: parseInt(node.settings.alterId) || 0,
+                  net: node.settings.network || "tcp",
+                  type: "none",
+                  host: (node.settings.wsHeaders && node.settings.wsHeaders.Host) || "",
+                  path: node.settings.wsPath || "/",
+                  tls: node.settings.tls ? "tls" : "none"
+                };
+                const vmessUri = `vmess://${Buffer.from(JSON.stringify(vmessInfo)).toString('base64')}`;
+                console.log(`已构造VMess节点URI: ${vmessUri.substring(0, 30)}...`);
+                return vmessUri;
+              } else if (node.type === 'ss' && node.settings?.method && node.settings?.password) {
+                // 构造Shadowsocks节点URI
+                const userInfo = `${node.settings.method}:${node.settings.password}`;
+                const base64UserInfo = Buffer.from(userInfo).toString('base64');
+                const ssUri = `ss://${base64UserInfo}@${node.server}:${parseInt(node.port) || 443}#${encodeURIComponent(nodeName)}`;
+                console.log(`已构造SS节点URI: ${ssUri.substring(0, 30)}...`);
+                return ssUri;
+              } else if (node.type === 'trojan' && node.settings?.password) {
+                // 构造Trojan节点URI
+                const trojanUri = `trojan://${node.settings.password}@${node.server}:${parseInt(node.port) || 443}?sni=${node.settings.sni || ''}&allowInsecure=${node.settings.allowInsecure ? '1' : '0'}#${encodeURIComponent(nodeName)}`;
+                console.log(`已构造Trojan节点URI: ${trojanUri.substring(0, 30)}...`);
+                return trojanUri;
+              } else if (node.type === 'ssr' && node.settings) {
+                // 构造SSR节点URI
+                try {
+                  const ssrParams = {
+                    server: node.server,
+                    port: parseInt(node.port) || 443,
+                    protocol: node.settings.protocol || 'origin',
+                    method: node.settings.method || 'aes-256-cfb',
+                    obfs: node.settings.obfs || 'plain',
+                    password: node.settings.password || '',
+                  };
+                  
+                  const base64Params = Buffer.from(
+                    `${ssrParams.server}:${ssrParams.port}:${ssrParams.protocol}:${ssrParams.method}:${ssrParams.obfs}:${Buffer.from(ssrParams.password).toString('base64')}`
+                  ).toString('base64');
+                  
+                  const base64Remarks = Buffer.from(nodeName).toString('base64');
+                  const ssrUri = `ssr://${base64Params}/?remarks=${base64Remarks}`;
+                  console.log(`已构造SSR节点URI: ${ssrUri.substring(0, 30)}...`);
+                  return ssrUri;
+                } catch (error) {
+                  console.error(`构造SSR节点URI失败:`, error);
+                  return '';
+                }
+              }
+              
+              // 无法构造URI的情况下返回空字符串
+              console.warn(`无法为节点 ${node.name} 构造URI，类型: ${node.type}`);
+              return '';
+            })
+            .filter(raw => raw.trim().length > 0) // 过滤掉空链接
+            .join('\n'); // 用换行符连接
+          
+          // 输出节点数量统计
+          const uriCount = rawNodes.split('\n').length;
+          console.log(`${filename} 生成了 ${uriCount} 个节点URI，原始节点数 ${group.nodes.length}`);
+          
+          // 编码为Base64
+          const base64Nodes = Buffer.from(rawNodes).toString('base64');
           
           try {
             fs.writeFileSync(outputPath, base64Nodes);
@@ -1233,7 +1326,100 @@ async function generateGroupedNodeFiles(nodes, options) {
           // 保持流媒体分组名称不变（已是英文）
           const filename = `${group.name}.txt`;
           const outputPath = path.join(groupDir, filename);
-          const base64Nodes = Buffer.from(JSON.stringify(group.nodes)).toString('base64');
+          
+          // 将节点原始链接拼接为字符串，然后Base64编码
+          const rawNodes = group.nodes
+            .map(node => {
+              // 优先使用原始URI
+              if (node.extra?.raw && node.extra.raw.trim().length > 0) {
+                console.log(`节点 ${node.name} 使用原始URI: ${node.extra.raw.substring(0, 30)}...`);
+                return node.extra.raw;
+              }
+              
+              // 构造节点名称，遵循分组格式
+              // 获取国家/地区前缀
+              let prefix = '';
+              if (group.name === '香港') prefix = '🇭🇰 香港 ';
+              else if (group.name === '台湾') prefix = '🇹🇼 台湾 ';
+              else if (group.name === '新加坡') prefix = '🇸🇬 新加坡 ';
+              else if (group.name === '美国') prefix = '🇺🇸 美国 ';
+              else if (group.name === '日本') prefix = '🇯🇵 日本 ';
+              else prefix = '';
+              
+              // 构造完整节点名称
+              const nodeName = node.name.includes(group.name) ? node.name : `${prefix}${node.name}`;
+              console.log(`为节点 ${node.name} 构造URI，修正名称为: ${nodeName}`);
+              
+              // 如果没有原始URI，尝试根据节点属性构造
+              if (node.type === 'vmess' && node.settings?.id) {
+                // 构造VMess节点URI
+                const vmessInfo = {
+                  v: "2",
+                  ps: nodeName,
+                  add: node.server,
+                  port: parseInt(node.port) || 443,
+                  id: node.settings.id,
+                  aid: parseInt(node.settings.alterId) || 0,
+                  net: node.settings.network || "tcp",
+                  type: "none",
+                  host: (node.settings.wsHeaders && node.settings.wsHeaders.Host) || "",
+                  path: node.settings.wsPath || "/",
+                  tls: node.settings.tls ? "tls" : "none"
+                };
+                const vmessUri = `vmess://${Buffer.from(JSON.stringify(vmessInfo)).toString('base64')}`;
+                console.log(`已构造VMess节点URI: ${vmessUri.substring(0, 30)}...`);
+                return vmessUri;
+              } else if (node.type === 'ss' && node.settings?.method && node.settings?.password) {
+                // 构造Shadowsocks节点URI
+                const userInfo = `${node.settings.method}:${node.settings.password}`;
+                const base64UserInfo = Buffer.from(userInfo).toString('base64');
+                const ssUri = `ss://${base64UserInfo}@${node.server}:${parseInt(node.port) || 443}#${encodeURIComponent(nodeName)}`;
+                console.log(`已构造SS节点URI: ${ssUri.substring(0, 30)}...`);
+                return ssUri;
+              } else if (node.type === 'trojan' && node.settings?.password) {
+                // 构造Trojan节点URI
+                const trojanUri = `trojan://${node.settings.password}@${node.server}:${parseInt(node.port) || 443}?sni=${node.settings.sni || ''}&allowInsecure=${node.settings.allowInsecure ? '1' : '0'}#${encodeURIComponent(nodeName)}`;
+                console.log(`已构造Trojan节点URI: ${trojanUri.substring(0, 30)}...`);
+                return trojanUri;
+              } else if (node.type === 'ssr' && node.settings) {
+                // 构造SSR节点URI
+                try {
+                  const ssrParams = {
+                    server: node.server,
+                    port: parseInt(node.port) || 443,
+                    protocol: node.settings.protocol || 'origin',
+                    method: node.settings.method || 'aes-256-cfb',
+                    obfs: node.settings.obfs || 'plain',
+                    password: node.settings.password || '',
+                  };
+                  
+                  const base64Params = Buffer.from(
+                    `${ssrParams.server}:${ssrParams.port}:${ssrParams.protocol}:${ssrParams.method}:${ssrParams.obfs}:${Buffer.from(ssrParams.password).toString('base64')}`
+                  ).toString('base64');
+                  
+                  const base64Remarks = Buffer.from(nodeName).toString('base64');
+                  const ssrUri = `ssr://${base64Params}/?remarks=${base64Remarks}`;
+                  console.log(`已构造SSR节点URI: ${ssrUri.substring(0, 30)}...`);
+                  return ssrUri;
+                } catch (error) {
+                  console.error(`构造SSR节点URI失败:`, error);
+                  return '';
+                }
+              }
+              
+              // 无法构造URI的情况下返回空字符串
+              console.warn(`无法为节点 ${node.name} 构造URI，类型: ${node.type}`);
+              return '';
+            })
+            .filter(raw => raw.trim().length > 0) // 过滤掉空链接
+            .join('\n'); // 用换行符连接
+          
+          // 输出节点数量统计
+          const uriCount = rawNodes.split('\n').length;
+          console.log(`${filename} 生成了 ${uriCount} 个节点URI，原始节点数 ${group.nodes.length}`);
+          
+          // 编码为Base64
+          const base64Nodes = Buffer.from(rawNodes).toString('base64');
           
           try {
             fs.writeFileSync(outputPath, base64Nodes);
@@ -1552,6 +1738,27 @@ async function main() {
     } catch (e) {
       console.error('保存最终节点数据失败:', e.message);
     }
+    
+    // 过滤掉中国节点
+    const filteredNodesCount = finalNodes.length;
+    finalNodes = finalNodes.filter(node => {
+      // 根据countryCode过滤
+      if (node.analysis && node.analysis.countryCode === 'CN') {
+        return false;
+      }
+      // 根据country过滤
+      if (node.analysis && node.analysis.country === '中国') {
+        return false;
+      }
+      // 根据节点名称过滤包含中国、CN的节点
+      const name = (node.name || '').toUpperCase();
+      if (name.includes('中国') || name.includes('CN') || name.includes('CHINA') || 
+          name.includes('国内') || name.includes('大陆')) {
+        return false;
+      }
+      return true;
+    });
+    console.log(`过滤中国节点: ${filteredNodesCount} -> ${finalNodes.length}, 移除了 ${filteredNodesCount - finalNodes.length} 个节点`);
     
     // 输出节点国家/地区分布情况
     try {

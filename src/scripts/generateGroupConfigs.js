@@ -28,11 +28,74 @@ function readNodesFromBase64File(filePath) {
     }
     
     const base64Content = fs.readFileSync(filePath, 'utf8');
-    const jsonContent = Buffer.from(base64Content, 'base64').toString('utf8');
-    return JSON.parse(jsonContent);
+    const rawContent = Buffer.from(base64Content, 'base64').toString('utf8');
+    
+    // 检查内容是否为节点URI链接（新格式）或JSON字符串（旧格式）
+    if (rawContent.trim().startsWith('{') || rawContent.trim().startsWith('[')) {
+      // 旧格式：直接解析JSON
+      console.log(`文件 ${path.basename(filePath)} 使用旧格式（JSON）解析`);
+      return JSON.parse(rawContent);
+    } else {
+      // 新格式：节点URI链接，需要解析
+      console.log(`文件 ${path.basename(filePath)} 使用新格式（URI链接）解析`);
+      
+      // 按行分割URI
+      const lines = rawContent.split('\n').filter(line => line.trim().length > 0);
+      console.log(`  发现 ${lines.length} 个节点链接`);
+      
+      return lines.map(line => {
+        const nodeType = getNodeTypeFromURI(line);
+        const name = getNodeNameFromURI(line);
+        
+        return {
+          name: name || `未命名节点`,
+          type: nodeType || 'unknown',
+          server: '127.0.0.1', // 由于无法完全解析，使用占位符
+          port: 1080,          // 由于无法完全解析，使用占位符
+          extra: {
+            raw: line          // 保存原始URI便于后续处理
+          }
+        };
+      });
+    }
   } catch (error) {
     console.error(`读取节点文件出错 ${filePath}:`, error.message);
     return [];
+  }
+}
+
+/**
+ * 从URI中获取节点类型
+ * @param {string} uri 节点URI
+ * @returns {string} 节点类型
+ */
+function getNodeTypeFromURI(uri) {
+  if (uri.startsWith('vmess://')) return 'vmess';
+  if (uri.startsWith('ss://')) return 'ss';
+  if (uri.startsWith('ssr://')) return 'ssr';
+  if (uri.startsWith('trojan://')) return 'trojan';
+  if (uri.startsWith('http://') || uri.startsWith('https://')) return 'http';
+  return 'unknown';
+}
+
+/**
+ * 从URI中获取节点名称
+ * @param {string} uri 节点URI
+ * @returns {string} 节点名称
+ */
+function getNodeNameFromURI(uri) {
+  try {
+    // 尝试从URI的hash部分获取名称
+    const hashIndex = uri.indexOf('#');
+    if (hashIndex > 0) {
+      return decodeURIComponent(uri.substring(hashIndex + 1));
+    }
+    
+    // 无法获取名称
+    return null;
+  } catch (error) {
+    console.error(`解析节点名称出错:`, error.message);
+    return null;
   }
 }
 
