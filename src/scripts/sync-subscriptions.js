@@ -10,6 +10,7 @@ import { fileURLToPath } from 'url';
 import { SubscriptionConverter } from '../converter/SubscriptionConverter.js';
 import { NodeTester } from '../tester/index.js';
 import yaml from 'js-yaml';
+import { BarkNotifier, eventEmitter, EventType } from '../utils/events/index.js';
 
 // 设置 ES 模块中的 __dirname
 const __filename = fileURLToPath(import.meta.url);
@@ -1120,6 +1121,24 @@ async function main() {
     console.log(`启用的订阅源: ${CONFIG.subscriptions.filter(sub => sub.enabled).length} 个`);
     console.log(`当前配置: 去重=${CONFIG.options.deduplication}, 数据目录=${CONFIG.options.dataDir}, 输出目录=${CONFIG.options.outputDir}`);
     console.log(`测试配置: 启用=${TESTING_CONFIG.enabled}, 超时=${TESTING_CONFIG.timeout}ms, 并发=${TESTING_CONFIG.concurrency}`);
+
+    // 初始化通知系统
+    const barkUrl = process.env.BARK_URL;
+    if (barkUrl) {
+      console.log(`Bark通知已启用: ${barkUrl}`);
+      const barkNotifier = new BarkNotifier({
+        barkUrl: barkUrl,
+        title: process.env.BARK_TITLE || 'SubSyncForge',
+        events: [
+          EventType.CONVERSION_COMPLETE,
+          EventType.SYSTEM_ERROR, 
+          EventType.SYSTEM_WARNING
+        ]
+      });
+      barkNotifier.registerEventListeners(eventEmitter);
+    } else {
+      console.log('Bark通知未启用，可通过设置BARK_URL环境变量启用');
+    }
 
     // 如果没有可用的订阅源，添加一个备用订阅
     if (CONFIG.subscriptions.length === 0 || CONFIG.subscriptions.every(sub => !sub.enabled)) {

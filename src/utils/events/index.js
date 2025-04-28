@@ -1,4 +1,5 @@
 import EventEmitter from './EventEmitter';
+import { BarkNotifier } from './BarkNotifier.js';
 
 // 事件类型定义
 export const EventType = {
@@ -88,10 +89,11 @@ export class WebhookNotifier {
   }
 }
 
-export { EventEmitter };
+export { EventEmitter, BarkNotifier };
 export default {
   EventEmitter,
   EventType,
   eventEmitter,
-  WebhookNotifier
+  WebhookNotifier,
+  BarkNotifier
 };

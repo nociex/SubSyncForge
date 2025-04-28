@@ -6,7 +6,7 @@ SubSyncForge 是一个强大的订阅转换工具，支持自动化订阅源管�
 
 ## 项目状态
 
-![版本](https://img.shields.io/badge/版本-1.3.0-blue)
+![版本](https://img.shields.io/badge/版本-1.3.2-blue)
 ![状态](https://img.shields.io/badge/状态-开发中-yellow)
 
 查看[更新日志](CHANGELOG.md)了解详细变更记录。
@@ -20,6 +20,8 @@ SubSyncForge 是一个强大的订阅转换工具，支持自动化订阅源管�
 3. 等待自动部署完成
 4. 配置环境变量（可选）：
    - `PRIVATE_SUBSCRIPTIONS`: 私人订阅源配置
+   - `BARK_URL`: Bark推送URL，用于接收更新通知（详见下文）
+   - `BARK_TITLE`: Bark推送标题，默认为"SubSyncForge"
 
 ### 方式二：手动部署
 
@@ -29,6 +31,42 @@ SubSyncForge 是一个强大的订阅转换工具，支持自动化订阅源管�
 4. 创建新的 Worker
 5. 设置环境变量（可选）
 6. 部署完成后访问 `your-worker.workers.dev`
+
+## 配置和环境变量
+
+### Bark通知推送设置（适用于iOS/macOS用户）
+
+Bark是一款可以推送通知到iOS/macOS设备的应用，配置步骤：
+
+1. 在App Store下载并安装[Bark应用](https://apps.apple.com/cn/app/bark-customed-notifications/id1403753865)
+2. 打开应用获取您的专属推送URL（格式类似：`https://api.day.app/xxxxxxxxx/`）
+3. 在GitHub仓库设置中添加Secret：
+   - 打开仓库 -> Settings -> Secrets and variables -> Actions
+   - 点击"New repository secret"按钮
+   - 名称填写`BARK_URL`，值填写您的Bark URL（包括最后的斜杠）
+   - 可选：添加`BARK_TITLE`自定义通知标题
+
+设置完成后，每当订阅更新时，您将收到一条通知，内容包括更新的文件数量和时间。
+
+### IP地理位置API配置（用于验证节点地区）
+
+系统默认使用免费的ip-api.com服务。如需自定义：
+
+1. 在GitHub仓库设置中添加Secret：
+   - 名称：`IP_API_KEY`（如果您选择的API需要密钥）
+   - 值：您的API密钥
+
+2. 修改工作流文件(`.github/workflows/sync-subscriptions.yml`)中的环境变量：
+   ```yaml
+   env:
+     IP_API_URL: "https://您选择的API地址/{ip}"
+   ```
+
+支持的免费API选项：
+- [ip-api.com](http://ip-api.com)（默认，无需API密钥）
+- [ipinfo.io](https://ipinfo.io)（需要API密钥，每月50,000次免费请求）
+- [ipgeolocation.io](https://ipgeolocation.io)（需要API密钥，每月30,000次免费请求）
+- [freegeoip.app](https://freegeoip.app)（无需API密钥）
 
 ## 配置说明
 
@@ -155,6 +193,11 @@ SubSyncForge 支持多种格式的转换，包括：
 - 自定义事件处理器
 - Webhook 支持
 - 异步事件处理
+- **Bark推送通知**
+  - 支持iOS/macOS设备通知
+  - 可配置推送事件
+  - 自定义通知标题
+  - 支持GitHub Actions自动推送更新通知
 
 ### 健壮性改进
 - 智能重试机制
