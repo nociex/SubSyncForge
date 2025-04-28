@@ -1,5 +1,6 @@
 import { logger } from '../index.js';
 import https from 'https';
+import http from 'http';
 import { URL } from 'url';
 import fs from 'fs';
 import path from 'path';
@@ -138,10 +139,28 @@ export class IPLocator {
 
   /**
    * 获取IP地址的地理位置信息
-   * @param {string} ip IP地址
+   * @param {string} ip IP地址或域名
    * @returns {Promise<Object>} 地理位置信息
    */
   async locate(ip) {
+    // 检查是否是域名而非IP
+    const isDomain = !this.isIPAddress(ip);
+    if (isDomain) {
+      this.logger.debug(`获取IP地址位置: ${ip}`);
+      // 对于域名，提供基本信息而不进行IP查询
+      return {
+        ip: ip,
+        country: null,
+        countryName: '其他',
+        region: '',
+        city: '',
+        org: '',
+        loc: '',
+        timezone: '',
+        timestamp: new Date().toISOString()
+      };
+    }
+    
     // 首先检查缓存
     const cachedInfo = this.getFromCache(ip);
     if (cachedInfo) {
@@ -241,7 +260,7 @@ export class IPLocator {
   async makeRequest(url, signal) {
     return new Promise((resolve, reject) => {
       const isHttps = url.startsWith('https');
-      const requestFn = isHttps ? https.get : require('http').get;
+      const requestFn = isHttps ? https.get : http.get;
       
       requestFn(url, { signal }, (res) => {
         if (res.statusCode === 429) {
@@ -573,6 +592,20 @@ export class IPLocator {
     } catch (e) {
       this.logger.error(`清理过期缓存失败: ${e.message}`);
     }
+  }
+
+  /**
+   * 判断字符串是否为有效的IP地址
+   * @param {string} str 要检查的字符串
+   * @returns {boolean} 是否为IP地址
+   */
+  isIPAddress(str) {
+    // IPv4地址正则表达式
+    const ipv4Pattern = /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
+    // IPv6地址正则表达式(简化版)
+    const ipv6Pattern = /^([0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|:((:[0-9a-fA-F]{1,4}){1,7}|:)$/;
+    
+    return ipv4Pattern.test(str) || ipv6Pattern.test(str);
   }
 }
 

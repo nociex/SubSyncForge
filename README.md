@@ -40,11 +40,23 @@ Bark是一款可以推送通知到iOS/macOS设备的应用，配置步骤：
 
 1. 在App Store下载并安装[Bark应用](https://apps.apple.com/cn/app/bark-customed-notifications/id1403753865)
 2. 打开应用获取您的专属推送URL（格式类似：`https://api.day.app/xxxxxxxxx/`）
-3. 在GitHub仓库设置中添加Secret：
-   - 打开仓库 -> Settings -> Secrets and variables -> Actions
-   - 点击"New repository secret"按钮
-   - 名称填写`BARK_URL`，值填写您的Bark URL（包括最后的斜杠）
-   - 可选：添加`BARK_TITLE`自定义通知标题
+3. 设置推送URL：
+   - **方法1（推荐）**: 在GitHub仓库设置中添加Secret：
+     - 打开仓库 -> Settings -> Secrets and variables -> Actions
+     - 点击"New repository secret"按钮
+     - 名称填写`BARK_URL`，值填写您的完整Bark URL（**必须包括最后的斜杠**）
+     - 可选：添加`BARK_TITLE`自定义通知标题
+   - **方法2**: 如果在本地运行，可以设置环境变量：
+     ```bash
+     export BARK_URL="https://api.day.app/您的KEY/"
+     export BARK_TITLE="SubSyncForge" # 可选
+     ```
+
+4. 验证配置:
+   - 确保URL格式正确，包含完整的`https://`前缀和最后的`/`
+   - 执行同步测试：`npm run test`
+   - 查看控制台输出，确认是否有"Bark通知已启用"的信息
+   - 如果没有收到推送，检查控制台是否有Bark相关错误
 
 设置完成后，每当订阅更新时，您将收到一条通知，内容包括更新的文件数量和时间。
 
@@ -337,3 +349,79 @@ SubSyncForge/
 ## 许可证
 
 MIT License
+
+## 分组节点导出功能
+
+项目现已支持将不同分组的节点以base64格式输出到output目录，便于用户根据自己的需求使用特定分组的节点。
+
+### 功能特点
+
+1. 同步订阅时自动将节点按地区和流媒体服务分组，并以base64格式输出到`output/groups`目录
+2. 提供专门的工具生成包含真实节点数据的分组配置文件（支持Mihomo/Clash和Surge格式）
+3. 每个分组文件都包含经过筛选的特定类型节点，方便针对性使用
+
+### 使用方法
+
+1. 运行同步订阅命令，自动生成分组节点文件：
+   ```bash
+   npm run test
+   ```
+   
+   同步完成后，在`output/groups`目录下会生成如下文件：
+   - `HK.txt` - 香港地区节点的base64编码文件
+   - `TW.txt` - 台湾地区节点的base64编码文件 
+   - `SG.txt` - 新加坡地区节点的base64编码文件
+   - `US.txt` - 美国地区节点的base64编码文件
+   - `JP.txt` - 日本地区节点的base64编码文件
+   - `Others.txt` - 其他地区节点的base64编码文件
+   - `OpenAI.txt` - 适用于OpenAI的节点base64编码文件
+   - `Disney+.txt` - 适用于Disney+的节点base64编码文件
+   - `Netflix.txt` - 适用于Netflix的节点base64编码文件
+
+2. 生成包含分组节点的配置文件（可选）：
+   ```bash
+   npm run generate-groups
+   ```
+   
+   这将在`output`目录下生成以下文件：
+   - `mihomo-groups.yaml` - 包含实际节点数据的Mihomo/Clash配置文件
+   - `surge-groups.conf` - 包含实际节点数据的Surge配置文件
+
+这些文件可以直接导入到对应的代理软件中使用。
+
+### 分组订阅链接
+
+基于Cloudflare Worker部署时，可以使用以下URL直接获取分组节点（请替换为您实际的worker域名）：
+
+```
+# 香港节点订阅
+https://your-worker.workers.dev/groups/HK
+或
+https://your-worker.domain.com/groups/HK
+
+# 台湾节点订阅
+https://your-worker.workers.dev/groups/TW
+
+# 新加坡节点订阅
+https://your-worker.workers.dev/groups/SG
+
+# 美国节点订阅
+https://your-worker.workers.dev/groups/US
+
+# 日本节点订阅
+https://your-worker.workers.dev/groups/JP
+
+# 其他地区节点订阅
+https://your-worker.workers.dev/groups/Others
+
+# 适用于OpenAI的节点订阅
+https://your-worker.workers.dev/groups/OpenAI
+
+# 适用于Disney+的节点订阅
+https://your-worker.workers.dev/groups/Disney+
+
+# 适用于Netflix的节点订阅
+https://your-worker.workers.dev/groups/Netflix
+```
+
+这些URL可以直接在支持订阅的代理软件中使用，如Surge、Shadowrocket、Clash等。

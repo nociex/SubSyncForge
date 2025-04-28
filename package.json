@@ -12,7 +12,8 @@
     "test": "node src/scripts/sync-subscriptions.js",
     "clean": "node src/scripts/clean-cache.js",
     "schedule": "node src/scripts/schedule.js",
-    "generate-icons": "node src/scripts/generateGroupIcons.js"
+    "generate-icons": "node src/scripts/generateGroupIcons.js",
+    "generate-groups": "node src/scripts/generateGroupConfigs.js"
   },
   "dependencies": {
     "node-fetch": "^3.3.2",

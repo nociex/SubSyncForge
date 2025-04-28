@@ -23,6 +23,65 @@ export class BarkNotifier {
     // 验证Bark URL格式
     if (this.barkUrl && !this.barkUrl.endsWith('/')) {
       this.barkUrl = `${this.barkUrl}/`;
+      console.log(`Bark URL已自动添加结尾斜杠: ${this.barkUrl}`);
+    }
+    
+    if (this.enabled) {
+      console.log(`Bark通知已启用: ${this.barkUrl}`);
+      console.log(`监听事件: ${this.events.join(', ')}`);
+      
+      // 发送测试通知
+      this.sendTestNotification();
+    } else {
+      if (!this.barkUrl) {
+        console.warn(`Bark通知未启用: 未设置barkUrl`);
+      } else {
+        console.warn(`Bark通知未启用: enabled=false`);
+      }
+    }
+  }
+  
+  /**
+   * 发送测试通知，验证配置是否正确
+   */
+  async sendTestNotification() {
+    try {
+      console.log('正在发送Bark测试通知...');
+      
+      const title = `${this.title} - 初始化测试`;
+      const content = `SubSyncForge正在验证Bark通知配置 (${new Date().toISOString()})`;
+      
+      // 构建Bark URL
+      const url = new URL(`${this.barkUrl}${encodeURIComponent(title)}/${encodeURIComponent(content)}`);
+      
+      url.searchParams.append('isArchive', '1');
+      url.searchParams.append('sound', 'default');
+      
+      console.log(`Bark测试通知URL: ${url.toString()}`);
+      
+      // 发送请求
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), this.timeout);
+      
+      const response = await fetch(url.toString(), {
+        method: 'GET',
+        signal: controller.signal
+      });
+      
+      clearTimeout(timeoutId);
+      
+      if (!response.ok) {
+        console.error(`Bark测试通知发送失败: ${response.status} ${response.statusText}`);
+        console.error(`响应内容: ${await response.text()}`);
+      } else {
+        const responseData = await response.text();
+        console.log(`Bark测试通知已发送成功，响应: ${responseData}`);
+      }
+    } catch (error) {
+      console.error(`Bark测试通知发送出错: ${error.message}`);
+      if (error.name === 'AbortError') {
+        console.error('Bark测试通知超时，请检查网络连接和URL是否正确');
+      }
     }
   }
   
@@ -31,10 +90,19 @@ export class BarkNotifier {
    * @param {EventEmitter} eventEmitter 事件发射器实例
    */
   registerEventListeners(eventEmitter) {
-    if (!this.enabled || !eventEmitter) return;
+    if (!this.enabled || !eventEmitter) {
+      console.warn('Bark通知未注册监听器: ', this.enabled ? '未提供eventEmitter' : 'enabled=false');
+      return;
+    }
+    
+    console.log(`开始注册Bark事件监听器...`);
     
     for (const event of this.events) {
+      console.log(`注册事件监听: ${event}`);
+      
       eventEmitter.on(event, async (data) => {
+        console.log(`接收到事件: ${event}`, data);
+        
         // 检查是否在最小间隔内已经发送过相同类型的通知
         const now = Date.now();
         if (this.lastPushTime[event] && (now - this.lastPushTime[event] < this.minInterval)) {
@@ -46,6 +114,8 @@ export class BarkNotifier {
         this.lastPushTime[event] = now;
       });
     }
+    
+    console.log(`Bark事件监听器注册完成`);
   }
   
   /**
@@ -54,12 +124,20 @@ export class BarkNotifier {
    * @param {object} data 事件数据
    */
   async sendNotification(event, data) {
-    if (!this.enabled || !this.barkUrl) return;
+    if (!this.enabled || !this.barkUrl) {
+      console.warn(`无法发送Bark通知: ${!this.enabled ? 'enabled=false' : 'barkUrl未设置'}`);
+      return;
+    }
     
     try {
+      console.log(`准备发送Bark通知: ${event}`);
+      
       // 构建消息内容
       const title = `${this.title} - ${this.formatEventType(event)}`;
       const content = this.formatContent(event, data);
+      
+      console.log(`通知标题: ${title}`);
+      console.log(`通知内容: ${content}`);
       
       // 构建Bark URL
       const url = new URL(`${this.barkUrl}${encodeURIComponent(title)}/${encodeURIComponent(content)}`);
@@ -70,20 +148,19 @@ export class BarkNotifier {
       // 根据事件类型设置不同的图标和声音
       switch (event) {
         case EventType.SYSTEM_ERROR:
-          url.searchParams.append('icon', 'https://i.loli.net/2021/03/03/klbZcGP8yh5qnLz.png');
           url.searchParams.append('sound', 'failure');
           break;
         case EventType.SYSTEM_WARNING:
-          url.searchParams.append('icon', 'https://i.loli.net/2021/03/03/klbZcGP8yh5qnLz.png');
           url.searchParams.append('sound', 'warning');
           break;
         case EventType.CONVERSION_COMPLETE:
-          url.searchParams.append('icon', 'https://i.loli.net/2021/03/03/klbZcGP8yh5qnLz.png');
           url.searchParams.append('sound', 'complete');
           break;
         default:
           url.searchParams.append('sound', 'default');
       }
+      
+      console.log(`最终Bark通知URL: ${url.toString()}`);
       
       // 发送请求
       const controller = new AbortController();
@@ -98,11 +175,17 @@ export class BarkNotifier {
       
       if (!response.ok) {
         console.error(`发送Bark通知失败 (${event}): ${response.status} ${response.statusText}`);
+        console.error(`响应内容: ${await response.text()}`);
       } else {
-        console.log(`Bark通知已发送: ${title}`);
+        const responseData = await response.text();
+        console.log(`Bark通知已发送成功，响应: ${responseData}`);
       }
     } catch (error) {
       console.error(`发送Bark通知出错 (${event}): ${error.message}`);
+      if (error.name === 'AbortError') {
+        console.error('Bark通知发送超时，请检查网络连接和URL是否正确');
+      }
+      console.error(`错误堆栈: ${error.stack}`);
     }
   }
   

@@ -1104,6 +1104,84 @@ async function generateConfigs(nodes, outputConfigs, options) {
   }
 }
 
+/**
+ * 将分组节点以base64格式输出到对应文件
+ * @param {Array} nodes 所有节点
+ * @param {Object} options 全局选项
+ */
+async function generateGroupedNodeFiles(nodes, options) {
+  const rootDir = options.rootDir || process.cwd();
+  const outputDir = path.join(rootDir, options.outputDir || 'output');
+  ensureDirectoryExists(outputDir);
+  
+  console.log(`准备生成分组节点base64文件...`);
+  
+  if (nodes.length === 0) {
+    console.warn('没有节点数据，无法生成分组节点文件');
+    return;
+  }
+
+  try {
+    // 创建分组管理器
+    const { GroupManager } = await import('../converter/analyzer/GroupManager.js');
+    const groupManager = new GroupManager();
+    const { groups } = groupManager.groupNodes(nodes);
+
+    // 创建分组目录
+    const groupDir = path.join(outputDir, 'groups');
+    ensureDirectoryExists(groupDir);
+    
+    console.log(`分组目录: ${groupDir}`);
+    
+    // 处理地区分组
+    if (groups.region && groups.region.length > 0) {
+      console.log(`发现 ${groups.region.length} 个地区分组`);
+      
+      for (const group of groups.region) {
+        if (group.nodes.length > 0) {
+          // 使用英文文件名
+          let filename;
+          if (group.name === '香港') filename = 'HK.txt';
+          else if (group.name === '台湾') filename = 'TW.txt';
+          else if (group.name === '新加坡') filename = 'SG.txt';
+          else if (group.name === '美国') filename = 'US.txt';
+          else if (group.name === '日本') filename = 'JP.txt';
+          else if (group.name === '其他') filename = 'Others.txt';
+          else filename = `${group.name}.txt`;
+          
+          const outputPath = path.join(groupDir, filename);
+          const base64Nodes = Buffer.from(JSON.stringify(group.nodes)).toString('base64');
+          
+          fs.writeFileSync(outputPath, base64Nodes);
+          console.log(`已生成地区分组节点文件: ${filename} (${group.nodes.length} 个节点)`);
+        }
+      }
+    }
+    
+    // 处理流媒体分组
+    if (groups.media && groups.media.length > 0) {
+      console.log(`发现 ${groups.media.length} 个流媒体分组`);
+      
+      for (const group of groups.media) {
+        if (group.nodes.length > 0) {
+          // 保持流媒体分组名称不变（已是英文）
+          const filename = `${group.name}.txt`;
+          const outputPath = path.join(groupDir, filename);
+          const base64Nodes = Buffer.from(JSON.stringify(group.nodes)).toString('base64');
+          
+          fs.writeFileSync(outputPath, base64Nodes);
+          console.log(`已生成流媒体分组节点文件: ${filename} (${group.nodes.length} 个节点)`);
+        }
+      }
+    }
+    
+    console.log(`分组节点base64文件生成完成`);
+  } catch (error) {
+    console.error(`生成分组节点文件时出错:`, error);
+    console.error(`错误堆栈: ${error.stack}`);
+  }
+}
+
 // 主函数
 async function main() {
   console.log('==================================================================');
@@ -1402,6 +1480,13 @@ async function main() {
     const genTime = Date.now() - genStartTime;
     console.log(`生成配置文件完成，耗时: ${genTime}ms`);
     
+    // 4. 生成分组节点base64文件
+    console.log('开始生成分组节点base64文件...');
+    const groupStartTime = Date.now();
+    await generateGroupedNodeFiles(finalNodes, CONFIG.options);
+    const groupTime = Date.now() - groupStartTime;
+    console.log(`生成分组节点文件完成，耗时: ${groupTime}ms`);
+
     // 生成一个状态文件，记录同步时间和结果
     try {
       const statusFile = path.join(dataDir, 'sync_status.json');

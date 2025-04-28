@@ -62,6 +62,47 @@ export class Router {
   }
 
   /**
+   * 检查路径是否匹配路由模式
+   * @param {string} routePattern 路由模式，如 '/groups/:groupName'
+   * @param {string} path 请求路径，如 '/groups/HK'
+   * @returns {Object|null} 匹配结果，包含参数，如 { groupName: 'HK' }
+   */
+  matchRoute(routePattern, path) {
+    // 如果路由不包含参数，直接比较
+    if (!routePattern.includes(':')) {
+      return routePattern === path ? {} : null;
+    }
+
+    // 将路由模式分割为段
+    const routeParts = routePattern.split('/');
+    const pathParts = path.split('/');
+
+    // 如果段数不同，则不匹配
+    if (routeParts.length !== pathParts.length) {
+      return null;
+    }
+
+    // 提取参数
+    const params = {};
+    for (let i = 0; i < routeParts.length; i++) {
+      const routePart = routeParts[i];
+      const pathPart = pathParts[i];
+
+      // 如果是参数段
+      if (routePart.startsWith(':')) {
+        const paramName = routePart.substring(1);
+        params[paramName] = pathPart;
+      } 
+      // 如果是固定段但不匹配
+      else if (routePart !== pathPart) {
+        return null;
+      }
+    }
+
+    return params;
+  }
+
+  /**
    * 处理请求
    * @param {Request} request 请求对象
    * @returns {Promise<Response>} 响应对象
@@ -70,9 +111,22 @@ export class Router {
     const url = new URL(request.url);
     const path = url.pathname;
     const method = request.method;
-
-    // 查找匹配的路由处理器
-    const handler = this.routes[method]?.get(path);
+    
+    // 尝试查找精确匹配的路由
+    let handler = this.routes[method]?.get(path);
+    let params = {};
+    
+    // 如果没有精确匹配，尝试查找带参数的路由
+    if (!handler) {
+      for (const [routePattern, routeHandler] of this.routes[method] || []) {
+        const matchParams = this.matchRoute(routePattern, path);
+        if (matchParams) {
+          handler = routeHandler;
+          params = matchParams;
+          break;
+        }
+      }
+    }
 
     if (!handler) {
       return new Response('Not Found', { status: 404 });
@@ -87,6 +141,8 @@ export class Router {
     }
 
     try {
+      // 将路径参数添加到请求对象中
+      request.params = params;
       return await currentHandler(request);
     } catch (error) {
       console.error('Router error:', error);

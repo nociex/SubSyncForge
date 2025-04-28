@@ -6,6 +6,7 @@ import https from 'https';
 import { SocksProxyAgent } from 'socks-proxy-agent';
 import { HttpsProxyAgent } from 'https-proxy-agent';
 import { URL } from 'url';
+import { randomUUID } from 'crypto';
 
 const defaultLogger = logger?.defaultLogger || console;
 
@@ -50,15 +51,16 @@ export class ProxyChecker {
             case 'socks5':
                 agent = new SocksProxyAgent(`socks5://${node.settings?.username ? `${node.settings.username}:${node.settings.password}@` : ''}${node.server}:${node.port}`);
                 break;
-            // Add cases for vmess, ss, trojan if specific libraries are available
-            // For now, these types will fall through to direct connection test or fail if unsupported
+            case 'trojan':
+                this.logger.warn(`Connectivity check for trojan is not fully supported yet. Performing basic TCP check.`);
+                // 对于Trojan协议，尝试进行TLS连接检查，因为Trojan是基于TLS的
+                return this.checkTlsConnection(node.server, node.port, timeout);
             case 'ss':
             case 'ssr':
             case 'vmess':
-            case 'trojan':
-                 this.logger.warn(`Connectivity check for ${node.type} is not fully supported yet. Performing basic TCP check.`);
-                 // Fallback to basic TCP check for now
-                 return this.checkTcpConnection(node.server, node.port, timeout);
+                this.logger.warn(`Connectivity check for ${node.type} is not fully supported yet. Performing basic TCP check.`);
+                // 对于其他特殊协议，仍然使用基本TCP检查
+                return this.checkTcpConnection(node.server, node.port, timeout);
             default:
                 this.logger.warn(`Unsupported proxy type for HTTP check: ${node.type}. Performing basic TCP check.`);
                 return this.checkTcpConnection(node.server, node.port, timeout);
@@ -66,10 +68,9 @@ export class ProxyChecker {
 
         requestOptions.agent = agent;
         const httpModule = targetUrl.protocol === 'https:' ? https : http;
-        const response = await httpModule.request(targetUrl, requestOptions);
-
+        
         return new Promise((resolve) => {
-            response.on('response', (res) => {
+            const req = httpModule.request(targetUrl, requestOptions, (res) => {
                 clearTimeout(timeoutId);
                 if (res.statusCode >= 200 && res.statusCode < 400) {
                     this.logger.debug(`Node ${node.name} connection successful (Status: ${res.statusCode}).`);
@@ -81,18 +82,18 @@ export class ProxyChecker {
                 res.resume(); // Consume response data to free up memory
             });
 
-            response.on('error', (err) => {
+            req.on('error', (err) => {
                 clearTimeout(timeoutId);
-                 if (err.name === 'AbortError') {
-                     // Already handled by timeout
+                if (err.name === 'AbortError') {
+                    // Already handled by timeout
                     resolve({ status: false, error: 'Timeout' });
-                 } else {
+                } else {
                     this.logger.warn(`Node ${node.name} connection error: ${err.message}`);
                     resolve({ status: false, error: err.message });
-                 }
+                }
             });
             
-            response.end(); // Important to end the request
+            req.end(); // Important to end the request
         });
 
     } catch (error) {
@@ -149,6 +150,67 @@ export class ProxyChecker {
                 resolve({ status: false, error: 'Connection closed unexpectedly' });
             }
         });
+      });
+  }
+
+  /**
+   * 检查TLS连接（适用于Trojan协议）
+   * @param {string} server - 服务器地址
+   * @param {number} port - 服务器端口
+   * @param {number} timeout - 超时时间（毫秒）
+   * @returns {Promise<{status: boolean, error: string|null}>}
+   */
+  async checkTlsConnection(server, port, timeout) {
+      return new Promise((resolve) => {
+          let connected = false;
+          
+          const timeoutId = setTimeout(() => {
+              if (!connected) {
+                  this.logger.warn(`TLS connection to ${server}:${port} timed out after ${timeout}ms`);
+                  socket.destroy();
+                  resolve({ status: false, error: 'Timeout' });
+              }
+          }, timeout);
+
+          // 创建TLS连接
+          const socket = tls.connect({
+              host: server,
+              port: port,
+              rejectUnauthorized: false, // 不验证服务器证书
+              servername: server, // 设置SNI
+              timeout: timeout,
+              ALPNProtocols: ['http/1.1'] // 尝试通过ALPN协商HTTP/1.1
+          }, () => {
+              connected = true;
+              clearTimeout(timeoutId);
+              
+              // 检查TLS连接是否成功建立
+              if (socket.authorized || !socket.authorizationError) {
+                  this.logger.debug(`TLS connection to ${server}:${port} successful`);
+                  socket.end();
+                  resolve({ status: true, error: null });
+              } else {
+                  this.logger.warn(`TLS connection to ${server}:${port} has authorization issues: ${socket.authorizationError}`);
+                  // 即使有授权问题，连接仍然成功建立
+                  socket.end();
+                  resolve({ status: true, error: null });
+              }
+          });
+
+          socket.on('error', (err) => {
+              if (!connected) {
+                  clearTimeout(timeoutId);
+                  this.logger.warn(`TLS connection to ${server}:${port} failed: ${err.message}`);
+                  resolve({ status: false, error: err.message });
+              }
+          });
+          
+          socket.on('close', (hadError) => {
+              if (!connected && !hadError) {
+                  clearTimeout(timeoutId);
+                  resolve({ status: false, error: 'Connection closed unexpectedly' });
+              }
+          });
       });
   }
 }
