@@ -122,10 +122,7 @@ jobs:
           
           # 检查是否有变化
           if git diff --cached --quiet; then
-            echo "没有检测到变化，创建测试文件..."
-            echo "本文件由GitHub Actions自动生成，用于测试工作流 $(date)" > output/test.txt
-            git add output/test.txt
-            git commit -m "chore: add test file to verify workflow" || echo "无法提交测试文件"
+            echo "没有检测到文件变化，跳过提交。"
             echo "has_changes=false" >> $GITHUB_OUTPUT
           else
             # 获取变化的文件列表
@@ -142,13 +139,13 @@ jobs:
             # 构建通知内容
             NOTIFICATION_TEXT="订阅已更新"
             if [ "$CONFIG_CHANGES" -gt 0 ]; then
-              NOTIFICATION_TEXT+="，配置文件已更新(${CONFIG_CHANGES}个)"
+              NOTIFICATION_TEXT+=", 配置文件已更新(${CONFIG_CHANGES}个)"
             fi
             if [ "$OUTPUT_CHANGES" -gt 0 ]; then
-              NOTIFICATION_TEXT+="，${OUTPUT_CHANGES}个订阅文件已更新"
+              NOTIFICATION_TEXT+=", ${OUTPUT_CHANGES}个订阅文件已更新"
             fi
             if [ "$DATA_CHANGES" -gt 0 ]; then
-              NOTIFICATION_TEXT+="，${DATA_CHANGES}个数据文件已更新"
+              NOTIFICATION_TEXT+=", ${DATA_CHANGES}个数据文件已更新"
             fi
             
             NOTIFICATION_TEXT+=" ($(date '+%Y-%m-%d %H:%M:%S'))"
@@ -162,6 +159,8 @@ jobs:
           fi
           
       - name: Push Changes
+        # 只有在检测到变化时才执行推送
+        if: steps.commit.outputs.has_changes == 'true' 
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
