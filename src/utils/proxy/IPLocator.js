@@ -98,6 +98,13 @@ export class IPLocator {
       }
     }
     
+    // 内存缓存
+    this.memoryCache = {};
+    
+    // 地区缓存文件
+    this.regionCacheFile = path.join(this.cacheDir, 'region_cache.json');
+    this.loadRegionCache();
+    
     // 加载国家代码映射
     this.countryCodeMap = {
       'CN': '中国',
@@ -138,6 +145,40 @@ export class IPLocator {
   }
 
   /**
+   * 加载地区缓存
+   */
+  loadRegionCache() {
+    this.regionCache = {};
+    
+    if (fs.existsSync(this.regionCacheFile)) {
+      try {
+        this.regionCache = JSON.parse(fs.readFileSync(this.regionCacheFile, 'utf-8'));
+        this.logger.info(`已加载IP地区缓存文件: ${Object.keys(this.regionCache).length} 个区域`);
+      } catch (e) {
+        this.logger.error(`加载IP地区缓存文件失败: ${e.message}`);
+        // 如果文件损坏，创建新的缓存文件
+        this.regionCache = {};
+        this.saveRegionCache();
+      }
+    } else {
+      // 创建新的缓存文件
+      this.saveRegionCache();
+    }
+  }
+  
+  /**
+   * 保存地区缓存
+   */
+  saveRegionCache() {
+    try {
+      fs.writeFileSync(this.regionCacheFile, JSON.stringify(this.regionCache, null, 2));
+      this.logger.debug(`IP地区缓存已保存: ${Object.keys(this.regionCache).length} 个区域`);
+    } catch (e) {
+      this.logger.error(`保存IP地区缓存失败: ${e.message}`);
+    }
+  }
+
+  /**
    * 获取IP地址的地理位置信息
    * @param {string} ip IP地址或域名
    * @returns {Promise<Object>} 地理位置信息
@@ -161,10 +202,27 @@ export class IPLocator {
       };
     }
     
-    // 首先检查缓存
+    // 优先检查内存缓存
+    if (this.memoryCache[ip]) {
+      const cacheEntry = this.memoryCache[ip];
+      const now = new Date().getTime();
+      
+      // 检查缓存是否过期
+      if (now - new Date(cacheEntry.timestamp).getTime() < this.cacheTime) {
+        this.logger.debug(`使用内存缓存的IP信息: ${ip}`);
+        return cacheEntry;
+      } else {
+        // 删除过期缓存
+        delete this.memoryCache[ip];
+      }
+    }
+    
+    // 检查地区缓存文件
     const cachedInfo = this.getFromCache(ip);
     if (cachedInfo) {
-      this.logger.debug(`使用缓存的IP信息: ${ip}`);
+      // 更新内存缓存
+      this.memoryCache[ip] = cachedInfo;
+      this.logger.debug(`使用地区缓存的IP信息: ${ip}`);
       return cachedInfo;
     }
     
@@ -219,6 +277,9 @@ export class IPLocator {
       
       // 保存到缓存
       this.saveToCache(ip, parsedData);
+      
+      // 更新内存缓存
+      this.memoryCache[ip] = parsedData;
       
       return parsedData;
     } catch (error) {
@@ -504,29 +565,30 @@ export class IPLocator {
    * @returns {Object|null} 缓存的IP信息或null
    */
   getFromCache(ip) {
-    const cacheFile = path.join(this.cacheDir, `${ip.replace(/\./g, '_')}.json`);
+    // 按国家/地区分区缓存，使用第一个字节作为分区键
+    const ipFirstPart = ip.split('.')[0] || 'unknown';
     
-    if (fs.existsSync(cacheFile)) {
-      try {
-        const cacheData = JSON.parse(fs.readFileSync(cacheFile, 'utf-8'));
+    // 检查该区域的缓存是否存在
+    if (this.regionCache[ipFirstPart] && this.regionCache[ipFirstPart][ip]) {
+      const cachedData = this.regionCache[ipFirstPart][ip];
+      
+      // 检查缓存是否过期
+      const cacheTime = new Date(cachedData.timestamp).getTime();
+      const now = new Date().getTime();
+      
+      if (now - cacheTime < this.cacheTime) {
+        return cachedData;
+      } else {
+        // 删除过期缓存
+        delete this.regionCache[ipFirstPart][ip];
         
-        // 检查缓存是否过期
-        const cacheTime = new Date(cacheData.timestamp).getTime();
-        const now = new Date().getTime();
-        
-        if (now - cacheTime < this.cacheTime) {
-          return cacheData;
-        } else {
-          this.logger.debug(`IP缓存已过期: ${ip}`);
-          // 尝试删除过期缓存
-          try {
-            fs.unlinkSync(cacheFile);
-          } catch (e) {
-            this.logger.error(`删除过期缓存失败: ${e.message}`);
-          }
+        // 如果该区域已空，删除该区域
+        if (Object.keys(this.regionCache[ipFirstPart]).length === 0) {
+          delete this.regionCache[ipFirstPart];
         }
-      } catch (e) {
-        this.logger.error(`读取缓存文件失败: ${e.message}`);
+        
+        // 保存更新后的缓存
+        this.saveRegionCache();
       }
     }
     
@@ -539,14 +601,21 @@ export class IPLocator {
    * @param {Object} data IP信息
    */
   saveToCache(ip, data) {
-    const cacheFile = path.join(this.cacheDir, `${ip.replace(/\./g, '_')}.json`);
+    // 按国家/地区分区缓存，使用第一个字节作为分区键
+    const ipFirstPart = ip.split('.')[0] || 'unknown';
     
-    try {
-      fs.writeFileSync(cacheFile, JSON.stringify(data, null, 2));
-      this.logger.debug(`IP信息已缓存: ${ip}`);
-    } catch (e) {
-      this.logger.error(`保存IP缓存失败: ${e.message}`);
+    // 如果该区域缓存不存在，创建一个新的
+    if (!this.regionCache[ipFirstPart]) {
+      this.regionCache[ipFirstPart] = {};
     }
+    
+    // 保存到区域缓存
+    this.regionCache[ipFirstPart][ip] = data;
+    
+    // 保存更新后的缓存
+    // 为了减少I/O操作，可以在这里实现批量保存或延迟保存
+    // 这里为简单起见，每次都保存
+    this.saveRegionCache();
   }
   
   /**
@@ -567,26 +636,34 @@ export class IPLocator {
    */
   cleanExpiredCache() {
     try {
-      const files = fs.readdirSync(this.cacheDir);
+      // 清理内存缓存
       const now = new Date().getTime();
-      let cleaned = 0;
-      
-      for (const file of files) {
-        if (file.endsWith('.json')) {
-          const cacheFile = path.join(this.cacheDir, file);
-          try {
-            const cacheData = JSON.parse(fs.readFileSync(cacheFile, 'utf-8'));
-            const cacheTime = new Date(cacheData.timestamp).getTime();
-            
-            if (now - cacheTime >= this.cacheTime) {
-              fs.unlinkSync(cacheFile);
-              cleaned++;
-            }
-          } catch (e) {
-            this.logger.error(`删除过期缓存失败: ${e.message}`);
-          }
+      Object.keys(this.memoryCache).forEach(ip => {
+        const cacheTime = new Date(this.memoryCache[ip].timestamp).getTime();
+        if (now - cacheTime >= this.cacheTime) {
+          delete this.memoryCache[ip];
         }
-      }
+      });
+      
+      // 清理地区缓存
+      let cleaned = 0;
+      Object.keys(this.regionCache).forEach(region => {
+        Object.keys(this.regionCache[region]).forEach(ip => {
+          const cacheTime = new Date(this.regionCache[region][ip].timestamp).getTime();
+          if (now - cacheTime >= this.cacheTime) {
+            delete this.regionCache[region][ip];
+            cleaned++;
+          }
+        });
+        
+        // 如果该区域已空，删除该区域
+        if (Object.keys(this.regionCache[region]).length === 0) {
+          delete this.regionCache[region];
+        }
+      });
+      
+      // 保存更新后的缓存
+      this.saveRegionCache();
       
       this.logger.info(`已清理过期缓存: ${cleaned} 个`);
     } catch (e) {

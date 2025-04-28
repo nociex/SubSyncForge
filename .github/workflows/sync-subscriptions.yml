@@ -53,19 +53,24 @@ jobs:
         run: |
           mkdir -p data
           mkdir -p output
+          mkdir -p output/groups  # 确保groups目录存在
           mkdir -p dist
+          mkdir -p templates     # 确保templates目录存在
           echo "检查创建的目录..."
           ls -la
           
       - name: Copy Templates
         run: |
-          if [ ! -d "templates" ]; then
-            echo "创建templates目录并添加基础模板..."
+          if [ ! -d "templates" ] || [ -z "$(ls -A templates)" ]; then
+            echo "templates目录不存在或为空，创建基础模板..."
             mkdir -p templates
-            echo '# 基础Mihomo模板' > templates/mihomo.yaml
-            echo '[General]' > templates/surge.conf
-            echo '{"log":{"level":"info"}}' > templates/singbox.json
+            # 创建基本模板
+            echo '# 基础Mihomo模板\nport: 7890\nproxy-groups:\n  - name: PROXY\n    proxies: []\nproxies: []' > templates/mihomo.yaml
+            echo '[General]\n[Proxy]\n[Proxy Group]\n[Rule]' > templates/surge.conf
+            echo '{"log":{"level":"info"},"inbounds":[],"outbounds":[]}' > templates/singbox.json
             echo '{"inbounds":[],"outbounds":[]}' > templates/v2ray.json
+          else
+            echo "templates目录已存在且不为空，跳过创建模板文件"
           fi
           echo "验证模板文件..."
           ls -la templates

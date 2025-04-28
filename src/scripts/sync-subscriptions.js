@@ -577,6 +577,11 @@ async function testNodes(nodes, testConfig) {
  * @param {Object} options 全局选项
  */
 async function generateConfigs(nodes, outputConfigs, options) {
+  // 添加更详细的日志
+  console.log(`=== 开始生成配置文件 ===`);
+  console.log(`输出配置详情: ${JSON.stringify(outputConfigs, null, 2)}`);
+  console.log(`选项详情: ${JSON.stringify(options, null, 2)}`);
+  
   // 创建转换器时传入节点重命名相关配置
   const converter = new SubscriptionConverter({
     nodeManagement: true,
@@ -588,7 +593,7 @@ async function generateConfigs(nodes, outputConfigs, options) {
   ensureDirectoryExists(outputDir);
   
   console.log(`准备生成 ${outputConfigs.length} 个配置文件`);
-  console.log(`输出目录: ${outputDir}`);
+  console.log(`输出目录: ${outputDir} (完整路径: ${path.resolve(outputDir)})`);
   console.log(`节点数量: ${nodes.length}`);
   
   if (nodes.length > 0) {
@@ -634,7 +639,10 @@ async function generateConfigs(nodes, outputConfigs, options) {
             path.join(rootDir, 'config', 'templates', templateFile)
           ];
           
+          console.log(`尝试查找模板文件，可能的路径: ${possiblePaths.join(', ')}`);
+          
           for (const possiblePath of possiblePaths) {
+            console.log(`检查路径是否存在: ${possiblePath} - ${fs.existsSync(possiblePath) ? '存在' : '不存在'}`);
             if (fs.existsSync(possiblePath)) {
               templatePath = possiblePath;
               break;
@@ -656,11 +664,43 @@ async function generateConfigs(nodes, outputConfigs, options) {
             const templatesDir = path.join(rootDir, 'templates');
             if (fs.existsSync(templatesDir)) {
               console.log(`templates目录内容: ${fs.readdirSync(templatesDir).join(', ')}`);
+            } else {
+              console.log(`templates目录不存在: ${templatesDir}`);
+              
+              // 尝试创建模板目录和基本模板
+              console.log(`尝试创建基本模板文件...`);
+              ensureDirectoryExists(templatesDir);
+              
+              // 创建基本模板
+              const templates = {
+                'mihomo.yaml': '# 基础Mihomo模板\nport: 7890\nproxy-groups:\n  - name: PROXY\n    proxies: []\nproxies: []',
+                'surge.conf': '[General]\n[Proxy]\n[Proxy Group]\n[Rule]',
+                'singbox.json': '{"log":{"level":"info"},"inbounds":[],"outbounds":[]}',
+                'v2ray.json': '{"inbounds":[],"outbounds":[]}'
+              };
+              
+              for (const [name, content] of Object.entries(templates)) {
+                const templateFile = path.join(templatesDir, name);
+                fs.writeFileSync(templateFile, content);
+                console.log(`创建基本模板文件: ${templateFile}`);
+              }
+              
+              // 重新设置模板路径
+              templatePath = path.join(templatesDir, actualFormat.toLowerCase() + (
+                actualFormat.toUpperCase() === 'MIHOMO' ? '.yaml' : 
+                actualFormat.toUpperCase() === 'SURGE' ? '.conf' : '.json'
+              ));
+              
+              console.log(`重新设置模板路径: ${templatePath}`);
             }
           } catch (e) {
-            console.error(`无法列出templates目录内容: ${e.message}`);
+            console.error(`无法处理templates目录: ${e.message}`);
           }
-          continue;
+          
+          if (!fs.existsSync(templatePath)) {
+            console.error(`无法找到或创建模板文件，跳过该配置`);
+            continue;
+          }
         }
         
         let templateContent = fs.readFileSync(templatePath, 'utf-8');
@@ -1244,6 +1284,11 @@ async function main() {
     console.log(`启用的订阅源: ${CONFIG.subscriptions.filter(sub => sub.enabled).length} 个`);
     console.log(`当前配置: 去重=${CONFIG.options.deduplication}, 数据目录=${CONFIG.options.dataDir}, 输出目录=${CONFIG.options.outputDir}`);
     console.log(`测试配置: 启用=${TESTING_CONFIG.enabled}, 超时=${TESTING_CONFIG.timeout}ms, 并发=${TESTING_CONFIG.concurrency}`);
+    
+    // 添加输出配置的详细日志
+    console.log(`输出配置详情: ${JSON.stringify(CONFIG.outputConfigs, null, 2)}`);
+    console.log(`输出配置数量: ${CONFIG.outputConfigs.length}`);
+    console.log(`是否有启用的输出配置: ${CONFIG.outputConfigs.some(cfg => cfg.enabled !== false)}`);
 
     // 初始化通知系统
     const barkUrl = process.env.BARK_URL;
@@ -1262,11 +1307,8 @@ async function main() {
       // 确保通知系统正确注册
       barkNotifier.registerEventListeners(eventEmitter);
       
-      // 测试事件系统
-      console.log('发送测试事件以验证Bark通知系统...');
-      eventEmitter.emit(EventType.SYSTEM_INFO, {
-        message: '初始化完成，开始同步订阅'
-      });
+      // 不再发送测试事件
+      console.log('Bark通知系统已初始化');
       
     } else {
       console.log('Bark通知未启用，可通过设置BARK_URL环境变量启用');
@@ -1562,6 +1604,48 @@ async function main() {
     } catch (e) {
       console.error('保存同步状态失败:', e.message);
     }
+    
+    // 编译节点统计数据
+    let totalNodes = 0;
+    const protocols = {};
+    const providers = [];
+    const regionsCount = {};
+    
+    if (finalNodes && Array.isArray(finalNodes)) {
+      totalNodes = finalNodes.length;
+      
+      // 统计协议
+      for (const node of finalNodes) {
+        if (node.protocol) {
+          protocols[node.protocol] = (protocols[node.protocol] || 0) + 1;
+        }
+        
+        // 统计地区
+        if (node.analysis && node.analysis.country) {
+          const country = node.analysis.country;
+          regionsCount[country] = (regionsCount[country] || 0) + 1;
+        }
+      }
+      
+      // 收集提供商
+      if (CONFIG.subscriptions) {
+        CONFIG.subscriptions.forEach(sub => {
+          if (sub.enabled && sub.name) {
+            providers.push(sub.name);
+          }
+        });
+      }
+    }
+    
+    // 发送完成通知
+    // 在处理完所有节点后发送更详细的通知
+    eventEmitter.emit(EventType.CONVERSION_COMPLETE, {
+      nodeCount: totalNodes,
+      time: Date.now() - fetchStartTime,
+      protocols: protocols,
+      providers: providers,
+      regionsCount: regionsCount
+    });
     
     console.log('==================================================================');
     console.log(`订阅同步完成! 总耗时: ${fetchTime + (TESTING_CONFIG.enabled ? testTime : 0) + genTime}ms`);

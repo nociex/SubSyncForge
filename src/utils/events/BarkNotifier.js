@@ -58,58 +58,11 @@ export class BarkNotifier {
     if (this.enabled) {
       console.log(`Bark通知已启用: ${this.barkUrl}`);
       console.log(`监听事件: ${this.events.join(', ')}`);
-      
-      // 发送测试通知
-      this.sendTestNotification();
     } else {
       if (!this.barkUrl) {
         console.warn(`Bark通知未启用: 未设置barkUrl`);
       } else {
         console.warn(`Bark通知未启用: enabled=false`);
-      }
-    }
-  }
-  
-  /**
-   * 发送测试通知，验证配置是否正确
-   */
-  async sendTestNotification() {
-    try {
-      console.log('正在发送Bark测试通知...');
-      
-      const title = `${this.title} - 初始化测试`;
-      const content = `SubSyncForge正在验证Bark通知配置 (${new Date().toISOString()})`;
-      
-      // 构建Bark URL
-      const url = new URL(`${this.barkUrl}${encodeURIComponent(title)}/${encodeURIComponent(content)}`);
-      
-      url.searchParams.append('isArchive', '1');
-      url.searchParams.append('sound', 'default');
-      
-      console.log(`Bark测试通知URL: ${url.toString()}`);
-      
-      // 发送请求
-      const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), this.timeout);
-      
-      const response = await fetch(url.toString(), {
-        method: 'GET',
-        signal: controller.signal
-      });
-      
-      clearTimeout(timeoutId);
-      
-      if (!response.ok) {
-        console.error(`Bark测试通知发送失败: ${response.status} ${response.statusText}`);
-        console.error(`响应内容: ${await response.text()}`);
-      } else {
-        const responseData = await response.text();
-        console.log(`Bark测试通知已发送成功，响应: ${responseData}`);
-      }
-    } catch (error) {
-      console.error(`Bark测试通知发送出错: ${error.message}`);
-      if (error.name === 'AbortError') {
-        console.error('Bark测试通知超时，请检查网络连接和URL是否正确');
       }
     }
   }
@@ -222,12 +175,12 @@ export class BarkNotifier {
   }
   
   /**
-   * 格式化事件类型为易读文本
-   * @param {string} eventType 事件类型
-   * @returns {string} 格式化后的文本
+   * 格式化事件类型为可读文本
+   * @param {string} event 事件类型
+   * @returns {string} 格式化后的事件类型
    */
-  formatEventType(eventType) {
-    switch (eventType) {
+  formatEventType(event) {
+    switch (event) {
       case EventType.CONVERSION_START:
         return '开始转换';
       case EventType.CONVERSION_PROGRESS:
@@ -237,11 +190,21 @@ export class BarkNotifier {
       case EventType.CONVERSION_ERROR:
         return '转换错误';
       case EventType.FETCH_START:
-        return '开始获取订阅';
+        return '开始获取';
       case EventType.FETCH_COMPLETE:
-        return '获取订阅完成';
+        return '获取完成';
       case EventType.FETCH_ERROR:
-        return '获取订阅失败';
+        return '获取错误';
+      case EventType.PARSE_START:
+        return '开始解析';
+      case EventType.PARSE_COMPLETE:
+        return '解析完成';
+      case EventType.PARSE_ERROR:
+        return '解析错误';
+      case EventType.DEDUP_START:
+        return '开始去重';
+      case EventType.DEDUP_COMPLETE:
+        return '去重完成';
       case EventType.SYSTEM_ERROR:
         return '系统错误';
       case EventType.SYSTEM_WARNING:
@@ -249,7 +212,7 @@ export class BarkNotifier {
       case EventType.SYSTEM_INFO:
         return '系统信息';
       default:
-        return eventType;
+        return event;
     }
   }
   
@@ -262,18 +225,41 @@ export class BarkNotifier {
   formatContent(event, data) {
     switch (event) {
       case EventType.CONVERSION_COMPLETE:
-        return `成功处理 ${data.nodeCount || 0} 个节点，耗时 ${data.time || 0}ms`;
+        let result = `成功处理 ${data.nodeCount || 0} 个节点`;
+        if (data.time) {
+          result += `，耗时 ${data.time}ms`;
+        }
+        if (data.providers && data.providers.length > 0) {
+          result += `\n来源: ${data.providers.join(', ')}`;
+        }
+        if (data.protocols) {
+          const protocolCounts = Object.entries(data.protocols)
+            .map(([protocol, count]) => `${protocol}(${count})`)
+            .join(', ');
+          result += `\n协议: ${protocolCounts}`;
+        }
+        if (data.regionsCount && Object.keys(data.regionsCount).length > 0) {
+          const regionCounts = Object.entries(data.regionsCount)
+            .filter(([region, count]) => count > 0)
+            .map(([region, count]) => `${region}(${count})`)
+            .join(', ');
+          if (regionCounts) {
+            result += `\n地区: ${regionCounts}`;
+          }
+        }
+        result += `\n${new Date().toLocaleString('zh-CN')}`;
+        return result;
       case EventType.SYSTEM_ERROR:
-        return `错误: ${data.message || data.error || '未知错误'}`;
+        return `错误: ${data.message || data.error || '未知错误'}\n${new Date().toLocaleString('zh-CN')}`;
       case EventType.SYSTEM_WARNING:
-        return `警告: ${data.message || '未知警告'}`;
+        return `警告: ${data.message || '未知警告'}\n${new Date().toLocaleString('zh-CN')}`;
       default:
         if (typeof data === 'string') {
-          return data;
+          return `${data}\n${new Date().toLocaleString('zh-CN')}`;
         } else if (data.message) {
-          return data.message;
+          return `${data.message}\n${new Date().toLocaleString('zh-CN')}`;
         } else {
-          return `事件触发: ${event}`;
+          return `事件触发: ${event}\n${new Date().toLocaleString('zh-CN')}`;
         }
     }
   }
