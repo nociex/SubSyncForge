@@ -534,12 +534,12 @@ async function fetchAndMergeAllNodes(converter) {
  * 测试节点有效性和延迟
  * @param {Array} nodes 节点列表
  * @param {Object} testConfig 测试配置
- * @returns {Promise<Array>} 测试结果数组
+ * @returns {Promise<Object>} 包含测试结果和tester实例的对象
  */
 async function testNodes(nodes, testConfig) {
   // 如果测试功能禁用，返回空结果
   if (!testConfig.enabled) {
-    return [];
+    return { results: [], tester: null };
   }
 
   console.log(`开始测试 ${nodes.length} 个节点的连通性和延迟...`);
@@ -561,12 +561,13 @@ async function testNodes(nodes, testConfig) {
     
     // 开始测试
     const testResults = await tester.testNodes(nodes);
-    return testResults;
+    // 返回测试结果和测试器实例
+    return { results: testResults, tester };
   } catch (error) {
     console.error('节点测试过程出错:', error.message);
     console.error('错误堆栈:', error.stack);
     // 测试失败时返回空结果
-    return [];
+    return { results: [], tester: null };
   }
 }
 
@@ -1385,7 +1386,8 @@ async function main() {
     // 2. 测试节点有效性和延迟
     console.log('开始测试节点连通性和延迟...');
     const testStartTime = Date.now();
-    const testResults = await testNodes(rawNodes, TESTING_CONFIG);
+    // 从testNodes函数获取测试结果和tester实例
+    const { results: testResults, tester } = await testNodes(rawNodes, TESTING_CONFIG);
     const testTime = Date.now() - testStartTime;
     
     // 根据测试结果处理节点
@@ -1398,7 +1400,7 @@ async function main() {
         console.log(`测试结果: 有效节点 ${validResults.length}/${rawNodes.length} (${(validResults.length/rawNodes.length*100).toFixed(1)}%), 无效节点 ${testResults.length - validResults.length}`);
         
         // 检查是否启用地区验证，并进行节点名称修正
-        if (TESTING_CONFIG.verify_location !== false) {
+        if (TESTING_CONFIG.verify_location !== false && tester) { // 确保tester存在
           console.log(`开始验证节点地区信息...`);
           // 取出有效节点
           const nodesToCorrect = validResults.map(r => r.node);
@@ -1451,7 +1453,7 @@ async function main() {
         finalNodes = filteredResults.map(r => r.node);
       } else {
         // 所有节点都保留的情况，同样需要修正地区
-        if (TESTING_CONFIG.verify_location !== false) {
+        if (TESTING_CONFIG.verify_location !== false && tester) { // 确保tester存在
           console.log(`开始验证节点地区信息...`);
           // 取出所有节点
           finalNodes = tester.correctNodeLocations(finalNodes, testResults);
@@ -1639,13 +1641,23 @@ async function main() {
     
     // 发送完成通知
     // 在处理完所有节点后发送更详细的通知
-    eventEmitter.emit(EventType.CONVERSION_COMPLETE, {
-      nodeCount: totalNodes,
-      time: Date.now() - fetchStartTime,
-      protocols: protocols,
-      providers: providers,
-      regionsCount: regionsCount
-    });
+    try {
+      console.log('发送完成通知事件...');
+      const eventData = {
+        nodeCount: totalNodes,
+        time: Date.now() - fetchStartTime,
+        protocols: protocols,
+        providers: providers,
+        regionsCount: regionsCount
+      };
+      console.log(`通知事件数据: ${JSON.stringify(eventData)}`);
+      
+      eventEmitter.emit(EventType.CONVERSION_COMPLETE, eventData);
+      console.log('完成通知事件已触发');
+    } catch (error) {
+      console.error('发送通知事件时出错:', error);
+      console.error('错误堆栈:', error.stack);
+    }
     
     console.log('==================================================================');
     console.log(`订阅同步完成! 总耗时: ${fetchTime + (TESTING_CONFIG.enabled ? testTime : 0) + genTime}ms`);
@@ -1655,6 +1667,20 @@ async function main() {
     console.error('同步过程中发生严重错误:');
     console.error(error);
     console.error(error.stack);
+    
+    // 尝试发送错误通知
+    try {
+      console.log('发送错误通知...');
+      eventEmitter.emit(EventType.SYSTEM_ERROR, {
+        message: `同步过程中发生严重错误: ${error.message}`,
+        error: error.toString(),
+        stack: error.stack
+      });
+      console.log('错误通知已触发');
+    } catch (notifyError) {
+      console.error('发送错误通知失败:', notifyError);
+    }
+    
     console.error('==================================================================');
     process.exit(1);
   }
@@ -1663,5 +1689,17 @@ async function main() {
 // 执行主函数
 main().catch(error => {
   console.error('同步过程中发生错误:', error);
+  
+  // 尝试发送错误通知
+  try {
+    eventEmitter.emit(EventType.SYSTEM_ERROR, {
+      message: `同步过程中捕获到错误: ${error.message}`,
+      error: error.toString(),
+      stack: error.stack
+    });
+  } catch (e) {
+    console.error('发送错误通知失败:', e);
+  }
+  
   process.exit(1);
 }); 
