@@ -8,9 +8,10 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { SubscriptionConverter } from '../converter/SubscriptionConverter.js';
-import { NodeTester } from '../tester/index.js';
+import { NodeTester } from '../tester/NodeTester.js';
 import yaml from 'js-yaml';
-import { BarkNotifier, eventEmitter, EventType } from '../utils/events/index.js';
+import { BarkNotifier } from '../utils/events/BarkNotifier.js';
+import { eventEmitter, EventType } from '../utils/events/index.js';
 
 // 设置 ES 模块中的 __dirname
 const __filename = fileURLToPath(import.meta.url);
@@ -1132,8 +1133,26 @@ async function generateGroupedNodeFiles(nodes, options) {
     ensureDirectoryExists(groupDir);
     
     console.log(`分组目录: ${groupDir}`);
+    console.log(`分组目录完整路径: ${path.resolve(groupDir)}`);
+    
+    // 检查目录权限
+    try {
+      fs.accessSync(groupDir, fs.constants.W_OK);
+      console.log(`分组目录有写入权限`);
+    } catch (err) {
+      console.error(`分组目录没有写入权限: ${err.message}`);
+      // 尝试修改权限
+      try {
+        fs.chmodSync(groupDir, 0o755);
+        console.log(`已尝试修改分组目录权限`);
+      } catch (chmodErr) {
+        console.error(`修改目录权限失败: ${chmodErr.message}`);
+      }
+    }
     
     // 处理地区分组
+    let generatedFiles = 0;
+    
     if (groups.region && groups.region.length > 0) {
       console.log(`发现 ${groups.region.length} 个地区分组`);
       
@@ -1152,8 +1171,14 @@ async function generateGroupedNodeFiles(nodes, options) {
           const outputPath = path.join(groupDir, filename);
           const base64Nodes = Buffer.from(JSON.stringify(group.nodes)).toString('base64');
           
-          fs.writeFileSync(outputPath, base64Nodes);
-          console.log(`已生成地区分组节点文件: ${filename} (${group.nodes.length} 个节点)`);
+          try {
+            fs.writeFileSync(outputPath, base64Nodes);
+            console.log(`已生成地区分组节点文件: ${filename} (${group.nodes.length} 个节点)`);
+            console.log(`文件完整路径: ${path.resolve(outputPath)}`);
+            generatedFiles++;
+          } catch (writeErr) {
+            console.error(`写入文件失败: ${filename} - ${writeErr.message}`);
+          }
         }
       }
     }
@@ -1169,16 +1194,36 @@ async function generateGroupedNodeFiles(nodes, options) {
           const outputPath = path.join(groupDir, filename);
           const base64Nodes = Buffer.from(JSON.stringify(group.nodes)).toString('base64');
           
-          fs.writeFileSync(outputPath, base64Nodes);
-          console.log(`已生成流媒体分组节点文件: ${filename} (${group.nodes.length} 个节点)`);
+          try {
+            fs.writeFileSync(outputPath, base64Nodes);
+            console.log(`已生成流媒体分组节点文件: ${filename} (${group.nodes.length} 个节点)`);
+            console.log(`文件完整路径: ${path.resolve(outputPath)}`);
+            generatedFiles++;
+          } catch (writeErr) {
+            console.error(`写入文件失败: ${filename} - ${writeErr.message}`);
+          }
         }
       }
     }
     
-    console.log(`分组节点base64文件生成完成`);
+    const message = `分组节点base64文件生成完成，共生成 ${generatedFiles} 个文件`;
+    console.log(message);
+    
+    // 触发转换完成事件，发送Bark通知
+    eventEmitter.emit(EventType.CONVERSION_COMPLETE, {
+      nodeCount: nodes.length,
+      time: Date.now(),
+      message: message
+    });
   } catch (error) {
     console.error(`生成分组节点文件时出错:`, error);
     console.error(`错误堆栈: ${error.stack}`);
+    
+    // 触发错误事件，通过Bark通知
+    eventEmitter.emit(EventType.SYSTEM_ERROR, {
+      message: `生成分组节点文件出错: ${error.message}`,
+      error: error
+    });
   }
 }
 
@@ -1213,7 +1258,16 @@ async function main() {
           EventType.SYSTEM_WARNING
         ]
       });
+      
+      // 确保通知系统正确注册
       barkNotifier.registerEventListeners(eventEmitter);
+      
+      // 测试事件系统
+      console.log('发送测试事件以验证Bark通知系统...');
+      eventEmitter.emit(EventType.SYSTEM_INFO, {
+        message: '初始化完成，开始同步订阅'
+      });
+      
     } else {
       console.log('Bark通知未启用，可通过设置BARK_URL环境变量启用');
     }

@@ -1,4 +1,4 @@
-import EventEmitter from './EventEmitter';
+import EventEmitter from './EventEmitter.js';
 import { BarkNotifier, EventType } from './BarkNotifier.js';
 
 // 创建全局事件发射器实例

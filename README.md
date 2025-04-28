@@ -425,3 +425,37 @@ https://your-worker.workers.dev/groups/Netflix
 ```
 
 这些URL可以直接在支持订阅的代理软件中使用，如Surge、Shadowrocket、Clash等。
+
+## 节点分组说明
+
+### 分组节点base64输出
+
+系统会自动将节点按照不同的分组（地区、服务类型）进行分类，并输出为base64格式文件，存放在`output/groups`目录下：
+
+- **地区分组**：
+  - `HK.txt` - 香港节点
+  - `TW.txt` - 台湾节点
+  - `JP.txt` - 日本节点
+  - `US.txt` - 美国节点
+  - `SG.txt` - 新加坡节点
+  - `Others.txt` - 其他地区节点
+
+- **流媒体分组**：
+  - `Netflix.txt` - Netflix解锁节点
+  - `Disney.txt` - Disney+解锁节点
+  - `YouTube.txt` - YouTube优化节点
+  - 等其他流媒体服务
+
+每个文件内容为JSON数组的base64编码，可以通过以下方式解码查看：
+
+```bash
+# 解码查看文件内容
+cat output/groups/HK.txt | base64 -d | jq .
+```
+
+或者使用脚本生成分组节点配置：
+
+```bash
+# 生成基于分组节点的配置
+npm run generate-groups
+```

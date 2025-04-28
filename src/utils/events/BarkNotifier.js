@@ -126,7 +126,10 @@ export class BarkNotifier {
     
     console.log(`开始注册Bark事件监听器...`);
     
-    for (const event of this.events) {
+    // 添加SYSTEM_INFO事件
+    const allEvents = [...this.events, EventType.SYSTEM_INFO];
+    
+    for (const event of allEvents) {
       console.log(`注册事件监听: ${event}`);
       
       eventEmitter.on(event, async (data) => {
@@ -144,7 +147,7 @@ export class BarkNotifier {
       });
     }
     
-    console.log(`Bark事件监听器注册完成`);
+    console.log(`Bark事件监听器注册完成: 共注册 ${allEvents.length} 个事件`);
   }
   
   /**
