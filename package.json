@@ -8,11 +8,14 @@
     "dev": "wrangler dev",
     "deploy": "wrangler deploy",
     "build": "rollup -c",
-    "sync": "npm run build && node dist/sync-subscriptions.js"
+    "sync": "npm run build && node dist/sync-subscriptions.js",
+    "test": "node src/scripts/sync-subscriptions.js"
   },
   "dependencies": {
     "node-fetch": "^3.3.2",
-    "js-yaml": "^4.1.0"
+    "js-yaml": "^4.1.0",
+    "https-proxy-agent": "^7.0.2",
+    "socks-proxy-agent": "^8.0.2"
   },
   "devDependencies": {
     "wrangler": "^3.0.0",

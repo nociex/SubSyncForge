@@ -8,6 +8,7 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { SubscriptionConverter } from '../converter/SubscriptionConverter.js';
+import { NodeTester } from '../tester/index.js';
 import yaml from 'js-yaml';
 
 // 设置 ES 模块中的 __dirname
@@ -40,6 +41,18 @@ const ConversionFormat = {
   SURGE: 'surge',
   SINGBOX: 'singbox',
   V2RAY: 'v2ray'
+};
+
+// 测试配置
+const TESTING_CONFIG = {
+  enabled: true,
+  concurrency: 5,
+  timeout: 5000,
+  test_url: "http://www.google.com/generate_204",
+  filter_invalid: true,
+  sort_by_latency: true,
+  max_latency: 2000,
+  max_nodes: 100
 };
 
 // 基本配置
@@ -151,6 +164,39 @@ function loadConfig() {
       
       if (config.advanced.sync_interval) {
         CONFIG.advanced.syncInterval = config.advanced.sync_interval;
+      }
+    }
+
+    // 加载测试配置
+    if (config.testing) {
+      TESTING_CONFIG.enabled = config.testing.enabled !== false;
+      
+      if (config.testing.concurrency) {
+        TESTING_CONFIG.concurrency = config.testing.concurrency;
+      }
+      
+      if (config.testing.timeout) {
+        TESTING_CONFIG.timeout = config.testing.timeout;
+      }
+      
+      if (config.testing.test_url) {
+        TESTING_CONFIG.test_url = config.testing.test_url;
+      }
+      
+      if (config.testing.filter_invalid !== undefined) {
+        TESTING_CONFIG.filter_invalid = config.testing.filter_invalid;
+      }
+      
+      if (config.testing.sort_by_latency !== undefined) {
+        TESTING_CONFIG.sort_by_latency = config.testing.sort_by_latency;
+      }
+      
+      if (config.testing.max_latency !== undefined) {
+        TESTING_CONFIG.max_latency = config.testing.max_latency;
+      }
+      
+      if (config.testing.max_nodes !== undefined) {
+        TESTING_CONFIG.max_nodes = config.testing.max_nodes;
       }
     }
 
@@ -464,6 +510,40 @@ async function fetchAndMergeAllNodes(converter) {
   }
   
   return finalNodes;
+}
+
+/**
+ * 测试节点有效性和延迟
+ * @param {Array} nodes 节点列表
+ * @param {Object} testConfig 测试配置
+ * @returns {Promise<Array>} 测试结果数组
+ */
+async function testNodes(nodes, testConfig) {
+  // 如果测试功能禁用，返回空结果
+  if (!testConfig.enabled) {
+    return [];
+  }
+
+  console.log(`开始测试 ${nodes.length} 个节点的连通性和延迟...`);
+  console.log(`测试配置: 并发=${testConfig.concurrency}, 超时=${testConfig.timeout}ms, URL=${testConfig.test_url}`);
+
+  try {
+    // 创建测试器实例
+    const tester = new NodeTester({
+      concurrency: testConfig.concurrency,
+      timeout: testConfig.timeout,
+      testUrl: testConfig.test_url
+    });
+    
+    // 开始测试
+    const testResults = await tester.testNodes(nodes);
+    return testResults;
+  } catch (error) {
+    console.error('节点测试过程出错:', error.message);
+    console.error('错误堆栈:', error.stack);
+    // 测试失败时返回空结果
+    return [];
+  }
 }
 
 /**
@@ -1017,6 +1097,7 @@ async function main() {
     console.log(`发现 ${CONFIG.subscriptions.length} 个订阅源`);
     console.log(`启用的订阅源: ${CONFIG.subscriptions.filter(sub => sub.enabled).length} 个`);
     console.log(`当前配置: 去重=${CONFIG.options.deduplication}, 数据目录=${CONFIG.options.dataDir}, 输出目录=${CONFIG.options.outputDir}`);
+    console.log(`测试配置: 启用=${TESTING_CONFIG.enabled}, 超时=${TESTING_CONFIG.timeout}ms, 并发=${TESTING_CONFIG.concurrency}`);
 
     // 如果没有可用的订阅源，添加一个备用订阅
     if (CONFIG.subscriptions.length === 0 || CONFIG.subscriptions.every(sub => !sub.enabled)) {
@@ -1064,23 +1145,176 @@ async function main() {
     
     console.log('订阅转换器初始化完成');
     
-    // 获取并合并所有节点
+    // 1. 获取并合并所有节点
     console.log('开始获取并合并所有节点...');
-    const startTime = Date.now();
-    const allNodes = await fetchAndMergeAllNodes(converter);
-    const fetchTime = Date.now() - startTime;
+    const fetchStartTime = Date.now();
+    const rawNodes = await fetchAndMergeAllNodes(converter);
+    const fetchTime = Date.now() - fetchStartTime;
     console.log(`获取节点完成，耗时: ${fetchTime}ms`);
     
-    if (allNodes.length === 0) {
+    if (rawNodes.length === 0) {
       console.warn('未获取到任何有效节点，但会继续尝试生成过程');
     }
     
-    console.log(`共获取 ${allNodes.length} 个有效节点`);
+    console.log(`共获取 ${rawNodes.length} 个有效节点`);
+    
+    // 保存所有原始节点数据
+    try {
+      const rawNodesFile = path.join(dataDir, 'raw_nodes.json');
+      fs.writeFileSync(rawNodesFile, JSON.stringify(rawNodes, null, 2));
+      console.log(`已保存原始节点数据到: ${rawNodesFile}`);
+    } catch (e) {
+      console.error('保存原始节点数据失败:', e.message);
+    }
+    
+    // 2. 测试节点有效性和延迟
+    console.log('开始测试节点连通性和延迟...');
+    const testStartTime = Date.now();
+    const testResults = await testNodes(rawNodes, TESTING_CONFIG);
+    const testTime = Date.now() - testStartTime;
+    
+    // 根据测试结果处理节点
+    let finalNodes = rawNodes;
+    
+    if (TESTING_CONFIG.enabled) {
+      if (TESTING_CONFIG.filter_invalid) {
+        // 只保留连通性测试通过的节点
+        const validResults = testResults.filter(r => r.status === 'up');
+        console.log(`测试结果: 有效节点 ${validResults.length}/${rawNodes.length} (${(validResults.length/rawNodes.length*100).toFixed(1)}%), 无效节点 ${testResults.length - validResults.length}`);
+        
+        // 按延迟排序
+        if (TESTING_CONFIG.sort_by_latency && validResults.length > 0) {
+          validResults.sort((a, b) => (a.latency || 99999) - (b.latency || 99999));
+          
+          // 输出延迟统计
+          const latencies = validResults.map(n => n.latency).filter(Boolean);
+          if (latencies.length > 0) {
+            const avgLatency = latencies.reduce((sum, lat) => sum + lat, 0) / latencies.length;
+            const minLatency = Math.min(...latencies);
+            const maxLatency = Math.max(...latencies);
+            
+            console.log(`延迟统计: 最小=${minLatency}ms, 最大=${maxLatency}ms, 平均=${avgLatency.toFixed(0)}ms`);
+            console.log(`最快的5个节点:`)
+            validResults.slice(0, 5).forEach((result, idx) => {
+              console.log(`  ${idx+1}. ${result.node.name}: ${result.latency}ms`);
+            });
+          }
+        }
+        
+        // 按最大延迟过滤
+        let filteredResults = validResults;
+        if (TESTING_CONFIG.max_latency > 0) {
+          const beforeCount = filteredResults.length;
+          filteredResults = filteredResults.filter(r => r.latency && r.latency <= TESTING_CONFIG.max_latency);
+          console.log(`按最大延迟(${TESTING_CONFIG.max_latency}ms)过滤: ${beforeCount} -> ${filteredResults.length}`);
+        }
+        
+        // 按最大节点数量限制
+        if (TESTING_CONFIG.max_nodes > 0 && filteredResults.length > TESTING_CONFIG.max_nodes) {
+          filteredResults = filteredResults.slice(0, TESTING_CONFIG.max_nodes);
+          console.log(`按最大节点数量(${TESTING_CONFIG.max_nodes})限制: ${filteredResults.length}`);
+        }
+        
+        // 仅保留有效节点
+        finalNodes = filteredResults.map(r => r.node);
+      } else {
+        // 所有节点都保留，但添加测试结果到节点的extra字段中
+        finalNodes = rawNodes.map(node => {
+          const result = testResults.find(r => r.node === node);
+          if (result) {
+            const nodeWithTestResult = { ...node };
+            if (!nodeWithTestResult.extra) nodeWithTestResult.extra = {};
+            nodeWithTestResult.extra.test = {
+              status: result.status,
+              latency: result.latency,
+              timestamp: new Date().toISOString()
+            };
+            return nodeWithTestResult;
+          }
+          return node;
+        });
+        
+        // 添加测试结果标记
+        finalNodes.forEach(node => {
+          if (node.extra?.test?.status === 'up') {
+            if (node.name && !node.name.includes('✓')) {
+              node.name = `✓ ${node.name}`;
+            }
+            
+            if (node.extra?.test?.latency) {
+              // 为名称添加延迟标记（如果没有）
+              if (node.name && !node.name.includes('ms')) {
+                node.name = `${node.name} [${node.extra.test.latency}ms]`;
+              }
+            }
+          } else if (node.extra?.test?.status === 'down') {
+            if (node.name && !node.name.includes('✗')) {
+              node.name = `✗ ${node.name}`;
+            }
+          }
+        });
+        
+        // 即使保留所有节点，也可以按测试结果排序
+        if (TESTING_CONFIG.sort_by_latency) {
+          finalNodes.sort((a, b) => {
+            // 有效节点在前
+            if (a.extra?.test?.status === 'up' && b.extra?.test?.status !== 'up') return -1;
+            if (a.extra?.test?.status !== 'up' && b.extra?.test?.status === 'up') return 1;
+            
+            // 两个都有效，按延迟排序
+            if (a.extra?.test?.status === 'up' && b.extra?.test?.status === 'up') {
+              return (a.extra?.test?.latency || 99999) - (b.extra?.test?.latency || 99999);
+            }
+            
+            return 0;
+          });
+        }
+      }
+      
+      console.log(`节点测试完成，耗时: ${testTime}ms, 最终保留节点数: ${finalNodes.length}`);
+      
+      // 保存测试报告
+      try {
+        const reportFile = path.join(dataDir, 'test_report.json');
+        const reportData = {
+          timestamp: new Date().toISOString(),
+          tested: rawNodes.length,
+          valid: testResults.filter(r => r.status === 'up').length,
+          invalid: testResults.filter(r => r.status === 'down').length,
+          filtered: finalNodes.length,
+          testTime,
+          results: testResults.map(r => ({
+            name: r.node.name,
+            server: r.node.server,
+            type: r.node.type,
+            status: r.status,
+            latency: r.latency,
+            error: r.error
+          }))
+        };
+        
+        fs.writeFileSync(reportFile, JSON.stringify(reportData, null, 2));
+        console.log(`测试报告已保存至: ${reportFile}`);
+      } catch (e) {
+        console.error('保存测试报告失败:', e.message);
+      }
+    } else {
+      console.log('节点测试功能已禁用，跳过测试');
+    }
+    
+    // 保存最终节点数据
+    try {
+      const finalNodesFile = path.join(dataDir, 'final_nodes.json');
+      fs.writeFileSync(finalNodesFile, JSON.stringify(finalNodes, null, 2));
+      console.log(`已保存最终节点数据到: ${finalNodesFile}`);
+    } catch (e) {
+      console.error('保存最终节点数据失败:', e.message);
+    }
     
     // 输出节点国家/地区分布情况
     try {
       const countryCount = {};
-      allNodes.forEach(node => {
+      finalNodes.forEach(node => {
         const country = node.country || 'Unknown';
         countryCount[country] = (countryCount[country] || 0) + 1;
       });
@@ -1095,10 +1329,10 @@ async function main() {
       console.error('统计节点国家分布出错:', e.message);
     }
     
-    // 生成各种格式的配置文件
+    // 3. 生成各种格式的配置文件
     console.log('开始生成配置文件...');
     const genStartTime = Date.now();
-    await generateConfigs(allNodes, CONFIG.outputConfigs, CONFIG.options);
+    await generateConfigs(finalNodes, CONFIG.outputConfigs, CONFIG.options);
     const genTime = Date.now() - genStartTime;
     console.log(`生成配置文件完成，耗时: ${genTime}ms`);
     
@@ -1107,12 +1341,15 @@ async function main() {
       const statusFile = path.join(dataDir, 'sync_status.json');
       const statusData = {
         lastSync: new Date().toISOString(),
-        nodesCount: allNodes.length,
+        originalNodesCount: rawNodes.length,
+        testedNodesCount: TESTING_CONFIG.enabled ? testResults.filter(r => r.status === 'up').length : 0,
+        finalNodesCount: finalNodes.length,
         successSubscriptions: CONFIG.subscriptions.filter(sub => sub.enabled).length,
         outputConfigs: CONFIG.outputConfigs.length,
         fetchTime,
+        testTime: TESTING_CONFIG.enabled ? testTime : 0,
         genTime,
-        totalTime: fetchTime + genTime
+        totalTime: fetchTime + (TESTING_CONFIG.enabled ? testTime : 0) + genTime
       };
       
       fs.writeFileSync(statusFile, JSON.stringify(statusData, null, 2));
@@ -1122,7 +1359,7 @@ async function main() {
     }
     
     console.log('==================================================================');
-    console.log(`订阅同步完成! 总耗时: ${fetchTime + genTime}ms`);
+    console.log(`订阅同步完成! 总耗时: ${fetchTime + (TESTING_CONFIG.enabled ? testTime : 0) + genTime}ms`);
     console.log('==================================================================');
   } catch (error) {
     console.error('==================================================================');
