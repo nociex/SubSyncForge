@@ -5,7 +5,21 @@
 格式基于 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.0.0/)，
 并且本项目遵循 [语义化版本](https://semver.org/lang/zh-CN/)。
 
-## [1.3.3] - 2024-07-xx (未发布)
+## [1.3.4] - 2025-04-28
+
+### Changed
+- **重构分组文件生成**: `generateGroupedNodeFiles` 函数现在直接输出节点分享链接到 `output/groups/*.txt` 文件，不再使用 Base64 编码，提高可读性。
+- **修复 ES 模块导入**: 修正了多个文件中 `.js` 后缀缺失导致的模块导入错误，确保在严格执行 ESM 规范的环境（如 Node.js v22+）下正常运行。
+- **修复 `trim` 函数错误**: 在 `generateGroupedNodeFiles` 中增加了对 `node.extra.raw` 的类型检查，避免了对非字符串类型调用 `trim()` 方法导致的运行时错误。
+
+### Added
+- 无
+
+### Fixed
+- 修复了因缺少 `.js` 后缀导致的多个模块无法找到的问题。
+- 修复了 `generateGroupedNodeFiles` 中潜在的 `trim` 函数调用错误。
+
+## [1.3.3] - 2024-07-27
 
 ### 改进
 

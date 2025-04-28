@@ -1215,7 +1215,8 @@ async function generateGroupedNodeFiles(nodes, options) {
           const rawNodes = group.nodes
             .map(node => {
               // 优先使用原始URI
-              if (node.extra?.raw && node.extra.raw.trim().length > 0) {
+              // 增加类型检查，确保 node.extra.raw 是字符串
+              if (node.extra?.raw && typeof node.extra.raw === 'string' && node.extra.raw.trim().length > 0) {
                 console.log(`节点 ${node.name} 使用原始URI: ${node.extra.raw.substring(0, 30)}...`);
                 return node.extra.raw;
               }
@@ -1330,7 +1331,8 @@ async function generateGroupedNodeFiles(nodes, options) {
           const rawNodes = group.nodes
             .map(node => {
               // 优先使用原始URI
-              if (node.extra?.raw && node.extra.raw.trim().length > 0) {
+              // 增加类型检查，确保 node.extra.raw 是字符串
+              if (node.extra?.raw && typeof node.extra.raw === 'string' && node.extra.raw.trim().length > 0) {
                 console.log(`节点 ${node.name} 使用原始URI: ${node.extra.raw.substring(0, 30)}...`);
                 return node.extra.raw;
               }

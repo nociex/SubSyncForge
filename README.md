@@ -373,10 +373,7 @@ MIT License
    - `SG.txt` - 新加坡地区节点的base64编码文件
    - `US.txt` - 美国地区节点的base64编码文件
    - `JP.txt` - 日本地区节点的base64编码文件
-   - `Others.txt` - 其他地区节点的base64编码文件
-   - `OpenAI.txt` - 适用于OpenAI的节点base64编码文件
-   - `Disney+.txt` - 适用于Disney+的节点base64编码文件
-   - `Netflix.txt` - 适用于Netflix的节点base64编码文件
+   - `Others.txt` - 其他地区节点
 
 2. 生成包含分组节点的配置文件（可选）：
    ```bash
@@ -446,16 +443,9 @@ https://your-worker.workers.dev/groups/Netflix
   - `YouTube.txt` - YouTube优化节点
   - 等其他流媒体服务
 
-每个文件内容为JSON数组的base64编码，可以通过以下方式解码查看：
+每个文件内容为原始的节点分享链接文本，每行一个链接，可以直接用于支持导入纯文本链接的客户端。
 
 ```bash
-# 解码查看文件内容
-cat output/groups/HK.txt | base64 -d | jq .
-```
-
-或者使用脚本生成分组节点配置：
-
-```bash
-# 生成基于分组节点的配置
-npm run generate-groups
+# 查看文件内容示例
+cat output/groups/HK.txt
 ```
