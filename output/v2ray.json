@@ -28,12 +28,12 @@
       "settings": {
         "vnext": [
           {
-            "address": "{{server}}",
-            "port": "{{port}}",
+            "address": "127.0.0.1",
+            "port": "1080",
             "users": [
               {
-                "id": "{{uuid}}",
-                "alterId": "{{alterId}}",
+                "id": "00000000-0000-0000-0000-000000000000",
+                "alterId": "0",
                 "security": "auto"
               }
             ]
@@ -41,16 +41,16 @@
         ]
       },
       "streamSettings": {
-        "network": "{{network}}",
-        "security": "{{security}}",
+        "network": "tcp",
+        "security": "none",
         "tlsSettings": {
-          "serverName": "{{serverName}}",
+          "serverName": "",
           "allowInsecure": false
         },
         "wsSettings": {
-          "path": "{{path}}",
+          "path": "/",
           "headers": {
-            "Host": "{{host}}"
+            "Host": ""
           }
         }
       }
@@ -169,50 +169,6 @@
       "statsInboundDownlink": false,
       "statsOutboundUplink": false,
       "statsOutboundDownlink": false
-    }
-  },
-  "remarks": {
-    "groups": {
-      "regionGroups": [
-        {
-          "name": "香港节点",
-          "icon": "HK"
-        },
-        {
-          "name": "台湾节点",
-          "icon": "TW"
-        },
-        {
-          "name": "新加坡节点",
-          "icon": "SG"
-        },
-        {
-          "name": "美国节点",
-          "icon": "US"
-        },
-        {
-          "name": "日本节点",
-          "icon": "JP"
-        },
-        {
-          "name": "其他节点",
-          "icon": "OTHER"
-        }
-      ],
-      "mediaGroups": [
-        {
-          "name": "OpenAI",
-          "icon": "OpenAI"
-        },
-        {
-          "name": "Disney+",
-          "icon": "Disney+"
-        },
-        {
-          "name": "Netflix",
-          "icon": "Netflix"
-        }
-      ]
     }
   }
 }
