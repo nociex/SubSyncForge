@@ -9,13 +9,16 @@
     "deploy": "wrangler deploy",
     "build": "rollup -c",
     "sync": "npm run build && node dist/sync-subscriptions.js",
-    "test": "node src/scripts/sync-subscriptions.js"
+    "test": "node src/scripts/sync-subscriptions.js",
+    "clean": "node src/scripts/clean-cache.js",
+    "schedule": "node src/scripts/schedule.js"
   },
   "dependencies": {
     "node-fetch": "^3.3.2",
     "js-yaml": "^4.1.0",
     "https-proxy-agent": "^7.0.2",
-    "socks-proxy-agent": "^8.0.2"
+    "socks-proxy-agent": "^8.0.2",
+    "cron": "^3.1.6"
   },
   "devDependencies": {
     "wrangler": "^3.0.0",

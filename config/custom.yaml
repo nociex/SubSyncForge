@@ -92,10 +92,22 @@ testing:
   sort_by_latency: true
   
   # 保留延迟低于此值的节点（毫秒，0表示不限制）
-  max_latency: 1000
+  max_latency: 2000
   
   # 保留最大节点数量（0表示不限制）
-  max_nodes: 0
+  max_nodes: 100
+  
+  # 是否验证并更正节点地区信息
+  verify_location: true
+  
+  # IP地址定位相关配置
+  ip_location:
+    # 定位服务API URL (使用{ip}作为占位符)
+    api_url: "https://ipinfo.io/{ip}/json"
+    # API密钥 (可选)
+    api_key: ""
+    # 缓存时间(毫秒), 默认7天
+    cache_time: 604800000
 
 # 高级设置
 advanced:
@@ -113,3 +125,20 @@ advanced:
   
   # 定时同步设置（分钟）
   sync_interval: 360
+
+# 计划任务
+schedule:
+  # 是否启用计划任务
+  enabled: true
+  
+  # 同步订阅任务 - 每6小时执行一次
+  sync_subscription:
+    cron: "0 */6 * * *"  # 每6小时执行一次 (0分, 每6小时, 每天, 每月, 每周)
+    enabled: true
+    command: "npm run sync"
+    
+  # 清理缓存任务 - 每周执行一次
+  clean_cache:
+    cron: "0 0 * * 0"  # 每周日凌晨执行一次 (0分, 0时, 每天, 每月, 周日)
+    enabled: true
+    command: "node src/scripts/clean-cache.js"

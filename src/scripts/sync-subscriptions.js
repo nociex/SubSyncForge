@@ -52,7 +52,9 @@ const TESTING_CONFIG = {
   filter_invalid: true,
   sort_by_latency: true,
   max_latency: 2000,
-  max_nodes: 100
+  max_nodes: 100,
+  verify_location: false,
+  ip_location: null
 };
 
 // 基本配置
@@ -197,6 +199,20 @@ function loadConfig() {
       
       if (config.testing.max_nodes !== undefined) {
         TESTING_CONFIG.max_nodes = config.testing.max_nodes;
+      }
+      
+      // 加载地区验证配置
+      if (config.testing.verify_location !== undefined) {
+        TESTING_CONFIG.verify_location = config.testing.verify_location;
+      }
+      
+      // 加载IP地址定位配置
+      if (config.testing.ip_location) {
+        TESTING_CONFIG.ip_location = {
+          api_url: config.testing.ip_location.api_url || 'https://ipinfo.io/{ip}/json',
+          api_key: config.testing.ip_location.api_key || '',
+          cache_time: config.testing.ip_location.cache_time || 604800000 // 默认7天
+        };
       }
     }
 
@@ -532,7 +548,13 @@ async function testNodes(nodes, testConfig) {
     const tester = new NodeTester({
       concurrency: testConfig.concurrency,
       timeout: testConfig.timeout,
-      testUrl: testConfig.test_url
+      testUrl: testConfig.test_url,
+      verifyLocation: testConfig.verify_location !== false,
+      ipLocatorOptions: {
+        apiUrl: testConfig.ip_location?.api_url,
+        apiKey: testConfig.ip_location?.api_key,
+        cacheTime: testConfig.ip_location?.cache_time
+      }
     });
     
     // 开始测试
@@ -1182,6 +1204,23 @@ async function main() {
         const validResults = testResults.filter(r => r.status === 'up');
         console.log(`测试结果: 有效节点 ${validResults.length}/${rawNodes.length} (${(validResults.length/rawNodes.length*100).toFixed(1)}%), 无效节点 ${testResults.length - validResults.length}`);
         
+        // 检查是否启用地区验证，并进行节点名称修正
+        if (TESTING_CONFIG.verify_location !== false) {
+          console.log(`开始验证节点地区信息...`);
+          // 取出有效节点
+          const nodesToCorrect = validResults.map(r => r.node);
+          // 使用节点测试器的correctNodeLocations方法修正地区信息
+          const correctedNodes = tester.correctNodeLocations(nodesToCorrect, validResults);
+          // 使用修正后的节点替换
+          validResults.forEach((result, index) => {
+            if (nodesToCorrect[index] !== correctedNodes[index]) {
+              // 替换节点对象
+              result.node = correctedNodes[index];
+            }
+          });
+          console.log(`节点地区验证完成`);
+        }
+        
         // 按延迟排序
         if (TESTING_CONFIG.sort_by_latency && validResults.length > 0) {
           validResults.sort((a, b) => (a.latency || 99999) - (b.latency || 99999));
@@ -1218,6 +1257,14 @@ async function main() {
         // 仅保留有效节点
         finalNodes = filteredResults.map(r => r.node);
       } else {
+        // 所有节点都保留的情况，同样需要修正地区
+        if (TESTING_CONFIG.verify_location !== false) {
+          console.log(`开始验证节点地区信息...`);
+          // 取出所有节点
+          finalNodes = tester.correctNodeLocations(finalNodes, testResults);
+          console.log(`节点地区验证完成`);
+        }
+        
         // 所有节点都保留，但添加测试结果到节点的extra字段中
         finalNodes = rawNodes.map(node => {
           const result = testResults.find(r => r.node === node);
