@@ -2,6 +2,9 @@
  * YAML解析器
  * 用于解析YAML格式的订阅内容
  */
+// 预先导入js-yaml或yaml库，避免动态导入可能引起的问题
+import yaml from 'js-yaml';
+
 export class YamlParser {
   /**
    * 解析YAML格式的数据
@@ -10,21 +13,7 @@ export class YamlParser {
    */
   async parse(raw) {
     try {
-      // 动态导入yaml解析库
-      let yamlModule;
-      try {
-        yamlModule = await import('js-yaml');
-      } catch (e) {
-        // 如果js-yaml不可用，尝试使用yaml库
-        try {
-          yamlModule = await import('yaml');
-        } catch (e2) {
-          throw new Error('No YAML parser module available');
-        }
-      }
-      
-      // 使用合适的解析函数
-      const yaml = yamlModule.default || yamlModule;
+      // 使用已导入的yaml库
       const parseFunc = yaml.load || yaml.parse || yaml.safeLoad;
       
       if (!parseFunc) {

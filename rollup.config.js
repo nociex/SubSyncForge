@@ -5,9 +5,11 @@ import json from '@rollup/plugin-json';
 export default {
   input: 'src/scripts/sync-subscriptions.js',
   output: {
-    file: 'dist/sync-subscriptions.js',
+    dir: 'dist',
     format: 'es',
-    sourcemap: true
+    sourcemap: true,
+    entryFileNames: '[name].js',
+    chunkFileNames: '[name]-[hash].js'
   },
   plugins: [
     nodeResolve({
@@ -21,6 +23,7 @@ export default {
     'fs',
     'path',
     'url',
-    'js-yaml'
+    'js-yaml',
+    'yaml'
   ]
 }; 

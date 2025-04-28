@@ -3,7 +3,36 @@
  * 用于在事件发生时发送Bark推送通知
  */
 
-import { EventType } from './index.js';
+// 直接定义EventType而不是从index导入，避免循环依赖
+const EventType = {
+  // 转换相关事件
+  CONVERSION_START: 'conversion:start',
+  CONVERSION_PROGRESS: 'conversion:progress',
+  CONVERSION_COMPLETE: 'conversion:complete',
+  CONVERSION_ERROR: 'conversion:error',
+  
+  // 获取相关事件
+  FETCH_START: 'fetch:start',
+  FETCH_COMPLETE: 'fetch:complete',
+  FETCH_ERROR: 'fetch:error',
+  
+  // 解析相关事件
+  PARSE_START: 'parse:start',
+  PARSE_COMPLETE: 'parse:complete',
+  PARSE_ERROR: 'parse:error',
+  
+  // 去重相关事件
+  DEDUP_START: 'dedup:start',
+  DEDUP_COMPLETE: 'dedup:complete',
+  
+  // 系统相关事件
+  SYSTEM_ERROR: 'system:error',
+  SYSTEM_WARNING: 'system:warning',
+  SYSTEM_INFO: 'system:info'
+};
+
+// 导出EventType
+export { EventType };
 
 export class BarkNotifier {
   constructor(options = {}) {

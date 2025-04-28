@@ -1,33 +1,5 @@
 import EventEmitter from './EventEmitter';
-import { BarkNotifier } from './BarkNotifier.js';
-
-// 事件类型定义
-export const EventType = {
-  // 转换相关事件
-  CONVERSION_START: 'conversion:start',
-  CONVERSION_PROGRESS: 'conversion:progress',
-  CONVERSION_COMPLETE: 'conversion:complete',
-  CONVERSION_ERROR: 'conversion:error',
-  
-  // 获取相关事件
-  FETCH_START: 'fetch:start',
-  FETCH_COMPLETE: 'fetch:complete',
-  FETCH_ERROR: 'fetch:error',
-  
-  // 解析相关事件
-  PARSE_START: 'parse:start',
-  PARSE_COMPLETE: 'parse:complete',
-  PARSE_ERROR: 'parse:error',
-  
-  // 去重相关事件
-  DEDUP_START: 'dedup:start',
-  DEDUP_COMPLETE: 'dedup:complete',
-  
-  // 系统相关事件
-  SYSTEM_ERROR: 'system:error',
-  SYSTEM_WARNING: 'system:warning',
-  SYSTEM_INFO: 'system:info'
-};
+import { BarkNotifier, EventType } from './BarkNotifier.js';
 
 // 创建全局事件发射器实例
 export const eventEmitter = new EventEmitter();
@@ -89,7 +61,9 @@ export class WebhookNotifier {
   }
 }
 
-export { EventEmitter, BarkNotifier };
+// 再次导出所有内容，让其他模块可以从index.js导入
+export { EventEmitter, EventType, BarkNotifier };
+
 export default {
   EventEmitter,
   EventType,

@@ -6,7 +6,6 @@ import https from 'https';
 import { SocksProxyAgent } from 'socks-proxy-agent';
 import { HttpsProxyAgent } from 'https-proxy-agent';
 import { URL } from 'url';
-import { randomUUID } from 'crypto';
 
 const defaultLogger = logger?.defaultLogger || console;
 
