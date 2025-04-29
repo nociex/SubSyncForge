@@ -67,11 +67,13 @@ nodes:
     cipher: aes-256-gcm
     password: "your-password"
 
-# 您也可以在此处添加额外的订阅源 (URL 或 Base64 格式)
-# subscriptions:
-#   - type: url
-#     value: "https://another.example.com/sub"
-#     name: "额外URL订阅"
+# 订阅源配置 (会与subscriptions.json中的订阅合并)
+subscriptions:
+  - name: "订阅名称"      # 自定义名称
+    url: "订阅URL"       # 订阅链接
+    enabled: true       # 是否启用
+    # type: "clash"     # 可选: 订阅格式 (如clash, v2ray等)
+    # updateInterval: 21600 # 可选: 更新间隔(秒)
 ```
 
 *   同样，将修改后的 `config/custom.yaml` 推送到 GitHub 仓库以生效。
