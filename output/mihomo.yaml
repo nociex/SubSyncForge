@@ -36,120 +36,10 @@ tun:
 
 proxies:
   # 节点信息
-  - name: Hysteria 19
-    type: vmess
-    server: chat.openai.com
-    port: 2083
-    uuid: 381cb6d1-6ad4-4909-8494-b8d786cf78ce
-    alterId: 0
-    network: ws
-    tls: true
-    servername: c.alalbb.top
-    ws-opts:
-      path: /1744007578.speed.ruanewa.cccp.freefly.pp.ua/
-  - name: Hysteria 23
-    type: vmess
-    server: chat.openai.com
-    port: 8443
-    uuid: 658b87e0-5d92-4424-d344-c167acd6a77f
-    alterId: 0
-    network: ws
-    tls: true
-    servername: c.alalbb.top
-    ws-opts:
-      path: /ny1-sub.890699.xyz/ny1-sub.890699.xyz
-  - name: Hysteria 28
-    type: vmess
-    server: workers.dev
-    port: 2096
-    uuid: bc86f949-7152-4367-92f5-7a11eacf9c9b
-    alterId: 0
-    network: ws
-    tls: true
-    servername: c.alalbb.top
-    ws-opts:
-      path: /lon2-sub.930.pp.ua/lon2-sub.930.pp.ua
-  - name: Hysteria 29
-    type: vmess
-    server: workers.dev
-    port: 8443
-    uuid: 914584ee-3515-46ac-a09d-4677a2e9dc9a
-    alterId: 0
-    network: ws
-    tls: true
-    servername: c.alalbb.top
-    ws-opts:
-      path: /us01.sh-cloudflare.sbs/
-  - name: Hysteria 31
-    type: vmess
-    server: chat.openai.com
-    port: 2096
-    uuid: 658b87e0-5d92-4424-d344-c167acd6a77f
-    alterId: 0
-    network: ws
-    tls: true
-    servername: c.alalbb.top
-    ws-opts:
-      path: /ny1-dash.890699.xyz/ny1-sub.890699.xyz
-  - name: Hysteria 32
+  - name: 🇺🇸 US Hysteria 31
     type: vmess
     server: auth0.openai.com
-    port: 8443
-    uuid: 914584ee-3515-46ac-a09d-4677a2e9dc9a
-    alterId: 0
-    network: ws
-    tls: true
-    servername: c.alalbb.top
-    ws-opts:
-      path: /us01.sh-cloudflare.sbs/
-  - name: Hysteria 33
-    type: vmess
-    server: api.jquery.com
-    port: 8443
-    uuid: 658b87e0-5d92-4424-d344-c167acd6a77f
-    alterId: 0
-    network: ws
-    tls: true
-    servername: c.alalbb.top
-    ws-opts:
-      path: /ny1-sub.890699.xyz/ny1-sub.890699.xyz
-  - name: Hysteria 34
-    type: vmess
-    server: laravel.com
     port: 2083
-    uuid: 381cb6d1-6ad4-4909-8494-b8d786cf78ce
-    alterId: 0
-    network: ws
-    tls: true
-    servername: c.alalbb.top
-    ws-opts:
-      path: /1744007578.speed.ruanewa.cccp.freefly.pp.ua/
-  - name: Hysteria 35
-    type: vmess
-    server: api.jquery.com
-    port: 2053
-    uuid: d79261b1-b706-49f6-b39d-af2a0b8ebac5
-    alterId: 0
-    network: ws
-    tls: true
-    servername: c.alalbb.top
-    ws-opts:
-      path: /hax.hy.cloudns.ch/d79261b1-b706-49f6-b39d-af2a0b8ebac5-vm
-  - name: Hysteria 36
-    type: vmess
-    server: cdnjs.com
-    port: 2096
-    uuid: 3bb3c730-e107-49c5-a0b2-b576d1b26a5e
-    alterId: 0
-    network: ws
-    tls: true
-    servername: c.alalbb.top
-    ws-opts:
-      path: /1743256978.speed.adl.cccp.freefly.pp.ua/
-  - name: Hysteria 37
-    type: vmess
-    server: cdnjs.com
-    port: 2087
     uuid: f082eeca-e068-45f9-d1bf-46e9de9bdf57
     alterId: 0
     network: ws
@@ -157,24 +47,42 @@ proxies:
     servername: c.alalbb.top
     ws-opts:
       path: /ny2-sub.930.pp.ua/ny2-sub.930.pp.ua
-  - name: 🇺🇸 US Hysteria 38
+  - name: 🇺🇸 US Shadowsocks 206
+    type: ss
+    server: 38.107.226.14
+    port: 8882
+    cipher: aes-256-gcm
+    password: kDWvXYZoTBcGkC4
+  - name: 🇺🇸 US Shadowsocks 212
+    type: ss
+    server: 34.234.217.178
+    port: 23478
+    cipher: aes-256-gcm
+    password: VUWK9NyG7
+  - name: 🇺🇸 US Shadowsocks 216
+    type: ss
+    server: 38.107.226.14
+    port: 7306
+    cipher: aes-256-gcm
+    password: FoOiGlkAA9yPEGP
+  - name:  US VMess 223
     type: vmess
-    server: codepen.io
-    port: 2053
-    uuid: f082eeca-e068-45f9-d1bf-46e9de9bdf57
+    server: 104.17.221.248
+    port: 8880
+    uuid: c7ce4f2f-1f87-3a7c-b407-3f8b8a6c33d4
     alterId: 0
     network: ws
-    tls: true
-    servername: c.alalbb.top
     ws-opts:
-      path: /ny2-sub.930.pp.ua/ny2-sub.930.pp.ua
-  - name: 🇺🇸 US Shadowsocks 325
+      path: /dabai.in104.20.32.71
+      headers:
+        Host: 100-62-180-62.s3.cn-db.top
+  - name: 🇺🇸 US Shadowsocks 281
     type: ss
     server: 38.107.226.14
     port: 7002
     cipher: aes-256-gcm
     password: RexnBgU7EV5ADxG
-  - name: 🇬🇧 US VMess 381
+  - name: 🇬🇧 US VMess 385
     type: vmess
     server: 141.101.121.127
     port: 2053
@@ -184,30 +92,132 @@ proxies:
     tls: true
     ws-opts:
       path: /
-  - name:  BR VMess 409
+  - name: Hysteria 27
     type: vmess
-    server: 5.10.246.52
-    port: 443
-    uuid: 9a4c8b30-081a-4299-822f-b2d95cc8c024
+    server: codepen.io
+    port: 2087
+    uuid: 41963e6b-295d-45a0-b6cc-38fbdd3e3f75
     alterId: 0
     network: ws
     tls: true
+    servername: c.alalbb.top
     ws-opts:
-      path: /vmess-argo?ed=2048
-      headers:
-        Host: brargo.lzj520hxw.dpdns.org
-  - name: 🇩🇪 DE VMess 415
+      path: /lon1-sub.890699.xyz/lon1-sub.890699.xyz
+  - name: Hysteria 29
     type: vmess
-    server: ip.sb
-    port: 443
-    uuid: cfa8c36c-9652-484a-89e1-34dcc98faac3
+    server: workers.dev
+    port: 2083
+    uuid: 381cb6d1-6ad4-4909-8494-b8d786cf78ce
     alterId: 0
     network: ws
     tls: true
+    servername: c.alalbb.top
     ws-opts:
-      path: /vmess?ed=2048
-      headers:
-        Host: cdn.3iapps.com
+      path: /1744007578.speed.ruanewa.cccp.freefly.pp.ua/
+  - name: 🇺🇸 US Hysteria 30
+    type: vmess
+    server: chat.openai.com
+    port: 2083
+    uuid: f082eeca-e068-45f9-d1bf-46e9de9bdf57
+    alterId: 0
+    network: ws
+    tls: true
+    servername: c.alalbb.top
+    ws-opts:
+      path: /ny2-sub.930.pp.ua/ny2-sub.930.pp.ua
+  - name: 🇺🇸 US Hysteria 32
+    type: vmess
+    server: workers.dev
+    port: 2087
+    uuid: bc86f949-7152-4367-92f5-7a11eacf9c9b
+    alterId: 0
+    network: ws
+    tls: true
+    servername: c.alalbb.top
+    ws-opts:
+      path: /lon2-sub.930.pp.ua/lon2-sub.930.pp.ua
+  - name: 🇺🇸 US VMess 440
+    type: vmess
+    server: time.is
+    port: 443
+    uuid: fb04920b-ec82-42f8-b1cf-694dc5fac847
+    alterId: 0
+    network: ws
+    tls: true
+    servername: shs111.kejixiaoqi666.store
+    ws-opts:
+  - name: 🇺🇸 US Hysteria 18
+    type: vmess
+    server: www.speedtest.net
+    port: 2053
+    uuid: bc86f949-7152-4367-92f5-7a11eacf9c9b
+    alterId: 0
+    network: ws
+    tls: true
+    servername: c.alalbb.top
+    ws-opts:
+      path: /lon2-sub.930.pp.ua/lon2-sub.930.pp.ua
+  - name: Hysteria 15
+    type: vmess
+    server: api.jquery.com
+    port: 8443
+    uuid: 41963e6b-295d-45a0-b6cc-38fbdd3e3f75
+    alterId: 0
+    network: ws
+    tls: true
+    servername: c.alalbb.top
+    ws-opts:
+      path: /lon1-sub.890699.xyz/lon1-sub.890699.xyz
+  - name: Hysteria 16
+    type: vmess
+    server: chat.openai.com
+    port: 8443
+    uuid: 914584ee-3515-46ac-a09d-4677a2e9dc9a
+    alterId: 0
+    network: ws
+    tls: true
+    servername: c.alalbb.top
+    ws-opts:
+      path: /us01.sh-cloudflare.sbs/
+  - name: 🇺🇸 US Hysteria 17
+    type: vmess
+    server: laravel.com
+    port: 443
+    uuid: 05641cf5-58d2-4ba4-a9f1-b3cda0b1fb1d
+    alterId: 0
+    network: ws
+    tls: true
+    servername: c.alalbb.top
+    ws-opts:
+      path: /obdii.cfd/linkws
+  - name: 🇺🇸 US Shadowsocks 329
+    type: ss
+    server: 38.107.226.14
+    port: 2375
+    cipher: aes-256-gcm
+    password: faBAoD54k87UJG7
+  - name: Hysteria 25
+    type: vmess
+    server: auth0.openai.com
+    port: 8443
+    uuid: 41963e6b-295d-45a0-b6cc-38fbdd3e3f75
+    alterId: 0
+    network: ws
+    tls: true
+    servername: c.alalbb.top
+    ws-opts:
+      path: /lon1-sub.890699.xyz/lon1-sub.890699.xyz
+  - name: Hysteria 23
+    type: vmess
+    server: discord.com
+    port: 2053
+    uuid: f082eeca-e068-45f9-d1bf-46e9de9bdf57
+    alterId: 0
+    network: ws
+    tls: true
+    servername: c.alalbb.top
+    ws-opts:
+      path: /ny2-sub.930.pp.ua/ny2-sub.930.pp.ua
   - name: 🇺🇸 US Hysteria 24
     type: vmess
     server: www.speedtest.net
@@ -219,73 +229,7 @@ proxies:
     servername: c.alalbb.top
     ws-opts:
       path: /uswuxian.pai50288.uk/?maps.app.goo.gl/K3hM5xrwZV7bQVBa7?ed=2560
-  - name: Hysteria 27
-    type: vmess
-    server: laravel.com
-    port: 8443
-    uuid: 41963e6b-295d-45a0-b6cc-38fbdd3e3f75
-    alterId: 0
-    network: ws
-    tls: true
-    servername: c.alalbb.top
-    ws-opts:
-      path: /lon1-sub.890699.xyz/lon1-sub.890699.xyz
-  - name: 🇺🇸 US Hysteria 39
-    type: vmess
-    server: auth0.openai.com
-    port: 2083
-    uuid: bc86f949-7152-4367-92f5-7a11eacf9c9b
-    alterId: 0
-    network: ws
-    tls: true
-    servername: c.alalbb.top
-    ws-opts:
-      path: /lon2-sub.930.pp.ua/lon2-sub.930.pp.ua
-  - name: 🇺🇸 US VMess 445
-    type: vmess
-    server: time.is
-    port: 443
-    uuid: 3d083a1b-28d6-4a5a-9f67-09a59b082ed3
-    alterId: 0
-    network: ws
-    tls: true
-    servername: shs111.kejixiaoqi666.store
-    ws-opts:
-  - name: 🇺🇸 US Hysteria 25
-    type: vmess
-    server: auth0.openai.com
-    port: 2096
-    uuid: bc86f949-7152-4367-92f5-7a11eacf9c9b
-    alterId: 0
-    network: ws
-    tls: true
-    servername: c.alalbb.top
-    ws-opts:
-      path: /lon2-dash.930.pp.ua/lon2-sub.930.pp.ua
   - name: Hysteria 26
-    type: vmess
-    server: laravel.com
-    port: 2053
-    uuid: f082eeca-e068-45f9-d1bf-46e9de9bdf57
-    alterId: 0
-    network: ws
-    tls: true
-    servername: c.alalbb.top
-    ws-opts:
-      path: /ny2-sub.930.pp.ua/ny2-sub.930.pp.ua
-  - name: 🇺🇸 US Shadowsocks 276
-    type: ss
-    server: 38.107.226.14
-    port: 2375
-    cipher: aes-256-gcm
-    password: faBAoD54k87UJG7
-  - name: 🇺🇸 US Shadowsocks 279
-    type: ss
-    server: 38.107.226.14
-    port: 7306
-    cipher: aes-256-gcm
-    password: FoOiGlkAA9yPEGP
-  - name: Hysteria 30
     type: vmess
     server: cdnjs.com
     port: 8443
@@ -296,164 +240,173 @@ proxies:
     servername: c.alalbb.top
     ws-opts:
       path: /uswuxian.pai50288.uk/
-  - name: Hysteria 20
-    type: vmess
-    server: www.speedtest.net
-    port: 2087
-    uuid: 41963e6b-295d-45a0-b6cc-38fbdd3e3f75
-    alterId: 0
-    network: ws
-    tls: true
-    servername: c.alalbb.top
-    ws-opts:
-      path: /lon1-sub.890699.xyz/lon1-sub.890699.xyz
-  - name: Hysteria 21
+  - name: Hysteria 28
     type: vmess
     server: discord.com
-    port: 8443
-    uuid: 41963e6b-295d-45a0-b6cc-38fbdd3e3f75
+    port: 2087
+    uuid: 658b87e0-5d92-4424-d344-c167acd6a77f
     alterId: 0
     network: ws
     tls: true
     servername: c.alalbb.top
     ws-opts:
-      path: /lon1-sub.890699.xyz/lon1-sub.890699.xyz
+      path: /ny1-sub.890699.xyz/ny1-sub.890699.xyz
   - name: Hysteria 02
     type: vmess
-    server: workers.dev
-    port: 443
-    uuid: 05641cf5-58d2-4ba4-a9f1-b3cda0b1fb1d
+    server: cdnjs.com
+    port: 2087
+    uuid: 658b87e0-5d92-4424-d344-c167acd6a77f
     alterId: 0
     network: ws
     tls: true
     servername: c.alalbb.top
     ws-opts:
-      path: /obdii.cfd/linkws
-  - name: 🇺🇸 US Hysteria 09
+      path: /ny1-sub.890699.xyz/ny1-sub.890699.xyz
+  - name: Hysteria 03
     type: vmess
-    server: codepen.io
+    server: cdnjs.com
     port: 443
-    uuid: d13fc2f5-3e05-4795-81eb-44143a09e552
+    uuid: de94cc0a-0592-4969-b1fc-97ea8f0ea0b3
     alterId: 0
     network: ws
     tls: true
     servername: c.alalbb.top
     ws-opts:
-      path: /sgfqkqmltcy.site/rbqqvws
-  - name: 🇩🇪 DE VMess 432
-    type: vmess
-    server: de01.sh-cloudflare.sbs
-    port: 2096
-    uuid: db00fd79-7cf7-4924-9a72-0c041d66816a
-    alterId: 0
-    network: ws
-    tls: true
-    servername: de01.sh-cloudflare.sbs
-    ws-opts:
-  - name: 🇺🇸 US VMess 441
+      path: /us.insbot.filegear-sg.me/aa
+  - name: 🇺🇸 US VMess 439
     type: vmess
     server: xiaoqi.yangmie.online
     port: 443
-    uuid: 3d083a1b-28d6-4a5a-9f67-09a59b082ed3
+    uuid: fb04920b-ec82-42f8-b1cf-694dc5fac847
     alterId: 0
     network: ws
     tls: true
     servername: shs111.kejixiaoqi666.store
     ws-opts:
-  - name: 🇺🇸 US VMess 439
-    type: vmess
-    server: us01.sh-cloudflare.sbs
-    port: 8443
-    uuid: b576bd02-6e31-454e-88c9-0ce3a15b2f09
-    alterId: 0
-    network: ws
-    tls: true
-    servername: us01.sh-cloudflare.sbs
-    ws-opts:
-  - name: 🇺🇸 US Shadowsocks 260
+  - name:  CA Shadowsocks 231
     type: ss
-    server: 107.173.230.12
-    port: 46265
+    server: 15.156.196.38
+    port: 24119
     cipher: aes-256-gcm
-    password: bndURzBoMWFDTjRmMWhzdEpINndtWHZmWlBuZm11UTA=7
-  - name: 🇸🇬 SG VMess 438
-    type: vmess
-    server: time.is
-    port: 80
-    uuid: 3d083a1b-28d6-4a5a-9f67-09a59b082ed3
-    alterId: 0
-    network: ws
-    ws-opts:
-  - name: 🇰🇷 KR Trojan 307
+    password: pHvYevSM7
+  - name: 🇺🇸 US Trojan 271
     type: trojan
-    server: julio.ns.cloudflare.com
+    server: www.digitalocean.com
     port: 443
-    password: 12345678
-    sni: 7bdfb97a.ikl.pages.dev
-  - name: 🇺🇸 US VMess 442
-    type: vmess
-    server: 443ip.yangmie.online
-    port: 443
-    uuid: 037514ad-b494-4200-84bb-32d0ab69dbcf
-    alterId: 0
-    network: ws
-    tls: true
-    servername: shs111.kejixiaoqi666.store
-    ws-opts:
-  - name: 🇯🇵 JP VMess 435
-    type: vmess
-    server: www.visa.com
-    port: 443
-    uuid: 3d083a1b-28d6-4a5a-9f67-09a59b082ed3
-    alterId: 0
-    network: ws
-    tls: true
-    servername: jpv.xiaoqi555.xyz
-    ws-opts:
-  - name: 🇺🇸 US Shadowsocks 305
-    type: ss
-    server: 38.107.226.14
-    port: 7001
-    cipher: aes-256-gcm
-    password: RexnBgU7EV5ADxG
-  - name: 🇺🇸 US VMess 397
-    type: vmess
-    server: yymg18.haibo168.com
-    port: 443
-    uuid: 5fc5106c-2ada-4481-a5df-608d66f7eda0
-    alterId: 0
-    network: ws
-    tls: true
-    ws-opts:
-      path: /yymg1234
-      headers:
-        Host: yymg18.haibo168.com
-  - name: 🇺🇸 US Shadowsocks 274
-    type: ss
-    server: 38.107.226.14
-    port: 8882
-    cipher: aes-256-gcm
-    password: kDWvXYZoTBcGkC4
-  - name: 🇺🇸 US Trojan 293
+    password: hntvwf100908
+    sni: am-cf-trojan-80s.pages.dev
+  - name: 🇺🇸 US Trojan 282
     type: trojan
     server: moura.ns.cloudflare.com
     port: 443
     password: hntvwf100908
     sni: am-cf-trojan-80s.pages.dev
-  - name: Hysteria 08
-    type: vmess
-    server: auth0.openai.com
+  - name: 🇨🇦 CA Trojan 305
+    type: trojan
+    server: braden.ns.cloudflare.com
     port: 443
-    uuid: edbb1059-1633-4271-b66e-ed4fba47a1bf
+    password: 12345678
+    sni: 7bdfb97a.ikl.pages.dev
+  - name: 🇺🇸 US VMess 437
+    type: vmess
+    server: 443ip.yangmie.online
+    port: 443
+    uuid: fb04920b-ec82-42f8-b1cf-694dc5fac847
+    alterId: 0
+    network: ws
+    tls: true
+    servername: shs111.kejixiaoqi666.store
+    ws-opts:
+  - name: Trojan 276
+    type: trojan
+    server: www.udemy.com
+    port: 443
+    password: hntvwf100908
+    sni: am-cf-trojan-80s.pages.dev
+  - name: 🇬🇧 UK Hysteria 04
+    type: vmess
+    server: discord.com
+    port: 443
+    uuid: 9b456c2a-f2c1-45e1-87a9-b7628b04bb24
     alterId: 0
     network: ws
     tls: true
     servername: c.alalbb.top
     ws-opts:
-      path: /linde06.indiavideo.sbs/linkws
+      path: /beyonddsz.cfd/linkws
+  - name: Trojan 257
+    type: trojan
+    server: abdullah.ns.cloudflare.com
+    port: 443
+    password: hntvwf100908
+    sni: am-cf-trojan-80s.pages.dev
+  - name: Trojan 259
+    type: trojan
+    server: otto.ns.cloudflare.com
+    port: 443
+    password: 12345678
+    sni: 7bdfb97a.ikl.pages.dev
+  - name:  Trojan 288
+    type: trojan
+    server: 104.17.212.237
+    port: 443
+    password: 666696d2-91bf-4639-ade2-bb4219862907
+    sni: fast.starjiluu.eu.org
+  - name: 🇨🇦 CA Trojan 298
+    type: trojan
+    server: lewis.ns.cloudflare.com
+    port: 443
+    password: 12345678
+    sni: 7bdfb97a.ikl.pages.dev
+  - name: 🇺🇸 US Shadowsocks 241
+    type: ss
+    server: 18.190.62.192
+    port: 14743
+    cipher: aes-256-gcm
+    password: JLMk9bhp7
+  - name: 🇺🇸 US Trojan 333
+    type: trojan
+    server: ipinfo.in
+    port: 443
+    password: hntvwf100908
+    sni: am-cf-trojan-80s.pages.dev
+  - name: 🇺🇸 US Trojan 246
+    type: trojan
+    server: stock.hostmonit.com
+    port: 443
+    password: hntvwf100908
+    sni: am-cf-trojan-80s.pages.dev
+  - name: Hysteria 13
+    type: vmess
+    server: cdnjs.com
+    port: 2096
+    uuid: 658b87e0-5d92-4424-d344-c167acd6a77f
+    alterId: 0
+    network: ws
+    tls: true
+    servername: c.alalbb.top
+    ws-opts:
+      path: /ny1-dash.890699.xyz/ny1-sub.890699.xyz
+  - name: Hysteria 22
+    type: vmess
+    server: auth0.openai.com
+    port: 2053
+    uuid: f082eeca-e068-45f9-d1bf-46e9de9bdf57
+    alterId: 0
+    network: ws
+    tls: true
+    servername: c.alalbb.top
+    ws-opts:
+      path: /ny2-sub.930.pp.ua/ny2-sub.930.pp.ua
+  - name: 🇺🇸 US Shadowsocks 222
+    type: ss
+    server: 38.107.226.14
+    port: 8090
+    cipher: aes-256-gcm
+    password: PCnnH6SQSnfoS27
   - name: 🇧🇪 BE Hysteria 10
     type: vmess
-    server: chat.openai.com
+    server: auth0.openai.com
     port: 443
     uuid: 03fcc618-b93d-6796-6aed-8a38c975d581
     alterId: 0
@@ -462,21 +415,10 @@ proxies:
     servername: c.alalbb.top
     ws-opts:
       path: /wrmelmwxlf.gktevlrqznwqqozy.fabpfs66gizmnojhcvqxwl.kytrcfzqla87gvgvs6c7kjnrubuh.cc/linkvws
-  - name: Hysteria 11
+  - name: Hysteria 14
     type: vmess
-    server: codepen.io
-    port: 8443
-    uuid: 381cb6d1-6ad4-4909-8494-b8d786cf78ce
-    alterId: 0
-    network: ws
-    tls: true
-    servername: c.alalbb.top
-    ws-opts:
-      path: /1744007578.speed.adl.cccp.freefly.pp.ua/
-  - name: 🇺🇸 US Hysteria 07
-    type: vmess
-    server: api.jquery.com
-    port: 2087
+    server: www.speedtest.net
+    port: 2096
     uuid: bc86f949-7152-4367-92f5-7a11eacf9c9b
     alterId: 0
     network: ws
@@ -484,19 +426,17 @@ proxies:
     servername: c.alalbb.top
     ws-opts:
       path: /lon2-sub.930.pp.ua/lon2-sub.930.pp.ua
-  - name:  Trojan 301
-    type: trojan
-    server: 104.17.212.237
+  - name: 🇯🇵 JP VMess 431
+    type: vmess
+    server: www.visa.com
     port: 443
-    password: 666696d2-91bf-4639-ade2-bb4219862907
-    sni: fast.starjiluu.eu.org
-  - name: 🇺🇸 US Trojan 408
-    type: trojan
-    server: 1sdfghjk.890602.xyz
-    port: 443
-    password: 5453ae26-250d-4e79-b4ec-016baf806865
-    sni: 1SdfghJk.890602.xyz
-  - name: 🇺🇸 US VMess 401
+    uuid: fb04920b-ec82-42f8-b1cf-694dc5fac847
+    alterId: 0
+    network: ws
+    tls: true
+    servername: jpv.xiaoqi555.xyz
+    ws-opts:
+  - name: 🇺🇸 US VMess 397
     type: vmess
     server: yymg23.haibo168.com
     port: 443
@@ -508,36 +448,209 @@ proxies:
       path: /yymg1234
       headers:
         Host: yymg23.haibo168.com
-  - name: 🇺🇸 US Shadowsocks 278
-    type: ss
-    server: 38.107.226.14
-    port: 9101
-    cipher: aes-256-gcm
-    password: e4FCWrgpkji3QY7
-  - name: 🇺🇸 US VMess 377
+  - name: Hysteria 20
     type: vmess
-    server: mlq001-1.facai2024.com
-    port: 443
-    uuid: ad24b06a-d3f7-4e7e-baf0-7f63a8587366
-    alterId: 0
-    network: ws
-    tls: true
-    ws-opts:
-      path: /ad24b06a
-      headers:
-        Host: mlq001-1.facai2024.com
-  - name: 🇨🇦 CA Hysteria 12
-    type: vmess
-    server: discord.com
-    port: 443
-    uuid: 03fcc618-b93d-6796-6aed-8a38c975d581
+    server: workers.dev
+    port: 8443
+    uuid: 41963e6b-295d-45a0-b6cc-38fbdd3e3f75
     alterId: 0
     network: ws
     tls: true
     servername: c.alalbb.top
     ws-opts:
-      path: /inna.cfd/linkvws
-  - name: 🇺🇸 US VMess 386
+      path: /lon1-sub.890699.xyz/lon1-sub.890699.xyz
+  - name: Hysteria 21
+    type: vmess
+    server: auth0.openai.com
+    port: 2096
+    uuid: 3bb3c730-e107-49c5-a0b2-b576d1b26a5e
+    alterId: 0
+    network: ws
+    tls: true
+    servername: c.alalbb.top
+    ws-opts:
+      path: /1743919978.speed.adl.cccp.freefly.pp.ua/
+  - name: 🇺🇸 US Shadowsocks 183
+    type: ss
+    server: 47.88.20.184
+    port: 47307
+    cipher: aes-256-gcm
+    password: bflqwvH65b��
+  - name: Hysteria 09
+    type: vmess
+    server: chat.openai.com
+    port: 443
+    uuid: edbb1059-1633-4271-b66e-ed4fba47a1bf
+    alterId: 0
+    network: ws
+    tls: true
+    servername: c.alalbb.top
+    ws-opts:
+      path: /linde06.indiavideo.sbs/linkws
+  - name: 🇺🇸 US Shadowsocks 190
+    type: ss
+    server: 47.89.211.178
+    port: 24710
+    cipher: aes-256-gcm
+    password: HsxsXQTIzh��
+  - name: Trojan 328
+    type: trojan
+    server: www.whatismyip.com
+    port: 443
+    password: 12345678
+    sni: 7bdfb97a.ikl.pages.dev
+  - name: 🇩🇪 DE VMess 429
+    type: vmess
+    server: de01.sh-cloudflare.sbs
+    port: 2096
+    uuid: 37c70503-dafd-4b20-ba06-7498da5841cc
+    alterId: 0
+    network: ws
+    tls: true
+    servername: de01.sh-cloudflare.sbs
+    ws-opts:
+  - name: 🇺🇸 US Hysteria 12
+    type: vmess
+    server: codepen.io
+    port: 443
+    uuid: 76221bfb-e92f-4e80-81c5-6fe48f50ac0b
+    alterId: 0
+    network: ws
+    tls: true
+    servername: c.alalbb.top
+    ws-opts:
+      path: /glweidf.sbs/linkws
+  - name: 🇨🇳 US Shadowsocks 154
+    type: ss
+    server: 137.175.113.193
+    port: 8388
+    cipher: chacha20-ietf
+    password: asd1234567
+  - name: Trojan 286
+    type: trojan
+    server: wilson.ns.cloudflare.com
+    port: 443
+    password: 12345678
+    sni: 7bdfb97a.ikl.pages.dev
+  - name: 🇰🇷 KR Trojan 272
+    type: trojan
+    server: julio.ns.cloudflare.com
+    port: 443
+    password: 12345678
+    sni: 7bdfb97a.ikl.pages.dev
+  - name:  IE Shadowsocks 185
+    type: ss
+    server: 54.76.126.234
+    port: 31938
+    cipher: aes-256-gcm
+    password: Yk6Y6W9Z7
+  - name: Trojan 243
+    type: trojan
+    server: rustam.ns.cloudflare.com
+    port: 443
+    password: hntvwf100908
+    sni: am-cf-trojan-80s.pages.dev
+  - name: Hysteria 11
+    type: vmess
+    server: laravel.com
+    port: 8443
+    uuid: 658b87e0-5d92-4424-d344-c167acd6a77f
+    alterId: 0
+    network: ws
+    tls: true
+    servername: c.alalbb.top
+    ws-opts:
+      path: /ny1-sub.890699.xyz/ny1-sub.890699.xyz
+  - name: 🇺🇸 US Shadowsocks 242
+    type: ss
+    server: 54.185.224.181
+    port: 443
+    cipher: aes-256-cfb
+    password: amazonskr057
+  - name: 🇬🇧 UK Shadowsocks 172
+    type: ss
+    server: 51.24.5.76
+    port: 6110
+    cipher: aes-256-gcm
+    password: Y09Etfs67
+  - name: 🇺🇸 US Shadowsocks 200
+    type: ss
+    server: 44.247.201.109
+    port: 17155
+    cipher: aes-256-gcm
+    password: EY21ohqh7
+  - name: 🇬🇧 UK Shadowsocks 163
+    type: ss
+    server: 62.100.205.48
+    port: 989
+    cipher: aes-256-cfb
+    password: f8f7aCzcPKbsF8p3��
+  - name: 🇺🇸 US Shadowsocks 192
+    type: ss
+    server: 34.219.163.102
+    port: 443
+    cipher: aes-256-cfb
+    password: amazonskr057
+  - name: 🇺🇸 US Shadowsocks 210
+    type: ss
+    server: 34.218.253.101
+    port: 443
+    cipher: aes-256-cfb
+    password: amazonskr057
+  - name: 🇺🇸 CA Shadowsocks 213
+    type: ss
+    server: 54.188.29.80
+    port: 443
+    cipher: aes-256-cfb
+    password: amazonskr057
+  - name:  NL Shadowsocks 179
+    type: ss
+    server: 85.234.65.100
+    port: 11359
+    cipher: aes-256-gcm
+    password: XaAIkJjp7
+  - name:  FR Shadowsocks 388
+    type: ss
+    server: 51.15.15.82
+    port: 989
+    cipher: aes-256-cfb
+    password: f8f7aCzcPKbsF8p3��
+  - name:  Shadowsocks 395
+    type: ss
+    server: 51.15.23.63
+    port: 989
+    cipher: aes-256-cfb
+    password: f8f7aCzcPKbsF8p3��
+  - name:  NL VMess 253
+    type: vmess
+    server: 0:0:0:0:0:ffff:9df5:4c61
+    port: 2095
+    uuid: 6ba15edd-efc5-426b-baf7-70b9c6607e26
+    alterId: 0
+    network: tcp
+  - name:  NL Shadowsocks 211
+    type: ss
+    server: 109.104.154.131
+    port: 20000
+    cipher: aes-256-gcm
+    password: U0UOWUJMSS8I9AZK��
+  - name:  FR Shadowsocks 160
+    type: ss
+    server: 51.195.119.47
+    port: 1080
+    cipher: chacha20-ietf-poly1305
+    password: qXvO7zYU7KeaB0Md7DQLow
+  - name: 🇯🇵 JP VMess 430
+    type: vmess
+    server: bookmyshow.com
+    port: 443
+    uuid: fb04920b-ec82-42f8-b1cf-694dc5fac847
+    alterId: 0
+    network: ws
+    tls: true
+    servername: jpv.xiaoqi555.xyz
+    ws-opts:
+  - name: 🇺🇸 US VMess 393
     type: vmess
     server: xsj015.facai2024.com
     port: 443
@@ -549,323 +662,19 @@ proxies:
       path: /ba3fc16f
       headers:
         Host: xsj015.facai2024.com
-  - name: 🇺🇸 US Shadowsocks 228
-    type: ss
-    server: 47.88.20.184
-    port: 47307
-    cipher: aes-256-gcm
-    password: bflqwvH65b��
-  - name: 🇺🇸 US VMess 218
+  - name: 🇺🇸 US VMess 408
     type: vmess
-    server: 43.153.74.63
-    port: 14589
-    uuid: 74f9cad6-b55b-4749-81d1-bdfec76f8808
-    alterId: 0
-    network: tcp
-  - name: 🇺🇸 US Shadowsocks 208
-    type: ss
-    server: 38.244.10.137
-    port: 54535
-    cipher: aes-256-gcm
-    password: QJbkBM3YrD��
-  - name: 🇺🇸 US Shadowsocks 210
-    type: ss
-    server: 47.89.211.178
-    port: 24710
-    cipher: aes-256-gcm
-    password: HsxsXQTIzh��
-  - name: 🇺🇸 US VMess 418
-    type: vmess
-    server: 43.153.74.63
-    port: 39254
-    uuid: 6628b585-0626-49f5-daa4-57e10167c58d
-    alterId: 0
-    network: tcp
-  - name: 🇺🇸 US Shadowsocks 226
-    type: ss
-    server: 43.153.64.173
-    port: 17129
-    cipher: aes-256-gcm
-    password: l1CqRgZrLf��
-  - name: 🇺🇸 US VMess 251
-    type: vmess
-    server: 43.153.74.63
-    port: 23353
-    uuid: a3c6c147-b584-4a40-cca5-87a86d250557
-    alterId: 0
-    network: tcp
-  - name: Trojan 321
-    type: trojan
-    server: wilson.ns.cloudflare.com
+    server: mlq001-1.facai2024.com
     port: 443
-    password: 12345678
-    sni: 7bdfb97a.ikl.pages.dev
-  - name: 🇨🇦 CA Trojan 318
-    type: trojan
-    server: braden.ns.cloudflare.com
-    port: 443
-    password: 12345678
-    sni: 7bdfb97a.ikl.pages.dev
-  - name: Hysteria 13
-    type: vmess
-    server: laravel.com
-    port: 2096
-    uuid: 3bb3c730-e107-49c5-a0b2-b576d1b26a5e
+    uuid: ad24b06a-d3f7-4e7e-baf0-7f63a8587366
     alterId: 0
     network: ws
     tls: true
-    servername: c.alalbb.top
     ws-opts:
-      path: /1743919978.speed.adl.cccp.freefly.pp.ua/
-  - name: 🇺🇸 US Shadowsocks 223
-    type: ss
-    server: 34.219.163.102
-    port: 443
-    cipher: aes-256-cfb
-    password: amazonskr057
-  - name: 🇬🇧 UK Shadowsocks 205
-    type: ss
-    server: 51.24.5.76
-    port: 6110
-    cipher: aes-256-gcm
-    password: Y09Etfs67
-  - name: 🇬🇧 UK Shadowsocks 206
-    type: ss
-    server: 62.100.205.48
-    port: 989
-    cipher: aes-256-cfb
-    password: f8f7aCzcPKbsF8p3��
-  - name: 🇺🇸 US Shadowsocks 291
-    type: ss
-    server: 54.185.224.181
-    port: 443
-    cipher: aes-256-cfb
-    password: amazonskr057
-  - name:  NL VMess 267
-    type: vmess
-    server: 0:0:0:0:0:ffff:9df5:4c61
-    port: 2095
-    uuid: 6ba15edd-efc5-426b-baf7-70b9c6607e26
-    alterId: 0
-    network: tcp
-  - name:  NL Shadowsocks 257
-    type: ss
-    server: 109.104.154.131
-    port: 20000
-    cipher: aes-256-gcm
-    password: U0UOWUJMSS8I9AZK��
-  - name:  NL Shadowsocks 421
-    type: ss
-    server: 51.15.15.82
-    port: 989
-    cipher: aes-256-cfb
-    password: f8f7aCzcPKbsF8p3��
-  - name: 🇯🇵 JP VMess 434
-    type: vmess
-    server: bookmyshow.com
-    port: 443
-    uuid: 3d083a1b-28d6-4a5a-9f67-09a59b082ed3
-    alterId: 0
-    network: ws
-    tls: true
-    servername: jpv.xiaoqi555.xyz
-    ws-opts:
-  - name: 🇳🇱 NL Trojan 304
-    type: trojan
-    server: www.pcmag.com
-    port: 443
-    password: hntvwf100908
-    sni: am-cf-trojan-80s.pages.dev
-  - name:  FR Shadowsocks 207
-    type: ss
-    server: 51.195.119.47
-    port: 1080
-    cipher: chacha20-ietf-poly1305
-    password: qXvO7zYU7KeaB0Md7DQLow
-  - name:  Shadowsocks 220
-    type: ss
-    server: 16.170.101.150
-    port: 21072
-    cipher: aes-256-gcm
-    password: LEFqixTd7
-  - name: 🇳🇴 NO Hysteria 03
-    type: vmess
-    server: www.speedtest.net
-    port: 443
-    uuid: 03fcc618-b93d-6796-6aed-8a38c975d581
-    alterId: 0
-    network: ws
-    tls: true
-    servername: c.alalbb.top
-    ws-opts:
-      path: /o.metuji.com/linkvws
-  - name:  CA Shadowsocks 338
-    type: ss
-    server: 37.143.128.125
-    port: 20012
-    cipher: aes-256-gcm
-    password: PPTJ34721G5TKXLU��
-  - name:  Shadowsocks 342
-    type: ss
-    server: 5.34.209.50
-    port: 58919
-    cipher: chacha20-ietf-poly1305
-    password: Wo7H7pfmmq0nxMRTSBYDj7
-  - name:  Shadowsocks 406
-    type: ss
-    server: 88.151.192.57
-    port: 443
-    cipher: chacha20-ietf-poly1305
-    password: 9CJz3J1GYljQ7
-  - name: Hysteria 04
-    type: vmess
-    server: api.jquery.com
-    port: 443
-    uuid: f584de15-2034-4170-a723-f48c2bae5e0f
-    alterId: 0
-    network: ws
-    tls: true
-    servername: c.alalbb.top
-    ws-opts:
-      path: /afrhms16v.bestxray.buzz/linkws
-  - name:  Shadowsocks 389
-    type: ss
-    server: 93.114.98.34
-    port: 7713
-    cipher: aes-256-gcm
-    password: aCRNijIj7
-  - name:  DE Shadowsocks 262
-    type: ss
-    server: 45.151.62.54
-    port: 28825
-    cipher: chacha20-ietf-poly1305
-    password: 0zyDRZ1XmNXaaCAN7KEA8a
-  - name: 🇺🇸 US Trojan 249
-    type: trojan
-    server: 45.62.119.227
-    port: 36735
-    password: DJfG07YMR4
-    sni: 45.62.119.227
-  - name:  US VMess 443
-    type: vmess
-    server: 45.147.201.231
-    port: 23078
-    uuid: dfd0a9b9-e698-4dd7-acb7-6d46791886ee
-    alterId: 0
-    network: ws
-    ws-opts:
-  - name: 🇺🇸 US Trojan 224
-    type: trojan
-    server: 2.59.151.181
-    port: 50090
-    password: QUrYz9nrFU
-    sni: 2.59.151.181
-  - name:  US VMess 444
-    type: vmess
-    server: 45.147.201.231
-    port: 20020
-    uuid: c21e3ea9-fa48-44ff-8470-c7e59e4d505c
-    alterId: 0
-    network: ws
-    ws-opts:
-  - name:  FR Shadowsocks 371
-    type: ss
-    server: 150.241.91.184
-    port: 8724
-    cipher: chacha20-ietf-poly1305
-    password: hY4vxI8XY3YJghRe4Gp2g2
-  - name:  DE VMess 433
-    type: vmess
-    server: 45.147.201.231
-    port: 20502
-    uuid: dfd0a9b9-e698-4dd7-acb7-6d46791886ee
-    alterId: 0
-    network: ws
-    ws-opts:
-  - name: Hysteria 06
-    type: vmess
-    server: workers.dev
-    port: 2087
-    uuid: 41963e6b-295d-45a0-b6cc-38fbdd3e3f75
-    alterId: 0
-    network: ws
-    tls: true
-    servername: c.alalbb.top
-    ws-opts:
-      path: /lon1-sub.890699.xyz/lon1-sub.890699.xyz
-  - name: Trojan 352
-    type: trojan
-    server: ip.sb
-    port: 443
-    password: 12345678
-    sni: 7bdfb97a.ikl.pages.dev
-  - name: 🇫🇷 FR Hysteria 05
-    type: vmess
-    server: cdnjs.com
-    port: 443
-    uuid: 03fcc618-b93d-6796-6aed-8a38c975d581
-    alterId: 0
-    network: ws
-    tls: true
-    servername: c.alalbb.top
-    ws-opts:
-      path: /tilebani.com/linkvws
-  - name: 🇯🇵 JP Shadowsocks 119
-    type: ss
-    server: 18.183.92.83
-    port: 443
-    cipher: aes-256-cfb
-    password: amazonskr057
-  - name: 🇯🇵 JP Shadowsocks 138
-    type: ss
-    server: 35.72.2.134
-    port: 443
-    cipher: aes-256-cfb
-    password: amazonskr057
-  - name: 🇯🇵 HK Shadowsocks 195
-    type: ss
-    server: 43.206.241.133
-    port: 443
-    cipher: aes-256-cfb
-    password: amazonskr057
-  - name: 🇯🇵 JP Shadowsocks 141
-    type: ss
-    server: 48.218.67.58
-    port: 33534
-    cipher: aes-256-gcm
-    password: HEqa1WxJSB��
-  - name: 🇯🇵 JP Shadowsocks 203
-    type: ss
-    server: 54.178.9.230
-    port: 443
-    cipher: aes-256-cfb
-    password: amazonskr057
-  - name: 🇺🇸 US VMess 333
-    type: vmess
-    server: test.yanyumo.xyz
-    port: 443
-    uuid: 0b9f7953-823f-4cc8-acb7-9dfec25c5840
-    alterId: 0
-    network: h2
-    tls: true
-  - name: 🇬🇧 Trojan 368
-    type: trojan
-    server: 5.144.181.144
-    port: 2053
-    password: Aimer
-    sni: epcca.ambercc.filegear-sg.me
-  - name: VMess 147
-    type: vmess
-    server: tls.19.node-for-bigairport.win
-    port: 33443
-    uuid: b71f9e84-86c9-49c4-b5f4-b33b35ee7410
-    alterId: 0
-    network: ws
-    ws-opts:
-      path: /
+      path: /ad24b06a
       headers:
-        Host: tls.19.node-for-bigairport.win
-  - name: 🇺🇸 US VMess 256
+        Host: mlq001-1.facai2024.com
+  - name: 🇺🇸 US VMess 234
     type: vmess
     server: f39f8f95-svhls0-t7r6w5-1ppvf.sea.plebai.net
     port: 443
@@ -877,333 +686,179 @@ proxies:
       path: /
       headers:
         Host: broadcastlv.chat.bilibili.com
-  - name: VMess 136
+  - name:  Shadowsocks 177
+    type: ss
+    server: 16.170.101.150
+    port: 21072
+    cipher: aes-256-gcm
+    password: LEFqixTd7
+  - name: Trojan 262
+    type: trojan
+    server: comicabc.com
+    port: 443
+    password: hntvwf100908
+    sni: am-cf-trojan-80s.pages.dev
+  - name:  CA Shadowsocks 369
+    type: ss
+    server: 37.143.128.125
+    port: 20012
+    cipher: aes-256-gcm
+    password: PPTJ34721G5TKXLU��
+  - name:  Shadowsocks 317
+    type: ss
+    server: 5.34.209.50
+    port: 58919
+    cipher: chacha20-ietf-poly1305
+    password: Wo7H7pfmmq0nxMRTSBYDj7
+  - name:  Shadowsocks 373
+    type: ss
+    server: 88.151.192.57
+    port: 443
+    cipher: chacha20-ietf-poly1305
+    password: 9CJz3J1GYljQ7
+  - name:  Shadowsocks 386
+    type: ss
+    server: 93.114.98.34
+    port: 7713
+    cipher: aes-256-gcm
+    password: aCRNijIj7
+  - name: 🇺🇸 US VMess 401
     type: vmess
-    server: tls.03.node-for-bigairport.win
-    port: 12443
+    server: yymg18.haibo168.com
+    port: 443
+    uuid: 5fc5106c-2ada-4481-a5df-608d66f7eda0
+    alterId: 0
+    network: ws
+    tls: true
+    ws-opts:
+      path: /yymg1234
+      headers:
+        Host: yymg18.haibo168.com
+  - name: 🇺🇸 US Trojan 224
+    type: trojan
+    server: 45.62.119.227
+    port: 36735
+    password: DJfG07YMR4
+    sni: 45.62.119.227
+  - name: 🇺🇸 US VMess 435
+    type: vmess
+    server: us01.sh-cloudflare.sbs
+    port: 8443
+    uuid: 3931d071-ec5c-43b7-a8e6-5914f8fd8c72
+    alterId: 0
+    network: ws
+    tls: true
+    servername: us01.sh-cloudflare.sbs
+    ws-opts:
+  - name: 🇯🇵 JP Shadowsocks 105
+    type: ss
+    server: 13.113.80.125
+    port: 30323
+    cipher: aes-256-gcm
+    password: nHUXPsJ67
+  - name: 🇯🇵 JP Shadowsocks 92
+    type: ss
+    server: 18.183.92.83
+    port: 443
+    cipher: aes-256-cfb
+    password: amazonskr057
+  - name: 🇯🇵 HK Shadowsocks 90
+    type: ss
+    server: 43.206.241.133
+    port: 443
+    cipher: aes-256-cfb
+    password: amazonskr057
+  - name: 🇯🇵 JP Shadowsocks 107
+    type: ss
+    server: 48.218.67.58
+    port: 33534
+    cipher: aes-256-gcm
+    password: HEqa1WxJSB��
+  - name: 🇺🇸 US VMess 390
+    type: vmess
+    server: test.yanyumo.xyz
+    port: 443
+    uuid: 0b9f7953-823f-4cc8-acb7-9dfec25c5840
+    alterId: 0
+    network: h2
+    tls: true
+  - name: 🇯🇵 JP Shadowsocks 91
+    type: ss
+    server: 54.178.9.230
+    port: 443
+    cipher: aes-256-cfb
+    password: amazonskr057
+  - name: 🇬🇧 Trojan 366
+    type: trojan
+    server: 5.144.181.144
+    port: 2053
+    password: Aimer
+    sni: epcca.ambercc.filegear-sg.me
+  - name: VMess 100
+    type: vmess
+    server: tls.02.node-for-bigairport.win
+    port: 443
     uuid: b71f9e84-86c9-49c4-b5f4-b33b35ee7410
     alterId: 0
     network: ws
     ws-opts:
       path: /
       headers:
-        Host: tls.03.node-for-bigairport.win
-  - name: Hysteria 18
-    type: vmess
-    server: laravel.com
-    port: 443
-    uuid: 05641cf5-58d2-4ba4-a9f1-b3cda0b1fb1d
-    alterId: 0
-    network: ws
-    tls: true
-    servername: c.alalbb.top
-    ws-opts:
-      path: /obdii.cfd/linkws
+        Host: tls.02.node-for-bigairport.win
   - name: 🇰🇷 KR Shadowsocks 182
     type: ss
     server: 125.141.31.72
     port: 15098
     cipher: aes-256-cfb
     password: qwerREWQ@@��
-  - name: 🇰🇷 KR Shadowsocks 140
-    type: ss
-    server: 221.150.109.89
-    port: 11389
-    cipher: aes-256-cfb
-    password: qwerREWQ@@��
-  - name: 🇯🇵 JP VMess 179
-    type: vmess
-    server: 0000000000000000000000000047.bgroup-node-for-bigairport.sbs
-    port: 12354
-    uuid: b71f9e84-86c9-49c4-b5f4-b33b35ee7410
-    alterId: 0
-    network: ws
-    tls: true
-    ws-opts:
-      path: /
-      headers:
-        Host: 0000000000000000000000000047.bgroup-node-for-bigairport.sbs
-  - name: 🇰🇷 KR Shadowsocks 154
-    type: ss
-    server: 125.141.26.12
-    port: 4857
-    cipher: aes-256-cfb
-    password: qwerREWQ@@��
-  - name: 🇰🇷 KR Shadowsocks 184
-    type: ss
-    server: 13.124.130.158
-    port: 443
-    cipher: aes-256-cfb
-    password: amazonskr057
-  - name: 🇨🇦 CA Trojan 340
-    type: trojan
-    server: www.4chan.org
-    port: 443
-    password: 12345678
-    sni: 7bdfb97a.ikl.pages.dev
-  - name: 🇰🇷 US Shadowsocks 383
+  - name: 🇰🇷 US Shadowsocks 400
     type: ss
     server: 154.90.62.168
     port: 989
     cipher: aes-256-cfb
     password: f8f7aCzcPKbsF8p3��
-  - name: 🇨🇳 HK Shadowsocks 81
-    type: ss
-    server: 117.186.219.3
-    port: 10001
-    cipher: aes-128-gcm
-    password: Sj10bnYDe7w6V29E��
-  - name: 🇰🇷 SG Shadowsocks 289
-    type: ss
-    server: 43.131.255.175
-    port: 3306
-    cipher: aes-256-cfb
-    password: 1601e3c29c8db1a88942cf0cad731bf37
-  - name: 🇨🇳 JP Shadowsocks 101
-    type: ss
-    server: 117.186.219.31
-    port: 10002
-    cipher: aes-128-gcm
-    password: Sj10bnYDe7w6V29E��
-  - name: 🇺🇸 US Hysteria 17
-    type: vmess
-    server: discord.com
-    port: 2053
-    uuid: bc86f949-7152-4367-92f5-7a11eacf9c9b
-    alterId: 0
-    network: ws
-    tls: true
-    servername: c.alalbb.top
-    ws-opts:
-      path: /lon2-sub.930.pp.ua/lon2-sub.930.pp.ua
-  - name: 🇨🇳 SG Shadowsocks 111
-    type: ss
-    server: 117.186.219.3
-    port: 10003
-    cipher: aes-128-gcm
-    password: Sj10bnYDe7w6V29E��
-  - name: 🇨🇳 US Shadowsocks 201
-    type: ss
-    server: 117.186.219.31
-    port: 10004
-    cipher: aes-128-gcm
-    password: Sj10bnYDe7w6V29E��
-  - name: 🇭🇰 US VMess 42
-    type: vmess
-    server: 47.83.132.36
-    port: 45060
-    uuid: f57c12d0-01cb-45e0-ff35-95e76394b634
-    alterId: 0
-    network: tcp
-  - name: 🇭🇰 HK Shadowsocks 99
-    type: ss
-    server: 103.149.182.191
-    port: 8388
-    cipher: chacha20-ietf
-    password: asd1234567
-  - name: 🇭🇰 HK Shadowsocks 117
-    type: ss
-    server: 154.197.26.237
-    port: 8388
-    cipher: chacha20-ietf
-    password: asd1234567
-  - name: 🇺🇸 Trojan 394
-    type: trojan
-    server: 147.45.79.236
-    port: 2053
-    password: Aimer
-    sni: epcca.ambercc.filegear-sg.me
-  - name: 🇭🇰 HK Shadowsocks 43
-    type: ss
-    server: 103.149.183.61
-    port: 8388
-    cipher: chacha20-ietf
-    password: asd1234567
-  - name: 🇺🇸 US Hysteria 16
+  - name: Hysteria 01
     type: vmess
     server: codepen.io
-    port: 2083
-    uuid: f082eeca-e068-45f9-d1bf-46e9de9bdf57
+    port: 2096
+    uuid: 658b87e0-5d92-4424-d344-c167acd6a77f
     alterId: 0
     network: ws
     tls: true
     servername: c.alalbb.top
     ws-opts:
-      path: /ny2-sub.930.pp.ua/ny2-sub.930.pp.ua
-  - name: 🇸🇬 SG Shadowsocks 78
-    type: ss
-    server: 47.129.120.255
-    port: 443
-    cipher: aes-256-cfb
-    password: amazonskr057
-  - name: ShadowsocksR 175
-    type: ssr
-    server: t2.50redlight.com
-    port: 21128
-    cipher: chacha20-ietf
-    password: myssojbk
-    obfs: plain
-    protocol: auth_aes128_md5
-    obfs-param: None
-  - name:  Shadowsocks 320
-    type: ss
-    server: 221.132.29.208
-    port: 38388
-    cipher: aes-256-cfb
-    password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
-  - name: 🇭🇰 HK Shadowsocks 180
-    type: ss
-    server: hkkh11v1.xpmc.cc
-    port: 24682
-    cipher: chacha20-ietf-poly1305
-    password: 91a41f4e02dc7
-  - name:  Shadowsocks 242
-    type: ss
-    server: 103.186.154.18
-    port: 38388
-    cipher: aes-256-cfb
-    password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
-  - name:  Shadowsocks 399
-    type: ss
-    server: 103.186.154.20
-    port: 38388
-    cipher: aes-256-cfb
-    password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
-  - name:  Shadowsocks 263
-    type: ss
-    server: 103.186.154.23
-    port: 38388
-    cipher: aes-256-cfb
-    password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
-  - name: 🇨🇳 US Shadowsocks 189
-    type: ss
-    server: 210.74.226.65
-    port: 10004
-    cipher: aes-128-gcm
-    password: Sj10bnYDe7w6V29E��
-  - name:  Shadowsocks 247
-    type: ss
-    server: 103.186.154.24
-    port: 38388
-    cipher: aes-256-cfb
-    password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
-  - name: 🇨🇳 US Shadowsocks 204
-    type: ss
-    server: 163.177.58.158
-    port: 10004
-    cipher: aes-128-gcm
-    password: Sj10bnYDe7w6V29E��
-  - name:  Shadowsocks 246
-    type: ss
-    server: 103.186.155.25
-    port: 38388
-    cipher: aes-256-cfb
-    password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
-  - name:  Shadowsocks 375
-    type: ss
-    server: 103.186.154.33
-    port: 38388
-    cipher: aes-256-cfb
-    password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
-  - name:  Shadowsocks 391
-    type: ss
-    server: 103.186.154.19
-    port: 38388
-    cipher: aes-256-cfb
-    password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
-  - name:  Shadowsocks 343
-    type: ss
-    server: 103.186.154.28
-    port: 38388
-    cipher: aes-256-cfb
-    password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
-  - name:  Shadowsocks 264
-    type: ss
-    server: 103.186.154.36
-    port: 38388
-    cipher: aes-256-cfb
-    password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
-  - name:  Shadowsocks 265
-    type: ss
-    server: 43.128.212.180
-    port: 3306
-    cipher: aes-256-cfb
-    password: 1601e3c29c8db1a88942cf0cad731bf37
-  - name: 🇨🇳 SG Shadowsocks 128
-    type: ss
-    server: 117.78.51.213
-    port: 10003
-    cipher: aes-128-gcm
-    password: Sj10bnYDe7w6V29E��
-  - name:  Shadowsocks 241
-    type: ss
-    server: 103.186.155.24
-    port: 38388
-    cipher: aes-256-cfb
-    password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
-  - name:  Shadowsocks 405
-    type: ss
-    server: 103.186.154.38
-    port: 38388
-    cipher: aes-256-cfb
-    password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
-  - name:  Shadowsocks 245
-    type: ss
-    server: 103.186.154.29
-    port: 38388
-    cipher: aes-256-cfb
-    password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
-  - name:  Shadowsocks 252
-    type: ss
-    server: 103.186.154.22
-    port: 38388
-    cipher: aes-256-cfb
-    password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
-  - name:  Shadowsocks 255
-    type: ss
-    server: 103.186.154.35
-    port: 38388
-    cipher: aes-256-cfb
-    password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
-  - name:  Shadowsocks 243
-    type: ss
-    server: 103.186.155.18
-    port: 38388
-    cipher: aes-256-cfb
-    password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
-  - name:  Shadowsocks 287
-    type: ss
-    server: 103.186.154.31
-    port: 38388
-    cipher: aes-256-cfb
-    password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
-  - name: 🇨🇳 HK Shadowsocks 40
-    type: ss
-    server: 163.177.58.158
-    port: 10001
-    cipher: aes-128-gcm
-    password: Sj10bnYDe7w6V29E��
-  - name:  Shadowsocks 259
-    type: ss
-    server: 103.186.154.30
-    port: 38388
-    cipher: aes-256-cfb
-    password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
-  - name:  Shadowsocks 272
-    type: ss
-    server: 103.186.155.19
-    port: 38388
-    cipher: aes-256-cfb
-    password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
-  - name: 🇨🇳 HK Shadowsocks 93
-    type: ss
-    server: 117.78.51.213
-    port: 10001
-    cipher: aes-128-gcm
-    password: Sj10bnYDe7w6V29E��
-  - name: 🇺🇸 US Hysteria 01
+      path: /ny1-sub.890699.xyz/ny1-sub.890699.xyz
+  - name: Hysteria 07
     type: vmess
-    server: nginx.com
+    server: api.jquery.com
+    port: 443
+    uuid: 576c81b6-4976-4fe3-b1a9-05a9c302e98e
+    alterId: 0
+    network: ws
+    tls: true
+    servername: c.alalbb.top
+    ws-opts:
+      path: /us10-04.852224.ggff.net/SNwNdunw28lVztopw90eoXel
+  - name:  CA Shadowsocks 180
+    type: ss
+    server: 103.75.119.144
+    port: 20021
+    cipher: aes-256-gcm
+    password: F641WNVX8POAMQQH��
+  - name: 🇺🇸 US Hysteria 08
+    type: vmess
+    server: workers.dev
+    port: 443
+    uuid: 5f726fe3-d82e-4da5-a711-8af0cbb2b682
+    alterId: 0
+    network: ws
+    tls: true
+    servername: c.alalbb.top
+    ws-opts:
+      path: /1a2d514b-37cf-499f-8d08-d017a92ab5bb.asoul-ava.top/azumase.ren
+  - name: 🇺🇸 US Hysteria 05
+    type: vmess
+    server: www.speedtest.net
     port: 443
     uuid: 950db6aa-4926-4616-816e-ec0312dcb87b
     alterId: 0
@@ -1212,57 +867,229 @@ proxies:
     servername: c.alalbb.top
     ws-opts:
       path: /jahfkjha.cfd/linkws
-  - name: 🇨🇳 JP Shadowsocks 122
+  - name: 🇰🇷 KR Shadowsocks 159
     type: ss
-    server: 117.78.51.213
-    port: 10002
-    cipher: aes-128-gcm
-    password: Sj10bnYDe7w6V29E��
-  - name: 🇨🇳 US Shadowsocks 215
-    type: ss
-    server: 117.78.51.213
-    port: 10004
-    cipher: aes-128-gcm
-    password: Sj10bnYDe7w6V29E��
-  - name: 🇨🇳 US VMess 71
-    type: vmess
-    server: 183.238.90.8
-    port: 41766
-    uuid: 418048af-a293-4b99-9b0c-98ca3580dd24
-    alterId: 64
-    network: tcp
-  - name: 🇨🇳 JP Shadowsocks 95
-    type: ss
-    server: 210.74.226.65
-    port: 10002
-    cipher: aes-128-gcm
-    password: Sj10bnYDe7w6V29E��
-  - name:  CA Shadowsocks 398
-    type: ss
-    server: 46.16.129.217
-    port: 20022
+    server: 13.125.168.176
+    port: 30976
     cipher: aes-256-gcm
-    password: MUPE2QCAOW7I7OQY��
-  - name: 🇨🇳 SG Shadowsocks 74
+    password: gJg1TyUQ7
+  - name: 🇸🇬 SG VMess 434
+    type: vmess
+    server: time.is
+    port: 80
+    uuid: fb04920b-ec82-42f8-b1cf-694dc5fac847
+    alterId: 0
+    network: ws
+    ws-opts:
+  - name: 🇭🇰 HK Shadowsocks 41
     type: ss
-    server: 163.177.58.158
-    port: 10003
-    cipher: aes-128-gcm
-    password: Sj10bnYDe7w6V29E��
-  - name: 🇨🇳 JP VMess 115
+    server: 154.197.26.237
+    port: 8388
+    cipher: chacha20-ietf
+    password: asd1234567
+  - name: 🇭🇰 HK Shadowsocks 115
+    type: ss
+    server: 103.149.183.61
+    port: 8388
+    cipher: chacha20-ietf
+    password: asd1234567
+  - name: 🇹🇼 TW Shadowsocks 275
+    type: ss
+    server: 185.189.160.98
+    port: 64759
+    cipher: aes-256-cfb
+    password: qwerREWQ@@��
+  - name:  Shadowsocks 310
+    type: ss
+    server: 221.132.29.208
+    port: 38388
+    cipher: aes-256-cfb
+    password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
+  - name: 🇸🇬 SG Shadowsocks 65
+    type: ss
+    server: 47.129.120.255
+    port: 443
+    cipher: aes-256-cfb
+    password: amazonskr057
+  - name:  Shadowsocks 217
+    type: ss
+    server: 103.186.155.25
+    port: 38388
+    cipher: aes-256-cfb
+    password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
+  - name:  Shadowsocks 337
+    type: ss
+    server: 103.186.154.23
+    port: 38388
+    cipher: aes-256-cfb
+    password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
+  - name:  Shadowsocks 358
+    type: ss
+    server: 103.186.154.28
+    port: 38388
+    cipher: aes-256-cfb
+    password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
+  - name:  Shadowsocks 219
+    type: ss
+    server: 103.186.154.24
+    port: 38388
+    cipher: aes-256-cfb
+    password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
+  - name: Trojan 324
+    type: trojan
+    server: ip.sb
+    port: 443
+    password: 12345678
+    sni: 7bdfb97a.ikl.pages.dev
+  - name:  Shadowsocks 336
+    type: ss
+    server: 103.186.154.19
+    port: 38388
+    cipher: aes-256-cfb
+    password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
+  - name:  Shadowsocks 351
+    type: ss
+    server: 103.186.154.30
+    port: 38388
+    cipher: aes-256-cfb
+    password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
+  - name: 🇭🇰 HK Shadowsocks 95
+    type: ss
+    server: 103.149.182.61
+    port: 8388
+    cipher: chacha20-ietf
+    password: asd1234567
+  - name: 🇸🇬 SG VMess 98
+    type: vmess
+    server: 0000000000000000000000000043.bgroup-node-for-bigairport.sbs
+    port: 12352
+    uuid: b71f9e84-86c9-49c4-b5f4-b33b35ee7410
+    alterId: 0
+    network: ws
+    tls: true
+    ws-opts:
+      path: /
+      headers:
+        Host: 0000000000000000000000000043.bgroup-node-for-bigairport.sbs
+  - name:  Shadowsocks 220
+    type: ss
+    server: 103.186.154.22
+    port: 38388
+    cipher: aes-256-cfb
+    password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
+  - name:  Shadowsocks 232
+    type: ss
+    server: 103.186.154.18
+    port: 38388
+    cipher: aes-256-cfb
+    password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
+  - name:  Shadowsocks 244
+    type: ss
+    server: 103.186.155.18
+    port: 38388
+    cipher: aes-256-cfb
+    password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
+  - name:  Shadowsocks 362
+    type: ss
+    server: 103.186.155.19
+    port: 38388
+    cipher: aes-256-cfb
+    password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
+  - name:  Shadowsocks 370
+    type: ss
+    server: 103.186.154.33
+    port: 38388
+    cipher: aes-256-cfb
+    password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
+  - name:  Shadowsocks 239
+    type: ss
+    server: 103.186.154.35
+    port: 38388
+    cipher: aes-256-cfb
+    password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
+  - name:  Shadowsocks 414
+    type: ss
+    server: 103.186.154.31
+    port: 38388
+    cipher: aes-256-cfb
+    password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
+  - name:  Shadowsocks 354
+    type: ss
+    server: 103.186.154.38
+    port: 38388
+    cipher: aes-256-cfb
+    password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
+  - name:  Shadowsocks 249
+    type: ss
+    server: 43.128.212.180
+    port: 3306
+    cipher: aes-256-cfb
+    password: 1601e3c29c8db1a88942cf0cad731bf37
+  - name: 🇨🇳 JP VMess 69
     type: vmess
     server: 183.237.84.53
     port: 55002
     uuid: 418048af-a293-4b99-9b0c-98ca3580dd24
     alterId: 64
     network: tcp
-  - name: 🇨🇳 JP Shadowsocks 97
+  - name:  Shadowsocks 423
     type: ss
-    server: 163.177.58.158
-    port: 10002
-    cipher: aes-128-gcm
-    password: Sj10bnYDe7w6V29E��
-  - name: 🇭🇰 HK VMess 326
+    server: 103.186.154.36
+    port: 38388
+    cipher: aes-256-cfb
+    password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
+  - name:  Shadowsocks 227
+    type: ss
+    server: 103.186.155.24
+    port: 38388
+    cipher: aes-256-cfb
+    password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
+  - name:  Shadowsocks 411
+    type: ss
+    server: 103.186.154.29
+    port: 38388
+    cipher: aes-256-cfb
+    password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
+  - name:  CA Shadowsocks 394
+    type: ss
+    server: 46.16.129.217
+    port: 20022
+    cipher: aes-256-gcm
+    password: MUPE2QCAOW7I7OQY��
+  - name: 🇨🇳 US VMess 422
+    type: vmess
+    server: 183.238.90.8
+    port: 46920
+    uuid: 418048af-a293-4b99-9b0c-98ca3580dd24
+    alterId: 64
+    network: tcp
+  - name: 🇸🇬 HK Shadowsocks 35
+    type: ss
+    server: 103.36.90.195
+    port: 8388
+    cipher: chacha20-ietf
+    password: asd1234567
+  - name:  Shadowsocks 327
+    type: ss
+    server: 103.186.154.20
+    port: 38388
+    cipher: aes-256-cfb
+    password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
+  - name: 🇨🇳 US VMess 57
+    type: vmess
+    server: 183.238.90.8
+    port: 39076
+    uuid: 418048af-a293-4b99-9b0c-98ca3580dd24
+    alterId: 64
+    network: tcp
+  - name: 🇨🇳 US VMess 156
+    type: vmess
+    server: 183.238.90.8
+    port: 41766
+    uuid: 418048af-a293-4b99-9b0c-98ca3580dd24
+    alterId: 64
+    network: tcp
+  - name: 🇭🇰 HK VMess 43
     type: vmess
     server: 10c5a388-svjgg0-swa8xy-laev.hgc1.tcpbbr.net
     port: 8080
@@ -1273,7 +1100,7 @@ proxies:
       path: /
       headers:
         Host: broadcastlv.chat.bilibili.com
-  - name: ShadowsocksR 142
+  - name: ShadowsocksR 126
     type: ssr
     server: anactorinstanceofjudgingsomethin.suannai.us
     port: 43125
@@ -1281,134 +1108,117 @@ proxies:
     password: sGWdzYDx5J
     obfs: tls1.2_ticket_auth
     protocol: auth_aes128_md5
-  - name: 🇸🇬 SG VMess 202
-    type: vmess
-    server: v7.nmcf.me
-    port: 8000
-    uuid: dd722e86-6cec-44e8-a444-7f513ab61c0c
-    alterId: 0
-    network: ws
-    ws-opts:
-      path: /nmkj
-      headers:
-        Host: v7.nmcf.me
-  - name: VMess 148
-    type: vmess
-    server: tls.17.node-for-bigairport.win
-    port: 11443
-    uuid: b71f9e84-86c9-49c4-b5f4-b33b35ee7410
-    alterId: 0
-    network: tcp
-    tls: true
-  - name: 🇰🇷 KR Shadowsocks 379
-    type: ss
-    server: p080.panda001.net
-    port: 36379
-    cipher: aes-256-cfb
-    password: qwerREWQ@@��
-  - name: VMess 113
-    type: vmess
-    server: tls.14.node-for-bigairport.win
-    port: 14443
-    uuid: b71f9e84-86c9-49c4-b5f4-b33b35ee7410
-    alterId: 0
-    network: tcp
-  - name: 🇨🇳 HK VMess 110
+  - name: ShadowsocksR 124
+    type: ssr
+    server: t2.50redlight.com
+    port: 21335
+    cipher: chacha20-ietf
+    password: myssojbk
+    obfs: plain
+    protocol: auth_aes128_md5
+    obfs-param: None
+  - name: 🇨🇳 HK VMess 79
     type: vmess
     server: 120.198.44.126
     port: 47883
     uuid: 418048af-a293-4b99-9b0c-98ca3580dd24
     alterId: 64
     network: tcp
-  - name: 🇺🇸 US VMess 417
+  - name: 🇩🇪 DE Hysteria 06
     type: vmess
-    server: aflzzul.meiquankongjian.com
-    port: 52513
-    uuid: 342bacfd-2b8f-3f49-a16e-439db5b0b9d5
+    server: nginx.com
+    port: 443
+    uuid: 9072d339-3885-4fe1-b0bc-29fa7505410e
     alterId: 0
     network: ws
+    tls: true
+    servername: c.alalbb.top
     ws-opts:
-      path: /564dfa20/
-      headers:
-        Host: aflzzul.meiquankongjian.com
-  - name: 🇭🇰 HK Trojan 273
+      path: /fixedfloati.cfd/linkwsd
+  - name: 🇨🇦 CA Trojan 279
     type: trojan
-    server: green2.cdntencentmusic.com
-    port: 28505
-    password: 1d3818a5-0000-4429-8ec2-5d4045d1ced2
-    sni: green2.cdntencentmusic.com
-  - name: 🇯🇵 JP Trojan 150
-    type: trojan
-    server: green2.cdntencentmusic.com
-    port: 28507
-    password: 20cc1a99-a26e-4c6b-b0be-1ed331b0c271
-    sni: green2.cdntencentmusic.com
-  - name: Trojan 370
-    type: trojan
-    server: ua.mjt000.com
+    server: www.7749tv.com
     port: 443
-    password: 46dce50f-cb9a-45d0-99f8-0107ea567bf2
-    sni: ua.mjt000.com
-  - name: 🇺🇸 US Trojan 373
+    password: 12345678
+    sni: 7bdfb97a.ikl.pages.dev
+  - name: 🇰🇷 KR Shadowsocks 334
+    type: ss
+    server: p080.panda001.net
+    port: 36379
+    cipher: aes-256-cfb
+    password: qwerREWQ@@��
+  - name: 🇰🇷 KR Shadowsocks 133
+    type: ss
+    server: p229.panda004.net
+    port: 30454
+    cipher: aes-256-cfb
+    password: qwerREWQ@@��
+  - name: 🇰🇷 KR Shadowsocks 113
+    type: ss
+    server: p231.panda004.net
+    port: 11389
+    cipher: aes-256-cfb
+    password: qwerREWQ@@��
+  - name: 🇰🇷 KR Shadowsocks 292
+    type: ss
+    server: p228.panda004.net
+    port: 63648
+    cipher: aes-256-cfb
+    password: qwerREWQ@@��
+  - name: 🇺🇸 US Trojan 361
     type: trojan
     server: free.darkevil.news
     port: 443
     password: 56befafd-4635-472c-9957-63748b27aaad
     sni: zoom.us
-  - name: 🇺🇸 US VMess 145
-    type: vmess
-    server: aflzzul.meiquankongjian.com
-    port: 52512
-    uuid: 342bacfd-2b8f-3f49-a16e-439db5b0b9d5
-    alterId: 0
-    network: ws
-    ws-opts:
-      path: /564dfa20/
-      headers:
-        Host: aflzzul.meiquankongjian.com
-  - name: 🇭🇰 HK Trojan 236
+  - name: 🇭🇰 HK Trojan 127
+    type: trojan
+    server: green2.cdntencentmusic.com
+    port: 28503
+    password: 53717109-332b-40bb-826b-346f2f0a55fa
+    sni: green2.cdntencentmusic.com
+  - name: 🇭🇰 HK Trojan 303
     type: trojan
     server: green2.cdntencentmusic.com
     port: 28504
     password: f4d3909c-31e2-47fd-9f44-f75ccd49d56e
     sni: green2.cdntencentmusic.com
-  - name: 🇯🇵 JP Trojan 118
+  - name: 🇯🇵 JP Trojan 331
     type: trojan
-    server: aafrtpfxr.jpl01i9zjfegelp.5xfsur8v62.gosdk.xyz
-    port: 22271
-    password: 7ff29f7b-49c2-4c80-9a4e-9de52ca010bb
-    sni: q08m.vgraxiw73s.hasyaf.cn
-  - name: 🇮🇹 IT Trojan 353
+    server: green2.cdntencentmusic.com
+    port: 28507
+    password: 20cc1a99-a26e-4c6b-b0be-1ed331b0c271
+    sni: green2.cdntencentmusic.com
+  - name: 🇮🇹 IT Trojan 352
     type: trojan
     server: it.mjt000.com
     port: 443
     password: 46dce50f-cb9a-45d0-99f8-0107ea567bf2
     sni: it.mjt000.com
-  - name: 🇰🇷 KR Shadowsocks 151
-    type: ss
-    server: p141.panda001.net
-    port: 4652
-    cipher: aes-256-cfb
-    password: qwerREWQ@@��
-  - name: 🇨🇳 US VMess 70
-    type: vmess
-    server: 183.238.90.8
-    port: 46920
-    uuid: 418048af-a293-4b99-9b0c-98ca3580dd24
-    alterId: 64
-    network: tcp
-  - name: 🇺🇸 US Trojan 234
+  - name: 🇭🇰 HK Trojan 147
+    type: trojan
+    server: green2.cdntencentmusic.com
+    port: 28505
+    password: 2c37a0d1-f498-4ce3-9690-d4363aef4d6a
+    sni: green2.cdntencentmusic.com
+  - name: 🇺🇸 US Trojan 363
+    type: trojan
+    server: green2.cdntencentmusic.com
+    port: 28506
+    password: f6240176-344d-4e72-a25d-7cb6045916ed
+    sni: green2.cdntencentmusic.com
+  - name: Trojan 344
+    type: trojan
+    server: ua.mjt000.com
+    port: 443
+    password: 46dce50f-cb9a-45d0-99f8-0107ea567bf2
+    sni: ua.mjt000.com
+  - name: Trojan 128
     type: trojan
     server: aafrtpfxr.jpl01i9zjfegelp.5xfsur8v62.gosdk.xyz
-    port: 34014
-    password: 5399c848-b0a3-49f9-b524-78ca874902f7
+    port: 43394
+    password: 7d7d5e58-409a-48f7-89bd-dede7cf908f6
     sni: q08m.vgraxiw73s.hasyaf.cn
-  - name: 🇯🇵 US Trojan 422
-    type: trojan
-    server: 47.79.85.59
-    port: 56465
-    password: YQ4dl0s18a
-    sni: 47.79.85.59
 
 proxy-groups:
   - name: "🛫 节点切换"
@@ -1425,182 +1235,161 @@ proxy-groups:
   - name: "🌈 手动选择"
     type: select
     proxies:
-        - Hysteria 19
-  - Hysteria 23
-  - Hysteria 28
-  - Hysteria 29
-  - Hysteria 31
-  - Hysteria 32
-  - Hysteria 33
-  - Hysteria 34
-  - Hysteria 35
-  - Hysteria 36
-  - Hysteria 37
-  - 🇺🇸 US Hysteria 38
-  - 🇺🇸 US Shadowsocks 325
-  - 🇬🇧 US VMess 381
-  -  BR VMess 409
-  - 🇩🇪 DE VMess 415
-  - 🇺🇸 US Hysteria 24
+        - 🇺🇸 US Hysteria 31
+  - 🇺🇸 US Shadowsocks 206
+  - 🇺🇸 US Shadowsocks 212
+  - 🇺🇸 US Shadowsocks 216
+  -  US VMess 223
+  - 🇺🇸 US Shadowsocks 281
+  - 🇬🇧 US VMess 385
   - Hysteria 27
-  - 🇺🇸 US Hysteria 39
-  - 🇺🇸 US VMess 445
-  - 🇺🇸 US Hysteria 25
+  - Hysteria 29
+  - 🇺🇸 US Hysteria 30
+  - 🇺🇸 US Hysteria 32
+  - 🇺🇸 US VMess 440
+  - 🇺🇸 US Hysteria 18
+  - Hysteria 15
+  - Hysteria 16
+  - 🇺🇸 US Hysteria 17
+  - 🇺🇸 US Shadowsocks 329
+  - Hysteria 25
+  - Hysteria 23
+  - 🇺🇸 US Hysteria 24
   - Hysteria 26
-  - 🇺🇸 US Shadowsocks 276
-  - 🇺🇸 US Shadowsocks 279
-  - Hysteria 30
+  - Hysteria 28
+  - Hysteria 02
+  - Hysteria 03
+  - 🇺🇸 US VMess 439
+  -  CA Shadowsocks 231
+  - 🇺🇸 US Trojan 271
+  - 🇺🇸 US Trojan 282
+  - 🇨🇦 CA Trojan 305
+  - 🇺🇸 US VMess 437
+  - Trojan 276
+  - 🇬🇧 UK Hysteria 04
+  - Trojan 257
+  - Trojan 259
+  -  Trojan 288
+  - 🇨🇦 CA Trojan 298
+  - 🇺🇸 US Shadowsocks 241
+  - 🇺🇸 US Trojan 333
+  - 🇺🇸 US Trojan 246
+  - Hysteria 13
+  - Hysteria 22
+  - 🇺🇸 US Shadowsocks 222
+  - 🇧🇪 BE Hysteria 10
+  - Hysteria 14
+  - 🇯🇵 JP VMess 431
+  - 🇺🇸 US VMess 397
   - Hysteria 20
   - Hysteria 21
-  - Hysteria 02
-  - 🇺🇸 US Hysteria 09
-  - 🇩🇪 DE VMess 432
-  - 🇺🇸 US VMess 441
-  - 🇺🇸 US VMess 439
-  - 🇺🇸 US Shadowsocks 260
-  - 🇸🇬 SG VMess 438
-  - 🇰🇷 KR Trojan 307
-  - 🇺🇸 US VMess 442
-  - 🇯🇵 JP VMess 435
-  - 🇺🇸 US Shadowsocks 305
-  - 🇺🇸 US VMess 397
-  - 🇺🇸 US Shadowsocks 274
-  - 🇺🇸 US Trojan 293
-  - Hysteria 08
-  - 🇧🇪 BE Hysteria 10
+  - 🇺🇸 US Shadowsocks 183
+  - Hysteria 09
+  - 🇺🇸 US Shadowsocks 190
+  - Trojan 328
+  - 🇩🇪 DE VMess 429
+  - 🇺🇸 US Hysteria 12
+  - 🇨🇳 US Shadowsocks 154
+  - Trojan 286
+  - 🇰🇷 KR Trojan 272
+  -  IE Shadowsocks 185
+  - Trojan 243
   - Hysteria 11
-  - 🇺🇸 US Hysteria 07
-  -  Trojan 301
-  - 🇺🇸 US Trojan 408
-  - 🇺🇸 US VMess 401
-  - 🇺🇸 US Shadowsocks 278
-  - 🇺🇸 US VMess 377
-  - 🇨🇦 CA Hysteria 12
-  - 🇺🇸 US VMess 386
-  - 🇺🇸 US Shadowsocks 228
-  - 🇺🇸 US VMess 218
-  - 🇺🇸 US Shadowsocks 208
+  - 🇺🇸 US Shadowsocks 242
+  - 🇬🇧 UK Shadowsocks 172
+  - 🇺🇸 US Shadowsocks 200
+  - 🇬🇧 UK Shadowsocks 163
+  - 🇺🇸 US Shadowsocks 192
   - 🇺🇸 US Shadowsocks 210
-  - 🇺🇸 US VMess 418
-  - 🇺🇸 US Shadowsocks 226
-  - 🇺🇸 US VMess 251
-  - Trojan 321
-  - 🇨🇦 CA Trojan 318
-  - Hysteria 13
-  - 🇺🇸 US Shadowsocks 223
-  - 🇬🇧 UK Shadowsocks 205
-  - 🇬🇧 UK Shadowsocks 206
-  - 🇺🇸 US Shadowsocks 291
-  -  NL VMess 267
-  -  NL Shadowsocks 257
-  -  NL Shadowsocks 421
-  - 🇯🇵 JP VMess 434
-  - 🇳🇱 NL Trojan 304
-  -  FR Shadowsocks 207
-  -  Shadowsocks 220
-  - 🇳🇴 NO Hysteria 03
-  -  CA Shadowsocks 338
-  -  Shadowsocks 342
-  -  Shadowsocks 406
-  - Hysteria 04
-  -  Shadowsocks 389
-  -  DE Shadowsocks 262
-  - 🇺🇸 US Trojan 249
-  -  US VMess 443
+  - 🇺🇸 CA Shadowsocks 213
+  -  NL Shadowsocks 179
+  -  FR Shadowsocks 388
+  -  Shadowsocks 395
+  -  NL VMess 253
+  -  NL Shadowsocks 211
+  -  FR Shadowsocks 160
+  - 🇯🇵 JP VMess 430
+  - 🇺🇸 US VMess 393
+  - 🇺🇸 US VMess 408
+  - 🇺🇸 US VMess 234
+  -  Shadowsocks 177
+  - Trojan 262
+  -  CA Shadowsocks 369
+  -  Shadowsocks 317
+  -  Shadowsocks 373
+  -  Shadowsocks 386
+  - 🇺🇸 US VMess 401
   - 🇺🇸 US Trojan 224
-  -  US VMess 444
-  -  FR Shadowsocks 371
-  -  DE VMess 433
-  - Hysteria 06
-  - Trojan 352
-  - 🇫🇷 FR Hysteria 05
-  - 🇯🇵 JP Shadowsocks 119
-  - 🇯🇵 JP Shadowsocks 138
-  - 🇯🇵 HK Shadowsocks 195
-  - 🇯🇵 JP Shadowsocks 141
-  - 🇯🇵 JP Shadowsocks 203
-  - 🇺🇸 US VMess 333
-  - 🇬🇧 Trojan 368
-  - VMess 147
-  - 🇺🇸 US VMess 256
-  - VMess 136
-  - Hysteria 18
+  - 🇺🇸 US VMess 435
+  - 🇯🇵 JP Shadowsocks 105
+  - 🇯🇵 JP Shadowsocks 92
+  - 🇯🇵 HK Shadowsocks 90
+  - 🇯🇵 JP Shadowsocks 107
+  - 🇺🇸 US VMess 390
+  - 🇯🇵 JP Shadowsocks 91
+  - 🇬🇧 Trojan 366
+  - VMess 100
   - 🇰🇷 KR Shadowsocks 182
-  - 🇰🇷 KR Shadowsocks 140
-  - 🇯🇵 JP VMess 179
-  - 🇰🇷 KR Shadowsocks 154
-  - 🇰🇷 KR Shadowsocks 184
-  - 🇨🇦 CA Trojan 340
-  - 🇰🇷 US Shadowsocks 383
-  - 🇨🇳 HK Shadowsocks 81
-  - 🇰🇷 SG Shadowsocks 289
-  - 🇨🇳 JP Shadowsocks 101
-  - 🇺🇸 US Hysteria 17
-  - 🇨🇳 SG Shadowsocks 111
-  - 🇨🇳 US Shadowsocks 201
-  - 🇭🇰 US VMess 42
-  - 🇭🇰 HK Shadowsocks 99
-  - 🇭🇰 HK Shadowsocks 117
-  - 🇺🇸 Trojan 394
-  - 🇭🇰 HK Shadowsocks 43
-  - 🇺🇸 US Hysteria 16
-  - 🇸🇬 SG Shadowsocks 78
-  - ShadowsocksR 175
-  -  Shadowsocks 320
-  - 🇭🇰 HK Shadowsocks 180
-  -  Shadowsocks 242
-  -  Shadowsocks 399
-  -  Shadowsocks 263
-  - 🇨🇳 US Shadowsocks 189
-  -  Shadowsocks 247
-  - 🇨🇳 US Shadowsocks 204
-  -  Shadowsocks 246
-  -  Shadowsocks 375
-  -  Shadowsocks 391
-  -  Shadowsocks 343
-  -  Shadowsocks 264
-  -  Shadowsocks 265
-  - 🇨🇳 SG Shadowsocks 128
-  -  Shadowsocks 241
-  -  Shadowsocks 405
-  -  Shadowsocks 245
-  -  Shadowsocks 252
-  -  Shadowsocks 255
-  -  Shadowsocks 243
-  -  Shadowsocks 287
-  - 🇨🇳 HK Shadowsocks 40
-  -  Shadowsocks 259
-  -  Shadowsocks 272
-  - 🇨🇳 HK Shadowsocks 93
-  - 🇺🇸 US Hysteria 01
-  - 🇨🇳 JP Shadowsocks 122
-  - 🇨🇳 US Shadowsocks 215
-  - 🇨🇳 US VMess 71
-  - 🇨🇳 JP Shadowsocks 95
-  -  CA Shadowsocks 398
-  - 🇨🇳 SG Shadowsocks 74
-  - 🇨🇳 JP VMess 115
-  - 🇨🇳 JP Shadowsocks 97
-  - 🇭🇰 HK VMess 326
-  - ShadowsocksR 142
-  - 🇸🇬 SG VMess 202
-  - VMess 148
-  - 🇰🇷 KR Shadowsocks 379
-  - VMess 113
-  - 🇨🇳 HK VMess 110
-  - 🇺🇸 US VMess 417
-  - 🇭🇰 HK Trojan 273
-  - 🇯🇵 JP Trojan 150
-  - Trojan 370
-  - 🇺🇸 US Trojan 373
-  - 🇺🇸 US VMess 145
-  - 🇭🇰 HK Trojan 236
-  - 🇯🇵 JP Trojan 118
-  - 🇮🇹 IT Trojan 353
-  - 🇰🇷 KR Shadowsocks 151
-  - 🇨🇳 US VMess 70
-  - 🇺🇸 US Trojan 234
-  - 🇯🇵 US Trojan 422
+  - 🇰🇷 US Shadowsocks 400
+  - Hysteria 01
+  - Hysteria 07
+  -  CA Shadowsocks 180
+  - 🇺🇸 US Hysteria 08
+  - 🇺🇸 US Hysteria 05
+  - 🇰🇷 KR Shadowsocks 159
+  - 🇸🇬 SG VMess 434
+  - 🇭🇰 HK Shadowsocks 41
+  - 🇭🇰 HK Shadowsocks 115
+  - 🇹🇼 TW Shadowsocks 275
+  -  Shadowsocks 310
+  - 🇸🇬 SG Shadowsocks 65
+  -  Shadowsocks 217
+  -  Shadowsocks 337
+  -  Shadowsocks 358
+  -  Shadowsocks 219
+  - Trojan 324
+  -  Shadowsocks 336
+  -  Shadowsocks 351
+  - 🇭🇰 HK Shadowsocks 95
+  - 🇸🇬 SG VMess 98
+  -  Shadowsocks 220
+  -  Shadowsocks 232
+  -  Shadowsocks 244
+  -  Shadowsocks 362
+  -  Shadowsocks 370
+  -  Shadowsocks 239
+  -  Shadowsocks 414
+  -  Shadowsocks 354
+  -  Shadowsocks 249
+  - 🇨🇳 JP VMess 69
+  -  Shadowsocks 423
+  -  Shadowsocks 227
+  -  Shadowsocks 411
+  -  CA Shadowsocks 394
+  - 🇨🇳 US VMess 422
+  - 🇸🇬 HK Shadowsocks 35
+  -  Shadowsocks 327
+  - 🇨🇳 US VMess 57
+  - 🇨🇳 US VMess 156
+  - 🇭🇰 HK VMess 43
+  - ShadowsocksR 126
+  - ShadowsocksR 124
+  - 🇨🇳 HK VMess 79
+  - 🇩🇪 DE Hysteria 06
+  - 🇨🇦 CA Trojan 279
+  - 🇰🇷 KR Shadowsocks 334
+  - 🇰🇷 KR Shadowsocks 133
+  - 🇰🇷 KR Shadowsocks 113
+  - 🇰🇷 KR Shadowsocks 292
+  - 🇺🇸 US Trojan 361
+  - 🇭🇰 HK Trojan 127
+  - 🇭🇰 HK Trojan 303
+  - 🇯🇵 JP Trojan 331
+  - 🇮🇹 IT Trojan 352
+  - 🇭🇰 HK Trojan 147
+  - 🇺🇸 US Trojan 363
+  - Trojan 344
+  - Trojan 128
       
   - name: "📲 电报消息"
     type: select
