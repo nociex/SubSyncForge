@@ -17,10 +17,50 @@ dns:
     - https://dns.google/dns-query
     - tls://dns.google:853
 proxies:
-  - name: 🇺🇸 US-HysteriaNode-worker-general
-    server: discord.com
+  - name: 🇫🇷 FR-HysteriaNode-worker-general
+    server: cdnjs.com
     type: vmess
-    country: 🇺🇸 US
+    country: 🇫🇷 FR
+    port: 443
+    uuid: 03fcc618-b93d-6796-6aed-8a38c975d581
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /linkvws
+      headers:
+        HOST: capellare.com
+        Host: c.alalbb.top
+    path: /capellare.com/linkvws
+  - name: 🇺🇸US-HysteriaNode-worker-general
+    server: cdnjs.com
+    type: vmess
+    country: 🇺🇸US
+    port: 2096
+    uuid: bc86f949-7152-4367-92f5-7a11eacf9c9b
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /lon2-sub.930.pp.ua
+      headers:
+        HOST: lon2-dash.930.pp.ua
+        Host: c.alalbb.top
+    path: /lon2-dash.930.pp.ua/lon2-sub.930.pp.ua
+  - name: 🏁 ZZ-HysteriaNode-worker-general
+    server: api.jquery.com
+    type: vmess
+    country: 🏁 ZZ
     port: 443
     uuid: f584de15-2034-4170-a723-f48c2bae5e0f
     alterId: 0
@@ -37,12 +77,12 @@ proxies:
         HOST: afrhms16v.bestxray.buzz
         Host: c.alalbb.top
     path: /afrhms16v.bestxray.buzz/linkws
-  - name: 🇺🇸US-HysteriaNode-worker-general
-    server: codepen.io
+  - name: '-HysteriaNode-worker-general'
+    server: discord.com
     type: vmess
-    country: 🇺🇸US
-    port: 2083
-    uuid: bc86f949-7152-4367-92f5-7a11eacf9c9b
+    country: 🇨🇴CO
+    port: 443
+    uuid: edbb1059-1633-4271-b66e-ed4fba47a1bf
     alterId: 0
     cipher: auto
     network: ws
@@ -52,15 +92,294 @@ proxies:
     tls: true
     skip-cert-verify: true
     ws-opts:
-      path: /lon2-sub.930.pp.ua
+      path: /linkws
       headers:
-        HOST: lon2-sub.930.pp.ua
+        HOST: linde06.indiavideo.sbs
         Host: c.alalbb.top
-    path: /lon2-sub.930.pp.ua/lon2-sub.930.pp.ua
-  - name: 🏁 ZZ-HysteriaNode-worker-general
+    path: /linde06.indiavideo.sbs/linkws
+  - name: '-HysteriaNode-worker-general'
     server: discord.com
     type: vmess
-    country: 🏁 ZZ
+    country: 🇺🇸US
+    port: 443
+    uuid: edbb1059-1633-4271-b66e-ed4fba47a1bf
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /linkws
+      headers:
+        HOST: linde06.indiavideo.sbs
+        Host: c.alalbb.top
+    path: /linde06.indiavideo.sbs/linkws
+  - name: '-HysteriaNode-worker-general'
+    server: cdnjs.com
+    type: vmess
+    country: 🇨🇴CO
+    port: 443
+    uuid: edbb1059-1633-4271-b66e-ed4fba47a1bf
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /linkws
+      headers:
+        HOST: linde06.indiavideo.sbs
+        Host: c.alalbb.top
+    path: /linde06.indiavideo.sbs/linkws
+  - name: 🇺🇸US-HysteriaNode-worker-general
+    server: cdnjs.com
+    type: vmess
+    country: 🇺🇸US
+    port: 443
+    uuid: 76221bfb-e92f-4e80-81c5-6fe48f50ac0b
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /linkws
+      headers:
+        HOST: glweidf.sbs
+        Host: c.alalbb.top
+    path: /glweidf.sbs/linkws
+  - name: 🇺🇸US-HysteriaNode-worker-general
+    server: codepen.io
+    type: vmess
+    country: 🇺🇸US
+    port: 443
+    uuid: 2faaf996-d2b0-440d-8258-81f2b05dd0e4
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /vmess-argo?ed=2560
+      headers:
+        HOST: glitch.nnuu.nyc.mn
+        Host: c.alalbb.top
+    path: /glitch.nnuu.nyc.mn/vmess-argo?ed=2560
+  - name: 🏁ZZ-HysteriaNode-worker-general
+    server: api.jquery.com
+    type: vmess
+    country: 🏁ZZ
+    port: 2087
+    uuid: 41963e6b-295d-45a0-b6cc-38fbdd3e3f75
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /lon1-sub.890699.xyz
+      headers:
+        HOST: lon1-sub.890699.xyz
+        Host: c.alalbb.top
+    path: /lon1-sub.890699.xyz/lon1-sub.890699.xyz
+  - name: 🇨🇴CO-HysteriaNode-worker-general
+    server: workers.dev
+    type: vmess
+    country: 🇨🇴CO
+    port: 443
+    uuid: 5f726fe3-d82e-4da5-a711-8af0cbb2b682
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /azumase.ren
+      headers:
+        HOST: b62a948c-faa2-4e8a-bf8a-3ff3121c875a.asoul-ava.top
+        Host: c.alalbb.top
+    path: /b62a948c-faa2-4e8a-bf8a-3ff3121c875a.asoul-ava.top/azumase.ren
+  - name: 🇺🇸US-HysteriaNode-worker-general
+    server: nginx.com
+    type: vmess
+    country: 🇺🇸US
+    port: 443
+    uuid: 76221bfb-e92f-4e80-81c5-6fe48f50ac0b
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /linkws
+      headers:
+        HOST: glweidf.sbs
+        Host: c.alalbb.top
+    path: /glweidf.sbs/linkws
+  - name: 🇧🇪 BE-HysteriaNode-worker-general
+    server: chat.openai.com
+    type: vmess
+    country: 🇧🇪 BE
+    port: 443
+    uuid: 03fcc618-b93d-6796-6aed-8a38c975d581
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /linkvws
+      headers:
+        HOST: >-
+          wrmelmwxlf.gktevlrqznwqqozy.fabpfs66gizmnojhcvqxwl.kytrcfzqla87gvgvs6c7kjnrubuh.cc
+        Host: c.alalbb.top
+    path: >-
+      /wrmelmwxlf.gktevlrqznwqqozy.fabpfs66gizmnojhcvqxwl.kytrcfzqla87gvgvs6c7kjnrubuh.cc/linkvws
+  - name: '-HysteriaNode-worker-general'
+    server: chat.openai.com
+    type: vmess
+    country: 🇨🇴CO
+    port: 443
+    uuid: edbb1059-1633-4271-b66e-ed4fba47a1bf
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /linkws
+      headers:
+        HOST: linde06.indiavideo.sbs
+        Host: c.alalbb.top
+    path: /linde06.indiavideo.sbs/linkws
+  - name: 🇺🇸US-HysteriaNode-worker-general
+    server: discord.com
+    type: vmess
+    country: 🇺🇸US
+    port: 2053
+    uuid: f082eeca-e068-45f9-d1bf-46e9de9bdf57
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /ny2-sub.930.pp.ua
+      headers:
+        HOST: ny2-sub.930.pp.ua
+        Host: c.alalbb.top
+    path: /ny2-sub.930.pp.ua/ny2-sub.930.pp.ua
+  - name: '-HysteriaNode-worker-general'
+    server: api.jquery.com
+    type: vmess
+    port: 8443
+    uuid: 914584ee-3515-46ac-a09d-4677a2e9dc9a
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    ws-opts:
+      path: /
+      headers:
+        Host: c.alalbb.top
+    path: /us01.sh-cloudflare.sbs/
+  - name: '-HysteriaNode-worker-general'
+    server: chat.openai.com
+    type: vmess
+    country: 🇨🇴CO
+    port: 443
+    uuid: edbb1059-1633-4271-b66e-ed4fba47a1bf
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /linkws
+      headers:
+        HOST: linde06.indiavideo.sbs
+        Host: c.alalbb.top
+    path: /linde06.indiavideo.sbs/linkws
+  - name: 🇺🇸US-HysteriaNode-worker-general
+    server: laravel.com
+    type: vmess
+    country: 🇺🇸US
+    port: 8443
+    uuid: c313606f-98c2-4d7b-ba74-48b94f61b11d
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /?maps.app.goo.gl/K3hM5xrwZV7bQVBa7?ed=2560
+      headers:
+        HOST: uswuxian.pai50288.uk
+        Host: c.alalbb.top
+    path: /uswuxian.pai50288.uk/?maps.app.goo.gl/K3hM5xrwZV7bQVBa7?ed=2560
+  - name: 🇩🇪DE-HysteriaNode-worker-general
+    server: auth0.openai.com
+    type: vmess
+    country: 🇩🇪DE
+    port: 443
+    uuid: 9072d339-3885-4fe1-b0bc-29fa7505410e
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /linkwsd
+      headers:
+        HOST: fixedfloati.cfd
+        Host: c.alalbb.top
+    path: /fixedfloati.cfd/linkwsd
+  - name: 🇫🇷FR-HysteriaNode-worker-general
+    server: auth0.openai.com
+    type: vmess
+    country: 🇫🇷FR
     port: 443
     uuid: 05641cf5-58d2-4ba4-a9f1-b3cda0b1fb1d
     alterId: 0
@@ -81,7 +400,7 @@ proxies:
     server: auth0.openai.com
     type: vmess
     country: 🏁ZZ
-    port: 2087
+    port: 8443
     uuid: 658b87e0-5d92-4424-d344-c167acd6a77f
     alterId: 0
     cipher: auto
@@ -98,10 +417,327 @@ proxies:
         Host: c.alalbb.top
     path: /ny1-sub.890699.xyz/ny1-sub.890699.xyz
   - name: '-HysteriaNode-worker-general'
+    server: www.speedtest.net
+    type: vmess
+    country: 🇺🇸US
+    port: 443
+    uuid: edbb1059-1633-4271-b66e-ed4fba47a1bf
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /linkws
+      headers:
+        HOST: linde06.indiavideo.sbs
+        Host: c.alalbb.top
+    path: /linde06.indiavideo.sbs/linkws
+  - name: '-HysteriaNode-worker-general'
+    server: laravel.com
+    type: vmess
+    country: 🇫🇷 FR
+    port: 443
+    uuid: e537f2f5-2a0c-4f59-92c9-832ca6433bf3
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /linkws
+      headers:
+        HOST: irvideo.cfd
+        Host: c.alalbb.top
+    path: /irvideo.cfd/linkws
+  - name: 🏁ZZ-HysteriaNode-worker-general
+    server: discord.com
+    type: vmess
+    country: 🏁ZZ
+    port: 2096
+    uuid: f082eeca-e068-45f9-d1bf-46e9de9bdf57
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /ny2-sub.930.pp.ua
+      headers:
+        HOST: ny2-sub.930.pp.ua
+        Host: c.alalbb.top
+    path: /ny2-sub.930.pp.ua/ny2-sub.930.pp.ua
+  - name: '-HysteriaNode-worker-general'
+    server: chat.openai.com
+    type: vmess
+    country: 🇨🇴CO
+    port: 443
+    uuid: edbb1059-1633-4271-b66e-ed4fba47a1bf
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /linkws
+      headers:
+        HOST: linde06.indiavideo.sbs
+        Host: c.alalbb.top
+    path: /linde06.indiavideo.sbs/linkws
+  - name: 🏁ZZ-HysteriaNode-worker-general
     server: cdnjs.com
     type: vmess
+    country: 🏁ZZ
+    port: 2053
+    uuid: f082eeca-e068-45f9-d1bf-46e9de9bdf57
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /ny2-sub.930.pp.ua
+      headers:
+        HOST: ny2-sub.930.pp.ua
+        Host: c.alalbb.top
+    path: /ny2-sub.930.pp.ua/ny2-sub.930.pp.ua
+  - name: 🏁ZZ-HysteriaNode-worker-general
+    server: auth0.openai.com
+    type: vmess
+    country: 🏁ZZ
+    port: 2087
+    uuid: f082eeca-e068-45f9-d1bf-46e9de9bdf57
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /ny2-sub.930.pp.ua
+      headers:
+        HOST: ny2-sub.930.pp.ua
+        Host: c.alalbb.top
+    path: /ny2-sub.930.pp.ua/ny2-sub.930.pp.ua
+  - name: '-HysteriaNode-worker-general'
+    server: www.speedtest.net
+    type: vmess
     port: 443
-    udp: true
+    uuid: 76221bfb-e92f-4e80-81c5-6fe48f50ac0b
+    alterId: 0
+    cipher: auto
+    network: ws
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /linkws
+      headers:
+        Host: c.alalbb.top
+    servername: c.alalbb.top
+    path: /glweidf.sbs/linkws
+  - name: 🇧🇪 BE-HysteriaNode-worker-general
+    server: auth0.openai.com
+    type: vmess
+    country: 🇧🇪 BE
+    port: 443
+    uuid: 03fcc618-b93d-6796-6aed-8a38c975d581
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /linkvws
+      headers:
+        HOST: harriscity.com
+        Host: c.alalbb.top
+    path: /harriscity.com/linkvws
+  - name: '-HysteriaNode-worker-general'
+    server: cdnjs.com
+    type: vmess
+    country: 🇨🇴CO
+    port: 443
+    uuid: edbb1059-1633-4271-b66e-ed4fba47a1bf
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /linkws
+      headers:
+        HOST: linde06.indiavideo.sbs
+        Host: c.alalbb.top
+    path: /linde06.indiavideo.sbs/linkws
+  - name: 🇺🇸US-HysteriaNode-worker-general
+    server: codepen.io
+    type: vmess
+    country: 🇺🇸US
+    port: 443
+    uuid: 5f726fe3-d82e-4da5-a711-8af0cbb2b682
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /azumase.ren
+      headers:
+        HOST: 1a2d514b-37cf-499f-8d08-d017a92ab5bb.asoul-ava.top
+        Host: c.alalbb.top
+    path: /1a2d514b-37cf-499f-8d08-d017a92ab5bb.asoul-ava.top/azumase.ren
+  - name: 🇫🇷 FR-HysteriaNode-worker-general
+    server: workers.dev
+    type: vmess
+    country: 🇫🇷 FR
+    port: 443
+    uuid: 03fcc618-b93d-6796-6aed-8a38c975d581
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /linkvws
+      headers:
+        HOST: tilebani.com
+        Host: c.alalbb.top
+    path: /tilebani.com/linkvws
+  - name: 🇫🇷FR-HysteriaNode-worker-general
+    server: nginx.com
+    type: vmess
+    country: 🇫🇷FR
+    port: 443
+    uuid: 9b456c2a-f2c1-45e1-87a9-b7628b04bb24
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /linkws
+      headers:
+        HOST: beyonddsz.cfd
+        Host: c.alalbb.top
+    path: /beyonddsz.cfd/linkws
+  - name: 🏁ZZ-HysteriaNode-worker-general
+    server: codepen.io
+    type: vmess
+    country: 🏁ZZ
+    port: 443
+    uuid: 9072d339-3885-4fe1-b0bc-29fa7505410e
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /linkwsd
+      headers:
+        HOST: divine-salad-41fb.mostafasafair.workers.dev
+        Host: c.alalbb.top
+    path: /fixedfloati.cfd/linkwsd
+  - name: 🏁 ZZ-HysteriaNode-worker-general
+    server: laravel.com
+    type: vmess
+    country: 🏁 ZZ
+    port: 443
+    uuid: d13fc2f5-3e05-4795-81eb-44143a09e552
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /rbqqvws
+      headers:
+        HOST: ayanjlizi.yiwis32762.workers.dev
+        Host: c.alalbb.top
+    path: /sgfqkqmltcy.site/rbqqvws
+  - name: 🇺🇸US-HysteriaNode-worker-general
+    server: www.speedtest.net
+    type: vmess
+    country: 🇺🇸US
+    port: 2083
+    uuid: f082eeca-e068-45f9-d1bf-46e9de9bdf57
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /ny2-sub.930.pp.ua
+      headers:
+        HOST: ny2-sub.930.pp.ua
+        Host: c.alalbb.top
+    path: /ny2-sub.930.pp.ua/ny2-sub.930.pp.ua
+  - name: 🇨🇴CO-HysteriaNode-worker-general
+    server: www.speedtest.net
+    type: vmess
+    country: 🇨🇴CO
+    port: 443
+    uuid: 05641cf5-58d2-4ba4-a9f1-b3cda0b1fb1d
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /linkws
+      headers:
+        HOST: obdii.cfd
+        Host: c.alalbb.top
+    path: /obdii.cfd/linkws
+  - name: '-HysteriaNode-worker-general'
+    server: workers.dev
+    type: vmess
+    port: 443
     uuid: 56529ad8-61d2-4bfa-aa0b-a800719cb5fe
     alterId: 0
     cipher: auto
@@ -109,12 +745,537 @@ proxies:
     http-opts: {}
     h2-opts: {}
     tls: true
+    skip-cert-verify: true
     ws-opts:
       path: /aa
       headers:
         Host: c.alalbb.top
     servername: c.alalbb.top
-    path: /tw.niskakowski.ggff.net/aa
+    path: /tw.insbot.filegear-sg.me/aa
+  - name: 🇺🇸US-HysteriaNode-worker-general
+    server: www.speedtest.net
+    type: vmess
+    country: 🇺🇸US
+    port: 2083
+    uuid: bc86f949-7152-4367-92f5-7a11eacf9c9b
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /lon2-sub.930.pp.ua
+      headers:
+        HOST: lon2-sub.930.pp.ua
+        Host: c.alalbb.top
+    path: /lon2-sub.930.pp.ua/lon2-sub.930.pp.ua
+  - name: 🇧🇪BE-HysteriaNode-worker-general
+    server: codepen.io
+    type: vmess
+    country: 🇧🇪BE
+    port: 443
+    uuid: 03fcc618-b93d-6796-6aed-8a38c975d581
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /linkvws
+      headers:
+        HOST: >-
+          wrmelmwxlf.gktevlrqznwqqozy.fabpfs66gizmnojhcvqxwl.kytrcfzqla87gvgvs6c7kjnrubuh.cc
+        Host: c.alalbb.top
+    path: >-
+      /wrmelmwxlf.gktevlrqznwqqozy.fabpfs66gizmnojhcvqxwl.kytrcfzqla87gvgvs6c7kjnrubuh.cc/linkvws
+  - name: 🇧🇪 BE-HysteriaNode-worker-general
+    server: workers.dev
+    type: vmess
+    country: 🇧🇪 BE
+    port: 443
+    uuid: 03fcc618-b93d-6796-6aed-8a38c975d581
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /linkvws
+      headers:
+        HOST: baradiha.com
+        Host: c.alalbb.top
+    path: /baradiha.com/linkvws
+  - name: 🇧🇪 BE-HysteriaNode-worker-general
+    server: chat.openai.com
+    type: vmess
+    country: 🇧🇪 BE
+    port: 443
+    uuid: 03fcc618-b93d-6796-6aed-8a38c975d581
+    alterId: 1
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: linkvws
+      headers:
+        HOST: 57.128.184.119
+        Host: c.alalbb.top
+    path: /57.128.184.119/linkvws
+  - name: 🏁 ZZ-HysteriaNode-worker-general
+    server: discord.com
+    type: vmess
+    country: 🏁 ZZ
+    port: 443
+    uuid: 05641cf5-58d2-4ba4-a9f1-b3cda0b1fb1d
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /linkws
+      headers:
+        HOST: obdii.cfd
+        Host: c.alalbb.top
+    path: /obdii.cfd/linkws
+  - name: 🇺🇸US-HysteriaNode-worker-general
+    server: www.speedtest.net
+    type: vmess
+    country: 🇺🇸US
+    port: 2083
+    uuid: f082eeca-e068-45f9-d1bf-46e9de9bdf57
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /ny2-sub.930.pp.ua
+      headers:
+        HOST: ny2-sub.930.pp.ua
+        Host: c.alalbb.top
+    path: /ny2-sub.930.pp.ua/ny2-sub.930.pp.ua
+  - name: 🇧🇪 BE-HysteriaNode-worker-general
+    server: cdnjs.com
+    type: vmess
+    country: 🇧🇪 BE
+    port: 443
+    uuid: 03fcc618-b93d-6796-6aed-8a38c975d581
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /linkvws
+      headers:
+        HOST: >-
+          wrmelmwxlf.gktevlrqznwqqozy.fabpfs66gizmnojhcvqxwl.kytrcfzqla87gvgvs6c7kjnrubuh.cc
+        Host: c.alalbb.top
+    path: >-
+      /wrmelmwxlf.gktevlrqznwqqozy.fabpfs66gizmnojhcvqxwl.kytrcfzqla87gvgvs6c7kjnrubuh.cc/linkvws
+  - name: '-HysteriaNode-worker-general'
+    server: discord.com
+    type: vmess
+    port: 443
+    uuid: edbb1059-1633-4271-b66e-ed4fba47a1bf
+    alterId: 0
+    cipher: auto
+    network: ws
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /linkws
+      headers:
+        Host: c.alalbb.top
+    servername: c.alalbb.top
+    path: /linde06.indiavideo.sbs/linkws
+  - name: 🏁 ZZ-HysteriaNode-worker-general
+    server: workers.dev
+    type: vmess
+    country: 🏁 ZZ
+    port: 443
+    uuid: edbb1059-1633-4271-b66e-ed4fba47a1bf
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /linkws
+      headers:
+        HOST: linde06.indiavideo.sbs
+        Host: c.alalbb.top
+    path: /linde06.indiavideo.sbs/linkws
+  - name: 🏁ZZ-HysteriaNode-worker-general
+    server: chat.openai.com
+    type: vmess
+    country: 🏁ZZ
+    port: 8443
+    uuid: 658b87e0-5d92-4424-d344-c167acd6a77f
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /ny1-sub.890699.xyz
+      headers:
+        HOST: ny1-sub.890699.xyz
+        Host: c.alalbb.top
+    path: /ny1-sub.890699.xyz/ny1-sub.890699.xyz
+  - name: 🇧🇪 BE-HysteriaNode-worker-general
+    server: chat.openai.com
+    type: vmess
+    country: 🇧🇪 BE
+    port: 443
+    uuid: 03fcc618-b93d-6796-6aed-8a38c975d581
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /linkvws
+      headers:
+        HOST: >-
+          wrmelmwxlf.gktevlrqznwqqozy.fabpfs66gizmnojhcvqxwl.kytrcfzqla87gvgvs6c7kjnrubuh.cc
+        Host: c.alalbb.top
+    path: >-
+      /wrmelmwxlf.gktevlrqznwqqozy.fabpfs66gizmnojhcvqxwl.kytrcfzqla87gvgvs6c7kjnrubuh.cc/linkvws
+  - name: 🇺🇸US-HysteriaNode-worker-general
+    server: api.jquery.com
+    type: vmess
+    country: 🇺🇸US
+    port: 443
+    uuid: 950db6aa-4926-4616-816e-ec0312dcb87b
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /linkws
+      headers:
+        HOST: jahfkjha.cfd
+        Host: c.alalbb.top
+    path: /jahfkjha.cfd/linkws
+  - name: 🇺🇸US-HysteriaNode-worker-general
+    server: codepen.io
+    type: vmess
+    country: 🇺🇸US
+    port: 443
+    uuid: 9c7c7039-a5f1-47b2-9225-cbb5bf03b9e6
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /vmess
+      headers:
+        HOST: serv1.idks1.web.id
+        Host: c.alalbb.top
+    path: /serv1.idks1.web.id/vmess
+  - name: '-HysteriaNode-worker-general'
+    server: auth0.openai.com
+    type: vmess
+    country: 🇨🇴CO
+    port: 443
+    uuid: edbb1059-1633-4271-b66e-ed4fba47a1bf
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /linkws
+      headers:
+        HOST: linde06.indiavideo.sbs
+        Host: c.alalbb.top
+    path: /linde06.indiavideo.sbs/linkws
+  - name: 🏁ZZ-HysteriaNode-worker-general
+    server: www.speedtest.net
+    type: vmess
+    country: 🏁ZZ
+    port: 443
+    uuid: 576c81b6-4976-4fe3-b1a9-05a9c302e98e
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /SNwNdunw28lVztopw90eoXel
+      headers:
+        HOST: us10-09.852224.ggff.net
+        Host: c.alalbb.top
+    path: /us10-09.852224.ggff.net/SNwNdunw28lVztopw90eoXel
+  - name: 🏁ZZ-HysteriaNode-worker-general
+    server: discord.com
+    type: vmess
+    country: 🏁ZZ
+    port: 8443
+    uuid: 914584ee-3515-46ac-a09d-4677a2e9dc9a
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /
+      headers:
+        HOST: us01.sh-cloudflare.sbs
+        Host: c.alalbb.top
+    path: /us01.sh-cloudflare.sbs/
+  - name: 🇺🇸US-HysteriaNode-worker-general
+    server: auth0.openai.com
+    type: vmess
+    country: 🇺🇸US
+    port: 2053
+    uuid: bc86f949-7152-4367-92f5-7a11eacf9c9b
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /lon2-sub.930.pp.ua
+      headers:
+        HOST: lon2-sub.930.pp.ua
+        Host: c.alalbb.top
+    path: /lon2-sub.930.pp.ua/lon2-sub.930.pp.ua
+  - name: 🏁ZZ-HysteriaNode-worker-general
+    server: cdnjs.com
+    type: vmess
+    country: 🏁ZZ
+    port: 8443
+    uuid: 41963e6b-295d-45a0-b6cc-38fbdd3e3f75
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /lon1-sub.890699.xyz
+      headers:
+        HOST: lon1-sub.890699.xyz
+        Host: c.alalbb.top
+    path: /lon1-sub.890699.xyz/lon1-sub.890699.xyz
+  - name: 🏁 ZZ-HysteriaNode-worker-general
+    server: laravel.com
+    type: vmess
+    country: 🏁 ZZ
+    port: 443
+    uuid: 05641cf5-58d2-4ba4-a9f1-b3cda0b1fb1d
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /linkws
+      headers:
+        HOST: obdii.cfd
+        Host: c.alalbb.top
+    path: /obdii.cfd/linkws
+  - name: 🇫🇷FR-HysteriaNode-worker-general
+    server: nginx.com
+    type: vmess
+    country: 🇫🇷FR
+    port: 443
+    uuid: 9b456c2a-f2c1-45e1-87a9-b7628b04bb24
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /linkws
+      headers:
+        HOST: beyonddsz.cfd
+        Host: c.alalbb.top
+    path: /beyonddsz.cfd/linkws
+  - name: 🇺🇸US-HysteriaNode-worker-general
+    server: nginx.com
+    type: vmess
+    country: 🇺🇸US
+    port: 2096
+    uuid: f082eeca-e068-45f9-d1bf-46e9de9bdf57
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /ny2-sub.930.pp.ua
+      headers:
+        HOST: ny2-sub.930.pp.ua
+        Host: c.alalbb.top
+    path: /ny2-sub.930.pp.ua/ny2-sub.930.pp.ua
+  - name: 🇧🇪 BE-HysteriaNode-worker-general
+    server: nginx.com
+    type: vmess
+    country: 🇧🇪 BE
+    port: 443
+    uuid: 03fcc618-b93d-6796-6aed-8a38c975d581
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /linkvws
+      headers:
+        HOST: aveiror.com
+        Host: c.alalbb.top
+    path: /aveiror.com/linkvws
+  - name: '-HysteriaNode-worker-general'
+    server: auth0.openai.com
+    type: vmess
+    country: 🏁ZZ
+    port: 443
+    uuid: 4d04b30c-ef7b-4a07-8f9e-f581ec171f8a
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /bua2hMcbA8wMzbGFtV
+      headers:
+        HOST: us7-01.890624.xyz
+        Host: c.alalbb.top
+    path: /us7-01.890624.xyz/bua2hMcbA8wMzbGFtV
+  - name: 🏁ZZ-HysteriaNode-worker-general
+    server: nginx.com
+    type: vmess
+    country: 🏁ZZ
+    port: 8443
+    uuid: 41963e6b-295d-45a0-b6cc-38fbdd3e3f75
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /lon1-sub.890699.xyz
+      headers:
+        HOST: lon1-sub.890699.xyz
+        Host: c.alalbb.top
+    path: /lon1-sub.890699.xyz/lon1-sub.890699.xyz
+  - name: 🏁ZZ-HysteriaNode-worker-general
+    server: cdnjs.com
+    type: vmess
+    country: 🏁ZZ
+    port: 443
+    uuid: d13fc2f5-3e05-4795-81eb-44143a09e552
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /rbqqvws
+      headers:
+        HOST: divine-salad-41fb.mostafasafair.workers.dev
+        Host: c.alalbb.top
+    path: /hknbyivfffj.site/rbqqvws
+  - name: 🇧🇪 BE-HysteriaNode-worker-general
+    server: auth0.openai.com
+    type: vmess
+    country: 🇧🇪 BE
+    port: 443
+    uuid: 03fcc618-b93d-6796-6aed-8a38c975d581
+    alterId: 1
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: linkvws
+      headers:
+        HOST: 57.129.25.20
+        Host: c.alalbb.top
+    path: /57.129.25.20/linkvws
   - name: '-HysteriaNode-worker-general'
     server: workers.dev
     type: vmess
@@ -136,7 +1297,7 @@ proxies:
         Host: c.alalbb.top
     path: /linde06.indiavideo.sbs/linkws
   - name: 🇧🇪 BE-HysteriaNode-worker-general
-    server: nginx.com
+    server: workers.dev
     type: vmess
     country: 🇧🇪 BE
     port: 443
@@ -152,33 +1313,13 @@ proxies:
     ws-opts:
       path: /linkvws
       headers:
-        HOST: harriscity.com
+        HOST: f.khilei.com
         Host: c.alalbb.top
-    path: /harriscity.com/linkvws
-  - name: 🇺🇸US-HysteriaNode-worker-general
-    server: chat.openai.com
-    type: vmess
-    country: 🇺🇸US
-    port: 2053
-    uuid: f082eeca-e068-45f9-d1bf-46e9de9bdf57
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /ny2-sub.930.pp.ua
-      headers:
-        HOST: ny2-sub.930.pp.ua
-        Host: c.alalbb.top
-    path: /ny2-sub.930.pp.ua/ny2-sub.930.pp.ua
-  - name: 🇺🇸US-HysteriaNode-worker-general
+    path: /f.khilei.com/linkvws
+  - name: 🇨🇴CO-HysteriaNode-worker-general
     server: codepen.io
     type: vmess
-    country: 🇺🇸US
+    country: 🇨🇴CO
     port: 443
     uuid: 5f726fe3-d82e-4da5-a711-8af0cbb2b682
     alterId: 0
@@ -195,12 +1336,110 @@ proxies:
         HOST: 1a2d514b-37cf-499f-8d08-d017a92ab5bb.asoul-ava.top
         Host: c.alalbb.top
     path: /1a2d514b-37cf-499f-8d08-d017a92ab5bb.asoul-ava.top/azumase.ren
+  - name: '-HysteriaNode-worker-general'
+    server: api.jquery.com
+    type: vmess
+    port: 443
+    udp: true
+    uuid: 47eab0de-97f9-49be-f2f3-2e4eb17268e6
+    alterId: 0
+    cipher: auto
+    network: ws
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    ws-opts:
+      path: /aa
+      headers:
+        Host: c.alalbb.top
+    servername: c.alalbb.top
+    path: /hk.niskakowski.ggff.net/aa
+  - name: 🏁 ZZ-HysteriaNode-worker-general
+    server: laravel.com
+    type: vmess
+    country: 🏁 ZZ
+    port: 443
+    uuid: edbb1059-1633-4271-b66e-ed4fba47a1bf
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /linkws
+      headers:
+        HOST: linde06.indiavideo.sbs
+        Host: c.alalbb.top
+    path: /linde06.indiavideo.sbs/linkws
   - name: 🏁ZZ-HysteriaNode-worker-general
-    server: cdnjs.com
+    server: chat.openai.com
+    type: vmess
+    country: 🏁ZZ
+    port: 8443
+    uuid: 41963e6b-295d-45a0-b6cc-38fbdd3e3f75
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /lon1-sub.890699.xyz
+      headers:
+        HOST: lon1-sub.890699.xyz
+        Host: c.alalbb.top
+    path: /lon1-sub.890699.xyz/lon1-sub.890699.xyz
+  - name: 🇨🇴CO-HysteriaNode-worker-general
+    server: discord.com
+    type: vmess
+    country: 🇨🇴CO
+    port: 443
+    uuid: f584de15-2034-4170-a723-f48c2bae5e0f
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /linkws
+      headers:
+        HOST: afrhms16v.bestxray.buzz
+        Host: c.alalbb.top
+    path: /afrhms16v.bestxray.buzz/linkws
+  - name: 🇦🇪AE-HysteriaNode-worker-general
+    server: codepen.io
+    type: vmess
+    country: 🇦🇪AE
+    port: 443
+    uuid: 9b456c2a-f2c1-45e1-87a9-b7628b04bb24
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /linkws
+      headers:
+        HOST: beyonddsz.cfd
+        Host: c.alalbb.top
+    path: /beyonddsz.cfd/linkws
+  - name: 🏁ZZ-HysteriaNode-worker-general
+    server: api.jquery.com
     type: vmess
     country: 🏁ZZ
     port: 443
-    uuid: 89c1aea7-4d0d-4013-b663-0f94a3e6bdbd
+    uuid: 47eab0de-97f9-49be-f2f3-2e4eb17268e6
     alterId: 0
     cipher: auto
     network: ws
@@ -210,17 +1449,75 @@ proxies:
     tls: true
     skip-cert-verify: true
     ws-opts:
-      path: /YfB29GXf4cThJQeJb
+      path: /aa
       headers:
-        HOST: sanjose01.890614.filegear-sg.me
+        HOST: hk.insbot.filegear-sg.me
         Host: c.alalbb.top
-    path: /sanjose01.890614.filegear-sg.me/YfB29GXf4cThJQeJb
-  - name: 🏁ZZ-HysteriaNode-worker-general
+    path: /hk.insbot.filegear-sg.me/aa
+  - name: 🇨🇴CO-HysteriaNode-worker-general
+    server: auth0.openai.com
+    type: vmess
+    country: 🇨🇴CO
+    port: 443
+    uuid: 950db6aa-4926-4616-816e-ec0312dcb87b
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /linkws
+      headers:
+        HOST: jahfkjha.cfd
+        Host: c.alalbb.top
+    path: /jahfkjha.cfd/linkws
+  - name: '-HysteriaNode-worker-general'
+    server: www.speedtest.net
+    type: vmess
+    port: 443
+    udp: true
+    uuid: 56529ad8-61d2-4bfa-aa0b-a800719cb5fe
+    alterId: 0
+    cipher: auto
+    network: ws
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    ws-opts:
+      path: /aa
+      headers:
+        Host: c.alalbb.top
+    servername: c.alalbb.top
+    path: /tw.niskakowski.ggff.net/aa
+  - name: 🇺🇸US-HysteriaNode-worker-general
+    server: codepen.io
+    type: vmess
+    country: 🇺🇸US
+    port: 443
+    uuid: 950db6aa-4926-4616-816e-ec0312dcb87b
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /linkws
+      headers:
+        HOST: jahfkjha.cfd
+        Host: c.alalbb.top
+    path: /jahfkjha.cfd/linkws
+  - name: 🇸🇪SE-HysteriaNode-worker-general
     server: laravel.com
     type: vmess
-    country: 🏁ZZ
-    port: 2096
-    uuid: 3bb3c730-e107-49c5-a0b2-b576d1b26a5e
+    country: 🇸🇪SE
+    port: 443
+    uuid: 950db6aa-4926-4616-816e-ec0312dcb87b
     alterId: 0
     cipher: auto
     network: ws
@@ -230,11 +1527,111 @@ proxies:
     tls: true
     skip-cert-verify: true
     ws-opts:
-      path: /
+      path: /linkws
       headers:
-        HOST: 1743256978.speed.adl.cccp.freefly.pp.ua
+        HOST: jahfkjha.cfd
         Host: c.alalbb.top
-    path: /1743256978.speed.adl.cccp.freefly.pp.ua/
+    path: /jahfkjha.cfd/linkws
+  - name: '-HysteriaNode-worker-general'
+    server: www.speedtest.net
+    type: vmess
+    country: 🏁ZZ
+    port: 443
+    uuid: edbb1059-1633-4271-b66e-ed4fba47a1bf
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /linkws
+      headers:
+        HOST: linde06.indiavideo.sbs
+        Host: c.alalbb.top
+    path: /linde06.indiavideo.sbs/linkws
+  - name: 🇫🇷 FR-HysteriaNode-worker-general
+    server: laravel.com
+    type: vmess
+    country: 🇫🇷 FR
+    port: 443
+    uuid: 03fcc618-b93d-6796-6aed-8a38c975d581
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /linkvws
+      headers:
+        HOST: a.baradiha.com
+        Host: c.alalbb.top
+    path: /a.baradiha.com/linkvws
+  - name: 🏁ZZ-HysteriaNode-worker-general
+    server: api.jquery.com
+    type: vmess
+    country: 🏁ZZ
+    port: 8443
+    uuid: 41963e6b-295d-45a0-b6cc-38fbdd3e3f75
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /lon1-sub.890699.xyz
+      headers:
+        HOST: lon1-sub.890699.xyz
+        Host: c.alalbb.top
+    path: /lon1-sub.890699.xyz/lon1-sub.890699.xyz
+  - name: '-HysteriaNode-worker-general'
+    server: nginx.com
+    type: vmess
+    country: 🇨🇴CO
+    port: 443
+    uuid: edbb1059-1633-4271-b66e-ed4fba47a1bf
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /linkws
+      headers:
+        HOST: linde06.indiavideo.sbs
+        Host: c.alalbb.top
+    path: /linde06.indiavideo.sbs/linkws
+  - name: 🇺🇸US-HysteriaNode-worker-general
+    server: workers.dev
+    type: vmess
+    country: 🇺🇸US
+    port: 2087
+    uuid: bc86f949-7152-4367-92f5-7a11eacf9c9b
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /lon2-sub.930.pp.ua
+      headers:
+        HOST: lon2-sub.930.pp.ua
+        Host: c.alalbb.top
+    path: /lon2-sub.930.pp.ua/lon2-sub.930.pp.ua
   - name: 🏁 ZZ-HysteriaNode-worker-general
     server: nginx.com
     type: vmess
@@ -255,88 +1652,8 @@ proxies:
         HOST: afrhms16v.bestxray.buzz
         Host: c.alalbb.top
     path: /afrhms16v.bestxray.buzz/linkws
-  - name: 🏁 ZZ-HysteriaNode-worker-general
-    server: api.jquery.com
-    type: vmess
-    country: 🏁 ZZ
-    port: 443
-    uuid: edbb1059-1633-4271-b66e-ed4fba47a1bf
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /linkws
-      headers:
-        HOST: linde06.indiavideo.sbs
-        Host: c.alalbb.top
-    path: /linde06.indiavideo.sbs/linkws
   - name: '-HysteriaNode-worker-general'
     server: cdnjs.com
-    type: vmess
-    country: 🏁ZZ
-    port: 443
-    uuid: 4664df84-15cf-4e57-828b-0782f125e898
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /
-      headers:
-        HOST: kr2.ttcc.tech
-        Host: c.alalbb.top
-    path: /kr2.ttcc.tech/
-  - name: 🇫🇷 FR-HysteriaNode-worker-general
-    server: nginx.com
-    type: vmess
-    country: 🇫🇷 FR
-    port: 443
-    uuid: 03fcc618-b93d-6796-6aed-8a38c975d581
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /linkvws
-      headers:
-        HOST: tilebani.com
-        Host: c.alalbb.top
-    path: /tilebani.com/linkvws
-  - name: 🏁 ZZ-HysteriaNode-worker-general
-    server: api.jquery.com
-    type: vmess
-    country: 🏁 ZZ
-    port: 443
-    uuid: edbb1059-1633-4271-b66e-ed4fba47a1bf
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /linkws
-      headers:
-        HOST: linde06.indiavideo.sbs
-        Host: c.alalbb.top
-    path: /linde06.indiavideo.sbs/linkws
-  - name: '-HysteriaNode-worker-general'
-    server: www.speedtest.net
     type: vmess
     country: 🇺🇸US
     port: 443
@@ -355,30 +1672,12 @@ proxies:
         HOST: irvideo.cfd
         Host: c.alalbb.top
     path: /irvideo.cfd/linkws
-  - name: '-HysteriaNode-worker-general'
-    server: api.jquery.com
+  - name: 🇺🇸US-HysteriaNode-worker-general
+    server: auth0.openai.com
     type: vmess
+    country: 🇺🇸US
     port: 443
-    udp: true
-    uuid: 47eab0de-97f9-49be-f2f3-2e4eb17268e6
-    alterId: 0
-    cipher: auto
-    network: ws
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    ws-opts:
-      path: /aa
-      headers:
-        Host: c.alalbb.top
-    servername: c.alalbb.top
-    path: /hk.niskakowski.ggff.net/aa
-  - name: 🏁ZZ-HysteriaNode-worker-general
-    server: codepen.io
-    type: vmess
-    country: 🏁ZZ
-    port: 2087
-    uuid: 41963e6b-295d-45a0-b6cc-38fbdd3e3f75
+    uuid: 05641cf5-58d2-4ba4-a9f1-b3cda0b1fb1d
     alterId: 0
     cipher: auto
     network: ws
@@ -388,13 +1687,153 @@ proxies:
     tls: true
     skip-cert-verify: true
     ws-opts:
-      path: /lon1-sub.890699.xyz
+      path: /linkws
       headers:
-        HOST: lon1-sub.890699.xyz
+        HOST: obdii.cfd
         Host: c.alalbb.top
-    path: /lon1-sub.890699.xyz/lon1-sub.890699.xyz
+    path: /obdii.cfd/linkws
+  - name: 🇺🇸US-HysteriaNode-worker-general
+    server: codepen.io
+    type: vmess
+    country: 🇺🇸US
+    port: 443
+    uuid: d13fc2f5-3e05-4795-81eb-44143a09e552
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /rbqqvws
+      headers:
+        HOST: join---bede.mosiv2-com.workers.dev
+        Host: c.alalbb.top
+    path: /sgfqkqmltcy.site/rbqqvws
+  - name: 🏁 ZZ-HysteriaNode-worker-general
+    server: cdnjs.com
+    type: vmess
+    country: 🏁 ZZ
+    port: 443
+    uuid: edbb1059-1633-4271-b66e-ed4fba47a1bf
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /linkws
+      headers:
+        HOST: linde06.indiavideo.sbs
+        Host: c.alalbb.top
+    path: /linde06.indiavideo.sbs/linkws
+  - name: 🇺🇸 US-HysteriaNode-worker-general
+    server: chat.openai.com
+    type: vmess
+    country: 🇺🇸 US
+    port: 8443
+    uuid: c313606f-98c2-4d7b-ba74-48b94f61b11d
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /
+      headers:
+        HOST: uswuxian.pai50288.uk
+        Host: c.alalbb.top
+    path: /uswuxian.pai50288.uk/
+  - name: 🏁ZZ-HysteriaNode-worker-general
+    server: auth0.openai.com
+    type: vmess
+    country: 🏁ZZ
+    port: 2096
+    uuid: 3bb3c730-e107-49c5-a0b2-b576d1b26a5e
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /
+      headers:
+        HOST: 1743919978.speed.adl.cccp.freefly.pp.ua
+        Host: c.alalbb.top
+    path: /1743919978.speed.adl.cccp.freefly.pp.ua/
+  - name: 🏁 ZZ-HysteriaNode-worker-general
+    server: api.jquery.com
+    type: vmess
+    country: 🏁 ZZ
+    port: 443
+    uuid: f584de15-2034-4170-a723-f48c2bae5e0f
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /linkws
+      headers:
+        HOST: afrhms16v.bestxray.buzz
+        Host: c.alalbb.top
+    path: /afrhms16v.bestxray.buzz/linkws
+  - name: 🏁 ZZ-HysteriaNode-worker-general
+    server: cdnjs.com
+    type: vmess
+    country: 🏁 ZZ
+    port: 443
+    uuid: 950db6aa-4926-4616-816e-ec0312dcb87b
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /linkws
+      headers:
+        HOST: jahfkjha.cfd
+        Host: c.alalbb.top
+    path: /jahfkjha.cfd/linkws
+  - name: '-HysteriaNode-worker-general'
+    server: auth0.openai.com
+    type: vmess
+    country: 🇫🇷FR
+    port: 443
+    uuid: e537f2f5-2a0c-4f59-92c9-832ca6433bf3
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /linkws
+      headers:
+        HOST: irvideo.cfd
+        Host: c.alalbb.top
+    path: /irvideo.cfd/linkws
   - name: 🇨🇦CA-HysteriaNode-worker-general
-    server: nginx.com
+    server: chat.openai.com
     type: vmess
     country: 🇨🇦CA
     port: 443
@@ -413,12 +1852,93 @@ proxies:
         HOST: inna.cfd
         Host: c.alalbb.top
     path: /inna.cfd/linkvws
+  - name: 🏁ZZ-HysteriaNode-worker-general
+    server: www.speedtest.net
+    type: vmess
+    country: 🏁ZZ
+    port: 443
+    uuid: 66e5c8dd-3176-458e-8fb0-1ed91d2f9602
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /vmess-argo?ed=2048
+      headers:
+        HOST: advertisers-assembled-voting-resource.trycloudflare.com
+        Host: c.alalbb.top
+    path: >-
+      /advertisers-assembled-voting-resource.trycloudflare.com/vmess-argo?ed=2048
   - name: '-HysteriaNode-worker-general'
+    server: chat.openai.com
+    type: vmess
+    country: 🇺🇸US
+    port: 443
+    uuid: e537f2f5-2a0c-4f59-92c9-832ca6433bf3
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /linkws
+      headers:
+        HOST: irvideo.cfd
+        Host: c.alalbb.top
+    path: /irvideo.cfd/linkws
+  - name: 🇸🇪SE-HysteriaNode-worker-general
+    server: codepen.io
+    type: vmess
+    country: 🇸🇪SE
+    port: 443
+    uuid: 950db6aa-4926-4616-816e-ec0312dcb87b
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /linkws
+      headers:
+        HOST: jahfkjha.cfd
+        Host: c.alalbb.top
+    path: /jahfkjha.cfd/linkws
+  - name: '-HysteriaNode-worker-general'
+    server: www.speedtest.net
+    type: vmess
+    country: 🏁ZZ
+    port: 443
+    uuid: e537f2f5-2a0c-4f59-92c9-832ca6433bf3
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /linkws
+      headers:
+        HOST: divine-salad-41fb.mostafasafair.workers.dev
+        Host: c.alalbb.top
+    path: /irvideo.cfd/linkws
+  - name: 🏁ZZ-HysteriaNode-worker-general
     server: nginx.com
     type: vmess
-    country: 🇨🇴CO
-    port: 443
-    uuid: edbb1059-1633-4271-b66e-ed4fba47a1bf
+    country: 🏁ZZ
+    port: 8443
+    uuid: 914584ee-3515-46ac-a09d-4677a2e9dc9a
     alterId: 0
     cipher: auto
     network: ws
@@ -428,37 +1948,17 @@ proxies:
     tls: true
     skip-cert-verify: true
     ws-opts:
-      path: /linkws
+      path: /
       headers:
-        HOST: linde06.indiavideo.sbs
+        HOST: us01.sh-cloudflare.sbs
         Host: c.alalbb.top
-    path: /linde06.indiavideo.sbs/linkws
-  - name: '-HysteriaNode-worker-general'
-    server: auth0.openai.com
-    type: vmess
-    country: 🇨🇴CO
-    port: 443
-    uuid: edbb1059-1633-4271-b66e-ed4fba47a1bf
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /linkws
-      headers:
-        HOST: linde06.indiavideo.sbs
-        Host: c.alalbb.top
-    path: /linde06.indiavideo.sbs/linkws
+    path: /us01.sh-cloudflare.sbs/
   - name: 🇺🇸 US-HysteriaNode-worker-general
     server: codepen.io
     type: vmess
     country: 🇺🇸 US
     port: 443
-    uuid: 9072d339-3885-4fe1-b0bc-29fa7505410e
+    uuid: f584de15-2034-4170-a723-f48c2bae5e0f
     alterId: 0
     cipher: auto
     network: ws
@@ -468,13 +1968,655 @@ proxies:
     tls: true
     skip-cert-verify: true
     ws-opts:
-      path: /linkwsd
+      path: /linkws
       headers:
-        HOST: fixedfloati.cfd
+        HOST: afrhms16v.bestxray.buzz
         Host: c.alalbb.top
-    path: /fixedfloati.cfd/linkwsd
+    path: /afrhms16v.bestxray.buzz/linkws
+  - name: 🇺🇸US-HysteriaNode-worker-general
+    server: discord.com
+    type: vmess
+    country: 🇺🇸US
+    port: 443
+    uuid: 5f726fe3-d82e-4da5-a711-8af0cbb2b682
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /azumase.ren
+      headers:
+        HOST: 1a2d514b-37cf-499f-8d08-d017a92ab5bb.asoul-ava.top
+        Host: c.alalbb.top
+    path: /1a2d514b-37cf-499f-8d08-d017a92ab5bb.asoul-ava.top/azumase.ren
+  - name: 🏁ZZ-HysteriaNode-worker-general
+    server: chat.openai.com
+    type: vmess
+    country: 🏁ZZ
+    port: 2083
+    uuid: 381cb6d1-6ad4-4909-8494-b8d786cf78ce
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /
+      headers:
+        HOST: 1744007578.speed.ruanewa.cccp.freefly.pp.ua
+        Host: c.alalbb.top
+    path: /1744007578.speed.ruanewa.cccp.freefly.pp.ua/
+  - name: 🏁ZZ-HysteriaNode-worker-general
+    server: laravel.com
+    type: vmess
+    country: 🏁ZZ
+    port: 2053
+    uuid: f082eeca-e068-45f9-d1bf-46e9de9bdf57
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /ny2-sub.930.pp.ua
+      headers:
+        HOST: ny2-sub.930.pp.ua
+        Host: c.alalbb.top
+    path: /ny2-sub.930.pp.ua/ny2-sub.930.pp.ua
+  - name: 🇺🇸 US-HysteriaNode-worker-general
+    server: nginx.com
+    type: vmess
+    country: 🇺🇸 US
+    port: 443
+    uuid: 950db6aa-4926-4616-816e-ec0312dcb87b
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /linkws
+      headers:
+        HOST: jahfkjha.cfd
+        Host: c.alalbb.top
+    path: /jahfkjha.cfd/linkws
+  - name: 🏁ZZ-HysteriaNode-worker-general
+    server: workers.dev
+    type: vmess
+    country: 🏁ZZ
+    port: 2096
+    uuid: 658b87e0-5d92-4424-d344-c167acd6a77f
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /ny1-sub.890699.xyz
+      headers:
+        HOST: ny1-sub.890699.xyz
+        Host: c.alalbb.top
+    path: /ny1-sub.890699.xyz/ny1-sub.890699.xyz
+  - name: 🇳🇴 NO-HysteriaNode-worker-general
+    server: laravel.com
+    type: vmess
+    country: 🇳🇴 NO
+    port: 443
+    uuid: 03fcc618-b93d-6796-6aed-8a38c975d581
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /linkvws
+      headers:
+        HOST: o.metuji.com
+        Host: c.alalbb.top
+    path: /o.metuji.com/linkvws
+  - name: 🇺🇸 US-HysteriaNode-worker-general
+    server: nginx.com
+    type: vmess
+    country: 🇺🇸 US
+    port: 443
+    uuid: 05641cf5-58d2-4ba4-a9f1-b3cda0b1fb1d
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /linkws
+      headers:
+        HOST: obdii.cfd
+        Host: c.alalbb.top
+    path: /obdii.cfd/linkws
   - name: '-HysteriaNode-worker-general'
+    server: cdnjs.com
+    type: vmess
+    country: 🇺🇸 US
+    port: 443
+    uuid: edbb1059-1633-4271-b66e-ed4fba47a1bf
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /linkws
+      headers:
+        HOST: linde06.indiavideo.sbs
+        Host: c.alalbb.top
+    path: /linde06.indiavideo.sbs/linkws
+  - name: 🏁ZZ-HysteriaNode-worker-general
+    server: chat.openai.com
+    type: vmess
+    country: 🏁ZZ
+    port: 2087
+    uuid: 658b87e0-5d92-4424-d344-c167acd6a77f
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /ny1-sub.890699.xyz
+      headers:
+        HOST: ny1-sub.890699.xyz
+        Host: c.alalbb.top
+    path: /ny1-sub.890699.xyz/ny1-sub.890699.xyz
+  - name: 🏁ZZ-HysteriaNode-worker-general
+    server: laravel.com
+    type: vmess
+    country: 🏁ZZ
+    port: 443
+    uuid: 76221bfb-e92f-4e80-81c5-6fe48f50ac0b
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /linkws
+      headers:
+        HOST: glweidf.sbs
+        Host: c.alalbb.top
+    path: /glweidf.sbs/linkws
+  - name: 🏁 ZZ-HysteriaNode-worker-general
     server: www.speedtest.net
+    type: vmess
+    country: 🏁 ZZ
+    port: 443
+    uuid: 05641cf5-58d2-4ba4-a9f1-b3cda0b1fb1d
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /linkws
+      headers:
+        HOST: obdii.cfd
+        Host: c.alalbb.top
+    path: /obdii.cfd/linkws
+  - name: 🇺🇸 US-HysteriaNode-worker-general
+    server: auth0.openai.com
+    type: vmess
+    country: 🇺🇸 US
+    port: 443
+    uuid: f584de15-2034-4170-a723-f48c2bae5e0f
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /linkws
+      headers:
+        HOST: afrhms16v.bestxray.buzz
+        Host: c.alalbb.top
+    path: /afrhms16v.bestxray.buzz/linkws
+  - name: 🇮🇷 IR-HysteriaNode-worker-general
+    server: laravel.com
+    type: vmess
+    country: 🇮🇷 IR
+    port: 443
+    uuid: 05641cf5-58d2-4ba4-a9f1-b3cda0b1fb1d
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /linkws
+      headers:
+        HOST: obdii.cfd
+        Host: c.alalbb.top
+    path: /obdii.cfd/linkws
+  - name: 🏁ZZ-HysteriaNode-worker-general
+    server: nginx.com
+    type: vmess
+    country: 🏁ZZ
+    port: 2096
+    uuid: bc86f949-7152-4367-92f5-7a11eacf9c9b
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /lon2-sub.930.pp.ua
+      headers:
+        HOST: lon2-sub.930.pp.ua
+        Host: c.alalbb.top
+    path: /lon2-sub.930.pp.ua/lon2-sub.930.pp.ua
+  - name: 🇺🇸 US-HysteriaNode-worker-general
+    server: laravel.com
+    type: vmess
+    country: 🇺🇸 US
+    port: 443
+    uuid: 03fcc618-b93d-6796-6aed-8a38c975d581
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /linkvws
+      headers:
+        HOST: >-
+          wrmelmwxlf.gktevlrqznwqqozy.fabpfs66gizmnojhcvqxwl.kytrcfzqla87gvgvs6c7kjnrubuh.cc
+        Host: c.alalbb.top
+    path: >-
+      /wrmelmwxlf.gktevlrqznwqqozy.fabpfs66gizmnojhcvqxwl.kytrcfzqla87gvgvs6c7kjnrubuh.cc/linkvws
+  - name: '-HysteriaNode-worker-general'
+    server: api.jquery.com
+    type: vmess
+    country: 🇬🇧GB
+    port: 443
+    uuid: edbb1059-1633-4271-b66e-ed4fba47a1bf
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /linkws
+      headers:
+        HOST: linde06.indiavideo.sbs
+        Host: c.alalbb.top
+    path: /linde06.indiavideo.sbs/linkws
+  - name: 🏁ZZ-HysteriaNode-worker-general
+    server: workers.dev
+    type: vmess
+    country: 🏁ZZ
+    port: 443
+    uuid: 39cec18f-a439-427c-9a4e-aeb6fcdf6f53
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /linkws
+      headers:
+        HOST: linja05.hwcar.sbs
+        Host: c.alalbb.top
+    path: /linja05.hwcar.sbs/linkws
+  - name: 🇺🇸 US-HysteriaNode-worker-general
+    server: cdnjs.com
+    type: vmess
+    country: 🇺🇸 US
+    port: 443
+    uuid: 03fcc618-b93d-6796-6aed-8a38c975d581
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /linkvws
+      headers:
+        HOST: baradiha.com
+        Host: c.alalbb.top
+    path: /baradiha.com/linkvws
+  - name: 🏁ZZ-HysteriaNode-worker-general
+    server: laravel.com
+    type: vmess
+    country: 🏁ZZ
+    port: 443
+    uuid: de94cc0a-0592-4969-b1fc-97ea8f0ea0b3
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /aa
+      headers:
+        HOST: us.kkp.me.eu.org
+        Host: c.alalbb.top
+    path: /us.kkp.me.eu.org/aa
+  - name: 🇺🇸US-HysteriaNode-worker-general
+    server: api.jquery.com
+    type: vmess
+    country: 🇺🇸US
+    port: 8443
+    uuid: c313606f-98c2-4d7b-ba74-48b94f61b11d
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /
+      headers:
+        HOST: uswuxian.pai50288.uk
+        Host: c.alalbb.top
+    path: /uswuxian.pai50288.uk/
+  - name: 🏁ZZ-HysteriaNode-worker-general
+    server: auth0.openai.com
+    type: vmess
+    country: 🏁ZZ
+    port: 2083
+    uuid: 381cb6d1-6ad4-4909-8494-b8d786cf78ce
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /
+      headers:
+        HOST: 1744007578.speed.ruanewa.cccp.freefly.pp.ua
+        Host: c.alalbb.top
+    path: /1744007578.speed.ruanewa.cccp.freefly.pp.ua/
+  - name: '-HysteriaNode-worker-general'
+    server: chat.openai.com
+    type: vmess
+    country: 🇰🇷 KR
+    port: 443
+    uuid: 4664df84-15cf-4e57-828b-0782f125e898
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /
+      headers:
+        HOST: kr2.ttcc.tech
+        Host: c.alalbb.top
+    path: /kr2.ttcc.tech/
+  - name: 🏁ZZ-HysteriaNode-worker-general
+    server: www.speedtest.net
+    type: vmess
+    country: 🏁ZZ
+    port: 8443
+    uuid: 658b87e0-5d92-4424-d344-c167acd6a77f
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /ny1-sub.890699.xyz
+      headers:
+        HOST: ny1-sub.890699.xyz
+        Host: c.alalbb.top
+    path: /ny1-sub.890699.xyz/ny1-sub.890699.xyz
+  - name: 🇺🇸US-HysteriaNode-worker-general
+    server: cdnjs.com
+    type: vmess
+    country: 🇺🇸US
+    port: 443
+    uuid: 950db6aa-4926-4616-816e-ec0312dcb87b
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /linkws
+      headers:
+        HOST: jahfkjha.cfd
+        Host: c.alalbb.top
+    path: /jahfkjha.cfd/linkws
+  - name: 🇬🇧 GB-HysteriaNode-worker-general
+    server: codepen.io
+    type: vmess
+    country: 🇬🇧 GB
+    port: 443
+    uuid: 9b456c2a-f2c1-45e1-87a9-b7628b04bb24
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /linkws
+      headers:
+        HOST: beyonddsz.cfd
+        Host: c.alalbb.top
+    path: /beyonddsz.cfd/linkws
+  - name: 🇰🇷 KR-HysteriaNode-worker-general
+    server: www.speedtest.net
+    type: vmess
+    country: 🇰🇷 KR
+    port: 443
+    uuid: b2d10673-24cc-4f96-b1f3-da8b17589077
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /
+      headers:
+        HOST: kr3.ttcc.tech
+        Host: c.alalbb.top
+    path: /kr3.ttcc.tech/
+  - name: 🇺🇸 US-HysteriaNode-worker-general
+    server: laravel.com
+    type: vmess
+    country: 🇺🇸 US
+    port: 443
+    uuid: edbb1059-1633-4271-b66e-ed4fba47a1bf
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /linkws
+      headers:
+        HOST: linde06.indiavideo.sbs
+        Host: c.alalbb.top
+    path: /linde06.indiavideo.sbs/linkws
+  - name: 🏁ZZ-HysteriaNode-worker-general
+    server: www.speedtest.net
+    type: vmess
+    country: 🏁ZZ
+    port: 2087
+    uuid: 658b87e0-5d92-4424-d344-c167acd6a77f
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /ny1-sub.890699.xyz
+      headers:
+        HOST: ny1-sub.890699.xyz
+        Host: c.alalbb.top
+    path: /ny1-sub.890699.xyz/ny1-sub.890699.xyz
+  - name: 🇺🇸 US-HysteriaNode-worker-general
+    server: nginx.com
+    type: vmess
+    country: 🇺🇸 US
+    port: 443
+    uuid: 39cec18f-a439-427c-9a4e-aeb6fcdf6f53
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /linkws
+      headers:
+        HOST: linja05.hwcar.sbs
+        Host: c.alalbb.top
+    path: /linja05.hwcar.sbs/linkws
+  - name: 🏁ZZ-HysteriaNode-worker-general
+    server: nginx.com
+    type: vmess
+    country: 🏁ZZ
+    port: 443
+    uuid: 576c81b6-4976-4fe3-b1a9-05a9c302e98e
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /SNwNdunw28lVztopw90eoXel
+      headers:
+        HOST: us10-04.852224.ggff.net
+        Host: c.alalbb.top
+    path: /us10-04.852224.ggff.net/SNwNdunw28lVztopw90eoXel
+  - name: 🇺🇸US-HysteriaNode-worker-general
+    server: workers.dev
+    type: vmess
+    country: 🇺🇸US
+    port: 443
+    uuid: 05641cf5-58d2-4ba4-a9f1-b3cda0b1fb1d
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /linkws
+      headers:
+        HOST: obdii.cfd
+        Host: c.alalbb.top
+    path: /obdii.cfd/linkws
+  - name: 🇺🇸US-HysteriaNode-worker-general
+    server: api.jquery.com
+    type: vmess
+    country: 🇺🇸US
+    port: 443
+    uuid: 76221bfb-e92f-4e80-81c5-6fe48f50ac0b
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /linkws
+      headers:
+        HOST: glweidf.sbs
+        Host: c.alalbb.top
+    path: /glweidf.sbs/linkws
+  - name: '-HysteriaNode-worker-general'
+    server: discord.com
     type: vmess
     country: 🏁ZZ
     port: 443
@@ -497,249 +2639,6 @@ proxies:
     server: www.speedtest.net
     type: vmess
     country: 🏁ZZ
-    port: 443
-    uuid: 39cec18f-a439-427c-9a4e-aeb6fcdf6f53
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /linkws
-      headers:
-        HOST: linja05.hwcar.sbs
-        Host: c.alalbb.top
-    path: /linja05.hwcar.sbs/linkws
-  - name: '-HysteriaNode-worker-general'
-    server: cdnjs.com
-    type: vmess
-    country: 🏁ZZ
-    port: 443
-    uuid: e537f2f5-2a0c-4f59-92c9-832ca6433bf3
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /linkws
-      headers:
-        HOST: divine-salad-41fb.mostafasafair.workers.dev
-        Host: c.alalbb.top
-    path: /irvideo.cfd/linkws
-  - name: 🏁 ZZ-HysteriaNode-worker-general
-    server: api.jquery.com
-    type: vmess
-    country: 🏁 ZZ
-    port: 443
-    uuid: 950db6aa-4926-4616-816e-ec0312dcb87b
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /linkws
-      headers:
-        HOST: jahfkjha.cfd
-        Host: c.alalbb.top
-    path: /jahfkjha.cfd/linkws
-  - name: 🏁ZZ-HysteriaNode-worker-general
-    server: www.speedtest.net
-    type: vmess
-    country: 🏁ZZ
-    port: 443
-    uuid: 66e5c8dd-3176-458e-8fb0-1ed91d2f9602
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /vmess-argo?ed=2048
-      headers:
-        HOST: advertisers-assembled-voting-resource.trycloudflare.com
-        Host: c.alalbb.top
-    path: >-
-      /advertisers-assembled-voting-resource.trycloudflare.com/vmess-argo?ed=2048
-  - name: 🇺🇸US-HysteriaNode-worker-general
-    server: discord.com
-    type: vmess
-    country: 🇺🇸US
-    port: 2096
-    uuid: bc86f949-7152-4367-92f5-7a11eacf9c9b
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /lon2-sub.930.pp.ua
-      headers:
-        HOST: lon2-dash.930.pp.ua
-        Host: c.alalbb.top
-    path: /lon2-dash.930.pp.ua/lon2-sub.930.pp.ua
-  - name: 🇮🇷 IR-HysteriaNode-worker-general
-    server: laravel.com
-    type: vmess
-    country: 🇮🇷 IR
-    port: 443
-    uuid: 05641cf5-58d2-4ba4-a9f1-b3cda0b1fb1d
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /linkws
-      headers:
-        HOST: obdii.cfd
-        Host: c.alalbb.top
-    path: /obdii.cfd/linkws
-  - name: 🇺🇸US-HysteriaNode-worker-general
-    server: nginx.com
-    type: vmess
-    country: 🇺🇸US
-    port: 2087
-    uuid: bc86f949-7152-4367-92f5-7a11eacf9c9b
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /lon2-sub.930.pp.ua
-      headers:
-        HOST: lon2-sub.930.pp.ua
-        Host: c.alalbb.top
-    path: /lon2-sub.930.pp.ua/lon2-sub.930.pp.ua
-  - name: 🏁ZZ-HysteriaNode-worker-general
-    server: www.speedtest.net
-    type: vmess
-    country: 🏁ZZ
-    port: 2087
-    uuid: 658b87e0-5d92-4424-d344-c167acd6a77f
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /ny1-sub.890699.xyz
-      headers:
-        HOST: ny1-sub.890699.xyz
-        Host: c.alalbb.top
-    path: /ny1-sub.890699.xyz/ny1-sub.890699.xyz
-  - name: '-HysteriaNode-worker-general'
-    server: discord.com
-    type: vmess
-    country: 🇺🇸US
-    port: 443
-    uuid: edbb1059-1633-4271-b66e-ed4fba47a1bf
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /linkws
-      headers:
-        HOST: linde06.indiavideo.sbs
-        Host: c.alalbb.top
-    path: /linde06.indiavideo.sbs/linkws
-  - name: 🇧🇪 BE-HysteriaNode-worker-general
-    server: laravel.com
-    type: vmess
-    country: 🇧🇪 BE
-    port: 443
-    uuid: 03fcc618-b93d-6796-6aed-8a38c975d581
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /linkvws
-      headers:
-        HOST: f.khilei.com
-        Host: c.alalbb.top
-    path: /f.khilei.com/linkvws
-  - name: 🏁ZZ-HysteriaNode-worker-general
-    server: auth0.openai.com
-    type: vmess
-    country: 🏁ZZ
-    port: 2053
-    uuid: f082eeca-e068-45f9-d1bf-46e9de9bdf57
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /ny2-sub.930.pp.ua
-      headers:
-        HOST: ny2-sub.930.pp.ua
-        Host: c.alalbb.top
-    path: /ny2-sub.930.pp.ua/ny2-sub.930.pp.ua
-  - name: 🇧🇪BE-HysteriaNode-worker-general
-    server: nginx.com
-    type: vmess
-    country: 🇧🇪BE
-    port: 443
-    uuid: 03fcc618-b93d-6796-6aed-8a38c975d581
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /linkvws
-      headers:
-        HOST: >-
-          wrmelmwxlf.gktevlrqznwqqozy.fabpfs66gizmnojhcvqxwl.kytrcfzqla87gvgvs6c7kjnrubuh.cc
-        Host: c.alalbb.top
-    path: >-
-      /wrmelmwxlf.gktevlrqznwqqozy.fabpfs66gizmnojhcvqxwl.kytrcfzqla87gvgvs6c7kjnrubuh.cc/linkvws
-  - name: 🏁ZZ-HysteriaNode-worker-general
-    server: laravel.com
-    type: vmess
-    country: 🏁ZZ
     port: 2096
     uuid: 3bb3c730-e107-49c5-a0b2-b576d1b26a5e
     alterId: 0
@@ -753,429 +2652,11 @@ proxies:
     ws-opts:
       path: /
       headers:
-        HOST: 1743919978.speed.adl.cccp.freefly.pp.ua
+        HOST: 1743256978.speed.adl.cccp.freefly.pp.ua
         Host: c.alalbb.top
-    path: /1743919978.speed.adl.cccp.freefly.pp.ua/
-  - name: 🏁ZZ-HysteriaNode-worker-general
-    server: laravel.com
-    type: vmess
-    country: 🏁ZZ
-    port: 2087
-    uuid: 41963e6b-295d-45a0-b6cc-38fbdd3e3f75
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /lon1-sub.890699.xyz
-      headers:
-        HOST: lon1-sub.890699.xyz
-        Host: c.alalbb.top
-    path: /lon1-sub.890699.xyz/lon1-sub.890699.xyz
-  - name: 🇺🇸US-HysteriaNode-worker-general
-    server: codepen.io
-    type: vmess
-    country: 🇺🇸US
-    port: 8443
-    uuid: c313606f-98c2-4d7b-ba74-48b94f61b11d
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /
-      headers:
-        HOST: uswuxian.pai50288.uk
-        Host: c.alalbb.top
-    path: /uswuxian.pai50288.uk/
-  - name: 🏁ZZ-HysteriaNode-worker-general
-    server: laravel.com
-    type: vmess
-    country: 🏁ZZ
-    port: 8443
-    uuid: 914584ee-3515-46ac-a09d-4677a2e9dc9a
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /
-      headers:
-        HOST: us01.sh-cloudflare.sbs
-        Host: c.alalbb.top
-    path: /us01.sh-cloudflare.sbs/
-  - name: 🇸🇪SE-HysteriaNode-worker-general
-    server: cdnjs.com
-    type: vmess
-    country: 🇸🇪SE
-    port: 443
-    uuid: 950db6aa-4926-4616-816e-ec0312dcb87b
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /linkws
-      headers:
-        HOST: jahfkjha.cfd
-        Host: c.alalbb.top
-    path: /jahfkjha.cfd/linkws
-  - name: 🏁 ZZ-HysteriaNode-worker-general
-    server: cdnjs.com
-    type: vmess
-    country: 🏁 ZZ
-    port: 443
-    uuid: 05641cf5-58d2-4ba4-a9f1-b3cda0b1fb1d
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /linkws
-      headers:
-        HOST: obdii.cfd
-        Host: c.alalbb.top
-    path: /obdii.cfd/linkws
-  - name: 🏁ZZ-HysteriaNode-worker-general
-    server: laravel.com
-    type: vmess
-    country: 🏁ZZ
-    port: 8443
-    uuid: 658b87e0-5d92-4424-d344-c167acd6a77f
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /ny1-sub.890699.xyz
-      headers:
-        HOST: ny1-sub.890699.xyz
-        Host: c.alalbb.top
-    path: /ny1-sub.890699.xyz/ny1-sub.890699.xyz
-  - name: 🇺🇸US-HysteriaNode-worker-general
-    server: laravel.com
-    type: vmess
-    country: 🇺🇸US
-    port: 443
-    uuid: 76221bfb-e92f-4e80-81c5-6fe48f50ac0b
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /linkws
-      headers:
-        HOST: glweidf.sbs
-        Host: c.alalbb.top
-    path: /glweidf.sbs/linkws
-  - name: 🇺🇸US-HysteriaNode-worker-general
-    server: nginx.com
-    type: vmess
-    country: 🇺🇸US
-    port: 443
-    uuid: 05641cf5-58d2-4ba4-a9f1-b3cda0b1fb1d
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /linkws
-      headers:
-        HOST: obdii.cfd
-        Host: c.alalbb.top
-    path: /obdii.cfd/linkws
-  - name: '-HysteriaNode-worker-general'
-    server: cdnjs.com
-    type: vmess
-    port: 443
-    uuid: edbb1059-1633-4271-b66e-ed4fba47a1bf
-    alterId: 0
-    cipher: auto
-    network: ws
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /linkws
-      headers:
-        Host: c.alalbb.top
-    servername: c.alalbb.top
-    path: /linde06.indiavideo.sbs/linkws
-  - name: 🇫🇷FR-HysteriaNode-worker-general
-    server: auth0.openai.com
-    type: vmess
-    country: 🇫🇷FR
-    port: 443
-    uuid: 05641cf5-58d2-4ba4-a9f1-b3cda0b1fb1d
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /linkws
-      headers:
-        HOST: obdii.cfd
-        Host: c.alalbb.top
-    path: /obdii.cfd/linkws
-  - name: 🇺🇸 US-HysteriaNode-worker-general
-    server: workers.dev
-    type: vmess
-    country: 🇺🇸 US
-    port: 443
-    uuid: f584de15-2034-4170-a723-f48c2bae5e0f
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /linkws
-      headers:
-        HOST: afrhms16v.bestxray.buzz
-        Host: c.alalbb.top
-    path: /afrhms16v.bestxray.buzz/linkws
-  - name: '-HysteriaNode-worker-general'
-    server: www.speedtest.net
-    type: vmess
-    country: 🇨🇴CO
-    port: 443
-    uuid: edbb1059-1633-4271-b66e-ed4fba47a1bf
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /linkws
-      headers:
-        HOST: linde06.indiavideo.sbs
-        Host: c.alalbb.top
-    path: /linde06.indiavideo.sbs/linkws
-  - name: 🏁ZZ-HysteriaNode-worker-general
-    server: auth0.openai.com
-    type: vmess
-    country: 🏁ZZ
-    port: 443
-    uuid: 76221bfb-e92f-4e80-81c5-6fe48f50ac0b
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /linkws
-      headers:
-        HOST: glweidf.sbs
-        Host: c.alalbb.top
-    path: /glweidf.sbs/linkws
-  - name: 🇨🇴CO-HysteriaNode-worker-general
-    server: cdnjs.com
-    type: vmess
-    country: 🇨🇴CO
-    port: 443
-    uuid: 5f726fe3-d82e-4da5-a711-8af0cbb2b682
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /azumase.ren
-      headers:
-        HOST: 1a2d514b-37cf-499f-8d08-d017a92ab5bb.asoul-ava.top
-        Host: c.alalbb.top
-    path: /1a2d514b-37cf-499f-8d08-d017a92ab5bb.asoul-ava.top/azumase.ren
-  - name: 🇺🇸US-HysteriaNode-worker-general
-    server: nginx.com
-    type: vmess
-    country: 🇺🇸US
-    port: 443
-    uuid: 9c7c7039-a5f1-47b2-9225-cbb5bf03b9e6
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /vmess
-      headers:
-        HOST: serv1.idks1.web.id
-        Host: c.alalbb.top
-    path: /serv1.idks1.web.id/vmess
-  - name: 🏁ZZ-HysteriaNode-worker-general
-    server: chat.openai.com
-    type: vmess
-    country: 🏁ZZ
-    port: 2096
-    uuid: f082eeca-e068-45f9-d1bf-46e9de9bdf57
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /ny2-sub.930.pp.ua
-      headers:
-        HOST: ny2-sub.930.pp.ua
-        Host: c.alalbb.top
-    path: /ny2-sub.930.pp.ua/ny2-sub.930.pp.ua
-  - name: 🇺🇸US-HysteriaNode-worker-general
-    server: auth0.openai.com
-    type: vmess
-    country: 🇺🇸US
-    port: 8443
-    uuid: c313606f-98c2-4d7b-ba74-48b94f61b11d
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /?maps.app.goo.gl/K3hM5xrwZV7bQVBa7?ed=2560
-      headers:
-        HOST: uswuxian.pai50288.uk
-        Host: c.alalbb.top
-    path: /uswuxian.pai50288.uk/?maps.app.goo.gl/K3hM5xrwZV7bQVBa7?ed=2560
-  - name: 🏁ZZ-HysteriaNode-worker-general
-    server: api.jquery.com
-    type: vmess
-    country: 🏁ZZ
-    port: 443
-    uuid: de94cc0a-0592-4969-b1fc-97ea8f0ea0b3
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /aa
-      headers:
-        HOST: us.kkp.me.eu.org
-        Host: c.alalbb.top
-    path: /us.kkp.me.eu.org/aa
-  - name: 🏁 ZZ-HysteriaNode-worker-general
-    server: discord.com
-    type: vmess
-    country: 🏁 ZZ
-    port: 443
-    uuid: f584de15-2034-4170-a723-f48c2bae5e0f
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /linkws
-      headers:
-        HOST: afrhms16v.bestxray.buzz
-        Host: c.alalbb.top
-    path: /afrhms16v.bestxray.buzz/linkws
-  - name: 🇫🇷FR-HysteriaNode-worker-general
-    server: codepen.io
-    type: vmess
-    country: 🇫🇷FR
-    port: 443
-    uuid: 9b456c2a-f2c1-45e1-87a9-b7628b04bb24
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /linkws
-      headers:
-        HOST: beyonddsz.cfd
-        Host: c.alalbb.top
-    path: /beyonddsz.cfd/linkws
-  - name: '-HysteriaNode-worker-general'
-    server: chat.openai.com
-    type: vmess
-    country: 🏁ZZ
-    port: 443
-    uuid: edbb1059-1633-4271-b66e-ed4fba47a1bf
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /linkws
-      headers:
-        HOST: linde06.indiavideo.sbs
-        Host: c.alalbb.top
-    path: /linde06.indiavideo.sbs/linkws
+    path: /1743256978.speed.adl.cccp.freefly.pp.ua/
   - name: 🇳🇱NL-HysteriaNode-worker-general
-    server: discord.com
+    server: cdnjs.com
     type: vmess
     country: 🇳🇱NL
     port: 443
@@ -1194,272 +2675,8 @@ proxies:
         HOST: jahfkjha.cfd
         Host: c.alalbb.top
     path: /jahfkjha.cfd/linkws
-  - name: 🇺🇸US-HysteriaNode-worker-general
-    server: discord.com
-    type: vmess
-    country: 🇺🇸US
-    port: 2083
-    uuid: f082eeca-e068-45f9-d1bf-46e9de9bdf57
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /ny2-sub.930.pp.ua
-      headers:
-        HOST: ny2-sub.930.pp.ua
-        Host: c.alalbb.top
-    path: /ny2-sub.930.pp.ua/ny2-sub.930.pp.ua
-  - name: 🏁ZZ-HysteriaNode-worker-general
-    server: codepen.io
-    type: vmess
-    country: 🏁ZZ
-    port: 8443
-    uuid: 41963e6b-295d-45a0-b6cc-38fbdd3e3f75
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /lon1-sub.890699.xyz
-      headers:
-        HOST: lon1-sub.890699.xyz
-        Host: c.alalbb.top
-    path: /lon1-sub.890699.xyz/lon1-sub.890699.xyz
-  - name: 🇧🇪 BE-HysteriaNode-worker-general
-    server: workers.dev
-    type: vmess
-    country: 🇧🇪 BE
-    port: 443
-    uuid: 03fcc618-b93d-6796-6aed-8a38c975d581
-    alterId: 1
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: linkvws
-      headers:
-        HOST: 57.129.25.20
-        Host: c.alalbb.top
-    path: /57.129.25.20/linkvws
-  - name: 🇺🇸US-HysteriaNode-worker-general
-    server: api.jquery.com
-    type: vmess
-    country: 🇺🇸US
-    port: 2087
-    uuid: bc86f949-7152-4367-92f5-7a11eacf9c9b
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /lon2-sub.930.pp.ua
-      headers:
-        HOST: lon2-sub.930.pp.ua
-        Host: c.alalbb.top
-    path: /lon2-sub.930.pp.ua/lon2-sub.930.pp.ua
-  - name: 🏁ZZ-HysteriaNode-worker-general
-    server: cdnjs.com
-    type: vmess
-    country: 🏁ZZ
-    port: 8443
-    uuid: 381cb6d1-6ad4-4909-8494-b8d786cf78ce
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /
-      headers:
-        HOST: 1744007578.speed.adl.cccp.freefly.pp.ua
-        Host: c.alalbb.top
-    path: /1744007578.speed.adl.cccp.freefly.pp.ua/
-  - name: 🇧🇪 BE-HysteriaNode-worker-general
-    server: nginx.com
-    type: vmess
-    country: 🇧🇪 BE
-    port: 443
-    uuid: 03fcc618-b93d-6796-6aed-8a38c975d581
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /linkvws
-      headers:
-        HOST: >-
-          wrmelmwxlf.gktevlrqznwqqozy.fabpfs66gizmnojhcvqxwl.kytrcfzqla87gvgvs6c7kjnrubuh.cc
-        Host: c.alalbb.top
-    path: >-
-      /wrmelmwxlf.gktevlrqznwqqozy.fabpfs66gizmnojhcvqxwl.kytrcfzqla87gvgvs6c7kjnrubuh.cc/linkvws
-  - name: 🇺🇸US-HysteriaNode-worker-general
-    server: workers.dev
-    type: vmess
-    country: 🇺🇸US
-    port: 443
-    uuid: 76221bfb-e92f-4e80-81c5-6fe48f50ac0b
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /linkws
-      headers:
-        HOST: glweidf.sbs
-        Host: c.alalbb.top
-    path: /glweidf.sbs/linkws
-  - name: 🏁 ZZ-HysteriaNode-worker-general
-    server: laravel.com
-    type: vmess
-    country: 🏁 ZZ
-    port: 443
-    uuid: f584de15-2034-4170-a723-f48c2bae5e0f
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /linkws
-      headers:
-        HOST: afrhms16v.bestxray.buzz
-        Host: c.alalbb.top
-    path: /afrhms16v.bestxray.buzz/linkws
-  - name: 🇺🇸 US-HysteriaNode-worker-general
-    server: codepen.io
-    type: vmess
-    country: 🇺🇸 US
-    port: 443
-    uuid: 05641cf5-58d2-4ba4-a9f1-b3cda0b1fb1d
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /linkws
-      headers:
-        HOST: obdii.cfd
-        Host: c.alalbb.top
-    path: /obdii.cfd/linkws
-  - name: 🇧🇪 BE-HysteriaNode-worker-general
-    server: nginx.com
-    type: vmess
-    country: 🇧🇪 BE
-    port: 443
-    uuid: 03fcc618-b93d-6796-6aed-8a38c975d581
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /linkvws
-      headers:
-        HOST: >-
-          wrmelmwxlf.gktevlrqznwqqozy.fabpfs66gizmnojhcvqxwl.kytrcfzqla87gvgvs6c7kjnrubuh.cc
-        Host: c.alalbb.top
-    path: >-
-      /wrmelmwxlf.gktevlrqznwqqozy.fabpfs66gizmnojhcvqxwl.kytrcfzqla87gvgvs6c7kjnrubuh.cc/linkvws
-  - name: 🏁ZZ-HysteriaNode-worker-general
-    server: api.jquery.com
-    type: vmess
-    country: 🏁ZZ
-    port: 443
-    uuid: 47eab0de-97f9-49be-f2f3-2e4eb17268e6
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /aa
-      headers:
-        HOST: hk.insbot.filegear-sg.me
-        Host: c.alalbb.top
-    path: /hk.insbot.filegear-sg.me/aa
-  - name: 🇨🇴CO-HysteriaNode-worker-general
-    server: cdnjs.com
-    type: vmess
-    country: 🇨🇴CO
-    port: 443
-    uuid: 05641cf5-58d2-4ba4-a9f1-b3cda0b1fb1d
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /linkws
-      headers:
-        HOST: obdii.cfd
-        Host: c.alalbb.top
-    path: /obdii.cfd/linkws
   - name: '-HysteriaNode-worker-general'
-    server: workers.dev
-    type: vmess
-    country: 🇨🇴CO
-    port: 443
-    uuid: edbb1059-1633-4271-b66e-ed4fba47a1bf
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /linkws
-      headers:
-        HOST: linde06.indiavideo.sbs
-        Host: c.alalbb.top
-    path: /linde06.indiavideo.sbs/linkws
-  - name: '-HysteriaNode-worker-general'
-    server: workers.dev
+    server: chat.openai.com
     type: vmess
     country: 🇮🇷IR
     port: 443
@@ -1478,50 +2695,10 @@ proxies:
         HOST: obdii.cfd
         Host: c.alalbb.top
     path: /obdii.cfd/linkws
-  - name: 🏁ZZ-HysteriaNode-worker-general
-    server: cdnjs.com
-    type: vmess
-    country: 🏁ZZ
-    port: 2087
-    uuid: f082eeca-e068-45f9-d1bf-46e9de9bdf57
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /ny2-sub.930.pp.ua
-      headers:
-        HOST: ny2-sub.930.pp.ua
-        Host: c.alalbb.top
-    path: /ny2-sub.930.pp.ua/ny2-sub.930.pp.ua
-  - name: 🇫🇷FR-HysteriaNode-worker-general
-    server: chat.openai.com
-    type: vmess
-    country: 🇫🇷FR
-    port: 443
-    uuid: 9b456c2a-f2c1-45e1-87a9-b7628b04bb24
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /linkws
-      headers:
-        HOST: beyonddsz.cfd
-        Host: c.alalbb.top
-    path: /beyonddsz.cfd/linkws
-  - name: 🇺🇸 US-HysteriaNode-worker-general
+  - name: 🇺🇸US-HysteriaNode-worker-general
     server: workers.dev
     type: vmess
-    country: 🇺🇸 US
+    country: 🇺🇸US
     port: 443
     uuid: f584de15-2034-4170-a723-f48c2bae5e0f
     alterId: 0
@@ -1538,106 +2715,6 @@ proxies:
         HOST: afrhms16v.bestxray.buzz
         Host: c.alalbb.top
     path: /afrhms16v.bestxray.buzz/linkws
-  - name: 🇳🇴 NO-HysteriaNode-worker-general
-    server: chat.openai.com
-    type: vmess
-    country: 🇳🇴 NO
-    port: 443
-    uuid: 03fcc618-b93d-6796-6aed-8a38c975d581
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /linkvws
-      headers:
-        HOST: o.metuji.com
-        Host: c.alalbb.top
-    path: /o.metuji.com/linkvws
-  - name: '-HysteriaNode-worker-general'
-    server: codepen.io
-    type: vmess
-    country: 🇨🇴CO
-    port: 443
-    uuid: edbb1059-1633-4271-b66e-ed4fba47a1bf
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /linkws
-      headers:
-        HOST: linde06.indiavideo.sbs
-        Host: c.alalbb.top
-    path: /linde06.indiavideo.sbs/linkws
-  - name: 🏁ZZ-HysteriaNode-worker-general
-    server: api.jquery.com
-    type: vmess
-    country: 🏁ZZ
-    port: 8443
-    uuid: 41963e6b-295d-45a0-b6cc-38fbdd3e3f75
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /lon1-sub.890699.xyz
-      headers:
-        HOST: lon1-sub.890699.xyz
-        Host: c.alalbb.top
-    path: /lon1-sub.890699.xyz/lon1-sub.890699.xyz
-  - name: 🏁ZZ-HysteriaNode-worker-general
-    server: chat.openai.com
-    type: vmess
-    country: 🏁ZZ
-    port: 8443
-    uuid: 658b87e0-5d92-4424-d344-c167acd6a77f
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /ny1-sub.890699.xyz
-      headers:
-        HOST: ny1-sub.890699.xyz
-        Host: c.alalbb.top
-    path: /ny1-sub.890699.xyz/ny1-sub.890699.xyz
-  - name: 🇺🇸US-HysteriaNode-worker-general
-    server: api.jquery.com
-    type: vmess
-    country: 🇺🇸US
-    port: 443
-    uuid: 950db6aa-4926-4616-816e-ec0312dcb87b
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /linkws
-      headers:
-        HOST: jahfkjha.cfd
-        Host: c.alalbb.top
-    path: /jahfkjha.cfd/linkws
   - name: 🇺🇸US-HysteriaNode-worker-general
     server: www.speedtest.net
     type: vmess
@@ -1659,327 +2736,9 @@ proxies:
         Host: c.alalbb.top
     path: /jahfkjha.cfd/linkws
   - name: 🏁ZZ-HysteriaNode-worker-general
-    server: laravel.com
-    type: vmess
-    country: 🏁ZZ
-    port: 2096
-    uuid: 658b87e0-5d92-4424-d344-c167acd6a77f
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /ny1-sub.890699.xyz
-      headers:
-        HOST: ny1-sub.890699.xyz
-        Host: c.alalbb.top
-    path: /ny1-sub.890699.xyz/ny1-sub.890699.xyz
-  - name: 🇫🇷FR-HysteriaNode-worker-general
-    server: api.jquery.com
-    type: vmess
-    country: 🇫🇷FR
-    port: 443
-    uuid: f584de15-2034-4170-a723-f48c2bae5e0f
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /linkws
-      headers:
-        HOST: afrhms16v.bestxray.buzz
-        Host: c.alalbb.top
-    path: /afrhms16v.bestxray.buzz/linkws
-  - name: 🇺🇸US-HysteriaNode-worker-general
-    server: api.jquery.com
-    type: vmess
-    country: 🇺🇸US
-    port: 443
-    uuid: 2faaf996-d2b0-440d-8258-81f2b05dd0e4
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /vmess-argo?ed=2560
-      headers:
-        HOST: glitch.nnuu.nyc.mn
-        Host: c.alalbb.top
-    path: /glitch.nnuu.nyc.mn/vmess-argo?ed=2560
-  - name: 🇺🇸 US-HysteriaNode-worker-general
-    server: laravel.com
-    type: vmess
-    country: 🇺🇸 US
-    port: 443
-    uuid: 39cec18f-a439-427c-9a4e-aeb6fcdf6f53
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /linkws
-      headers:
-        HOST: linja05.hwcar.sbs
-        Host: c.alalbb.top
-    path: /linja05.hwcar.sbs/linkws
-  - name: '-HysteriaNode-worker-general'
-    server: workers.dev
-    type: vmess
-    port: 443
-    uuid: 76221bfb-e92f-4e80-81c5-6fe48f50ac0b
-    alterId: 0
-    cipher: auto
-    network: ws
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /linkws
-      headers:
-        Host: c.alalbb.top
-    servername: c.alalbb.top
-    path: /glweidf.sbs/linkws
-  - name: 🇧🇪 BE-HysteriaNode-worker-general
-    server: www.speedtest.net
-    type: vmess
-    country: 🇧🇪 BE
-    port: 443
-    uuid: 03fcc618-b93d-6796-6aed-8a38c975d581
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /linkvws
-      headers:
-        HOST: aveiror.com
-        Host: c.alalbb.top
-    path: /aveiror.com/linkvws
-  - name: 🏁ZZ-HysteriaNode-worker-general
-    server: workers.dev
-    type: vmess
-    country: 🏁ZZ
-    port: 2053
-    uuid: f082eeca-e068-45f9-d1bf-46e9de9bdf57
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /ny2-sub.930.pp.ua
-      headers:
-        HOST: ny2-sub.930.pp.ua
-        Host: c.alalbb.top
-    path: /ny2-sub.930.pp.ua/ny2-sub.930.pp.ua
-  - name: 🏁ZZ-HysteriaNode-worker-general
-    server: cdnjs.com
-    type: vmess
-    country: 🏁ZZ
-    port: 8443
-    uuid: c313606f-98c2-4d7b-ba74-48b94f61b11d
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /
-      headers:
-        HOST: uswuxian.pai50288.uk
-        Host: c.alalbb.top
-    path: /uswuxian.pai50288.uk/
-  - name: '-HysteriaNode-worker-general'
-    server: discord.com
-    type: vmess
-    country: 🇫🇷FR
-    port: 443
-    uuid: e537f2f5-2a0c-4f59-92c9-832ca6433bf3
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /linkws
-      headers:
-        HOST: irvideo.cfd
-        Host: c.alalbb.top
-    path: /irvideo.cfd/linkws
-  - name: 🏁ZZ-HysteriaNode-worker-general
-    server: auth0.openai.com
-    type: vmess
-    country: 🏁ZZ
-    port: 443
-    uuid: 47eab0de-97f9-49be-f2f3-2e4eb17268e6
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /aa
-      headers:
-        HOST: hk.insbot.filegear-sg.me
-        Host: c.alalbb.top
-    path: /hk.insbot.filegear-sg.me/aa
-  - name: '-HysteriaNode-worker-general'
-    server: codepen.io
-    type: vmess
-    country: 🇫🇷 FR
-    port: 443
-    uuid: e537f2f5-2a0c-4f59-92c9-832ca6433bf3
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /linkws
-      headers:
-        HOST: irvideo.cfd
-        Host: c.alalbb.top
-    path: /irvideo.cfd/linkws
-  - name: 🏁ZZ-HysteriaNode-worker-general
-    server: www.speedtest.net
-    type: vmess
-    country: 🏁ZZ
-    port: 8443
-    uuid: 914584ee-3515-46ac-a09d-4677a2e9dc9a
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /
-      headers:
-        HOST: us01.sh-cloudflare.sbs
-        Host: c.alalbb.top
-    path: /us01.sh-cloudflare.sbs/
-  - name: '-HysteriaNode-worker-general'
-    server: www.speedtest.net
-    type: vmess
-    country: 🇨🇴CO
-    port: 443
-    uuid: edbb1059-1633-4271-b66e-ed4fba47a1bf
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /linkws
-      headers:
-        HOST: linde06.indiavideo.sbs
-        Host: c.alalbb.top
-    path: /linde06.indiavideo.sbs/linkws
-  - name: '-HysteriaNode-worker-general'
-    server: cdnjs.com
-    type: vmess
-    country: 🇰🇷 KR
-    port: 443
-    uuid: 4664df84-15cf-4e57-828b-0782f125e898
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /
-      headers:
-        HOST: kr2.ttcc.tech
-        Host: c.alalbb.top
-    path: /kr2.ttcc.tech/
-  - name: 🇺🇸 US-HysteriaNode-worker-general
     server: chat.openai.com
     type: vmess
-    country: 🇺🇸 US
-    port: 443
-    uuid: 950db6aa-4926-4616-816e-ec0312dcb87b
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /linkws
-      headers:
-        HOST: jahfkjha.cfd
-        Host: c.alalbb.top
-    path: /jahfkjha.cfd/linkws
-  - name: 🇺🇸US-HysteriaNode-worker-general
-    server: workers.dev
-    type: vmess
-    country: 🇺🇸US
-    port: 443
-    uuid: f584de15-2034-4170-a723-f48c2bae5e0f
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /linkws
-      headers:
-        HOST: afrhms16v.bestxray.buzz
-        Host: c.alalbb.top
-    path: /afrhms16v.bestxray.buzz/linkws
-  - name: 🇨🇴CO-HysteriaNode-worker-general
-    server: auth0.openai.com
-    type: vmess
-    country: 🇨🇴CO
+    country: 🏁ZZ
     port: 443
     uuid: 5f726fe3-d82e-4da5-a711-8af0cbb2b682
     alterId: 0
@@ -1993,55 +2752,15 @@ proxies:
     ws-opts:
       path: /azumase.ren
       headers:
-        HOST: b62a948c-faa2-4e8a-bf8a-3ff3121c875a.asoul-ava.top
+        HOST: 1a2d514b-37cf-499f-8d08-d017a92ab5bb.asoul-ava.top
         Host: c.alalbb.top
-    path: /b62a948c-faa2-4e8a-bf8a-3ff3121c875a.asoul-ava.top/azumase.ren
-  - name: 🏁ZZ-HysteriaNode-worker-general
-    server: www.speedtest.net
+    path: /1a2d514b-37cf-499f-8d08-d017a92ab5bb.asoul-ava.top/azumase.ren
+  - name: 🇺🇸 US-HysteriaNode-worker-general
+    server: cdnjs.com
     type: vmess
-    country: 🏁ZZ
+    country: 🇺🇸 US
     port: 443
-    uuid: 9072d339-3885-4fe1-b0bc-29fa7505410e
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /linkwsd
-      headers:
-        HOST: divine-salad-41fb.mostafasafair.workers.dev
-        Host: c.alalbb.top
-    path: /fixedfloati.cfd/linkwsd
-  - name: 🇺🇸US-HysteriaNode-worker-general
-    server: nginx.com
-    type: vmess
-    country: 🇺🇸US
-    port: 2053
-    uuid: bc86f949-7152-4367-92f5-7a11eacf9c9b
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /lon2-sub.930.pp.ua
-      headers:
-        HOST: lon2-sub.930.pp.ua
-        Host: c.alalbb.top
-    path: /lon2-sub.930.pp.ua/lon2-sub.930.pp.ua
-  - name: '-HysteriaNode-worker-general'
-    server: nginx.com
-    type: vmess
-    country: 🇨🇴CO
-    port: 443
-    uuid: edbb1059-1633-4271-b66e-ed4fba47a1bf
+    uuid: 950db6aa-4926-4616-816e-ec0312dcb87b
     alterId: 0
     cipher: auto
     network: ws
@@ -2053,31 +2772,11 @@ proxies:
     ws-opts:
       path: /linkws
       headers:
-        HOST: linde06.indiavideo.sbs
+        HOST: jahfkjha.cfd
         Host: c.alalbb.top
-    path: /linde06.indiavideo.sbs/linkws
-  - name: 🇩🇪DE-HysteriaNode-worker-general
-    server: laravel.com
-    type: vmess
-    country: 🇩🇪DE
-    port: 443
-    uuid: 9072d339-3885-4fe1-b0bc-29fa7505410e
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /linkwsd
-      headers:
-        HOST: fixedfloati.cfd
-        Host: c.alalbb.top
-    path: /fixedfloati.cfd/linkwsd
+    path: /jahfkjha.cfd/linkws
   - name: 🇺🇸US-HysteriaNode-worker-general
-    server: cdnjs.com
+    server: www.speedtest.net
     type: vmess
     country: 🇺🇸US
     port: 443
@@ -2096,26 +2795,6 @@ proxies:
         HOST: glweidf.sbs
         Host: c.alalbb.top
     path: /glweidf.sbs/linkws
-  - name: 🏁ZZ-HysteriaNode-worker-general
-    server: laravel.com
-    type: vmess
-    country: 🏁ZZ
-    port: 443
-    uuid: 576c81b6-4976-4fe3-b1a9-05a9c302e98e
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /SNwNdunw28lVztopw90eoXel
-      headers:
-        HOST: us10-09.852224.ggff.net
-        Host: c.alalbb.top
-    path: /us10-09.852224.ggff.net/SNwNdunw28lVztopw90eoXel
   - name: 🇺🇸 US-HysteriaNode-worker-general
     server: auth0.openai.com
     type: vmess
@@ -2136,11 +2815,11 @@ proxies:
         HOST: tilebani.com
         Host: c.alalbb.top
     path: /tilebani.com/linkvws
-  - name: 🏁ZZ-HysteriaNode-worker-general
-    server: api.jquery.com
+  - name: 🇺🇸US-HysteriaNode-worker-general
+    server: www.speedtest.net
     type: vmess
-    country: 🏁ZZ
-    port: 2096
+    country: 🇺🇸US
+    port: 2087
     uuid: bc86f949-7152-4367-92f5-7a11eacf9c9b
     alterId: 0
     cipher: auto
@@ -2156,13 +2835,33 @@ proxies:
         HOST: lon2-sub.930.pp.ua
         Host: c.alalbb.top
     path: /lon2-sub.930.pp.ua/lon2-sub.930.pp.ua
+  - name: 🏁ZZ-HysteriaNode-worker-general
+    server: codepen.io
+    type: vmess
+    country: 🏁ZZ
+    port: 2096
+    uuid: 658b87e0-5d92-4424-d344-c167acd6a77f
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /ny1-sub.890699.xyz
+      headers:
+        HOST: ny1-dash.890699.xyz
+        Host: c.alalbb.top
+    path: /ny1-dash.890699.xyz/ny1-sub.890699.xyz
   - name: 🇺🇸 US-HysteriaNode-worker-general
-    server: workers.dev
+    server: codepen.io
     type: vmess
     country: 🇺🇸 US
     port: 443
     uuid: 03fcc618-b93d-6796-6aed-8a38c975d581
-    alterId: 0
+    alterId: 1
     cipher: auto
     network: ws
     servername: c.alalbb.top
@@ -2171,115 +2870,13 @@ proxies:
     tls: true
     skip-cert-verify: true
     ws-opts:
-      path: /linkvws
+      path: linkvws
       headers:
-        HOST: >-
-          wrmelmwxlf.gktevlrqznwqqozy.fabpfs66gizmnojhcvqxwl.kytrcfzqla87gvgvs6c7kjnrubuh.cc
+        HOST: 67.220.66.194
         Host: c.alalbb.top
-    path: >-
-      /wrmelmwxlf.gktevlrqznwqqozy.fabpfs66gizmnojhcvqxwl.kytrcfzqla87gvgvs6c7kjnrubuh.cc/linkvws
+    path: /67.220.66.194/linkvws
   - name: 🏁ZZ-HysteriaNode-worker-general
-    server: auth0.openai.com
-    type: vmess
-    country: 🏁ZZ
-    port: 2053
-    uuid: d79261b1-b706-49f6-b39d-af2a0b8ebac5
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: d79261b1-b706-49f6-b39d-af2a0b8ebac5-vm
-      headers:
-        HOST: hax.hy.cloudns.ch
-        Host: c.alalbb.top
-    path: /hax.hy.cloudns.ch/d79261b1-b706-49f6-b39d-af2a0b8ebac5-vm
-  - name: 🏁ZZ-HysteriaNode-worker-general
-    server: www.speedtest.net
-    type: vmess
-    country: 🏁ZZ
-    port: 443
-    uuid: de94cc0a-0592-4969-b1fc-97ea8f0ea0b3
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /aa
-      headers:
-        HOST: us.insbot.filegear-sg.me
-        Host: c.alalbb.top
-    path: /us.insbot.filegear-sg.me/aa
-  - name: '-HysteriaNode-worker-general'
-    server: discord.com
-    type: vmess
-    country: 🇬🇧GB
-    port: 443
-    uuid: edbb1059-1633-4271-b66e-ed4fba47a1bf
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /linkws
-      headers:
-        HOST: linde06.indiavideo.sbs
-        Host: c.alalbb.top
-    path: /linde06.indiavideo.sbs/linkws
-  - name: 🇺🇸 US-HysteriaNode-worker-general
-    server: laravel.com
-    type: vmess
-    country: 🇺🇸 US
-    port: 443
-    uuid: 950db6aa-4926-4616-816e-ec0312dcb87b
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /linkws
-      headers:
-        HOST: jahfkjha.cfd
-        Host: c.alalbb.top
-    path: /jahfkjha.cfd/linkws
-  - name: 🏁ZZ-HysteriaNode-worker-general
-    server: auth0.openai.com
-    type: vmess
-    country: 🏁ZZ
-    port: 443
-    uuid: 5f726fe3-d82e-4da5-a711-8af0cbb2b682
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /azumase.ren
-      headers:
-        HOST: 1a2d514b-37cf-499f-8d08-d017a92ab5bb.asoul-ava.top
-        Host: c.alalbb.top
-    path: /1a2d514b-37cf-499f-8d08-d017a92ab5bb.asoul-ava.top/azumase.ren
-  - name: 🏁ZZ-HysteriaNode-worker-general
-    server: api.jquery.com
+    server: nginx.com
     type: vmess
     country: 🏁ZZ
     port: 2096
@@ -2298,48 +2895,8 @@ proxies:
         HOST: 1743919978.speed.adl.cccp.freefly.pp.ua
         Host: c.alalbb.top
     path: /1743919978.speed.adl.cccp.freefly.pp.ua/
-  - name: 🇫🇷 FR-HysteriaNode-worker-general
-    server: auth0.openai.com
-    type: vmess
-    country: 🇫🇷 FR
-    port: 443
-    uuid: 03fcc618-b93d-6796-6aed-8a38c975d581
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /linkvws
-      headers:
-        HOST: a.baradiha.com
-        Host: c.alalbb.top
-    path: /a.baradiha.com/linkvws
-  - name: 🇦🇪AE-HysteriaNode-worker-general
-    server: laravel.com
-    type: vmess
-    country: 🇦🇪AE
-    port: 443
-    uuid: 9b456c2a-f2c1-45e1-87a9-b7628b04bb24
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /linkws
-      headers:
-        HOST: beyonddsz.cfd
-        Host: c.alalbb.top
-    path: /beyonddsz.cfd/linkws
   - name: 🇺🇸US-HysteriaNode-worker-general
-    server: auth0.openai.com
+    server: discord.com
     type: vmess
     country: 🇺🇸US
     port: 443
@@ -2358,8 +2915,108 @@ proxies:
         HOST: jahfkjha.cfd
         Host: c.alalbb.top
     path: /jahfkjha.cfd/linkws
+  - name: 🏁ZZ-HysteriaNode-worker-general
+    server: cdnjs.com
+    type: vmess
+    country: 🏁ZZ
+    port: 2053
+    uuid: d79261b1-b706-49f6-b39d-af2a0b8ebac5
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: d79261b1-b706-49f6-b39d-af2a0b8ebac5-vm
+      headers:
+        HOST: hax.hy.cloudns.ch
+        Host: c.alalbb.top
+    path: /hax.hy.cloudns.ch/d79261b1-b706-49f6-b39d-af2a0b8ebac5-vm
+  - name: 🇺🇸 US-HysteriaNode-worker-general
+    server: www.speedtest.net
+    type: vmess
+    country: 🇺🇸 US
+    port: 443
+    uuid: f584de15-2034-4170-a723-f48c2bae5e0f
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /linkws
+      headers:
+        HOST: afrhms16v.bestxray.buzz
+        Host: c.alalbb.top
+    path: /afrhms16v.bestxray.buzz/linkws
+  - name: 🇺🇸 US-HysteriaNode-worker-general
+    server: laravel.com
+    type: vmess
+    country: 🇺🇸 US
+    port: 443
+    uuid: 9072d339-3885-4fe1-b0bc-29fa7505410e
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /linkwsd
+      headers:
+        HOST: fixedfloati.cfd
+        Host: c.alalbb.top
+    path: /fixedfloati.cfd/linkwsd
+  - name: 🏁ZZ-HysteriaNode-worker-general
+    server: www.speedtest.net
+    type: vmess
+    country: 🏁ZZ
+    port: 2087
+    uuid: 41963e6b-295d-45a0-b6cc-38fbdd3e3f75
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /lon1-sub.890699.xyz
+      headers:
+        HOST: lon1-sub.890699.xyz
+        Host: c.alalbb.top
+    path: /lon1-sub.890699.xyz/lon1-sub.890699.xyz
+  - name: 🇺🇸 US-HysteriaNode-worker-general
+    server: cdnjs.com
+    type: vmess
+    country: 🇺🇸 US
+    port: 443
+    uuid: 950db6aa-4926-4616-816e-ec0312dcb87b
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /linkws
+      headers:
+        HOST: jahfkjha.cfd
+        Host: c.alalbb.top
+    path: /jahfkjha.cfd/linkws
   - name: '-HysteriaNode-worker-general'
-    server: codepen.io
+    server: nginx.com
     type: vmess
     country: 🏁ZZ
     port: 443
@@ -2375,9 +3032,129 @@ proxies:
     ws-opts:
       path: /bua2hMcbA8wMzbGFtV
       headers:
-        HOST: us7-01.890624.xyz
+        HOST: us7-03.890624.xyz
         Host: c.alalbb.top
-    path: /us7-01.890624.xyz/bua2hMcbA8wMzbGFtV
+    path: /us7-03.890624.xyz/bua2hMcbA8wMzbGFtV
+  - name: 🏁ZZ-HysteriaNode-worker-general
+    server: www.speedtest.net
+    type: vmess
+    country: 🏁ZZ
+    port: 8443
+    uuid: c313606f-98c2-4d7b-ba74-48b94f61b11d
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /
+      headers:
+        HOST: uswuxian.pai50288.uk
+        Host: c.alalbb.top
+    path: /uswuxian.pai50288.uk/
+  - name: 🇺🇸 US-HysteriaNode-worker-general
+    server: codepen.io
+    type: vmess
+    country: 🇺🇸 US
+    port: 443
+    uuid: 39cec18f-a439-427c-9a4e-aeb6fcdf6f53
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /linkws
+      headers:
+        HOST: linja05.hwcar.sbs
+        Host: c.alalbb.top
+    path: /linja05.hwcar.sbs/linkws
+  - name: 🇺🇸US-HysteriaNode-worker-general
+    server: api.jquery.com
+    type: vmess
+    country: 🇺🇸US
+    port: 443
+    uuid: 76221bfb-e92f-4e80-81c5-6fe48f50ac0b
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /linkws
+      headers:
+        HOST: glweidf.sbs
+        Host: c.alalbb.top
+    path: /glweidf.sbs/linkws
+  - name: 🏁ZZ-HysteriaNode-worker-general
+    server: cdnjs.com
+    type: vmess
+    country: 🏁ZZ
+    port: 443
+    uuid: f584de15-2034-4170-a723-f48c2bae5e0f
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /linkws
+      headers:
+        HOST: afrhms16v.bestxray.buzz
+        Host: c.alalbb.top
+    path: /afrhms16v.bestxray.buzz/linkws
+  - name: '-HysteriaNode-worker-general'
+    server: www.speedtest.net
+    type: vmess
+    country: 🏁ZZ
+    port: 443
+    uuid: 4664df84-15cf-4e57-828b-0782f125e898
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /
+      headers:
+        HOST: kr2.ttcc.tech
+        Host: c.alalbb.top
+    path: /kr2.ttcc.tech/
+  - name: 🏁ZZ-HysteriaNode-worker-general
+    server: auth0.openai.com
+    type: vmess
+    country: 🏁ZZ
+    port: 443
+    uuid: 89c1aea7-4d0d-4013-b663-0f94a3e6bdbd
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /YfB29GXf4cThJQeJb
+      headers:
+        HOST: sanjose01.890614.filegear-sg.me
+        Host: c.alalbb.top
+    path: /sanjose01.890614.filegear-sg.me/YfB29GXf4cThJQeJb
   - name: 🇺🇸 US-HysteriaNode-worker-general
     server: api.jquery.com
     type: vmess
@@ -2398,8 +3175,28 @@ proxies:
         HOST: mankadmu.com
         Host: c.alalbb.top
     path: /mankadmu.com/linkvws
+  - name: 🇫🇷FR-HysteriaNode-worker-general
+    server: api.jquery.com
+    type: vmess
+    country: 🇫🇷FR
+    port: 443
+    uuid: f584de15-2034-4170-a723-f48c2bae5e0f
+    alterId: 0
+    cipher: auto
+    network: ws
+    servername: c.alalbb.top
+    http-opts: {}
+    h2-opts: {}
+    tls: true
+    skip-cert-verify: true
+    ws-opts:
+      path: /linkws
+      headers:
+        HOST: afrhms16v.bestxray.buzz
+        Host: c.alalbb.top
+    path: /afrhms16v.bestxray.buzz/linkws
   - name: 🏁ZZ-HysteriaNode-worker-general
-    server: discord.com
+    server: nginx.com
     type: vmess
     country: 🏁ZZ
     port: 8443
@@ -2418,210 +3215,8 @@ proxies:
         HOST: us01.sh-cloudflare.sbs
         Host: c.alalbb.top
     path: /us01.sh-cloudflare.sbs/
-  - name: 🇧🇪 BE-HysteriaNode-worker-general
-    server: laravel.com
-    type: vmess
-    country: 🇧🇪 BE
-    port: 443
-    uuid: 03fcc618-b93d-6796-6aed-8a38c975d581
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /linkvws
-      headers:
-        HOST: >-
-          wrmelmwxlf.gktevlrqznwqqozy.fabpfs66gizmnojhcvqxwl.kytrcfzqla87gvgvs6c7kjnrubuh.cc
-        Host: c.alalbb.top
-    path: >-
-      /wrmelmwxlf.gktevlrqznwqqozy.fabpfs66gizmnojhcvqxwl.kytrcfzqla87gvgvs6c7kjnrubuh.cc/linkvws
-  - name: 🏁 ZZ-HysteriaNode-worker-general
-    server: api.jquery.com
-    type: vmess
-    country: 🏁 ZZ
-    port: 443
-    uuid: 05641cf5-58d2-4ba4-a9f1-b3cda0b1fb1d
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /linkws
-      headers:
-        HOST: obdii.cfd
-        Host: c.alalbb.top
-    path: /obdii.cfd/linkws
-  - name: 🏁ZZ-HysteriaNode-worker-general
-    server: api.jquery.com
-    type: vmess
-    country: 🏁ZZ
-    port: 443
-    uuid: d13fc2f5-3e05-4795-81eb-44143a09e552
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /rbqqvws
-      headers:
-        HOST: divine-salad-41fb.mostafasafair.workers.dev
-        Host: c.alalbb.top
-    path: /hknbyivfffj.site/rbqqvws
-  - name: '-HysteriaNode-worker-general'
-    server: chat.openai.com
-    type: vmess
-    country: 🏁ZZ
-    port: 443
-    uuid: 4d04b30c-ef7b-4a07-8f9e-f581ec171f8a
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /bua2hMcbA8wMzbGFtV
-      headers:
-        HOST: us7-03.890624.xyz
-        Host: c.alalbb.top
-    path: /us7-03.890624.xyz/bua2hMcbA8wMzbGFtV
-  - name: 🇧🇪 BE-HysteriaNode-worker-general
-    server: chat.openai.com
-    type: vmess
-    country: 🇧🇪 BE
-    port: 443
-    uuid: 03fcc618-b93d-6796-6aed-8a38c975d581
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /linkvws
-      headers:
-        HOST: baradiha.com
-        Host: c.alalbb.top
-    path: /baradiha.com/linkvws
-  - name: 🏁ZZ-HysteriaNode-worker-general
-    server: workers.dev
-    type: vmess
-    country: 🏁ZZ
-    port: 8443
-    uuid: 658b87e0-5d92-4424-d344-c167acd6a77f
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /ny1-sub.890699.xyz
-      headers:
-        HOST: ny1-sub.890699.xyz
-        Host: c.alalbb.top
-    path: /ny1-sub.890699.xyz/ny1-sub.890699.xyz
-  - name: 🏁ZZ-HysteriaNode-worker-general
-    server: nginx.com
-    type: vmess
-    country: 🏁ZZ
-    port: 443
-    uuid: f584de15-2034-4170-a723-f48c2bae5e0f
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /linkws
-      headers:
-        HOST: afrhms16v.bestxray.buzz
-        Host: c.alalbb.top
-    path: /afrhms16v.bestxray.buzz/linkws
-  - name: 🇺🇸US-HysteriaNode-worker-general
-    server: chat.openai.com
-    type: vmess
-    country: 🇺🇸US
-    port: 2083
-    uuid: f082eeca-e068-45f9-d1bf-46e9de9bdf57
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /ny2-sub.930.pp.ua
-      headers:
-        HOST: ny2-sub.930.pp.ua
-        Host: c.alalbb.top
-    path: /ny2-sub.930.pp.ua/ny2-sub.930.pp.ua
-  - name: 🇺🇸US-HysteriaNode-worker-general
-    server: workers.dev
-    type: vmess
-    country: 🇺🇸US
-    port: 443
-    uuid: 950db6aa-4926-4616-816e-ec0312dcb87b
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /linkws
-      headers:
-        HOST: jahfkjha.cfd
-        Host: c.alalbb.top
-    path: /jahfkjha.cfd/linkws
-  - name: 🇫🇷 FR-HysteriaNode-worker-general
-    server: chat.openai.com
-    type: vmess
-    country: 🇫🇷 FR
-    port: 443
-    uuid: 03fcc618-b93d-6796-6aed-8a38c975d581
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /linkvws
-      headers:
-        HOST: capellare.com
-        Host: c.alalbb.top
-    path: /capellare.com/linkvws
   - name: 🇺🇸 US-HysteriaNode-worker-general
-    server: cdnjs.com
+    server: nginx.com
     type: vmess
     country: 🇺🇸 US
     port: 443
@@ -2640,111 +3235,16 @@ proxies:
         HOST: obdii.cfd
         Host: c.alalbb.top
     path: /obdii.cfd/linkws
-  - name: '-HysteriaNode-worker-general'
-    server: api.jquery.com
-    type: vmess
-    country: 🇺🇸US
-    port: 443
-    uuid: edbb1059-1633-4271-b66e-ed4fba47a1bf
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /linkws
-      headers:
-        HOST: linde06.indiavideo.sbs
-        Host: c.alalbb.top
-    path: /linde06.indiavideo.sbs/linkws
   - name: 🏁ZZ-HysteriaNode-worker-general
-    server: nginx.com
-    type: vmess
-    country: 🏁ZZ
-    port: 8443
-    uuid: 41963e6b-295d-45a0-b6cc-38fbdd3e3f75
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /lon1-sub.890699.xyz
-      headers:
-        HOST: lon1-sub.890699.xyz
-        Host: c.alalbb.top
-    path: /lon1-sub.890699.xyz/lon1-sub.890699.xyz
-  - name: 🏁ZZ-HysteriaNode-worker-general
-    server: codepen.io
-    type: vmess
-    country: 🏁ZZ
-    port: 2083
-    uuid: 381cb6d1-6ad4-4909-8494-b8d786cf78ce
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /
-      headers:
-        HOST: 1744007578.speed.ruanewa.cccp.freefly.pp.ua
-        Host: c.alalbb.top
-    path: /1744007578.speed.ruanewa.cccp.freefly.pp.ua/
-  - name: '-HysteriaNode-worker-general'
     server: www.speedtest.net
     type: vmess
-    port: 8443
-    uuid: 914584ee-3515-46ac-a09d-4677a2e9dc9a
+    country: 🏁ZZ
+    port: 443
+    uuid: de94cc0a-0592-4969-b1fc-97ea8f0ea0b3
     alterId: 0
     cipher: auto
     network: ws
     servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    ws-opts:
-      path: /
-      headers:
-        Host: c.alalbb.top
-    path: /us01.sh-cloudflare.sbs/
-  - name: 🇺🇸 US-HysteriaNode-worker-general
-    server: codepen.io
-    type: vmess
-    country: 🇺🇸 US
-    port: 443
-    uuid: 950db6aa-4926-4616-816e-ec0312dcb87b
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /linkws
-      headers:
-        HOST: jahfkjha.cfd
-        Host: c.alalbb.top
-    path: /jahfkjha.cfd/linkws
-  - name: '-HysteriaNode-worker-general'
-    server: cdnjs.com
-    type: vmess
-    port: 443
-    uuid: 56529ad8-61d2-4bfa-aa0b-a800719cb5fe
-    alterId: 0
-    cipher: auto
-    network: ws
     http-opts: {}
     h2-opts: {}
     tls: true
@@ -2752,55 +3252,15 @@ proxies:
     ws-opts:
       path: /aa
       headers:
+        HOST: us.insbot.filegear-sg.me
         Host: c.alalbb.top
-    servername: c.alalbb.top
-    path: /tw.insbot.filegear-sg.me/aa
-  - name: 🇬🇧 GB-HysteriaNode-worker-general
-    server: codepen.io
-    type: vmess
-    country: 🇬🇧 GB
-    port: 443
-    uuid: 9b456c2a-f2c1-45e1-87a9-b7628b04bb24
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /linkws
-      headers:
-        HOST: beyonddsz.cfd
-        Host: c.alalbb.top
-    path: /beyonddsz.cfd/linkws
+    path: /us.insbot.filegear-sg.me/aa
   - name: 🏁ZZ-HysteriaNode-worker-general
     server: discord.com
     type: vmess
     country: 🏁ZZ
-    port: 8443
-    uuid: 41963e6b-295d-45a0-b6cc-38fbdd3e3f75
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /lon1-sub.890699.xyz
-      headers:
-        HOST: lon1-sub.890699.xyz
-        Host: c.alalbb.top
-    path: /lon1-sub.890699.xyz/lon1-sub.890699.xyz
-  - name: '-HysteriaNode-worker-general'
-    server: chat.openai.com
-    type: vmess
-    country: 🇺🇸 US
     port: 443
-    uuid: edbb1059-1633-4271-b66e-ed4fba47a1bf
+    uuid: 47eab0de-97f9-49be-f2f3-2e4eb17268e6
     alterId: 0
     cipher: auto
     network: ws
@@ -2810,151 +3270,11 @@ proxies:
     tls: true
     skip-cert-verify: true
     ws-opts:
-      path: /linkws
+      path: /aa
       headers:
-        HOST: linde06.indiavideo.sbs
+        HOST: hk.insbot.filegear-sg.me
         Host: c.alalbb.top
-    path: /linde06.indiavideo.sbs/linkws
-  - name: 🏁ZZ-HysteriaNode-worker-general
-    server: nginx.com
-    type: vmess
-    country: 🏁ZZ
-    port: 443
-    uuid: 576c81b6-4976-4fe3-b1a9-05a9c302e98e
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /SNwNdunw28lVztopw90eoXel
-      headers:
-        HOST: us10-04.852224.ggff.net
-        Host: c.alalbb.top
-    path: /us10-04.852224.ggff.net/SNwNdunw28lVztopw90eoXel
-  - name: 🇧🇪 BE-HysteriaNode-worker-general
-    server: nginx.com
-    type: vmess
-    country: 🇧🇪 BE
-    port: 443
-    uuid: 03fcc618-b93d-6796-6aed-8a38c975d581
-    alterId: 1
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: linkvws
-      headers:
-        HOST: 57.128.184.119
-        Host: c.alalbb.top
-    path: /57.128.184.119/linkvws
-  - name: 🇨🇴CO-HysteriaNode-worker-general
-    server: api.jquery.com
-    type: vmess
-    country: 🇨🇴CO
-    port: 443
-    uuid: 950db6aa-4926-4616-816e-ec0312dcb87b
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /linkws
-      headers:
-        HOST: jahfkjha.cfd
-        Host: c.alalbb.top
-    path: /jahfkjha.cfd/linkws
-  - name: 🏁ZZ-HysteriaNode-worker-general
-    server: discord.com
-    type: vmess
-    country: 🏁ZZ
-    port: 2096
-    uuid: 658b87e0-5d92-4424-d344-c167acd6a77f
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /ny1-sub.890699.xyz
-      headers:
-        HOST: ny1-dash.890699.xyz
-        Host: c.alalbb.top
-    path: /ny1-dash.890699.xyz/ny1-sub.890699.xyz
-  - name: 🇸🇪SE-HysteriaNode-worker-general
-    server: chat.openai.com
-    type: vmess
-    country: 🇸🇪SE
-    port: 443
-    uuid: 950db6aa-4926-4616-816e-ec0312dcb87b
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /linkws
-      headers:
-        HOST: jahfkjha.cfd
-        Host: c.alalbb.top
-    path: /jahfkjha.cfd/linkws
-  - name: 🇺🇸US-HysteriaNode-worker-general
-    server: workers.dev
-    type: vmess
-    country: 🇺🇸US
-    port: 2096
-    uuid: f082eeca-e068-45f9-d1bf-46e9de9bdf57
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /ny2-sub.930.pp.ua
-      headers:
-        HOST: ny2-sub.930.pp.ua
-        Host: c.alalbb.top
-    path: /ny2-sub.930.pp.ua/ny2-sub.930.pp.ua
-  - name: 🇺🇸US-HysteriaNode-worker-general
-    server: laravel.com
-    type: vmess
-    country: 🇺🇸US
-    port: 443
-    uuid: 950db6aa-4926-4616-816e-ec0312dcb87b
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /linkws
-      headers:
-        HOST: jahfkjha.cfd
-        Host: c.alalbb.top
-    path: /jahfkjha.cfd/linkws
+    path: /hk.insbot.filegear-sg.me/aa
   - name: 🏁ZZ-HysteriaNode-worker-general
     server: api.jquery.com
     type: vmess
@@ -2976,50 +3296,10 @@ proxies:
         Host: c.alalbb.top
     path: /lon1-sub.890699.xyz/lon1-sub.890699.xyz
   - name: 🏁ZZ-HysteriaNode-worker-general
-    server: www.speedtest.net
-    type: vmess
-    country: 🏁ZZ
-    port: 443
-    uuid: f584de15-2034-4170-a723-f48c2bae5e0f
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /linkws
-      headers:
-        HOST: afrhms16v.bestxray.buzz
-        Host: c.alalbb.top
-    path: /afrhms16v.bestxray.buzz/linkws
-  - name: 🇺🇸US-HysteriaNode-worker-general
     server: laravel.com
     type: vmess
-    country: 🇺🇸US
-    port: 443
-    uuid: 05641cf5-58d2-4ba4-a9f1-b3cda0b1fb1d
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /linkws
-      headers:
-        HOST: obdii.cfd
-        Host: c.alalbb.top
-    path: /obdii.cfd/linkws
-  - name: 🏁ZZ-HysteriaNode-worker-general
-    server: workers.dev
-    type: vmess
     country: 🏁ZZ
-    port: 2083
+    port: 8443
     uuid: 381cb6d1-6ad4-4909-8494-b8d786cf78ce
     alterId: 0
     cipher: auto
@@ -3032,13 +3312,13 @@ proxies:
     ws-opts:
       path: /
       headers:
-        HOST: 1744007578.speed.ruanewa.cccp.freefly.pp.ua
+        HOST: 1744007578.speed.adl.cccp.freefly.pp.ua
         Host: c.alalbb.top
-    path: /1744007578.speed.ruanewa.cccp.freefly.pp.ua/
-  - name: 🇨🇴CO-HysteriaNode-worker-general
-    server: chat.openai.com
+    path: /1744007578.speed.adl.cccp.freefly.pp.ua/
+  - name: 🏁ZZ-HysteriaNode-worker-general
+    server: nginx.com
     type: vmess
-    country: 🇨🇴CO
+    country: 🏁ZZ
     port: 443
     uuid: f584de15-2034-4170-a723-f48c2bae5e0f
     alterId: 0
@@ -3055,48 +3335,8 @@ proxies:
         HOST: afrhms16v.bestxray.buzz
         Host: c.alalbb.top
     path: /afrhms16v.bestxray.buzz/linkws
-  - name: 🇺🇸 US-HysteriaNode-worker-general
-    server: nginx.com
-    type: vmess
-    country: 🇺🇸 US
-    port: 443
-    uuid: edbb1059-1633-4271-b66e-ed4fba47a1bf
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /linkws
-      headers:
-        HOST: linde06.indiavideo.sbs
-        Host: c.alalbb.top
-    path: /linde06.indiavideo.sbs/linkws
-  - name: 🏁 ZZ-HysteriaNode-worker-general
-    server: workers.dev
-    type: vmess
-    country: 🏁 ZZ
-    port: 443
-    uuid: edbb1059-1633-4271-b66e-ed4fba47a1bf
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /linkws
-      headers:
-        HOST: linde06.indiavideo.sbs
-        Host: c.alalbb.top
-    path: /linde06.indiavideo.sbs/linkws
   - name: 🇺🇸US-HysteriaNode-worker-general
-    server: cdnjs.com
+    server: www.speedtest.net
     type: vmess
     country: 🇺🇸US
     port: 443
@@ -3115,28 +3355,8 @@ proxies:
         HOST: qwe.852224.ggff.net
         Host: c.alalbb.top
     path: /qwe.852224.ggff.net/SpXidaRA9PbqU8RhisheV
-  - name: '-HysteriaNode-worker-general'
-    server: nginx.com
-    type: vmess
-    country: 🇺🇸US
-    port: 443
-    uuid: e537f2f5-2a0c-4f59-92c9-832ca6433bf3
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /linkws
-      headers:
-        HOST: irvideo.cfd
-        Host: c.alalbb.top
-    path: /irvideo.cfd/linkws
   - name: 🇺🇸US-HysteriaNode-worker-general
-    server: chat.openai.com
+    server: auth0.openai.com
     type: vmess
     country: 🇺🇸US
     port: 443
@@ -3155,274 +3375,13 @@ proxies:
         HOST: obdii.cfd
         Host: c.alalbb.top
     path: /obdii.cfd/linkws
-  - name: '-HysteriaNode-worker-general'
-    server: www.speedtest.net
-    type: vmess
-    country: 🇨🇴CO
-    port: 443
-    uuid: edbb1059-1633-4271-b66e-ed4fba47a1bf
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /linkws
-      headers:
-        HOST: linde06.indiavideo.sbs
-        Host: c.alalbb.top
-    path: /linde06.indiavideo.sbs/linkws
-  - name: 🇺🇸US-HysteriaNode-worker-general
-    server: www.speedtest.net
-    type: vmess
-    country: 🇺🇸US
-    port: 443
-    uuid: 5f726fe3-d82e-4da5-a711-8af0cbb2b682
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /azumase.ren
-      headers:
-        HOST: 1a2d514b-37cf-499f-8d08-d017a92ab5bb.asoul-ava.top
-        Host: c.alalbb.top
-    path: /1a2d514b-37cf-499f-8d08-d017a92ab5bb.asoul-ava.top/azumase.ren
-  - name: 🏁 ZZ-HysteriaNode-worker-general
-    server: auth0.openai.com
-    type: vmess
-    country: 🏁 ZZ
-    port: 443
-    uuid: d13fc2f5-3e05-4795-81eb-44143a09e552
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /rbqqvws
-      headers:
-        HOST: ayanjlizi.yiwis32762.workers.dev
-        Host: c.alalbb.top
-    path: /sgfqkqmltcy.site/rbqqvws
-  - name: 🇰🇷 KR-HysteriaNode-worker-general
-    server: www.speedtest.net
-    type: vmess
-    country: 🇰🇷 KR
-    port: 443
-    uuid: b2d10673-24cc-4f96-b1f3-da8b17589077
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /
-      headers:
-        HOST: kr3.ttcc.tech
-        Host: c.alalbb.top
-    path: /kr3.ttcc.tech/
-  - name: 🇺🇸 US-HysteriaNode-worker-general
-    server: api.jquery.com
-    type: vmess
-    country: 🇺🇸 US
-    port: 443
-    uuid: 39cec18f-a439-427c-9a4e-aeb6fcdf6f53
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /linkws
-      headers:
-        HOST: linja05.hwcar.sbs
-        Host: c.alalbb.top
-    path: /linja05.hwcar.sbs/linkws
-  - name: 🇺🇸 US-HysteriaNode-worker-general
-    server: nginx.com
-    type: vmess
-    country: 🇺🇸 US
-    port: 8443
-    uuid: c313606f-98c2-4d7b-ba74-48b94f61b11d
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /
-      headers:
-        HOST: uswuxian.pai50288.uk
-        Host: c.alalbb.top
-    path: /uswuxian.pai50288.uk/
-  - name: 🇺🇸US-HysteriaNode-worker-general
-    server: auth0.openai.com
-    type: vmess
-    country: 🇺🇸US
-    port: 443
-    uuid: 76221bfb-e92f-4e80-81c5-6fe48f50ac0b
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /linkws
-      headers:
-        HOST: glweidf.sbs
-        Host: c.alalbb.top
-    path: /glweidf.sbs/linkws
-  - name: 🇺🇸 US-HysteriaNode-worker-general
-    server: auth0.openai.com
-    type: vmess
-    country: 🇺🇸 US
-    port: 443
-    uuid: 03fcc618-b93d-6796-6aed-8a38c975d581
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /linkvws
-      headers:
-        HOST: baradiha.com
-        Host: c.alalbb.top
-    path: /baradiha.com/linkvws
-  - name: 🇺🇸US-HysteriaNode-worker-general
-    server: api.jquery.com
-    type: vmess
-    country: 🇺🇸US
-    port: 443
-    uuid: 76221bfb-e92f-4e80-81c5-6fe48f50ac0b
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /linkws
-      headers:
-        HOST: glweidf.sbs
-        Host: c.alalbb.top
-    path: /glweidf.sbs/linkws
-  - name: 🇺🇸US-HysteriaNode-worker-general
-    server: workers.dev
-    type: vmess
-    country: 🇺🇸US
-    port: 443
-    uuid: d13fc2f5-3e05-4795-81eb-44143a09e552
-    alterId: 0
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: /rbqqvws
-      headers:
-        HOST: join---bede.mosiv2-com.workers.dev
-        Host: c.alalbb.top
-    path: /sgfqkqmltcy.site/rbqqvws
-  - name: 🇺🇸 US-HysteriaNode-worker-general
-    server: nginx.com
-    type: vmess
-    country: 🇺🇸 US
-    port: 443
-    uuid: 03fcc618-b93d-6796-6aed-8a38c975d581
-    alterId: 1
-    cipher: auto
-    network: ws
-    servername: c.alalbb.top
-    http-opts: {}
-    h2-opts: {}
-    tls: true
-    skip-cert-verify: true
-    ws-opts:
-      path: linkvws
-      headers:
-        HOST: 67.220.66.194
-        Host: c.alalbb.top
-    path: /67.220.66.194/linkvws
-  - name: AT_speednode_0001-speednodes
-    server: 152.53.230.194
-    port: 20821
+  - name: DE_speednode_0035-speednodes
+    server: 194.55.13.118
+    port: 51212
     type: vless
-    uuid: 1e3b70d6-02f1-4307-ba55-9266ab4c53f4
+    uuid: b5779651-874b-464c-8a05-02616e6833c1
     tls: false
     skip-cert-verify: false
-    udp: true
-  - name: US_speednode_0063-speednodes
-    server: www.speedtest.net
-    port: 8080
-    type: vless
-    uuid: 37923a01-14f0-40c2-a5dd-d0349ca27210
-    tls: false
-    skip-cert-verify: false
-    servername: vihypercloud.academigroup.ir.
-    network: ws
-    ws-opts:
-      path: >-
-        /Join--EXPRESSVPN_420--Join--EXPRESSVPN_420--Join--EXPRESSVPN_420--Join--EXPRESSVPN_420--Join--EXPRESSVPN_420--Join--EXPRESSVPN_420--Join--EXPRESSVPN_420--Join--EXPRESSVPN_420--Join--EXPRESSVPN_420--Join--EXPRESSVPN_420--Join--EXPRESSVPN_420--Join--EXPRESSVPN_420--Join--EXPRESSVPN_420?ed=2048
-      headers:
-        Host: vihypercloud.academigroup.ir.
-    udp: true
-  - name: CN_speednode_0024-speednodes
-    server: test123.zlqhdns.top
-    port: 40430
-    type: vless
-    uuid: 459b4a80-bd61-4ecd-a26b-e9c1809d9e45
-    flow: xtls-rprx-vision
-    tls: true
-    skip-cert-verify: false
-    client-fingerprint: chrome
-    servername: www.yahoo.com
-    reality-opts:
-      public-key: qhTzYYIgBzDLNYR79oxftqdo1kzL-1_hGJKfqrOliCY
-    udp: true
-  - name: CN_speednode_0032-speednodes
-    server: shenyang001.dynu.net
-    port: 31735
-    type: vless
-    uuid: 459b4a80-bd61-4ecd-a26b-e9c1809d9e45
-    flow: xtls-rprx-vision
-    tls: true
-    skip-cert-verify: false
-    client-fingerprint: chrome
-    servername: www.nvidia.com
-    reality-opts:
-      public-key: qhTzYYIgBzDLNYR79oxftqdo1kzL-1_hGJKfqrOliCY
     udp: true
   - name: US_speednode_0057-speednodes
     server: 162.159.20.34
@@ -3438,117 +3397,6 @@ proxies:
       headers:
         Host: 5-55sfjslf.ifenxiang.cfd
     udp: true
-  - name: CN_speednode_0019-speednodes
-    server: vip.jddns0202.top
-    port: 42426
-    type: vless
-    uuid: 459b4a80-bd61-4ecd-a26b-e9c1809d9e45
-    flow: xtls-rprx-vision
-    tls: true
-    skip-cert-verify: true
-    client-fingerprint: chrome
-    servername: gateway.icloud.com
-    reality-opts:
-      public-key: qhTzYYIgBzDLNYR79oxftqdo1kzL-1_hGJKfqrOliCY
-    udp: true
-  - name: DE_speednode_0037-speednodes
-    server: 49.12.185.64
-    port: 443
-    type: vless
-    uuid: a6e8515c-4e54-435a-9a47-2365beb40164
-    tls: false
-    skip-cert-verify: true
-    udp: true
-  - name: AT_speednode_0004-speednodes
-    server: 152.53.88.121
-    port: 50610
-    type: vless
-    uuid: a35e396d-0c85-4a57-a6db-643006a86b69
-    tls: false
-    skip-cert-verify: false
-    udp: true
-  - name: RU_speednode_0048-speednodes
-    server: 45.8.211.26
-    port: 2096
-    type: vless
-    uuid: 838f5273-5d2d-4630-a0f5-9cc8e4aef4d6
-    tls: true
-    skip-cert-verify: false
-    client-fingerprint: chrome
-    servername: UoIrHqRs.cAfUnEaR.InFo
-    alpn:
-      - h2
-      - http/1.1
-    network: ws
-    ws-opts:
-      path: /
-      headers:
-        Host: UoIrHqRs.cAfUnEaR.InFo
-    udp: true
-  - name: US_speednode_0066-speednodes
-    server: 162.159.20.34
-    port: 2095
-    type: vless
-    uuid: 59860b15-b2d9-47f9-9b92-81bd1639fcc5
-    tls: false
-    skip-cert-verify: false
-    servername: 5-55sfjslf.ifenxiang.cfd
-    network: ws
-    ws-opts:
-      path: /TELEGRAM-MARAMBASHI_MARAMBASHI?ed=512
-      headers:
-        Host: 5-55sfjslf.ifenxiang.cfd
-    udp: true
-  - name: CH_speednode_0007-speednodes
-    server: 37.156.46.44
-    port: 59838
-    type: vless
-    uuid: f28b23ed-6eb2-da9a-c112-6918a83654a6
-    flow: xtls-rprx-vision
-    tls: true
-    skip-cert-verify: true
-    client-fingerprint: chrome
-    servername: stackoverflow.com
-    reality-opts:
-      public-key: KmXtdOimd1xGGg7V2rvo74_HxMd6_bzFyosF6Z5c22A
-      short-id: d6d54c08fbbf895f
-    udp: true
-  - name: US_speednode_0052-speednodes
-    server: www.speedtest.net
-    port: 80
-    type: vless
-    uuid: 53fa8faf-ba4b-4322-9c69-a3e5b1555049
-    tls: false
-    skip-cert-verify: true
-    servername: redfree8mahsang6.redfree8.ir
-    network: ws
-    ws-opts:
-      path: >-
-        /vpnowl-vpnowl-vpnowl-vpnowl-vpnowl-vpnowl-vpnowl-vpnowl-vpnowl-vpnowl-vpnowl-vpnowl-vpnowl-vpnowl-vpnowl-vpnowl-vpnowl-vpnowl-vpnowl-vpnowl-vpnowl-vpnowl-vpnowl-vpnowl?ed=2560
-      headers:
-        Host: redfree8mahsang6.redfree8.ir
-    udp: true
-  - name: AT_speednode_0003-speednodes
-    server: 152.53.91.37
-    port: 19290
-    type: vless
-    uuid: 2a8e6c01-49d3-4023-9955-1dd8ef2acd6c
-    tls: false
-    skip-cert-verify: false
-    udp: true
-  - name: CN_speednode_0016-speednodes
-    server: agaungzhou01.bumbleshrimp.com
-    port: 31800
-    type: vless
-    uuid: 459b4a80-bd61-4ecd-a26b-e9c1809d9e45
-    flow: xtls-rprx-vision
-    tls: true
-    skip-cert-verify: false
-    client-fingerprint: chrome
-    servername: www.nvidia.com
-    reality-opts:
-      public-key: qhTzYYIgBzDLNYR79oxftqdo1kzL-1_hGJKfqrOliCY
-    udp: true
   - name: HK_speednode_0041-speednodes
     server: hkt-ty-line-1.sudatech.store
     port: 20550
@@ -3562,37 +3410,21 @@ proxies:
     reality-opts:
       public-key: cWs2mTxI3sdZlPYsRh239mJFnxi0Y8RmF-ZEtziFNQ8
     udp: true
-  - name: AT_speednode_0002-speednodes
-    server: 152.53.224.247
-    port: 52133
+  - name: AT_speednode_0004-speednodes
+    server: 152.53.88.121
+    port: 50610
     type: vless
-    uuid: 9f8cd09e-8a6e-4800-97fb-57070d45125e
+    uuid: a35e396d-0c85-4a57-a6db-643006a86b69
     tls: false
     skip-cert-verify: false
     udp: true
-  - name: CH_speednode_0009-speednodes
-    server: yapc-1.afshin.ir
-    port: 443
+  - name: AT_speednode_0003-speednodes
+    server: 152.53.91.37
+    port: 19290
     type: vless
-    uuid: 7c317161-5cf8-4cbc-811a-d1297c41bb23
-    flow: xtls-rprx-vision
-    tls: true
+    uuid: 2a8e6c01-49d3-4023-9955-1dd8ef2acd6c
+    tls: false
     skip-cert-verify: false
-    client-fingerprint: chrome
-    servername: YAPC-1.afshin.ir
-    udp: true
-  - name: CN_speednode_0034-speednodes
-    server: beiyong.dynuddns.net
-    port: 57926
-    type: vless
-    uuid: 459b4a80-bd61-4ecd-a26b-e9c1809d9e45
-    flow: xtls-rprx-vision
-    tls: true
-    skip-cert-verify: false
-    client-fingerprint: chrome
-    servername: gateway.icloud.com
-    reality-opts:
-      public-key: qhTzYYIgBzDLNYR79oxftqdo1kzL-1_hGJKfqrOliCY
     udp: true
   - name: US_speednode_0069-speednodes
     server: tgju.org
@@ -3608,167 +3440,13 @@ proxies:
       headers:
         Host: M4.nF9JZ2st7N.zULAiR.ORG.
     udp: true
-  - name: US_speednode_0059-speednodes
-    server: 104.18.20.69
-    port: 443
+  - name: AT_speednode_0002-speednodes
+    server: 152.53.224.247
+    port: 52133
     type: vless
-    uuid: 6c84a81d-7c36-44ca-a40d-d63fc20abb18
-    tls: true
-    skip-cert-verify: true
-    client-fingerprint: ios
-    servername: us5s.pqvip.top
-    network: ws
-    ws-opts:
-      path: /pq/us5
-      headers:
-        Host: us5s.pqvip.top
-    udp: true
-  - name: CH_speednode_0008-speednodes
-    server: 152.67.68.116
-    port: 443
-    type: vless
-    uuid: 7c317161-5cf8-4cbc-811a-d1297c41bb23
-    flow: xtls-rprx-vision
-    tls: true
-    skip-cert-verify: false
-    client-fingerprint: chrome
-    servername: yapc-1.afshin.ir
-    udp: true
-  - name: CH_speednode_0011-speednodes
-    server: yapc-1.afshin.ir
-    port: 443
-    type: vless
-    uuid: 7c317161-5cf8-4cbc-811a-d1297c41bb23
-    flow: xtls-rprx-vision
-    tls: true
-    skip-cert-verify: false
-    client-fingerprint: chrome
-    servername: yapc-1.afshin.ir
-    udp: true
-  - name: CN_speednode_0013-speednodes
-    server: beiyong.dynuddns.net
-    port: 15842
-    type: vless
-    uuid: 459b4a80-bd61-4ecd-a26b-e9c1809d9e45
-    flow: xtls-rprx-vision
-    tls: true
-    skip-cert-verify: false
-    client-fingerprint: chrome
-    servername: www.yahoo.com
-    reality-opts:
-      public-key: qhTzYYIgBzDLNYR79oxftqdo1kzL-1_hGJKfqrOliCY
-    udp: true
-  - name: CH_speednode_0010-speednodes
-    server: 152.67.68.116
-    port: 443
-    type: vless
-    uuid: 7c317161-5cf8-4cbc-811a-d1297c41bb23
-    flow: xtls-rprx-vision
-    tls: true
-    skip-cert-verify: true
-    client-fingerprint: chrome
-    servername: YAPC-1.afshin.ir
-    udp: true
-  - name: CN_speednode_0021-speednodes
-    server: shenzhou05.mysynology.net
-    port: 29023
-    type: vless
-    uuid: 459b4a80-bd61-4ecd-a26b-e9c1809d9e45
-    flow: xtls-rprx-vision
-    tls: true
-    skip-cert-verify: false
-    client-fingerprint: chrome
-    servername: www.amazon.com
-    reality-opts:
-      public-key: qhTzYYIgBzDLNYR79oxftqdo1kzL-1_hGJKfqrOliCY
-    udp: true
-  - name: CN_speednode_0027-speednodes
-    server: csuzhou01.1cooldns.com
-    port: 41274
-    type: vless
-    uuid: 459b4a80-bd61-4ecd-a26b-e9c1809d9e45
-    flow: xtls-rprx-vision
-    tls: true
-    skip-cert-verify: true
-    client-fingerprint: chrome
-    servername: www.amazon.com
-    reality-opts:
-      public-key: qhTzYYIgBzDLNYR79oxftqdo1kzL-1_hGJKfqrOliCY
-    udp: true
-  - name: CN_speednode_0018-speednodes
-    server: agaungzhou01.bumbleshrimp.com
-    port: 12791
-    type: vless
-    uuid: 459b4a80-bd61-4ecd-a26b-e9c1809d9e45
-    flow: xtls-rprx-vision
-    tls: true
-    skip-cert-verify: false
-    client-fingerprint: chrome
-    servername: www.yahoo.com
-    reality-opts:
-      public-key: qhTzYYIgBzDLNYR79oxftqdo1kzL-1_hGJKfqrOliCY
-    udp: true
-  - name: CN_speednode_0014-speednodes
-    server: gysz0000.dynu.net
-    port: 15823
-    type: vless
-    uuid: 459b4a80-bd61-4ecd-a26b-e9c1809d9e45
-    flow: xtls-rprx-vision
-    tls: true
-    skip-cert-verify: false
-    client-fingerprint: chrome
-    servername: www.yahoo.com
-    reality-opts:
-      public-key: qhTzYYIgBzDLNYR79oxftqdo1kzL-1_hGJKfqrOliCY
-    udp: true
-  - name: US_speednode_0058-speednodes
-    server: fastaly.dollardoon.com
-    port: 80
-    type: vless
-    uuid: a02f4706-8451-433b-b02a-93b584b54fa0
+    uuid: 9f8cd09e-8a6e-4800-97fb-57070d45125e
     tls: false
     skip-cert-verify: false
-    servername: vipfast_7.com
-    network: ws
-    ws-opts:
-      path: >-
-        /@V2RAYFAST_7@V2RAYFAST_7@V2RAYFAST_7@V2RAYFAST_7@V2RAYFAST_7@V2RAYFAST_7@V2RAYFAST_7@V2RAYFAST_7@V2RAYFAST_7@V2RAYFAST_7@V2RAYFAST_7@V2RAYFAST_7@V2RAYFAST_7@V2RAYFAST_7@V2RAYFAST_7@V2RAYFAST_7@V2RAYFAST_7@V2RAYFAST_7@V2RAYFAST_7@V2RAYFAST_7@V2RAYFAST_7@V2RAYFAST_7@V2RAYFAST_7@V2RAYFAST_7?ed=2048
-      headers:
-        Host: vipfast_7.com
-    udp: true
-  - name: CN_speednode_0015-speednodes
-    server: beiyong.dynuddns.net
-    port: 29877
-    type: vless
-    uuid: 459b4a80-bd61-4ecd-a26b-e9c1809d9e45
-    flow: xtls-rprx-vision
-    tls: true
-    skip-cert-verify: false
-    client-fingerprint: chrome
-    servername: www.nvidia.com
-    reality-opts:
-      public-key: qhTzYYIgBzDLNYR79oxftqdo1kzL-1_hGJKfqrOliCY
-    udp: true
-  - name: DE_speednode_0035-speednodes
-    server: 194.55.13.118
-    port: 51212
-    type: vless
-    uuid: b5779651-874b-464c-8a05-02616e6833c1
-    tls: false
-    skip-cert-verify: false
-    udp: true
-  - name: CN_speednode_0029-speednodes
-    server: csuzhou01.1cooldns.com
-    port: 15464
-    type: vless
-    uuid: 459b4a80-bd61-4ecd-a26b-e9c1809d9e45
-    flow: xtls-rprx-vision
-    tls: true
-    skip-cert-verify: false
-    client-fingerprint: chrome
-    servername: www.nvidia.com
-    reality-opts:
-      public-key: qhTzYYIgBzDLNYR79oxftqdo1kzL-1_hGJKfqrOliCY
     udp: true
   - name: CN_speednode_0026-speednodes
     server: vip.jddns0202.top
@@ -3795,6 +3473,328 @@ proxies:
     servername: gateway.icloud.com
     reality-opts:
       public-key: qhTzYYIgBzDLNYR79oxftqdo1kzL-1_hGJKfqrOliCY
+    udp: true
+  - name: US_speednode_0063-speednodes
+    server: www.speedtest.net
+    port: 8080
+    type: vless
+    uuid: 37923a01-14f0-40c2-a5dd-d0349ca27210
+    tls: false
+    skip-cert-verify: false
+    servername: vihypercloud.academigroup.ir.
+    network: ws
+    ws-opts:
+      path: >-
+        /Join--EXPRESSVPN_420--Join--EXPRESSVPN_420--Join--EXPRESSVPN_420--Join--EXPRESSVPN_420--Join--EXPRESSVPN_420--Join--EXPRESSVPN_420--Join--EXPRESSVPN_420--Join--EXPRESSVPN_420--Join--EXPRESSVPN_420--Join--EXPRESSVPN_420--Join--EXPRESSVPN_420--Join--EXPRESSVPN_420--Join--EXPRESSVPN_420?ed=2048
+      headers:
+        Host: vihypercloud.academigroup.ir.
+    udp: true
+  - name: CN_speednode_0013-speednodes
+    server: beiyong.dynuddns.net
+    port: 15842
+    type: vless
+    uuid: 459b4a80-bd61-4ecd-a26b-e9c1809d9e45
+    flow: xtls-rprx-vision
+    tls: true
+    skip-cert-verify: false
+    client-fingerprint: chrome
+    servername: www.yahoo.com
+    reality-opts:
+      public-key: qhTzYYIgBzDLNYR79oxftqdo1kzL-1_hGJKfqrOliCY
+    udp: true
+  - name: CN_speednode_0014-speednodes
+    server: gysz0000.dynu.net
+    port: 15823
+    type: vless
+    uuid: 459b4a80-bd61-4ecd-a26b-e9c1809d9e45
+    flow: xtls-rprx-vision
+    tls: true
+    skip-cert-verify: false
+    client-fingerprint: chrome
+    servername: www.yahoo.com
+    reality-opts:
+      public-key: qhTzYYIgBzDLNYR79oxftqdo1kzL-1_hGJKfqrOliCY
+    udp: true
+  - name: DE_speednode_0037-speednodes
+    server: 49.12.185.64
+    port: 443
+    type: vless
+    uuid: a6e8515c-4e54-435a-9a47-2365beb40164
+    tls: false
+    skip-cert-verify: true
+    udp: true
+  - name: CN_speednode_0019-speednodes
+    server: vip.jddns0202.top
+    port: 42426
+    type: vless
+    uuid: 459b4a80-bd61-4ecd-a26b-e9c1809d9e45
+    flow: xtls-rprx-vision
+    tls: true
+    skip-cert-verify: true
+    client-fingerprint: chrome
+    servername: gateway.icloud.com
+    reality-opts:
+      public-key: qhTzYYIgBzDLNYR79oxftqdo1kzL-1_hGJKfqrOliCY
+    udp: true
+  - name: CH_speednode_0009-speednodes
+    server: yapc-1.afshin.ir
+    port: 443
+    type: vless
+    uuid: 7c317161-5cf8-4cbc-811a-d1297c41bb23
+    flow: xtls-rprx-vision
+    tls: true
+    skip-cert-verify: false
+    client-fingerprint: chrome
+    servername: YAPC-1.afshin.ir
+    udp: true
+  - name: CN_speednode_0018-speednodes
+    server: agaungzhou01.bumbleshrimp.com
+    port: 12791
+    type: vless
+    uuid: 459b4a80-bd61-4ecd-a26b-e9c1809d9e45
+    flow: xtls-rprx-vision
+    tls: true
+    skip-cert-verify: false
+    client-fingerprint: chrome
+    servername: www.yahoo.com
+    reality-opts:
+      public-key: qhTzYYIgBzDLNYR79oxftqdo1kzL-1_hGJKfqrOliCY
+    udp: true
+  - name: CN_speednode_0015-speednodes
+    server: beiyong.dynuddns.net
+    port: 29877
+    type: vless
+    uuid: 459b4a80-bd61-4ecd-a26b-e9c1809d9e45
+    flow: xtls-rprx-vision
+    tls: true
+    skip-cert-verify: false
+    client-fingerprint: chrome
+    servername: www.nvidia.com
+    reality-opts:
+      public-key: qhTzYYIgBzDLNYR79oxftqdo1kzL-1_hGJKfqrOliCY
+    udp: true
+  - name: CN_speednode_0021-speednodes
+    server: shenzhou05.mysynology.net
+    port: 29023
+    type: vless
+    uuid: 459b4a80-bd61-4ecd-a26b-e9c1809d9e45
+    flow: xtls-rprx-vision
+    tls: true
+    skip-cert-verify: false
+    client-fingerprint: chrome
+    servername: www.amazon.com
+    reality-opts:
+      public-key: qhTzYYIgBzDLNYR79oxftqdo1kzL-1_hGJKfqrOliCY
+    udp: true
+  - name: CN_speednode_0034-speednodes
+    server: beiyong.dynuddns.net
+    port: 57926
+    type: vless
+    uuid: 459b4a80-bd61-4ecd-a26b-e9c1809d9e45
+    flow: xtls-rprx-vision
+    tls: true
+    skip-cert-verify: false
+    client-fingerprint: chrome
+    servername: gateway.icloud.com
+    reality-opts:
+      public-key: qhTzYYIgBzDLNYR79oxftqdo1kzL-1_hGJKfqrOliCY
+    udp: true
+  - name: CH_speednode_0007-speednodes
+    server: 37.156.46.44
+    port: 59838
+    type: vless
+    uuid: f28b23ed-6eb2-da9a-c112-6918a83654a6
+    flow: xtls-rprx-vision
+    tls: true
+    skip-cert-verify: true
+    client-fingerprint: chrome
+    servername: stackoverflow.com
+    reality-opts:
+      public-key: KmXtdOimd1xGGg7V2rvo74_HxMd6_bzFyosF6Z5c22A
+      short-id: d6d54c08fbbf895f
+    udp: true
+  - name: US_speednode_0059-speednodes
+    server: 104.18.20.69
+    port: 443
+    type: vless
+    uuid: 6c84a81d-7c36-44ca-a40d-d63fc20abb18
+    tls: true
+    skip-cert-verify: true
+    client-fingerprint: ios
+    servername: us5s.pqvip.top
+    network: ws
+    ws-opts:
+      path: /pq/us5
+      headers:
+        Host: us5s.pqvip.top
+    udp: true
+  - name: CN_speednode_0032-speednodes
+    server: shenyang001.dynu.net
+    port: 31735
+    type: vless
+    uuid: 459b4a80-bd61-4ecd-a26b-e9c1809d9e45
+    flow: xtls-rprx-vision
+    tls: true
+    skip-cert-verify: false
+    client-fingerprint: chrome
+    servername: www.nvidia.com
+    reality-opts:
+      public-key: qhTzYYIgBzDLNYR79oxftqdo1kzL-1_hGJKfqrOliCY
+    udp: true
+  - name: AT_speednode_0001-speednodes
+    server: 152.53.230.194
+    port: 20821
+    type: vless
+    uuid: 1e3b70d6-02f1-4307-ba55-9266ab4c53f4
+    tls: false
+    skip-cert-verify: false
+    udp: true
+  - name: US_speednode_0052-speednodes
+    server: www.speedtest.net
+    port: 80
+    type: vless
+    uuid: 53fa8faf-ba4b-4322-9c69-a3e5b1555049
+    tls: false
+    skip-cert-verify: true
+    servername: redfree8mahsang6.redfree8.ir
+    network: ws
+    ws-opts:
+      path: >-
+        /vpnowl-vpnowl-vpnowl-vpnowl-vpnowl-vpnowl-vpnowl-vpnowl-vpnowl-vpnowl-vpnowl-vpnowl-vpnowl-vpnowl-vpnowl-vpnowl-vpnowl-vpnowl-vpnowl-vpnowl-vpnowl-vpnowl-vpnowl-vpnowl?ed=2560
+      headers:
+        Host: redfree8mahsang6.redfree8.ir
+    udp: true
+  - name: CN_speednode_0016-speednodes
+    server: agaungzhou01.bumbleshrimp.com
+    port: 31800
+    type: vless
+    uuid: 459b4a80-bd61-4ecd-a26b-e9c1809d9e45
+    flow: xtls-rprx-vision
+    tls: true
+    skip-cert-verify: false
+    client-fingerprint: chrome
+    servername: www.nvidia.com
+    reality-opts:
+      public-key: qhTzYYIgBzDLNYR79oxftqdo1kzL-1_hGJKfqrOliCY
+    udp: true
+  - name: RU_speednode_0048-speednodes
+    server: 45.8.211.26
+    port: 2096
+    type: vless
+    uuid: 838f5273-5d2d-4630-a0f5-9cc8e4aef4d6
+    tls: true
+    skip-cert-verify: false
+    client-fingerprint: chrome
+    servername: UoIrHqRs.cAfUnEaR.InFo
+    alpn:
+      - h2
+      - http/1.1
+    network: ws
+    ws-opts:
+      path: /
+      headers:
+        Host: UoIrHqRs.cAfUnEaR.InFo
+    udp: true
+  - name: CN_speednode_0027-speednodes
+    server: csuzhou01.1cooldns.com
+    port: 41274
+    type: vless
+    uuid: 459b4a80-bd61-4ecd-a26b-e9c1809d9e45
+    flow: xtls-rprx-vision
+    tls: true
+    skip-cert-verify: true
+    client-fingerprint: chrome
+    servername: www.amazon.com
+    reality-opts:
+      public-key: qhTzYYIgBzDLNYR79oxftqdo1kzL-1_hGJKfqrOliCY
+    udp: true
+  - name: CH_speednode_0011-speednodes
+    server: yapc-1.afshin.ir
+    port: 443
+    type: vless
+    uuid: 7c317161-5cf8-4cbc-811a-d1297c41bb23
+    flow: xtls-rprx-vision
+    tls: true
+    skip-cert-verify: false
+    client-fingerprint: chrome
+    servername: yapc-1.afshin.ir
+    udp: true
+  - name: CN_speednode_0029-speednodes
+    server: csuzhou01.1cooldns.com
+    port: 15464
+    type: vless
+    uuid: 459b4a80-bd61-4ecd-a26b-e9c1809d9e45
+    flow: xtls-rprx-vision
+    tls: true
+    skip-cert-verify: false
+    client-fingerprint: chrome
+    servername: www.nvidia.com
+    reality-opts:
+      public-key: qhTzYYIgBzDLNYR79oxftqdo1kzL-1_hGJKfqrOliCY
+    udp: true
+  - name: CH_speednode_0010-speednodes
+    server: 152.67.68.116
+    port: 443
+    type: vless
+    uuid: 7c317161-5cf8-4cbc-811a-d1297c41bb23
+    flow: xtls-rprx-vision
+    tls: true
+    skip-cert-verify: true
+    client-fingerprint: chrome
+    servername: YAPC-1.afshin.ir
+    udp: true
+  - name: CH_speednode_0008-speednodes
+    server: 152.67.68.116
+    port: 443
+    type: vless
+    uuid: 7c317161-5cf8-4cbc-811a-d1297c41bb23
+    flow: xtls-rprx-vision
+    tls: true
+    skip-cert-verify: false
+    client-fingerprint: chrome
+    servername: yapc-1.afshin.ir
+    udp: true
+  - name: CN_speednode_0024-speednodes
+    server: test123.zlqhdns.top
+    port: 40430
+    type: vless
+    uuid: 459b4a80-bd61-4ecd-a26b-e9c1809d9e45
+    flow: xtls-rprx-vision
+    tls: true
+    skip-cert-verify: false
+    client-fingerprint: chrome
+    servername: www.yahoo.com
+    reality-opts:
+      public-key: qhTzYYIgBzDLNYR79oxftqdo1kzL-1_hGJKfqrOliCY
+    udp: true
+  - name: US_speednode_0058-speednodes
+    server: fastaly.dollardoon.com
+    port: 80
+    type: vless
+    uuid: a02f4706-8451-433b-b02a-93b584b54fa0
+    tls: false
+    skip-cert-verify: false
+    servername: vipfast_7.com
+    network: ws
+    ws-opts:
+      path: >-
+        /@V2RAYFAST_7@V2RAYFAST_7@V2RAYFAST_7@V2RAYFAST_7@V2RAYFAST_7@V2RAYFAST_7@V2RAYFAST_7@V2RAYFAST_7@V2RAYFAST_7@V2RAYFAST_7@V2RAYFAST_7@V2RAYFAST_7@V2RAYFAST_7@V2RAYFAST_7@V2RAYFAST_7@V2RAYFAST_7@V2RAYFAST_7@V2RAYFAST_7@V2RAYFAST_7@V2RAYFAST_7@V2RAYFAST_7@V2RAYFAST_7@V2RAYFAST_7@V2RAYFAST_7?ed=2048
+      headers:
+        Host: vipfast_7.com
+    udp: true
+  - name: US_speednode_0066-speednodes
+    server: 162.159.20.34
+    port: 2095
+    type: vless
+    uuid: 59860b15-b2d9-47f9-9b92-81bd1639fcc5
+    tls: false
+    skip-cert-verify: false
+    servername: 5-55sfjslf.ifenxiang.cfd
+    network: ws
+    ws-opts:
+      path: /TELEGRAM-MARAMBASHI_MARAMBASHI?ed=512
+      headers:
+        Host: 5-55sfjslf.ifenxiang.cfd
     udp: true
 proxy-groups:
   - name: All
@@ -3841,213 +3841,213 @@ proxy-groups:
     url: http://clients3.google.com/generate_204
     interval: 600
     proxies:
-      - 🇺🇸 US-HysteriaNode-worker-general
-      - 🇺🇸US-HysteriaNode-worker-general
-      - 🏁 ZZ-HysteriaNode-worker-general
-      - 🏁ZZ-HysteriaNode-worker-general
-      - '-HysteriaNode-worker-general'
-      - '-HysteriaNode-worker-general'
-      - 🇧🇪 BE-HysteriaNode-worker-general
-      - 🇺🇸US-HysteriaNode-worker-general
-      - 🇺🇸US-HysteriaNode-worker-general
-      - 🏁ZZ-HysteriaNode-worker-general
-      - 🏁ZZ-HysteriaNode-worker-general
-      - 🏁 ZZ-HysteriaNode-worker-general
-      - 🏁 ZZ-HysteriaNode-worker-general
-      - '-HysteriaNode-worker-general'
       - 🇫🇷 FR-HysteriaNode-worker-general
+      - 🇺🇸US-HysteriaNode-worker-general
       - 🏁 ZZ-HysteriaNode-worker-general
       - '-HysteriaNode-worker-general'
       - '-HysteriaNode-worker-general'
-      - 🏁ZZ-HysteriaNode-worker-general
-      - 🇨🇦CA-HysteriaNode-worker-general
       - '-HysteriaNode-worker-general'
-      - '-HysteriaNode-worker-general'
-      - 🇺🇸 US-HysteriaNode-worker-general
-      - '-HysteriaNode-worker-general'
-      - 🏁ZZ-HysteriaNode-worker-general
-      - '-HysteriaNode-worker-general'
-      - 🏁 ZZ-HysteriaNode-worker-general
-      - 🏁ZZ-HysteriaNode-worker-general
-      - 🇺🇸US-HysteriaNode-worker-general
-      - 🇮🇷 IR-HysteriaNode-worker-general
-      - 🇺🇸US-HysteriaNode-worker-general
-      - 🏁ZZ-HysteriaNode-worker-general
-      - '-HysteriaNode-worker-general'
-      - 🇧🇪 BE-HysteriaNode-worker-general
-      - 🏁ZZ-HysteriaNode-worker-general
-      - 🇧🇪BE-HysteriaNode-worker-general
-      - 🏁ZZ-HysteriaNode-worker-general
-      - 🏁ZZ-HysteriaNode-worker-general
-      - 🇺🇸US-HysteriaNode-worker-general
-      - 🏁ZZ-HysteriaNode-worker-general
-      - 🇸🇪SE-HysteriaNode-worker-general
-      - 🏁 ZZ-HysteriaNode-worker-general
-      - 🏁ZZ-HysteriaNode-worker-general
       - 🇺🇸US-HysteriaNode-worker-general
       - 🇺🇸US-HysteriaNode-worker-general
-      - '-HysteriaNode-worker-general'
-      - 🇫🇷FR-HysteriaNode-worker-general
-      - 🇺🇸 US-HysteriaNode-worker-general
-      - '-HysteriaNode-worker-general'
       - 🏁ZZ-HysteriaNode-worker-general
       - 🇨🇴CO-HysteriaNode-worker-general
       - 🇺🇸US-HysteriaNode-worker-general
-      - 🏁ZZ-HysteriaNode-worker-general
-      - 🇺🇸US-HysteriaNode-worker-general
-      - 🏁ZZ-HysteriaNode-worker-general
-      - 🏁 ZZ-HysteriaNode-worker-general
-      - 🇫🇷FR-HysteriaNode-worker-general
-      - '-HysteriaNode-worker-general'
-      - 🇳🇱NL-HysteriaNode-worker-general
-      - 🇺🇸US-HysteriaNode-worker-general
-      - 🏁ZZ-HysteriaNode-worker-general
       - 🇧🇪 BE-HysteriaNode-worker-general
-      - 🇺🇸US-HysteriaNode-worker-general
-      - 🏁ZZ-HysteriaNode-worker-general
-      - 🇧🇪 BE-HysteriaNode-worker-general
-      - 🇺🇸US-HysteriaNode-worker-general
-      - 🏁 ZZ-HysteriaNode-worker-general
-      - 🇺🇸 US-HysteriaNode-worker-general
-      - 🇧🇪 BE-HysteriaNode-worker-general
-      - 🏁ZZ-HysteriaNode-worker-general
-      - 🇨🇴CO-HysteriaNode-worker-general
       - '-HysteriaNode-worker-general'
-      - '-HysteriaNode-worker-general'
-      - 🏁ZZ-HysteriaNode-worker-general
-      - 🇫🇷FR-HysteriaNode-worker-general
-      - 🇺🇸 US-HysteriaNode-worker-general
-      - 🇳🇴 NO-HysteriaNode-worker-general
-      - '-HysteriaNode-worker-general'
-      - 🏁ZZ-HysteriaNode-worker-general
-      - 🏁ZZ-HysteriaNode-worker-general
-      - 🇺🇸US-HysteriaNode-worker-general
-      - 🇺🇸US-HysteriaNode-worker-general
-      - 🏁ZZ-HysteriaNode-worker-general
-      - 🇫🇷FR-HysteriaNode-worker-general
-      - 🇺🇸US-HysteriaNode-worker-general
-      - 🇺🇸 US-HysteriaNode-worker-general
-      - '-HysteriaNode-worker-general'
-      - 🇧🇪 BE-HysteriaNode-worker-general
-      - 🏁ZZ-HysteriaNode-worker-general
-      - 🏁ZZ-HysteriaNode-worker-general
-      - '-HysteriaNode-worker-general'
-      - 🏁ZZ-HysteriaNode-worker-general
-      - '-HysteriaNode-worker-general'
-      - 🏁ZZ-HysteriaNode-worker-general
-      - '-HysteriaNode-worker-general'
-      - '-HysteriaNode-worker-general'
-      - 🇺🇸 US-HysteriaNode-worker-general
-      - 🇺🇸US-HysteriaNode-worker-general
-      - 🇨🇴CO-HysteriaNode-worker-general
-      - 🏁ZZ-HysteriaNode-worker-general
       - 🇺🇸US-HysteriaNode-worker-general
       - '-HysteriaNode-worker-general'
+      - '-HysteriaNode-worker-general'
+      - 🇺🇸US-HysteriaNode-worker-general
       - 🇩🇪DE-HysteriaNode-worker-general
-      - 🇺🇸US-HysteriaNode-worker-general
+      - 🇫🇷FR-HysteriaNode-worker-general
       - 🏁ZZ-HysteriaNode-worker-general
-      - 🇺🇸 US-HysteriaNode-worker-general
+      - '-HysteriaNode-worker-general'
+      - '-HysteriaNode-worker-general'
       - 🏁ZZ-HysteriaNode-worker-general
-      - 🇺🇸 US-HysteriaNode-worker-general
+      - '-HysteriaNode-worker-general'
       - 🏁ZZ-HysteriaNode-worker-general
       - 🏁ZZ-HysteriaNode-worker-general
       - '-HysteriaNode-worker-general'
-      - 🇺🇸 US-HysteriaNode-worker-general
-      - 🏁ZZ-HysteriaNode-worker-general
-      - 🏁ZZ-HysteriaNode-worker-general
+      - 🇧🇪 BE-HysteriaNode-worker-general
+      - '-HysteriaNode-worker-general'
+      - 🇺🇸US-HysteriaNode-worker-general
       - 🇫🇷 FR-HysteriaNode-worker-general
+      - 🇫🇷FR-HysteriaNode-worker-general
+      - 🏁ZZ-HysteriaNode-worker-general
+      - 🏁 ZZ-HysteriaNode-worker-general
+      - 🇺🇸US-HysteriaNode-worker-general
+      - 🇨🇴CO-HysteriaNode-worker-general
+      - '-HysteriaNode-worker-general'
+      - 🇺🇸US-HysteriaNode-worker-general
+      - 🇧🇪BE-HysteriaNode-worker-general
+      - 🇧🇪 BE-HysteriaNode-worker-general
+      - 🇧🇪 BE-HysteriaNode-worker-general
+      - 🏁 ZZ-HysteriaNode-worker-general
+      - 🇺🇸US-HysteriaNode-worker-general
+      - 🇧🇪 BE-HysteriaNode-worker-general
+      - '-HysteriaNode-worker-general'
+      - 🏁 ZZ-HysteriaNode-worker-general
+      - 🏁ZZ-HysteriaNode-worker-general
+      - 🇧🇪 BE-HysteriaNode-worker-general
+      - 🇺🇸US-HysteriaNode-worker-general
+      - 🇺🇸US-HysteriaNode-worker-general
+      - '-HysteriaNode-worker-general'
+      - 🏁ZZ-HysteriaNode-worker-general
+      - 🏁ZZ-HysteriaNode-worker-general
+      - 🇺🇸US-HysteriaNode-worker-general
+      - 🏁ZZ-HysteriaNode-worker-general
+      - 🏁 ZZ-HysteriaNode-worker-general
+      - 🇫🇷FR-HysteriaNode-worker-general
+      - 🇺🇸US-HysteriaNode-worker-general
+      - 🇧🇪 BE-HysteriaNode-worker-general
+      - '-HysteriaNode-worker-general'
+      - 🏁ZZ-HysteriaNode-worker-general
+      - 🏁ZZ-HysteriaNode-worker-general
+      - 🇧🇪 BE-HysteriaNode-worker-general
+      - '-HysteriaNode-worker-general'
+      - 🇧🇪 BE-HysteriaNode-worker-general
+      - 🇨🇴CO-HysteriaNode-worker-general
+      - '-HysteriaNode-worker-general'
+      - 🏁 ZZ-HysteriaNode-worker-general
+      - 🏁ZZ-HysteriaNode-worker-general
+      - 🇨🇴CO-HysteriaNode-worker-general
       - 🇦🇪AE-HysteriaNode-worker-general
-      - 🇺🇸US-HysteriaNode-worker-general
-      - '-HysteriaNode-worker-general'
-      - 🇺🇸 US-HysteriaNode-worker-general
       - 🏁ZZ-HysteriaNode-worker-general
-      - 🇧🇪 BE-HysteriaNode-worker-general
-      - 🏁 ZZ-HysteriaNode-worker-general
-      - 🏁ZZ-HysteriaNode-worker-general
-      - '-HysteriaNode-worker-general'
-      - 🇧🇪 BE-HysteriaNode-worker-general
-      - 🏁ZZ-HysteriaNode-worker-general
-      - 🏁ZZ-HysteriaNode-worker-general
-      - 🇺🇸US-HysteriaNode-worker-general
-      - 🇺🇸US-HysteriaNode-worker-general
-      - 🇫🇷 FR-HysteriaNode-worker-general
-      - 🇺🇸 US-HysteriaNode-worker-general
-      - '-HysteriaNode-worker-general'
-      - 🏁ZZ-HysteriaNode-worker-general
-      - 🏁ZZ-HysteriaNode-worker-general
-      - '-HysteriaNode-worker-general'
-      - 🇺🇸 US-HysteriaNode-worker-general
-      - '-HysteriaNode-worker-general'
-      - 🇬🇧 GB-HysteriaNode-worker-general
-      - 🏁ZZ-HysteriaNode-worker-general
-      - '-HysteriaNode-worker-general'
-      - 🏁ZZ-HysteriaNode-worker-general
-      - 🇧🇪 BE-HysteriaNode-worker-general
       - 🇨🇴CO-HysteriaNode-worker-general
-      - 🏁ZZ-HysteriaNode-worker-general
+      - '-HysteriaNode-worker-general'
+      - 🇺🇸US-HysteriaNode-worker-general
       - 🇸🇪SE-HysteriaNode-worker-general
+      - '-HysteriaNode-worker-general'
+      - 🇫🇷 FR-HysteriaNode-worker-general
+      - 🏁ZZ-HysteriaNode-worker-general
+      - '-HysteriaNode-worker-general'
+      - 🇺🇸US-HysteriaNode-worker-general
+      - 🏁 ZZ-HysteriaNode-worker-general
+      - '-HysteriaNode-worker-general'
       - 🇺🇸US-HysteriaNode-worker-general
       - 🇺🇸US-HysteriaNode-worker-general
-      - 🏁ZZ-HysteriaNode-worker-general
-      - 🏁ZZ-HysteriaNode-worker-general
-      - 🇺🇸US-HysteriaNode-worker-general
-      - 🏁ZZ-HysteriaNode-worker-general
-      - 🇨🇴CO-HysteriaNode-worker-general
+      - 🏁 ZZ-HysteriaNode-worker-general
       - 🇺🇸 US-HysteriaNode-worker-general
+      - 🏁ZZ-HysteriaNode-worker-general
       - 🏁 ZZ-HysteriaNode-worker-general
-      - 🇺🇸US-HysteriaNode-worker-general
-      - '-HysteriaNode-worker-general'
-      - 🇺🇸US-HysteriaNode-worker-general
-      - '-HysteriaNode-worker-general'
-      - 🇺🇸US-HysteriaNode-worker-general
       - 🏁 ZZ-HysteriaNode-worker-general
+      - '-HysteriaNode-worker-general'
+      - 🇨🇦CA-HysteriaNode-worker-general
+      - 🏁ZZ-HysteriaNode-worker-general
+      - '-HysteriaNode-worker-general'
+      - 🇸🇪SE-HysteriaNode-worker-general
+      - '-HysteriaNode-worker-general'
+      - 🏁ZZ-HysteriaNode-worker-general
+      - 🇺🇸 US-HysteriaNode-worker-general
+      - 🇺🇸US-HysteriaNode-worker-general
+      - 🏁ZZ-HysteriaNode-worker-general
+      - 🏁ZZ-HysteriaNode-worker-general
+      - 🇺🇸 US-HysteriaNode-worker-general
+      - 🏁ZZ-HysteriaNode-worker-general
+      - 🇳🇴 NO-HysteriaNode-worker-general
+      - 🇺🇸 US-HysteriaNode-worker-general
+      - '-HysteriaNode-worker-general'
+      - 🏁ZZ-HysteriaNode-worker-general
+      - 🏁ZZ-HysteriaNode-worker-general
+      - 🏁 ZZ-HysteriaNode-worker-general
+      - 🇺🇸 US-HysteriaNode-worker-general
+      - 🇮🇷 IR-HysteriaNode-worker-general
+      - 🏁ZZ-HysteriaNode-worker-general
+      - 🇺🇸 US-HysteriaNode-worker-general
+      - '-HysteriaNode-worker-general'
+      - 🏁ZZ-HysteriaNode-worker-general
+      - 🇺🇸 US-HysteriaNode-worker-general
+      - 🏁ZZ-HysteriaNode-worker-general
+      - 🇺🇸US-HysteriaNode-worker-general
+      - 🏁ZZ-HysteriaNode-worker-general
+      - '-HysteriaNode-worker-general'
+      - 🏁ZZ-HysteriaNode-worker-general
+      - 🇺🇸US-HysteriaNode-worker-general
+      - 🇬🇧 GB-HysteriaNode-worker-general
       - 🇰🇷 KR-HysteriaNode-worker-general
       - 🇺🇸 US-HysteriaNode-worker-general
+      - 🏁ZZ-HysteriaNode-worker-general
+      - 🇺🇸 US-HysteriaNode-worker-general
+      - 🏁ZZ-HysteriaNode-worker-general
+      - 🇺🇸US-HysteriaNode-worker-general
+      - 🇺🇸US-HysteriaNode-worker-general
+      - '-HysteriaNode-worker-general'
+      - 🏁ZZ-HysteriaNode-worker-general
+      - 🇳🇱NL-HysteriaNode-worker-general
+      - '-HysteriaNode-worker-general'
+      - 🇺🇸US-HysteriaNode-worker-general
+      - 🇺🇸US-HysteriaNode-worker-general
+      - 🏁ZZ-HysteriaNode-worker-general
       - 🇺🇸 US-HysteriaNode-worker-general
       - 🇺🇸US-HysteriaNode-worker-general
       - 🇺🇸 US-HysteriaNode-worker-general
       - 🇺🇸US-HysteriaNode-worker-general
-      - 🇺🇸US-HysteriaNode-worker-general
+      - 🏁ZZ-HysteriaNode-worker-general
       - 🇺🇸 US-HysteriaNode-worker-general
+      - 🏁ZZ-HysteriaNode-worker-general
+      - 🇺🇸US-HysteriaNode-worker-general
+      - 🏁ZZ-HysteriaNode-worker-general
+      - 🇺🇸 US-HysteriaNode-worker-general
+      - 🇺🇸 US-HysteriaNode-worker-general
+      - 🏁ZZ-HysteriaNode-worker-general
+      - 🇺🇸 US-HysteriaNode-worker-general
+      - '-HysteriaNode-worker-general'
+      - 🏁ZZ-HysteriaNode-worker-general
+      - 🇺🇸 US-HysteriaNode-worker-general
+      - 🇺🇸US-HysteriaNode-worker-general
+      - 🏁ZZ-HysteriaNode-worker-general
+      - '-HysteriaNode-worker-general'
+      - 🏁ZZ-HysteriaNode-worker-general
+      - 🇺🇸 US-HysteriaNode-worker-general
+      - 🇫🇷FR-HysteriaNode-worker-general
+      - 🏁ZZ-HysteriaNode-worker-general
+      - 🇺🇸 US-HysteriaNode-worker-general
+      - 🏁ZZ-HysteriaNode-worker-general
+      - 🏁ZZ-HysteriaNode-worker-general
+      - 🏁ZZ-HysteriaNode-worker-general
+      - 🏁ZZ-HysteriaNode-worker-general
+      - 🏁ZZ-HysteriaNode-worker-general
+      - 🇺🇸US-HysteriaNode-worker-general
+      - 🇺🇸US-HysteriaNode-worker-general
   - name: Original-speednodes
     type: url-test
     url: http://clients3.google.com/generate_204
     interval: 600
     proxies:
-      - AT_speednode_0001-speednodes
-      - US_speednode_0063-speednodes
-      - CN_speednode_0024-speednodes
-      - CN_speednode_0032-speednodes
-      - US_speednode_0057-speednodes
-      - CN_speednode_0019-speednodes
-      - DE_speednode_0037-speednodes
-      - AT_speednode_0004-speednodes
-      - RU_speednode_0048-speednodes
-      - US_speednode_0066-speednodes
-      - CH_speednode_0007-speednodes
-      - US_speednode_0052-speednodes
-      - AT_speednode_0003-speednodes
-      - CN_speednode_0016-speednodes
-      - HK_speednode_0041-speednodes
-      - AT_speednode_0002-speednodes
-      - CH_speednode_0009-speednodes
-      - CN_speednode_0034-speednodes
-      - US_speednode_0069-speednodes
-      - US_speednode_0059-speednodes
-      - CH_speednode_0008-speednodes
-      - CH_speednode_0011-speednodes
-      - CN_speednode_0013-speednodes
-      - CH_speednode_0010-speednodes
-      - CN_speednode_0021-speednodes
-      - CN_speednode_0027-speednodes
-      - CN_speednode_0018-speednodes
-      - CN_speednode_0014-speednodes
-      - US_speednode_0058-speednodes
-      - CN_speednode_0015-speednodes
       - DE_speednode_0035-speednodes
-      - CN_speednode_0029-speednodes
+      - US_speednode_0057-speednodes
+      - HK_speednode_0041-speednodes
+      - AT_speednode_0004-speednodes
+      - AT_speednode_0003-speednodes
+      - US_speednode_0069-speednodes
+      - AT_speednode_0002-speednodes
       - CN_speednode_0026-speednodes
       - CN_speednode_0020-speednodes
+      - US_speednode_0063-speednodes
+      - CN_speednode_0013-speednodes
+      - CN_speednode_0014-speednodes
+      - DE_speednode_0037-speednodes
+      - CN_speednode_0019-speednodes
+      - CH_speednode_0009-speednodes
+      - CN_speednode_0018-speednodes
+      - CN_speednode_0015-speednodes
+      - CN_speednode_0021-speednodes
+      - CN_speednode_0034-speednodes
+      - CH_speednode_0007-speednodes
+      - US_speednode_0059-speednodes
+      - CN_speednode_0032-speednodes
+      - AT_speednode_0001-speednodes
+      - US_speednode_0052-speednodes
+      - CN_speednode_0016-speednodes
+      - RU_speednode_0048-speednodes
+      - CN_speednode_0027-speednodes
+      - CH_speednode_0011-speednodes
+      - CN_speednode_0029-speednodes
+      - CH_speednode_0010-speednodes
+      - CH_speednode_0008-speednodes
+      - CN_speednode_0024-speednodes
+      - US_speednode_0058-speednodes
+      - US_speednode_0066-speednodes
 rules:
   - GEOIP,IR,DIRECT
   - DOMAIN-SUFFIX,ir,DIRECT

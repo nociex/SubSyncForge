@@ -5,16 +5,8 @@
 subscriptions:
   # 订阅源列表
 
-  - name: "cmm"
-    url: "https://subcheck.fiz.dpdns.org/download/sub"
-    enabled: true 
-    
   - name: "jjgy"
     url: "https://zh.jikun.fun/share/col/%E6%B1%9F%E6%B1%9F%E5%85%AC%E7%9B%8A?token=1yGRuU-x6r_zEz28cE_pE"
-    enabled: true 
-
-  - name: "ppua"
-    url: "https://sub-store.isfree.pp.ua/download/sub?target=URI"
     enabled: true 
 
   - name: "loc"
@@ -71,6 +63,62 @@ output:
       enabled: true
       options:
         use_first_node: true
+        
+    # 香港节点列表
+    - name: "hk_nodes"
+      template: "templates/txt_list.txt"
+      path: "hk.txt"
+      enabled: true
+      options:
+        filter_by_region: ["香港", "HK", "Hong Kong"]
+        
+    # 美国节点列表
+    - name: "us_nodes"
+      template: "templates/txt_list.txt"
+      path: "us.txt"
+      enabled: true
+      options:
+        filter_by_region: ["美国", "US", "United States"]
+        
+    # 日本节点列表
+    - name: "jp_nodes"
+      template: "templates/txt_list.txt"
+      path: "jp.txt"
+      enabled: true
+      options:
+        filter_by_region: ["日本", "JP", "Japan"]
+        
+    # 新加坡节点列表
+    - name: "sg_nodes"
+      template: "templates/txt_list.txt"
+      path: "sg.txt"
+      enabled: true
+      options:
+        filter_by_region: ["新加坡", "SG", "Singapore"]
+        
+    # OpenAI 可用节点列表
+    - name: "openai_nodes"
+      template: "templates/txt_list.txt"
+      path: "openai.txt"
+      enabled: true
+      options:
+        filter_by_service: ["OpenAI"]
+        
+    # Disney+ 可用节点列表
+    - name: "disney_nodes"
+      template: "templates/txt_list.txt"
+      path: "disney.txt"
+      enabled: true
+      options:
+        filter_by_service: ["Disney", "Disney+"]
+        
+    # Netflix 可用节点列表
+    - name: "netflix_nodes"
+      template: "templates/txt_list.txt"
+      path: "netflix.txt"
+      enabled: true
+      options:
+        filter_by_service: ["Netflix"]
 
 # 测试配置
 testing:

@@ -28,12 +28,12 @@
       "settings": {
         "vnext": [
           {
-            "address": "127.0.0.1",
-            "port": "1080",
+            "address": "{{server}}",
+            "port": "{{port}}",
             "users": [
               {
-                "id": "00000000-0000-0000-0000-000000000000",
-                "alterId": "0",
+                "id": "{{uuid}}",
+                "alterId": "{{alterId}}",
                 "security": "auto"
               }
             ]
@@ -41,16 +41,16 @@
         ]
       },
       "streamSettings": {
-        "network": "tcp",
-        "security": "none",
+        "network": "{{network}}",
+        "security": "{{security}}",
         "tlsSettings": {
-          "serverName": "",
+          "serverName": "{{serverName}}",
           "allowInsecure": false
         },
         "wsSettings": {
-          "path": "/",
+          "path": "{{path}}",
           "headers": {
-            "Host": ""
+            "Host": "{{host}}"
           }
         }
       }
