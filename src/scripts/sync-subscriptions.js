@@ -1144,6 +1144,24 @@ async function main() {
   console.log(`开始同步订阅...时间: ${new Date().toISOString()}`);
   console.log('==================================================================');
   
+  let previousNodeCount = null; // 初始化上次节点数
+  const dataDir = path.join(CONFIG.rootDir, CONFIG.options.dataDir);
+  const statusFile = path.join(dataDir, 'sync_status.json');
+
+  try {
+    // 尝试读取上次同步状态
+    if (fs.existsSync(statusFile)) {
+      const statusContent = fs.readFileSync(statusFile, 'utf-8');
+      const lastStatus = JSON.parse(statusContent);
+      if (lastStatus && typeof lastStatus.finalNodesCount === 'number') {
+        previousNodeCount = lastStatus.finalNodesCount;
+        console.log(`读取到上次同步节点数: ${previousNodeCount}`);
+      }
+    }
+  } catch (e) {
+    console.warn(`读取上次同步状态文件失败: ${e.message}`);
+  }
+
   try {
     // 加载配置
     if (!loadConfig()) {
@@ -1536,6 +1554,7 @@ async function main() {
       console.log('发送完成通知事件...');
       const eventData = {
         nodeCount: totalNodes,
+        previousNodeCount: previousNodeCount, // 添加上次节点数
         time: Date.now() - fetchStartTime,
         protocols: protocols,
         providers: providers,

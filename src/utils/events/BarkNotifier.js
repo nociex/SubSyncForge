@@ -225,29 +225,65 @@ export class BarkNotifier {
   formatContent(event, data) {
     switch (event) {
       case EventType.CONVERSION_COMPLETE:
-        let result = `成功处理 ${data.nodeCount || 0} 个节点`;
-        if (data.time) {
-          result += `，耗时 ${data.time}ms`;
+        let nodeCountStr = '';
+        const currentNodeCount = data.nodeCount || 0;
+        const previousNodeCount = data.previousNodeCount;
+
+        // 检查节点数是否有变化
+        if (typeof previousNodeCount === 'number' && previousNodeCount !== currentNodeCount) {
+          const diff = currentNodeCount - previousNodeCount;
+          const diffSign = diff > 0 ? '+' : '';
+          nodeCountStr = `节点: ${currentNodeCount} (${diffSign}${diff})`; // 显示当前数量和变化
+        } else if (typeof previousNodeCount !== 'number') {
+          // 如果没有上次记录，只显示当前数量
+          nodeCountStr = `节点: ${currentNodeCount}`;
         }
+        // 如果数量无变化，nodeCountStr 保持为空字符串，不显示节点信息
+
+        let timeStr = '';
+        if (data.time) {
+          const totalSeconds = Math.round(data.time / 1000);
+          const minutes = Math.floor(totalSeconds / 60);
+          const seconds = totalSeconds % 60;
+          if (minutes > 0) {
+            timeStr = `耗时 ${minutes}分${seconds}秒`;
+          } else {
+            timeStr = `耗时 ${seconds}秒`;
+          }
+        }
+
+        let result = `✅ 同步完成`;
+        if (nodeCountStr) { // 仅当节点数有变化或首次运行时添加
+          result += `，${nodeCountStr}`;
+        }
+        if (timeStr) {
+          result += `，${timeStr}`;
+        }
+
         if (data.providers && data.providers.length > 0) {
           result += `\n来源: ${data.providers.join(', ')}`;
         }
-        if (data.protocols) {
-          const protocolCounts = Object.entries(data.protocols)
-            .map(([protocol, count]) => `${protocol}(${count})`)
-            .join(', ');
-          result += `\n协议: ${protocolCounts}`;
+        if (data.protocols && Object.keys(data.protocols).length > 0) {
+          // 只列出存在的协议类型
+          const protocolsList = Object.keys(data.protocols).join(', ');
+          result += `\n协议: ${protocolsList}`;
         }
         if (data.regionsCount && Object.keys(data.regionsCount).length > 0) {
-          const regionCounts = Object.entries(data.regionsCount)
-            .filter(([region, count]) => count > 0)
+          // 显示Top 5地区及其数量
+          const sortedRegions = Object.entries(data.regionsCount)
+            .filter(([, count]) => count > 0)
+            .sort(([, countA], [, countB]) => countB - countA); // 按数量降序排序
+          
+          const topRegions = sortedRegions
+            .slice(0, 5) // 取前5个
             .map(([region, count]) => `${region}(${count})`)
             .join(', ');
-          if (regionCounts) {
-            result += `\n地区: ${regionCounts}`;
-          }
+            
+          const totalRegions = sortedRegions.length; // 总地区数
+          
+          result += `\n地区: ${topRegions}${totalRegions > 5 ? ` 等 ${totalRegions} 个地区` : ''}`; // 如果超过5个，添加 "等 X 个地区"
         }
-        result += `\n${new Date().toLocaleString('zh-CN')}`;
+        result += `\n${new Date().toLocaleString('zh-CN')}`; // 保留日期时间
         return result;
       case EventType.SYSTEM_ERROR:
         return `错误: ${data.message || data.error || '未知错误'}\n${new Date().toLocaleString('zh-CN')}`;
@@ -263,4 +299,4 @@ export class BarkNotifier {
         }
     }
   }
-} 
+}
