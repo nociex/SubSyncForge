@@ -1057,115 +1057,59 @@ async function generateGroupedNodeFiles(nodes, options) {
       }
     }
     
-    // 处理流媒体分组
+    // 处理应用/流媒体分组
     if (groups.media && groups.media.length > 0) {
-      console.log(`发现 ${groups.media.length} 个流媒体分组`);
-      
+      console.log(`发现 ${groups.media.length} 个应用/流媒体分组`);
+
       for (const group of groups.media) {
         if (group.nodes.length > 0) {
-          // 保持流媒体分组名称不变（已是英文）
-          const filename = `${group.name}.txt`;
+          // 使用分组名称作为文件名，例如 OpenAI.txt, Disney+.txt
+          // 需要处理 '+' 等可能在文件名中不安全的字符
+          const safeGroupName = group.name.replace(/[^a-zA-Z0-9_-]/g, '_'); // 替换特殊字符为下划线
+          const filename = `${safeGroupName}.txt`;
           const outputPath = path.join(groupDir, filename);
-          
-          // 将节点原始链接拼接为字符串
+
+          // 将节点原始链接拼接为字符串 (与地区分组逻辑相同)
           const rawNodes = group.nodes
             .map(node => {
-              // 优先使用原始URI
-              // 增加类型检查，确保 node.extra.raw 是字符串
               if (node.extra?.raw && typeof node.extra.raw === 'string' && node.extra.raw.trim().length > 0) {
-                console.log(`节点 ${node.name} 使用原始URI: ${node.extra.raw.substring(0, 30)}...`);
                 return node.extra.raw;
               }
-              
-              // 构造节点名称，遵循分组格式
-              // 获取国家/地区前缀
-              let prefix = '';
-              if (group.name === '香港') prefix = '🇭🇰 香港 ';
-              else if (group.name === '台湾') prefix = '🇹🇼 台湾 ';
-              else if (group.name === '新加坡') prefix = '🇸🇬 新加坡 ';
-              else if (group.name === '美国') prefix = '🇺🇸 美国 ';
-              else if (group.name === '日本') prefix = '🇯🇵 日本 ';
-              else if (group.name === '其他') prefix = '🌍 其他 ';
-              else prefix = '';
-              
-              // 构造完整节点名称
-              const nodeName = node.name.includes(group.name) ? node.name : `${prefix}${node.name}`;
-              console.log(`为节点 ${node.name} 构造URI，修正名称为: ${nodeName}`);
-              
-              // 如果没有原始URI，尝试根据节点属性构造
+              // 构造节点名称
+              const nodeName = node.name || 'Unnamed Node';
+              // 尝试构造URI (省略具体构造逻辑，与地区分组相同)
               if (node.type === 'vmess' && node.settings?.id) {
-                // 构造VMess节点URI
-                const vmessInfo = {
-                  v: "2",
-                  ps: nodeName,
-                  add: node.server,
-                  port: parseInt(node.port) || 443,
-                  id: node.settings.id,
-                  aid: parseInt(node.settings.alterId) || 0,
-                  net: node.settings.network || "tcp",
-                  type: "none",
-                  host: (node.settings.wsHeaders && node.settings.wsHeaders.Host) || "",
-                  path: node.settings.wsPath || "/",
-                  tls: node.settings.tls ? "tls" : "none"
-                };
-                const vmessUri = `vmess://${Buffer.from(JSON.stringify(vmessInfo)).toString('base64')}`;
-                console.log(`已构造VMess节点URI: ${vmessUri.substring(0, 30)}...`);
-                return vmessUri;
+                const vmessInfo = { v: "2", ps: nodeName, add: node.server, port: parseInt(node.port) || 443, id: node.settings.id, aid: parseInt(node.settings.alterId) || 0, net: node.settings.network || "tcp", type: "none", host: (node.settings.wsHeaders && node.settings.wsHeaders.Host) || "", path: node.settings.wsPath || "/", tls: node.settings.tls ? "tls" : "none" };
+                return `vmess://${Buffer.from(JSON.stringify(vmessInfo)).toString('base64')}`;
               } else if (node.type === 'ss' && node.settings?.method && node.settings?.password) {
-                // 构造Shadowsocks节点URI
                 const userInfo = `${node.settings.method}:${node.settings.password}`;
                 const base64UserInfo = Buffer.from(userInfo).toString('base64');
-                const ssUri = `ss://${base64UserInfo}@${node.server}:${parseInt(node.port) || 443}#${encodeURIComponent(nodeName)}`;
-                console.log(`已构造SS节点URI: ${ssUri.substring(0, 30)}...`);
-                return ssUri;
+                return `ss://${base64UserInfo}@${node.server}:${parseInt(node.port) || 443}#${encodeURIComponent(nodeName)}`;
               } else if (node.type === 'trojan' && node.settings?.password) {
-                // 构造Trojan节点URI
-                const trojanUri = `trojan://${node.settings.password}@${node.server}:${parseInt(node.port) || 443}?sni=${node.settings.sni || ''}&allowInsecure=${node.settings.allowInsecure ? '1' : '0'}#${encodeURIComponent(nodeName)}`;
-                console.log(`已构造Trojan节点URI: ${trojanUri.substring(0, 30)}...`);
-                return trojanUri;
+                return `trojan://${node.settings.password}@${node.server}:${parseInt(node.port) || 443}?sni=${node.settings.sni || ''}&allowInsecure=${node.settings.allowInsecure ? '1' : '0'}#${encodeURIComponent(nodeName)}`;
               } else if (node.type === 'ssr' && node.settings) {
-                // 构造SSR节点URI
                 try {
-                  const ssrParams = {
-                          server: node.server,
-                    port: parseInt(node.port) || 443,
-                    protocol: node.settings.protocol || 'origin',
-                    method: node.settings.method || 'aes-256-cfb',
-                    obfs: node.settings.obfs || 'plain',
-                    password: node.settings.password || '',
-                  };
-                  
-                  const base64Params = Buffer.from(
-                    `${ssrParams.server}:${ssrParams.port}:${ssrParams.protocol}:${ssrParams.method}:${ssrParams.obfs}:${Buffer.from(ssrParams.password).toString('base64')}`
-                  ).toString('base64');
-                  
+                  const ssrParams = { server: node.server, port: parseInt(node.port) || 443, protocol: node.settings.protocol || 'origin', method: node.settings.method || 'aes-256-cfb', obfs: node.settings.obfs || 'plain', password: node.settings.password || '' };
+                  const base64Params = Buffer.from(`${ssrParams.server}:${ssrParams.port}:${ssrParams.protocol}:${ssrParams.method}:${ssrParams.obfs}:${Buffer.from(ssrParams.password).toString('base64')}`).toString('base64');
                   const base64Remarks = Buffer.from(nodeName).toString('base64');
-                  const ssrUri = `ssr://${base64Params}/?remarks=${base64Remarks}`;
-                  console.log(`已构造SSR节点URI: ${ssrUri.substring(0, 30)}...`);
-                  return ssrUri;
-                } catch (error) {
-                  console.error(`构造SSR节点URI失败:`, error);
-                  return '';
-                }
+                  return `ssr://${base64Params}/?remarks=${base64Remarks}`;
+                } catch (error) { return ''; }
               }
-              
-              // 无法构造URI的情况下返回空字符串
-              console.warn(`无法为节点 ${node.name} 构造URI，类型: ${node.type}`);
+              console.warn(`无法为应用分组节点 ${node.name} 构造URI，类型: ${node.type}`);
               return '';
             })
-            .filter(raw => raw.trim().length > 0) // 过滤掉空链接
-            .join('\n'); // 用换行符连接
-          
-          // 输出节点数量统计
-          const uriCount = rawNodes.split('\n').length;
+            .filter(raw => raw && raw.trim().length > 0)
+            .join('\n');
+
+          const uriCount = rawNodes.split('\n').filter(Boolean).length; // 确保计算准确
           console.log(`${filename} 生成了 ${uriCount} 个节点URI，原始节点数 ${group.nodes.length}`);
-          
-          // 直接写入原始节点链接，不再使用base64编码
+
+          // 写入文件
           try {
             fs.writeFileSync(outputPath, rawNodes);
-            console.log(`已生成流媒体分组节点文件: ${filename} (${group.nodes.length} 个节点)`);
+            console.log(`已生成应用/流媒体分组节点文件: ${filename} (${group.nodes.length} 个节点)`);
             console.log(`文件完整路径: ${path.resolve(outputPath)}`);
-            generatedFiles++;
+            generatedFiles++; // 增加计数器
           } catch (writeErr) {
             console.error(`写入文件失败: ${filename} - ${writeErr.message}`);
           }
@@ -1649,4 +1593,4 @@ main().catch(error => {
   }
   
   process.exit(1);
-}); 
+});
