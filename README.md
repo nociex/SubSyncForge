@@ -6,7 +6,7 @@ SubSyncForge 是一个强大的订阅转换工具，支持自动化订阅源管�
 
 ## 项目状态
 
-![版本](https://img.shields.io/badge/版本-1.3.3-blue)
+![版本](https://img.shields.io/badge/版本-1.3.5-blue)
 ![状态](https://img.shields.io/badge/状态-开发中-yellow)
 
 查看[更新日志](CHANGELOG.md)了解详细变更记录。
@@ -164,15 +164,18 @@ nodes:
    - 提取节点关键信息
    - 数据验证层确保输入数据有效
 
-3. **去重处理**
+3. **过滤处理**
    - 基于节点特征进行去重
-   - 保留最优节点配置
-   - 支持自定义去重规则
+   - **新增：按地区过滤节点（如香港、日本、美国等）**
+   - **新增：按服务标签过滤节点（如OpenAI、Netflix等）**
+   - 支持自定义过滤规则
    - 性能优化处理
 
 4. **格式转换**
    - 生成标准 V2Ray 分享链接
    - 基于模板生成 Clash/Surge/SingBox 配置
+   - **新增：生成地区分组文本列表（如 hk.txt, jp.txt）**
+   - **新增：生成服务分组文本列表（如 openai.txt, netflix.txt）**
    - 支持自定义转换规则
    - 事件通知系统，支持 Webhook
 

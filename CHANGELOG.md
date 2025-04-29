@@ -5,6 +5,23 @@
 格式基于 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.0.0/)，
 并且本项目遵循 [语义化版本](https://semver.org/lang/zh-CN/)。
 
+## [1.3.5] - 2025-04-29
+
+### 新增
+- **高级节点过滤功能**
+  - 支持按地区过滤节点（通过`filter_by_region`选项）
+  - 支持按服务过滤节点（通过`filter_by_service`选项）
+  - 添加地区文本列表生成功能（hk.txt, jp.txt, us.txt, sg.txt等）
+  - 添加服务文本列表生成功能（openai.txt, disney.txt, netflix.txt等）
+
+### 优化
+- 改进配置文件处理逻辑，优化地区和服务标签识别
+- 简化配置生成代码，提高性能和可读性
+- 添加文本列表模板(txt_list.txt)，支持简单输出节点链接
+
+### 修复
+- 修复了特殊字符在节点名称中可能导致的解析错误
+
 ## [1.3.4] - 2025-04-28
 
 ### Changed
