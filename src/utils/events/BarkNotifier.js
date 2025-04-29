@@ -242,13 +242,27 @@ export class BarkNotifier {
 
         let timeStr = '';
         if (data.time) {
-          const totalSeconds = Math.round(data.time / 1000);
-          const minutes = Math.floor(totalSeconds / 60);
-          const seconds = totalSeconds % 60;
-          if (minutes > 0) {
-            timeStr = `耗时 ${minutes}分${seconds}秒`;
+          // Handle both milliseconds and seconds input
+          let totalSeconds = data.time;
+          if (totalSeconds > 10000) {  // Likely in milliseconds
+            totalSeconds = Math.round(totalSeconds / 1000);
+          }
+          
+          if (totalSeconds > 0) {
+            const hours = Math.floor(totalSeconds / 3600);
+            const remainingSeconds = totalSeconds % 3600;
+            const minutes = Math.floor(remainingSeconds / 60);
+            const seconds = remainingSeconds % 60;
+            
+            if (hours > 0) {
+              timeStr = `耗时 ${hours}小时${minutes}分${seconds}秒`;
+            } else if (minutes > 0) {
+              timeStr = `耗时 ${minutes}分${seconds}秒`;
+            } else {
+              timeStr = `耗时 ${seconds}秒`;
+            }
           } else {
-            timeStr = `耗时 ${seconds}秒`;
+            timeStr = '耗时 0秒';
           }
         }
 

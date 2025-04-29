@@ -56,6 +56,9 @@ export class ProxyChecker {
                 return this.checkTlsConnection(node.server, node.port, timeout);
             case 'ss':
             case 'ssr':
+                this.logger.warn(`SSR protocol detected, using SSR specific check with extended timeout`);
+                // SSR nodes get longer timeout and retry logic
+                return this.checkSsrConnection(node.server, node.port, timeout * 2); // Double timeout for SSR
             case 'vmess':
                 this.logger.warn(`Connectivity check for ${node.type} is not fully supported yet. Performing basic TCP check.`);
                 // 对于其他特殊协议，仍然使用基本TCP检查
@@ -214,4 +217,4 @@ export class ProxyChecker {
   }
 }
 
-export default ProxyChecker; 
+export default ProxyChecker;

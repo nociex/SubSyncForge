@@ -182,7 +182,7 @@ schedule:
   
   # 同步订阅任务 - 每6小时执行一次
   sync_subscription:
-    cron: "0 */6 * * *"  # 每6小时执行一次 (0分, 每6小时, 每天, 每月, 每周)
+    cron: "0 */12 * * *"  # 每12小时执行一次 (0分, 每12小时, 每天, 每月, 每周)
     enabled: true
     command: "npm run sync"
     
