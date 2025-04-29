@@ -587,6 +587,52 @@ export class SubscriptionConverter {
         clashNode.tls = node.settings.tls;
         clashNode.skipCertVerify = node.settings.skipCertVerify;
         break;
+      case 'hysteria2':
+        clashNode.type = 'hysteria2';
+        clashNode.password = node.settings.auth;
+        clashNode.sni = node.settings.sni;
+        clashNode['skip-cert-verify'] = node.settings.insecure;
+        if (node.settings.obfs) {
+          clashNode.obfs = node.settings.obfs;
+          if (node.settings.obfsPassword) {
+            clashNode['obfs-password'] = node.settings.obfsPassword;
+          }
+        }
+        if (node.settings.uploadBandwidth) {
+          clashNode.up = node.settings.uploadBandwidth;
+        }
+        if (node.settings.downloadBandwidth) {
+          clashNode.down = node.settings.downloadBandwidth;
+        }
+        break;
+      case 'vless':
+        clashNode.type = 'vless';
+        clashNode.uuid = node.settings.id;
+        clashNode.network = node.settings.network;
+        if (node.settings.security === 'tls') {
+          clashNode.tls = true;
+          clashNode.sni = node.settings.sni;
+          if (node.settings.fp) {
+            clashNode['client-fingerprint'] = node.settings.fp;
+          }
+          if (node.settings.alpn) {
+            clashNode.alpn = node.settings.alpn.split(',');
+          }
+        }
+        if (node.settings.network === 'ws') {
+          clashNode['ws-opts'] = {
+            path: node.settings.path || '/'
+          };
+          if (node.settings.host) {
+            clashNode['ws-opts'].headers = {
+              Host: node.settings.host
+            };
+          }
+        }
+        if (node.settings.flow) {
+          clashNode.flow = node.settings.flow;
+        }
+        break;
       default:
         throw new Error(`Unsupported node type for Clash: ${node.type}`);
     }
@@ -746,6 +792,81 @@ export class SubscriptionConverter {
           surgeLine += `, test-url=${node.testUrl}`;
         }
         break;
+      case 'hysteria2':
+        // Surge 可能不直接支持 hysteria2，但我们可以尝试提供格式
+        surgeLine += `hysteria2, ${node.server}, ${node.port}, password=${node.settings.auth}`;
+        
+        if (node.settings.sni) {
+          surgeLine += `, sni=${node.settings.sni}`;
+        }
+        
+        if (node.settings.insecure) {
+          surgeLine += ', skip-cert-verify=true';
+        }
+        
+        if (node.settings.obfs) {
+          surgeLine += `, obfs=${node.settings.obfs}`;
+          if (node.settings.obfsPassword) {
+            surgeLine += `, obfs-password=${node.settings.obfsPassword}`;
+          }
+        }
+        
+        if (node.settings.uploadBandwidth) {
+          surgeLine += `, up=${node.settings.uploadBandwidth}`;
+        }
+        
+        if (node.settings.downloadBandwidth) {
+          surgeLine += `, down=${node.settings.downloadBandwidth}`;
+        }
+        
+        if (node.testUrl) {
+          surgeLine += `, test-url=${node.testUrl}`;
+        }
+        break;
+      case 'vless':
+        // Surge 可能不直接支持 vless，但我们可以尝试提供格式
+        surgeLine += `vless, ${node.server}, ${node.port}, uuid=${node.settings.id}`;
+        
+        if (node.settings.network) {
+          surgeLine += `, network=${node.settings.network}`;
+        }
+        
+        if (node.settings.security === 'tls') {
+          surgeLine += ', tls=true';
+          
+          if (node.settings.sni) {
+            surgeLine += `, sni=${node.settings.sni}`;
+          }
+          
+          if (node.settings.fp) {
+            surgeLine += `, client-fingerprint=${node.settings.fp}`;
+          }
+          
+          if (node.settings.alpn) {
+            surgeLine += `, alpn=${node.settings.alpn}`;
+          }
+        }
+        
+        if (node.settings.network === 'ws') {
+          surgeLine += ', ws=true';
+          
+          if (node.settings.path) {
+            surgeLine += `, ws-path=${node.settings.path}`;
+          }
+          
+          if (node.settings.host) {
+            surgeLine += `, ws-headers=Host:${node.settings.host}`;
+          }
+        }
+        
+        if (node.settings.flow) {
+          surgeLine += `, flow=${node.settings.flow}`;
+        }
+        
+        if (node.testUrl) {
+          surgeLine += `, test-url=${node.testUrl}`;
+        }
+        break;
       // 添加对其他 Surge 支持类型的处理...
       default:
         this.logger.warn(`Unsupported node type for Surge format: ${node.type}`);
@@ -867,6 +988,83 @@ export class SubscriptionConverter {
               enabled: true,
               insecure: node.settings.skipCertVerify || false
             };
+          }
+          break;
+        case 'hysteria2':
+          config = {
+            type: 'hysteria2',
+            tag: node.name,
+            server: node.server,
+            server_port: parseInt(node.port),
+            password: node.settings.auth
+          };
+          
+          if (node.settings.sni || node.settings.insecure) {
+            config.tls = {
+              enabled: true,
+              server_name: node.settings.sni || node.server,
+              insecure: node.settings.insecure || false
+            };
+          }
+          
+          if (node.settings.obfs) {
+            config.obfs = {
+              type: node.settings.obfs
+            };
+            
+            if (node.settings.obfsPassword) {
+              config.obfs.password = node.settings.obfsPassword;
+            }
+          }
+          
+          if (node.settings.uploadBandwidth) {
+            config.up_mbps = parseInt(node.settings.uploadBandwidth) || 10;
+          }
+          
+          if (node.settings.downloadBandwidth) {
+            config.down_mbps = parseInt(node.settings.downloadBandwidth) || 50;
+          }
+          break;
+        case 'vless':
+          config = {
+            type: 'vless',
+            tag: node.name,
+            server: node.server,
+            server_port: parseInt(node.port),
+            uuid: node.settings.id,
+            network: node.settings.network || 'tcp',
+            tls: {
+              enabled: node.settings.security === 'tls',
+              server_name: node.settings.sni || node.server,
+              insecure: false
+            }
+          };
+          
+          if (node.settings.network === 'ws') {
+            config.transport = {
+              type: 'ws',
+              path: node.settings.path || '/',
+              headers: {}
+            };
+            
+            if (node.settings.host) {
+              config.transport.headers.Host = node.settings.host;
+            }
+          }
+          
+          if (node.settings.flow) {
+            config.flow = node.settings.flow;
+          }
+          
+          if (node.settings.fp) {
+            config.tls.utls = {
+              enabled: true,
+              fingerprint: node.settings.fp
+            };
+          }
+          
+          if (node.settings.alpn) {
+            config.tls.alpn = node.settings.alpn.split(',');
           }
           break;
         default:
@@ -1022,6 +1220,110 @@ export class SubscriptionConverter {
                 allowInsecure: node.settings.skipCertVerify || false
               }
             };
+          }
+          break;
+        case 'hysteria2':
+          // V2Ray 核心可能不直接支持 hysteria2，但我们可以提供基本配置
+          config = {
+            protocol: 'hysteria2',  // 注意：这可能不被标准V2Ray支持
+            tag: node.name,
+            settings: {
+              servers: [{
+                address: node.server,
+                port: parseInt(node.port),
+                password: node.settings.auth
+              }]
+            },
+            streamSettings: {
+              security: 'tls',
+              tlsSettings: {
+                serverName: node.settings.sni || node.server,
+                allowInsecure: node.settings.insecure || false
+              }
+            }
+          };
+          
+          // 添加obfs配置
+          if (node.settings.obfs) {
+            config.settings.obfs = node.settings.obfs;
+            if (node.settings.obfsPassword) {
+              config.settings.obfsPassword = node.settings.obfsPassword;
+            }
+          }
+          
+          // 添加带宽配置
+          if (node.settings.uploadBandwidth || node.settings.downloadBandwidth) {
+            config.settings.bandwidth = {};
+            if (node.settings.uploadBandwidth) {
+              config.settings.bandwidth.up = node.settings.uploadBandwidth;
+            }
+            if (node.settings.downloadBandwidth) {
+              config.settings.bandwidth.down = node.settings.downloadBandwidth;
+            }
+          }
+          break;
+        case 'vless':
+          config = {
+            protocol: 'vless',
+            tag: node.name,
+            settings: {
+              vnext: [{
+                address: node.server,
+                port: parseInt(node.port),
+                users: [{
+                  id: node.settings.id,
+                  encryption: node.settings.encryption || 'none',
+                  flow: node.settings.flow || ''
+                }]
+              }]
+            }
+          };
+          
+          // 设置流配置
+          let hasStreamSettings = false;
+          config.streamSettings = {};
+          
+          // 设置传输协议
+          if (node.settings.network) {
+            hasStreamSettings = true;
+            config.streamSettings.network = node.settings.network;
+            
+            // 设置 WebSocket 参数
+            if (node.settings.network === 'ws') {
+              config.streamSettings.wsSettings = {
+                path: node.settings.path || '/',
+                headers: {}
+              };
+              
+              if (node.settings.host) {
+                config.streamSettings.wsSettings.headers.Host = node.settings.host;
+              }
+            }
+          }
+          
+          // 设置 TLS
+          if (node.settings.security === 'tls') {
+            hasStreamSettings = true;
+            config.streamSettings.security = 'tls';
+            config.streamSettings.tlsSettings = {
+              serverName: node.settings.sni || node.server,
+              allowInsecure: false  // 默认安全模式
+            };
+            
+            // 设置 fingerprint
+            if (node.settings.fp) {
+              config.streamSettings.tlsSettings.fingerprint = node.settings.fp;
+            }
+            
+            // 设置 alpn
+            if (node.settings.alpn) {
+              config.streamSettings.tlsSettings.alpn = node.settings.alpn.split(',');
+            }
+          }
+          
+          // 如果没有流设置，删除 streamSettings 对象
+          if (!hasStreamSettings) {
+            delete config.streamSettings;
           }
           break;
         default:

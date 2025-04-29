@@ -233,7 +233,8 @@ export class SubscriptionFetcher {
           const decoded = Buffer.from(data, 'base64').toString('utf-8');
           // 检查解码后内容是否包含常见协议
           if (decoded.includes('vmess://') || decoded.includes('ss://') || 
-              decoded.includes('ssr://') || decoded.includes('trojan://')) {
+              decoded.includes('ssr://') || decoded.includes('trojan://') || 
+              decoded.includes('hysteria2://') || decoded.includes('vless://')) {
             this.logger.log('Base64解码后发现有效协议前缀');
             return true;
           }
@@ -258,7 +259,8 @@ export class SubscriptionFetcher {
       
       // 检测URI格式
       if (data.includes('vmess://') || data.includes('ss://') || 
-          data.includes('ssr://') || data.includes('trojan://')) {
+          data.includes('ssr://') || data.includes('trojan://') ||
+          data.includes('hysteria2://') || data.includes('vless://')) {
         this.logger.log('检测到直接的节点URI');
         return true;
       }

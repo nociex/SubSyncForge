@@ -58,8 +58,12 @@ export class Base64Parser {
       return this.parseShadowsocksR(line);
     } else if (line.startsWith('trojan://')) {
       return this.parseTrojan(line);
+    } else if (line.startsWith('hysteria2://')) {
+      return this.parseHysteria2(line);
+    } else if (line.startsWith('vless://')) {
+      return this.parseVless(line);
     } else {
-      console.warn(`Unsupported protocol: ${line.substring(0, 10)}...`);
+      console.warn(`Unsupported protocol: ${line.substring(0, 20)}...`);
       return null;
     }
   }
@@ -237,6 +241,118 @@ export class Base64Parser {
       };
     } catch (error) {
       console.error('Failed to parse Trojan node:', error);
+      return null;
+    }
+  }
+
+  /**
+   * 解析Hysteria2节点
+   * @param {string} line Hysteria2节点文本
+   * @returns {Object} 解析后的Hysteria2节点对象
+   */
+  parseHysteria2(line) {
+    try {
+      // hysteria2://auth@server:port?params#name
+      const url = new URL(line);
+      
+      // 提取认证信息（在用户名部分）
+      const auth = url.username;
+      
+      // 提取服务器和端口
+      const server = url.hostname;
+      const port = url.port || 443;
+      
+      // 提取名称
+      const name = decodeURIComponent(url.hash.substring(1) || '');
+      
+      // 提取参数
+      const sni = url.searchParams.get('sni') || server;
+      const insecure = url.searchParams.get('insecure') === '1';
+      const obfs = url.searchParams.get('obfs') || '';
+      const obfsPassword = url.searchParams.get('obfs-password') || '';
+      const uploadBandwidth = url.searchParams.get('up') || '';
+      const downloadBandwidth = url.searchParams.get('down') || '';
+      
+      return {
+        type: 'hysteria2',
+        name: name || `Hysteria2 ${server}:${port}`,
+        server: server,
+        port: port,
+        protocol: 'hysteria2',
+        settings: {
+          auth: auth,
+          sni: sni,
+          insecure: insecure,
+          obfs: obfs,
+          obfsPassword: obfsPassword,
+          uploadBandwidth: uploadBandwidth,
+          downloadBandwidth: downloadBandwidth
+        },
+        extra: {
+          raw: line
+        }
+      };
+    } catch (error) {
+      console.error('Failed to parse Hysteria2 node:', error);
+      return null;
+    }
+  }
+
+  /**
+   * 解析VLESS节点
+   * @param {string} line VLESS节点文本
+   * @returns {Object} 解析后的VLESS节点对象
+   */
+  parseVless(line) {
+    try {
+      // vless://uuid@server:port?params#name
+      const url = new URL(line);
+      
+      // 提取UUID（在用户名部分）
+      const id = url.username;
+      
+      // 提取服务器和端口
+      const server = url.hostname;
+      const port = url.port || 443;
+      
+      // 提取名称
+      const name = decodeURIComponent(url.hash.substring(1) || '');
+      
+      // 提取参数
+      const type = url.searchParams.get('type') || 'tcp';
+      const security = url.searchParams.get('security') || 'none';
+      const sni = url.searchParams.get('sni') || server;
+      const fp = url.searchParams.get('fp') || '';
+      const alpn = url.searchParams.get('alpn') || '';
+      const path = url.searchParams.get('path') || '/';
+      const host = url.searchParams.get('host') || '';
+      const encryption = url.searchParams.get('encryption') || 'none';
+      const flow = url.searchParams.get('flow') || '';
+      
+      return {
+        type: 'vless',
+        name: name || `VLESS ${server}:${port}`,
+        server: server,
+        port: port,
+        protocol: 'vless',
+        settings: {
+          id: id,
+          network: type,
+          security: security,
+          sni: sni,
+          fp: fp,
+          alpn: alpn,
+          path: path,
+          host: host,
+          encryption: encryption,
+          flow: flow
+        },
+        extra: {
+          raw: line
+        }
+      };
+    } catch (error) {
+      console.error('Failed to parse VLESS node:', error);
       return null;
     }
   }
