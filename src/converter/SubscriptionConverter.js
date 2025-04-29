@@ -525,102 +525,78 @@ export class SubscriptionConverter {
    * @returns {string} Clash格式的节点配置
    */
   formatNodeForClash(node) {
-    try {
-      // 基本配置
-      let config = `  - name: ${node.name}\n    type: ${node.type}\n    server: ${node.server}\n    port: ${node.port}`;
+    if (!node || typeof node !== 'object') {
+      this.logger.warn('Invalid node object provided to formatNodeForClash');
+      return null; // 或者返回一个默认值，或者抛出错误
+    }
 
-      // 根据不同协议添加特定配置
-      switch (node.type) {
-        case 'vmess':
-          config += `\n    uuid: ${node.settings.id}`;
-          if (node.settings.alterId !== undefined) {
-            config += `\n    alterId: ${node.settings.alterId}`;
-          }
-          if (node.settings.network) {
-            config += `\n    network: ${node.settings.network}`;
-          }
-          if (node.settings.tls) {
-            config += `\n    tls: true`;
-            if (node.settings.serverName) {
-              config += `\n    servername: ${node.settings.serverName}`;
-            }
-          }
-          if (node.settings.network === 'ws') {
-            config += `\n    ws-opts:`;
-            if (node.settings.wsPath) {
-              config += `\n      path: ${node.settings.wsPath}`;
-            }
-            if (node.settings.wsHeaders && Object.keys(node.settings.wsHeaders).length > 0) {
-              config += `\n      headers:`;
-              for (const [key, value] of Object.entries(node.settings.wsHeaders)) {
-                config += `\n        ${key}: ${value}`;
-              }
-            }
-          }
-          break;
-        case 'ss':
-          config += `\n    cipher: ${node.settings.method}`;
-          config += `\n    password: ${node.settings.password}`;
-          break;
-        case 'ssr':
-          config += `\n    cipher: ${node.settings.method}`;
-          config += `\n    password: ${node.settings.password}`;
-          config += `\n    obfs: ${node.settings.obfs}`;
-          config += `\n    protocol: ${node.settings.protocol}`;
-          if (node.settings.obfsParam) {
-            config += `\n    obfs-param: ${node.settings.obfsParam}`;
-          }
-          if (node.settings.protocolParam) {
-            config += `\n    protocol-param: ${node.settings.protocolParam}`;
-          }
-          break;
-        case 'trojan':
-          config += `\n    password: ${node.settings.password}`;
-          if (node.settings.sni) {
-            config += `\n    sni: ${node.settings.sni}`;
-          }
-          if (node.settings.skipCertVerify !== undefined) {
-            config += `\n    skip-cert-verify: ${node.settings.skipCertVerify}`;
-          }
-          break;
-        case 'http':
-          config += `\n    username: ${node.settings.username || ''}`;
-          config += `\n    password: ${node.settings.password || ''}`;
-          if (node.settings.tls) {
-            config += `\n    tls: true`;
-            if (node.settings.skipCertVerify !== undefined) {
-              config += `\n    skip-cert-verify: ${node.settings.skipCertVerify}`;
-            }
-          }
-          break;
-        case 'socks':
-          if (node.settings.username) {
-            config += `\n    username: ${node.settings.username}`;
-          }
-          if (node.settings.password) {
-            config += `\n    password: ${node.settings.password}`;
-          }
-          if (node.settings.tls) {
-            config += `\n    tls: true`;
-            if (node.settings.skipCertVerify !== undefined) {
-              config += `\n    skip-cert-verify: ${node.settings.skipCertVerify}`;
-            }
-          }
-          break;
-        default:
-          throw new Error(`Unsupported node type for Clash: ${node.type}`);
-      }
+    // 清理节点名称中的无效字符
+    const cleanedNodeName = (node.name || 'Unnamed Node').replace(/\\uFFFD/g, '');
 
-      // 添加标签和分组信息
-      if (node.extra && node.extra.tags && Array.isArray(node.extra.tags) && node.extra.tags.length > 0) {
-        config += `\n    tags: [${node.extra.tags.map(tag => `"${tag}"`).join(', ')}]`;
-      }
-
-      return config;
-    } catch (error) {
-      this.logger.error(`Error formatting node for Clash: ${error.message}`);
+    // 确保所有必需的属性都存在
+    const requiredProps = ['type', 'server', 'port'];
+    if (!requiredProps.every(prop => prop in node)) {
+      this.logger.warn(`Node missing required properties for Clash format: ${JSON.stringify(node)}`);
       return null;
     }
+
+    let clashNode = {
+      // 使用清理后的名称
+      name: cleanedNodeName,
+      type: node.type,
+      server: node.server,
+      port: node.port
+    };
+
+    switch (node.type) {
+      case 'vmess':
+        clashNode.uuid = node.settings.id;
+        clashNode.alterId = node.settings.alterId;
+        clashNode.network = node.settings.network;
+        clashNode.tls = node.settings.tls;
+        clashNode.serverName = node.settings.serverName;
+        clashNode.wsPath = node.settings.wsPath;
+        clashNode.wsHeaders = node.settings.wsHeaders;
+        break;
+      case 'ss':
+        clashNode.cipher = node.settings.method;
+        clashNode.password = node.settings.password;
+        break;
+      case 'ssr':
+        clashNode.cipher = node.settings.method;
+        clashNode.password = node.settings.password;
+        clashNode.obfs = node.settings.obfs;
+        clashNode.protocol = node.settings.protocol;
+        clashNode.obfsParam = node.settings.obfsParam;
+        clashNode.protocolParam = node.settings.protocolParam;
+        break;
+      case 'trojan':
+        clashNode.password = node.settings.password;
+        clashNode.sni = node.settings.sni;
+        clashNode.skipCertVerify = node.settings.skipCertVerify;
+        break;
+      case 'http':
+        clashNode.username = node.settings.username || '';
+        clashNode.password = node.settings.password || '';
+        clashNode.tls = node.settings.tls;
+        clashNode.skipCertVerify = node.settings.skipCertVerify;
+        break;
+      case 'socks':
+        clashNode.username = node.settings.username || '';
+        clashNode.password = node.settings.password || '';
+        clashNode.tls = node.settings.tls;
+        clashNode.skipCertVerify = node.settings.skipCertVerify;
+        break;
+      default:
+        throw new Error(`Unsupported node type for Clash: ${node.type}`);
+    }
+
+    // 添加标签和分组信息
+    if (node.extra && node.extra.tags && Array.isArray(node.extra.tags) && node.extra.tags.length > 0) {
+      clashNode.tags = node.extra.tags.map(tag => `"${tag}"`);
+    }
+
+    return JSON.stringify(clashNode);
   }
 
   /**
@@ -629,76 +605,154 @@ export class SubscriptionConverter {
    * @returns {string} Surge格式的节点配置
    */
   formatNodeForSurge(node) {
-    try {
-      let config = '';
-      
-      switch (node.type) {
-        case 'vmess':
-          config = `${node.name} = vmess, ${node.server}, ${node.port}, username=${node.settings.id}`;
-          if (node.settings.network === 'ws') {
-            config += `, ws=true`;
-            if (node.settings.wsPath) {
-              config += `, ws-path=${node.settings.wsPath}`;
-            }
-            if (node.settings.wsHeaders && node.settings.wsHeaders.Host) {
-              config += `, ws-headers=Host:${node.settings.wsHeaders.Host}`;
-            }
-          }
-          if (node.settings.tls) {
-            config += `, tls=true`;
-            if (node.settings.serverName) {
-              config += `, sni=${node.settings.serverName}`;
-            }
-          }
-          break;
-        case 'ss':
-          config = `${node.name} = ss, ${node.server}, ${node.port}, encrypt-method=${node.settings.method}, password=${node.settings.password}`;
-          break;
-        case 'trojan':
-          config = `${node.name} = trojan, ${node.server}, ${node.port}, password=${node.settings.password}`;
-          if (node.settings.sni) {
-            config += `, sni=${node.settings.sni}`;
-          }
-          break;
-        case 'http':
-          config = `${node.name} = http, ${node.server}, ${node.port}`;
-          if (node.settings.username) {
-            config += `, username=${node.settings.username}`;
-          }
-          if (node.settings.password) {
-            config += `, password=${node.settings.password}`;
-          }
-          if (node.settings.tls) {
-            config += `, tls=true`;
-            if (node.settings.skipCertVerify !== undefined && node.settings.skipCertVerify) {
-              config += `, skip-cert-verify=true`;
-            }
-          }
-          break;
-        case 'socks':
-          config = `${node.name} = socks5, ${node.server}, ${node.port}`;
-          if (node.settings.username) {
-            config += `, username=${node.settings.username}`;
-          }
-          if (node.settings.password) {
-            config += `, password=${node.settings.password}`;
-          }
-          if (node.settings.tls) {
-            config += `, tls=true`;
-            if (node.settings.skipCertVerify !== undefined && node.settings.skipCertVerify) {
-              config += `, skip-cert-verify=true`;
-            }
-          }
-          break;
-        default:
-          throw new Error(`Unsupported node type for Surge: ${node.type}`);
-      }
-      
-      return config;
-    } catch (error) {
-      this.logger.error(`Error formatting node for Surge: ${error.message}`);
+    if (!node || typeof node !== 'object') {
+      this.logger.warn('Invalid node object provided to formatNodeForSurge');
       return null;
     }
+
+    // 清理节点名称中的无效字符
+    const cleanedNodeName = (node.name || 'Unnamed Node').replace(/\\uFFFD/g, '');
+
+    // 确保所有必需的属性都存在
+    const requiredProps = ['type', 'server', 'port'];
+    if (!requiredProps.every(prop => prop in node)) {
+      this.logger.warn(`Node missing required properties for Surge format: ${JSON.stringify(node)}`);
+      return null;
+    }
+
+    let surgeLine = `${cleanedNodeName} = `; // 使用清理后的名称
+
+    switch (node.type) {
+      case 'ss':
+        if (!node.password || !node['encrypt-method']) {
+          this.logger.warn(`SS node missing password or encrypt-method: ${JSON.stringify(node)}`);
+          return null;
+        }
+        surgeLine += `ss, ${node.server}, ${node.port}, encrypt-method=${node['encrypt-method']}, password=${node.password}`;
+        if (node.obfs) {
+          surgeLine += `, obfs=${node.obfs}`;
+          if (node['obfs-host']) {
+            surgeLine += `, obfs-host=${node['obfs-host']}`;
+          }
+        }
+        if (node.tfo) {
+          surgeLine += `, tfo=${node.tfo}`;
+        }
+        if (node.udp) { // Surge 使用 'udp-relay'
+          surgeLine += ', udp-relay=true';
+        }
+        if (node.testUrl) { // 添加 test-url
+          surgeLine += `, test-url=${node.testUrl}`;
+        }
+        break;
+      case 'vmess':
+        if (!node.uuid) {
+          this.logger.warn(`VMess node missing uuid: ${JSON.stringify(node)}`);
+          return null;
+        }
+        surgeLine += `vmess, ${node.server}, ${node.port}, username=${node.uuid}`;
+        if (node.alterId) {
+          surgeLine += `, alterId=${node.alterId}`; // Surge 使用 alterId
+        }
+        if (node.network === 'ws') {
+          surgeLine += ', ws=true';
+          if (node.wsSettings?.path) { // Surge 使用 'ws-path'
+            surgeLine += `, ws-path=${node.wsSettings.path}`;
+          }
+          if (node.wsSettings?.headers?.Host) { // Surge 使用 'ws-headers=Host:host.com'
+            surgeLine += `, ws-headers=Host:${node.wsSettings.headers.Host}`;
+          }
+        } else if (node.network === 'tcp') {
+          // TCP 是默认值，通常不需要显式添加，除非有特殊配置
+        }
+        if (node.tls) { // Surge 使用 'tls'
+          surgeLine += ', tls=true';
+          if (node.skipCertVerify) { // Surge 使用 'skip-cert-verify'
+            surgeLine += ', skip-cert-verify=true';
+          }
+          if (node.sni) { // Surge 使用 'sni'
+            surgeLine += `, sni=${node.sni}`;
+          }
+        }
+        if (node.udp) { // Surge 使用 'udp-relay'
+          surgeLine += ', udp-relay=true';
+        }
+        if (node.testUrl) { // 添加 test-url
+          surgeLine += `, test-url=${node.testUrl}`;
+        }
+        break;
+      case 'trojan':
+        if (!node.password) {
+          this.logger.warn(`Trojan node missing password: ${JSON.stringify(node)}`);
+          return null;
+        }
+        surgeLine += `trojan, ${node.server}, ${node.port}, password=${node.password}`;
+        if (node.sni) { // Surge 使用 'sni'
+          surgeLine += `, sni=${node.sni}`;
+        }
+        if (node.skipCertVerify) { // Surge 使用 'skip-cert-verify'
+          surgeLine += ', skip-cert-verify=true';
+        }
+        if (node.udp) { // Surge 使用 'udp-relay'
+          surgeLine += ', udp-relay=true';
+        }
+        if (node.testUrl) { // 添加 test-url
+          surgeLine += `, test-url=${node.testUrl}`;
+        }
+        break;
+      case 'http':
+      case 'https': // Surge 将 HTTP 和 HTTPS 视为同一种类型
+        surgeLine += `${node.type}, ${node.server}, ${node.port}`;
+        if (node.username) {
+          surgeLine += `, username=${node.username}`;
+        }
+        if (node.password) {
+          surgeLine += `, password=${node.password}`; // Surge 中密码通常与用户名一起提供
+        }
+        if (node.tls && node.type === 'https') { // HTTPS 暗示了 TLS
+          surgeLine += ', tls=true'; // 虽然 Surge 会自动处理 HTTPS，明确添加无害
+          if (node.skipCertVerify) {
+            surgeLine += ', skip-cert-verify=true';
+          }
+          if (node.sni) {
+            surgeLine += `, sni=${node.sni}`;
+          }
+        }
+        if (node.testUrl) { // 添加 test-url
+          surgeLine += `, test-url=${node.testUrl}`;
+        }
+        break;
+      case 'socks5':
+        surgeLine += `socks5, ${node.server}, ${node.port}`;
+        if (node.username) {
+          surgeLine += `, username=${node.username}`;
+        }
+        if (node.password) {
+          surgeLine += `, password=${node.password}`;
+        }
+        if (node.tls) { // SOCKS5 over TLS
+          surgeLine += ', tls=true';
+          if (node.skipCertVerify) {
+            surgeLine += ', skip-cert-verify=true';
+          }
+          if (node.sni) { // Surge SOCKS5 TLS 也支持 SNI
+            surgeLine += `, sni=${node.sni}`;
+          }
+        }
+        if (node.udp) { // Surge SOCKS5 支持 UDP
+          surgeLine += ', udp-relay=true';
+        }
+        if (node.testUrl) { // 添加 test-url
+          surgeLine += `, test-url=${node.testUrl}`;
+        }
+        break;
+      // 添加对其他 Surge 支持类型的处理...
+      default:
+        this.logger.warn(`Unsupported node type for Surge format: ${node.type}`);
+        return null; // 不支持的类型返回 null
+    }
+
+    return surgeLine;
   }
 
   /**
