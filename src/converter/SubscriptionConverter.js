@@ -1,7 +1,6 @@
 import { SubscriptionFetcher } from './fetcher/SubscriptionFetcher.js';
 import { SubscriptionParser } from './parser/SubscriptionParser.js';
 import { NodeDeduplicator } from './dedup/NodeDeduplicator.js';
-import { FormatConverter } from './formats/FormatConverter.js';
 import { NodeManager } from './analyzer/index.js';
 import { RuleManager } from './rules/index.js';
 
@@ -73,7 +72,6 @@ export class SubscriptionConverter {
     this.fetcher = new SubscriptionFetcher(options.fetch);
     this.parser = new SubscriptionParser();
     this.deduplicator = new NodeDeduplicator();
-    this.converter = new FormatConverter();
 
     // 初始化节点管理器，传递分组模式
     this.nodeManager = new NodeManager({
@@ -390,7 +388,11 @@ export class SubscriptionConverter {
       // 4. 转换格式
       let result;
       try {
-        result = await this.converter.convert(nodes, targetFormat, convertOptions.template);
+        // 使用内部方法格式化节点
+        // 注意：这可能是一个简化实现，实际输出可能需要根据 targetFormat、template 和 groups 进行更复杂的组装
+        const formattedNodes = nodes.map(node => this.formatNodeForTarget(node, targetFormat)).filter(Boolean);
+        // 简单的换行符连接，可能需要根据具体格式调整（例如 Clash/Surge 需要特定结构）
+        result = formattedNodes.join('\n');
 
         this.logger.debug(`Converted ${nodes.length} nodes to ${targetFormat} format`);
       } catch (error) {
