@@ -5,78 +5,10 @@ SubSyncForge 是一个用于转换和管理代理订阅源的工具。它可以�
 ## 快速开始：部署到 Cloudflare Workers (推荐)
 
 1.  **一键部署**: 点击下方按钮，按照提示登录 Cloudflare 并完成部署。
-    [![Deploy to Cloudflare Workers](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/nociex/SubSyncForge)
+    [![Deploy to Cloudflare Workers](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/nociex/SubSyncForge/tree/dev)
 2.  **访问**: 部署成功后，您的 Worker 会有一个 `.workers.dev` 地址（或您绑定的自定义域名）。
 
 ## 如何使用
-
-### 1. 配置订阅源
-
-编辑 `config/subscriptions.json` 文件，添加您需要转换的订阅源：
-
-```json
-{
-  "sources": [
-    {
-      "id": "source-1",        // 唯一标识符
-      "name": "我的订阅",      // 自定义名称
-      "url": "https://example.com/your-sub-url", // 您的原始订阅链接
-      "type": "v2ray",         // 原始订阅格式 (如 v2ray, clash, ss)
-      "updateInterval": 21600  // 更新间隔 (秒)，0表示不自动更新
-    },
-    {
-      "id": "source-2",
-      "name": "另一个订阅",
-      "url": "...",
-      "type": "clash"
-    }
-    // ...更多订阅源
-  ]
-}
-```
-
-*   将修改后的 `config/subscriptions.json` 推送到您的 GitHub 仓库，GitHub Actions 会自动同步并更新 Worker。
-
-### 2. 添加自定义节点 (可选)
-
-如果您有单独的节点需要添加到订阅中，可以编辑 `config/custom.yaml`：
-
-```yaml
-# 自定义节点
-nodes:
-  # VMess 节点示例
-  - type: vmess
-    name: "我的自定义VMess节点"
-    server: my.server.com
-    port: 443
-    uuid: "your-uuid"
-    alterId: 0
-    cipher: "auto"
-    tls: true
-    network: ws
-    ws-opts:
-      path: /vmess
-      headers:
-        Host: my.server.com
-
-  # Shadowsocks 节点示例
-  - type: ss
-    name: "我的自定义SS节点"
-    server: my.ss.server
-    port: 8388
-    cipher: aes-256-gcm
-    password: "your-password"
-
-# 订阅源配置 (会与subscriptions.json中的订阅合并)
-subscriptions:
-  - name: "订阅名称"      # 自定义名称
-    url: "订阅URL"       # 订阅链接
-    enabled: true       # 是否启用
-    # type: "clash"     # 可选: 订阅格式 (如clash, v2ray等)
-    # updateInterval: 21600 # 可选: 更新间隔(秒)
-```
-
-*   同样，将修改后的 `config/custom.yaml` 推送到 GitHub 仓库以生效。
 
 ### 3. 获取转换后的订阅
 

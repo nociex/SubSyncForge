@@ -1,5 +1,5 @@
 import { Router } from './router';
-import { handleSubscription, handleStatus } from './handlers';
+import { handleStatus, handleGithubProxy, handleShortcut } from './handlers'; // 移除了 handleSubscription
 import { handleHealth } from './handlers/healthHandler';
 import { handleGroupSubscription } from './handlers/groupHandler';
 import { logger, metrics } from '../utils';
@@ -10,7 +10,7 @@ const log = defaultLogger.child({ component: 'worker' });
 const router = new Router();
 
 // API 路由
-router.get('/api/subscriptions', handleSubscription);
+// router.get('/api/subscriptions', handleSubscription); // 移除了订阅路由
 // router.post('/api/convert', handleConversion); // Removed route
 router.get('/api/status', handleStatus);
 router.get('/api/health', handleHealth);
@@ -82,7 +82,27 @@ router.use(withMetrics);
 
 // 注册 fetch 事件监听器
 addEventListener('fetch', (event) => {
-  event.respondWith(router.handle(event.request));
+  const request = event.request;
+  const url = new URL(request.url);
+  const path = url.pathname;
+  const shortcutKey = path.substring(1); // 获取路径（移除开头的 '/'）
+
+  // 检查是否是预定义的快捷方式 (从 handlers/index.js 导入 shortcutMap 的键)
+  // 注意：这里直接硬编码了快捷键，更健壮的方式是从 handlers 模块导出 shortcutMap 并检查 key
+  const definedShortcuts = ['HK', 'US', 'SG', 'TW', 'JP', 'Others']; // 添加了 TW, JP
+  if (definedShortcuts.includes(shortcutKey)) {
+    const shortcutHandlerWithMetrics = withMetrics(handleShortcut);
+    event.respondWith(shortcutHandlerWithMetrics(request));
+  
+  // 检查是否是 GitHub 代理请求
+  } else if (path.startsWith('/gh-proxy/')) {
+    const proxyHandlerWithMetrics = withMetrics(handleGithubProxy);
+    event.respondWith(proxyHandlerWithMetrics(request));
+  
+  // 否则，交给路由器处理 (处理 /api/*, /groups/* 等)
+  } else {
+    event.respondWith(router.handle(request));
+  }
 });
 
 class ResponseBuilder {
