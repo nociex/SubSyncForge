@@ -1066,6 +1066,12 @@ async function generateGroupedNodeFiles(nodes, options) {
       
       for (const group of groups.region) {
         if (group.nodes.length > 0) {
+          // 如果是 '其他' 分组，则跳过，避免生成重复的 output/groups/Others.txt
+          if (group.name === '其他') {
+            console.log(`跳过生成 '其他' 分组文件 (output/groups/Others.txt)，因为它与 output/others.txt 重复。`);
+            continue;
+          }
+          
           // 使用英文文件名
           let filename;
           if (group.name === '香港') filename = 'HK.txt';

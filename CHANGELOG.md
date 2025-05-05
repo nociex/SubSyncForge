@@ -5,6 +5,20 @@
 格式基于 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.0.0/)，
 并且本项目遵循 [语义化版本](https://semver.org/lang/zh-CN/)。
 
+## [未发布]
+
+## [1.3.7] - 2025-05-05
+
+### 新增
+- 实现了国内代理缓存和获取逻辑 (34e3eb6)。
+
+### 优化
+- 更新 `SubscriptionFetcher` 使用 ES6 导入，并增强 `sync-subscriptions` 中的代理处理 (d8c3451)。
+
+### 修复
+- 修复了 Rollup 构建配置，将 `node-fetch` 添加到外部依赖，解决了在 ES Module 环境下运行构建脚本时出现的 `ReferenceError: require is not defined` 错误 (a4279e2)。
+- 优化 GitHub Actions 工作流，移除在没有文件变更时创建无效 `test.txt` 文件的行为，确保只有在实际发生文件变化时才进行提交和推送。
+
 ## [1.3.6] - 2025-04-29
 
 ### 新增
@@ -52,12 +66,6 @@
 - 增强图标生成模块稳定性，即使在没有节点数据时也能正确生成图标
 - 改进配置模板处理逻辑，增加对缺失模板文件和解析错误的异常处理
 - 优化错误处理，提供更详细的错误提示信息
-
-## [未发布]
-
-### 修复
-- 修复了 Rollup 构建配置，将 `node-fetch` 添加到外部依赖，解决了在 ES Module 环境下运行构建脚本时出现的 `ReferenceError: require is not defined` 错误。
-- 优化 GitHub Actions 工作流，移除在没有文件变更时创建无效 `test.txt` 文件的行为，确保只有在实际发生文件变化时才进行提交和推送。
 
 ## [1.3.2] - 2023-07-26
 
