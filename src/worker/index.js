@@ -1,5 +1,5 @@
 import { Router } from './router';
-import { handleSubscription, handleConversion, handleStatus } from './handlers';
+import { handleSubscription, handleStatus } from './handlers';
 import { handleHealth } from './handlers/healthHandler';
 import { handleGroupSubscription } from './handlers/groupHandler';
 import { logger, metrics } from '../utils';
@@ -11,7 +11,7 @@ const router = new Router();
 
 // API 路由
 router.get('/api/subscriptions', handleSubscription);
-router.post('/api/convert', handleConversion);
+// router.post('/api/convert', handleConversion); // Removed route
 router.get('/api/status', handleStatus);
 router.get('/api/health', handleHealth);
 

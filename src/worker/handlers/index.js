@@ -30,39 +30,7 @@ export async function handleSubscription(request) {
   }
 }
 
-/**
- * 处理转换请求
- * @param {Request} request 请求对象
- * @returns {Response} 响应对象
- */
-export async function handleConversion(request) {
-  try {
-    // 解析请求体
-    const body = await request.json();
-    const { url, format, options } = body;
-    
-    if (!url) {
-      return ResponseBuilder.error('URL is required', 400);
-    }
-    
-    if (!format) {
-      return ResponseBuilder.error('Format is required', 400);
-    }
-    
-    // 模拟转换结果
-    const result = {
-      success: true,
-      format,
-      nodeCount: 10,
-      data: `# 这是一个示例转换结果\n# 格式: ${format}\n# 来源: ${url}`
-    };
-    
-    return ResponseBuilder.json(result);
-  } catch (error) {
-    log.error('Failed to handle conversion request', { error: error.message });
-    return ResponseBuilder.error('Failed to convert subscription', 500);
-  }
-}
+// handleConversion function removed as it's no longer used.
 
 /**
  * 处理状态请求
@@ -89,6 +57,6 @@ export async function handleStatus(request) {
 
 export default {
   handleSubscription,
-  handleConversion,
+  // handleConversion, // Removed export
   handleStatus
 };
