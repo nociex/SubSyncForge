@@ -24,6 +24,7 @@ export default {
     'path',
     'url',
     'js-yaml',
-    'yaml'
+    'yaml',
+    'node-fetch' // 将 node-fetch 添加到外部依赖
   ]
-}; 
+};

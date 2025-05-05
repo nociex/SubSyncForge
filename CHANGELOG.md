@@ -56,6 +56,7 @@
 ## [未发布]
 
 ### 修复
+- 修复了 Rollup 构建配置，将 `node-fetch` 添加到外部依赖，解决了在 ES Module 环境下运行构建脚本时出现的 `ReferenceError: require is not defined` 错误。
 - 优化 GitHub Actions 工作流，移除在没有文件变更时创建无效 `test.txt` 文件的行为，确保只有在实际发生文件变化时才进行提交和推送。
 
 ## [1.3.2] - 2023-07-26
