@@ -92,16 +92,15 @@ export class NodeTester {
         let finalError = result.error || null;
 
         if (result.status) {
-          // 检查延迟是否低于阈值
-          if (latency < 10) {
-            this.logger.warn(`节点 ${node.name} 延迟过低 (${latency}ms)，标记为 down`);
-            finalStatus = 'down';
-            // 可以选择保留延迟值或设为null，这里设为null与失败状态一致
-            finalLatency = null; 
-            finalError = `延迟过低 (${latency}ms)`; // 添加特定错误信息
-          } else {
+          // 检查延迟是否低于 1000ms
+          if (latency < 1000) {
             finalStatus = 'up';
             finalLatency = latency;
+          } else {
+            this.logger.warn(`节点 ${node.name} 延迟过高 (${latency}ms)，标记为 down`);
+            finalStatus = 'down';
+            finalLatency = null; // 延迟过高视为不可用，不记录延迟
+            finalError = `延迟过高 (${latency}ms)`; // 添加错误信息
           }
         }
 

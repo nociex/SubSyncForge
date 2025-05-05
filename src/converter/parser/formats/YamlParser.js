@@ -130,6 +130,7 @@ export class YamlParser {
     // 根据类型进行处理
     switch (type) {
       case 'vmess':
+      case 'vless': // 添加对 vless 类型的处理
         return this.normalizeVmess(node);
       case 'ss':
       case 'shadowsocks':
