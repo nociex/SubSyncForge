@@ -47,7 +47,7 @@ export class PlainTextParser {
       return this.parseTrojan(line);
     } else if (line.startsWith('http://') || line.startsWith('https://')) {
       return this.parseHttp(line);
-    } else if (line.startsWith('socks://') || line.startsWith('socks5://')) {
+    } else if (line.startsWith('socks://') || line.startsWith('socks5://') || line.startsWith('sock://')) {
       return this.parseSocks(line);
     }
     
@@ -439,8 +439,23 @@ export class PlainTextParser {
    */
   parseSocks(uri) {
     try {
+      // 验证基本格式
+      if (!uri.startsWith('socks://') && !uri.startsWith('socks5://') && !uri.startsWith('sock://')) {
+        throw new Error('Invalid SOCKS protocol prefix (must start with sock://, socks:// or socks5://)');
+      }
+      
+      // 检查是否有明显的base64编码内容
+      if (uri.includes('dW5kZWZpbmVk') || uri.match(/[A-Za-z0-9+/=]{20,}/)) {
+        throw new Error('Invalid SOCKS URL - appears to contain encoded data');
+      }
+
       // socks://username:password@server:port#name
       const url = new URL(uri);
+      
+      // 验证服务器和端口
+      if (!url.hostname || !url.port) {
+        throw new Error('Missing server or port in SOCKS URL');
+      }
       
       // 提取名称
       const name = decodeURIComponent(url.hash.substring(1) || '');
@@ -468,8 +483,8 @@ export class PlainTextParser {
         }
       };
     } catch (error) {
-      console.error('Failed to parse Socks URI:', error);
+      console.error('Failed to parse Socks URI:', error.message);
       return null;
     }
   }
-} 
+}
