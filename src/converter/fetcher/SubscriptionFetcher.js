@@ -1,6 +1,6 @@
 // 引入 node-fetch 和 https-proxy-agent
-const fetch = require('node-fetch');
-const { HttpsProxyAgent } = require('https-proxy-agent');
+import fetch from 'node-fetch';
+import { HttpsProxyAgent } from 'https-proxy-agent';
 export class SubscriptionFetcher {
   constructor(options = {}) {
     this.timeout = options.timeout || 30000; // 默认30秒超时

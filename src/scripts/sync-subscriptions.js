@@ -1699,15 +1699,26 @@ async function main() {
       console.error('错误堆栈:', error.stack);
     }
 // *** 提取并保存本次运行找到的国内代理供下次使用 ***
-    console.log('[Main] 提取并保存国内 HTTP/HTTPS 代理...');
+    console.log('[Main] 提取并保存国内 HTTP/HTTPS/SOCKS5 代理...'); // 更新日志信息
     const currentChinaProxies = [];
     // 使用 finalNodes，因为它包含了测试和过滤后的最终节点列表
+console.log('[Debug] Final nodes before caching check:', JSON.stringify(finalNodes.filter(n => n.type === 'http' || n.type === 'https' || n.type === 'socks' || n.type === 'socks5'), null, 2)); // 打印所有潜在的代理节点
     for (const node of finalNodes) {
       // !! 重要: 确认国家代码和代理类型判断逻辑是否符合你的节点结构 !!
-      if ((node.type === 'http' || node.type === 'https') && node.analysis && node.analysis.country === '中国') { // 使用 analysis.country
+      // 检查节点分析结果中的国家信息
+      const isChinaNode = (node.analysis && node.analysis.country === '中国') ||
+                          (node.extra?.location?.country_code === 'CN') ||
+                          (node.extra?.location?.country && /中国|china/i.test(node.extra.location.country)) ||
+                          (node.name && /CN|中国|中转|国内|回国/i.test(node.name)); // 补充检查节点名称和原始位置信息
+
+      const isSupportedProxyType = ['http', 'https', 'socks', 'socks5'].includes(node.type); // 支持的代理类型
+
+      if (isChinaNode && isSupportedProxyType) {
          // 构建代理 URL，考虑认证信息
          // !! 重要: 确认认证信息存储位置 !!
-         let proxyUrl = `${node.type}://`;
+         let protocol = node.type === 'socks' ? 'socks5' : node.type; // 将 'socks' 视为 'socks5'
+         let proxyUrl = `${protocol}://`;
+         // SOCKS5 和 HTTP/HTTPS 可能有认证
          if (node.settings && node.settings.username && node.settings.password) {
            proxyUrl += `${encodeURIComponent(node.settings.username)}:${encodeURIComponent(node.settings.password)}@`;
          }
@@ -1715,7 +1726,7 @@ async function main() {
          currentChinaProxies.push(proxyUrl);
       }
     }
-    console.log(`[Main] 本次运行找到 ${currentChinaProxies.length} 个国内 HTTP/HTTPS 代理`);
+    console.log(`[Main] 本次运行找到 ${currentChinaProxies.length} 个国内 HTTP/HTTPS/SOCKS5 代理`); // 更新日志信息
     saveChinaProxies(currentChinaProxies); // 保存供下次使用
     
     console.log('==================================================================');
