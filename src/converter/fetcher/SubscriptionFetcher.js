@@ -1,8 +1,13 @@
+// 引入 node-fetch 和 https-proxy-agent
+const fetch = require('node-fetch');
+const { HttpsProxyAgent } = require('https-proxy-agent');
 export class SubscriptionFetcher {
   constructor(options = {}) {
     this.timeout = options.timeout || 30000; // 默认30秒超时
     this.maxRetries = options.maxRetries || 3; // 默认最多重试3次
     this.logger = options.logger || console;
+    this.chinaProxyProvider = options.chinaProxyProvider; // 获取国内代理的函数
+    this.proxyFallbackThreshold = options.proxyFallbackThreshold || 5; // 失败多少次后尝试使用代理
     
     // 默认请求配置
     this.defaultOptions = {
@@ -86,60 +91,108 @@ export class SubscriptionFetcher {
     return data;
   }
 
-  async fetch(url, options = {}) {
+  async fetch(url, options = {}) { // 移除 requireChinaIP 处理
     let lastError;
-    
-    this.logger.log(`开始获取订阅: ${url}`);
-    
-    // 合并默认选项和用户提供的选项
-    const fetchOptions = this._mergeOptions(this.defaultOptions, options);
+    // 直接使用传入的 options 作为 requestOptions
+    const requestOptions = options;
+
+    this.logger.log(`开始获取订阅: ${url}`); // 移除 requireChinaIP 相关日志
+
+    // 合并默认选项和用户提供的请求选项
+    const baseFetchOptions = this._mergeOptions(this.defaultOptions, requestOptions);
     let uaIndex = 0;
-    
-    for (let attempt = 0; attempt < this.maxRetries * this.userAgents.length; attempt++) {
+    let useProxy = false; // 标记当前尝试是否应使用代理
+
+    // 总尝试次数仍然由 maxRetries 和 userAgents 数量决定
+    const totalAttempts = this.maxRetries * this.userAgents.length;
+
+    for (let attempt = 0; attempt < totalAttempts; attempt++) {
+      const currentFetchOptions = { ...baseFetchOptions }; // 每次循环创建新的选项副本
+      let agent = null; // 重置 agent
+
       try {
-        // 每次重试时可能尝试不同的UA
+        // UA 切换逻辑保持不变
         if (attempt > 0 && attempt % this.maxRetries === 0) {
           uaIndex = (uaIndex + 1) % this.userAgents.length;
-          fetchOptions.headers['User-Agent'] = this.userAgents[uaIndex];
-          this.logger.log(`切换UA为: ${fetchOptions.headers['User-Agent']}`);
+          currentFetchOptions.headers['User-Agent'] = this.userAgents[uaIndex];
+          this.logger.log(`切换UA为: ${currentFetchOptions.headers['User-Agent']}`);
+        } else if (attempt === 0) {
+          currentFetchOptions.headers['User-Agent'] = baseFetchOptions.headers['User-Agent'] || this.userAgents[uaIndex];
         }
-        
+
         if (attempt > 0) {
           this.logger.log(`重试第${attempt}次获取: ${url}`);
-          this.logger.log(`使用UA: ${fetchOptions.headers['User-Agent']}`);
+          this.logger.log(`使用UA: ${currentFetchOptions.headers['User-Agent']}`);
         }
-        
-        const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), this.timeout);
-        
+
+        // --- 代理回退逻辑 ---
+        // 检查是否达到代理回退阈值
+        if (attempt >= this.proxyFallbackThreshold) {
+          if (!useProxy) { // 首次达到阈值时打印日志
+             this.logger.log(`尝试次数 (${attempt}) 已达阈值 (${this.proxyFallbackThreshold})，后续尝试将使用国内代理 (如果可用)`);
+             useProxy = true; // 标记后续尝试使用代理
+          }
+
+          if (this.chinaProxyProvider) {
+            const proxyUrl = this.chinaProxyProvider(); // 获取一个国内代理
+            if (proxyUrl) {
+              this.logger.log(`尝试使用国内代理 ${proxyUrl} 获取 ${url}`);
+              try {
+                agent = new HttpsProxyAgent(proxyUrl);
+              } catch (e) {
+                this.logger.error(`创建代理 Agent 失败 (${proxyUrl}): ${e.message}`);
+                // 创建失败，本次尝试不使用代理
+              }
+            } else {
+              this.logger.warn(`需要使用国内代理但未找到可用代理: ${url}`);
+              // 找不到代理，本次尝试不使用代理
+            }
+          } else {
+             this.logger.warn(`需要使用国内代理但未配置 chinaProxyProvider`);
+             // 未配置 provider，本次尝试不使用代理
+          }
+        }
+        // --- 结束代理回退逻辑 ---
+
         // 添加随机查询参数防止缓存
         const urlWithParam = this._addRandomParam(url);
-        
+
         this.logger.log(`发送请求到: ${urlWithParam}`);
-        this.logger.log(`请求头: ${JSON.stringify(fetchOptions.headers)}`);
-        
+        this.logger.log(`请求头: ${JSON.stringify(currentFetchOptions.headers)}`);
+        if (agent) {
+          this.logger.log(`使用代理: ${agent.proxy.href}`);
+        } else if (useProxy) {
+          this.logger.log(`尝试使用代理但未成功创建或获取代理`);
+        }
+
         // 记录请求开始时间
         const startTime = Date.now();
-        
+
         // 发送请求
         let response;
         try {
-          response = await fetch(urlWithParam, {
-            ...fetchOptions,
-            signal: controller.signal
-          });
-          
+          const fetchOpts = {
+            ...currentFetchOptions,
+            // signal: controller.signal, // node-fetch@2 不直接用 AbortController signal
+            timeout: this.timeout, // 使用 node-fetch 的 timeout 选项
+            agent: agent // 传递 agent
+          };
+          response = await fetch(urlWithParam, fetchOpts);
+
           // 记录请求完成和耗时
           const endTime = Date.now();
           this.logger.log(`请求完成，耗时: ${endTime - startTime}ms, 状态码: ${response.status}`);
-          
+
         } catch (fetchError) {
-          if (fetchError.name === 'AbortError') {
-            throw new Error(`请求超时 (${this.timeout}ms)`);
+          // node-fetch 超时错误类型可能不同
+          if (fetchError.type === 'request-timeout') {
+             throw new Error(`请求超时 (${this.timeout}ms)`);
           }
-          throw fetchError;
+          // 处理其他 fetch 错误，例如 DNS 解析失败、连接被拒等
+          this.logger.error(`Fetch API 调用出错: ${fetchError.message}, 类型: ${fetchError.type || 'N/A'}`);
+          throw fetchError; // 重新抛出以便重试逻辑捕获
         } finally {
-          clearTimeout(timeoutId);
+          // clearTimeout(timeoutId);
         }
         
         // 检查HTTP状态码

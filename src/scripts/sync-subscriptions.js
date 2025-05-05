@@ -12,6 +12,7 @@ import { NodeTester } from '../tester/NodeTester.js';
 import yaml from 'js-yaml';
 import { BarkNotifier } from '../utils/events/BarkNotifier.js';
 import { eventEmitter, EventType } from '../utils/events/index.js';
+import { HttpsProxyAgent } from 'https-proxy-agent'; // 需要引入
 
 // 设置 ES 模块中的 __dirname
 const __filename = fileURLToPath(import.meta.url);
@@ -25,6 +26,56 @@ const DEBUG = LOG_LEVEL === 'debug';
 // 获取项目根目录
 const rootDir = path.resolve(__dirname, '../..');
 console.log(`项目根目录: ${rootDir}`);
+
+// --- 国内代理缓存配置 ---
+const CHINA_PROXY_CACHE_PATH = path.resolve(rootDir, 'data/ip_cache/china_proxies.json');
+let loadedChinaProxies = []; // 缓存加载的代理
+let currentProxyIndex = 0;
+
+// 确保缓存目录存在
+ensureDirectoryExists(path.dirname(CHINA_PROXY_CACHE_PATH));
+
+// 加载国内代理缓存
+function loadChinaProxies() {
+  try {
+    if (fs.existsSync(CHINA_PROXY_CACHE_PATH)) {
+      const content = fs.readFileSync(CHINA_PROXY_CACHE_PATH, 'utf-8');
+      const proxies = JSON.parse(content);
+      if (Array.isArray(proxies)) {
+        console.log(`成功从 ${CHINA_PROXY_CACHE_PATH} 加载 ${proxies.length} 个国内代理缓存`);
+        return proxies.filter(p => typeof p === 'string' && p.startsWith('http')); // 基本验证
+      }
+    }
+  } catch (error) {
+    console.error(`加载国内代理缓存失败: ${error.message}`);
+  }
+  console.log('未找到或无法加载国内代理缓存文件。');
+  return [];
+}
+
+// 保存国内代理缓存
+function saveChinaProxies(proxies) {
+  try {
+    // 只保存有效的 HTTP/HTTPS 代理 URL
+    const validProxies = proxies.filter(p => typeof p === 'string' && p.startsWith('http'));
+    fs.writeFileSync(CHINA_PROXY_CACHE_PATH, JSON.stringify(validProxies, null, 2));
+    console.log(`已将 ${validProxies.length} 个国内代理缓存保存到 ${CHINA_PROXY_CACHE_PATH}`);
+  } catch (error) {
+    console.error(`保存国内代理缓存失败: ${error.message}`);
+  }
+}
+
+// 提供国内代理的函数 (轮询)
+function getChinaProxy() {
+  if (loadedChinaProxies.length === 0) {
+    return null; // 没有可用代理
+  }
+  const proxy = loadedChinaProxies[currentProxyIndex];
+  currentProxyIndex = (currentProxyIndex + 1) % loadedChinaProxies.length;
+  console.log(`[ProxyProvider] 提供国内代理: ${proxy}`);
+  return proxy;
+}
+// --- 结束 国内代理缓存配置 ---
 
 // 订阅类型
 const SubscriptionType = {
@@ -286,6 +337,13 @@ async function fetchAndMergeAllNodes(converter) {
           
           // 直接使用fetcher获取数据，而不是通过convert方法
           console.log(`开始获取订阅内容...`);
+
+          // *** 添加 requireChinaIP 选项 ***
+          fetchOptions.requireChinaIP = subscription.requireChinaIP === true;
+          if (fetchOptions.requireChinaIP) {
+            console.log(`[Fetcher] 订阅 ${subscription.name} 已标记需要国内代理`);
+          }
+
           const fetchResult = await converter.fetcher.fetch(subscription.url, fetchOptions);
           const rawData = fetchResult.data;
           
@@ -1212,6 +1270,8 @@ async function main() {
   console.log('==================================================================');
   console.log(`开始同步订阅...时间: ${new Date().toISOString()}`);
   console.log('==================================================================');
+// *** 加载国内代理缓存 ***
+  loadedChinaProxies = loadChinaProxies();
   
   let previousNodeCount = null; // 初始化上次节点数
   const dataDir = path.join(CONFIG.rootDir, CONFIG.options.dataDir);
@@ -1312,7 +1372,8 @@ async function main() {
       fetch: {
         timeout: 60000,  // 增加超时时间到60秒
         maxRetries: 3,   // 每个UA尝试3次
-        userAgent: 'v2rayN/5.29' // 使用v2rayN作为UA
+        userAgent: 'v2rayN/5.29', // 使用v2rayN作为UA
+        chinaProxyProvider: getChinaProxy // *** 传递代理提供者 ***
       }
     });
     
@@ -1637,6 +1698,25 @@ async function main() {
       console.error('发送通知事件时出错:', error);
       console.error('错误堆栈:', error.stack);
     }
+// *** 提取并保存本次运行找到的国内代理供下次使用 ***
+    console.log('[Main] 提取并保存国内 HTTP/HTTPS 代理...');
+    const currentChinaProxies = [];
+    // 使用 finalNodes，因为它包含了测试和过滤后的最终节点列表
+    for (const node of finalNodes) {
+      // !! 重要: 确认国家代码和代理类型判断逻辑是否符合你的节点结构 !!
+      if ((node.type === 'http' || node.type === 'https') && node.analysis && node.analysis.country === '中国') { // 使用 analysis.country
+         // 构建代理 URL，考虑认证信息
+         // !! 重要: 确认认证信息存储位置 !!
+         let proxyUrl = `${node.type}://`;
+         if (node.settings && node.settings.username && node.settings.password) {
+           proxyUrl += `${encodeURIComponent(node.settings.username)}:${encodeURIComponent(node.settings.password)}@`;
+         }
+         proxyUrl += `${node.server}:${node.port}`;
+         currentChinaProxies.push(proxyUrl);
+      }
+    }
+    console.log(`[Main] 本次运行找到 ${currentChinaProxies.length} 个国内 HTTP/HTTPS 代理`);
+    saveChinaProxies(currentChinaProxies); // 保存供下次使用
     
     console.log('==================================================================');
     console.log(`订阅同步完成! 总耗时: ${fetchTime + (TESTING_CONFIG.enabled ? testTime : 0) + genTime}ms`);
