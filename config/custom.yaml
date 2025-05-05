@@ -40,6 +40,10 @@ subscriptions:
   - name: "hxapi"
     url: "https://api-hx.02000.net/api/v1/client/subscribe?token=647da51d982c8c972577c18208d94e59"
     enabled: true
+
+  - name: "xship"
+    url: "https://xship.top/v1/subscribe?starlink=free"
+    enabled: true
     
 # 输出配置
 output:
@@ -135,6 +139,22 @@ output:
       enabled: true
       options:
         filter_by_service: ["Netflix"]
+
+    # 台湾节点列表
+    - name: "tw_nodes"
+      template: "templates/txt_list.txt"
+      path: "tw.txt"
+      enabled: true
+      options:
+        filter_by_region: ["台湾", "TW", "Taiwan"]
+
+    # 其他地区节点列表 (尝试使用 exclude_regions)
+    - name: "other_nodes"
+      template: "templates/txt_list.txt"
+      path: "others.txt"
+      enabled: true
+      options:
+        exclude_regions: ["香港", "HK", "Hong Kong", "美国", "US", "United States", "日本", "JP", "Japan", "新加坡", "SG", "Singapore", "台湾", "TW", "Taiwan"]
 
 # 测试配置
 testing:

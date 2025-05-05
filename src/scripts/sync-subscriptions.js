@@ -654,6 +654,40 @@ async function generateConfigs(nodes, outputConfigs, options) {
         console.log(`地区过滤后节点数量: ${filteredNodes.length}`);
       }
       
+      // 处理按地区排除选项 (新增逻辑)
+      if (output.options && output.options.exclude_regions && output.options.exclude_regions.length > 0) {
+        console.log(`按地区排除节点: ${output.options.exclude_regions.join(', ')}`);
+        const excludedRegions = output.options.exclude_regions;
+        
+        filteredNodes = filteredNodes.filter(node => {
+          // 如果节点没有地区信息，则不排除
+          if (!node.analysis || (!node.analysis.countryCode && !node.analysis.country)) {
+            return true;
+          }
+          
+          // 检查节点的地区代码是否在排除列表中
+          if (node.analysis.countryCode && excludedRegions.some(r => r.toUpperCase() === node.analysis.countryCode.toUpperCase())) {
+            return false; // 排除
+          }
+          
+          // 检查节点的地区名称是否在排除列表中
+          if (node.analysis.country && excludedRegions.some(r => node.analysis.country.includes(r))) {
+            return false; // 排除
+          }
+          
+          // 检查节点名称中是否包含排除的地区信息
+          const name = (node.name || '').toUpperCase();
+          if (excludedRegions.some(r => name.includes(r.toUpperCase()))) {
+             return false; // 排除
+          }
+          
+          // 如果都不匹配，则保留该节点
+          return true;
+        });
+        
+        console.log(`地区排除后节点数量: ${filteredNodes.length}`);
+      }
+      
       // 处理按服务过滤选项
       if (output.options && output.options.filter_by_service && output.options.filter_by_service.length > 0) {
         console.log(`按服务过滤节点: ${output.options.filter_by_service.join(', ')}`);
@@ -856,12 +890,47 @@ async function generateConfigs(nodes, outputConfigs, options) {
               ).filter(Boolean).join('\n');
               
               // Clash/Mihomo特定处理...
+
+            } else if (templatePath === path.join(rootDir, 'templates', 'txt_list.txt')) { // 使用完整路径匹配
+              // 新增：处理 txt_list.txt 模板
+              console.log(`处理 txt_list.txt 模板 (路径匹配)`); // 修改日志
+              formattedNodes = filteredNodes.map(node => {
+                // 优先使用原始URI (与 generateGroupedNodeFiles 逻辑类似)
+                if (node.extra?.raw && typeof node.extra.raw === 'string' && node.extra.raw.trim().length > 0) {
+                  return node.extra.raw;
+                }
+                // 尝试构造URI
+                if (node.type === 'vmess' && node.settings?.id) {
+                  const vmessInfo = { v: "2", ps: node.name, add: node.server, port: parseInt(node.port) || 443, id: node.settings.id, aid: parseInt(node.settings.alterId) || 0, net: node.settings.network || "tcp", type: "none", host: (node.settings.wsHeaders && node.settings.wsHeaders.Host) || "", path: node.settings.wsPath || "/", tls: node.settings.tls ? "tls" : "none" };
+                  return `vmess://${Buffer.from(JSON.stringify(vmessInfo)).toString('base64')}`;
+                } else if (node.type === 'ss' && node.settings?.method && node.settings?.password) {
+                  const userInfo = `${node.settings.method}:${node.settings.password}`;
+                  const base64UserInfo = Buffer.from(userInfo).toString('base64');
+                  return `ss://${base64UserInfo}@${node.server}:${parseInt(node.port) || 443}#${encodeURIComponent(node.name || 'Node')}`;
+                } else if (node.type === 'trojan' && node.settings?.password) {
+                  return `trojan://${node.settings.password}@${node.server}:${parseInt(node.port) || 443}?sni=${node.settings.sni || ''}&allowInsecure=${node.settings.allowInsecure ? '1' : '0'}#${encodeURIComponent(node.name || 'Node')}`;
+                } else if (node.type === 'ssr' && node.settings) {
+                  try {
+                    const ssrParams = { server: node.server, port: parseInt(node.port) || 443, protocol: node.settings.protocol || 'origin', method: node.settings.method || 'aes-256-cfb', obfs: node.settings.obfs || 'plain', password: node.settings.password || '' };
+                    const base64Params = Buffer.from(`${ssrParams.server}:${ssrParams.port}:${ssrParams.protocol}:${ssrParams.method}:${ssrParams.obfs}:${Buffer.from(ssrParams.password).toString('base64')}`).toString('base64');
+                    const base64Remarks = Buffer.from(node.name || 'Node').toString('base64');
+                    return `ssr://${base64Params}/?remarks=${base64Remarks}`;
+                  } catch (error) { return ''; }
+                }
+                console.warn(`无法为节点 ${node.name} 构造URI (类型: ${node.type})，在 txt_list 输出中跳过`);
+                return ''; // 返回空字符串以过滤掉无法处理的节点
+              }).filter(Boolean).join('\n'); // 过滤掉空URI并用换行符连接
+            } else {
+               // 对于其他未明确处理的文本模板，保留原始行为（可能需要改进）
+               console.warn(`未知的文本模板类型或路径: ${templatePath} (原始: ${templateFile})，将写入原始模板内容`); // 添加更多日志信息
+               formattedNodes = templateContent;
             }
-            
-            fs.writeFileSync(outputPath, templateContent);
+
+            // 写入处理后的内容
+            console.log(`准备写入 ${outputPath}, 内容片段: ${(formattedNodes || '').substring(0, 100)}...`); // 添加日志记录
+            fs.writeFileSync(outputPath, formattedNodes);
             console.log(`已生成 ${actualFormat} 配置: ${outputPath} (${filteredNodes.length} 个节点)`);
           }
-          
         } catch (error) {
           console.error(`处理模板时出错:`, error);
           console.error(`错误堆栈: ${error.stack}`);

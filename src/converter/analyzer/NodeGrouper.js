@@ -17,25 +17,27 @@ export class NodeGrouper {
 
     // 高级分组（参考用户提供的标准）
     this.advancedGroups = [
-      // 主要选择组
-      { name: '🛫 节点切换', type: 'select', includeGroups: ['🕋 自建节点', '🌈 手动选择', '🇸🇬 新加坡节点', '🇭🇰 香港节点', '🇺🇲 美国节点', '🌍 其他节点'], includeDirect: true },
-      { name: '🌈 手动选择', type: 'select', includeGroups: [], includeDirect: true },
+      // 主要选择组 - 添加 JP 和 TW
+      { name: '🛫 节点切换', type: 'select', includeGroups: ['🕋 自建节点', '🌈 手动选择', '🇸🇬 新加坡节点', '🇭🇰 香港节点', '🇯🇵 日本节点', '🇹🇼 台湾节点', '🇺🇲 美国节点', '🌍 其他节点'], includeDirect: true },
+      { name: '🌈 手动选择', type: 'select', includeGroups: [], includeDirect: true }, // Manual select should probably include all nodes implicitly, but let's keep it consistent for now.
 
-      // 应用/服务专用组
-      { name: '📲 电报消息', type: 'select', includeGroups: ['🕋 自建节点', '🌈 手动选择', '🇸🇬 新加坡节点', '🇭🇰 香港节点', '🇺🇲 美国节点', '🌍 其他节点'], includeDirect: true },
-      { name: '🧬 OpenAi', type: 'select', includeGroups: ['🕋 自建节点', '🌈 手动选择', '🇸🇬 新加坡节点', '🇺🇲 美国节点', '🌍 其他节点'], includeDirect: true, includeByTag: ['OpenAI'] },
-      { name: '📹 油管视频', type: 'select', includeGroups: ['🕋 自建节点', '🌈 手动选择', '🇸🇬 新加坡节点', '🇭🇰 香港节点', '🇺🇲 美国节点', '🌍 其他节点'], includeDirect: true, includeByTag: ['YouTube'] },
-      { name: '🎥 奈飞视频', type: 'select', includeGroups: ['🕋 自建节点', '🌈 手动选择', '🇸🇬 新加坡节点', '🇭🇰 香港节点', '🇺🇲 美国节点', '🌍 其他节点'], includeDirect: true, includeByTag: ['Netflix'] },
-      { name: '🎬 迪士尼+', type: 'select', includeGroups: ['🕋 自建节点', '🌈 手动选择', '🇸🇬 新加坡节点', '🇭🇰 香港节点', '🇺🇲 美国节点', '🌍 其他节点'], includeDirect: true, includeByTag: ['Disney+'] },
-      { name: '📢 谷歌FCM', type: 'select', includeGroups: ['🕋 自建节点', '🌈 手动选择', '🇸🇬 新加坡节点', '🇭🇰 香港节点', '🇺🇲 美国节点', '🌍 其他节点'], includeDirect: true },
-      { name: 'Ⓜ️ 微软服务', type: 'select', includeGroups: ['🕋 自建节点', '🌈 手动选择', '🇸🇬 新加坡节点', '🇭🇰 香港节点', '🇺🇲 美国节点', '🌍 其他节点'], includeDirect: true, includeByTag: ['Microsoft'] },
-      { name: '🍎 苹果服务', type: 'select', includeGroups: ['🕋 自建节点', '🌈 手动选择', '🇸🇬 新加坡节点', '🇭🇰 香港节点', '🇺🇲 美国节点', '🌍 其他节点'], includeDirect: true, includeByTag: ['Apple'] },
-      { name: '🎮 游戏平台', type: 'select', includeGroups: ['🕋 自建节点', '🌈 手动选择', '🇸🇬 新加坡节点', '🇭🇰 香港节点', '🇺🇲 美国节点', '🌍 其他节点'], includeDirect: true, includeByTag: ['游戏'] },
+      // 应用/服务专用组 - 添加 JP 和 TW where appropriate
+      { name: '📲 电报消息', type: 'select', includeGroups: ['🕋 自建节点', '🌈 手动选择', '🇸🇬 新加坡节点', '🇭🇰 香港节点', '🇯🇵 日本节点', '🇹🇼 台湾节点', '🇺🇲 美国节点', '🌍 其他节点'], includeDirect: true },
+      // OpenAI often restricts HK/TW, let's keep them out unless specifically requested
+      { name: '🧬 OpenAi', type: 'select', includeGroups: ['🕋 自建节点', '🌈 手动选择', '🇸🇬 新加坡节点', '🇯🇵 日本节点', '🇺🇲 美国节点', '🌍 其他节点'], includeDirect: true, includeByTag: ['OpenAI'] },
+      { name: '📹 油管视频', type: 'select', includeGroups: ['🕋 自建节点', '🌈 手动选择', '🇸🇬 新加坡节点', '🇭🇰 香港节点', '🇯🇵 日本节点', '🇹🇼 台湾节点', '🇺🇲 美国节点', '🌍 其他节点'], includeDirect: true, includeByTag: ['YouTube'] },
+      { name: '🎥 奈飞视频', type: 'select', includeGroups: ['🕋 自建节点', '🌈 手动选择', '🇸🇬 新加坡节点', '🇭🇰 香港节点', '🇯🇵 日本节点', '🇹🇼 台湾节点', '🇺🇲 美国节点', '🌍 其他节点'], includeDirect: true, includeByTag: ['Netflix'] },
+      { name: '🎬 迪士尼+', type: 'select', includeGroups: ['🕋 自建节点', '🌈 手动选择', '🇸🇬 新加坡节点', '🇭🇰 香港节点', '🇯🇵 日本节点', '🇹🇼 台湾节点', '🇺🇲 美国节点', '🌍 其他节点'], includeDirect: true, includeByTag: ['Disney+'] },
+      { name: '📢 谷歌FCM', type: 'select', includeGroups: ['🕋 自建节点', '🌈 手动选择', '🇸🇬 新加坡节点', '🇭🇰 香港节点', '🇯🇵 日本节点', '🇹🇼 台湾节点', '🇺🇲 美国节点', '🌍 其他节点'], includeDirect: true },
+      { name: 'Ⓜ️ 微软服务', type: 'select', includeGroups: ['🕋 自建节点', '🌈 手动选择', '🇸🇬 新加坡节点', '🇭🇰 香港节点', '🇯🇵 日本节点', '🇹🇼 台湾节点', '🇺🇲 美国节点', '🌍 其他节点'], includeDirect: true, includeByTag: ['Microsoft'] },
+      { name: '🍎 苹果服务', type: 'select', includeGroups: ['🕋 自建节点', '🌈 手动选择', '🇸🇬 新加坡节点', '🇭🇰 香港节点', '🇯🇵 日本节点', '🇹🇼 台湾节点', '🇺🇲 美国节点', '🌍 其他节点'], includeDirect: true, includeByTag: ['Apple'] },
+      { name: '🎮 游戏平台', type: 'select', includeGroups: ['🕋 自建节点', '🌈 手动选择', '🇸🇬 新加坡节点', '🇭🇰 香港节点', '🇯🇵 日本节点', '🇹🇼 台湾节点', '🇺🇲 美国节点', '🌍 其他节点'], includeDirect: true, includeByTag: ['游戏'] },
 
       // 特殊用途组
       { name: '🕋 自建节点', type: 'select', includeCustom: true },
       { name: '🚈 全球直连', type: 'select', includeDirect: true, includeGroups: ['🕋 自建节点'] },
       { name: '🛑 广告拦截', type: 'select', includeReject: true, includeDirect: true },
+      // 漏网之鱼 should probably include all region groups now? Or keep it simple? Let's keep it simple for now.
       { name: '🌀 漏网之鱼', type: 'select', includeGroups: ['🕋 自建节点', '🌈 手动选择', '🌍 其他节点'], includeDirect: true },
     ];
 
@@ -488,7 +490,8 @@ export class NodeGrouper {
         return true; // 没有国家信息的节点也归为其他节点
       }
       const code = node.analysis.countryCode;
-      return code !== 'HK' && code !== 'SG' && code !== 'US';
+      // Exclude HK, SG, US, JP, TW from the 'Others' group
+      return code !== 'HK' && code !== 'SG' && code !== 'US' && code !== 'JP' && code !== 'TW';
     });
 
     if (otherNodes.length > 0) {
