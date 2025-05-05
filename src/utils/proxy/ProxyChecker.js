@@ -51,7 +51,7 @@ export class ProxyChecker {
                 agent = new SocksProxyAgent(`socks5://${node.settings?.username ? `${node.settings.username}:${node.settings.password}@` : ''}${node.server}:${node.port}`);
                 break;
             case 'trojan':
-                this.logger.warn(`Connectivity check for trojan is not fully supported yet. Performing basic TCP check.`);
+                this.logger.warn(`Connectivity check for trojan is not fully supported yet. Performing basic TLS check.`);
                 // 对于Trojan协议，尝试进行TLS连接检查，因为Trojan是基于TLS的
                 return this.checkTlsConnection(node.server, node.port, timeout);
             case 'ss':
@@ -214,6 +214,21 @@ export class ProxyChecker {
               }
           });
       });
+  }
+
+  /**
+   * Placeholder for SSR connection check.
+   * @param {string} server - Server address.
+   * @param {number} port - Server port.
+   * @param {number} timeout - Timeout in milliseconds.
+   * @returns {Promise<{status: boolean, error: string|null}>}
+   */
+  async checkSsrConnection(server, port, timeout) {
+      this.logger.warn(`Performing basic TCP check for SSR node ${server}:${port}.`);
+      // Placeholder: Return 'down' status until actual implementation
+      // Consider adding a basic TCP check here if desired: return this.checkTcpConnection(server, port, timeout);
+      // Implementing basic TCP check for SSR as a starting point
+      return this.checkTcpConnection(server, port, timeout);
   }
 }
 

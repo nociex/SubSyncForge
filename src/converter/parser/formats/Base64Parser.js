@@ -207,23 +207,35 @@ export class Base64Parser {
    */
   parseTrojan(line) {
     try {
-      // trojan://password@server:port?params#name
-      const url = new URL(line);
-      
+      // 先检查基本格式
+      if (!line.startsWith('trojan://') || !line.includes('@')) {
+        console.warn('Invalid Trojan URL format');
+        return null;
+      }
+
+      // 处理特殊字符 - 先提取密码部分进行编码
+      const atIndex = line.indexOf('@');
+      const passwordPart = line.substring(8, atIndex);
+      const encodedPassword = encodeURIComponent(decodeURIComponent(passwordPart));
+      const sanitizedLine = `trojan://${encodedPassword}${line.substring(atIndex)}`;
+
+      // 解析URL
+      const url = new URL(sanitizedLine);
+
       // 提取密码（在用户名部分）
-      const password = url.username;
-      
+      const password = decodeURIComponent(url.username);
+
       // 提取服务器和端口
       const server = url.hostname;
       const port = url.port || 443;
-      
+
       // 提取名称
       const name = decodeURIComponent(url.hash.substring(1) || '');
-      
+
       // 提取参数
       const sni = url.searchParams.get('sni') || server;
       const allowInsecure = url.searchParams.get('allowInsecure') === '1';
-      
+
       return {
         type: 'trojan',
         name: name || `Trojan ${server}:${port}`,
@@ -240,7 +252,7 @@ export class Base64Parser {
         }
       };
     } catch (error) {
-      console.error('Failed to parse Trojan node:', error);
+      console.error('Failed to parse Trojan node:', error.message);
       return null;
     }
   }
@@ -356,4 +368,4 @@ export class Base64Parser {
       return null;
     }
   }
-} 
+}

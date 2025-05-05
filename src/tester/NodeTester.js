@@ -87,12 +87,30 @@ export class NodeTester {
           }
         }
 
-        this.logger.debug(`测试结果 ${node.name}: 状态=${result.status ? 'up' : 'down'}, 延迟=${latency}ms, 位置=${locationInfo?.countryName || '未知'}`);
+        let finalStatus = 'down';
+        let finalLatency = null;
+        let finalError = result.error || null;
+
+        if (result.status) {
+          // 检查延迟是否低于阈值
+          if (latency < 10) {
+            this.logger.warn(`节点 ${node.name} 延迟过低 (${latency}ms)，标记为 down`);
+            finalStatus = 'down';
+            // 可以选择保留延迟值或设为null，这里设为null与失败状态一致
+            finalLatency = null; 
+            finalError = `延迟过低 (${latency}ms)`; // 添加特定错误信息
+          } else {
+            finalStatus = 'up';
+            finalLatency = latency;
+          }
+        }
+
+        this.logger.debug(`测试结果 ${node.name}: 状态=${finalStatus}, 延迟=${finalLatency !== null ? finalLatency + 'ms' : 'N/A'}, 位置=${locationInfo?.countryName || '未知'}`);
         return {
           node,
-          status: result.status ? 'up' : 'down',
-          latency: result.status ? latency : null,
-          error: result.error || null,
+          status: finalStatus,
+          latency: finalLatency,
+          error: finalError,
           locationInfo: locationInfo,
           needsLocationCorrection: result.needsLocationCorrection || false,
           actualLocation: result.actualLocation || null
@@ -197,4 +215,4 @@ export class NodeTester {
   }
 }
 
-export default NodeTester; 
+export default NodeTester;
