@@ -15,44 +15,44 @@ dns:
     - tls://1.0.0.1:853
     - tls://dns.google:853
 proxies:
+  - {name: XW-HJC, server: qymg.qy1357.top, port: 30003, client-fingerprint: chrome, type: hysteria2, password: 3b4dd604-5a29-4d9d-8e0b-74f337c9ffbc, auth: 3b4dd604-5a29-4d9d-8e0b-74f337c9ffbc, sni: qymg.qy1357.top, skip-cert-verify: true, udp: true}
   - {name: "⚫︎ Channel: @MxlShare", server: 9.9.9.9, port: 34388, client-fingerprint: chrome, type: vless, uuid: 412ae33c-a9fc-46c3-8f1f-02c0da23688c, tls: true, servername: www.com, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: www.com}}}
   - {name: "⚫︎ Website: https://mxlsub.me", server: 9.9.9.9, port: 39869, client-fingerprint: chrome, type: vless, uuid: 412ae33c-a9fc-46c3-8f1f-02c0da23688c, tls: true, servername: www.com, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: www.com}}}
-  - {name: 🇧🇷 巴西 | BRA, server: tiamo3.tiamocloud.us.kg, port: 80, client-fingerprint: chrome, type: vmess, uuid: d4982966-d488-497d-b997-24232d8d3605, alterId: 0, cipher: auto, tls: false, network: ws, ws-opts: {path: /, headers: {Host: tiamo3.tiamocloud.us.kg}}, udp: true}
-  - {name: 🇧🇷 巴西 | BRA 2, server: tiamo3.tiamocloud.us.kg, port: 80, client-fingerprint: chrome, type: vmess, uuid: 136dff41-3317-4cba-9ef2-e4c36f86ad8e, alterId: 0, cipher: auto, tls: false, network: ws, ws-opts: {path: /, headers: {Host: tiamo3.tiamocloud.us.kg}}, udp: true}
+  - {name: 🇧🇷 巴西 | BRA, server: tiamo3.tiamocloud.us.kg, port: 80, client-fingerprint: chrome, type: vmess, uuid: 136dff41-3317-4cba-9ef2-e4c36f86ad8e, alterId: 0, cipher: auto, tls: false, network: ws, ws-opts: {path: /, headers: {Host: tiamo3.tiamocloud.us.kg}}, udp: true}
+  - {name: 🇧🇷 巴西 | BRA 2, server: tiamo3.tiamocloud.us.kg, port: 80, client-fingerprint: chrome, type: vmess, uuid: d4982966-d488-497d-b997-24232d8d3605, alterId: 0, cipher: auto, tls: false, network: ws, ws-opts: {path: /, headers: {Host: tiamo3.tiamocloud.us.kg}}, udp: true}
   - {name: 🇨🇳 台湾 | TWN, server: hinetiw0k.yooddns.stream, port: 26900, client-fingerprint: chrome, type: ss, cipher: chacha20-ietf-poly1305, password: c10f2e2b-ea4f-426e-a246-b1d4140dc699, udp: true}
   - {name: 🇨🇳 台湾 | TWN 2, server: hinetiw0k.yooddns.stream, port: 26900, client-fingerprint: chrome, type: ss, cipher: chacha20-ietf-poly1305, password: c0f3b308-d3f5-4094-b8be-29c20d5b0e92, udp: true}
   - {name: 🇩🇪 德国 | DEU, server: qydg.qy1357.top, port: 33003, client-fingerprint: chrome, type: hysteria2, password: 3b4dd604-5a29-4d9d-8e0b-74f337c9ffbc, auth: 3b4dd604-5a29-4d9d-8e0b-74f337c9ffbc, sni: qydg.qy1357.top, skip-cert-verify: true, udp: true}
   - {name: 🇪🇪 爱沙尼亚 | EST, server: tiamo1.tiamocloud.us.kg, port: 80, client-fingerprint: chrome, type: vmess, uuid: 136dff41-3317-4cba-9ef2-e4c36f86ad8e, alterId: 0, cipher: auto, tls: false, network: ws, ws-opts: {path: /, headers: {Host: tiamo1.tiamocloud.us.kg}}, udp: true}
   - {name: 🇪🇪 爱沙尼亚 | EST 2, server: tiamo1.tiamocloud.us.kg, port: 80, client-fingerprint: chrome, type: vmess, uuid: d4982966-d488-497d-b997-24232d8d3605, alterId: 0, cipher: auto, tls: false, network: ws, ws-opts: {path: /, headers: {Host: tiamo1.tiamocloud.us.kg}}, udp: true}
   - {name: 🇬🇧 英国 | GBR, server: qyyg.qy1357.top, port: 30003, client-fingerprint: chrome, type: hysteria2, password: 3b4dd604-5a29-4d9d-8e0b-74f337c9ffbc, auth: 3b4dd604-5a29-4d9d-8e0b-74f337c9ffbc, sni: qyyg.qy1357.top, skip-cert-verify: true, udp: true}
-  - {name: 🇭🇰 香港 | HKG, server: bevent.bilibili.tv, port: 443, client-fingerprint: chrome, type: vmess, uuid: c10f2e2b-ea4f-426e-a246-b1d4140dc699, alterId: 0, cipher: auto, tls: true, servername: hkt.xiaoqi555.xyz, network: ws, ws-opts: {path: /, headers: {Host: hkt.xiaoqi555.xyz}}, udp: true}
-  - {name: 🇭🇰 香港 | HKG 2, server: bevent.bilibili.tv, port: 443, client-fingerprint: chrome, type: vmess, uuid: c0f3b308-d3f5-4094-b8be-29c20d5b0e92, alterId: 0, cipher: auto, tls: true, servername: hkt.xiaoqi555.xyz, network: ws, ws-opts: {path: /, headers: {Host: hkt.xiaoqi555.xyz}}, udp: true}
-  - {name: 🇯🇵 日本 | JPN, server: www.visa.com, port: 443, client-fingerprint: chrome, type: vmess, uuid: c0f3b308-d3f5-4094-b8be-29c20d5b0e92, alterId: 0, cipher: auto, tls: true, skip-cert-verify: true, servername: jpv.xiaoqi555.xyz, network: ws, ws-opts: {path: /, headers: {Host: jpv.xiaoqi555.xyz}}, udp: true}
-  - {name: 🇯🇵 日本 | JPN 2, server: bookmyshow.com, port: 443, client-fingerprint: chrome, type: vmess, uuid: c10f2e2b-ea4f-426e-a246-b1d4140dc699, alterId: 0, cipher: auto, tls: true, servername: jpv.xiaoqi555.xyz, network: ws, ws-opts: {path: /, headers: {Host: jpv.xiaoqi555.xyz}}, udp: true}
-  - {name: 🇯🇵 日本 | JPN 3, server: 2001:19f0:7001:4c24:5400:5ff:fe2b:b8af, port: 443, reality-opts: {public-key: W959HKDLJPaAhQbTLSfP3oMxEeNk0JRJxvDZRrjFeRU, short-id: "0b8881d0" }, client-fingerprint: chrome, type: vless, uuid: c0f3b308-d3f5-4094-b8be-29c20d5b0e92, tls: true, flow: xtls-rprx-vision, servername: yahoo.com, network: tcp, udp: true}
-  - {name: 🇯🇵 日本 | JPN 4, server: 2001:19f0:7001:4c24:5400:5ff:fe2b:b8af, port: 443, reality-opts: {public-key: W959HKDLJPaAhQbTLSfP3oMxEeNk0JRJxvDZRrjFeRU, short-id: "0b8881d0" }, client-fingerprint: edge, type: vless, uuid: c10f2e2b-ea4f-426e-a246-b1d4140dc699, tls: true, flow: xtls-rprx-vision, servername: yahoo.com, network: tcp, udp: true}
+  - {name: 🇭🇰 香港 | HKG, server: bevent.bilibili.tv, port: 443, client-fingerprint: chrome, type: vmess, uuid: c0f3b308-d3f5-4094-b8be-29c20d5b0e92, alterId: 0, cipher: auto, tls: true, servername: hkt.xiaoqi555.xyz, network: ws, ws-opts: {path: /, headers: {Host: hkt.xiaoqi555.xyz}}, udp: true}
+  - {name: 🇭🇰 香港 | HKG 2, server: bevent.bilibili.tv, port: 443, client-fingerprint: chrome, type: vmess, uuid: c10f2e2b-ea4f-426e-a246-b1d4140dc699, alterId: 0, cipher: auto, tls: true, servername: hkt.xiaoqi555.xyz, network: ws, ws-opts: {path: /, headers: {Host: hkt.xiaoqi555.xyz}}, udp: true}
+  - {name: 🇯🇵 日本 | JPN, server: www.visa.com, port: 443, client-fingerprint: chrome, type: vmess, uuid: c10f2e2b-ea4f-426e-a246-b1d4140dc699, alterId: 0, cipher: auto, tls: true, skip-cert-verify: true, servername: jpv.xiaoqi555.xyz, network: ws, ws-opts: {path: /, headers: {Host: jpv.xiaoqi555.xyz}}, udp: true}
+  - {name: 🇯🇵 日本 | JPN 2, server: 1c4.bulldognet-dstat.uk, port: 45679, client-fingerprint: chrome, type: ss, cipher: chacha20-ietf-poly1305, password: c0f3b308-d3f5-4094-b8be-29c20d5b0e92, udp: true}
+  - {name: 🇯🇵 日本 | JPN 3, server: 2001:19f0:7001:4c24:5400:5ff:fe2b:b8af, port: 443, reality-opts: {public-key: W959HKDLJPaAhQbTLSfP3oMxEeNk0JRJxvDZRrjFeRU, short-id: "0b8881d0" }, client-fingerprint: ios, type: vless, uuid: c0f3b308-d3f5-4094-b8be-29c20d5b0e92, tls: true, flow: xtls-rprx-vision, servername: yahoo.com, network: tcp, udp: true}
+  - {name: 🇯🇵 日本 | JPN 4, server: 1c4.bulldognet-dstat.uk, port: 45679, client-fingerprint: chrome, type: ss, cipher: chacha20-ietf-poly1305, password: c10f2e2b-ea4f-426e-a246-b1d4140dc699, udp: true}
   - {name: 🇯🇵 日本 | JPN 5, server: time.is, port: 443, client-fingerprint: chrome, type: vmess, uuid: c10f2e2b-ea4f-426e-a246-b1d4140dc699, alterId: 0, cipher: auto, tls: true, skip-cert-verify: true, servername: jpv.xiaoqi555.xyz, network: ws, ws-opts: {path: /, headers: {Host: jpv.xiaoqi555.xyz}}, udp: true}
-  - {name: 🇯🇵 日本 | JPN 6, server: www.visa.com, port: 443, client-fingerprint: chrome, type: vmess, uuid: c10f2e2b-ea4f-426e-a246-b1d4140dc699, alterId: 0, cipher: auto, tls: true, skip-cert-verify: true, servername: jpv.xiaoqi555.xyz, network: ws, ws-opts: {path: /, headers: {Host: jpv.xiaoqi555.xyz}}, udp: true}
-  - {name: 🇯🇵 日本 | JPN 7, server: bookmyshow.com, port: 443, client-fingerprint: chrome, type: vmess, uuid: c0f3b308-d3f5-4094-b8be-29c20d5b0e92, alterId: 0, cipher: auto, tls: true, servername: jpv.xiaoqi555.xyz, network: ws, ws-opts: {path: /, headers: {Host: jpv.xiaoqi555.xyz}}, udp: true}
-  - {name: 🇯🇵 日本 | JPN 8, server: 1c4.bulldognet-dstat.uk, port: 45679, client-fingerprint: chrome, type: ss, cipher: chacha20-ietf-poly1305, password: c0f3b308-d3f5-4094-b8be-29c20d5b0e92, udp: true}
-  - {name: 🇯🇵 日本 | JPN 9, server: time.is, port: 443, client-fingerprint: chrome, type: vmess, uuid: c0f3b308-d3f5-4094-b8be-29c20d5b0e92, alterId: 0, cipher: auto, tls: true, skip-cert-verify: true, servername: jpv.xiaoqi555.xyz, network: ws, ws-opts: {path: /, headers: {Host: jpv.xiaoqi555.xyz}}, udp: true}
-  - {name: 🇯🇵 日本 | JPN 10, server: 1c4.bulldognet-dstat.uk, port: 45679, client-fingerprint: chrome, type: ss, cipher: chacha20-ietf-poly1305, password: c10f2e2b-ea4f-426e-a246-b1d4140dc699, udp: true}
+  - {name: 🇯🇵 日本 | JPN 6, server: bookmyshow.com, port: 443, client-fingerprint: chrome, type: vmess, uuid: c10f2e2b-ea4f-426e-a246-b1d4140dc699, alterId: 0, cipher: auto, tls: true, servername: jpv.xiaoqi555.xyz, network: ws, ws-opts: {path: /, headers: {Host: jpv.xiaoqi555.xyz}}, udp: true}
+  - {name: 🇯🇵 日本 | JPN 7, server: time.is, port: 443, client-fingerprint: chrome, type: vmess, uuid: c0f3b308-d3f5-4094-b8be-29c20d5b0e92, alterId: 0, cipher: auto, tls: true, skip-cert-verify: true, servername: jpv.xiaoqi555.xyz, network: ws, ws-opts: {path: /, headers: {Host: jpv.xiaoqi555.xyz}}, udp: true}
+  - {name: 🇯🇵 日本 | JPN 8, server: 2001:19f0:7001:4c24:5400:5ff:fe2b:b8af, port: 443, reality-opts: {public-key: W959HKDLJPaAhQbTLSfP3oMxEeNk0JRJxvDZRrjFeRU, short-id: "0b8881d0" }, client-fingerprint: edge, type: vless, uuid: c10f2e2b-ea4f-426e-a246-b1d4140dc699, tls: true, flow: xtls-rprx-vision, servername: yahoo.com, network: tcp, udp: true}
+  - {name: 🇯🇵 日本 | JPN 9, server: www.visa.com, port: 443, client-fingerprint: chrome, type: vmess, uuid: c0f3b308-d3f5-4094-b8be-29c20d5b0e92, alterId: 0, cipher: auto, tls: true, skip-cert-verify: true, servername: jpv.xiaoqi555.xyz, network: ws, ws-opts: {path: /, headers: {Host: jpv.xiaoqi555.xyz}}, udp: true}
+  - {name: 🇯🇵 日本 | JPN 10, server: bookmyshow.com, port: 443, client-fingerprint: chrome, type: vmess, uuid: c0f3b308-d3f5-4094-b8be-29c20d5b0e92, alterId: 0, cipher: auto, tls: true, servername: jpv.xiaoqi555.xyz, network: ws, ws-opts: {path: /, headers: {Host: jpv.xiaoqi555.xyz}}, udp: true}
   - {name: 🇰🇷 韩国 | KOR, server: qyhg.qy1357.top, port: 30003, client-fingerprint: chrome, type: hysteria2, password: 3b4dd604-5a29-4d9d-8e0b-74f337c9ffbc, auth: 3b4dd604-5a29-4d9d-8e0b-74f337c9ffbc, sni: qyhg.qy1357.top, skip-cert-verify: true, udp: true}
-  - {name: 🇸🇬 新加坡 | SGP, server: qyxjp.qy1357.top, port: 30003, client-fingerprint: chrome, type: hysteria2, password: 3b4dd604-5a29-4d9d-8e0b-74f337c9ffbc, auth: 3b4dd604-5a29-4d9d-8e0b-74f337c9ffbc, sni: qyxjp.qy1357.top, skip-cert-verify: true, udp: true}
-  - {name: 🇸🇬 新加坡 | SGP 2, server: tiamo2.tiamocloud.us.kg, port: 80, client-fingerprint: chrome, type: vmess, uuid: 136dff41-3317-4cba-9ef2-e4c36f86ad8e, alterId: 0, cipher: auto, tls: false, network: ws, ws-opts: {path: /, headers: {Host: tiamo2.tiamocloud.us.kg}}, udp: true}
-  - {name: 🇸🇬 新加坡 | SGP 3, server: tiamo2.tiamocloud.us.kg, port: 80, client-fingerprint: chrome, type: vmess, uuid: d4982966-d488-497d-b997-24232d8d3605, alterId: 0, cipher: auto, tls: false, network: ws, ws-opts: {path: /, headers: {Host: tiamo2.tiamocloud.us.kg}}, udp: true}
-  - {name: 🇸🇬 新加坡 | SGP 4, server: qyxjp2.qy1357.top, port: 30003, client-fingerprint: chrome, type: hysteria2, password: 3b4dd604-5a29-4d9d-8e0b-74f337c9ffbc, auth: 3b4dd604-5a29-4d9d-8e0b-74f337c9ffbc, sni: qyxjp2.qy1357.top, skip-cert-verify: true, udp: true}
+  - {name: 🇸🇬 新加坡 | SGP, server: qyxjp2.qy1357.top, port: 30003, client-fingerprint: chrome, type: hysteria2, password: 3b4dd604-5a29-4d9d-8e0b-74f337c9ffbc, auth: 3b4dd604-5a29-4d9d-8e0b-74f337c9ffbc, sni: qyxjp2.qy1357.top, skip-cert-verify: true, udp: true}
+  - {name: 🇸🇬 新加坡 | SGP 2, server: tiamo2.tiamocloud.us.kg, port: 80, client-fingerprint: chrome, type: vmess, uuid: d4982966-d488-497d-b997-24232d8d3605, alterId: 0, cipher: auto, tls: false, network: ws, ws-opts: {path: /, headers: {Host: tiamo2.tiamocloud.us.kg}}, udp: true}
+  - {name: 🇸🇬 新加坡 | SGP 3, server: tiamo2.tiamocloud.us.kg, port: 80, client-fingerprint: chrome, type: vmess, uuid: 136dff41-3317-4cba-9ef2-e4c36f86ad8e, alterId: 0, cipher: auto, tls: false, network: ws, ws-opts: {path: /, headers: {Host: tiamo2.tiamocloud.us.kg}}, udp: true}
+  - {name: 🇸🇬 新加坡 | SGP 4, server: qyxjp.qy1357.top, port: 30003, client-fingerprint: chrome, type: hysteria2, password: 3b4dd604-5a29-4d9d-8e0b-74f337c9ffbc, auth: 3b4dd604-5a29-4d9d-8e0b-74f337c9ffbc, sni: qyxjp.qy1357.top, skip-cert-verify: true, udp: true}
   - {name: 🇺🇸 美国 | USA, server: cf.090227.xyz, port: 80, client-fingerprint: chrome, type: vmess, uuid: c0f3b308-d3f5-4094-b8be-29c20d5b0e92, alterId: 0, cipher: auto, tls: false, network: ws, ws-opts: {path: /, headers: {Host: shs111.kejixiaoqi666.store}}, udp: true}
-  - {name: 🇺🇸 美国 | USA 2, server: time.is, port: 80, client-fingerprint: chrome, type: vmess, uuid: c0f3b308-d3f5-4094-b8be-29c20d5b0e92, alterId: 0, cipher: auto, tls: false, network: ws, ws-opts: {path: /, headers: {Host: shs111.kejixiaoqi666.store}}, udp: true}
-  - {name: 🇺🇸 美国 | USA 3, server: time.is, port: 80, client-fingerprint: chrome, type: vmess, uuid: c10f2e2b-ea4f-426e-a246-b1d4140dc699, alterId: 0, cipher: auto, tls: false, network: ws, ws-opts: {path: /, headers: {Host: shs111.kejixiaoqi666.store}}, udp: true}
-  - {name: 🇺🇸 美国 | USA 4, server: zz.xiao666666.site, port: 10001, client-fingerprint: chrome, type: vmess, uuid: c10f2e2b-ea4f-426e-a246-b1d4140dc699, alterId: 0, cipher: auto, tls: false, network: ws, ws-opts: {path: /, headers: {Host: by.xiao666666.site}}, udp: true}
-  - {name: 🇺🇸 美国 | USA 5, server: bestcf.mfwl.art, port: 80, client-fingerprint: chrome, type: vmess, uuid: c10f2e2b-ea4f-426e-a246-b1d4140dc699, alterId: 0, cipher: auto, tls: false, network: ws, ws-opts: {path: /, headers: {Host: shs111.kejixiaoqi666.store}}, udp: true}
-  - {name: 🇺🇸 美国 | USA 6, server: bestcf.top, port: 80, client-fingerprint: chrome, type: vmess, uuid: c10f2e2b-ea4f-426e-a246-b1d4140dc699, alterId: 0, cipher: auto, tls: false, network: ws, ws-opts: {path: /, headers: {Host: shs111.kejixiaoqi666.store}}, udp: true}
-  - {name: 🇺🇸 美国 | USA 7, server: bestcf.mfwl.art, port: 80, client-fingerprint: chrome, type: vmess, uuid: c0f3b308-d3f5-4094-b8be-29c20d5b0e92, alterId: 0, cipher: auto, tls: false, network: ws, ws-opts: {path: /, headers: {Host: shs111.kejixiaoqi666.store}}, udp: true}
-  - {name: 🇺🇸 美国 | USA 8, server: cf.090227.xyz, port: 80, client-fingerprint: chrome, type: vmess, uuid: c10f2e2b-ea4f-426e-a246-b1d4140dc699, alterId: 0, cipher: auto, tls: false, network: ws, ws-opts: {path: /, headers: {Host: shs111.kejixiaoqi666.store}}, udp: true}
-  - {name: 🇺🇸 美国 | USA 9, server: bestcf.top, port: 80, client-fingerprint: chrome, type: vmess, uuid: c0f3b308-d3f5-4094-b8be-29c20d5b0e92, alterId: 0, cipher: auto, tls: false, network: ws, ws-opts: {path: /, headers: {Host: shs111.kejixiaoqi666.store}}, udp: true}
-  - {name: 🇺🇸 美国 | USA 10, server: zz.xiao666666.site, port: 10001, client-fingerprint: chrome, type: vmess, uuid: c0f3b308-d3f5-4094-b8be-29c20d5b0e92, alterId: 0, cipher: auto, tls: false, network: ws, ws-opts: {path: /, headers: {Host: by.xiao666666.site}}, udp: true}
-  - {name: 🏴‍☠️ 未知地区 | Unknown, server: qymg.qy1357.top, port: 30003, client-fingerprint: chrome, type: hysteria2, password: 3b4dd604-5a29-4d9d-8e0b-74f337c9ffbc, auth: 3b4dd604-5a29-4d9d-8e0b-74f337c9ffbc, sni: qymg.qy1357.top, skip-cert-verify: true, udp: true}
+  - {name: 🇺🇸 美国 | USA 2, server: cf.090227.xyz, port: 80, client-fingerprint: chrome, type: vmess, uuid: c10f2e2b-ea4f-426e-a246-b1d4140dc699, alterId: 0, cipher: auto, tls: false, network: ws, ws-opts: {path: /, headers: {Host: shs111.kejixiaoqi666.store}}, udp: true}
+  - {name: 🇺🇸 美国 | USA 3, server: bestcf.mfwl.art, port: 80, client-fingerprint: chrome, type: vmess, uuid: c10f2e2b-ea4f-426e-a246-b1d4140dc699, alterId: 0, cipher: auto, tls: false, network: ws, ws-opts: {path: /, headers: {Host: shs111.kejixiaoqi666.store}}, udp: true}
+  - {name: 🇺🇸 美国 | USA 4, server: time.is, port: 80, client-fingerprint: chrome, type: vmess, uuid: c10f2e2b-ea4f-426e-a246-b1d4140dc699, alterId: 0, cipher: auto, tls: false, network: ws, ws-opts: {path: /, headers: {Host: shs111.kejixiaoqi666.store}}, udp: true}
+  - {name: 🇺🇸 美国 | USA 5, server: bestcf.mfwl.art, port: 80, client-fingerprint: chrome, type: vmess, uuid: c0f3b308-d3f5-4094-b8be-29c20d5b0e92, alterId: 0, cipher: auto, tls: false, network: ws, ws-opts: {path: /, headers: {Host: shs111.kejixiaoqi666.store}}, udp: true}
+  - {name: 🇺🇸 美国 | USA 6, server: bestcf.top, port: 80, client-fingerprint: chrome, type: vmess, uuid: c0f3b308-d3f5-4094-b8be-29c20d5b0e92, alterId: 0, cipher: auto, tls: false, network: ws, ws-opts: {path: /, headers: {Host: shs111.kejixiaoqi666.store}}, udp: true}
+  - {name: 🇺🇸 美国 | USA 7, server: zz.xiao666666.site, port: 10001, client-fingerprint: chrome, type: vmess, uuid: c10f2e2b-ea4f-426e-a246-b1d4140dc699, alterId: 0, cipher: auto, tls: false, network: ws, ws-opts: {path: /, headers: {Host: by.xiao666666.site}}, udp: true}
+  - {name: 🇺🇸 美国 | USA 8, server: zz.xiao666666.site, port: 10001, client-fingerprint: chrome, type: vmess, uuid: c0f3b308-d3f5-4094-b8be-29c20d5b0e92, alterId: 0, cipher: auto, tls: false, network: ws, ws-opts: {path: /, headers: {Host: by.xiao666666.site}}, udp: true}
+  - {name: 🇺🇸 美国 | USA 9, server: time.is, port: 80, client-fingerprint: chrome, type: vmess, uuid: c0f3b308-d3f5-4094-b8be-29c20d5b0e92, alterId: 0, cipher: auto, tls: false, network: ws, ws-opts: {path: /, headers: {Host: shs111.kejixiaoqi666.store}}, udp: true}
+  - {name: 🇺🇸 美国 | USA 10, server: bestcf.top, port: 80, client-fingerprint: chrome, type: vmess, uuid: c10f2e2b-ea4f-426e-a246-b1d4140dc699, alterId: 0, cipher: auto, tls: false, network: ws, ws-opts: {path: /, headers: {Host: shs111.kejixiaoqi666.store}}, udp: true}
 proxy-groups:
   - name: ☁️ 代理选择
     type: select
@@ -68,6 +68,7 @@ proxy-groups:
   - name: ✏️ 手动切换
     type: select
     proxies:
+      - XW-HJC
       - "⚫︎ Channel: @MxlShare"
       - "⚫︎ Website: https://mxlsub.me"
       - 🇧🇷 巴西 | BRA
@@ -105,7 +106,6 @@ proxy-groups:
       - 🇺🇸 美国 | USA 8
       - 🇺🇸 美国 | USA 9
       - 🇺🇸 美国 | USA 10
-      - 🏴‍☠️ 未知地区 | Unknown
   - name: 📲 电报消息
     type: select
     proxies:
@@ -248,6 +248,7 @@ proxy-groups:
     url: http://www.gstatic.com/generate_204
     interval: 300
     proxies:
+      - XW-HJC
       - "⚫︎ Channel: @MxlShare"
       - "⚫︎ Website: https://mxlsub.me"
       - 🇧🇷 巴西 | BRA
@@ -285,7 +286,6 @@ proxy-groups:
       - 🇺🇸 美国 | USA 8
       - 🇺🇸 美国 | USA 9
       - 🇺🇸 美国 | USA 10
-      - 🏴‍☠️ 未知地区 | Unknown
   - name: 🎈 其余流量
     type: select
     proxies:
