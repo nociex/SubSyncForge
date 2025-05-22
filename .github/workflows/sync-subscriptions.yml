@@ -57,7 +57,7 @@ jobs:
         run: pnpm build
       
       - name: Run sync script
-        run: node dist/scripts/sync-subscriptions.js
+        run: node dist/sync-subscriptions.js
         env:
           BARK_URL: ${{ secrets.BARK_URL }}
           BARK_TITLE: SubSyncForge
