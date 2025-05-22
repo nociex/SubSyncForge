@@ -10,8 +10,6 @@ import fetch from 'node-fetch';
 import { HttpsProxyAgent } from 'https-proxy-agent';
 import { saveCacheData } from '../utils/FileSystem.js';
 import { SubscriptionType } from '../config/ConfigDefaults.js';
-import { ChinaSocksSubscriptionFetcher } from '../../utils/proxy/ChinaSocksSubscriptionFetcher.js';
-import { ChinaProxyLoader } from '../../utils/proxy/ChinaProxyLoader.js';
 import { SubscriptionParser } from './SubscriptionParser.js';
 
 export class SubscriptionFetcher {
@@ -27,92 +25,60 @@ export class SubscriptionFetcher {
     this.proxyManager = options.proxyManager || null;
     this.logger = options.logger || console;
     this.converter = options.converter || null;
-    this.chinaProxyEnabled = options.chinaProxyEnabled || false;
     this.parser = new SubscriptionParser({
       rootDir: this.rootDir,
       dataDir: this.dataDir,
       logger: this.logger
     });
-    
-    // 初始化中国代理加载器和中国代理订阅获取器
-    if (this.chinaProxyEnabled) {
-      this.chinaProxyLoader = new ChinaProxyLoader({
-        rootDir: this.rootDir,
-        dataDir: this.dataDir,
-        logger: this.logger
-      });
-      
-      this.chinaSocksFetcher = new ChinaSocksSubscriptionFetcher({
-        rootDir: this.rootDir,
-        dataDir: this.dataDir,
-        logger: this.logger
-      });
-    }
   }
 
   /**
    * 获取订阅内容
    * @param {Object} subscription 订阅配置
-   * @returns {Promise<Object>} 订阅内容
+   * @returns {Promise<Object>} 获取结果
    */
   async fetchSubscription(subscription) {
     if (!subscription || !subscription.url) {
-      this.logger.error('订阅配置无效，缺少URL');
-      return {
-        source: subscription?.name || 'unknown',
-        nodes: [],
-        error: '订阅配置无效，缺少URL'
-      };
+      throw new Error('无效的订阅配置');
     }
 
-    let useChinaProxy = false;
-    
-    // 检查是否使用中国代理
-    if (this.chinaProxyEnabled && subscription.use_china_proxy) {
-      useChinaProxy = true;
-      this.logger.info(`将使用中国代理获取订阅: ${subscription.name}`);
-    }
+    this.logger.info(`开始获取订阅: ${subscription.name}`);
 
+    // 检查订阅配置
+    const subscriptionUrl = subscription.url;
+    const subscriptionType = subscription.type || 'auto';
+    const headers = subscription.headers || {};
+    const useCache = subscription.useCache !== false;
+
+    // 计算缓存路径
     const cacheDir = path.join(this.rootDir, this.dataDir, 'cache');
-    const cacheHash = crypto.createHash('md5').update(subscription.url).digest('hex');
-    const cachePath = path.join(cacheDir, `${cacheHash}_cache.json`);
+    if (!fs.existsSync(cacheDir)) {
+      fs.mkdirSync(cacheDir, { recursive: true });
+    }
 
-    // 检查缓存
+    // 计算缓存文件名
+    const subscriptionHash = crypto
+      .createHash('md5')
+      .update(subscriptionUrl)
+      .digest('hex');
+    const cachePath = path.join(cacheDir, `${subscriptionHash}_cache.json`);
+
+    // 检查是否有有效缓存
     let cacheData = null;
-    let useCache = false;
-
-    const saveCacheData = (path, nodes, hash) => {
+    if (useCache && fs.existsSync(cachePath)) {
       try {
-        const data = {
-          timestamp: Date.now(),
-          source: subscription.name,
-          url: subscription.url,
-          type: subscription.type,
-          nodes: nodes,
-          hash: hash
-        };
-        fs.writeFileSync(path, JSON.stringify(data, null, 2));
-        this.logger.info(`已缓存订阅数据: ${path}`);
-      } catch (error) {
-        this.logger.error(`缓存订阅数据失败: ${error.message}`);
-      }
-    };
+        const cacheContent = fs.readFileSync(cachePath, 'utf-8');
+        const cacheJson = JSON.parse(cacheContent);
+        const cacheTime = new Date(cacheJson.timestamp);
+        const now = new Date();
+        const cacheTtl = subscription.cacheTtl || this.cacheTtl;
 
-    if (fs.existsSync(cachePath)) {
-      try {
-        const content = fs.readFileSync(cachePath, 'utf8');
-        cacheData = JSON.parse(content);
-        
-        if (cacheData && cacheData.timestamp) {
-          const now = Date.now();
-          const cacheAge = (now - cacheData.timestamp) / 1000; // 转换为秒
-          
-          if (cacheAge < this.cacheTtl) {
-            useCache = true;
-            this.logger.info(`使用缓存的订阅数据，缓存年龄: ${Math.floor(cacheAge / 60)} 分钟`);
-          } else {
-            this.logger.info(`缓存已过期，需要重新获取: ${Math.floor(cacheAge / 60)} 分钟 > ${Math.floor(this.cacheTtl / 60)} 分钟`);
-          }
+        // 如果缓存未过期，则使用缓存
+        if (now.getTime() - cacheTime.getTime() < cacheTtl * 1000) {
+          this.logger.info(`使用缓存的订阅数据: ${subscription.name}`);
+          cacheData = cacheJson;
+        } else {
+          this.logger.info(`缓存已过期: ${subscription.name}`);
         }
       } catch (error) {
         this.logger.warn(`读取缓存失败: ${error.message}`);
@@ -129,7 +95,6 @@ export class SubscriptionFetcher {
           // 使用订阅解析器检测中国节点
           const parseOptions = {
             detectChineseNodes: true,
-            convertToSocks: true,
             source: subscription.name,
             ...subscription.parseOptions
           };
@@ -164,82 +129,84 @@ export class SubscriptionFetcher {
     let content = '';
     let contentHash = '';
     let fetchError = null;
-    
+
+    // 尝试获取订阅内容
     try {
-      // 根据配置选择获取方式
-      if (useChinaProxy) {
-        // 使用中国代理获取
-        this.logger.info(`通过中国代理获取订阅: ${subscription.name}`);
-        const result = await this.chinaSocksFetcher.fetch(subscription.url, {
-          headers: subscription.headers || {},
-          useCache: true
-        });
-        
-        if (!result.success || !result.data) {
-          throw new Error(result.error?.message || '通过中国代理获取订阅失败');
-        }
-        
-        content = result.data;
-      } else if (this.useProxy && this.proxyManager) {
-        // 使用代理获取
+      // 准备请求选项
+      const requestOptions = {
+        method: 'GET',
+        headers: {
+          'User-Agent': 'SubSyncForge/1.0',
+          'Accept': '*/*',
+          ...headers
+        },
+        timeout: subscription.timeout || 30000 // 默认30秒超时
+      };
+
+      // 使用代理（如果启用）
+      if (this.useProxy && this.proxyManager) {
         const proxy = await this.proxyManager.getProxy();
-        
         if (proxy) {
-          this.logger.info(`通过代理 ${proxy} 获取订阅: ${subscription.name}`);
-          
-          const agent = new HttpsProxyAgent(proxy);
-          const response = await fetch(subscription.url, {
-            agent,
-            headers: subscription.headers || {},
-            timeout: 30000
-          });
-          
-          if (!response.ok) {
-            throw new Error(`HTTP 错误: ${response.status}`);
-          }
-          
-          content = await response.text();
-        } else {
-          this.logger.warn('未找到可用代理，直接获取订阅');
-          
-          const response = await fetch(subscription.url, {
-            headers: subscription.headers || {},
-            timeout: 30000
-          });
-          
-          if (!response.ok) {
-            throw new Error(`HTTP 错误: ${response.status}`);
-          }
-          
-          content = await response.text();
+          this.logger.info(`使用代理: ${proxy}`);
+          requestOptions.agent = new HttpsProxyAgent(proxy);
         }
-      } else {
-        // 直接获取
-        this.logger.info(`直接获取订阅: ${subscription.name}`);
-        
-        const response = await fetch(subscription.url, {
-          headers: subscription.headers || {},
-          timeout: 30000
-        });
-        
-        if (!response.ok) {
-          throw new Error(`HTTP 错误: ${response.status}`);
-        }
-        
-        content = await response.text();
       }
-      
-      if (!content || content.trim().length === 0) {
-        throw new Error('获取的订阅内容为空');
+
+      this.logger.info(`开始请求订阅: ${subscriptionUrl}`);
+      const response = await fetch(subscriptionUrl, requestOptions);
+
+      if (!response.ok) {
+        throw new Error(`HTTP错误: ${response.status} ${response.statusText}`);
       }
-      
+
+      // 获取内容
+      content = await response.text();
+      if (!content) {
+        throw new Error('订阅内容为空');
+      }
+
+      this.logger.info(`成功获取订阅内容，长度: ${content.length}`);
+
       // 计算内容哈希
-      contentHash = crypto.createHash('sha256').update(content).digest('hex');
-      
-      this.logger.info(`成功获取订阅: ${subscription.name}, 原始数据大小: ${content.length} 字节`);
-      
-      // 解析订阅内容
-      try {
+      contentHash = crypto
+        .createHash('md5')
+        .update(content)
+        .digest('hex');
+
+      // 如果内容哈希与缓存相同，直接返回缓存
+      if (cacheData && contentHash === cacheData.hash) {
+        this.logger.info(`内容未变化，使用缓存数据`);
+        return {
+          source: subscription.name,
+          nodes: cacheData.nodes,
+          fromCache: true,
+          hash: contentHash
+        };
+      }
+    } catch (error) {
+      this.logger.error(`获取订阅内容失败: ${error.message}`);
+      fetchError = error;
+
+      // 如果获取失败但有缓存，使用缓存
+      if (cacheData) {
+        this.logger.info(`获取失败，使用缓存数据`);
+        return {
+          source: subscription.name,
+          nodes: cacheData.nodes,
+          fromCache: true,
+          hash: cacheData.hash,
+          error: fetchError.message
+        };
+      }
+
+      // 如果没有缓存，抛出错误
+      throw error;
+    }
+
+    // 解析订阅内容
+    try {
+      // 根据订阅类型解析内容
+      if (content) {
         if (!this.converter) {
           throw new Error('未配置转换器，无法解析订阅内容');
         }
@@ -275,7 +242,6 @@ export class SubscriptionFetcher {
             // 使用订阅解析器检测中国节点
             const parseOptions = {
               detectChineseNodes: true,
-              convertToSocks: true,
               source: subscription.name,
               ...subscription.parseOptions
             };
@@ -289,11 +255,15 @@ export class SubscriptionFetcher {
           }
         }
         
-        // 缓存订阅内容
-        if (!fs.existsSync(cacheDir)) {
-          fs.mkdirSync(cacheDir, { recursive: true });
+        // 缓存节点
+        if (useCache) {
+          try {
+            await saveCacheData(cachePath, finalNodes, contentHash);
+            this.logger.info(`已缓存订阅数据: ${subscription.name}`);
+          } catch (error) {
+            this.logger.warn(`缓存订阅数据失败: ${error.message}`);
+          }
         }
-        saveCacheData(cachePath, finalNodes, contentHash);
         
         return {
           source: subscription.name,
@@ -301,51 +271,27 @@ export class SubscriptionFetcher {
           fromCache: false,
           hash: contentHash
         };
-      } catch (error) {
-        this.logger.error(`处理 ${subscription.name} 订阅失败: ${error.message}`);
-        this.logger.error(`错误堆栈: ${error.stack}`);
-        
-        // 尝试使用缓存作为后备
-        if (cacheData && Array.isArray(cacheData.nodes)) {
-          this.logger.info(`使用缓存作为后备，包含 ${cacheData.nodes.length} 个节点`);
-          return {
-            source: subscription.name,
-            nodes: cacheData.nodes,
-            fromCache: true,
-            fromBackup: true,
-            hash: cacheData.hash
-          };
-        }
-        
-        return {
-          source: subscription.name,
-          nodes: [],
-          fromCache: false,
-          error: error.message
-        };
       }
-    } catch (fetchError) {
-      this.logger.error(`获取 ${subscription.name} 订阅失败: ${fetchError.message}`);
+    } catch (error) {
+      this.logger.error(`解析订阅内容失败: ${error.message}`);
       
-      // 尝试使用缓存作为后备
-      if (cacheData && Array.isArray(cacheData.nodes)) {
-        this.logger.info(`使用缓存作为后备，包含 ${cacheData.nodes.length} 个节点`);
+      // 如果解析失败但有缓存，使用缓存
+      if (cacheData) {
+        this.logger.info(`解析失败，使用缓存数据`);
         return {
           source: subscription.name,
           nodes: cacheData.nodes,
           fromCache: true,
-          fromBackup: true,
-          hash: cacheData.hash
+          hash: cacheData.hash,
+          error: error.message
         };
       }
       
-      return {
-        source: subscription.name,
-        nodes: [],
-        fromCache: false,
-        error: fetchError.message
-      };
+      // 如果没有缓存，抛出错误
+      throw error;
     }
+    
+    throw new Error('未能获取订阅内容');
   }
 
   /**

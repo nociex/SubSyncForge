@@ -2,7 +2,6 @@ import fs from 'fs';
 import path from 'path';
 import { logger } from '../../utils/index.js';
 import { IpLocationDetector } from '../../utils/ip/IpLocationDetector.js';
-import { SocksNodeConverter } from '../../utils/proxy/SocksNodeConverter.js';
 
 const defaultLogger = logger?.defaultLogger || console;
 
@@ -26,47 +25,42 @@ export class SubscriptionParser {
    */
   async parseSubscription(content, type, options = {}) {
     let nodes = [];
-    
+
     try {
-      // 根据订阅类型选择不同的解析方法
-      switch (type) {
+      if (!content) {
+        this.logger.warn('订阅内容为空');
+        return [];
+      }
+
+      // 根据订阅类型选择合适的解析器
+      switch (type.toLowerCase()) {
         case 'base64':
-          nodes = await this.parseBase64(content, options);
-          break;
-        case 'shadowsocks':
-          nodes = await this.parseShadowsocks(content, options);
+        case 'v2ray':
+        case 'vmess':
+        case 'ss':
+        case 'ssr':
+        case 'trojan':
+          // 这些类型由现有解析器处理
           break;
         case 'clash':
-          nodes = await this.parseClash(content, options);
+        case 'yaml':
+          // 这些类型由现有解析器处理
           break;
-        case 'sip002':
-          nodes = await this.parseSIP002(content, options);
-          break;
-        case 'v2ray':
-          nodes = await this.parseV2Ray(content, options);
-          break;
-        case 'trojan':
-          nodes = await this.parseTrojan(content, options);
-          break;
-        case 'mixed':
-          nodes = await this.parseMixed(content, options);
+        case 'singbox':
+        case 'json':
+          // 这些类型由现有解析器处理
           break;
         default:
-          this.logger.warn(`未知的订阅类型: ${type}，尝试作为混合类型解析`);
-          nodes = await this.parseMixed(content, options);
+          this.logger.warn(`未知的订阅类型: ${type}，将尝试自动检测`);
       }
-      
+
       // 检查是否需要对中国节点进行处理
       if (options.detectChineseNodes !== false) {
-        // 创建IP地理位置检测器和SOCKS节点转换器
+        // 创建IP地理位置检测器
         const ipDetector = new IpLocationDetector({
           logger: this.logger,
           rootDir: this.rootDir,
           dataDir: this.dataDir
-        });
-        
-        const socksConverter = new SocksNodeConverter({
-          logger: this.logger
         });
         
         // 记录开始检测
@@ -83,58 +77,48 @@ export class SubscriptionParser {
           const end = Math.min(start + batchSize, nodes.length);
           const batch = nodes.slice(start, end);
           
-          // 并行检测每个节点的IP位置
+          this.logger.info(`处理批次 ${i+1}/${batches}，节点数: ${batch.length}`);
+          
+          // 并行检测节点位置
           const promises = batch.map(async (node) => {
+            // 跳过已经检测过的节点
+            if (node.metadata?.location?.country) {
+              return {
+                node,
+                isCN: node.metadata.location.country === 'CN' || 
+                      node.metadata.location.country_name === '中国' ||
+                      node.metadata.isChinaNode === true
+              };
+            }
+            
+            // 检测节点服务器位置
             try {
-              // 跳过已标记的节点
-              if (node.metadata?.location?.country === 'CN' || 
-                  node.metadata?.location?.country === 'China') {
-                return {
-                  node,
-                  isCN: true
-                };
-              }
-              
-              // 跳过没有服务器地址的节点
               if (!node.server) {
-                return {
-                  node,
-                  isCN: false
-                };
+                return { node, isCN: false };
               }
               
-              // 检测IP地理位置
-              const location = await ipDetector.detectLocation(node.server);
+              const location = await ipDetector.getIpLocation(node.server);
               
-              // 如果是中国大陆IP，标记该节点
-              if (location && (location.country === 'CN' || location.country === 'China')) {
-                // 添加位置元数据
-                if (!node.metadata) node.metadata = {};
-                node.metadata.location = location;
-                node.metadata.isChinaNode = true;
-                
-                return {
-                  node,
-                  isCN: true
-                };
+              // 如果节点没有元数据，创建一个
+              if (!node.metadata) {
+                node.metadata = {};
               }
               
-              // 非中国节点，添加位置信息
-              if (location) {
-                if (!node.metadata) node.metadata = {};
-                node.metadata.location = location;
-              }
+              // 保存位置信息
+              node.metadata.location = location;
               
-              return {
-                node,
-                isCN: false
-              };
+              // 判断是否为中国节点
+              const isCN = location?.country === 'CN' || 
+                        location?.country_name === '中国';
+              
+              // 标记是否为中国节点
+              node.metadata.isChinaNode = isCN;
+              
+              return { node, isCN };
             } catch (error) {
-              this.logger.warn(`检测节点 ${node.name || node.server} 的地理位置失败: ${error.message}`);
-              return {
-                node,
-                isCN: false
-              };
+              // 如果检测失败，默认不是中国节点
+              this.logger.warn(`检测节点 ${node.name || node.server} 位置失败: ${error.message}`);
+              return { node, isCN: false };
             }
           });
           
@@ -150,41 +134,6 @@ export class SubscriptionParser {
         
         // 输出中国节点数量
         this.logger.info(`共发现 ${cnNodes.length} 个中国大陆节点`);
-        
-        // 如果找到中国节点，创建SOCKS版本
-        if (cnNodes.length > 0 && options.convertToSocks !== false) {
-          this.logger.info('开始将中国节点转换为SOCKS类型');
-          
-          // 过滤掉已经是SOCKS的节点，避免重复转换
-          const nonSocksNodes = cnNodes.filter(node => 
-            node.type !== 'socks' && 
-            node.type !== 'socks5' && 
-            !node.metadata?.is_china_socks
-          );
-          
-          if (nonSocksNodes.length === 0) {
-            this.logger.info('所有中国节点都已经是SOCKS类型，无需转换');
-            return nodes;
-          }
-          
-          // 转换为SOCKS节点
-          const socksNodes = await Promise.all(
-            nonSocksNodes.map(node => socksConverter.convertToSocks(node))
-          );
-          
-          // 过滤掉转换失败的节点
-          const validSocksNodes = socksNodes.filter(node => node !== null);
-          
-          this.logger.info(`成功转换 ${validSocksNodes.length} 个SOCKS节点`);
-          
-          // 将SOCKS节点添加到结果中
-          const result = [...nodes, ...validSocksNodes];
-          
-          // 缓存中国SOCKS节点
-          this._cacheChinaSocksNodes(validSocksNodes);
-          
-          return result;
-        }
       }
       
       return nodes;
@@ -195,70 +144,7 @@ export class SubscriptionParser {
   }
 
   /**
-   * 缓存中国SOCKS节点
-   * @param {Array} nodes SOCKS节点列表
-   * @private
-   */
-  _cacheChinaSocksNodes(nodes) {
-    if (!nodes || nodes.length === 0) return;
-    
-    try {
-      // 确保目录存在
-      const cacheDir = path.join(this.rootDir, this.dataDir, 'cache');
-      if (!fs.existsSync(cacheDir)) {
-        fs.mkdirSync(cacheDir, { recursive: true });
-      }
-      
-      // 缓存文件路径
-      const cachePath = path.join(cacheDir, 'china_socks_nodes.json');
-      
-      // 检查现有缓存
-      let existingNodes = [];
-      if (fs.existsSync(cachePath)) {
-        try {
-          const cacheContent = fs.readFileSync(cachePath, 'utf-8');
-          existingNodes = JSON.parse(cacheContent);
-        } catch (e) {
-          this.logger.warn(`读取现有中国SOCKS节点缓存失败: ${e.message}`);
-        }
-      }
-      
-      // 合并节点，避免重复
-      const serverSet = new Set();
-      
-      // 添加现有节点的服务器地址
-      existingNodes.forEach(node => {
-        if (node.server && node.port) {
-          serverSet.add(`${node.server}:${node.port}`);
-        }
-      });
-      
-      // 添加新节点
-      const newNodes = [];
-      for (const node of nodes) {
-        if (node.server && node.port) {
-          const key = `${node.server}:${node.port}`;
-          if (!serverSet.has(key)) {
-            serverSet.add(key);
-            newNodes.push(node);
-          }
-        }
-      }
-      
-      // 合并节点
-      const mergedNodes = [...existingNodes, ...newNodes];
-      
-      // 写入缓存
-      fs.writeFileSync(cachePath, JSON.stringify(mergedNodes, null, 2));
-      
-      this.logger.info(`已缓存 ${mergedNodes.length} 个中国SOCKS节点 (新增 ${newNodes.length} 个)`);
-    } catch (error) {
-      this.logger.error(`缓存中国SOCKS节点失败: ${error.message}`);
-    }
-  }
-
-  /**
-   * 处理已有节点，检测中国节点并转换为SOCKS
+   * 处理已有节点，检测中国节点
    * @param {Array} nodes 节点列表
    * @param {Object} options 选项
    * @returns {Promise<Array>} 处理后的节点列表
@@ -271,15 +157,11 @@ export class SubscriptionParser {
     try {
       // 检查是否需要对中国节点进行处理
       if (options.detectChineseNodes !== false) {
-        // 创建IP地理位置检测器和SOCKS节点转换器
+        // 创建IP地理位置检测器
         const ipDetector = new IpLocationDetector({
           logger: this.logger,
           rootDir: this.rootDir,
           dataDir: this.dataDir
-        });
-        
-        const socksConverter = new SocksNodeConverter({
-          logger: this.logger
         });
         
         // 记录开始检测
@@ -296,58 +178,48 @@ export class SubscriptionParser {
           const end = Math.min(start + batchSize, nodes.length);
           const batch = nodes.slice(start, end);
           
-          // 并行检测每个节点的IP位置
+          this.logger.info(`处理批次 ${i+1}/${batches}，节点数: ${batch.length}`);
+          
+          // 并行检测节点位置
           const promises = batch.map(async (node) => {
+            // 跳过已经检测过的节点
+            if (node.metadata?.location?.country) {
+              return {
+                node,
+                isCN: node.metadata.location.country === 'CN' || 
+                      node.metadata.location.country_name === '中国' ||
+                      node.metadata.isChinaNode === true
+              };
+            }
+            
+            // 检测节点服务器位置
             try {
-              // 跳过已标记的节点
-              if (node.metadata?.location?.country === 'CN' || 
-                  node.metadata?.location?.country === 'China') {
-                return {
-                  node,
-                  isCN: true
-                };
-              }
-              
-              // 跳过没有服务器地址的节点
               if (!node.server) {
-                return {
-                  node,
-                  isCN: false
-                };
+                return { node, isCN: false };
               }
               
-              // 检测IP地理位置
-              const location = await ipDetector.detectLocation(node.server);
+              const location = await ipDetector.getIpLocation(node.server);
               
-              // 如果是中国大陆IP，标记该节点
-              if (location && (location.country === 'CN' || location.country === 'China')) {
-                // 添加位置元数据
-                if (!node.metadata) node.metadata = {};
-                node.metadata.location = location;
-                node.metadata.isChinaNode = true;
-                
-                return {
-                  node,
-                  isCN: true
-                };
+              // 如果节点没有元数据，创建一个
+              if (!node.metadata) {
+                node.metadata = {};
               }
               
-              // 非中国节点，添加位置信息
-              if (location) {
-                if (!node.metadata) node.metadata = {};
-                node.metadata.location = location;
-              }
+              // 保存位置信息
+              node.metadata.location = location;
               
-              return {
-                node,
-                isCN: false
-              };
+              // 判断是否为中国节点
+              const isCN = location?.country === 'CN' || 
+                        location?.country_name === '中国';
+              
+              // 标记是否为中国节点
+              node.metadata.isChinaNode = isCN;
+              
+              return { node, isCN };
             } catch (error) {
-              this.logger.warn(`检测节点 ${node.name || node.server} 的地理位置失败: ${error.message}`);
-              return {
-                node,
-                isCN: false
-              };
+              // 如果检测失败，默认不是中国节点
+              this.logger.warn(`检测节点 ${node.name || node.server} 位置失败: ${error.message}`);
+              return { node, isCN: false };
             }
           });
           
@@ -363,44 +235,9 @@ export class SubscriptionParser {
         
         // 输出中国节点数量
         this.logger.info(`共发现 ${cnNodes.length} 个中国大陆节点`);
-        
-        // 如果找到中国节点，创建SOCKS版本
-        if (cnNodes.length > 0 && options.convertToSocks !== false) {
-          this.logger.info('开始将中国节点转换为SOCKS类型');
-          
-          // 过滤掉已经是SOCKS的节点，避免重复转换
-          const nonSocksNodes = cnNodes.filter(node => 
-            node.type !== 'socks' && 
-            node.type !== 'socks5' && 
-            !node.metadata?.is_china_socks
-          );
-          
-          if (nonSocksNodes.length === 0) {
-            this.logger.info('所有中国节点都已经是SOCKS类型，无需转换');
-            return nodes;
-          }
-          
-          // 转换为SOCKS节点
-          const socksNodes = await Promise.all(
-            nonSocksNodes.map(node => socksConverter.convertToSocks(node))
-          );
-          
-          // 过滤掉转换失败的节点
-          const validSocksNodes = socksNodes.filter(node => node !== null);
-          
-          this.logger.info(`成功转换 ${validSocksNodes.length} 个SOCKS节点`);
-          
-          // 将SOCKS节点添加到结果中
-          const result = [...nodes, ...validSocksNodes];
-          
-          // 缓存中国SOCKS节点
-          this._cacheChinaSocksNodes(validSocksNodes);
-          
-          return result;
-        }
       }
       
-      // 如果没有进行中国节点检测，或者没有找到中国节点，直接返回原节点列表
+      // 直接返回原节点列表
       return nodes;
     } catch (error) {
       this.logger.error(`处理节点失败: ${error.message}`);
