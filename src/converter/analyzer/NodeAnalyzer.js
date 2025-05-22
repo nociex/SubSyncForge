@@ -406,76 +406,32 @@ export class NodeAnalyzer {
    * @returns {string} 生成的节点名称
    */
   generateName(analysis, options = {}, index = null) {
-    const {
-      includeCountry = true,
-      includeProtocol = true,
-      includeNumber = true,
-      includeTags = true,
-      tagLimit = 2,
-      format = '{country}{protocol}{tags}{number}'
-    } = options;
-
-    let name = format;
-
-    // 替换国家/地区（同时显示旗帜和国家代码）
-    if (includeCountry && analysis.country) {
-      // 查找国旗表情符号，通常是以🇦-🇿开头的双字母组合
-      const countryEmoji = Object.keys(this.countryMap).find(
-        key => this.countryMap[key] === analysis.countryCode && 
-               key.length >= 2 && 
-               key.codePointAt(0) >= 127462 && key.codePointAt(0) <= 127487
-      );
-      
-      // 确保同时显示旗帜和国家代码，格式为: 🇺🇸 US
-      if (countryEmoji && analysis.countryCode) {
-        name = name.replace('{country}', `${countryEmoji} ${analysis.countryCode}`);
-      } else {
-        name = name.replace('{country}', analysis.countryCode ? `${analysis.countryCode}` : analysis.country);
-      }
+    // 获取国家/地区代码或名称
+    let country = '';
+    if (analysis.countryCode) {
+      // 优先使用国家代码
+      country = analysis.countryCode;
+    } else if (analysis.country) {
+      // 如果没有国家代码，则使用国家名称
+      country = analysis.country;
     } else {
-      name = name.replace('{country}', '');
+      // 如果都没有，则使用"Unknown"
+      country = 'Unknown';
     }
 
-    // 替换协议
-    if (includeProtocol && analysis.protocol) {
-      name = name.replace('{protocol}', ` ${analysis.protocol}`);
-    } else {
-      name = name.replace('{protocol}', '');
+    // 获取协议
+    let protocol = analysis.protocol || 'Unknown';
+
+    // 生成编号（从1开始，保证两位数）
+    let number = '';
+    if (index !== null) {
+      number = (index + 1).toString().padStart(2, '0');
     }
 
-    // 替换标签（作为备注，若无备注则不填）
-    if (includeTags && analysis.tags.length > 0) {
-      const specialTags = analysis.tags.filter(tag =>
-        tag !== analysis.protocol &&
-        tag !== analysis.country &&
-        !['VMess', 'VLESS', 'Trojan', 'Shadowsocks', 'ShadowsocksR', 'HTTP', 'HTTPS', 'SOCKS', 'SOCKS5', 'WireGuard', 'Hysteria', 'Hysteria2', 'TUIC', 'REALITY', 'NaiveProxy'].includes(tag) &&
-        !Object.values(this.countryMap).includes(tag)
-      );
-
-      const limitedTags = specialTags.slice(0, tagLimit);
-      if (limitedTags.length > 0) {
-        name = name.replace('{tags}', ` ${limitedTags.join('/')}`);
-      } else {
-        // 如果没有特殊标签作为备注，则完全移除标签部分
-        name = name.replace('{tags}', '');
-      }
-    } else {
-      name = name.replace('{tags}', '');
-    }
-
-    // 替换编号（使用传入的索引生成编号，而不是节点原有的编号）
-    if (includeNumber && index !== null) {
-      // 从1开始编号，并确保至少两位数
-      const sequentialNumber = (index + 1).toString().padStart(2, '0');
-      name = name.replace('{number}', ` ${sequentialNumber}`);
-    } else {
-      name = name.replace('{number}', '');
-    }
-
-    // 清理多余的空格
-    name = name.replace(/\s+/g, ' ').trim();
-
-    return name || analysis.originalName;
+    // 组合为最终名称：国家+协议+编号
+    let name = `${country}-${protocol}-${number}`;
+    
+    return name;
   }
 }
 

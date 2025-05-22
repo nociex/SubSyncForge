@@ -1,8 +1,12 @@
 // 导入SubscriptionConverter
 import { SubscriptionConverter } from './src/converter/SubscriptionConverter.js';
+import { NodeManager } from './src/converter/analyzer/index.js';
+import { NodeTester } from './src/core/testing/NodeTester.js';
+import { NodeProcessor } from './src/core/node/NodeProcessor.js';
 
 // 导入需要的工具
 import { logger } from './src/utils/index.js';
+import yaml from 'js-yaml'; // 导入js-yaml库用于解析YAML
 
 // 创建日志实例
 const testLogger = logger.defaultLogger.child({ component: 'TestScript' });
@@ -23,6 +27,24 @@ const converter = new SubscriptionConverter({
   applyRules: true
 });
 
+// 创建节点测试器
+const nodeTester = new NodeTester({
+  concurrency: 10,
+  timeout: 5000,
+  filterInvalid: true,
+  logger: testLogger
+});
+
+// 创建节点处理器
+const nodeProcessor = new NodeProcessor({
+  deduplication: true,
+  filterIrrelevant: true,
+  logger: testLogger
+});
+
+// 创建节点管理器
+const nodeManager = new NodeManager();
+
 // 主函数
 async function testSubscription() {
   testLogger.info('开始订阅测试');
@@ -38,12 +60,69 @@ async function testSubscription() {
         testLogger.info(`成功转换订阅! 获取到 ${result.nodeCount} 个节点`);
         testLogger.info(`转换耗时: ${result.time}ms`);
         
-        // 显示前3个节点的信息
-        const clashData = JSON.parse(result.data);
+        // 获取节点数据 - 使用js-yaml解析Clash配置
+        const clashData = yaml.load(result.data);
         if (clashData.proxies && clashData.proxies.length > 0) {
-          testLogger.info(`节点示例:`);
-          clashData.proxies.slice(0, 3).forEach((proxy, index) => {
-            testLogger.info(`${index + 1}. ${proxy.name} (${proxy.type}) - ${proxy.server}:${proxy.port}`);
+          // 获取节点
+          const nodes = clashData.proxies.map(proxy => ({
+            type: proxy.type,
+            name: proxy.name,
+            server: proxy.server,
+            port: proxy.port,
+            settings: {
+              password: proxy.password,
+              method: proxy.cipher || proxy.method,
+              id: proxy.uuid || proxy.id
+            }
+          }));
+          
+          testLogger.info(`开始测试节点有效性...`);
+          
+          // 测试节点有效性
+          const testedNodes = await nodeTester.testNodes(nodes);
+          const validNodes = testedNodes.filter(node => node.valid);
+          
+          testLogger.info(`测试完成，总共 ${testedNodes.length} 个节点，有效 ${validNodes.length} 个节点`);
+          
+          // 处理节点
+          const processedNodes = nodeProcessor.processNodes(validNodes, { onlyValid: true });
+          testLogger.info(`处理后有 ${processedNodes.length} 个有效节点`);
+          
+          // 分析节点
+          const { nodes: analyzedNodes } = nodeManager.processNodes(processedNodes);
+          
+          // 重命名节点
+          const renamedNodes = nodeManager.renameNodes(analyzedNodes);
+          
+          // 确保节点名称不重复
+          const uniqueNameMap = new Map();
+          let uniqueNodes = [];
+          
+          renamedNodes.forEach((node, index) => {
+            // 如果名称已存在，则添加后缀以确保唯一性
+            let baseName = node.name;
+            let uniqueName = baseName;
+            let counter = 1;
+            
+            while (uniqueNameMap.has(uniqueName)) {
+              uniqueName = `${baseName}-${counter}`;
+              counter++;
+            }
+            
+            uniqueNameMap.set(uniqueName, true);
+            uniqueNodes.push({
+              ...node,
+              name: uniqueName
+            });
+          });
+          
+          // 显示重命名后的节点
+          testLogger.info(`节点重命名完成，最终有效节点数量: ${uniqueNodes.length}`);
+          
+          // 显示前10个有效节点
+          testLogger.info(`有效节点示例:`);
+          uniqueNodes.slice(0, 10).forEach((node, index) => {
+            testLogger.info(`${index + 1}. ${node.name} (${node.type}) - ${node.server}:${node.port} - 延迟: ${node.latency}ms`);
           });
         }
       } else {

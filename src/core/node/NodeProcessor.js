@@ -39,6 +39,13 @@ export class NodeProcessor {
       this.logger.info(`过滤无关节点后数量: ${validNodes.length} (删除了 ${beforeCount - validNodes.length} 个节点)`);
     }
     
+    // 仅保留测试连接成功的有效节点
+    if (options.onlyValid) {
+      const beforeCount = validNodes.length;
+      validNodes = validNodes.filter(node => node.valid === true);
+      this.logger.info(`仅保留连接有效的节点后数量: ${validNodes.length} (删除了 ${beforeCount - validNodes.length} 个连接失败的节点)`);
+    }
+    
     // 去重
     if (this.deduplication) {
       validNodes = this.deduplicateNodes(validNodes);

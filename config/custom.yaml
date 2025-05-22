@@ -183,7 +183,7 @@ testing:
   enabled: true
   
   # 测试并发数（同时测试多少个节点）
-  concurrency: 5
+  concurrency: 20
   
   # 测试超时时间（毫秒）
   timeout: 10000
@@ -198,7 +198,7 @@ testing:
   sort_by_latency: true
   
   # 保留延迟低于此值的节点（毫秒，0表示不限制）
-  max_latency: 5000
+  max_latency: 1000
   
   # 保留最大节点数量（0表示不限制）
   max_nodes: 0
