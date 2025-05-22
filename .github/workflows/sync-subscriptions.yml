@@ -61,6 +61,70 @@ jobs:
       - name: Build project
         run: pnpm build
       
+      # 配置上传器
+      - name: Configure uploaders
+        run: |
+          # 创建临时配置文件
+          cat > config/uploader.json.tmp << EOL
+          {
+            "uploaders": [
+              {
+                "id": "local",
+                "name": "本地存储",
+                "type": "local",
+                "enabled": true,
+                "config": {
+                  "outputDir": "./output"
+                }
+              }
+            ],
+            "defaultUploader": "local"
+          }
+          EOL
+          
+          # 如果配置了WebDAV
+          if [[ -n "${{ secrets.WEBDAV_URL }}" && -n "${{ secrets.WEBDAV_USERNAME }}" && -n "${{ secrets.WEBDAV_PASSWORD }}" ]]; then
+            echo "配置WebDAV上传..."
+            # 使用jq添加WebDAV配置
+            jq '.uploaders += [{
+              "id": "webdav",
+              "name": "WebDAV存储",
+              "type": "webdav",
+              "enabled": true,
+              "config": {
+                "url": "${{ secrets.WEBDAV_URL }}",
+                "username": "${{ secrets.WEBDAV_USERNAME }}",
+                "password": "${{ secrets.WEBDAV_PASSWORD }}",
+                "remotePath": "${{ secrets.WEBDAV_PATH || 'sub-sync' }}"
+              }
+            }]' config/uploader.json.tmp > config/uploader.json.tmp2
+            mv config/uploader.json.tmp2 config/uploader.json.tmp
+          fi
+          
+          # 如果配置了Cloudflare R2
+          if [[ -n "${{ secrets.R2_ACCOUNT_ID }}" && -n "${{ secrets.R2_ACCESS_KEY_ID }}" && -n "${{ secrets.R2_SECRET_ACCESS_KEY }}" && -n "${{ secrets.R2_BUCKET_NAME }}" ]]; then
+            echo "配置Cloudflare R2上传..."
+            # 使用jq添加R2配置
+            jq '.uploaders += [{
+              "id": "r2",
+              "name": "Cloudflare R2存储",
+              "type": "r2",
+              "enabled": true,
+              "config": {
+                "accountId": "${{ secrets.R2_ACCOUNT_ID }}",
+                "accessKeyId": "${{ secrets.R2_ACCESS_KEY_ID }}",
+                "secretAccessKey": "${{ secrets.R2_SECRET_ACCESS_KEY }}",
+                "bucketName": "${{ secrets.R2_BUCKET_NAME }}",
+                "remotePath": "${{ secrets.R2_PATH || 'sub-sync' }}"
+              }
+            }]' config/uploader.json.tmp > config/uploader.json.tmp2
+            mv config/uploader.json.tmp2 config/uploader.json.tmp
+          fi
+          
+          # 移动最终配置文件
+          mv config/uploader.json.tmp config/uploader.json
+          echo "上传器配置完成"
+      
       # 运行同步订阅脚本
       - name: Sync subscriptions
         env:
@@ -73,12 +137,20 @@ jobs:
           MAX_EXECUTION_TIME: '18000000'  # 5小时 (毫秒)
           BARK_URL: ${{ secrets.BARK_URL }}
           BARK_TITLE: ${{ secrets.BARK_TITLE || '订阅同步通知' }}
+          # GitHub 信息用于输出URL
+          GITHUB_USER: ${{ github.repository_owner }}
+          REPO_NAME: ${{ github.event.repository.name }}
+          # 上传配置
+          USE_GITHUB: 'true'
+          USE_UPLOADER: ${{ (secrets.WEBDAV_URL != '' || secrets.R2_ACCOUNT_ID != '') && 'true' || 'false' }}
         run: |
           echo "工作目录: $(pwd)"
           echo "根目录: $ROOT_DIR"
           echo "数据目录: $DATA_DIR"
           echo "配置文件路径: $CONFIG_PATH"
           echo "最大执行时间: $MAX_EXECUTION_TIME ms"
+          echo "GitHub用户: $GITHUB_USER"
+          echo "仓库名称: $REPO_NAME"
           
           # 使用新的入口脚本
           node dist/sync-subscriptions.js

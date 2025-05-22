@@ -111,6 +111,8 @@ export class SyncManager {
         rootDir: this.rootDir,
         outputDir: this.config.options.outputDir,
         dataDir: this.config.options.dataDir,
+        githubUser: this.config.options.githubUser || '',
+        repoName: this.config.options.repoName || 'SubSyncForge',
         logger: this.logger
       });
       

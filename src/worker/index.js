@@ -16,7 +16,7 @@ router.get('/api/status', handleStatus);
 router.get('/api/health', handleHealth);
 
 // 分组订阅路由
-router.get('/groups/:groupName', handleGroupSubscription);
+router.get('/output/:groupName', handleGroupSubscription);
 
 // 记录请求指标的中间件
 const withMetrics = (handler) => {

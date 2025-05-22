@@ -1,0 +1,39 @@
+{
+  "uploaders": [
+    {
+      "id": "local",
+      "name": "本地存储",
+      "type": "local",
+      "enabled": true,
+      "config": {
+        "outputDir": "./output"
+      }
+    },
+    {
+      "id": "webdav",
+      "name": "WebDAV存储",
+      "type": "webdav",
+      "enabled": false,
+      "config": {
+        "url": "https://your-webdav-server.com/remote.php/dav/files/username/",
+        "username": "your-username",
+        "password": "your-password",
+        "remotePath": "sub-sync"
+      }
+    },
+    {
+      "id": "r2",
+      "name": "Cloudflare R2存储",
+      "type": "r2",
+      "enabled": false,
+      "config": {
+        "accountId": "your-cloudflare-account-id",
+        "accessKeyId": "your-r2-access-key-id",
+        "secretAccessKey": "your-r2-secret-access-key",
+        "bucketName": "your-bucket-name",
+        "remotePath": "sub-sync"
+      }
+    }
+  ],
+  "defaultUploader": "local"
+} 

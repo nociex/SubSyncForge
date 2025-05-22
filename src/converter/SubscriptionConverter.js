@@ -73,7 +73,14 @@ export class SubscriptionConverter {
     this.fetcher = new SubscriptionFetcher(options.fetch);
     this.parser = new SubscriptionParser();
     this.deduplicator = new NodeDeduplicator();
-    this.converter = new FormatConverter();
+    
+    // 初始化格式转换器，传递 GitHub 配置
+    this.converter = new FormatConverter({
+      githubUser: options.githubUser || '',
+      repoName: options.repoName || 'SubSyncForge',
+      outputDir: options.outputDir || './output',
+      logger: options.logger
+    });
 
     // 初始化节点管理器，传递分组模式
     this.nodeManager = new NodeManager({
@@ -1334,6 +1341,56 @@ export class SubscriptionConverter {
     } catch (error) {
       this.logger.error(`Error formatting node for V2Ray: ${error.message}`);
       return null;
+    }
+  }
+
+  /**
+   * 读取模板文件
+   * @param {string} templatePath 模板路径
+   * @returns {Promise<string>} 模板内容
+   */
+  async readTemplate(templatePath) {
+    try {
+      const resolvedPath = path.resolve(process.cwd(), templatePath);
+      this.logger.debug(`Reading template from ${resolvedPath}`);
+      return await fs.promises.readFile(resolvedPath, 'utf8');
+    } catch (error) {
+      this.logger.error(`Failed to read template: ${error.message}`, { templatePath });
+      throw new ConfigurationError(`Failed to read template: ${error.message}`, { 
+        cause: error, 
+        context: { templatePath } 
+      });
+    }
+  }
+
+  /**
+   * 获取默认模板路径
+   * @param {string} format 目标格式
+   * @returns {string} 默认模板路径
+   */
+  getDefaultTemplatePath(format) {
+    switch (format.toLowerCase()) {
+      case 'clash':
+      case 'yaml':
+        return 'templates/clash.yaml';
+      case 'mihomo':
+        return 'templates/mihomo.yaml';
+      case 'singbox':
+        return 'templates/singbox.json';
+      case 'surge':
+        return 'templates/surge.conf';
+      case 'v2ray':
+      case 'xray':
+        return 'templates/v2ray.json';
+      case 'sub':
+      case 'v2rayn':
+      case 'v2sub':
+        return 'templates/v2sub.txt';
+      case 'plain':
+      case 'text':
+        return 'templates/txt_list.txt';
+      default:
+        return `templates/${format}.txt`;
     }
   }
 }

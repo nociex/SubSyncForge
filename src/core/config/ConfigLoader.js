@@ -96,6 +96,15 @@ export class ConfigLoader {
       if (userConfig.output.configs && Array.isArray(userConfig.output.configs)) {
         finalConfig.outputConfigs = userConfig.output.configs;
       }
+      
+      // 合并 GitHub 相关配置
+      if (userConfig.output.github_user) {
+        finalConfig.options.githubUser = userConfig.output.github_user;
+      }
+      
+      if (userConfig.output.repo_name) {
+        finalConfig.options.repoName = userConfig.output.repo_name;
+      }
     }
 
     // 合并高级设置

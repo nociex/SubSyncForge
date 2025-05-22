@@ -16,6 +16,8 @@ export class ConfigGenerator {
     this.rootDir = options.rootDir || process.cwd();
     this.outputDir = options.outputDir || 'output';
     this.dataDir = options.dataDir || 'data';
+    this.githubUser = options.githubUser || '';
+    this.repoName = options.repoName || 'SubSyncForge';
     this.converter = options.converter || null;
     this.logger = options.logger || console;
   }
@@ -308,42 +310,44 @@ export class ConfigGenerator {
   }
 
   /**
-   * 从模板生成内容
-   * @param {string} format 格式
+   * 根据模板生成配置内容
+   * @param {string} format 格式类型
    * @param {string} templateContent 模板内容
    * @param {Array} nodes 节点数组
    * @param {Object} options 选项
    * @returns {Promise<string>} 生成的内容
    */
   async generateContentFromTemplate(format, templateContent, nodes, options = {}) {
-    // 根据格式生成内容
-    const formatUpper = format.toUpperCase();
+    this.logger.info(`根据 ${format} 模板生成配置内容`);
     
-    // 文本格式处理
-    if (formatUpper === 'CLASH' || formatUpper === 'MIHOMO') {
-      return this.generateClashContent(templateContent, nodes, options);
-    } else if (formatUpper === 'SURGE') {
-      return this.generateSurgeContent(templateContent, nodes, options);
-    } else if (formatUpper === 'SINGBOX') {
-      return this.generateSingboxContent(templateContent, nodes, options);
-    } else if (formatUpper === 'V2RAY') {
-      return this.generateV2rayContent(templateContent, nodes, options);
-    } else if (formatUpper === 'TXT' || formatUpper === 'TEXT') {
-      return this.generateTextContent(templateContent, nodes, options);
-    } else {
-      // 默认处理，尝试使用转换器
+    // 根据不同格式调用不同的生成函数
+    let content = '';
+    
+    try {
       if (this.converter) {
-        try {
-          return await this.converter.convert(nodes, format, options);
-        } catch (error) {
-          this.logger.error(`使用转换器转换为${format}格式失败: ${error.message}`);
-          return templateContent; // 失败时返回原始模板
-        }
+        // 使用转换器生成配置
+        this.logger.info(`使用现有转换器生成 ${format} 格式配置`);
+        content = await this.converter.convert(nodes, format, templateContent, options);
       } else {
-        this.logger.warn(`没有可用的转换器，无法转换为${format}格式`);
-        return templateContent;
+        // 按照格式类型生成配置
+        this.logger.info(`使用内置方法生成 ${format} 格式配置`);
+        
+        const { FormatConverter } = await import('../../converter/formats/FormatConverter.js');
+        const converter = new FormatConverter({
+          logger: this.logger,
+          githubUser: this.githubUser,
+          repoName: this.repoName,
+          outputDir: this.outputDir
+        });
+        
+        content = await converter.convert(nodes, format, templateContent, options);
       }
+    } catch (error) {
+      this.logger.error(`生成配置内容失败: ${error.message}`);
+      content = templateContent; // 失败时返回原始模板
     }
+    
+    return content;
   }
 
   /**

@@ -11,7 +11,9 @@ export const defaultConfig = {
   options: {
     deduplication: true,
     dataDir: 'data',
-    outputDir: 'output'
+    outputDir: 'output',
+    githubUser: '',         // GitHub 用户名，用于生成默认 URL
+    repoName: 'SubSyncForge' // GitHub 仓库名，用于生成默认 URL
   },
   advanced: {
     logLevel: 'info',
