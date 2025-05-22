@@ -771,24 +771,56 @@ export class ConfigGenerator {
       const checkRegions = [];
       regions.forEach(r => {
         const upperRegion = r.toUpperCase();
+        
+        // 基本匹配
         checkRegions.push(upperRegion);
-        // 添加常见的节点命名模式
-        checkRegions.push(`${upperRegion}_`);
-        checkRegions.push(`_${upperRegion}`);
-        checkRegions.push(`${upperRegion}-`);
-        checkRegions.push(`-${upperRegion}`);
-        // 添加国旗emoji检测 (大部分节点名称包含国旗emoji)
+        
+        // 添加地区代码匹配
         if (upperRegion === 'HK' || upperRegion === '香港' || upperRegion === 'HONG KONG') {
+          checkRegions.push('HK');
+          checkRegions.push('HONGKONG');
+          checkRegions.push('HONG KONG');
+          checkRegions.push('HONGKONG');
+          checkRegions.push('HKG');
           checkRegions.push('🇭🇰');
+          checkRegions.push('港');
         } else if (upperRegion === 'US' || upperRegion === '美国' || upperRegion === 'UNITED STATES') {
+          checkRegions.push('US');
+          checkRegions.push('USA');
+          checkRegions.push('UNITED STATES');
+          checkRegions.push('AMERICA');
           checkRegions.push('🇺🇸');
+          checkRegions.push('美');
         } else if (upperRegion === 'JP' || upperRegion === '日本' || upperRegion === 'JAPAN') {
+          checkRegions.push('JP');
+          checkRegions.push('JPN');
+          checkRegions.push('JAPAN');
           checkRegions.push('🇯🇵');
+          checkRegions.push('日');
         } else if (upperRegion === 'SG' || upperRegion === '新加坡' || upperRegion === 'SINGAPORE') {
+          checkRegions.push('SG');
+          checkRegions.push('SGP');
+          checkRegions.push('SINGAPORE');
           checkRegions.push('🇸🇬');
+          checkRegions.push('坡');
         } else if (upperRegion === 'TW' || upperRegion === '台湾' || upperRegion === 'TAIWAN') {
+          checkRegions.push('TW');
+          checkRegions.push('TWN');
+          checkRegions.push('TAIWAN');
           checkRegions.push('🇹🇼');
+          checkRegions.push('台');
         }
+        
+        // 添加常见的节点命名模式（带前缀/后缀）
+        const patterns = [
+          `${upperRegion}_`, `_${upperRegion}`, 
+          `${upperRegion}-`, `-${upperRegion}`, 
+          ` ${upperRegion} `, ` ${upperRegion}`, `${upperRegion} `,
+          `[${upperRegion}]`, `(${upperRegion})`,
+          `【${upperRegion}】`, `「${upperRegion}」`
+        ];
+        
+        patterns.forEach(pattern => checkRegions.push(pattern));
       });
       
       // 检查节点名称是否包含任一排除标识
@@ -797,41 +829,93 @@ export class ConfigGenerator {
         return false; // 排除
       }
       
-      // 检查节点的国家代码和国家名称 (如果有分析数据)
+      // 如果节点有分析信息，检查countryCode或country
       if (node.analysis) {
         // 检查节点的地区代码是否在排除列表中
-        if (node.analysis.countryCode && regions.some(r => 
-          r.toUpperCase() === node.analysis.countryCode.toUpperCase())) {
+        if (node.analysis.countryCode && regions.some(r => {
+          const upperRegion = r.toUpperCase();
+          return upperRegion === node.analysis.countryCode.toUpperCase() ||
+                 (upperRegion === 'HK' && node.analysis.countryCode.toUpperCase() === 'HKG') ||
+                 (upperRegion === 'US' && node.analysis.countryCode.toUpperCase() === 'USA') ||
+                 (upperRegion === 'JP' && node.analysis.countryCode.toUpperCase() === 'JPN') ||
+                 (upperRegion === 'SG' && node.analysis.countryCode.toUpperCase() === 'SGP') ||
+                 (upperRegion === 'TW' && node.analysis.countryCode.toUpperCase() === 'TWN');
+        })) {
           this.logger.debug(`排除节点: ${node.name} (匹配国家代码: ${node.analysis.countryCode})`);
           return false; // 排除
         }
         
         // 检查节点的地区名称是否在排除列表中
-        if (node.analysis.country && regions.some(r => 
-          node.analysis.country.toUpperCase().includes(r.toUpperCase()))) {
+        if (node.analysis.country && regions.some(r => {
+          const region = r.toLowerCase();
+          const country = node.analysis.country.toLowerCase();
+          return country.includes(region) ||
+                 (region === 'hk' && (country.includes('hong kong') || country.includes('hongkong'))) ||
+                 (region === 'us' && (country.includes('united states') || country.includes('america'))) ||
+                 (region === 'jp' && country.includes('japan')) ||
+                 (region === 'sg' && country.includes('singapore')) ||
+                 (region === 'tw' && (country.includes('taiwan') || country.includes('taipei')));
+        })) {
           this.logger.debug(`排除节点: ${node.name} (匹配国家名称: ${node.analysis.country})`);
           return false; // 排除
         }
       }
       
-      // 检查其他可能的地区标识
-      // 例如，检查节点的服务器名称或IP是否与已知的地区关联
-      if (node.server) {
-        const serverUpper = node.server.toUpperCase();
-        // 一些云服务供应商的地区标识
-        const knownRegionPatterns = {
-          'HK': ['HONGKONG', 'HK-', '-HK', 'HKG'],
-          'US': ['US-', '-US', 'USA-', '-USA'],
-          'JP': ['JAPAN', 'JP-', '-JP', 'JPN'],
-          'SG': ['SINGAPORE', 'SG-', '-SG', 'SGP'],
-          'TW': ['TAIWAN', 'TW-', '-TW', 'TWN']
-        };
+      // 检查服务器IP地址特征（如果存在典型的服务器地址模式）
+      const server = (node.server || '').toLowerCase();
+      if (server) {
+        // 香港节点通常使用的域名或IP特征
+        if (regions.some(r => r.toUpperCase() === 'HK' || r === '香港') && 
+            (server.includes('hk') || server.includes('hongkong') || server.includes('hkg'))) {
+          this.logger.debug(`排除节点: ${node.name} (服务器地址特征匹配香港)`);
+          return false;
+        }
         
-        for (const [regionCode, patterns] of Object.entries(knownRegionPatterns)) {
-          if (regions.some(r => r.toUpperCase() === regionCode) && 
-              patterns.some(p => serverUpper.includes(p))) {
-            this.logger.debug(`排除节点: ${node.name} (服务器名称匹配地区: ${regionCode})`);
-            return false; // 排除
+        // 美国节点通常使用的域名或IP特征
+        if (regions.some(r => r.toUpperCase() === 'US' || r === '美国') && 
+            (server.includes('us') || server.includes('usa') || server.includes('united'))) {
+          this.logger.debug(`排除节点: ${node.name} (服务器地址特征匹配美国)`);
+          return false;
+        }
+        
+        // 日本节点通常使用的域名或IP特征
+        if (regions.some(r => r.toUpperCase() === 'JP' || r === '日本') && 
+            (server.includes('jp') || server.includes('japan'))) {
+          this.logger.debug(`排除节点: ${node.name} (服务器地址特征匹配日本)`);
+          return false;
+        }
+        
+        // 新加坡节点通常使用的域名或IP特征
+        if (regions.some(r => r.toUpperCase() === 'SG' || r === '新加坡') && 
+            (server.includes('sg') || server.includes('singapore'))) {
+          this.logger.debug(`排除节点: ${node.name} (服务器地址特征匹配新加坡)`);
+          return false;
+        }
+        
+        // 台湾节点通常使用的域名或IP特征
+        if (regions.some(r => r.toUpperCase() === 'TW' || r === '台湾') && 
+            (server.includes('tw') || server.includes('taiwan'))) {
+          this.logger.debug(`排除节点: ${node.name} (服务器地址特征匹配台湾)`);
+          return false;
+        }
+      }
+      
+      // 检查国家/地区代码
+      // 一些节点名称格式例如：US_speednode_0015
+      const regionCodes = ['HK', 'US', 'JP', 'SG', 'TW'];
+      for (const code of regionCodes) {
+        if (regions.some(r => r.toUpperCase() === code || 
+                             (code === 'HK' && (r === '香港' || r.toUpperCase() === 'HONG KONG')) ||
+                             (code === 'US' && (r === '美国' || r.toUpperCase() === 'UNITED STATES')) ||
+                             (code === 'JP' && (r === '日本' || r.toUpperCase() === 'JAPAN')) ||
+                             (code === 'SG' && (r === '新加坡' || r.toUpperCase() === 'SINGAPORE')) ||
+                             (code === 'TW' && (r === '台湾' || r.toUpperCase() === 'TAIWAN')))) {
+          
+          // 检查是否以国家/地区代码开头，后跟下划线或其他分隔符
+          const regex = new RegExp(`^${code}[_\\-\\s]`, 'i');
+          if (regex.test(name)) {
+            this.logger.debug(`排除节点: ${node.name} (匹配国家代码前缀)`);
+            return false;
           }
         }
       }
