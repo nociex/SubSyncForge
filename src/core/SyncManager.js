@@ -301,7 +301,18 @@ export class SyncManager {
       typeDistribution: validNodeTypes
     });
     
-    return testedNodes;
+    // 重要修复：IP检测后重新进行节点分析和分类
+    this.logger.info(`IP检测完成，开始重新分析和分类节点...`);
+    
+    // 创建节点管理器，用于重新分析节点
+    const nodeManager = new NodeManager();
+    
+    // 重新分析测试后的节点，添加地区、服务等标记
+    this.logger.info(`开始重新分析节点...`);
+    const { nodes: reanalyzedNodes } = nodeManager.processNodes(testedNodes);
+    this.logger.info(`节点重新分析完成`);
+    
+    return reanalyzedNodes;
   }
 
   /**
