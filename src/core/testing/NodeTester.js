@@ -20,11 +20,48 @@ export class NodeTester {
     this.timeout = options.timeout || 5000;
     this.testUrl = options.testUrl || 'http://www.google.com/generate_204';
     this.maxLatency = options.maxLatency || 5000;
+    this.minLatency = options.minLatency || 0; // 默认最小延迟阈值
     this.filterInvalid = options.filterInvalid !== false;
     this.verifyLocation = options.verifyLocation === true;
+    this.filterUnreasonableLatency = options.filterUnreasonableLatency !== false; // 是否过滤不合理的延迟
     this.logger = options.logger || console;
     this.ipInfoCache = new Map();
     this.cachePath = path.join(this.rootDir, this.dataDir, 'ip_cache/ip_info_cache.json');
+    
+    // 国家/地区的合理最小延迟（毫秒）
+    this.regionMinLatency = {
+      '中国': 2,
+      '香港': 20,
+      'HK': 20,
+      'Hong Kong': 20,
+      '台湾': 30,
+      'TW': 30,
+      'Taiwan': 30,
+      '日本': 40,
+      'JP': 40,
+      'Japan': 40,
+      '韩国': 50,
+      'KR': 50,
+      'Korea': 50,
+      '新加坡': 60,
+      'SG': 60,
+      'Singapore': 60,
+      '美国': 120,
+      'US': 120,
+      'United States': 120,
+      // 欧洲国家
+      '德国': 150,
+      'DE': 150,
+      'Germany': 150,
+      '英国': 160,
+      'GB': 160,
+      'UK': 160,
+      '法国': 160,
+      'FR': 160,
+      'France': 160,
+      // 其他地区
+      'default': 100 // 默认最小延迟
+    };
     
     // 初始化时加载IP缓存
     this.loadIPCache();
@@ -48,6 +85,7 @@ export class NodeTester {
     let testedNodes = [];
     let validNodes = [];
     let invalidNodes = [];
+    let unreasonableLatencyNodes = 0;
     
     // 分批测试
     for (let i = 0; i < batches.length; i++) {
@@ -58,8 +96,19 @@ export class NodeTester {
         return this.testNode(node, i * this.concurrency + index)
           .then(result => {
             if (result.valid) {
-              validNodes.push(result);
-              this.logger.info(`节点 ${result.name} 测试通过，延迟: ${result.latency}ms`);
+              // 检查延迟是否合理
+              const isReasonableLatency = this.isLatencyReasonable(result);
+              
+              if (isReasonableLatency || !this.filterUnreasonableLatency) {
+                validNodes.push(result);
+                this.logger.info(`节点 ${result.name} 测试通过，延迟: ${result.latency}ms`);
+              } else {
+                result.valid = false;
+                result.error = `不合理的延迟值: ${result.latency}ms (${this.getReasonableMinLatency(result)}ms)`;
+                invalidNodes.push(result);
+                unreasonableLatencyNodes++;
+                this.logger.warn(`节点 ${result.name} 延迟不合理: ${result.latency}ms，最小合理延迟: ${this.getReasonableMinLatency(result)}ms`);
+              }
             } else {
               invalidNodes.push(result);
               this.logger.info(`节点 ${result.name} 测试失败: ${result.error}`);
@@ -83,7 +132,7 @@ export class NodeTester {
     }
     
     // 统计结果
-    this.logger.info(`测试完成，总计 ${testedNodes.length} 个节点，有效: ${validNodes.length}, 无效: ${invalidNodes.length}`);
+    this.logger.info(`测试完成，总计 ${testedNodes.length} 个节点，有效: ${validNodes.length}, 无效: ${invalidNodes.length}, 延迟不合理: ${unreasonableLatencyNodes}`);
     
     // 保存测试结果到文件
     this.saveTestResults(testedNodes);
@@ -155,6 +204,12 @@ export class NodeTester {
           testResult.error = `Latency too high: ${testResult.latency}ms > ${this.maxLatency}ms`;
         }
         
+        // 全局最小延迟检查
+        if (testResult.valid && this.minLatency > 0 && testResult.latency < this.minLatency) {
+          // 我们仍将其标记为有效，但会在后续过程中根据地区特定的延迟合理性检查过滤
+          testResult.suspiciousLatency = true;
+        }
+        
         // 返回结果，包含原始节点信息和测试结果
         resolve({
           ...node,
@@ -162,6 +217,7 @@ export class NodeTester {
           latency: testResult.valid ? testResult.latency : -1,
           location: testResult.location,
           error: testResult.valid ? null : testResult.error,
+          suspiciousLatency: testResult.suspiciousLatency,
           test: testResult
         });
       } catch (error) {
@@ -173,6 +229,47 @@ export class NodeTester {
         });
       }
     });
+  }
+
+  /**
+   * 判断节点延迟是否合理
+   * @param {Object} node 节点对象
+   * @returns {boolean} 是否合理
+   */
+  isLatencyReasonable(node) {
+    const minLatency = this.getReasonableMinLatency(node);
+    return node.latency >= minLatency;
+  }
+
+  /**
+   * 获取节点的合理最小延迟
+   * @param {Object} node 节点对象
+   * @returns {number} 最小合理延迟
+   */
+  getReasonableMinLatency(node) {
+    // 从节点名称中提取地区信息
+    let region = null;
+    
+    // 首先检查名称中是否包含地区代码或地区名称
+    for (const key of Object.keys(this.regionMinLatency)) {
+      if (node.name && node.name.includes(key)) {
+        region = key;
+        break;
+      }
+    }
+    
+    // 如果节点有地区或国家标签，也可以用来判断
+    if (!region && node.region) {
+      region = node.region;
+    }
+    
+    // 如果节点有位置信息，可以用国家代码
+    if (!region && node.location && node.location.country) {
+      region = node.location.country;
+    }
+    
+    // 返回该地区的最小延迟阈值，如果没有找到匹配的地区，则返回默认值
+    return this.regionMinLatency[region] || this.regionMinLatency.default;
   }
 
   /**
@@ -238,19 +335,14 @@ export class NodeTester {
               resolveOnce({ success: true, latency });
             });
             
-            // 如果节点速度足够快，则直接视为有效
-            const quickLatency = Date.now() - startTime;
-            if (quickLatency < 100) {
-              resolveOnce({ success: true, latency: quickLatency });
-            }
-            
-            // 等待200ms后，如果节点仍然连接，也视为有效
+            // 延迟返回结果，确保测量的延迟更准确
+            // 不再立即返回超快的连接，而是等待足够时间测量实际延迟
             setTimeout(() => {
               if (!hasResolved && socket.writable) {
                 const latency = Date.now() - startTime;
                 resolveOnce({ success: true, latency });
               }
-            }, 200);
+            }, 100); // 等待至少100ms以获取更准确的延迟测量
           });
         }).catch(error => {
           resolve({ success: false, error: error.message });
@@ -363,6 +455,7 @@ export class NodeTester {
         totalNodes: results.length,
         validNodes: results.filter(n => n.valid).length,
         invalidNodes: results.filter(n => !n.valid).length,
+        suspiciousLatencyNodes: results.filter(n => n.valid && n.suspiciousLatency).length,
         avgLatency: results.filter(n => n.valid).reduce((sum, n) => sum + n.latency, 0) / 
                    (results.filter(n => n.valid).length || 1)
       };

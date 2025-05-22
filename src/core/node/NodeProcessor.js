@@ -61,16 +61,201 @@ export class NodeProcessor {
       });
     }
     
-    // 限制节点数量（如果有）
+    // 根据性能和质量给节点排序
+    validNodes = this.sortNodesByQuality(validNodes);
+    
+    // 按类型限制节点数量
+    if (options.maxNodesPerType && options.maxNodesPerType > 0) {
+      validNodes = this.limitNodesByType(validNodes, options.maxNodesPerType);
+      this.logger.info(`按类型限制节点后数量: ${validNodes.length}`);
+    }
+    
+    // 按地区限制节点数量
+    if (options.maxNodesPerRegion && options.maxNodesPerRegion > 0) {
+      validNodes = this.limitNodesByRegion(validNodes, options.maxNodesPerRegion);
+      this.logger.info(`按地区限制节点后数量: ${validNodes.length}`);
+    }
+    
+    // 全局限制节点数量（如果有）
     if (options.maxNodes && options.maxNodes > 0 && validNodes.length > options.maxNodes) {
       validNodes = validNodes.slice(0, options.maxNodes);
-      this.logger.info(`限制节点数量为 ${options.maxNodes}`);
+      this.logger.info(`限制总节点数量为 ${options.maxNodes}`);
     }
     
     // 规范化节点（确保每个节点都有必要的字段）
     validNodes = this.normalizeNodes(validNodes);
     
     return validNodes;
+  }
+
+  /**
+   * 按节点类型限制数量
+   * @param {Array} nodes 节点数组
+   * @param {number} maxPerType 每种类型的最大节点数
+   * @returns {Array} 处理后的节点数组
+   */
+  limitNodesByType(nodes, maxPerType) {
+    if (!Array.isArray(nodes) || nodes.length === 0 || maxPerType <= 0) return nodes;
+    
+    // 按类型分组
+    const nodesByType = {};
+    nodes.forEach(node => {
+      if (node.type) {
+        if (!nodesByType[node.type]) {
+          nodesByType[node.type] = [];
+        }
+        nodesByType[node.type].push(node);
+      }
+    });
+    
+    // 限制每种类型的节点数量
+    let result = [];
+    for (const type in nodesByType) {
+      const typeNodes = nodesByType[type];
+      // 选择该类型的前N个节点，按照延迟排序
+      const selectedNodes = typeNodes
+        .sort((a, b) => (a.latency || Infinity) - (b.latency || Infinity))
+        .slice(0, maxPerType);
+      
+      this.logger.info(`类型 ${type} 的节点: 总计 ${typeNodes.length}，保留 ${selectedNodes.length}`);
+      result = result.concat(selectedNodes);
+    }
+    
+    return result;
+  }
+
+  /**
+   * 按节点地区限制数量
+   * @param {Array} nodes 节点数组
+   * @param {number} maxPerRegion 每个地区的最大节点数
+   * @returns {Array} 处理后的节点数组
+   */
+  limitNodesByRegion(nodes, maxPerRegion) {
+    if (!Array.isArray(nodes) || nodes.length === 0 || maxPerRegion <= 0) return nodes;
+    
+    // 按地区分组
+    const nodesByRegion = this.groupNodesByRegion(nodes);
+    
+    // 限制每个地区的节点数量
+    let result = [];
+    for (const region in nodesByRegion) {
+      const regionNodes = nodesByRegion[region];
+      // 选择该地区的前N个节点，按照延迟排序
+      const selectedNodes = regionNodes
+        .sort((a, b) => (a.latency || Infinity) - (b.latency || Infinity))
+        .slice(0, maxPerRegion);
+      
+      this.logger.info(`地区 ${region} 的节点: 总计 ${regionNodes.length}，保留 ${selectedNodes.length}`);
+      result = result.concat(selectedNodes);
+    }
+    
+    return result;
+  }
+
+  /**
+   * 将节点按地区分组
+   * @param {Array} nodes 节点数组
+   * @returns {Object} 按地区分组的节点
+   */
+  groupNodesByRegion(nodes) {
+    if (!Array.isArray(nodes)) return {};
+    
+    const nodesByRegion = {};
+    
+    // 地区关键词映射
+    const regionKeywords = {
+      '中国': ['中国', '大陆', 'China', 'CN'],
+      '香港': ['香港', 'HK', 'Hong Kong'],
+      '台湾': ['台湾', 'TW', 'Taiwan'],
+      '日本': ['日本', 'JP', 'Japan'],
+      '韩国': ['韩国', '南韩', 'KR', 'Korea'],
+      '新加坡': ['新加坡', 'SG', 'Singapore'],
+      '美国': ['美国', 'US', 'USA', 'United States'],
+      '英国': ['英国', 'UK', 'GB', 'Great Britain'],
+      '德国': ['德国', 'DE', 'Germany'],
+      '法国': ['法国', 'FR', 'France'],
+      '俄罗斯': ['俄罗斯', 'RU', 'Russia'],
+      '加拿大': ['加拿大', 'CA', 'Canada'],
+      '澳大利亚': ['澳大利亚', '澳洲', 'AU', 'Australia'],
+      '印度': ['印度', 'IN', 'India'],
+      '巴西': ['巴西', 'BR', 'Brazil'],
+      '阿联酋': ['阿联酋', '迪拜', 'AE', 'UAE'],
+      '土耳其': ['土耳其', 'TR', 'Turkey'],
+      '荷兰': ['荷兰', 'NL', 'Netherlands'],
+      '印尼': ['印尼', '印度尼西亚', 'ID', 'Indonesia'],
+      '意大利': ['意大利', 'IT', 'Italy'],
+      '西班牙': ['西班牙', 'ES', 'Spain'],
+      '马来西亚': ['马来西亚', 'MY', 'Malaysia'],
+      '菲律宾': ['菲律宾', 'PH', 'Philippines'],
+      '越南': ['越南', 'VN', 'Vietnam'],
+      '泰国': ['泰国', 'TH', 'Thailand'],
+      '其他': [] // 默认类别
+    };
+    
+    // 尝试从节点名称或属性中提取地区信息
+    nodes.forEach(node => {
+      let nodeRegion = '其他'; // 默认地区
+      
+      // 1. 优先从节点的region或location属性中获取
+      if (node.region) {
+        nodeRegion = node.region;
+      } else if (node.location && node.location.country) {
+        nodeRegion = node.location.country;
+      } else if (node.name) {
+        // 2. 从节点名称中提取地区信息
+        const nodeName = node.name.toLowerCase();
+        
+        // 遍历地区关键词映射，寻找匹配
+        for (const region in regionKeywords) {
+          const keywords = regionKeywords[region];
+          const found = keywords.some(keyword => 
+            nodeName.includes(keyword.toLowerCase())
+          );
+          
+          if (found) {
+            nodeRegion = region;
+            break;
+          }
+        }
+      }
+      
+      // 将节点添加到对应地区
+      if (!nodesByRegion[nodeRegion]) {
+        nodesByRegion[nodeRegion] = [];
+      }
+      nodesByRegion[nodeRegion].push(node);
+    });
+    
+    return nodesByRegion;
+  }
+
+  /**
+   * 按照节点质量排序（延迟、稳定性等）
+   * @param {Array} nodes 节点数组
+   * @returns {Array} 排序后的节点数组
+   */
+  sortNodesByQuality(nodes) {
+    if (!Array.isArray(nodes)) return [];
+    
+    // 定义排序函数
+    return nodes.sort((a, b) => {
+      // 首先按有效性排序
+      if (a.valid && !b.valid) return -1;
+      if (!a.valid && b.valid) return 1;
+      
+      // 如果都有效，按延迟排序
+      if (a.valid && b.valid) {
+        // 可疑延迟的节点排在后面
+        if (a.suspiciousLatency && !b.suspiciousLatency) return 1;
+        if (!a.suspiciousLatency && b.suspiciousLatency) return -1;
+        
+        // 正常按延迟值排序（小的在前）
+        return (a.latency || Infinity) - (b.latency || Infinity);
+      }
+      
+      // 其他情况保持原顺序
+      return 0;
+    });
   }
 
   /**
@@ -241,7 +426,9 @@ export class NodeProcessor {
       settings: node.settings || {},
       metadata: node.metadata || {},
       extra: node.extra || {},
-      test: node.test || null
+      test: node.test || null,
+      latency: node.latency,
+      valid: node.valid
     }));
   }
 
@@ -250,42 +437,7 @@ export class NodeProcessor {
    * @returns {string} 随机ID
    */
   generateId() {
-    return Math.random().toString(36).substring(2, 11);
-  }
-
-  /**
-   * 按区域分组节点
-   * @param {Array} nodes 节点数组
-   * @returns {Object} 分组后的节点
-   */
-  groupNodesByRegion(nodes) {
-    const groups = {
-      '香港': [],
-      '台湾': [],
-      '日本': [],
-      '美国': [],
-      '新加坡': [],
-      '其他': []
-    };
-    
-    nodes.forEach(node => {
-      const name = node.name || '';
-      
-      if (name.includes('香港') || name.includes('HK') || name.includes('Hong')) {
-        groups['香港'].push(node);
-      } else if (name.includes('台湾') || name.includes('TW') || name.includes('Taiwan')) {
-        groups['台湾'].push(node);
-      } else if (name.includes('日本') || name.includes('JP') || name.includes('Japan')) {
-        groups['日本'].push(node);
-      } else if (name.includes('美国') || name.includes('US') || name.includes('USA')) {
-        groups['美国'].push(node);
-      } else if (name.includes('新加坡') || name.includes('SG') || name.includes('Singapore')) {
-        groups['新加坡'].push(node);
-      } else {
-        groups['其他'].push(node);
-      }
-    });
-    
-    return groups;
+    return Math.random().toString(36).substring(2, 15) + 
+           Math.random().toString(36).substring(2, 15);
   }
 } 

@@ -118,7 +118,9 @@ export class SyncManager {
         timeout: testingConfig.timeout || 5000,
         testUrl: testingConfig.test_url || 'http://www.google.com/generate_204',
         maxLatency: testingConfig.max_latency || 5000,
+        minLatency: testingConfig.min_latency || 0,
         filterInvalid: testingConfig.filter_invalid !== false,
+        filterUnreasonableLatency: testingConfig.filter_unreasonable_latency !== false,
         verifyLocation: testingConfig.verify_location === true,
         logger: this.logger
       });
@@ -186,7 +188,9 @@ export class SyncManager {
       
       // 最终处理节点（根据配置过滤有效性）
       const finalOptions = {
-        maxNodes: this.config.testing?.max_nodes || 0,
+        maxNodes: this.config.testing?.max_nodes || 500, // 设置默认最大节点数为500
+        maxNodesPerType: this.config.testing?.max_nodes_per_type || 50, // 每种类型最大节点数
+        maxNodesPerRegion: this.config.testing?.max_nodes_per_region || 30, // 每个地区最大节点数
         onlyValid: this.config.testing?.filter_invalid !== false // 根据配置决定是否只保留有效节点
       };
       const processedNodes = this.nodeProcessor.processNodes(testedNodes, finalOptions);

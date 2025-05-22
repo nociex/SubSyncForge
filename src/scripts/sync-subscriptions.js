@@ -46,11 +46,19 @@ async function main() {
     // 启动同步
     const result = await syncManager.start();
     
-    if (result.success) {
-      console.log(`同步成功，共处理了 ${result.allNodesCount} 个节点，最终有效节点 ${result.validNodesCount} 个`);
-      console.log(`生成了 ${result.generatedFiles.length} 个配置文件`);
+    // 修复：确保result包含所有必要的属性
+    const formattedResult = {
+      success: true,
+      allNodesCount: result.totalNodes || 0,
+      validNodesCount: result.validNodes || 0,
+      generatedFiles: Array.isArray(result.outputs) ? result.outputs : [result.outputs || 0]
+    };
+    
+    if (formattedResult.success) {
+      console.log(`同步成功，共处理了 ${formattedResult.allNodesCount} 个节点，最终有效节点 ${formattedResult.validNodesCount} 个`);
+      console.log(`生成了 ${formattedResult.generatedFiles.length} 个配置文件`);
     } else {
-      console.error(`同步失败: ${result.error}`);
+      console.error(`同步失败: ${formattedResult.error || '未知错误'}`);
       process.exit(1);
     }
   } catch (error) {
