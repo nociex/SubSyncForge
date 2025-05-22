@@ -65,7 +65,7 @@ jobs:
         env:
           BARK_URL: ${{ secrets.BARK_URL }}
           BARK_TITLE: SubSyncForge
-          DATA_DIR: ${{ github.workspace }}/data
+          DATA_DIR: data
       
       - name: Commit and push changes
         run: |
