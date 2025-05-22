@@ -38,6 +38,12 @@ export const defaultConfig = {
       api_key: '',
       cache_time: 604800000 // 7天
     }
+  },
+  chinaProxy: {
+    enabled: false,
+    configFile: 'config/china_proxies.json',
+    useForSubscription: false,
+    useForTesting: false
   }
 };
 

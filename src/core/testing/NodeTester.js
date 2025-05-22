@@ -7,6 +7,8 @@ import { spawn } from 'child_process';
 import fs from 'fs';
 import path from 'path';
 import { ensureDirectoryExists } from '../utils/FileSystem.js';
+import { ChinaProxyTester } from '../../utils/proxy/ChinaProxyTester.js';
+import { ChinaProxyLoader } from '../../utils/proxy/ChinaProxyLoader.js';
 
 export class NodeTester {
   /**
@@ -25,9 +27,41 @@ export class NodeTester {
     this.logger = options.logger || console;
     this.ipInfoCache = new Map();
     this.cachePath = path.join(this.rootDir, this.dataDir, 'ip_cache/ip_info_cache.json');
+    this.useChineseProxy = options.useChineseProxy || false;
     
     // 初始化时加载IP缓存
     this.loadIPCache();
+    
+    // 初始化中国代理测试器（如果启用）
+    if (this.useChineseProxy) {
+      this.chinaProxyLoader = new ChinaProxyLoader({
+        rootDir: this.rootDir,
+        logger: this.logger
+      });
+      
+      const chinaProxyConfig = this.chinaProxyLoader.loadConfig();
+      if (chinaProxyConfig.enabled && chinaProxyConfig.use_for_testing) {
+        const formattedProxies = this.chinaProxyLoader.getFormattedProxies();
+        if (formattedProxies.length > 0) {
+          this.chinaProxyTester = new ChinaProxyTester({
+            logger: this.logger,
+            socksProxies: formattedProxies,
+            timeout: chinaProxyConfig.testing.timeout || this.timeout,
+            testUrl: chinaProxyConfig.testing.test_url || this.testUrl,
+            concurrency: this.concurrency
+          });
+          this.logger.info(`已启用中国大陆代理测速，配置了 ${formattedProxies.length} 个代理`);
+        } else {
+          this.logger.warn(`虽然启用了中国大陆代理测速，但没有配置有效的代理`);
+          this.chinaProxyTester = null;
+        }
+      } else {
+        this.chinaProxyTester = null;
+      }
+    } else {
+      this.chinaProxyTester = null;
+      this.chinaProxyLoader = null;
+    }
   }
 
   /**
@@ -80,6 +114,36 @@ export class NodeTester {
       // 等待当前批次完成
       const batchResults = await Promise.all(batchPromises);
       testedNodes = testedNodes.concat(batchResults);
+    }
+    
+    // 如果启用了中国代理测试，则使用中国代理测试所有节点
+    if (this.chinaProxyTester) {
+      this.logger.info(`开始通过中国大陆代理测试节点...`);
+      
+      try {
+        const chinaResults = await this.chinaProxyTester.testNodes(nodes);
+        
+        // 将中国代理测试结果添加到测试结果中
+        for (const chinaResult of chinaResults) {
+          const index = testedNodes.findIndex(node => 
+            node.name === chinaResult.name && 
+            node.server === chinaResult.server && 
+            node.port === chinaResult.port);
+          
+          if (index !== -1) {
+            // 添加中国测试结果到现有节点
+            testedNodes[index].china_test = {
+              valid: chinaResult.valid,
+              latency: chinaResult.latency,
+              error: chinaResult.error
+            };
+            
+            this.logger.info(`节点 ${chinaResult.name} 通过中国代理测试结果: ${chinaResult.valid ? '成功' : '失败'}, 延迟: ${chinaResult.latency || 'N/A'}ms`);
+          }
+        }
+      } catch (error) {
+        this.logger.error(`中国大陆代理测试失败:`, error.message);
+      }
     }
     
     // 统计结果
