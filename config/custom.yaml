@@ -62,25 +62,25 @@ output:
     - name: "mihomo"
       template: "templates/mihomo.yaml"
       path: "mihomo.yaml"
-      enabled: true
+      enabled: false
     
     # Surge 配置
     - name: "surge"
       template: "templates/surge.conf"
       path: "surge.conf"
-      enabled: true
+      enabled: false
     
     # Sing-box 配置
     - name: "singbox"
       template: "templates/singbox.json"
       path: "singbox.json"
-      enabled: true
+      enabled: false
     
     # V2Ray 配置 (选择第一个节点作为默认)
     - name: "v2ray"
       template: "templates/v2ray.json"
       path: "v2ray.json"
-      enabled: true
+      enabled: false
       options:
         use_first_node: true
         

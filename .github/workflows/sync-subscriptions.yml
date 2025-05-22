@@ -18,17 +18,19 @@ jobs:
         with:
           fetch-depth: 0    # 获取完整历史记录
       
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18'
-          cache: 'pnpm'    # 启用Node模块缓存
-          
+      # 先设置pnpm
       - name: Setup pnpm
         uses: pnpm/action-setup@v2
         with:
           version: 7
           run_install: false
+      
+      # 然后设置Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'pnpm'    # 启用Node模块缓存
       
       # 添加缓存恢复步骤
       - name: Cache node modules
