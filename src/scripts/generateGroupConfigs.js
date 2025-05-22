@@ -1,6 +1,6 @@
 /**
  * 生成包含分组节点的配置文件
- * 此脚本用于读取output/groups目录下的节点文件，
+ * 此脚本用于读取output目录下的节点文件，
  * 然后将这些节点插入到各个代理软件的配置模板中
  */
 
@@ -118,10 +118,10 @@ function getNodeNameFromURI(uri) {
  * @returns {Object} 分组节点数据
  */
 function readAllGroupNodes() {
-  const groupsDir = path.join(rootDir, 'output', 'groups');
+  const outputDir = path.join(rootDir, 'output');
   
-  if (!fs.existsSync(groupsDir)) {
-    console.warn(`分组目录不存在: ${groupsDir}`);
+  if (!fs.existsSync(outputDir)) {
+    console.warn(`输出目录不存在: ${outputDir}`);
     return { region: {}, media: {} };
   }
   
@@ -157,23 +157,32 @@ function readAllGroupNodes() {
   };
   
   // 读取所有文件
-  const files = fs.readdirSync(groupsDir);
+  const files = fs.readdirSync(outputDir);
   
   for (const file of files) {
     if (!file.endsWith('.txt')) continue;
+    if (file === '.gitkeep') continue;
     
-    const filePath = path.join(groupsDir, file);
+    const filePath = path.join(outputDir, file);
+    // 忽略目录
+    if (fs.statSync(filePath).isDirectory()) continue;
+    
     const nodes = readNodesFromFile(filePath);
     
+    // 处理文件名的大小写，以匹配映射
+    const normalizedFile = file.charAt(0).toUpperCase() + file.slice(1);
+    
     // 检查是哪种分组类型
-    if (regionFileMapping[file]) {
-      const { key, name } = regionFileMapping[file];
+    if (regionFileMapping[normalizedFile] || regionFileMapping[file]) {
+      const mappingKey = regionFileMapping[normalizedFile] ? normalizedFile : file;
+      const { key, name } = regionFileMapping[mappingKey];
       result.region[key] = {
         name: name,
         nodes: nodes
       };
-    } else if (mediaMapping[file]) {
-      const { key, name } = mediaMapping[file];
+    } else if (mediaMapping[normalizedFile] || mediaMapping[file]) {
+      const mappingKey = mediaMapping[normalizedFile] ? normalizedFile : file;
+      const { key, name } = mediaMapping[mappingKey];
       result.media[key] = {
         name: name,
         nodes: nodes
