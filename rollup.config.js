@@ -8,9 +8,9 @@ export default {
     dir: 'dist',
     format: 'es',
     sourcemap: true,
-    entryFileNames: 'scripts/[name].js',
+    entryFileNames: '[name].js',
     chunkFileNames: 'shared/[name]-[hash].js',
-    preserveModules: true,
+    preserveModules: false,
     preserveModulesRoot: 'src'
   },
   plugins: [

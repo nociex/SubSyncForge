@@ -81,7 +81,7 @@ jobs:
           echo "最大执行时间: $MAX_EXECUTION_TIME ms"
           
           # 使用新的入口脚本
-          node dist/scripts/sync-subscriptions.js
+          node dist/sync-subscriptions.js
       
       # 提交更改
       - name: Commit changes
