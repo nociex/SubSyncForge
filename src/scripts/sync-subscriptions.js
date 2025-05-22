@@ -13,6 +13,7 @@ import yaml from 'js-yaml';
 import { BarkNotifier } from '../utils/events/BarkNotifier.js';
 import { eventEmitter, EventType } from '../utils/events/index.js';
 import { HttpsProxyAgent } from 'https-proxy-agent'; // 需要引入
+import crypto from 'crypto';
 
 // 全局超时控制 - 设置为5小时，留1小时的余量
 const MAX_EXECUTION_TIME = 5 * 60 * 60 * 1000; // 5小时(毫秒)
@@ -38,7 +39,7 @@ console.log(`[Logger] Setting log level to: ${LOG_LEVEL}`);
 const DEBUG = LOG_LEVEL === 'debug';
 
 // 获取项目根目录
-const rootDir = path.resolve(__dirname, '../..');
+const rootDir = process.env.ROOT_DIR || path.resolve(__dirname, '../..');
 console.log(`项目根目录: ${rootDir}`);
 
 // --- 国内代理缓存配置 ---
@@ -127,18 +128,18 @@ const TESTING_CONFIG = {
 // 基本配置
 const CONFIG = {
   rootDir: rootDir,
-  configFile: path.resolve(rootDir, 'config/custom.yaml'),
+  configFile: process.env.CONFIG_PATH || path.resolve(rootDir, 'config/custom.yaml'),
   subscriptions: [],
   outputConfigs: [],
   options: {
     deduplication: true,
-    dataDir: 'data',
+    dataDir: process.env.DATA_DIR || 'data',
     outputDir: 'output'
   },
   advanced: {
-    logLevel: 'info',
+    logLevel: process.env.LOG_LEVEL || 'info',
     cacheTtl: 3600,
-    proxyForSubscription: false,
+    proxyForSubscription: process.env.PROXY_FOR_SUBSCRIPTION === 'true',
     sortNodes: true,
     syncInterval: 360
   }
@@ -297,398 +298,387 @@ function loadConfig() {
 
 // 处理单个订阅源的函数，用于并行处理
 async function fetchSubscription(subscription, converter) {
-  if (!subscription.enabled) {
-    console.log(`跳过禁用的订阅: ${subscription.name}`);
-    return [];
+  console.log(`===========================================================`);
+  console.log(`开始处理订阅: ${subscription.name}, 类型: ${subscription.type}, URL: ${subscription.url}`);
+  
+  // 检查缓存 - 只有URL类型的订阅才会缓存
+  let useCache = false;
+  let cacheData = null;
+  const cacheDir = path.join(CONFIG.rootDir, CONFIG.options.dataDir, 'cache');
+  const cachePath = path.join(cacheDir, `${subscription.name}_cache.json`);
+  
+  // 缓存过期时间检查 (单位: 秒)
+  const cacheExpiry = CONFIG.advanced.cacheTtl || 3600; // 默认1小时
+  
+  // 尝试从缓存中获取
+  if (subscription.type === SubscriptionType.URL && fs.existsSync(cachePath)) {
+    try {
+      const cacheContent = fs.readFileSync(cachePath, 'utf-8');
+      cacheData = JSON.parse(cacheContent);
+      
+      if (cacheData && Array.isArray(cacheData.nodes) && cacheData.timestamp) {
+        const cacheAge = (Date.now() - cacheData.timestamp) / 1000; // 换算成秒
+        if (cacheAge < cacheExpiry) {
+          console.log(`使用${subscription.name}的缓存数据，缓存年龄: ${Math.floor(cacheAge/60)}分钟，包含${cacheData.nodes.length}个节点`);
+          useCache = true;
+          return {
+            source: subscription.name,
+            nodes: cacheData.nodes,
+            fromCache: true,
+            hash: cacheData.hash
+          };
+        } else {
+          console.log(`${subscription.name}的缓存已过期 (${Math.floor(cacheAge/60)}分钟), 重新获取`);
+        }
+      }
+    } catch (error) {
+      console.error(`读取${subscription.name}的缓存失败:`, error.message);
+    }
+  } else {
+    console.log(`未找到订阅 ${subscription.name} 的缓存`);
   }
   
-  try {
-    console.log(`===========================================================`);
-    console.log(`开始处理订阅: ${subscription.name}, 类型: ${subscription.type || 'url'}, URL: ${subscription.url || '(BASE64/直接内容)'}`);
-    
-    // 增量处理逻辑：检查缓存
-    const dataDir = path.join(CONFIG.rootDir, CONFIG.options.dataDir);
-    ensureDirectoryExists(dataDir);
-    
-    // 缓存文件路径
-    const subscriptionCachePath = path.join(dataDir, `subscription_${subscription.name.replace(/[^a-zA-Z0-9_-]/g, '_')}.json`);
-    const subscriptionRawPath = path.join(dataDir, `${subscription.name.replace(/[^a-zA-Z0-9_-]/g, '_')}.txt`);
-    
-    // 默认需要更新
-    let needUpdate = true;
-    let cachedNodes = [];
-    let lastHash = '';
-    let lastTimestamp = 0;
-    
-    // 检查缓存
-    if (fs.existsSync(subscriptionCachePath)) {
+  // 如果不使用缓存，则获取新数据
+  if (!useCache) {
+    // 根据订阅类型获取数据
+    if (subscription.type === SubscriptionType.URL) {
       try {
-        const cacheData = JSON.parse(fs.readFileSync(subscriptionCachePath, 'utf-8'));
-        if (cacheData && cacheData.nodes && Array.isArray(cacheData.nodes)) {
-          cachedNodes = cacheData.nodes;
-          lastHash = cacheData.hash || '';
-          lastTimestamp = cacheData.timestamp || 0;
-          
-          // 检查更新间隔时间是否超过配置的间隔
-          // 使用advanced.syncInterval配置项，默认为6小时(21600秒)
-          const updateInterval = (CONFIG.advanced.syncInterval || 360) * 60 * 1000; // 转换为毫秒
-          const timeNow = Date.now();
-          
-          if (timeNow - lastTimestamp < updateInterval) {
-            console.log(`订阅 ${subscription.name} 上次更新时间为 ${new Date(lastTimestamp).toLocaleString()}`);
-            console.log(`未超过更新间隔(${updateInterval/60000}分钟)，使用缓存数据，包含 ${cachedNodes.length} 个节点`);
-            return cachedNodes;
-          } else {
-            console.log(`订阅 ${subscription.name} 缓存已过期，需要更新。上次更新: ${new Date(lastTimestamp).toLocaleString()}`);
-          }
+        console.log(`从URL获取订阅: ${subscription.url}`);
+        
+        // 设置自定义请求头 (检查特定域名并添加对应请求头)
+        let customHeaders = {};
+        if (subscription.url.includes('alalbb.top')) {
+          console.log(`检测到alalbb.top域名，添加特定请求头`);
+          customHeaders = {
+            Referer: 'https://alalbb.top/',
+            Origin: 'https://alalbb.top',
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
+          };
         }
-      } catch (e) {
-        console.error(`读取订阅缓存失败: ${e.message}`);
-      }
-    } else {
-      console.log(`未找到订阅 ${subscription.name} 的缓存`);
-    }
-    
-    let result = [];
-    
-    // 根据订阅类型处理
-    if (subscription.type === SubscriptionType.BASE64 && subscription.content) {
-      // 处理Base64内容
-      console.log(`解析Base64订阅内容: ${subscription.name}`);
-      // 计算内容哈希
-      const contentHash = require('crypto').createHash('md5').update(subscription.content).digest('hex');
-      
-      // 如果哈希值相同，则内容未变化
-      if (contentHash === lastHash) {
-        console.log(`Base64内容未变化，使用缓存数据，包含 ${cachedNodes.length} 个节点`);
-        return cachedNodes;
-      }
-      
-      // 内容变化，重新解析
-      result = await converter.parser.parse(subscription.content);
-      console.log(`解析Base64订阅: ${subscription.name}, 获取 ${result.length} 个节点`);
-      
-      // 保存缓存
-      saveCacheData(subscriptionCachePath, result, contentHash);
-      
-    } else if ([SubscriptionType.VMESS, SubscriptionType.SS, SubscriptionType.SSR, SubscriptionType.TROJAN].includes(subscription.type) && subscription.content) {
-      // 处理单个节点
-      console.log(`解析单个${subscription.type}节点: ${subscription.name}`);
-      
-      // 计算内容哈希
-      const contentHash = require('crypto').createHash('md5').update(subscription.content).digest('hex');
-      
-      // 如果哈希值相同，则内容未变化
-      if (contentHash === lastHash) {
-        console.log(`节点内容未变化，使用缓存数据`);
-        return cachedNodes;
-      }
-      
-      // 内容变化，重新解析
-      const node = await converter.parser.parseLine(subscription.content);
-      result = node ? [node] : [];
-      console.log(`解析${subscription.type}节点: ${subscription.name}, 成功: ${result.length > 0}`);
-      
-      // 保存缓存
-      saveCacheData(subscriptionCachePath, result, contentHash);
-      
-    } else if (subscription.url) {
-      // 获取URL订阅
-      console.log(`从URL获取订阅: ${subscription.url}`);
-      try {
-        // 根据URL自定义请求头，部分订阅源需要特殊处理
-        const customHeaders = {};
-        const fetchOptions = { 
-          headers: customHeaders,
-          timeout: 60000, // 60秒超时
-          retry: 3 // 最多重试3次
+        
+        // 添加用户自定义请求头 (如果有)
+        if (subscription.headers && typeof subscription.headers === 'object') {
+          customHeaders = { ...customHeaders, ...subscription.headers };
+        }
+        
+        console.log(`为 ${subscription.name} 设置的自定义请求头:`, JSON.stringify(customHeaders, null, 2));
+        
+        // 获取订阅内容
+        let content = '';
+        let contentHash = '';
+        
+        // 获取请求参数
+        let options = {
+          headers: customHeaders
         };
         
-        // 为某些域名设置特殊请求头
-        const url = new URL(subscription.url);
-        const domain = url.hostname;
-        
-        // 为特定域名添加Referer和更多特定处理
-        if (domain.includes('alalbb.top')) {
-          console.log(`检测到alalbb.top域名，添加特定请求头`);
-          customHeaders['Referer'] = 'https://alalbb.top/';
-          customHeaders['Origin'] = 'https://alalbb.top';
-          customHeaders['User-Agent'] = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36';
-        } else if (domain.includes('flyi.me')) {
-          console.log(`检测到flyi.me域名，添加特定请求头`);
-          customHeaders['Referer'] = 'https://freesu7.flyi.me/';
-          customHeaders['Origin'] = 'https://freesu7.flyi.me';
-          customHeaders['User-Agent'] = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.2 Safari/605.1.15';
-        }
-        
-        console.log(`为 ${subscription.name} 设置的自定义请求头:`, customHeaders);
-        
-        // *** 添加 requireChinaIP 选项 ***
-        fetchOptions.requireChinaIP = subscription.requireChinaIP === true;
-        if (fetchOptions.requireChinaIP) {
-          console.log(`[Fetcher] 订阅 ${subscription.name} 已标记需要国内代理`);
-        }
-        
-        // 如果存在上次的原始数据文件，添加条件请求头
-        if (fs.existsSync(subscriptionRawPath)) {
+        // 如果配置了使用代理，并且有可用代理，则使用代理
+        if (CONFIG.advanced.proxyForSubscription && loadedChinaProxies.length > 0) {
           try {
-            const stats = fs.statSync(subscriptionRawPath);
-            const lastModified = new Date(stats.mtime).toUTCString();
-            customHeaders['If-Modified-Since'] = lastModified;
-            console.log(`添加条件请求头 If-Modified-Since: ${lastModified}`);
-          } catch (e) {
-            console.error(`获取文件状态失败: ${e.message}`);
+            const proxy = getChinaProxy();
+            if (proxy) {
+              console.log(`尝试使用代理 ${proxy} 获取订阅`);
+              const agent = new HttpsProxyAgent(proxy);
+              options.agent = agent;
+            } else {
+              console.log(`尝试使用代理但未成功创建或获取代理`);
+            }
+          } catch (proxyError) {
+            console.error(`设置代理失败: ${proxyError.message}`);
           }
         }
-
-        const fetchResult = await converter.fetcher.fetch(subscription.url, fetchOptions);
         
-        // 检查是否304 Not Modified (服务器返回的状态码)
-        if (fetchResult.status === 304) {
-          console.log(`订阅源返回304 Not Modified，内容未变化，使用缓存`);
-          return cachedNodes;
-        }
-        
-        const rawData = fetchResult.data;
-        
-        // 内容为空则使用缓存
-        if (!rawData || rawData.trim() === '') {
-          console.warn(`获取到的订阅内容为空，使用缓存数据`);
-          if (cachedNodes.length > 0) {
-            return cachedNodes;
-          }
-          return [];
-        }
-        
-        // 计算内容哈希
-        const contentHash = require('crypto').createHash('md5').update(rawData).digest('hex');
-        
-        // 检查内容是否变化
-        if (contentHash === lastHash && lastHash !== '') {
-          console.log(`订阅内容哈希未变化，使用缓存数据，包含 ${cachedNodes.length} 个节点`);
-          return cachedNodes;
-        }
-        
-        console.log(`成功获取订阅: ${subscription.name}, 原始数据大小: ${rawData.length} 字节, 哈希: ${contentHash.substring(0, 8)}...`);
-        
-        // 保存原始数据
         try {
-          fs.writeFileSync(subscriptionRawPath, rawData);
-          console.log(`原始订阅数据已保存到: ${subscriptionRawPath}`);
-        } catch (writeError) {
-          console.error(`保存原始订阅数据失败: ${writeError.message}`);
-        }
-        
-        // 解析节点
-        console.log(`解析订阅数据...`);
-        try {
-          result = await converter.parser.parse(rawData);
-          console.log(`从 ${subscription.name} 解析出 ${result.length} 个节点`);
+          // 获取订阅内容
+          console.log(`开始获取订阅: ${subscription.url}`);
           
-          // 检查是否解析结果为空
-          if (result.length === 0 && cachedNodes.length > 0) {
-            console.warn(`解析结果为空，但有缓存数据，使用缓存数据 ${cachedNodes.length} 个节点`);
-            return cachedNodes;
+          // 添加时间戳防止缓存
+          const urlWithTimestamp = subscription.url.includes('?') 
+            ? `${subscription.url}&_t=${Date.now()}` 
+            : `${subscription.url}?_t=${Date.now()}`;
+          
+          console.log(`发送请求到: ${urlWithTimestamp}`);
+          
+          // 设置默认请求头
+          const defaultHeaders = {
+            'User-Agent': 'v2rayN/5.29',
+            'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+            'Accept-Language': 'zh-CN,zh;q=0.9,en;q=0.8',
+            'Cache-Control': 'no-cache',
+            'Pragma': 'no-cache'
+          };
+          
+          // 合并默认请求头和自定义请求头
+          options.headers = { ...defaultHeaders, ...options.headers };
+          console.log(`请求头:`, JSON.stringify(options.headers, null, 2));
+          
+          // 发送请求
+          const startTime = Date.now();
+          const response = await fetch(urlWithTimestamp, options);
+          const endTime = Date.now();
+          const responseTime = endTime - startTime;
+          
+          console.log(`请求完成，耗时: ${responseTime}ms, 状态码: ${response.status}`);
+          console.log(`响应内容类型: ${response.headers.get('content-type')}`);
+          
+          if (!response.ok) {
+            throw new Error(`HTTP 错误: ${response.status} ${response.statusText}`);
           }
           
-          // 保存缓存
-          saveCacheData(subscriptionCachePath, result, contentHash);
+          // 获取内容
+          content = await response.text();
           
+          // 计算内容摘要 (用于缓存比较)
+          contentHash = crypto.createHash('sha256').update(content).digest('hex');
+          
+          // 如果内容过长，只显示前200个字符
+          if (content.length > 200) {
+            console.log(`响应内容太长，只显示前200字符: \n${content.substring(0, 200)}...`);
+          } else if (content.trim().length === 0) {
+            console.log(`服务器返回了空内容`);
+            throw new Error('服务器返回了空内容');
+          } else {
+            console.log(`响应内容: \n${content}`);
+          }
+          
+          if (content.trim().length === 0) {
+            throw new Error('服务器返回了空内容');
+          }
+          
+          console.log(`成功获取订阅，数据大小: ${content.length} 字节`);
+          
+          // 检测格式类型
+          if (content.includes('proxies:') || content.includes('Proxy:') || content.includes('proxy-groups:')) {
+            console.log(`检测到可能的YAML/Clash配置`);
+          } else if (content.startsWith('ss://') || content.startsWith('ssr://') || content.startsWith('vmess://') || content.startsWith('trojan://')) {
+            console.log(`检测到Base64/文本格式的节点列表`);
+          } else if (content.startsWith('{') && content.includes('"outbounds"')) {
+            console.log(`检测到V2Ray/Sing-box JSON配置`);
+          } else if (/^[A-Za-z0-9+/=]+$/.test(content.trim())) {
+            console.log(`检测到可能的Base64编码内容`);
+          }
+          
+        } catch (fetchError) {
+          console.error(`获取订阅出错: ${fetchError.message}`);
+          return {
+            source: subscription.name,
+            nodes: [],
+            fromCache: false,
+            error: fetchError.message
+          };
+        }
+        
+        // 解析订阅内容
+        try {
+          const parsedNodes = await converter.parseSubscription(content, subscription.type);
+          
+          if (!parsedNodes || !Array.isArray(parsedNodes) || parsedNodes.length === 0) {
+            console.log(`订阅 ${subscription.name} 未返回任何节点`);
+            return {
+              source: subscription.name,
+              nodes: [],
+              fromCache: false,
+              hash: contentHash
+            };
+          }
+          
+          console.log(`成功解析 ${subscription.name} 订阅，包含 ${parsedNodes.length} 个节点`);
+          
+          // 标记节点来源
+          parsedNodes.forEach(node => {
+            if (!node.metadata) node.metadata = {};
+            node.metadata.source = subscription.name;
+          });
+          
+          // 保存到缓存
+          if (subscription.type === SubscriptionType.URL) {
+            ensureDirectoryExists(cacheDir);
+            saveCacheData(cachePath, parsedNodes, contentHash);
+          }
+          
+          return {
+            source: subscription.name,
+            nodes: parsedNodes,
+            fromCache: false,
+            hash: contentHash
+          };
         } catch (parseError) {
-          console.error(`解析订阅数据时出错:`, parseError.message);
-          
-          // 如果解析失败但有缓存，使用缓存数据
-          if (cachedNodes.length > 0) {
-            console.warn(`解析失败但存在缓存，使用缓存数据 (${cachedNodes.length} 个节点)`);
-            return cachedNodes;
-          }
+          console.error(`获取订阅失败: ${parseError.message}`);
+          return {
+            source: subscription.name,
+            nodes: [],
+            fromCache: false,
+            error: parseError.message
+          };
         }
-      } catch (fetchError) {
-        console.error(`获取订阅失败: ${fetchError.message}`);
+      } catch (error) {
+        console.error(`处理 ${subscription.name} 订阅失败: ${error.message}`);
+        // 尝试使用缓存作为后备
+        if (cacheData && Array.isArray(cacheData.nodes)) {
+          console.log(`使用缓存作为后备，包含 ${cacheData.nodes.length} 个节点`);
+          return {
+            source: subscription.name,
+            nodes: cacheData.nodes,
+            fromCache: true,
+            fromBackup: true,
+            hash: cacheData.hash
+          };
+        }
         
-        // 如果获取失败但有缓存，使用缓存数据
-        if (cachedNodes.length > 0) {
-          console.warn(`获取失败但存在缓存，使用缓存数据 (${cachedNodes.length} 个节点)`);
-          return cachedNodes;
-        }
-        
-        // 记录错误但继续处理其他订阅
-        return [];
+        return {
+          source: subscription.name,
+          nodes: [],
+          fromCache: false,
+          error: error.message
+        };
       }
+    } else {
+      // 处理其他类型的订阅，如Base64, VMess等
+      console.log(`不支持的订阅类型: ${subscription.type}`);
+      return {
+        source: subscription.name,
+        nodes: [],
+        fromCache: false,
+        error: `不支持的订阅类型: ${subscription.type}`
+      };
     }
-    
-    // 添加订阅源信息到节点
-    return result.map(node => ({
-      ...node,
-      source: subscription.name
-    }));
-  } catch (error) {
-    console.error(`处理订阅 ${subscription.name} 时出错:`, error.message);
-    
-    // 如果有缓存，使用缓存数据
-    const dataDir = path.join(CONFIG.rootDir, CONFIG.options.dataDir);
-    const subscriptionCachePath = path.join(dataDir, `subscription_${subscription.name.replace(/[^a-zA-Z0-9_-]/g, '_')}.json`);
-    
-    if (fs.existsSync(subscriptionCachePath)) {
-      try {
-        const cacheData = JSON.parse(fs.readFileSync(subscriptionCachePath, 'utf-8'));
-        if (cacheData && cacheData.nodes && Array.isArray(cacheData.nodes)) {
-          console.warn(`处理订阅出错但存在缓存，使用缓存数据 (${cacheData.nodes.length} 个节点)`);
-          return cacheData.nodes;
-        }
-      } catch (e) {
-        console.error(`读取缓存失败: ${e.message}`);
-      }
-    }
-    
-    return []; // 返回空数组，不影响其他订阅的处理
   }
 }
 
 // 修改后的fetchAndMergeAllNodes函数，支持并行处理
 async function fetchAndMergeAllNodes(converter) {
-  const enabledSubscriptions = CONFIG.subscriptions.filter(sub => sub.enabled);
-  console.log(`准备获取 ${enabledSubscriptions.length} 个启用的订阅源的节点`);
-  
-  // 使用并行处理提高效率
-  const fetchPromises = enabledSubscriptions.map(sub => fetchSubscription(sub, converter));
-  
-  // 设置批次大小，避免并发太多
-  const BATCH_SIZE = 5;
-  const allNodes = [];
-  
-  // 增量更新标识和计数
-  let hasUpdates = false;
-  let cachedNodeCount = 0;
-  let updatedNodeCount = 0;
-  
-  // 分批处理订阅源
-  for (let i = 0; i < fetchPromises.length; i += BATCH_SIZE) {
-    if (checkTimeLimit()) {
-      console.warn('执行时间接近限制，终止剩余订阅获取');
-      break;
+  try {
+    // 初始化计数器
+    let cachedCount = 0;
+    let updatedCount = 0;
+    
+    // 过滤出启用的订阅
+    const enabledSubscriptions = CONFIG.subscriptions.filter(sub => sub.enabled !== false);
+    console.log(`准备获取 ${enabledSubscriptions.length} 个启用的订阅源的节点`);
+    
+    // 批量处理订阅源，避免同时发送太多请求
+    const batchSize = 5; // 每批处理5个订阅源
+    const batches = [];
+    
+    for (let i = 0; i < enabledSubscriptions.length; i += batchSize) {
+      batches.push(enabledSubscriptions.slice(i, i + batchSize));
     }
     
-    const batchPromises = fetchPromises.slice(i, i + BATCH_SIZE);
-    console.log(`处理订阅批次 ${Math.floor(i/BATCH_SIZE) + 1}/${Math.ceil(fetchPromises.length/BATCH_SIZE)}`);
+    // 存储所有订阅结果
+    let allResults = [];
     
-    const batchResults = await Promise.all(batchPromises);
-    
-    // 处理每个订阅源的结果
-    for (let j = 0; j < batchResults.length; j++) {
-      const subscriptionIndex = i + j;
-      if (subscriptionIndex < enabledSubscriptions.length) {
-        const subscription = enabledSubscriptions[subscriptionIndex];
-        const nodes = batchResults[j];
-        
-        if (nodes && nodes.length > 0) {
-          console.log(`订阅 ${subscription.name} 返回 ${nodes.length} 个节点`);
-          
-          // 检查这些节点是否来自缓存
-          const dataDir = path.join(CONFIG.rootDir, CONFIG.options.dataDir);
-          const subscriptionCachePath = path.join(dataDir, `subscription_${subscription.name.replace(/[^a-zA-Z0-9_-]/g, '_')}.json`);
-          let isFromCache = false;
-          
-          try {
-            if (fs.existsSync(subscriptionCachePath)) {
-              const cacheData = JSON.parse(fs.readFileSync(subscriptionCachePath, 'utf-8'));
-              const cacheTime = cacheData.timestamp || 0;
-              // 如果缓存时间在5分钟内，认为这是刚刚从缓存获取的数据
-              if (Date.now() - cacheTime < 5 * 60 * 1000) {
-                isFromCache = true;
-              }
-            }
-          } catch (e) {
-            console.error(`检查缓存状态时出错: ${e.message}`);
-          }
-          
-          // 统计使用缓存和更新的节点数量
-          if (isFromCache) {
-            cachedNodeCount += nodes.length;
-            console.log(`订阅 ${subscription.name} 使用缓存数据`);
-          } else {
-            updatedNodeCount += nodes.length;
-            hasUpdates = true;
-            console.log(`订阅 ${subscription.name} 获取了更新的数据`);
-          }
-          
-          // 将节点添加到总列表
-          allNodes.push(...nodes);
-        } else {
-          console.log(`订阅 ${subscription.name} 未返回任何节点`);
-        }
+    // 分批处理
+    for (let i = 0; i < batches.length; i++) {
+      console.log(`处理订阅批次 ${i+1}/${batches.length}`);
+      
+      // 并行处理当前批次的订阅
+      const fetchPromises = batches[i].map(sub => fetchSubscription(sub, converter));
+      
+      // 等待所有请求完成
+      const batchResults = await Promise.all(fetchPromises);
+      
+      // 添加到结果集
+      allResults = allResults.concat(batchResults);
+      
+      // 如果超时，提前结束
+      if (checkTimeLimit()) {
+        console.warn(`执行时间接近限制，终止剩余批次的获取 (${i+1}/${batches.length})`);
+        break;
       }
     }
     
-    // 保存中间结果
-    const checkpointFile = path.join(CONFIG.rootDir, CONFIG.options.dataDir, 'checkpoint.json');
-    try {
-      fs.writeFileSync(checkpointFile, JSON.stringify({
-        timestamp: Date.now(),
-        processed: i + batchPromises.length,
-        total: fetchPromises.length,
-        nodeCount: allNodes.length,
-        cachedNodeCount,
-        updatedNodeCount,
-        hasUpdates
-      }));
-    } catch (e) {
-      console.error('保存检查点数据失败:', e.message);
-    }
-  }
-  
-  // 如果启用去重，对所有节点进行去重
-  let finalNodes = allNodes;
-  if (CONFIG.options.deduplication && allNodes.length > 0) {
-    console.log(`正在进行节点去重...`);
-    finalNodes = converter.deduplicator.deduplicate(allNodes);
-    console.log(`节点去重: ${allNodes.length} -> ${finalNodes.length}`);
-  }
-  
-  // 对节点进行分析和重命名
-  if (finalNodes.length > 0) {
-    console.log(`正在对节点进行分析和重命名...`);
-    // 使用nodeManager处理节点
-    const processedResult = converter.nodeManager.processNodes(finalNodes);
-    finalNodes = processedResult.nodes;
+    // 处理结果，合并节点
+    let allNodes = [];
     
-    // 重命名节点
-    finalNodes = converter.nodeManager.renameNodes(finalNodes, {
-      format: '{country}{protocol}{tags}{number}',
-      includeCountry: true,
-      includeProtocol: true,
-      includeNumber: true,
-      includeTags: true,
-      tagLimit: 2
-    });
-    
-    console.log(`完成节点分析和重命名，节点数量: ${finalNodes.length}`);
-  }
-  
-  console.log(`所有订阅处理完成，共获取 ${allNodes.length} 个节点 (缓存: ${cachedNodeCount}, 更新: ${updatedNodeCount})`);
-  console.log(`最终节点数量(去重后): ${finalNodes.length}`);
-  console.log(`是否有订阅源更新: ${hasUpdates ? '是' : '否'}`);
-  
-  // 如果没有任何更新，并且最终节点数量为0，尝试加载上次的最终节点数据
-  if (!hasUpdates && finalNodes.length === 0) {
-    const dataDir = path.join(CONFIG.rootDir, CONFIG.options.dataDir);
-    const finalNodesFile = path.join(dataDir, 'final_nodes.json');
-    
-    if (fs.existsSync(finalNodesFile)) {
-      try {
-        console.log(`未获取到任何节点，且无订阅更新，尝试加载上次的最终节点数据...`);
-        const lastFinalNodes = JSON.parse(fs.readFileSync(finalNodesFile, 'utf-8'));
-        if (Array.isArray(lastFinalNodes) && lastFinalNodes.length > 0) {
-          finalNodes = lastFinalNodes;
-          console.log(`成功加载上次的最终节点数据，共 ${finalNodes.length} 个节点`);
-        }
-      } catch (e) {
-        console.error(`加载上次最终节点数据失败: ${e.message}`);
+    // 遍历订阅结果
+    for (const result of allResults) {
+      if (!result) continue;
+      
+      const { source, nodes, fromCache, error } = result;
+      
+      if (error) {
+        console.warn(`订阅 ${source} 处理出错: ${error}`);
+        continue;
       }
+      
+      if (!nodes || !Array.isArray(nodes)) {
+        console.warn(`订阅 ${source} 未返回节点数组`);
+        continue;
+      }
+      
+      // 统计节点来源
+      if (fromCache) {
+        cachedCount += nodes.length;
+      } else {
+        updatedCount += nodes.length;
+      }
+      
+      // 将节点添加到总集合
+      allNodes = allNodes.concat(nodes);
+      
+      console.log(`处理订阅 ${source} 完成，获取 ${nodes.length} 个节点，来源: ${fromCache ? '缓存' : '更新'}`);
+    }
+    
+    // 节点数量统计
+    const originalCount = allNodes.length;
+    
+    // 如果配置了去重，则去重
+    if (CONFIG.options.deduplication) {
+      allNodes = deduplicateNodes(allNodes);
+      console.log(`去重后节点数量: ${allNodes.length} (原始: ${originalCount}, 减少: ${originalCount - allNodes.length})`);
+    }
+    
+    console.log(`所有订阅处理完成，共获取 ${allNodes.length} 个节点 (缓存: ${cachedCount}, 更新: ${updatedCount})`);
+    console.log(`最终节点数量(去重后): ${allNodes.length}`);
+    
+    // 检查是否有更新的订阅
+    const hasUpdates = updatedCount > 0;
+    console.log(`是否有订阅源更新: ${hasUpdates ? '是' : '否'}`);
+    
+    // 返回所有节点
+    return allNodes;
+  } catch (error) {
+    console.error(`获取和合并节点时出错:`, error);
+    throw error;
+  }
+}
+
+// 节点去重函数
+function deduplicateNodes(nodes) {
+  if (!Array.isArray(nodes)) return [];
+  if (nodes.length <= 1) return nodes;
+  
+  // 通过唯一标识符去重
+  const uniqueMap = new Map();
+  
+  for (const node of nodes) {
+    // 构建唯一标识，通常是节点的服务器+端口+类型+密码等信息的组合
+    let uniqueKey = '';
+    
+    if (node.server && node.port) {
+      // 基于服务器地址和端口号生成唯一键
+      uniqueKey = `${node.server}:${node.port}`;
+      
+      // 如果有额外的标识信息，添加到唯一键中
+      if (node.password) uniqueKey += `:${node.password}`;
+      if (node.uuid) uniqueKey += `:${node.uuid}`;
+      if (node.type) uniqueKey += `:${node.type}`;
+    } else if (node.extra && node.extra.raw) {
+      // 如果有原始URI，则直接用URI作为唯一键
+      uniqueKey = node.extra.raw;
+    } else {
+      // 如果没有足够信息，则使用节点的完整内容作为唯一键
+      uniqueKey = JSON.stringify(node);
+    }
+    
+    // 如果唯一键已存在，则跳过当前节点
+    if (!uniqueMap.has(uniqueKey)) {
+      uniqueMap.set(uniqueKey, node);
     }
   }
   
-  return finalNodes;
+  // 返回去重后的节点数组
+  return Array.from(uniqueMap.values());
 }
 
 // 修改后的testNodes函数，支持批次处理
@@ -790,7 +780,53 @@ async function generateConfigs(nodes, outputConfigs, options) {
   
   console.log(`准备生成 ${outputConfigs.length} 个配置文件`);
   console.log(`输出目录: ${outputDir} (完整路径: ${path.resolve(outputDir)})`);
-  console.log(`节点数量: ${nodes.length}`);
+  console.log(`节点数量: ${nodes ? nodes.length : 0}`);
+  
+  // 如果节点数组为空或未定义，创建空的配置文件
+  if (!nodes || nodes.length === 0) {
+    console.log(`节点数组为空，将创建空的配置文件`);
+    
+    for (const output of outputConfigs) {
+      // 如果配置被禁用，则跳过
+      if (output.enabled === false) {
+        console.log(`跳过禁用的输出配置: ${output.name}`);
+        continue;
+      }
+      
+      const { name, path: outputFile } = output;
+      
+      if (!outputFile) {
+        console.error(`输出配置缺少必要参数: ${JSON.stringify(output)}`);
+        continue;
+      }
+      
+      const outputPath = path.join(outputDir, outputFile);
+      ensureDirectoryExists(path.dirname(outputPath));
+      
+      try {
+        // 为不同类型的配置创建基本的空内容
+        let emptyContent = '';
+        
+        if (outputFile.endsWith('.yaml') || outputFile.endsWith('.yml')) {
+          emptyContent = `# 空的配置文件 - 自动生成\nproxies: []\n`;
+        } else if (outputFile.endsWith('.json')) {
+          emptyContent = `{\n  "proxies": []\n}`;
+        } else if (outputFile.endsWith('.conf')) {
+          emptyContent = `# 空的配置文件 - 自动生成\n`;
+        } else {
+          emptyContent = `# 空的配置文件 - 自动生成\n`;
+        }
+        
+        fs.writeFileSync(outputPath, emptyContent);
+        console.log(`已创建空的配置文件: ${outputFile}`);
+      } catch (error) {
+        console.error(`创建空配置文件失败: ${outputFile} - ${error.message}`);
+      }
+    }
+    
+    console.log(`所有空配置文件创建完成`);
+    return;
+  }
   
   if (nodes.length > 0) {
     console.log(`第一个节点示例: ${JSON.stringify(nodes[0], null, 2).substring(0, 200)}...`);
@@ -897,9 +933,25 @@ async function generateConfigs(nodes, outputConfigs, options) {
         console.log(`服务过滤后节点数量: ${filteredNodes.length}`);
       }
       
-      // 如果过滤后没有节点，记录警告并继续
+      // 如果过滤后没有节点，记录警告并继续但创建空文件
       if (filteredNodes.length === 0) {
-        console.warn(`警告: 过滤后没有节点符合条件，将跳过生成 ${outputFile}`);
+        console.warn(`警告: 过滤后没有节点符合条件，将创建空的 ${outputFile} 文件`);
+        
+        // 创建空的配置文件
+        let emptyContent = '';
+        
+        if (outputFile.endsWith('.yaml') || outputFile.endsWith('.yml')) {
+          emptyContent = `# 空的配置文件 - 自动生成\nproxies: []\n`;
+        } else if (outputFile.endsWith('.json')) {
+          emptyContent = `{\n  "proxies": []\n}`;
+        } else if (outputFile.endsWith('.conf')) {
+          emptyContent = `# 空的配置文件 - 自动生成\n`;
+        } else {
+          emptyContent = `# 空的配置文件 - 自动生成\n`;
+        }
+        
+        fs.writeFileSync(outputPath, emptyContent);
+        console.log(`已创建空的配置文件: ${outputFile}`);
         continue;
       }
       
@@ -1148,6 +1200,8 @@ async function generateConfigs(nodes, outputConfigs, options) {
       console.error(`错误堆栈: ${error.stack}`);
     }
   }
+  
+  console.log(`=== 配置文件生成完成 ===`);
 }
 
 /**
@@ -1162,8 +1216,27 @@ async function generateGroupedNodeFiles(nodes, options) {
   
   console.log(`准备生成分组节点文件...`);
   
-  if (nodes.length === 0) {
-    console.warn('没有节点数据，无法生成分组节点文件');
+  if (!nodes || nodes.length === 0) {
+    console.warn('没有节点数据，创建空的分组节点文件');
+    
+    // 创建分组目录
+    const groupDir = path.join(outputDir, 'groups');
+    ensureDirectoryExists(groupDir);
+    
+    // 创建一些常见分组的空文件
+    const defaultGroups = ['HK.txt', 'US.txt', 'JP.txt', 'SG.txt', 'TW.txt', 'Others.txt'];
+    
+    for (const filename of defaultGroups) {
+      const outputPath = path.join(groupDir, filename);
+      try {
+        fs.writeFileSync(outputPath, ''); // 写入空内容
+        console.log(`已创建空的分组节点文件: ${filename}`);
+      } catch (writeErr) {
+        console.error(`创建空文件失败: ${filename} - ${writeErr.message}`);
+      }
+    }
+    
+    console.log(`空分组节点文件创建完成`);
     return;
   }
 
@@ -1376,6 +1449,22 @@ async function generateGroupedNodeFiles(nodes, options) {
           }
         }
       }
+    } else {
+      console.log(`没有发现地区分组，创建默认空文件`);
+      
+      // 创建默认分组的空文件
+      const defaultGroups = ['HK.txt', 'US.txt', 'JP.txt', 'SG.txt', 'TW.txt', 'Others.txt'];
+      
+      for (const filename of defaultGroups) {
+        const outputPath = path.join(groupDir, filename);
+        try {
+          fs.writeFileSync(outputPath, ''); // 写入空内容
+          console.log(`已创建空的分组节点文件: ${filename}`);
+          generatedFiles++;
+        } catch (writeErr) {
+          console.error(`创建空文件失败: ${filename} - ${writeErr.message}`);
+        }
+      }
     }
     
     // 处理应用/流媒体分组
@@ -1463,6 +1552,22 @@ async function generateGroupedNodeFiles(nodes, options) {
           }
         }
       }
+    } else {
+      console.log(`没有发现应用/流媒体分组，创建默认空文件`);
+      
+      // 创建默认流媒体分组的空文件
+      const defaultMediaGroups = ['Netflix.txt', 'Disney_.txt', 'OpenAI.txt'];
+      
+      for (const filename of defaultMediaGroups) {
+        const outputPath = path.join(groupDir, filename);
+        try {
+          fs.writeFileSync(outputPath, ''); // 写入空内容
+          console.log(`已创建空的应用分组节点文件: ${filename}`);
+          generatedFiles++;
+        } catch (writeErr) {
+          console.error(`创建空文件失败: ${filename} - ${writeErr.message}`);
+        }
+      }
     }
     
     const message = `分组节点文件生成完成，共生成 ${generatedFiles} 个文件`;
@@ -1486,7 +1591,7 @@ async function generateGroupedNodeFiles(nodes, options) {
   }
 }
 
-// 修改main函数，添加全局超时控制
+// 修改main函数，添加全局超时控制和错误处理
 async function main() {
   globalStartTime = Date.now();
   console.log('==================================================================');
@@ -1504,7 +1609,12 @@ async function main() {
   }
   
   let previousNodeCount = null; // 初始化上次节点数
-  const dataDir = path.join(CONFIG.rootDir, CONFIG.options.dataDir);
+  const dataDir = path.join(rootDir, CONFIG.options.dataDir);
+  console.log(`数据目录: ${dataDir}`);
+  
+  // 确保数据目录存在
+  ensureDirectoryExists(dataDir);
+  
   const statusFile = path.join(dataDir, 'sync_status.json');
 
   try {
@@ -1522,8 +1632,6 @@ async function main() {
   }
 
   try {
-    ensureDirectoryExists(dataDir);
-    
     // 创建转换器实例
     const converter = new SubscriptionConverter({
       parser: CONFIG.parser,
@@ -1537,7 +1645,14 @@ async function main() {
     
     // 获取所有订阅节点
     console.log('开始获取所有订阅节点...');
-    const mergedNodes = await fetchAndMergeAllNodes(converter);
+    let mergedNodes = [];
+    try {
+      mergedNodes = await fetchAndMergeAllNodes(converter);
+    } catch (error) {
+      console.error(`获取订阅节点失败: ${error.message}`);
+      console.error(error.stack);
+      mergedNodes = []; // 确保是空数组
+    }
     
     // 保存节点统计信息，方便后续增量处理
     const finalNodesFile = path.join(dataDir, 'final_nodes.json');
@@ -1554,12 +1669,10 @@ async function main() {
     }
     
     // 如果配置了测试，进行节点测试
-    if (CONFIG.testConfig && CONFIG.testConfig.enabled) {
+    if (CONFIG.testConfig && CONFIG.testConfig.enabled && mergedNodes.length > 0) {
       console.log(`即将开始节点测试，总节点数: ${mergedNodes.length}`);
       
-      if (mergedNodes.length === 0) {
-        console.log('没有节点可供测试，跳过测试步骤');
-      } else if (mergedNodes.length < 10) {
+      if (mergedNodes.length < 10) {
         console.log('节点数量过少，跳过测试步骤');
       } else {
         const tester = new NodeTester(CONFIG.testConfig);
@@ -1580,8 +1693,12 @@ async function main() {
           }
           
           console.log(`测试批次 ${i+1}/${batches.length}, 包含 ${batches[i].length} 个节点`);
-          const testResults = await tester.testNodes(batches[i]);
-          testedNodes = testedNodes.concat(testResults);
+          try {
+            const testResults = await tester.testNodes(batches[i]);
+            testedNodes = testedNodes.concat(testResults);
+          } catch (testError) {
+            console.error(`测试批次 ${i+1} 失败: ${testError.message}`);
+          }
           
           // 保存中间测试结果
           const testCheckpoint = path.join(dataDir, 'test_checkpoint.json');
@@ -1606,6 +1723,8 @@ async function main() {
         
         console.log(`节点测试完成，共测试 ${testedNodes.length} 个节点`);
       }
+    } else {
+      console.log('跳过节点测试步骤');
     }
     
     // 对节点进行排序
@@ -1635,63 +1754,51 @@ async function main() {
       
       mergedNodes.sort(sorter);
       console.log('节点排序完成');
+    } else {
+      console.log('没有节点可供排序');
     }
     
-    // 保存各种格式的文件
-    if (CONFIG.outFormats && CONFIG.outFormats.length > 0) {
-      console.log(`生成 ${CONFIG.outFormats.length} 种格式的订阅文件...`);
-      
-      // 检查是否有增量更新标记
-      let hasUpdates = false;
-      let lastCheckpointData = null;
-      
-      try {
-        const checkpointFile = path.join(dataDir, 'checkpoint.json');
-        if (fs.existsSync(checkpointFile)) {
-          lastCheckpointData = JSON.parse(fs.readFileSync(checkpointFile, 'utf-8'));
-          hasUpdates = lastCheckpointData.hasUpdates === true;
-        }
-      } catch (e) {
-        console.error('读取检查点数据失败:', e.message);
-      }
-      
-      // 如果没有变化且节点数相同，可以跳过转换步骤(可选)
-      const skipConversion = !hasUpdates && 
-                          previousNodeCount === mergedNodes.length && 
-                          CONFIG.options.skipUnchangedConversion === true;
-      
-      if (skipConversion) {
-        console.log(`节点数量与上次相同(${mergedNodes.length})且无更新，跳过转换步骤`);
-      } else {
-        for (const format of CONFIG.outFormats) {
-          if (checkTimeLimit()) {
-            console.warn('执行时间接近限制，终止剩余格式的转换');
-            break;
-          }
-          
-          console.log(`生成 ${format} 格式的订阅文件...`);
-          
-          try {
-            const convertedContent = await converter.convert(mergedNodes, format);
-            if (convertedContent) {
-              const outFile = path.join(CONFIG.rootDir, CONFIG.options.outDir, `${CONFIG.name}.${format}`);
-              ensureDirectoryExists(path.dirname(outFile));
-              fs.writeFileSync(outFile, convertedContent);
-              console.log(`已生成 ${format} 格式的订阅文件: ${outFile}`);
-            } else {
-              console.error(`转换为 ${format} 格式失败: 返回内容为空`);
-            }
-          } catch (convertError) {
-            console.error(`转换为 ${format} 格式失败:`, convertError.message);
-          }
-        }
-      }
-    }
+    // 创建输出目录
+    const outDir = path.join(rootDir, CONFIG.options.outputDir || 'output');
+    ensureDirectoryExists(outDir);
+    console.log(`确保输出目录存在: ${outDir}`);
     
     // 保存节点详细信息到JSON文件(方便调试和数据分析)
-    const nodesJsonFile = path.join(CONFIG.rootDir, CONFIG.options.outDir, `${CONFIG.name}.nodes.json`);
-    fs.writeFileSync(nodesJsonFile, JSON.stringify(mergedNodes, null, 2));
-    console.log(`已保存节点详细信息到: ${nodesJsonFile}`);
+    try {
+      const nodesJsonFile = path.join(outDir, `nodes.json`);
+      fs.writeFileSync(nodesJsonFile, JSON.stringify(mergedNodes, null, 2));
+      console.log(`已保存节点详细信息到: ${nodesJsonFile}`);
+    } catch (error) {
+      console.error(`保存节点详细信息失败: ${error.message}`);
+    }
+    
+    // 生成各种配置文件
+    if (CONFIG.outputConfigs && CONFIG.outputConfigs.length > 0) {
+      console.log(`准备生成配置文件...`);
+      try {
+        await generateConfigs(mergedNodes, CONFIG.outputConfigs, {
+          rootDir: rootDir,
+          outputDir: CONFIG.options.outputDir || 'output',
+          dataDir: CONFIG.options.dataDir || 'data'
+        });
+        console.log(`配置文件生成完成`);
+      } catch (configError) {
+        console.error(`生成配置文件失败: ${configError.message}`);
+      }
+    }
+    
+    // 生成分组节点文件
+    try {
+      console.log(`准备生成分组节点文件...`);
+      await generateGroupedNodeFiles(mergedNodes, {
+        rootDir: rootDir,
+        outputDir: CONFIG.options.outputDir || 'output',
+        dataDir: CONFIG.options.dataDir || 'data'
+      });
+      console.log(`分组节点文件生成完成`);
+    } catch (groupError) {
+      console.error(`生成分组节点文件失败: ${groupError.message}`);
+    }
     
     // 保存本次同步状态
     const statusData = {
@@ -1701,7 +1808,13 @@ async function main() {
       previousNodesCount: previousNodeCount,
       message: `成功同步 ${mergedNodes.length} 个节点`
     };
-    fs.writeFileSync(statusFile, JSON.stringify(statusData, null, 2));
+    
+    try {
+      fs.writeFileSync(statusFile, JSON.stringify(statusData, null, 2));
+      console.log(`已保存同步状态到: ${statusFile}`);
+    } catch (e) {
+      console.error(`保存同步状态失败: ${e.message}`);
+    }
     
     // 发送通知
     const diff = previousNodeCount !== null ? mergedNodes.length - previousNodeCount : 0;
@@ -1729,13 +1842,17 @@ async function main() {
     console.error(error.stack);
     
     // 保存错误状态
-    const statusData = {
-      timestamp: Date.now(),
-      success: false,
-      previousNodesCount: previousNodeCount,
-      message: `同步失败: ${error.message}`
-    };
-    fs.writeFileSync(statusFile, JSON.stringify(statusData, null, 2));
+    try {
+      const statusData = {
+        timestamp: Date.now(),
+        success: false,
+        previousNodesCount: previousNodeCount,
+        message: `同步失败: ${error.message}`
+      };
+      fs.writeFileSync(statusFile, JSON.stringify(statusData, null, 2));
+    } catch (e) {
+      console.error(`保存错误状态失败: ${e.message}`);
+    }
     
     // 发送错误通知
     eventEmitter.emit(EventType.SYNC_ERROR, {

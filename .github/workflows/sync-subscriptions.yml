@@ -37,56 +37,55 @@ jobs:
         uses: actions/cache@v3
         with:
           path: node_modules
-          key: ${{ runner.os }}-node-modules-${{ hashFiles('**/pnpm-lock.yaml') }}
+          key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
           restore-keys: |
-            ${{ runner.os }}-node-modules-
-      
-      # 添加数据目录缓存，支持增量处理
-      - name: Cache subscription data
-        uses: actions/cache@v3
-        with:
-          path: data
-          key: ${{ runner.os }}-subscription-data-${{ github.run_id }}
-          restore-keys: |
-            ${{ runner.os }}-subscription-data-
+            ${{ runner.os }}-pnpm-
       
       # 确保数据目录存在
       - name: Create data directory
-        run: mkdir -p data
+        run: |
+          mkdir -p data
+          mkdir -p output
+          mkdir -p data/cache
+          mkdir -p data/ip_cache
+          mkdir -p output/groups
+          chmod -R 777 data
+          chmod -R 777 output
       
+      # 安装依赖
       - name: Install dependencies
         run: pnpm install
       
+      # 构建项目
       - name: Build project
         run: pnpm build
       
-      - name: Run sync script
-        run: node dist/sync-subscriptions.js
+      # 运行同步订阅脚本
+      - name: Sync subscriptions
         env:
-          BARK_URL: ${{ secrets.BARK_URL }}
-          BARK_TITLE: SubSyncForge
-          DATA_DIR: data
           ROOT_DIR: ${{ github.workspace }}
+          DATA_DIR: data
           CONFIG_PATH: ${{ github.workspace }}/config/custom.yaml
-          PROXY_FOR_SUBSCRIPTION: "true"
-          LOG_LEVEL: debug
-      
-      - name: Commit and push changes
+          PROXY_FOR_SUBSCRIPTION: 'true'
+          LOG_LEVEL: 'debug'
         run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
+          echo "工作目录: $(pwd)"
+          echo "根目录: $ROOT_DIR"
+          echo "数据目录: $DATA_DIR"
+          echo "配置文件路径: $CONFIG_PATH"
+          node dist/sync-subscriptions.js
+      
+      # 提交更改（即使获取节点失败也提交空文件）
+      - name: Commit changes
+        run: |
+          git config --local user.email "actions@github.com"
+          git config --local user.name "GitHub Actions"
           
           # 添加所有更改
-          git add -A
+          git add data/ output/
           
-          # 检查是否有变更
-          if git diff --staged --quiet; then
-            echo "No changes to commit"
-            exit 0
-          fi
+          # 即使没有变化也继续执行（不会报错）
+          git commit -m "更新订阅数据 $(date +'%Y-%m-%d %H:%M:%S')" || echo "没有变更需要提交"
           
-          # 提交更改
-          git commit -m "Update subscriptions: $(date +'%Y-%m-%d %H:%M:%S')"
-          
-          # 尝试推送更改
-          git push
+          # 推送更改
+          git push || echo "推送失败，可能是没有新变更"
