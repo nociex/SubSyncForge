@@ -14,6 +14,20 @@ import { BarkNotifier } from '../utils/events/BarkNotifier.js';
 import { eventEmitter, EventType } from '../utils/events/index.js';
 import { HttpsProxyAgent } from 'https-proxy-agent'; // 需要引入
 
+// 全局超时控制 - 设置为5小时，留1小时的余量
+const MAX_EXECUTION_TIME = 5 * 60 * 60 * 1000; // 5小时(毫秒)
+let globalStartTime = Date.now();
+
+// 检查是否接近时间限制
+function checkTimeLimit() {
+  const elapsed = Date.now() - globalStartTime;
+  if (elapsed > MAX_EXECUTION_TIME) {
+    console.warn(`⚠️ 执行时间已达到${(elapsed/3600000).toFixed(1)}小时，接近GitHub Actions限制，提前结束流程`);
+    return true;
+  }
+  return false;
+}
+
 // 设置 ES 模块中的 __dirname
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -131,10 +145,15 @@ const CONFIG = {
 };
 
 // 确保目录存在
-function ensureDirectoryExists(directory) {
-  if (!fs.existsSync(directory)) {
-    fs.mkdirSync(directory, { recursive: true });
-    console.log(`创建目录: ${directory}`);
+function ensureDirectoryExists(dirPath) {
+  if (!fs.existsSync(dirPath)) {
+    try {
+      fs.mkdirSync(dirPath, { recursive: true });
+      console.log(`创建目录: ${dirPath}`);
+    } catch (error) {
+      console.error(`创建目录失败: ${dirPath}, 错误: ${error.message}`);
+      throw error;
+    }
   }
 }
 
@@ -276,244 +295,349 @@ function loadConfig() {
   }
 }
 
-// 合并所有订阅节点
-async function fetchAndMergeAllNodes(converter) {
-  const allNodes = [];
-  let successCount = 0;
-  let failedCount = 0;
-  
-  console.log(`准备获取 ${CONFIG.subscriptions.length} 个订阅源的节点`);
-  
-  for (const subscription of CONFIG.subscriptions) {
-    if (!subscription.enabled) {
-      console.log(`跳过禁用的订阅: ${subscription.name}`);
-      continue;
-    }
-    
-    try {
-      console.log(`===========================================================`);
-      console.log(`开始处理订阅: ${subscription.name}, 类型: ${subscription.type || 'url'}, URL: ${subscription.url || '(BASE64/直接内容)'}`);
-      
-      let result;
-      
-      // 根据订阅类型处理
-      if (subscription.type === SubscriptionType.BASE64 && subscription.content) {
-        // 处理Base64内容
-        console.log(`解析Base64订阅内容: ${subscription.name}`);
-        result = await converter.parser.parse(subscription.content);
-        console.log(`解析Base64订阅: ${subscription.name}, 获取 ${result.length} 个节点`);
-      } else if ([SubscriptionType.VMESS, SubscriptionType.SS, SubscriptionType.SSR, SubscriptionType.TROJAN].includes(subscription.type) && subscription.content) {
-        // 处理单个节点
-        console.log(`解析单个${subscription.type}节点: ${subscription.name}`);
-        const node = await converter.parser.parseLine(subscription.content);
-        result = node ? [node] : [];
-        console.log(`解析${subscription.type}节点: ${subscription.name}, 成功: ${result.length > 0}`);
-      } else if (subscription.url) {
-        // 获取URL订阅
-        console.log(`从URL获取订阅: ${subscription.url}`);
-        try {
-          // 根据URL自定义请求头，部分订阅源需要特殊处理
-          const customHeaders = {};
-          const fetchOptions = { headers: customHeaders };
-          
-          // 为某些域名设置特殊请求头
-          const url = new URL(subscription.url);
-          const domain = url.hostname;
-          
-          // 为特定域名添加Referer和更多特定处理
-          if (domain.includes('alalbb.top')) {
-            console.log(`检测到alalbb.top域名，添加特定请求头`);
-            customHeaders['Referer'] = 'https://alalbb.top/';
-            customHeaders['Origin'] = 'https://alalbb.top';
-            customHeaders['User-Agent'] = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36';
-          } else if (domain.includes('flyi.me')) {
-            console.log(`检测到flyi.me域名，添加特定请求头`);
-            customHeaders['Referer'] = 'https://freesu7.flyi.me/';
-            customHeaders['Origin'] = 'https://freesu7.flyi.me';
-            customHeaders['User-Agent'] = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.2 Safari/605.1.15';
-          }
-          
-          console.log(`为 ${subscription.name} 设置的自定义请求头:`, customHeaders);
-          
-          // 直接使用fetcher获取数据，而不是通过convert方法
-          console.log(`开始获取订阅内容...`);
-
-          // *** 添加 requireChinaIP 选项 ***
-          fetchOptions.requireChinaIP = subscription.requireChinaIP === true;
-          if (fetchOptions.requireChinaIP) {
-            console.log(`[Fetcher] 订阅 ${subscription.name} 已标记需要国内代理`);
-          }
-
-          const fetchResult = await converter.fetcher.fetch(subscription.url, fetchOptions);
-          const rawData = fetchResult.data;
-          
-          console.log(`成功获取订阅: ${subscription.name}, 原始数据大小: ${rawData.length} 字节`);
-          
-          // 保存原始数据
-          const dataDir = path.join(CONFIG.rootDir, CONFIG.options.dataDir);
-          ensureDirectoryExists(dataDir);
-          const rawFile = path.join(dataDir, `${subscription.name}.txt`);
-          
-          // 确保目录存在
-          try {
-            fs.writeFileSync(rawFile, rawData);
-            console.log(`原始订阅数据已保存到: ${rawFile}`);
-          } catch (writeError) {
-            console.error(`保存原始订阅数据失败: ${writeError.message}`);
-          }
-          
-          // 解析节点前尝试识别数据格式
-          // 尝试识别常见的数据格式
-          let detectedFormat = 'unknown';
-          if (/^[A-Za-z0-9+/=]+$/.test(rawData.trim())) {
-            detectedFormat = 'base64';
-            console.log(`检测到Base64编码格式`);
-          } else if (rawData.includes('proxies:')) {
-            detectedFormat = 'clash';
-            console.log(`检测到Clash格式`);
-          } else if (rawData.includes('vmess://') || rawData.includes('ss://')) {
-            detectedFormat = 'uri';
-            console.log(`检测到URI格式`);
-          } else if (rawData.startsWith('{') && rawData.endsWith('}')) {
-            detectedFormat = 'json';
-            console.log(`检测到JSON格式`);
-          }
-          console.log(`检测到的订阅格式: ${detectedFormat}`);
-          
-          // 解析节点
-          console.log(`解析订阅数据...`);
-          try {
-            // 增加更详细的解析过程日志
-            console.log(`开始使用订阅解析器解析数据`);
-            result = await converter.parser.parse(rawData);
-            console.log(`从 ${subscription.name} 解析出 ${result.length} 个节点`);
-            
-            // 输出解析结果的第一个节点以供调试
-            if (result.length > 0) {
-              console.log(`第一个节点示例:`, JSON.stringify(result[0], null, 2).substring(0, 200) + '...');
-            }
-          } catch (parseError) {
-            console.error(`解析订阅数据时出错:`, parseError.message);
-            console.error(`错误堆栈:`, parseError.stack);
-            
-            // 尝试使用备用解析方法
-            console.log(`尝试使用备用解析方法...`);
-            
-            // 尝试作为Clash格式强制解析
-            if (detectedFormat === 'clash' || rawData.includes('proxies:')) {
-              console.log(`尝试强制作为Clash格式解析`);
-              try {
-                // 动态导入yaml解析库
-                const yaml = await import('js-yaml');
-                const clashConfig = yaml.load(rawData);
-                
-                if (clashConfig && clashConfig.proxies && Array.isArray(clashConfig.proxies)) {
-                  console.log(`成功解析Clash配置，找到 ${clashConfig.proxies.length} 个代理节点`);
-                  
-                  // 手动转换节点
-                  result = clashConfig.proxies.map(proxy => {
-                    try {
-                      return {
-                        type: proxy.type,
-                        name: proxy.name || '',
-                        server: proxy.server || '',
-                        port: parseInt(proxy.port) || 0,
-                        settings: {
-                          // VMess特殊处理
-                          ...(proxy.type === 'vmess' && {
-                            id: proxy.uuid || '',
-                            alterId: proxy.alterId || 0,
-                            security: proxy.cipher || 'auto',
-                            network: proxy.network || 'tcp',
-                            tls: proxy.tls === true,
-                            wsPath: proxy['ws-path'] || (proxy['ws-opts'] && proxy['ws-opts'].path) || '',
-                            wsHeaders: proxy['ws-headers'] || (proxy['ws-opts'] && proxy['ws-opts'].headers) || {}
-                          }),
-                          // SS特殊处理
-                          ...(proxy.type === 'ss' && {
-                            method: proxy.cipher || '',
-                            password: proxy.password || ''
-                          }),
-                          // Trojan特殊处理
-                          ...(proxy.type === 'trojan' && {
-                            password: proxy.password || '',
-                            sni: proxy.sni || '',
-                            allowInsecure: proxy['skip-cert-verify'] === true
-                          })
-                        },
-                        extra: {
-                          raw: proxy
-                        }
-                      };
-                    } catch (e) {
-                      console.error(`转换Clash节点失败:`, e.message);
-                      return null;
-                    }
-                  }).filter(Boolean);
-                  
-                  console.log(`成功转换 ${result.length} 个Clash节点`);
-                } else {
-                  console.log(`Clash配置解析失败或未找到有效的proxies字段`);
-                }
-              } catch (e) {
-                console.error(`强制解析Clash失败:`, e.message);
-              }
-            }
-            
-            // 如果仍然没有结果，记录错误
-            if (!result || result.length === 0) {
-              console.error(`所有解析方法都失败，无法解析订阅数据`);
-            }
-          }
-          
-          if (!result || result.length === 0) {
-            console.warn(`解析结果为空，尝试查看原始数据的前200个字符:`);
-            console.warn(rawData.substring(0, 200));
-            
-            // 保存到失败记录
-            const errorFile = path.join(dataDir, `${subscription.name}_error.txt`);
-            try {
-              fs.writeFileSync(errorFile, `时间: ${new Date().toISOString()}\n格式: ${detectedFormat}\n内容:\n${rawData}`);
-              console.log(`已保存解析失败的内容到: ${errorFile}`);
-            } catch (e) {
-              console.error(`保存错误内容失败: ${e.message}`);
-            }
-          }
-        } catch (fetchError) {
-          console.error(`获取订阅 ${subscription.url} 时出错:`, fetchError);
-          console.error(`错误堆栈:`, fetchError.stack);
-          failedCount++;
-          continue; // 继续处理下一个订阅
-        }
-      }
-      
-      if (result && result.length > 0) {
-        console.log(`从 ${subscription.name} 获取到 ${result.length} 个节点`);
-        
-        // 添加订阅源信息
-        result.forEach(node => {
-          if (!node.extra) node.extra = {};
-          node.extra.source = subscription.name;
-        });
-        
-        allNodes.push(...result);
-        successCount++;
-      } else {
-        console.warn(`从 ${subscription.name} 未获取到任何节点`);
-        failedCount++;
-      }
-    } catch (error) {
-      console.error(`处理订阅 ${subscription.name} 时出错:`, error.message);
-      console.error(`错误堆栈:`, error.stack);
-      failedCount++;
-    }
-    
-    console.log(`===========================================================`);
+// 处理单个订阅源的函数，用于并行处理
+async function fetchSubscription(subscription, converter) {
+  if (!subscription.enabled) {
+    console.log(`跳过禁用的订阅: ${subscription.name}`);
+    return [];
   }
   
-  console.log(`订阅获取统计: 成功 ${successCount} 个, 失败 ${failedCount} 个, 总共获取 ${allNodes.length} 个节点`);
+  try {
+    console.log(`===========================================================`);
+    console.log(`开始处理订阅: ${subscription.name}, 类型: ${subscription.type || 'url'}, URL: ${subscription.url || '(BASE64/直接内容)'}`);
+    
+    // 增量处理逻辑：检查缓存
+    const dataDir = path.join(CONFIG.rootDir, CONFIG.options.dataDir);
+    ensureDirectoryExists(dataDir);
+    
+    // 缓存文件路径
+    const subscriptionCachePath = path.join(dataDir, `subscription_${subscription.name.replace(/[^a-zA-Z0-9_-]/g, '_')}.json`);
+    const subscriptionRawPath = path.join(dataDir, `${subscription.name.replace(/[^a-zA-Z0-9_-]/g, '_')}.txt`);
+    
+    // 默认需要更新
+    let needUpdate = true;
+    let cachedNodes = [];
+    let lastHash = '';
+    let lastTimestamp = 0;
+    
+    // 检查缓存
+    if (fs.existsSync(subscriptionCachePath)) {
+      try {
+        const cacheData = JSON.parse(fs.readFileSync(subscriptionCachePath, 'utf-8'));
+        if (cacheData && cacheData.nodes && Array.isArray(cacheData.nodes)) {
+          cachedNodes = cacheData.nodes;
+          lastHash = cacheData.hash || '';
+          lastTimestamp = cacheData.timestamp || 0;
+          
+          // 检查更新间隔时间是否超过配置的间隔
+          // 使用advanced.syncInterval配置项，默认为6小时(21600秒)
+          const updateInterval = (CONFIG.advanced.syncInterval || 360) * 60 * 1000; // 转换为毫秒
+          const timeNow = Date.now();
+          
+          if (timeNow - lastTimestamp < updateInterval) {
+            console.log(`订阅 ${subscription.name} 上次更新时间为 ${new Date(lastTimestamp).toLocaleString()}`);
+            console.log(`未超过更新间隔(${updateInterval/60000}分钟)，使用缓存数据，包含 ${cachedNodes.length} 个节点`);
+            return cachedNodes;
+          } else {
+            console.log(`订阅 ${subscription.name} 缓存已过期，需要更新。上次更新: ${new Date(lastTimestamp).toLocaleString()}`);
+          }
+        }
+      } catch (e) {
+        console.error(`读取订阅缓存失败: ${e.message}`);
+      }
+    } else {
+      console.log(`未找到订阅 ${subscription.name} 的缓存`);
+    }
+    
+    let result = [];
+    
+    // 根据订阅类型处理
+    if (subscription.type === SubscriptionType.BASE64 && subscription.content) {
+      // 处理Base64内容
+      console.log(`解析Base64订阅内容: ${subscription.name}`);
+      // 计算内容哈希
+      const contentHash = require('crypto').createHash('md5').update(subscription.content).digest('hex');
+      
+      // 如果哈希值相同，则内容未变化
+      if (contentHash === lastHash) {
+        console.log(`Base64内容未变化，使用缓存数据，包含 ${cachedNodes.length} 个节点`);
+        return cachedNodes;
+      }
+      
+      // 内容变化，重新解析
+      result = await converter.parser.parse(subscription.content);
+      console.log(`解析Base64订阅: ${subscription.name}, 获取 ${result.length} 个节点`);
+      
+      // 保存缓存
+      saveCacheData(subscriptionCachePath, result, contentHash);
+      
+    } else if ([SubscriptionType.VMESS, SubscriptionType.SS, SubscriptionType.SSR, SubscriptionType.TROJAN].includes(subscription.type) && subscription.content) {
+      // 处理单个节点
+      console.log(`解析单个${subscription.type}节点: ${subscription.name}`);
+      
+      // 计算内容哈希
+      const contentHash = require('crypto').createHash('md5').update(subscription.content).digest('hex');
+      
+      // 如果哈希值相同，则内容未变化
+      if (contentHash === lastHash) {
+        console.log(`节点内容未变化，使用缓存数据`);
+        return cachedNodes;
+      }
+      
+      // 内容变化，重新解析
+      const node = await converter.parser.parseLine(subscription.content);
+      result = node ? [node] : [];
+      console.log(`解析${subscription.type}节点: ${subscription.name}, 成功: ${result.length > 0}`);
+      
+      // 保存缓存
+      saveCacheData(subscriptionCachePath, result, contentHash);
+      
+    } else if (subscription.url) {
+      // 获取URL订阅
+      console.log(`从URL获取订阅: ${subscription.url}`);
+      try {
+        // 根据URL自定义请求头，部分订阅源需要特殊处理
+        const customHeaders = {};
+        const fetchOptions = { 
+          headers: customHeaders,
+          timeout: 60000, // 60秒超时
+          retry: 3 // 最多重试3次
+        };
+        
+        // 为某些域名设置特殊请求头
+        const url = new URL(subscription.url);
+        const domain = url.hostname;
+        
+        // 为特定域名添加Referer和更多特定处理
+        if (domain.includes('alalbb.top')) {
+          console.log(`检测到alalbb.top域名，添加特定请求头`);
+          customHeaders['Referer'] = 'https://alalbb.top/';
+          customHeaders['Origin'] = 'https://alalbb.top';
+          customHeaders['User-Agent'] = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36';
+        } else if (domain.includes('flyi.me')) {
+          console.log(`检测到flyi.me域名，添加特定请求头`);
+          customHeaders['Referer'] = 'https://freesu7.flyi.me/';
+          customHeaders['Origin'] = 'https://freesu7.flyi.me';
+          customHeaders['User-Agent'] = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.2 Safari/605.1.15';
+        }
+        
+        console.log(`为 ${subscription.name} 设置的自定义请求头:`, customHeaders);
+        
+        // *** 添加 requireChinaIP 选项 ***
+        fetchOptions.requireChinaIP = subscription.requireChinaIP === true;
+        if (fetchOptions.requireChinaIP) {
+          console.log(`[Fetcher] 订阅 ${subscription.name} 已标记需要国内代理`);
+        }
+        
+        // 如果存在上次的原始数据文件，添加条件请求头
+        if (fs.existsSync(subscriptionRawPath)) {
+          try {
+            const stats = fs.statSync(subscriptionRawPath);
+            const lastModified = new Date(stats.mtime).toUTCString();
+            customHeaders['If-Modified-Since'] = lastModified;
+            console.log(`添加条件请求头 If-Modified-Since: ${lastModified}`);
+          } catch (e) {
+            console.error(`获取文件状态失败: ${e.message}`);
+          }
+        }
+
+        const fetchResult = await converter.fetcher.fetch(subscription.url, fetchOptions);
+        
+        // 检查是否304 Not Modified (服务器返回的状态码)
+        if (fetchResult.status === 304) {
+          console.log(`订阅源返回304 Not Modified，内容未变化，使用缓存`);
+          return cachedNodes;
+        }
+        
+        const rawData = fetchResult.data;
+        
+        // 内容为空则使用缓存
+        if (!rawData || rawData.trim() === '') {
+          console.warn(`获取到的订阅内容为空，使用缓存数据`);
+          if (cachedNodes.length > 0) {
+            return cachedNodes;
+          }
+          return [];
+        }
+        
+        // 计算内容哈希
+        const contentHash = require('crypto').createHash('md5').update(rawData).digest('hex');
+        
+        // 检查内容是否变化
+        if (contentHash === lastHash && lastHash !== '') {
+          console.log(`订阅内容哈希未变化，使用缓存数据，包含 ${cachedNodes.length} 个节点`);
+          return cachedNodes;
+        }
+        
+        console.log(`成功获取订阅: ${subscription.name}, 原始数据大小: ${rawData.length} 字节, 哈希: ${contentHash.substring(0, 8)}...`);
+        
+        // 保存原始数据
+        try {
+          fs.writeFileSync(subscriptionRawPath, rawData);
+          console.log(`原始订阅数据已保存到: ${subscriptionRawPath}`);
+        } catch (writeError) {
+          console.error(`保存原始订阅数据失败: ${writeError.message}`);
+        }
+        
+        // 解析节点
+        console.log(`解析订阅数据...`);
+        try {
+          result = await converter.parser.parse(rawData);
+          console.log(`从 ${subscription.name} 解析出 ${result.length} 个节点`);
+          
+          // 检查是否解析结果为空
+          if (result.length === 0 && cachedNodes.length > 0) {
+            console.warn(`解析结果为空，但有缓存数据，使用缓存数据 ${cachedNodes.length} 个节点`);
+            return cachedNodes;
+          }
+          
+          // 保存缓存
+          saveCacheData(subscriptionCachePath, result, contentHash);
+          
+        } catch (parseError) {
+          console.error(`解析订阅数据时出错:`, parseError.message);
+          
+          // 如果解析失败但有缓存，使用缓存数据
+          if (cachedNodes.length > 0) {
+            console.warn(`解析失败但存在缓存，使用缓存数据 (${cachedNodes.length} 个节点)`);
+            return cachedNodes;
+          }
+        }
+      } catch (fetchError) {
+        console.error(`获取订阅失败: ${fetchError.message}`);
+        
+        // 如果获取失败但有缓存，使用缓存数据
+        if (cachedNodes.length > 0) {
+          console.warn(`获取失败但存在缓存，使用缓存数据 (${cachedNodes.length} 个节点)`);
+          return cachedNodes;
+        }
+        
+        // 记录错误但继续处理其他订阅
+        return [];
+      }
+    }
+    
+    // 添加订阅源信息到节点
+    return result.map(node => ({
+      ...node,
+      source: subscription.name
+    }));
+  } catch (error) {
+    console.error(`处理订阅 ${subscription.name} 时出错:`, error.message);
+    
+    // 如果有缓存，使用缓存数据
+    const dataDir = path.join(CONFIG.rootDir, CONFIG.options.dataDir);
+    const subscriptionCachePath = path.join(dataDir, `subscription_${subscription.name.replace(/[^a-zA-Z0-9_-]/g, '_')}.json`);
+    
+    if (fs.existsSync(subscriptionCachePath)) {
+      try {
+        const cacheData = JSON.parse(fs.readFileSync(subscriptionCachePath, 'utf-8'));
+        if (cacheData && cacheData.nodes && Array.isArray(cacheData.nodes)) {
+          console.warn(`处理订阅出错但存在缓存，使用缓存数据 (${cacheData.nodes.length} 个节点)`);
+          return cacheData.nodes;
+        }
+      } catch (e) {
+        console.error(`读取缓存失败: ${e.message}`);
+      }
+    }
+    
+    return []; // 返回空数组，不影响其他订阅的处理
+  }
+}
+
+// 修改后的fetchAndMergeAllNodes函数，支持并行处理
+async function fetchAndMergeAllNodes(converter) {
+  const enabledSubscriptions = CONFIG.subscriptions.filter(sub => sub.enabled);
+  console.log(`准备获取 ${enabledSubscriptions.length} 个启用的订阅源的节点`);
   
-  // 如果启用去重，进行节点去重
+  // 使用并行处理提高效率
+  const fetchPromises = enabledSubscriptions.map(sub => fetchSubscription(sub, converter));
+  
+  // 设置批次大小，避免并发太多
+  const BATCH_SIZE = 5;
+  const allNodes = [];
+  
+  // 增量更新标识和计数
+  let hasUpdates = false;
+  let cachedNodeCount = 0;
+  let updatedNodeCount = 0;
+  
+  // 分批处理订阅源
+  for (let i = 0; i < fetchPromises.length; i += BATCH_SIZE) {
+    if (checkTimeLimit()) {
+      console.warn('执行时间接近限制，终止剩余订阅获取');
+      break;
+    }
+    
+    const batchPromises = fetchPromises.slice(i, i + BATCH_SIZE);
+    console.log(`处理订阅批次 ${Math.floor(i/BATCH_SIZE) + 1}/${Math.ceil(fetchPromises.length/BATCH_SIZE)}`);
+    
+    const batchResults = await Promise.all(batchPromises);
+    
+    // 处理每个订阅源的结果
+    for (let j = 0; j < batchResults.length; j++) {
+      const subscriptionIndex = i + j;
+      if (subscriptionIndex < enabledSubscriptions.length) {
+        const subscription = enabledSubscriptions[subscriptionIndex];
+        const nodes = batchResults[j];
+        
+        if (nodes && nodes.length > 0) {
+          console.log(`订阅 ${subscription.name} 返回 ${nodes.length} 个节点`);
+          
+          // 检查这些节点是否来自缓存
+          const dataDir = path.join(CONFIG.rootDir, CONFIG.options.dataDir);
+          const subscriptionCachePath = path.join(dataDir, `subscription_${subscription.name.replace(/[^a-zA-Z0-9_-]/g, '_')}.json`);
+          let isFromCache = false;
+          
+          try {
+            if (fs.existsSync(subscriptionCachePath)) {
+              const cacheData = JSON.parse(fs.readFileSync(subscriptionCachePath, 'utf-8'));
+              const cacheTime = cacheData.timestamp || 0;
+              // 如果缓存时间在5分钟内，认为这是刚刚从缓存获取的数据
+              if (Date.now() - cacheTime < 5 * 60 * 1000) {
+                isFromCache = true;
+              }
+            }
+          } catch (e) {
+            console.error(`检查缓存状态时出错: ${e.message}`);
+          }
+          
+          // 统计使用缓存和更新的节点数量
+          if (isFromCache) {
+            cachedNodeCount += nodes.length;
+            console.log(`订阅 ${subscription.name} 使用缓存数据`);
+          } else {
+            updatedNodeCount += nodes.length;
+            hasUpdates = true;
+            console.log(`订阅 ${subscription.name} 获取了更新的数据`);
+          }
+          
+          // 将节点添加到总列表
+          allNodes.push(...nodes);
+        } else {
+          console.log(`订阅 ${subscription.name} 未返回任何节点`);
+        }
+      }
+    }
+    
+    // 保存中间结果
+    const checkpointFile = path.join(CONFIG.rootDir, CONFIG.options.dataDir, 'checkpoint.json');
+    try {
+      fs.writeFileSync(checkpointFile, JSON.stringify({
+        timestamp: Date.now(),
+        processed: i + batchPromises.length,
+        total: fetchPromises.length,
+        nodeCount: allNodes.length,
+        cachedNodeCount,
+        updatedNodeCount,
+        hasUpdates
+      }));
+    } catch (e) {
+      console.error('保存检查点数据失败:', e.message);
+    }
+  }
+  
+  // 如果启用去重，对所有节点进行去重
   let finalNodes = allNodes;
   if (CONFIG.options.deduplication && allNodes.length > 0) {
     console.log(`正在进行节点去重...`);
@@ -541,59 +665,33 @@ async function fetchAndMergeAllNodes(converter) {
     console.log(`完成节点分析和重命名，节点数量: ${finalNodes.length}`);
   }
   
-  // 如果没有获取到任何节点，尝试使用备用节点
-  if (finalNodes.length === 0) {
-    console.warn(`未获取到任何节点，尝试使用备用示例节点...`);
-    try {
-      // 创建一些示例节点，以便在测试环境中工作
-      const backupNodes = [
-        {
-          type: 'ss',
-          name: '备用节点1 (自动生成)',
-          server: '127.0.0.1',
-          port: 8388,
-          settings: {
-            method: 'aes-256-gcm',
-            password: 'password123'
-          },
-          extra: {
-            source: '备用节点',
-            notes: '这是由系统自动生成的备用节点，用于在无法获取任何订阅时保持功能正常运行'
-          }
-        },
-        {
-          type: 'vmess',
-          name: '备用节点2 (自动生成)',
-          server: '127.0.0.1',
-          port: 443,
-          settings: {
-            id: '00000000-0000-0000-0000-000000000000',
-            security: 'auto',
-            alterId: 0
-          },
-          extra: {
-            source: '备用节点',
-            notes: '这是由系统自动生成的备用节点，用于在无法获取任何订阅时保持功能正常运行'
-          }
+  console.log(`所有订阅处理完成，共获取 ${allNodes.length} 个节点 (缓存: ${cachedNodeCount}, 更新: ${updatedNodeCount})`);
+  console.log(`最终节点数量(去重后): ${finalNodes.length}`);
+  console.log(`是否有订阅源更新: ${hasUpdates ? '是' : '否'}`);
+  
+  // 如果没有任何更新，并且最终节点数量为0，尝试加载上次的最终节点数据
+  if (!hasUpdates && finalNodes.length === 0) {
+    const dataDir = path.join(CONFIG.rootDir, CONFIG.options.dataDir);
+    const finalNodesFile = path.join(dataDir, 'final_nodes.json');
+    
+    if (fs.existsSync(finalNodesFile)) {
+      try {
+        console.log(`未获取到任何节点，且无订阅更新，尝试加载上次的最终节点数据...`);
+        const lastFinalNodes = JSON.parse(fs.readFileSync(finalNodesFile, 'utf-8'));
+        if (Array.isArray(lastFinalNodes) && lastFinalNodes.length > 0) {
+          finalNodes = lastFinalNodes;
+          console.log(`成功加载上次的最终节点数据，共 ${finalNodes.length} 个节点`);
         }
-      ];
-      
-      finalNodes = backupNodes;
-      console.log(`已添加 ${backupNodes.length} 个备用节点`);
-    } catch (e) {
-      console.error(`创建备用节点失败:`, e.message);
+      } catch (e) {
+        console.error(`加载上次最终节点数据失败: ${e.message}`);
+      }
     }
   }
   
   return finalNodes;
 }
 
-/**
- * 测试节点有效性和延迟
- * @param {Array} nodes 节点列表
- * @param {Object} testConfig 测试配置
- * @returns {Promise<Object>} 包含测试结果和tester实例的对象
- */
+// 修改后的testNodes函数，支持批次处理
 async function testNodes(nodes, testConfig) {
   // 如果测试功能禁用，返回空结果
   if (!testConfig.enabled) {
@@ -617,10 +715,49 @@ async function testNodes(nodes, testConfig) {
       }
     });
     
-    // 开始测试
-    const testResults = await tester.testNodes(nodes);
+    // 批次处理节点测试
+    const BATCH_SIZE = 100; // 每批处理100个节点
+    const batches = [];
+    for (let i = 0; i < nodes.length; i += BATCH_SIZE) {
+      batches.push(nodes.slice(i, i + BATCH_SIZE));
+    }
+    
+    console.log(`将 ${nodes.length} 个节点分为 ${batches.length} 批进行测试`);
+    
+    let allResults = [];
+    for (let i = 0; i < batches.length; i++) {
+      if (checkTimeLimit()) {
+        console.warn('执行时间接近限制，终止剩余节点测试');
+        break;
+      }
+      
+      const batch = batches[i];
+      console.log(`测试批次 ${i+1}/${batches.length}, 包含 ${batch.length} 个节点`);
+      
+      const batchStartTime = Date.now();
+      const batchResults = await tester.testNodes(batch);
+      const batchTime = Date.now() - batchStartTime;
+      
+      console.log(`批次 ${i+1} 测试完成，耗时: ${batchTime}ms, 成功: ${batchResults.filter(r => r.status === 'up').length}/${batch.length}`);
+      allResults = allResults.concat(batchResults);
+      
+      // 保存中间测试结果
+      const testCheckpointFile = path.join(CONFIG.rootDir, CONFIG.options.dataDir, 'test_checkpoint.json');
+      try {
+        fs.writeFileSync(testCheckpointFile, JSON.stringify({
+          timestamp: Date.now(),
+          processed: i + 1,
+          total: batches.length,
+          resultCount: allResults.length,
+          validCount: allResults.filter(r => r.status === 'up').length
+        }));
+      } catch (e) {
+        console.error('保存测试检查点数据失败:', e.message);
+      }
+    }
+    
     // 返回测试结果和测试器实例
-    return { results: testResults, tester };
+    return { results: allResults, tester };
   } catch (error) {
     console.error('节点测试过程出错:', error.message);
     console.error('错误堆栈:', error.stack);
@@ -1087,11 +1224,62 @@ async function generateGroupedNodeFiles(nodes, options) {
           // 将节点原始链接拼接为字符串
           const rawNodes = group.nodes
                   .map(node => {
-              // 优先使用原始URI
-              // 增加类型检查，确保 node.extra.raw 是字符串
+              // 优先使用原始URI，但更新节点名称
               if (node.extra?.raw && typeof node.extra.raw === 'string' && node.extra.raw.trim().length > 0) {
-                console.log(`节点 ${node.name} 使用原始URI: ${node.extra.raw.substring(0, 30)}...`);
-                return node.extra.raw;
+                // 构造节点名称，遵循分组格式
+                // 获取国家/地区前缀
+                let prefix = '';
+                if (group.name === '香港') prefix = '🇭🇰 香港 ';
+                else if (group.name === '台湾') prefix = '🇹🇼 台湾 ';
+                else if (group.name === '新加坡') prefix = '🇸🇬 新加坡 ';
+                else if (group.name === '美国') prefix = '🇺🇸 美国 ';
+                else if (group.name === '日本') prefix = '🇯🇵 日本 ';
+                else if (group.name === '其他') prefix = '🌍 其他 ';
+                else prefix = '';
+                
+                // 构造完整节点名称
+                const nodeName = node.name.includes(group.name) ? node.name : `${prefix}${node.name}`;
+                
+                // 获取原始URI
+                let uri = node.extra.raw;
+                
+                // 针对不同类型的节点URI进行处理
+                if (uri.startsWith('vmess://')) {
+                  try {
+                    // 解析VMess URI
+                    const base64Str = uri.substring(8);
+                    const decoded = JSON.parse(Buffer.from(base64Str, 'base64').toString());
+                    // 更新节点名称
+                    decoded.ps = nodeName;
+                    // 重新编码URI
+                    uri = 'vmess://' + Buffer.from(JSON.stringify(decoded)).toString('base64');
+                  } catch (e) {
+                    console.warn(`更新VMess节点名称失败: ${e.message}`);
+                  }
+                } else if (uri.startsWith('ss://')) {
+                  // 处理SS URI（更新#后的名称部分）
+                  const hashIndex = uri.indexOf('#');
+                  if (hashIndex > 0) {
+                    uri = uri.substring(0, hashIndex) + '#' + encodeURIComponent(nodeName);
+                  }
+                } else if (uri.startsWith('trojan://')) {
+                  // 处理Trojan URI（更新#后的名称部分）
+                  const hashIndex = uri.indexOf('#');
+                  if (hashIndex > 0) {
+                    uri = uri.substring(0, hashIndex) + '#' + encodeURIComponent(nodeName);
+                  }
+                } else if (uri.startsWith('vless://')) {
+                  // 处理VLESS URI（更新#后的名称部分）
+                  const hashIndex = uri.indexOf('#');
+                  if (hashIndex > 0) {
+                    uri = uri.substring(0, hashIndex) + '#' + encodeURIComponent(nodeName);
+                  }
+                } else if (uri.startsWith('ssr://')) {
+                  // SSR URI处理较复杂，暂时保持原样
+                  console.log(`注意: 未修改SSR节点的名称: ${nodeName}`);
+                }
+                
+                return uri;
               }
               
               // 构造节点名称，遵循分组格式
@@ -1205,35 +1393,62 @@ async function generateGroupedNodeFiles(nodes, options) {
           // 将节点原始链接拼接为字符串 (与地区分组逻辑相同)
           const rawNodes = group.nodes
             .map(node => {
+              // 优先使用原始URI，但更新节点名称
               if (node.extra?.raw && typeof node.extra.raw === 'string' && node.extra.raw.trim().length > 0) {
-                return node.extra.raw;
+                // 构造节点名称
+                const nodeName = node.name || 'Unnamed Node';
+                
+                // 获取原始URI
+                let uri = node.extra.raw;
+                
+                // 针对不同类型的节点URI进行处理
+                if (uri.startsWith('vmess://')) {
+                  try {
+                    // 解析VMess URI
+                    const base64Str = uri.substring(8);
+                    const decoded = JSON.parse(Buffer.from(base64Str, 'base64').toString());
+                    // 更新节点名称
+                    decoded.ps = nodeName;
+                    // 重新编码URI
+                    uri = 'vmess://' + Buffer.from(JSON.stringify(decoded)).toString('base64');
+                  } catch (e) {
+                    console.warn(`更新VMess节点名称失败: ${e.message}`);
+                  }
+                } else if (uri.startsWith('ss://')) {
+                  // 处理SS URI（更新#后的名称部分）
+                  const hashIndex = uri.indexOf('#');
+                  if (hashIndex > 0) {
+                    uri = uri.substring(0, hashIndex) + '#' + encodeURIComponent(nodeName);
+                  }
+                } else if (uri.startsWith('trojan://')) {
+                  // 处理Trojan URI（更新#后的名称部分）
+                  const hashIndex = uri.indexOf('#');
+                  if (hashIndex > 0) {
+                    uri = uri.substring(0, hashIndex) + '#' + encodeURIComponent(nodeName);
+                  }
+                } else if (uri.startsWith('vless://')) {
+                  // 处理VLESS URI（更新#后的名称部分）
+                  const hashIndex = uri.indexOf('#');
+                  if (hashIndex > 0) {
+                    uri = uri.substring(0, hashIndex) + '#' + encodeURIComponent(nodeName);
+                  }
+                } else if (uri.startsWith('ssr://')) {
+                  // SSR URI处理较复杂，暂时保持原样
+                  console.log(`注意: 未修改SSR节点的名称: ${nodeName}`);
+                }
+                
+                return uri;
               }
+              
               // 构造节点名称
               const nodeName = node.name || 'Unnamed Node';
               // 尝试构造URI (省略具体构造逻辑，与地区分组相同)
-              if (node.type === 'vmess' && node.settings?.id) {
-                const vmessInfo = { v: "2", ps: nodeName, add: node.server, port: parseInt(node.port) || 443, id: node.settings.id, aid: parseInt(node.settings.alterId) || 0, net: node.settings.network || "tcp", type: "none", host: (node.settings.wsHeaders && node.settings.wsHeaders.Host) || "", path: node.settings.wsPath || "/", tls: node.settings.tls ? "tls" : "none" };
-                return `vmess://${Buffer.from(JSON.stringify(vmessInfo)).toString('base64')}`;
-              } else if (node.type === 'ss' && node.settings?.method && node.settings?.password) {
-                const userInfo = `${node.settings.method}:${node.settings.password}`;
-                const base64UserInfo = Buffer.from(userInfo).toString('base64');
-                return `ss://${base64UserInfo}@${node.server}:${parseInt(node.port) || 443}#${encodeURIComponent(nodeName)}`;
-              } else if (node.type === 'trojan' && node.settings?.password) {
-                return `trojan://${node.settings.password}@${node.server}:${parseInt(node.port) || 443}?sni=${node.settings.sni || ''}&allowInsecure=${node.settings.allowInsecure ? '1' : '0'}#${encodeURIComponent(nodeName)}`;
-              } else if (node.type === 'ssr' && node.settings) {
-                try {
-                  const ssrParams = { server: node.server, port: parseInt(node.port) || 443, protocol: node.settings.protocol || 'origin', method: node.settings.method || 'aes-256-cfb', obfs: node.settings.obfs || 'plain', password: node.settings.password || '' };
-                  const base64Params = Buffer.from(`${ssrParams.server}:${ssrParams.port}:${ssrParams.protocol}:${ssrParams.method}:${ssrParams.obfs}:${Buffer.from(ssrParams.password).toString('base64')}`).toString('base64');
-                  const base64Remarks = Buffer.from(nodeName).toString('base64');
-                  return `ssr://${base64Params}/?remarks=${base64Remarks}`;
-                } catch (error) { return ''; }
-              }
-              console.warn(`无法为应用分组节点 ${node.name} 构造URI，类型: ${node.type}`);
-              return '';
+              // ... existing code ...
             })
-            .filter(raw => raw && raw.trim().length > 0)
-            .join('\n');
-
+            .filter(raw => raw.trim().length > 0) // 过滤掉空链接
+            .join('\n'); // 用换行符连接
+          
+          // 输出节点数量统计
           const uriCount = rawNodes.split('\n').filter(Boolean).length; // 确保计算准确
           console.log(`${filename} 生成了 ${uriCount} 个节点URI，原始节点数 ${group.nodes.length}`);
 
@@ -1271,13 +1486,22 @@ async function generateGroupedNodeFiles(nodes, options) {
   }
 }
 
-// 主函数
+// 修改main函数，添加全局超时控制
 async function main() {
+  globalStartTime = Date.now();
   console.log('==================================================================');
   console.log(`开始同步订阅...时间: ${new Date().toISOString()}`);
+  console.log(`已设置全局执行时间限制: ${MAX_EXECUTION_TIME/3600000}小时`);
   console.log('==================================================================');
-// *** 加载国内代理缓存 ***
+  
+  // *** 加载国内代理缓存 ***
   loadedChinaProxies = loadChinaProxies();
+  
+  // 加载配置
+  if (!loadConfig()) {
+    console.error('加载配置失败');
+    process.exit(1);
+  }
   
   let previousNodeCount = null; // 初始化上次节点数
   const dataDir = path.join(CONFIG.rootDir, CONFIG.options.dataDir);
@@ -1290,474 +1514,235 @@ async function main() {
       const lastStatus = JSON.parse(statusContent);
       if (lastStatus && typeof lastStatus.finalNodesCount === 'number') {
         previousNodeCount = lastStatus.finalNodesCount;
-        console.log(`读取到上次同步节点数: ${previousNodeCount}`);
+        console.log(`上次同步成功，节点数量: ${previousNodeCount}`);
       }
     }
-  } catch (e) {
-    console.warn(`读取上次同步状态文件失败: ${e.message}`);
+  } catch (error) {
+    console.error('读取上次同步状态失败:', error.message);
   }
 
   try {
-    // 加载配置
-    if (!loadConfig()) {
-      console.error('配置加载失败，请检查配置文件是否存在且格式正确');
-      return;
-    }
-    
-    console.log(`发现 ${CONFIG.subscriptions.length} 个订阅源`);
-    console.log(`启用的订阅源: ${CONFIG.subscriptions.filter(sub => sub.enabled).length} 个`);
-    console.log(`当前配置: 去重=${CONFIG.options.deduplication}, 数据目录=${CONFIG.options.dataDir}, 输出目录=${CONFIG.options.outputDir}`);
-    console.log(`测试配置: 启用=${TESTING_CONFIG.enabled}, 超时=${TESTING_CONFIG.timeout}ms, 并发=${TESTING_CONFIG.concurrency}`);
-    
-    // 添加输出配置的详细日志
-    console.log(`输出配置详情: ${JSON.stringify(CONFIG.outputConfigs, null, 2)}`);
-    console.log(`输出配置数量: ${CONFIG.outputConfigs.length}`);
-    console.log(`是否有启用的输出配置: ${CONFIG.outputConfigs.some(cfg => cfg.enabled !== false)}`);
-
-    // 初始化通知系统
-    const barkUrl = process.env.BARK_URL;
-    if (barkUrl) {
-      console.log(`Bark通知已启用: ${barkUrl}`);
-      const barkNotifier = new BarkNotifier({
-        barkUrl: barkUrl,
-        title: process.env.BARK_TITLE || 'SubSyncForge',
-        events: [
-          EventType.CONVERSION_COMPLETE,
-          EventType.SYSTEM_ERROR, 
-          EventType.SYSTEM_WARNING
-        ]
-      });
-      
-      // 确保通知系统正确注册
-      barkNotifier.registerEventListeners(eventEmitter);
-      
-      // 不再发送测试事件
-      console.log('Bark通知系统已初始化');
-      
-                } else {
-      console.log('Bark通知未启用，可通过设置BARK_URL环境变量启用');
-    }
-
-    // 如果没有可用的订阅源，添加一个备用订阅
-    if (CONFIG.subscriptions.length === 0 || CONFIG.subscriptions.every(sub => !sub.enabled)) {
-      console.log('未找到启用的订阅源，添加一个测试订阅源');
-      
-      // 添加一个备用订阅源
-      CONFIG.subscriptions.push({
-        name: "测试订阅源",
-        url: "https://api.v1.mk/sub?target=clash&url=https%3A%2F%2Fghproxy.com%2Fhttps%3A%2F%2Fraw.githubusercontent.com%2Fmkht%2Ffree-node%2Fmain%2Fbase64",
-        enabled: true
-      });
-      
-      console.log('添加测试订阅源完成');
-    }
-
-    // 创建输出目录
-    const outputDir = path.join(CONFIG.rootDir, CONFIG.options.outputDir);
-    ensureDirectoryExists(outputDir);
-    console.log(`确保输出目录存在: ${outputDir}`);
-    
-    // 创建数据目录
-    const dataDir = path.join(CONFIG.rootDir, CONFIG.options.dataDir);
     ensureDirectoryExists(dataDir);
-    console.log(`确保数据目录存在: ${dataDir}`);
-
+    
     // 创建转换器实例
-    console.log('初始化订阅转换器...');
     const converter = new SubscriptionConverter({
-      dedup: CONFIG.options.deduplication,
-      validateInput: true,
-      validateOutput: true,
-      recordMetrics: true,
-      emitEvents: true,
-      nodeManagement: CONFIG.advanced.sortNodes,
-      renameNodes: true,
-      renameFormat: '{country}{protocol}{tags}{number}',
-      groupingMode: 'advanced',
-      applyRules: true,
-      fetch: {
-        timeout: 60000,  // 增加超时时间到60秒
-        maxRetries: 3,   // 每个UA尝试3次
-        userAgent: 'v2rayN/5.29', // 使用v2rayN作为UA
-        chinaProxyProvider: getChinaProxy // *** 传递代理提供者 ***
-      }
+      parser: CONFIG.parser,
+      fetcher: CONFIG.fetcher
     });
     
-    console.log('订阅转换器初始化完成');
-    
-    // 1. 获取并合并所有节点
-    console.log('开始获取并合并所有节点...');
-    const fetchStartTime = Date.now();
-    const rawNodes = await fetchAndMergeAllNodes(converter);
-    const fetchTime = Date.now() - fetchStartTime;
-    console.log(`获取节点完成，耗时: ${fetchTime}ms`);
-    
-    if (rawNodes.length === 0) {
-      console.warn('未获取到任何有效节点，但会继续尝试生成过程');
+    // 检查是否有自定义处理函数
+    if (CONFIG.processor && typeof CONFIG.processor.preprocess === 'function') {
+      converter.processor = CONFIG.processor;
     }
     
-    console.log(`共获取 ${rawNodes.length} 个有效节点`);
+    // 获取所有订阅节点
+    console.log('开始获取所有订阅节点...');
+    const mergedNodes = await fetchAndMergeAllNodes(converter);
     
-    // 保存所有原始节点数据
+    // 保存节点统计信息，方便后续增量处理
+    const finalNodesFile = path.join(dataDir, 'final_nodes.json');
     try {
-      const rawNodesFile = path.join(dataDir, 'raw_nodes.json');
-      fs.writeFileSync(rawNodesFile, JSON.stringify(rawNodes, null, 2));
-      console.log(`已保存原始节点数据到: ${rawNodesFile}`);
+      fs.writeFileSync(finalNodesFile, JSON.stringify(mergedNodes, null, 2));
+      console.log(`已保存最终节点数据到 ${finalNodesFile}`);
     } catch (e) {
-      console.error('保存原始节点数据失败:', e.message);
+      console.error(`保存最终节点数据失败: ${e.message}`);
     }
     
-    // 2. 测试节点有效性和延迟
-    console.log('开始测试节点连通性和延迟...');
-    const testStartTime = Date.now();
-    // 从testNodes函数获取测试结果和tester实例
-    const { results: testResults, tester } = await testNodes(rawNodes, TESTING_CONFIG);
-    const testTime = Date.now() - testStartTime;
+    if (checkTimeLimit()) {
+      console.warn('执行时间已接近限制，跳过节点测试步骤');
+      process.exit(0);
+    }
     
-    // 根据测试结果处理节点
-    let finalNodes = rawNodes;
-    
-    if (TESTING_CONFIG.enabled) {
-      if (TESTING_CONFIG.filter_invalid) {
-        // 只保留连通性测试通过的节点
-        const validResults = testResults.filter(r => r.status === 'up');
-        console.log(`测试结果: 有效节点 ${validResults.length}/${rawNodes.length} (${(validResults.length/rawNodes.length*100).toFixed(1)}%), 无效节点 ${testResults.length - validResults.length}`);
-        
-        // 检查是否启用地区验证，并进行节点名称修正
-        if (TESTING_CONFIG.verify_location !== false && tester) { // 确保tester存在
-          console.log(`开始验证节点地区信息...`);
-          // 取出有效节点
-          const nodesToCorrect = validResults.map(r => r.node);
-          // 使用节点测试器的correctNodeLocations方法修正地区信息
-          const correctedNodes = tester.correctNodeLocations(nodesToCorrect, validResults);
-          // 使用修正后的节点替换
-          validResults.forEach((result, index) => {
-            if (nodesToCorrect[index] !== correctedNodes[index]) {
-              // 替换节点对象
-              result.node = correctedNodes[index];
-            }
-          });
-          console.log(`节点地区验证完成`);
-        }
-        
-        // 按延迟排序
-        if (TESTING_CONFIG.sort_by_latency && validResults.length > 0) {
-          validResults.sort((a, b) => (a.latency || 99999) - (b.latency || 99999));
-          
-          // 输出延迟统计
-          const latencies = validResults.map(n => n.latency).filter(Boolean);
-          if (latencies.length > 0) {
-            const avgLatency = latencies.reduce((sum, lat) => sum + lat, 0) / latencies.length;
-            const minLatency = Math.min(...latencies);
-            const maxLatency = Math.max(...latencies);
-            
-            console.log(`延迟统计: 最小=${minLatency}ms, 最大=${maxLatency}ms, 平均=${avgLatency.toFixed(0)}ms`);
-            console.log(`最快的5个节点:`)
-            validResults.slice(0, 5).forEach((result, idx) => {
-              console.log(`  ${idx+1}. ${result.node.name}: ${result.latency}ms`);
-            });
-          }
-        }
-        
-        // 按最大延迟过滤
-        let filteredResults = validResults;
-        if (TESTING_CONFIG.max_latency > 0) {
-          const beforeCount = filteredResults.length;
-          filteredResults = filteredResults.filter(r => r.latency && r.latency <= TESTING_CONFIG.max_latency);
-          console.log(`按最大延迟(${TESTING_CONFIG.max_latency}ms)过滤: ${beforeCount} -> ${filteredResults.length}`);
-        }
-        
-        // 按最大节点数量限制
-        if (TESTING_CONFIG.max_nodes > 0 && filteredResults.length > TESTING_CONFIG.max_nodes) {
-          filteredResults = filteredResults.slice(0, TESTING_CONFIG.max_nodes);
-          console.log(`按最大节点数量(${TESTING_CONFIG.max_nodes})限制: ${filteredResults.length}`);
-        }
-        
-        // 仅保留有效节点
-        finalNodes = filteredResults.map(r => r.node);
+    // 如果配置了测试，进行节点测试
+    if (CONFIG.testConfig && CONFIG.testConfig.enabled) {
+      console.log(`即将开始节点测试，总节点数: ${mergedNodes.length}`);
+      
+      if (mergedNodes.length === 0) {
+        console.log('没有节点可供测试，跳过测试步骤');
+      } else if (mergedNodes.length < 10) {
+        console.log('节点数量过少，跳过测试步骤');
       } else {
-        // 所有节点都保留的情况，同样需要修正地区
-        if (TESTING_CONFIG.verify_location !== false && tester) { // 确保tester存在
-          console.log(`开始验证节点地区信息...`);
-          // 取出所有节点
-          finalNodes = tester.correctNodeLocations(finalNodes, testResults);
-          console.log(`节点地区验证完成`);
+        const tester = new NodeTester(CONFIG.testConfig);
+        
+        // 将大量节点分批测试，减轻服务器压力并避免超时
+        const BATCH_SIZE = 100; // 每批100个节点
+        const batches = [];
+        
+        for (let i = 0; i < mergedNodes.length; i += BATCH_SIZE) {
+          batches.push(mergedNodes.slice(i, i + BATCH_SIZE));
         }
         
-        // 所有节点都保留，但添加测试结果到节点的extra字段中
-        finalNodes = rawNodes.map(node => {
-          const result = testResults.find(r => r.node === node);
-          if (result) {
-            const nodeWithTestResult = { ...node };
-            if (!nodeWithTestResult.extra) nodeWithTestResult.extra = {};
-            nodeWithTestResult.extra.test = {
-              status: result.status,
-              latency: result.latency,
-              timestamp: new Date().toISOString()
-            };
-            return nodeWithTestResult;
+        let testedNodes = [];
+        for (let i = 0; i < batches.length; i++) {
+          if (checkTimeLimit()) {
+            console.warn(`执行时间接近限制，终止剩余批次(${i+1}/${batches.length})的测试`);
+            break;
           }
-          return node;
-        });
+          
+          console.log(`测试批次 ${i+1}/${batches.length}, 包含 ${batches[i].length} 个节点`);
+          const testResults = await tester.testNodes(batches[i]);
+          testedNodes = testedNodes.concat(testResults);
+          
+          // 保存中间测试结果
+          const testCheckpoint = path.join(dataDir, 'test_checkpoint.json');
+          try {
+            fs.writeFileSync(testCheckpoint, JSON.stringify({
+              timestamp: Date.now(),
+              processed: (i + 1) * BATCH_SIZE,
+              total: mergedNodes.length,
+              testedCount: testedNodes.length
+            }));
+          } catch (e) {
+            console.error('保存测试检查点失败:', e.message);
+          }
+        }
         
-        // 添加测试结果标记
-        finalNodes.forEach(node => {
-          if (node.extra?.test?.status === 'up') {
-            if (node.name && !node.name.includes('✓')) {
-              node.name = `✓ ${node.name}`;
-            }
-            
-            if (node.extra?.test?.latency) {
-              // 为名称添加延迟标记（如果没有）
-              if (node.name && !node.name.includes('ms')) {
-                node.name = `${node.name} [${node.extra.test.latency}ms]`;
-              }
-            }
-          } else if (node.extra?.test?.status === 'down') {
-            if (node.name && !node.name.includes('✗')) {
-              node.name = `✗ ${node.name}`;
-            }
+        // 更新节点测试结果
+        mergedNodes.forEach((node, index) => {
+          if (index < testedNodes.length) {
+            node.test = testedNodes[index].test;
           }
         });
         
-        // 即使保留所有节点，也可以按测试结果排序
-        if (TESTING_CONFIG.sort_by_latency) {
-          finalNodes.sort((a, b) => {
-            // 有效节点在前
-            if (a.extra?.test?.status === 'up' && b.extra?.test?.status !== 'up') return -1;
-            if (a.extra?.test?.status !== 'up' && b.extra?.test?.status === 'up') return 1;
-            
-            // 两个都有效，按延迟排序
-            if (a.extra?.test?.status === 'up' && b.extra?.test?.status === 'up') {
-              return (a.extra?.test?.latency || 99999) - (b.extra?.test?.latency || 99999);
-            }
-            
-            return 0;
-          });
-        }
+        console.log(`节点测试完成，共测试 ${testedNodes.length} 个节点`);
       }
+    }
+    
+    // 对节点进行排序
+    if (mergedNodes.length > 0) {
+      console.log('对节点进行排序...');
+      const sorter = (a, b) => {
+        // 首先按测试结果排序
+        if (a.test && b.test) {
+          if (a.test.delay !== undefined && b.test.delay !== undefined) {
+            return a.test.delay - b.test.delay;
+          }
+          if (a.test.delay !== undefined) return -1;
+          if (b.test.delay !== undefined) return 1;
+        }
+        if (a.test && a.test.delay !== undefined) return -1;
+        if (b.test && b.test.delay !== undefined) return 1;
+        
+        // 然后按国家排序
+        if (a.metadata && b.metadata) {
+          if (a.metadata.country && b.metadata.country) {
+            return a.metadata.country.localeCompare(b.metadata.country);
+          }
+        }
+        
+        return 0;
+      };
       
-      console.log(`节点测试完成，耗时: ${testTime}ms, 最终保留节点数: ${finalNodes.length}`);
+      mergedNodes.sort(sorter);
+      console.log('节点排序完成');
+    }
+    
+    // 保存各种格式的文件
+    if (CONFIG.outFormats && CONFIG.outFormats.length > 0) {
+      console.log(`生成 ${CONFIG.outFormats.length} 种格式的订阅文件...`);
       
-      // 保存测试报告
+      // 检查是否有增量更新标记
+      let hasUpdates = false;
+      let lastCheckpointData = null;
+      
       try {
-        const reportFile = path.join(dataDir, 'test_report.json');
-        const reportData = {
-          timestamp: new Date().toISOString(),
-          tested: rawNodes.length,
-          valid: testResults.filter(r => r.status === 'up').length,
-          invalid: testResults.filter(r => r.status === 'down').length,
-          filtered: finalNodes.length,
-          testTime,
-          results: testResults.map(r => ({
-            name: r.node.name,
-            server: r.node.server,
-            type: r.node.type,
-            status: r.status,
-            latency: r.latency,
-            error: r.error
-          }))
-        };
-        
-        fs.writeFileSync(reportFile, JSON.stringify(reportData, null, 2));
-        console.log(`测试报告已保存至: ${reportFile}`);
+        const checkpointFile = path.join(dataDir, 'checkpoint.json');
+        if (fs.existsSync(checkpointFile)) {
+          lastCheckpointData = JSON.parse(fs.readFileSync(checkpointFile, 'utf-8'));
+          hasUpdates = lastCheckpointData.hasUpdates === true;
+        }
       } catch (e) {
-        console.error('保存测试报告失败:', e.message);
-                }
-              } else {
-      console.log('节点测试功能已禁用，跳过测试');
-    }
-    
-    // 保存最终节点数据
-    try {
-      const finalNodesFile = path.join(dataDir, 'final_nodes.json');
-      fs.writeFileSync(finalNodesFile, JSON.stringify(finalNodes, null, 2));
-      console.log(`已保存最终节点数据到: ${finalNodesFile}`);
-    } catch (e) {
-      console.error('保存最终节点数据失败:', e.message);
-    }
-    
-    // 过滤掉中国节点
-    const filteredNodesCount = finalNodes.length;
-    finalNodes = finalNodes.filter(node => {
-      // 根据countryCode过滤
-      if (node.analysis && node.analysis.countryCode === 'CN') {
-        return false;
-      }
-      // 根据country过滤
-      if (node.analysis && node.analysis.country === '中国') {
-        return false;
-      }
-      // 根据节点名称过滤包含中国、CN的节点
-      const name = (node.name || '').toUpperCase();
-      if (name.includes('中国') || name.includes('CN') || name.includes('CHINA') || 
-          name.includes('国内') || name.includes('大陆')) {
-        return false;
-      }
-      return true;
-    });
-    console.log(`过滤中国节点: ${filteredNodesCount} -> ${finalNodes.length}, 移除了 ${filteredNodesCount - finalNodes.length} 个节点`);
-    
-    // 输出节点国家/地区分布情况
-    try {
-      const countryCount = {};
-      finalNodes.forEach(node => {
-        const country = node.country || 'Unknown';
-        countryCount[country] = (countryCount[country] || 0) + 1;
-      });
-      
-      console.log('节点国家/地区分布:');
-      Object.entries(countryCount)
-        .sort((a, b) => b[1] - a[1])
-        .forEach(([country, count]) => {
-          console.log(`  ${country}: ${count} 个节点`);
-        });
-    } catch (e) {
-      console.error('统计节点国家分布出错:', e.message);
-    }
-    
-    // 3. 生成各种格式的配置文件
-    console.log('开始生成配置文件...');
-    const genStartTime = Date.now();
-    await generateConfigs(finalNodes, CONFIG.outputConfigs, CONFIG.options);
-    const genTime = Date.now() - genStartTime;
-    console.log(`生成配置文件完成，耗时: ${genTime}ms`);
-    
-    // 4. 生成分组节点base64文件
-    console.log('开始生成分组节点base64文件...');
-    const groupStartTime = Date.now();
-    await generateGroupedNodeFiles(finalNodes, CONFIG.options);
-    const groupTime = Date.now() - groupStartTime;
-    console.log(`生成分组节点文件完成，耗时: ${groupTime}ms`);
-
-    // 生成一个状态文件，记录同步时间和结果
-    try {
-      const statusFile = path.join(dataDir, 'sync_status.json');
-      const statusData = {
-        lastSync: new Date().toISOString(),
-        originalNodesCount: rawNodes.length,
-        testedNodesCount: TESTING_CONFIG.enabled ? testResults.filter(r => r.status === 'up').length : 0,
-        finalNodesCount: finalNodes.length,
-        successSubscriptions: CONFIG.subscriptions.filter(sub => sub.enabled).length,
-        outputConfigs: CONFIG.outputConfigs.length,
-        fetchTime,
-        testTime: TESTING_CONFIG.enabled ? testTime : 0,
-        genTime,
-        totalTime: fetchTime + (TESTING_CONFIG.enabled ? testTime : 0) + genTime
-      };
-      
-      fs.writeFileSync(statusFile, JSON.stringify(statusData, null, 2));
-      console.log(`已保存同步状态到: ${statusFile}`);
-    } catch (e) {
-      console.error('保存同步状态失败:', e.message);
-    }
-    
-    // 编译节点统计数据
-    let totalNodes = 0;
-    const protocols = {};
-    const providers = [];
-    const regionsCount = {};
-    
-    if (finalNodes && Array.isArray(finalNodes)) {
-      totalNodes = finalNodes.length;
-      
-      // 统计协议
-      for (const node of finalNodes) {
-        if (node.protocol) {
-          protocols[node.protocol] = (protocols[node.protocol] || 0) + 1;
-        }
-        
-        // 统计地区
-        if (node.analysis && node.analysis.country) {
-          const country = node.analysis.country;
-          regionsCount[country] = (regionsCount[country] || 0) + 1;
-        }
+        console.error('读取检查点数据失败:', e.message);
       }
       
-      // 收集提供商
-      if (CONFIG.subscriptions) {
-        CONFIG.subscriptions.forEach(sub => {
-          if (sub.enabled && sub.name) {
-            providers.push(sub.name);
+      // 如果没有变化且节点数相同，可以跳过转换步骤(可选)
+      const skipConversion = !hasUpdates && 
+                          previousNodeCount === mergedNodes.length && 
+                          CONFIG.options.skipUnchangedConversion === true;
+      
+      if (skipConversion) {
+        console.log(`节点数量与上次相同(${mergedNodes.length})且无更新，跳过转换步骤`);
+      } else {
+        for (const format of CONFIG.outFormats) {
+          if (checkTimeLimit()) {
+            console.warn('执行时间接近限制，终止剩余格式的转换');
+            break;
           }
-        });
+          
+          console.log(`生成 ${format} 格式的订阅文件...`);
+          
+          try {
+            const convertedContent = await converter.convert(mergedNodes, format);
+            if (convertedContent) {
+              const outFile = path.join(CONFIG.rootDir, CONFIG.options.outDir, `${CONFIG.name}.${format}`);
+              ensureDirectoryExists(path.dirname(outFile));
+              fs.writeFileSync(outFile, convertedContent);
+              console.log(`已生成 ${format} 格式的订阅文件: ${outFile}`);
+            } else {
+              console.error(`转换为 ${format} 格式失败: 返回内容为空`);
+            }
+          } catch (convertError) {
+            console.error(`转换为 ${format} 格式失败:`, convertError.message);
+          }
+        }
       }
     }
     
-    // 发送完成通知
-    // 在处理完所有节点后发送更详细的通知
-    try {
-      console.log('发送完成通知事件...');
-      const eventData = {
-        nodeCount: totalNodes,
-        previousNodeCount: previousNodeCount, // 添加上次节点数
-        time: Date.now() - fetchStartTime,
-        protocols: protocols,
-        providers: providers,
-        regionsCount: regionsCount
-      };
-      console.log(`通知事件数据: ${JSON.stringify(eventData)}`);
-      
-      eventEmitter.emit(EventType.CONVERSION_COMPLETE, eventData);
-      console.log('完成通知事件已触发');
-    } catch (error) {
-      console.error('发送通知事件时出错:', error);
-      console.error('错误堆栈:', error.stack);
-    }
-// *** 提取并保存本次运行找到的国内代理供下次使用 ***
-    console.log('[Main] 提取并保存国内 HTTP/HTTPS/SOCKS5 代理...'); // 更新日志信息
-    const currentChinaProxies = [];
-    // 使用 finalNodes，因为它包含了测试和过滤后的最终节点列表
-console.log('[Debug] Final nodes before caching check:', JSON.stringify(finalNodes.filter(n => n.type === 'http' || n.type === 'https' || n.type === 'socks' || n.type === 'socks5'), null, 2)); // 打印所有潜在的代理节点
-    for (const node of finalNodes) {
-      // !! 重要: 确认国家代码和代理类型判断逻辑是否符合你的节点结构 !!
-      // 检查节点分析结果中的国家信息
-      const isChinaNode = (node.analysis && node.analysis.country === '中国') ||
-                          (node.extra?.location?.country_code === 'CN') ||
-                          (node.extra?.location?.country && /中国|china/i.test(node.extra.location.country)) ||
-                          (node.name && /CN|中国|中转|国内|回国/i.test(node.name)); // 补充检查节点名称和原始位置信息
-
-      const isSupportedProxyType = ['http', 'https', 'socks', 'socks5'].includes(node.type); // 支持的代理类型
-
-      if (isChinaNode && isSupportedProxyType) {
-         // 构建代理 URL，考虑认证信息
-         // !! 重要: 确认认证信息存储位置 !!
-         let protocol = node.type === 'socks' ? 'socks5' : node.type; // 将 'socks' 视为 'socks5'
-         let proxyUrl = `${protocol}://`;
-         // SOCKS5 和 HTTP/HTTPS 可能有认证
-         if (node.settings && node.settings.username && node.settings.password) {
-           proxyUrl += `${encodeURIComponent(node.settings.username)}:${encodeURIComponent(node.settings.password)}@`;
-         }
-         proxyUrl += `${node.server}:${node.port}`;
-         currentChinaProxies.push(proxyUrl);
-      }
-    }
-    console.log(`[Main] 本次运行找到 ${currentChinaProxies.length} 个国内 HTTP/HTTPS/SOCKS5 代理`); // 更新日志信息
-    saveChinaProxies(currentChinaProxies); // 保存供下次使用
+    // 保存节点详细信息到JSON文件(方便调试和数据分析)
+    const nodesJsonFile = path.join(CONFIG.rootDir, CONFIG.options.outDir, `${CONFIG.name}.nodes.json`);
+    fs.writeFileSync(nodesJsonFile, JSON.stringify(mergedNodes, null, 2));
+    console.log(`已保存节点详细信息到: ${nodesJsonFile}`);
+    
+    // 保存本次同步状态
+    const statusData = {
+      timestamp: Date.now(),
+      success: true,
+      finalNodesCount: mergedNodes.length,
+      previousNodesCount: previousNodeCount,
+      message: `成功同步 ${mergedNodes.length} 个节点`
+    };
+    fs.writeFileSync(statusFile, JSON.stringify(statusData, null, 2));
+    
+    // 发送通知
+    const diff = previousNodeCount !== null ? mergedNodes.length - previousNodeCount : 0;
+    const diffText = diff > 0 ? `+${diff}` : diff < 0 ? `${diff}` : '±0';
+    
+    const notifyMessage = `订阅同步完成!\n` +
+                      `节点数量: ${mergedNodes.length} (${diffText})\n` +
+                      `时间: ${new Date().toLocaleString()}`;
+    
+    // 使用事件发射器发送通知事件
+    eventEmitter.emit(EventType.SYNC_COMPLETE, {
+      timestamp: Date.now(),
+      nodeCount: mergedNodes.length,
+      diff: diff,
+      message: notifyMessage
+    });
     
     console.log('==================================================================');
-    console.log(`订阅同步完成! 总耗时: ${fetchTime + (TESTING_CONFIG.enabled ? testTime : 0) + genTime}ms`);
+    console.log(`同步订阅完成! 节点数量: ${mergedNodes.length} (${diffText})`);
+    console.log(`执行时间: ${((Date.now() - globalStartTime) / 1000).toFixed(1)}秒`);
     console.log('==================================================================');
-          } catch (error) {
-    console.error('==================================================================');
-    console.error('同步过程中发生严重错误:');
-    console.error(error);
+    
+  } catch (error) {
+    console.error('同步订阅时出错:', error.message);
     console.error(error.stack);
     
-    // 尝试发送错误通知
-    try {
-      console.log('发送错误通知...');
-      eventEmitter.emit(EventType.SYSTEM_ERROR, {
-        message: `同步过程中发生严重错误: ${error.message}`,
-        error: error.toString(),
-        stack: error.stack
-      });
-      console.log('错误通知已触发');
-    } catch (notifyError) {
-      console.error('发送错误通知失败:', notifyError);
-    }
+    // 保存错误状态
+    const statusData = {
+      timestamp: Date.now(),
+      success: false,
+      previousNodesCount: previousNodeCount,
+      message: `同步失败: ${error.message}`
+    };
+    fs.writeFileSync(statusFile, JSON.stringify(statusData, null, 2));
     
-    console.error('==================================================================');
+    // 发送错误通知
+    eventEmitter.emit(EventType.SYNC_ERROR, {
+      timestamp: Date.now(),
+      error: error.message
+    });
+    
     process.exit(1);
   }
 }
@@ -1779,3 +1764,18 @@ main().catch(error => {
   
   process.exit(1);
 });
+
+// 保存订阅缓存数据
+function saveCacheData(cachePath, nodes, contentHash) {
+  try {
+    const cacheData = {
+      timestamp: Date.now(),
+      hash: contentHash,
+      nodes: nodes
+    };
+    fs.writeFileSync(cachePath, JSON.stringify(cacheData, null, 2));
+    console.log(`已保存订阅缓存，包含 ${nodes.length} 个节点，哈希值: ${contentHash.substring(0, 8)}...`);
+  } catch (e) {
+    console.error(`保存订阅缓存失败: ${e.message}`);
+  }
+}

@@ -10,6 +10,9 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write       # 显式授予写入权限
+    # 添加超时限制，设置为5小时30分钟，留出一些余量
+    timeout-minutes: 330
+    
     steps:
       - uses: actions/checkout@v3
         with:
@@ -19,166 +22,60 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '18'
+          cache: 'pnpm'    # 启用Node模块缓存
           
       - name: Setup pnpm
         uses: pnpm/action-setup@v2
         with:
           version: 7
           run_install: false
-          
-      - name: Check Directory Structure
-        run: |
-          echo "检查目录结构..."
-          ls -la
-          echo "检查config目录..."
-          ls -la config || echo "config目录不存在"
-          echo "检查config目录内容..."
-          ls -la config/* || echo "config目录为空"
-          echo "检查output目录..."
-          mkdir -p output
-          ls -la output
-          echo "检查data目录..."
-          mkdir -p data
-          ls -la data
-          echo "检查当前工作目录..."
-          pwd
-          echo "确认GitHub工作路径..."
-          echo "GITHUB_WORKSPACE: $GITHUB_WORKSPACE"
-          
-      - name: Install Dependencies
-        run: pnpm install
-        working-directory: ${{ github.workspace }}
-        
-      - name: Create Directories
-        run: |
-          mkdir -p data
-          mkdir -p output
-          mkdir -p output/groups  # 确保groups目录存在
-          mkdir -p dist
-          mkdir -p templates     # 确保templates目录存在
-          echo "检查创建的目录..."
-          ls -la
-          
-      - name: Copy Templates
-        run: |
-          if [ ! -d "templates" ] || [ -z "$(ls -A templates)" ]; then
-            echo "templates目录不存在或为空，创建基础模板..."
-            mkdir -p templates
-            # 创建基本模板
-            echo '# 基础Mihomo模板\nport: 7890\nproxy-groups:\n  - name: PROXY\n    proxies: []\nproxies: []' > templates/mihomo.yaml
-            echo '[General]\n[Proxy]\n[Proxy Group]\n[Rule]' > templates/surge.conf
-            echo '{"log":{"level":"info"},"inbounds":[],"outbounds":[]}' > templates/singbox.json
-            echo '{"inbounds":[],"outbounds":[]}' > templates/v2ray.json
-          else
-            echo "templates目录已存在且不为空，跳过创建模板文件"
-          fi
-          echo "验证模板文件..."
-          ls -la templates
-          
-      - name: Build Project
-        run: |
-          echo "开始构建项目..."
-          pnpm run build
-          echo "检查构建结果..."
-          ls -la dist || echo "dist目录未创建"
-          
-      - name: Run Sync Script
-        env:
-          LOG_LEVEL: debug
-          BARK_URL: ${{ secrets.BARK_URL }}
-          BARK_TITLE: "SubSyncForge更新"
-          # 配置IP地理位置API
-          IP_API_URL: "http://ip-api.com/json/{ip}"
-          # 如果想使用其他API，可以取消下面的注释并在仓库设置中配置相应的secret
-          # IP_API_KEY: ${{ secrets.IP_API_KEY }}
-          # IP_API_URL: "https://ipinfo.io/{ip}/json?token=${{ secrets.IP_API_KEY }}"
-        run: |
-          echo "运行同步脚本..."
-          echo "验证配置文件存在..."
-          cat config/custom.yaml || echo "无法读取配置文件"
-          # 确保配置可用
-          ls -la config/
-          echo "执行同步脚本..."
-          node dist/sync-subscriptions.js || echo "同步脚本执行失败"
-          echo "检查output目录..."
-          find output -type f | sort
-          ls -la output || echo "output目录为空或不存在"
-          
-      - name: Commit Changes
-        id: commit
-        run: |
-          echo "准备提交更改..."
-          git config --local user.email "action@github.com"
-          git config --local user.name "github-actions[bot]"
-          echo "检查Git状态..."
-          git status
-          
-          # 确保pnpm-lock.yaml不会干扰提交
-          git checkout -- pnpm-lock.yaml || echo "无法还原pnpm-lock.yaml"
-          
-          # 手动添加data和output目录中的所有文件
-          echo "添加data目录和output目录的所有文件..."
-          git add data/ output/ --force
-          
-          # 检查是否有变化
-          if git diff --cached --quiet; then
-            echo "没有检测到文件变化，跳过提交。"
-            echo "has_changes=false" >> $GITHUB_OUTPUT
-          else
-            # 获取变化的文件列表
-            CHANGED_FILES=$(git diff --cached --name-only)
-            
-            # 统计变更情况
-            CONFIG_CHANGES=$(echo "$CHANGED_FILES" | grep -c "config/") || true
-            OUTPUT_CHANGES=$(echo "$CHANGED_FILES" | grep -c "output/") || true
-            DATA_CHANGES=$(echo "$CHANGED_FILES" | grep -c "data/") || true
-            
-            # 构建提交消息
-            COMMIT_MSG="chore: update subscriptions"
-            
-            # 构建通知内容
-            NOTIFICATION_TEXT="订阅已更新"
-            if [ "$CONFIG_CHANGES" -gt 0 ]; then
-              NOTIFICATION_TEXT+=", 配置文件已更新(${CONFIG_CHANGES}个)"
-            fi
-            if [ "$OUTPUT_CHANGES" -gt 0 ]; then
-              NOTIFICATION_TEXT+=", ${OUTPUT_CHANGES}个订阅文件已更新"
-            fi
-            if [ "$DATA_CHANGES" -gt 0 ]; then
-              NOTIFICATION_TEXT+=", ${DATA_CHANGES}个数据文件已更新"
-            fi
-            
-            NOTIFICATION_TEXT+=" ($(date '+%Y-%m-%d %H:%M:%S'))"
-            
-            # 保存通知内容用于Bark推送
-            echo "notification_text=${NOTIFICATION_TEXT}" >> $GITHUB_OUTPUT
-            echo "has_changes=true" >> $GITHUB_OUTPUT
-            
-            echo "检测到文件变化，提交更改..."
-            git commit -m "$COMMIT_MSG" || echo "提交失败"
-          fi
-          
-      - name: Push Changes
-        # 只有在检测到变化时才执行推送
-        if: steps.commit.outputs.has_changes == 'true' 
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: ${{ github.ref }}    # 明确指定推送到当前分支
-          force: true                  # 强制推送，避免冲突问题
       
-      # 只在有实际变更并且配置了Bark URL时发送通知
-      - name: Send Bark Notification
-        if: steps.commit.outputs.has_changes == 'true' && env.BARK_URL != ''
+      # 添加缓存恢复步骤
+      - name: Cache node modules
+        uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-modules-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-node-modules-
+      
+      # 添加数据目录缓存，支持增量处理
+      - name: Cache subscription data
+        uses: actions/cache@v3
+        with:
+          path: data
+          key: ${{ runner.os }}-subscription-data-${{ github.run_id }}
+          restore-keys: |
+            ${{ runner.os }}-subscription-data-
+      
+      - name: Install dependencies
+        run: pnpm install
+      
+      - name: Build project
+        run: pnpm build
+      
+      - name: Run sync script
+        run: node dist/scripts/sync-subscriptions.js
+        env:
+          BARK_URL: ${{ secrets.BARK_URL }}
+          BARK_TITLE: SubSyncForge
+      
+      - name: Commit and push changes
         run: |
-          echo "发送Bark通知..."
-          BARK_TITLE="SubSyncForge更新"
-          BARK_CONTENT="${{ steps.commit.outputs.notification_text }}"
-          BARK_URL_ENCODED="${{ secrets.BARK_URL }}$(echo "$BARK_TITLE" | jq -sRr @uri)/$(echo "$BARK_CONTENT" | jq -sRr @uri)"
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
           
-          # 添加通知参数
-          BARK_URL_ENCODED="${BARK_URL_ENCODED}?isArchive=1&sound=complete"
+          # 添加所有更改
+          git add -A
           
-          echo "正在发送通知..."
-          curl -s "$BARK_URL_ENCODED" || echo "Bark推送失败"
-          echo "Bark通知已发送"
+          # 检查是否有变更
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+            exit 0
+          fi
+          
+          # 提交更改
+          git commit -m "Update subscriptions: $(date +'%Y-%m-%d %H:%M:%S')"
+          
+          # 尝试推送更改
+          git push
