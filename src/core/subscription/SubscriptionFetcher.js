@@ -88,35 +88,6 @@ export class SubscriptionFetcher {
     // 如果有有效缓存则直接返回
     if (useCache && cacheData && Array.isArray(cacheData.nodes)) {
       this.logger.info(`返回缓存的订阅数据: ${subscription.name}，包含 ${cacheData.nodes.length} 个节点`);
-      
-      // 即使使用缓存，也启用中国节点检测
-      if (subscription.detect_chinese_nodes !== false) {
-        try {
-          // 使用订阅解析器检测中国节点
-          const parseOptions = {
-            detectChineseNodes: true,
-            source: subscription.name,
-            ...subscription.parseOptions
-          };
-          
-          // 这里我们不重新解析，而是直接检测现有节点
-          // 注意：这里我们传递null作为内容，这样解析器就知道直接处理已有节点
-          this.logger.info(`检测缓存中的中国节点，总节点数: ${cacheData.nodes.length}`);
-          
-          // 更新节点缓存，添加中国节点的SOCKS版本
-          const processedNodes = await this.parser.processNodes(cacheData.nodes, parseOptions);
-          
-          // 如果处理后的节点比之前多，更新缓存
-          if (processedNodes.length > cacheData.nodes.length) {
-            this.logger.info(`检测到新的中国节点，更新缓存`);
-            cacheData.nodes = processedNodes;
-            saveCacheData(cachePath, processedNodes, cacheData.hash);
-          }
-        } catch (error) {
-          this.logger.warn(`检测缓存中的中国节点失败: ${error.message}`);
-        }
-      }
-      
       return {
         source: subscription.name,
         nodes: cacheData.nodes,
@@ -235,30 +206,10 @@ export class SubscriptionFetcher {
           node.metadata.source = subscription.name;
         });
         
-        // 如果启用了中国节点检测
-        let finalNodes = parsedNodes;
-        if (subscription.detect_chinese_nodes !== false) {
-          try {
-            // 使用订阅解析器检测中国节点
-            const parseOptions = {
-              detectChineseNodes: true,
-              source: subscription.name,
-              ...subscription.parseOptions
-            };
-            
-            this.logger.info(`检测中国节点，总节点数: ${parsedNodes.length}`);
-            finalNodes = await this.parser.processNodes(parsedNodes, parseOptions);
-            this.logger.info(`中国节点检测完成，最终节点数: ${finalNodes.length}`);
-          } catch (error) {
-            this.logger.warn(`检测中国节点失败: ${error.message}`);
-            finalNodes = parsedNodes;
-          }
-        }
-        
         // 缓存节点
         if (useCache) {
           try {
-            await saveCacheData(cachePath, finalNodes, contentHash);
+            await saveCacheData(cachePath, parsedNodes, contentHash);
             this.logger.info(`已缓存订阅数据: ${subscription.name}`);
           } catch (error) {
             this.logger.warn(`缓存订阅数据失败: ${error.message}`);
@@ -267,7 +218,7 @@ export class SubscriptionFetcher {
         
         return {
           source: subscription.name,
-          nodes: finalNodes,
+          nodes: parsedNodes,
           fromCache: false,
           hash: contentHash
         };

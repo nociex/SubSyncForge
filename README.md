@@ -401,61 +401,9 @@ https://raw.githubusercontent.com/<您的用户名>/SubSyncForge/output/HK.txt
 1. 设置 `github_user` 和 `repo_name` 配置项
 2. 保持为空以使用默认的 `https://your-server/` 前缀，然后在实际使用时手动替换
 
-## 新增功能：SOCKS代理验证
+## 自定义部署服务器
 
-SubSyncForge 现在支持验证节点是否可用作SOCKS代理，并且可以区分节点是仅能访问中国大陆网站还是可以访问国际网站。
+如果你希望将订阅内容部署到自己的服务器，可以通过以下两种方式：
 
-### 使用方法
-
-1. 使用测试脚本验证SOCKS代理：
-
-```bash
-node test-socks-proxy.js [订阅URL] [选项]
-```
-
-选项：
-- `--concurrency=10` - 设置并发验证数量（默认10）
-- `--timeout=5000` - 设置超时时间（默认5000毫秒）
-- `--output=output` - 设置输出目录（默认output）
-- `--china-only` 或 `-c` - 仅测试中国节点
-- `--ip-info` 或 `-i` - 包含IP位置信息
-
-### 示例
-
-```bash
-# 验证默认订阅URL中的所有节点
-node test-socks-proxy.js
-
-# 验证指定订阅URL中的节点，设置20个并发
-node test-socks-proxy.js https://example.com/sub --concurrency=20
-
-# 仅验证中国节点
-node test-socks-proxy.js --china-only
-
-# 包含IP位置信息
-node test-socks-proxy.js --ip-info
-```
-
-### 技术实现
-
-SubSyncForge 通过以下步骤验证节点是否可用作SOCKS代理：
-
-1. **TCP连接验证** - 首先验证到节点服务器的TCP连接是否可用
-2. **HTTP请求验证** - 通过SOCKS代理发送HTTP请求到国际测试URL（默认为Google的generate_204服务）
-3. **中国网站验证** - 如果国际网站访问失败，尝试访问中国网站（默认为百度）以判断节点是否仅支持中国大陆网络
-
-验证结果将保存在output目录下，包含：
-- 完整验证结果（包含每个节点的详细信息）
-- 可用SOCKS节点列表（仅包含验证通过的节点）
-
-### 配置和使用中国代理
-
-您可以在`config/china_proxies.json`中配置中国大陆代理，用于通过中国IP获取订阅和测试节点。现在支持验证这些代理的可用性：
-
-```javascript
-// 使用ChinaProxyLoader获取并验证中国代理
-import { ChinaProxyLoader } from './src/utils/proxy/index.js';
-
-const proxyLoader = new ChinaProxyLoader();
-const proxies = await proxyLoader.getFormattedProxies(true); // 传入true表示验证代理可用性
-```
+1. 设置 `github_user` 和 `repo_name` 配置项
+2. 保持为空以使用默认的 `https://your-server/` 前缀，然后在实际使用时手动替换
