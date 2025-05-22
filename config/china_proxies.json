@@ -4,7 +4,7 @@
   "enabled": true,
   "auto_detect_environment": true,
   "use_local_connection_if_in_china": true,
-  "auto_find_china_nodes_from_cache": true,
+  "auto_find_china_nodes_from_cache": false,
   "fallback_to_direct": true,
   "allow_non_china_socks_nodes": true,
   "china_node_keywords": [
@@ -29,7 +29,7 @@
   "use_for_subscription": true,
   "use_for_testing": true,
   "subscription": {
-    "cache_ttl": 21600,
+    "cache_ttl": 0,
     "timeout": 10000,
     "retries": 3
   },
