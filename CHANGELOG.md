@@ -7,6 +7,13 @@
 
 ## [未发布]
 
+### 优化
+- **配置文件URL统一**：
+  - 统一所有配置模板（Surge, Clash, SingBox）中的订阅URL格式
+  - 将所有URL更新为GitHub仓库原始文件链接（https://raw.githubusercontent.com/nociex/SubSyncForge/output/）
+  - 确保所有配置文件具有一致的订阅源引用方式
+  - 改进跨客户端配置兼容性
+
 ## [1.5.2] - 2025-05-24
 
 ### 修复
