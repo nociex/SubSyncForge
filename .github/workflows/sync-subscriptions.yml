@@ -41,13 +41,14 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pnpm-
       
-      # 确保数据目录存在
-      - name: Create data directory
+      # 确保目录结构存在
+      - name: Create directories
         run: |
           mkdir -p data
           mkdir -p output
           mkdir -p data/cache
           mkdir -p data/ip_cache
+          mkdir -p data/test_results
           mkdir -p output/groups
           chmod -R 777 data
           chmod -R 777 output
@@ -63,29 +64,44 @@ jobs:
       # 运行同步订阅脚本
       - name: Sync subscriptions
         env:
+          GITHUB_WORKSPACE: ${{ github.workspace }}
           ROOT_DIR: ${{ github.workspace }}
           DATA_DIR: data
           CONFIG_PATH: ${{ github.workspace }}/config/custom.yaml
           PROXY_FOR_SUBSCRIPTION: 'true'
-          LOG_LEVEL: 'debug'
+          LOG_LEVEL: 'info'
+          MAX_EXECUTION_TIME: '18000000'  # 5小时 (毫秒)
+          BARK_URL: ${{ secrets.BARK_URL }}
+          BARK_TITLE: ${{ secrets.BARK_TITLE || '订阅同步通知' }}
         run: |
           echo "工作目录: $(pwd)"
           echo "根目录: $ROOT_DIR"
           echo "数据目录: $DATA_DIR"
           echo "配置文件路径: $CONFIG_PATH"
-          node dist/sync-subscriptions.js
+          echo "最大执行时间: $MAX_EXECUTION_TIME ms"
+          
+          # 使用新的入口脚本
+          node dist/scripts/sync-subscriptions.js
       
-      # 提交更改（即使获取节点失败也提交空文件）
+      # 提交更改
       - name: Commit changes
         run: |
           git config --local user.email "actions@github.com"
           git config --local user.name "GitHub Actions"
           
-          # 添加所有更改
-          git add data/ output/
-          
-          # 即使没有变化也继续执行（不会报错）
-          git commit -m "更新订阅数据 $(date +'%Y-%m-%d %H:%M:%S')" || echo "没有变更需要提交"
-          
-          # 推送更改
-          git push || echo "推送失败，可能是没有新变更"
+          # 检查是否有变更
+          if [[ -n $(git status -s data/ output/) ]]; then
+            # 添加所有变更
+            git add data/ output/
+            
+            # 获取节点数量信息用于提交信息
+            NODES_COUNT=$(grep -o '"totalNodes":[0-9]*' data/test_results/latest_test.json 2>/dev/null | grep -o '[0-9]*' || echo "未知")
+            VALID_NODES=$(grep -o '"validNodes":[0-9]*' data/test_results/latest_test.json 2>/dev/null | grep -o '[0-9]*' || echo "未知")
+            
+            # 提交并推送变更
+            git commit -m "更新订阅数据: ${VALID_NODES}/${NODES_COUNT} 个有效节点 - $(date +'%Y-%m-%d %H:%M:%S')"
+            git push
+            echo "已提交并推送更新"
+          else
+            echo "没有变更需要提交"
+          fi

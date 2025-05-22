@@ -8,8 +8,10 @@ export default {
     dir: 'dist',
     format: 'es',
     sourcemap: true,
-    entryFileNames: '[name].js',
-    chunkFileNames: '[name]-[hash].js'
+    entryFileNames: 'scripts/[name].js',
+    chunkFileNames: 'shared/[name]-[hash].js',
+    preserveModules: true,
+    preserveModulesRoot: 'src'
   },
   plugins: [
     nodeResolve({
@@ -23,8 +25,14 @@ export default {
     'fs',
     'path',
     'url',
+    'crypto',
+    'child_process',
+    'https',
+    'http',
+    'net',
     'js-yaml',
     'yaml',
-    'node-fetch' // 将 node-fetch 添加到外部依赖
+    'node-fetch',
+    'https-proxy-agent'
   ]
 };
