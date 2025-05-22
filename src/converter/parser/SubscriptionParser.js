@@ -40,68 +40,66 @@ export class SubscriptionParser {
       // 解析数据并转换为统一格式
       this.logger.log(`使用 ${format} 解析器解析数据...`);
       const nodes = await parser.parse(processedRaw);
+      
+      // 检查解析结果
+      if (!nodes || !Array.isArray(nodes)) {
+        this.logger.warn(`解析结果不是有效的节点数组, 返回空数组`);
+        return [];
+      }
+      
       this.logger.log(`解析成功，获取到 ${nodes.length} 个节点`);
+      
+      // 添加详细日志，输出节点类型分布
+      if (nodes.length > 0) {
+        const typeCount = {};
+        nodes.forEach(node => {
+          if (node && node.type) {
+            typeCount[node.type] = (typeCount[node.type] || 0) + 1;
+          }
+        });
+        this.logger.log(`节点类型分布: ${JSON.stringify(typeCount)}`);
+      }
       
       const normalizedNodes = this.normalize(nodes);
       this.logger.log(`规范化后节点数: ${normalizedNodes.length}`);
       
+      // 如果规范化后节点数明显减少，输出详细信息
+      if (normalizedNodes.length < nodes.length * 0.8) {
+        this.logger.warn(`规范化过程中丢失了${nodes.length - normalizedNodes.length}个节点，请检查节点格式`);
+      }
+      
       return normalizedNodes;
     } catch (error) {
-      this.logger.error(`解析错误 (${format}): ${error.message}`);
-      // 尝试使用其他解析器
-      this.logger.log(`尝试备用解析器...`);
+      this.logger.error(`解析数据失败: ${error.message}`);
+      this.logger.error(`错误堆栈: ${error.stack}`);
       
-      // 尝试所有解析器，包括刚刚失败的那个（使用处理过的数据可能成功）
-      for (const [backupFormat, backupParser] of Object.entries(this.parsers)) {
+      // 尝试查找问题原因
+      this.logger.log(`尝试进行故障排查...`);
+      
+      // 检查格式是否正确识别
+      this.logger.log(`再次检查数据格式...`);
+      
+      if (format === 'yaml') {
+        this.logger.log(`对于YAML格式，尝试检查数据结构...`);
         try {
-          this.logger.log(`尝试使用 ${backupFormat} 解析器...`);
-          // 对于Base64解析器，如果第一次尝试失败，尝试使用原始数据
-          const dataToTry = backupFormat === 'base64' && format === 'base64' ? raw : processedRaw;
-          const nodes = await backupParser.parse(dataToTry);
-          if (nodes && nodes.length > 0) {
-            this.logger.log(`使用备用解析器 ${backupFormat} 成功，获取到 ${nodes.length} 个节点`);
-            return this.normalize(nodes);
-          } else {
-            this.logger.log(`备用解析器 ${backupFormat} 未找到节点`);
+          // 使用更宽松的方式解析
+          const yaml = await import('js-yaml');
+          const data = yaml.load(processedRaw, { schema: yaml.JSON_SCHEMA });
+          
+          if (data) {
+            this.logger.log(`YAML基本解析成功，数据结构: ${typeof data}, 顶级键: ${Object.keys(data).join(', ')}`);
+            
+            // 检查是否包含proxies或类似字段
+            const hasProxies = data.proxies || data.Proxy || data['proxy-providers'] || data['proxy-groups'];
+            this.logger.log(`是否包含代理字段: ${hasProxies ? '是' : '否'}`);
           }
-        } catch (backupError) {
-          // 忽略备用解析器错误，继续尝试下一个
-          this.logger.log(`备用解析器 ${backupFormat} 失败: ${backupError.message}`);
+        } catch (yamlError) {
+          this.logger.error(`YAML解析诊断失败: ${yamlError.message}`);
         }
       }
       
-      // 所有解析器都失败，尝试直接解析是否有节点URI
-      try {
-        this.logger.log(`尝试直接提取节点URI...`);
-        const uriPattern = /(vmess|ss|ssr|trojan|hysteria2|hysteria|vless|socks|tuic):\/\/[A-Za-z0-9+/=]+/g;
-        const matches = processedRaw.match(uriPattern);
-        
-        if (matches && matches.length > 0) {
-          this.logger.log(`提取到 ${matches.length} 个节点URI`);
-          const nodes = [];
-          
-          for (const uri of matches) {
-            try {
-              const node = await this.parseLine(uri);
-              if (node) {
-                nodes.push(node);
-              }
-            } catch (e) {
-              // 忽略单个URI解析错误
-            }
-          }
-          
-          if (nodes.length > 0) {
-            this.logger.log(`成功从URI提取 ${nodes.length} 个节点`);
-            return this.normalize(nodes);
-          }
-        }
-      } catch (e) {
-        this.logger.error(`直接提取节点URI失败: ${e.message}`);
-      }
-      
-      // 所有解析器都失败
-      throw new Error(`Failed to parse subscription data: ${error.message}`);
+      // 如果无法解析，返回空数组
+      return [];
     }
   }
 

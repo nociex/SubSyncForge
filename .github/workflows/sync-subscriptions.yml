@@ -165,9 +165,27 @@ jobs:
             # 添加所有变更
             git add data/ output/
             
-            # 获取节点数量信息用于提交信息
-            NODES_COUNT=$(grep -o '"totalNodes":[0-9]*' data/test_results/latest_test.json 2>/dev/null | grep -o '[0-9]*' || echo "未知")
-            VALID_NODES=$(grep -o '"validNodes":[0-9]*' data/test_results/latest_test.json 2>/dev/null | grep -o '[0-9]*' || echo "未知")
+            # 获取节点数量信息用于提交信息 - 改进解析逻辑
+            # 如果无法从latest_test.json获取数据，则查找最新的测试结果文件
+            if [[ -f "data/test_results/latest_test.json" ]]; then
+              NODES_COUNT=$(grep -o '"totalNodes":[0-9]*' data/test_results/latest_test.json 2>/dev/null | grep -o '[0-9]*' || echo "0")
+              VALID_NODES=$(grep -o '"validNodes":[0-9]*' data/test_results/latest_test.json 2>/dev/null | grep -o '[0-9]*' || echo "0")
+            else
+              # 找到最新的测试结果文件
+              LATEST_TEST_FILE=$(ls -t data/test_results/test_*.json 2>/dev/null | head -1)
+              if [[ -n "$LATEST_TEST_FILE" ]]; then
+                NODES_COUNT=$(grep -o '"totalNodes":[0-9]*' "$LATEST_TEST_FILE" 2>/dev/null | grep -o '[0-9]*' || echo "0")
+                VALID_NODES=$(grep -o '"validNodes":[0-9]*' "$LATEST_TEST_FILE" 2>/dev/null | grep -o '[0-9]*' || echo "0")
+              else
+                # 如果找不到任何测试结果文件，则设置为0
+                NODES_COUNT="0"
+                VALID_NODES="0"
+              fi
+            fi
+            
+            # 确保变量不为空
+            NODES_COUNT="${NODES_COUNT:-0}"
+            VALID_NODES="${VALID_NODES:-0}"
             
             # 提交并推送变更
             git commit -m "更新订阅数据: ${VALID_NODES}/${NODES_COUNT} 个有效节点 - $(date +'%Y-%m-%d %H:%M:%S')"

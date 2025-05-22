@@ -98,7 +98,10 @@ export class ConfigLoader {
       }
       
       if (userConfig.output.configs && Array.isArray(userConfig.output.configs)) {
-        finalConfig.outputConfigs = userConfig.output.configs;
+        // 修改这里，确保输出配置结构正确
+        finalConfig.outputConfigs = {
+          outputs: userConfig.output.configs
+        };
       }
       
       // 合并 GitHub 相关配置

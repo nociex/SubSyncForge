@@ -761,26 +761,79 @@ export class ConfigGenerator {
    * @returns {Array} 过滤后的节点
    */
   excludeNodesByRegion(nodes, regions) {
+    this.logger.info(`开始按地区排除节点，排除地区: ${regions.join(', ')}`);
+    
     return nodes.filter(node => {
-      // 如果节点没有地区信息，则不排除
-      if (!node.analysis || (!node.analysis.countryCode && !node.analysis.country)) {
-        return true;
-      }
-      
-      // 检查节点的地区代码是否在排除列表中
-      if (node.analysis.countryCode && regions.some(r => r.toUpperCase() === node.analysis.countryCode.toUpperCase())) {
-        return false; // 排除
-      }
-      
-      // 检查节点的地区名称是否在排除列表中
-      if (node.analysis.country && regions.some(r => node.analysis.country.includes(r))) {
-        return false; // 排除
-      }
-      
-      // 检查节点名称中是否包含排除的地区信息
+      // 先检查节点名称中是否包含排除的地区信息，这是最可靠的方法
       const name = (node.name || '').toUpperCase();
-      if (regions.some(r => name.includes(r.toUpperCase()))) {
-         return false; // 排除
+      
+      // 准备一个更严格的匹配数组，增加常见前缀/后缀情况
+      const checkRegions = [];
+      regions.forEach(r => {
+        const upperRegion = r.toUpperCase();
+        checkRegions.push(upperRegion);
+        // 添加常见的节点命名模式
+        checkRegions.push(`${upperRegion}_`);
+        checkRegions.push(`_${upperRegion}`);
+        checkRegions.push(`${upperRegion}-`);
+        checkRegions.push(`-${upperRegion}`);
+        // 添加国旗emoji检测 (大部分节点名称包含国旗emoji)
+        if (upperRegion === 'HK' || upperRegion === '香港' || upperRegion === 'HONG KONG') {
+          checkRegions.push('🇭🇰');
+        } else if (upperRegion === 'US' || upperRegion === '美国' || upperRegion === 'UNITED STATES') {
+          checkRegions.push('🇺🇸');
+        } else if (upperRegion === 'JP' || upperRegion === '日本' || upperRegion === 'JAPAN') {
+          checkRegions.push('🇯🇵');
+        } else if (upperRegion === 'SG' || upperRegion === '新加坡' || upperRegion === 'SINGAPORE') {
+          checkRegions.push('🇸🇬');
+        } else if (upperRegion === 'TW' || upperRegion === '台湾' || upperRegion === 'TAIWAN') {
+          checkRegions.push('🇹🇼');
+        }
+      });
+      
+      // 检查节点名称是否包含任一排除标识
+      if (checkRegions.some(r => name.includes(r))) {
+        this.logger.debug(`排除节点: ${node.name} (匹配名称)`);
+        return false; // 排除
+      }
+      
+      // 检查节点的国家代码和国家名称 (如果有分析数据)
+      if (node.analysis) {
+        // 检查节点的地区代码是否在排除列表中
+        if (node.analysis.countryCode && regions.some(r => 
+          r.toUpperCase() === node.analysis.countryCode.toUpperCase())) {
+          this.logger.debug(`排除节点: ${node.name} (匹配国家代码: ${node.analysis.countryCode})`);
+          return false; // 排除
+        }
+        
+        // 检查节点的地区名称是否在排除列表中
+        if (node.analysis.country && regions.some(r => 
+          node.analysis.country.toUpperCase().includes(r.toUpperCase()))) {
+          this.logger.debug(`排除节点: ${node.name} (匹配国家名称: ${node.analysis.country})`);
+          return false; // 排除
+        }
+      }
+      
+      // 检查其他可能的地区标识
+      // 例如，检查节点的服务器名称或IP是否与已知的地区关联
+      if (node.server) {
+        const serverUpper = node.server.toUpperCase();
+        // 一些云服务供应商的地区标识
+        const knownRegionPatterns = {
+          'HK': ['HONGKONG', 'HK-', '-HK', 'HKG'],
+          'US': ['US-', '-US', 'USA-', '-USA'],
+          'JP': ['JAPAN', 'JP-', '-JP', 'JPN'],
+          'SG': ['SINGAPORE', 'SG-', '-SG', 'SGP'],
+          'TW': ['TAIWAN', 'TW-', '-TW', 'TWN']
+        };
+        
+        for (const [regionCode, patterns] of Object.entries(knownRegionPatterns)) {
+          if (regions.some(r => r.toUpperCase() === regionCode) && 
+              patterns.some(p => serverUpper.includes(p))) {
+            this.logger.debug(`排除节点: ${node.name} (服务器名称匹配地区: ${regionCode})`);
+            return false; // 排除
+          }
+        }
       }
       
       // 如果都不匹配，则保留该节点
@@ -796,7 +849,21 @@ export class ConfigGenerator {
    */
   filterNodesByService(nodes, services) {
     return nodes.filter(node => {
-      // 检查节点名称中是否包含指定服务
+      // 首先检查节点分析中的标签
+      if (node.analysis && Array.isArray(node.analysis.tags)) {
+        // 如果节点的标签中包含任何一个指定的服务，则匹配成功
+        const hasServiceTag = node.analysis.tags.some(tag => 
+          services.some(service => 
+            tag.toUpperCase().includes(service.toUpperCase())
+          )
+        );
+        
+        if (hasServiceTag) {
+          return true;
+        }
+      }
+      
+      // 然后检查节点名称中是否包含指定服务
       const name = (node.name || '').toUpperCase();
       return services.some(service => name.includes(service.toUpperCase()));
     });

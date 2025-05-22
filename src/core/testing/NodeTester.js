@@ -188,19 +188,23 @@ export class NodeTester {
       }, this.timeout);
       
       // 使用socket检查连接 - 在实际项目中，应该替换为真正的代理连接测试
-      const net = require('net');
-      const socket = new net.Socket();
-      
-      socket.connect(node.port, node.server, () => {
+      import('net').then(net => {
+        const socket = new net.Socket();
+        
+        socket.connect(node.port, node.server, () => {
+          clearTimeout(timeout);
+          socket.destroy();
+          resolve({ success: true });
+        });
+        
+        socket.on('error', (error) => {
+          clearTimeout(timeout);
+          socket.destroy();
+          resolve({ success: false, error: error.message });
+        });
+      }).catch(error => {
         clearTimeout(timeout);
-        socket.destroy();
-        resolve({ success: true });
-      });
-      
-      socket.on('error', (error) => {
-        clearTimeout(timeout);
-        socket.destroy();
-        resolve({ success: false, error: error.message });
+        resolve({ success: false, error: `模块加载失败: ${error.message}` });
       });
     });
   }

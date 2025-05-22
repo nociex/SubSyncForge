@@ -1,0 +1,267 @@
+{
+  "log": {
+    "level": "info",
+    "timestamp": true
+  },
+  "dns": {
+    "servers": [
+      {
+        "tag": "cloudflare",
+        "address": "https://1.1.1.1/dns-query"
+      },
+      {
+        "tag": "google",
+        "address": "https://8.8.8.8/dns-query"
+      },
+      {
+        "tag": "local",
+        "address": "223.5.5.5",
+        "detour": "direct"
+      }
+    ],
+    "rules": [
+      {
+        "domain": [
+          "domain:example.com"
+        ],
+        "server": "local"
+      }
+    ],
+    "strategy": "ipv4_only",
+    "disable_cache": false,
+    "disable_expire": false
+  },
+  "inbounds": [
+    {
+      "type": "tun",
+      "tag": "tun-in",
+      "inet4_address": "172.19.0.1/30",
+      "auto_route": true,
+      "stack": "system",
+      "sniff": true
+    },
+    {
+      "type": "mixed",
+      "tag": "mixed-in",
+      "listen": "127.0.0.1",
+      "listen_port": 1080,
+      "sniff": true
+    }
+  ],
+  "outbounds": [
+    {
+      "type": "selector",
+      "tag": "proxy",
+      "outbounds": [
+        "auto",
+        "direct",
+        "hk-group",
+        "tw-group",
+        "sg-group",
+        "jp-group",
+        "us-group",
+        "others-group"
+      ]
+    },
+    {
+      "type": "urltest",
+      "tag": "auto",
+      "outbounds": [
+        "hk-group",
+        "tw-group",
+        "sg-group",
+        "jp-group",
+        "us-group"
+      ],
+      "url": "https://www.gstatic.com/generate_204",
+      "interval": "5m",
+      "tolerance": 100
+    },
+    {
+      "type": "selector",
+      "tag": "openai",
+      "outbounds": [
+        "proxy",
+        "hk-group",
+        "tw-group",
+        "sg-group",
+        "jp-group",
+        "us-group",
+        "others-group"
+      ]
+    },
+    {
+      "type": "selector",
+      "tag": "netflix",
+      "outbounds": [
+        "proxy",
+        "hk-group",
+        "tw-group",
+        "sg-group",
+        "jp-group",
+        "us-group",
+        "others-group"
+      ]
+    },
+    {
+      "type": "selector",
+      "tag": "disney",
+      "outbounds": [
+        "proxy",
+        "hk-group",
+        "tw-group",
+        "sg-group",
+        "jp-group",
+        "us-group",
+        "others-group"
+      ]
+    },
+    {
+      "type": "selector",
+      "tag": "hk-group",
+      "outbounds": [],
+      "providers": ["hk"]
+    },
+    {
+      "type": "selector",
+      "tag": "tw-group",
+      "outbounds": [],
+      "providers": ["tw"]
+    },
+    {
+      "type": "selector",
+      "tag": "sg-group",
+      "outbounds": [],
+      "providers": ["sg"]
+    },
+    {
+      "type": "selector",
+      "tag": "jp-group",
+      "outbounds": [],
+      "providers": ["jp"]
+    },
+    {
+      "type": "selector",
+      "tag": "us-group",
+      "outbounds": [],
+      "providers": ["us"]
+    },
+    {
+      "type": "selector",
+      "tag": "others-group",
+      "outbounds": [],
+      "providers": ["others"]
+    },
+    {
+      "type": "direct",
+      "tag": "direct"
+    },
+    {
+      "type": "block",
+      "tag": "block"
+    },
+    {
+      "type": "dns",
+      "tag": "dns-out"
+    }
+  ],
+  "providers": {
+    "hk": {
+      "url": "https://your-server/output/HK.txt",
+      "interval": "1h",
+      "download_detour": "direct"
+    },
+    "tw": {
+      "url": "https://your-server/output/TW.txt",
+      "interval": "1h",
+      "download_detour": "direct"
+    },
+    "sg": {
+      "url": "https://your-server/output/SG.txt",
+      "interval": "1h",
+      "download_detour": "direct"
+    },
+    "jp": {
+      "url": "https://your-server/output/JP.txt",
+      "interval": "1h",
+      "download_detour": "direct"
+    },
+    "us": {
+      "url": "https://your-server/output/US.txt",
+      "interval": "1h",
+      "download_detour": "direct"
+    },
+    "others": {
+      "url": "https://your-server/output/Others.txt",
+      "interval": "1h",
+      "download_detour": "direct"
+    },
+    "netflix": {
+      "url": "https://your-server/output/Netflix.txt",
+      "interval": "1h",
+      "download_detour": "direct"
+    },
+    "openai": {
+      "url": "https://your-server/output/OpenAI.txt",
+      "interval": "1h",
+      "download_detour": "direct"
+    },
+    "disney": {
+      "url": "https://your-server/output/Disney+.txt",
+      "interval": "1h",
+      "download_detour": "direct"
+    }
+  },
+  "route": {
+    "rules": [
+      {
+        "protocol": "dns",
+        "outbound": "dns-out"
+      },
+      {
+        "domain": [
+          "openai.com",
+          "ai.com"
+        ],
+        "outbound": "openai"
+      },
+      {
+        "domain": [
+          "netflix.com",
+          "netflix.net",
+          "nflxext.com",
+          "nflximg.com",
+          "nflximg.net",
+          "nflxso.net",
+          "nflxvideo.net"
+        ],
+        "outbound": "netflix"
+      },
+      {
+        "domain": [
+          "disneyplus.com",
+          "disney-plus.net",
+          "disneystreaming.com",
+          "dssott.com",
+          "bamgrid.com"
+        ],
+        "outbound": "disney"
+      },
+      {
+        "domain_suffix": [
+          "cn"
+        ],
+        "outbound": "direct"
+      },
+      {
+        "geoip": [
+          "private",
+          "cn"
+        ],
+        "outbound": "direct"
+      }
+    ],
+    "final": "proxy",
+    "auto_detect_interface": true
+  }
+}

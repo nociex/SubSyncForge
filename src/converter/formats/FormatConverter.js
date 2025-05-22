@@ -32,6 +32,12 @@ export class FormatConverter {
    * @returns {string} 转换后的配置
    */
   async convert(nodes, format, templatePath, options = {}) {
+    // 如果format为空或者undefined，使用默认格式
+    if (!format) {
+      this.logger.warn('没有指定格式，默认使用text格式');
+      format = 'text';
+    }
+
     // 获取模板
     const template = await this.getTemplate(format, templatePath);
     
@@ -49,9 +55,11 @@ export class FormatConverter {
       case 'txt':
       case 'text':
       case 'plain':
+      case 'other_nodes': // 增加对other_nodes格式的支持
         return this.convertToTextList(nodes, template, options);
       default:
-        throw new Error(`Unsupported format: ${format}`);
+        this.logger.warn(`不支持的格式: ${format}，转为使用文本格式`);
+        return this.convertToTextList(nodes, template, options);
     }
   }
 
@@ -62,19 +70,29 @@ export class FormatConverter {
    * @returns {string} 模板内容
    */
   async getTemplate(format, templatePath) {
+    // 确保format是有效的字符串
+    format = format || 'text';
+    
+    // 如果已经传入了模板内容而不是路径，直接使用
+    if (templatePath && typeof templatePath === 'string' && !templatePath.includes('/') && !templatePath.includes('\\')) {
+      return templatePath;
+    }
+    
     // 如果已经缓存了模板，直接返回
     if (this.templates[format]) {
       return this.templates[format];
     }
     
     // 如果提供了模板路径，使用提供的路径
-    if (templatePath) {
+    if (templatePath && fs.existsSync(templatePath)) {
       try {
         const template = fs.readFileSync(templatePath, 'utf8');
         this.templates[format] = template;
         return template;
       } catch (error) {
-        throw new Error(`Failed to read template: ${error.message}`);
+        this.logger.error(`读取模板文件失败: ${error.message}`);
+        // 失败时返回默认的空模板
+        return '# 空的配置文件 - 自动生成';
       }
     }
     
@@ -87,18 +105,29 @@ export class FormatConverter {
       v2ray: 'json',
       txt: 'txt',
       text: 'txt',
-      plain: 'txt'
+      plain: 'txt',
+      other_nodes: 'txt'  // 增加对other_nodes格式的支持
     };
     
     const ext = extensions[format.toLowerCase()] || 'txt';
     const defaultPath = path.join(this.templatesDir, `${format.toLowerCase()}.${ext}`);
     
     try {
-      const template = fs.readFileSync(defaultPath, 'utf8');
-      this.templates[format] = template;
-      return template;
+      if (fs.existsSync(defaultPath)) {
+        const template = fs.readFileSync(defaultPath, 'utf8');
+        this.templates[format] = template;
+        return template;
+      } else {
+        // 如果默认模板不存在，返回一个基本模板
+        this.logger.warn(`模板文件不存在: ${defaultPath}，使用默认空模板`);
+        const defaultTemplate = '# 空的配置文件 - 自动生成';
+        this.templates[format] = defaultTemplate;
+        return defaultTemplate;
+      }
     } catch (error) {
-      throw new Error(`Failed to read default template: ${error.message}`);
+      this.logger.error(`读取默认模板失败: ${error.message}`);
+      // 失败时返回默认的空模板
+      return '# 空的配置文件 - 自动生成';
     }
   }
 
@@ -111,7 +140,38 @@ export class FormatConverter {
    */
   convertToTextList(nodes, template, options = {}) {
     // 将节点转换为URI字符串
-    const nodeUris = nodes.map(node => node.uri || '').filter(Boolean);
+    const nodeUris = nodes.map(node => {
+      // 优先使用原始URI
+      if (node.extra?.raw && typeof node.extra.raw === 'string' && node.extra.raw.trim().length > 0) {
+        return node.extra.raw;
+      }
+      
+      // 尝试构造URI
+      if (node.type === 'vmess' && node.settings?.id) {
+        const vmessInfo = { 
+          v: "2", 
+          ps: node.name, 
+          add: node.server, 
+          port: parseInt(node.port) || 443, 
+          id: node.settings.id, 
+          aid: parseInt(node.settings.alterId) || 0, 
+          net: node.settings.network || "tcp", 
+          type: "none", 
+          host: (node.settings.wsHeaders && node.settings.wsHeaders.Host) || "", 
+          path: node.settings.wsPath || "/", 
+          tls: node.settings.tls ? "tls" : "none" 
+        };
+        return `vmess://${Buffer.from(JSON.stringify(vmessInfo)).toString('base64')}`;
+      } else if (node.type === 'ss' && node.settings?.method && node.settings?.password) {
+        const userInfo = `${node.settings.method}:${node.settings.password}`;
+        const base64UserInfo = Buffer.from(userInfo).toString('base64');
+        return `ss://${base64UserInfo}@${node.server}:${parseInt(node.port) || 443}#${encodeURIComponent(node.name || 'Node')}`;
+      } else if (node.type === 'trojan' && node.settings?.password) {
+        return `trojan://${node.settings.password}@${node.server}:${parseInt(node.port) || 443}?sni=${node.settings.sni || ''}&allowInsecure=${node.settings.allowInsecure ? '1' : '0'}#${encodeURIComponent(node.name || 'Node')}`;
+      }
+      
+      return node.uri || '';
+    }).filter(Boolean);
     
     // 生成节点列表
     const nodesList = nodeUris.join('\n');

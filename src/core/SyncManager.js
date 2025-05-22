@@ -13,6 +13,8 @@ import { NodeTester } from './testing/NodeTester.js';
 import { ConfigGenerator } from './output/ConfigGenerator.js';
 import { ProxyManager } from './proxy/ProxyManager.js';
 import { SubscriptionConverter } from '../converter/SubscriptionConverter.js';
+import { NodeManager } from '../converter/analyzer/index.js';
+import fs from 'fs';
 
 export class SyncManager {
   /**
@@ -165,7 +167,7 @@ export class SyncManager {
       }
       
       // 生成配置文件
-      const generatedFiles = await this.generateConfigs(this.validNodes);
+      const generatedFiles = await this.generateConfigs(this.validNodes, this.config.outputConfigs);
       
       this.logger.info(`同步完成，生成了 ${generatedFiles.length} 个配置文件`);
       
@@ -220,8 +222,16 @@ export class SyncManager {
       maxNodes: this.config.testing?.max_nodes || 0
     };
     
+    // 创建节点管理器，用于分析节点
+    const nodeManager = new NodeManager();
+    
+    // 分析节点，添加地区、服务等标记
+    this.logger.info(`开始分析节点...`);
+    const { nodes: analyzedNodes } = nodeManager.processNodes(nodes);
+    this.logger.info(`节点分析完成`);
+    
     // 处理节点
-    const processedNodes = this.nodeProcessor.processNodes(nodes, options);
+    const processedNodes = this.nodeProcessor.processNodes(analyzedNodes, options);
     
     this.logger.info(`节点处理完成，处理后的节点数量: ${processedNodes.length}`);
     
@@ -242,27 +252,180 @@ export class SyncManager {
       return nodes;
     }
     
+    // 记录节点类型分布
+    const nodeTypes = {};
+    nodes.forEach(node => {
+      if (node && node.type) {
+        nodeTypes[node.type] = (nodeTypes[node.type] || 0) + 1;
+      }
+    });
+    this.logger.info(`测试前节点类型分布: ${JSON.stringify(nodeTypes)}`);
+    
     // 正常测试节点
     const testedNodes = await this.nodeTester.testNodes(nodes);
     
-    this.logger.info(`节点测试完成，有效节点数量: ${testedNodes.length}`);
+    // 分析测试结果
+    const validNodes = testedNodes.filter(node => node.valid);
+    const invalidNodes = testedNodes.filter(node => !node.valid);
+    
+    // 汇总无效原因
+    const errorCounts = {};
+    invalidNodes.forEach(node => {
+      if (node.error) {
+        errorCounts[node.error] = (errorCounts[node.error] || 0) + 1;
+      }
+    });
+    
+    // 有效节点类型分布
+    const validNodeTypes = {};
+    validNodes.forEach(node => {
+      if (node && node.type) {
+        validNodeTypes[node.type] = (validNodeTypes[node.type] || 0) + 1;
+      }
+    });
+    
+    this.logger.info(`节点测试完成，有效节点数量: ${validNodes.length}/${testedNodes.length}`);
+    this.logger.info(`有效节点类型分布: ${JSON.stringify(validNodeTypes)}`);
+    
+    if (Object.keys(errorCounts).length > 0) {
+      this.logger.info(`无效节点错误分布: ${JSON.stringify(errorCounts)}`);
+    }
+    
+    // 保存测试状态到文件
+    this.saveTestStatus({
+      timestamp: new Date().toISOString(),
+      totalNodes: testedNodes.length,
+      validNodes: validNodes.length,
+      invalidNodes: invalidNodes.length,
+      errorDistribution: errorCounts,
+      typeDistribution: validNodeTypes
+    });
     
     return testedNodes;
   }
 
   /**
+   * 保存测试状态到文件
+   * @param {Object} status 测试状态
+   */
+  saveTestStatus(status) {
+    try {
+      const statusPath = path.join(this.rootDir, this.config.options.dataDir, 'test_status.json');
+      fs.writeFileSync(statusPath, JSON.stringify(status, null, 2));
+      this.logger.info(`测试状态已保存到: ${statusPath}`);
+    } catch (error) {
+      this.logger.error(`保存测试状态失败: ${error.message}`);
+    }
+  }
+
+  /**
    * 生成配置文件
    * @param {Array} nodes 节点数组
+   * @param {Object} outputOptions 输出选项
    * @returns {Promise<Array>} 生成的文件列表
    */
-  async generateConfigs(nodes) {
-    this.logger.info(`开始生成配置文件...`);
-    
-    // 生成配置文件
-    const generatedFiles = await this.configGenerator.generateConfigs(nodes, this.config.outputConfigs);
-    
-    this.logger.info(`配置文件生成完成，生成了 ${generatedFiles.length} 个文件`);
-    
-    return generatedFiles;
+  async generateConfigs(nodes, outputOptions) {
+    try {
+      const validNodes = nodes.filter(node => node.valid === true);
+      const validCount = validNodes.length;
+      
+      // 保存节点数量统计信息
+      const stats = {
+        totalNodes: nodes.length,
+        validNodes: validCount,
+        timestamp: new Date().toISOString()
+      };
+      
+      // 写入节点统计信息到status文件
+      fs.writeFileSync(path.join(this.rootDir, this.config.options.dataDir, 'test_status.json'), JSON.stringify(stats, null, 2));
+      
+      // 写入到latest_test.json文件，方便GitHub Actions读取
+      fs.writeFileSync(path.join(this.rootDir, this.config.options.dataDir, 'test_results/latest_test.json'), JSON.stringify(stats, null, 2));
+      
+      this.logger.info(`有效节点数量: ${validCount}/${nodes.length}`);
+      
+      // 即使没有有效节点，也要继续生成配置文件
+      // 使节点分析和配置生成流程可以完成
+      if (validCount === 0) {
+        this.logger.warn('没有有效节点，将生成空的配置文件');
+      }
+      
+      // 输出配置文件
+      const configGenerator = new ConfigGenerator({
+        rootDir: this.rootDir,
+        outputDir: this.config.options.outputDir,
+        dataDir: this.config.options.dataDir,
+        githubUser: this.config.options.githubUser || '',
+        repoName: this.config.options.repoName || 'SubSyncForge',
+        logger: this.logger
+      });
+      
+      // 检查输出配置是否有效，如果无效则使用默认配置
+      if (!outputOptions || !outputOptions.outputs || !Array.isArray(outputOptions.outputs) || outputOptions.outputs.length === 0) {
+        this.logger.warn('输出配置无效或为空，使用默认配置');
+        // 使用默认的输出配置
+        const defaultOutputs = [
+          {
+            name: "clash",
+            format: "clash",
+            path: "clash.yaml",
+            template: "templates/clash.yaml",
+            enabled: true
+          },
+          {
+            name: "surge",
+            format: "surge",
+            path: "surge.conf",
+            template: "templates/surge.conf",
+            enabled: true
+          },
+          {
+            name: "singbox",
+            format: "singbox",
+            path: "singbox.json",
+            template: "templates/singbox.json",
+            enabled: true
+          },
+          {
+            name: "v2ray",
+            format: "v2ray",
+            path: "v2ray.json",
+            template: "templates/v2ray.json",
+            enabled: true
+          },
+          {
+            name: "all",
+            format: "text",
+            path: "all.txt",
+            template: "templates/text.txt",
+            enabled: true
+          }
+        ];
+        
+        // 在设置了解析后生成的节点时，使用validNodes；否则使用所有节点
+        const nodesToUse = this.config.options.useValidNodesOnly ? validNodes : nodes;
+        
+        const generatedFiles = await configGenerator.generateConfigs(nodesToUse, defaultOutputs);
+        this.logger.info(`生成了 ${generatedFiles.length} 个配置文件`);
+        
+        return generatedFiles;
+      }
+      
+      // 在设置了解析后生成的节点时，使用validNodes；否则使用所有节点
+      const nodesToUse = outputOptions.useValidNodesOnly ? validNodes : nodes;
+      
+      const generatedFiles = await configGenerator.generateConfigs(nodesToUse, outputOptions.outputs);
+      this.logger.info(`生成了 ${generatedFiles.length} 个配置文件`);
+      
+      // 生成RSS文件
+      if (this.config.features && this.config.features.rss) {
+        await this.generateRss(stats);
+      }
+      
+      return generatedFiles;
+    } catch (error) {
+      this.logger.error('生成配置文件时出错:', error);
+      throw error;
+    }
   }
 } 

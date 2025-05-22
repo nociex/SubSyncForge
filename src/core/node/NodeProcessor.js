@@ -107,20 +107,67 @@ export class NodeProcessor {
    * @returns {boolean} 是否有效
    */
   isValidNode(node) {
-    if (!node) return false;
-    
-    // 基本属性检查
-    if (!node.type || !node.server || !node.port) {
+    if (!node) {
+      this.logger.debug('节点无效: 节点对象为空');
       return false;
     }
     
+    // 基本属性检查
+    if (!node.type) {
+      this.logger.debug(`节点无效: 缺少type字段`, {name: node.name});
+      return false;
+    }
+    
+    if (!node.server) {
+      this.logger.debug(`节点无效: 缺少server字段`, {name: node.name, type: node.type});
+      return false;
+    }
+    
+    if (!node.port) {
+      this.logger.debug(`节点无效: 缺少port字段`, {name: node.name, type: node.type, server: node.server});
+      return false;
+    }
+    
+    // 服务器地址检查 - 过滤掉明显无效的地址
+    const invalidServerPatterns = [
+      /localhost/i,
+      /^127\./,
+      /^192\.168\./,
+      /^10\./,
+      /^172\.(1[6-9]|2[0-9]|3[0-1])\./,
+      /example/i,
+      /test/i,
+      /^[^.]+$/  // 不包含点的地址
+    ];
+    
+    for (const pattern of invalidServerPatterns) {
+      if (pattern.test(node.server)) {
+        this.logger.debug(`节点无效: 服务器地址无效`, {name: node.name, server: node.server});
+        return false;
+      }
+    }
+    
     // 特定类型的额外检查
-    if (node.type === 'ss' && (!node.settings || !node.settings.method || !node.settings.password)) {
-      return false;
-    } else if (node.type === 'vmess' && (!node.settings || !node.settings.id)) {
-      return false;
-    } else if (node.type === 'trojan' && (!node.settings || !node.settings.password)) {
-      return false;
+    if (node.type === 'ss' || node.type === 'shadowsocks') {
+      if (!node.settings || !node.settings.method || !node.settings.password) {
+        this.logger.debug(`SS节点无效: 缺少method或password`, {name: node.name, server: node.server});
+        return false;
+      }
+    } else if (node.type === 'vmess') {
+      if (!node.settings || !node.settings.id) {
+        this.logger.debug(`Vmess节点无效: 缺少id`, {name: node.name, server: node.server});
+        return false;
+      }
+    } else if (node.type === 'trojan') {
+      if (!node.settings || !node.settings.password) {
+        this.logger.debug(`Trojan节点无效: 缺少password`, {name: node.name, server: node.server});
+        return false;
+      }
+    } else if (node.type === 'vless') {
+      if (!node.settings || !node.settings.id) {
+        this.logger.debug(`VLESS节点无效: 缺少id`, {name: node.name, server: node.server});
+        return false;
+      }
     }
     
     return true;
