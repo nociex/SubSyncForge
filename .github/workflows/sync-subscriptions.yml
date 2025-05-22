@@ -50,6 +50,10 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-subscription-data-
       
+      # 确保数据目录存在
+      - name: Create data directory
+        run: mkdir -p data
+      
       - name: Install dependencies
         run: pnpm install
       
@@ -61,6 +65,7 @@ jobs:
         env:
           BARK_URL: ${{ secrets.BARK_URL }}
           BARK_TITLE: SubSyncForge
+          DATA_DIR: ${{ github.workspace }}/data
       
       - name: Commit and push changes
         run: |
