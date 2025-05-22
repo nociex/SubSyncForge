@@ -165,7 +165,7 @@ testing:
   concurrency: 5
   
   # 测试超时时间（毫秒）
-  timeout: 5000
+  timeout: 10000
   
   # 测试URL
   test_url: "http://latency-test.skk.moe/endpoint"
@@ -177,7 +177,7 @@ testing:
   sort_by_latency: true
   
   # 保留延迟低于此值的节点（毫秒，0表示不限制）
-  max_latency: 2000
+  max_latency: 5000
   
   # 保留最大节点数量（0表示不限制）
   max_nodes: 0
@@ -200,10 +200,10 @@ advanced:
   cache_ttl: 3600
   
   # 日志级别: debug, info, warn, error
-  log_level: "info"
+  log_level: "debug"
   
   # 使用代理获取订阅内容
-  proxy_for_subscription: false
+  proxy_for_subscription: true
   
   # 节点排序
   sort_nodes: true

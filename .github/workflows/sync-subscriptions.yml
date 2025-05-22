@@ -66,6 +66,10 @@ jobs:
           BARK_URL: ${{ secrets.BARK_URL }}
           BARK_TITLE: SubSyncForge
           DATA_DIR: data
+          ROOT_DIR: ${{ github.workspace }}
+          CONFIG_PATH: ${{ github.workspace }}/config/custom.yaml
+          PROXY_FOR_SUBSCRIPTION: "true"
+          LOG_LEVEL: debug
       
       - name: Commit and push changes
         run: |
