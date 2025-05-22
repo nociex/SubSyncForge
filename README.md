@@ -1,18 +1,68 @@
-# SubSyncForge - 订阅转换工具
+# SubSyncForge - 高级订阅转换和管理工具
 
-SubSyncForge 是一个用于转换和管理代理订阅源的工具。它可以自动同步、过滤、分组和转换订阅，并通过 Cloudflare Worker 提供访问。
+SubSyncForge 是一个功能强大的代理订阅转换和管理工具。它能自动获取、解析、优化和转换各种格式的代理订阅，并提供高级分组、过滤和规则管理功能。
 
-## 快速开始：部署到 Cloudflare Workers (推荐)
+## 🚀 主要特性
 
-1.  **一键部署**: 点击下方按钮，按照提示登录 Cloudflare 并完成部署。
-    [![Deploy to Cloudflare Workers](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/nociex/SubSyncForge)
-2.  **访问**: 部署成功后，您的 Worker 会有一个 `.workers.dev` 地址（或您绑定的自定义域名）。
+- **多格式订阅支持**：支持各种常见订阅格式（V2Ray、Clash、SS、SingBox等）
+- **增强的订阅获取**：智能请求头管理，支持处理各种编码（Base64、明文、JSON等）
+- **高级分组功能**：按地区、服务和协议自动分组节点
+- **强大的规则系统**：内置专业规则集，支持多种规则格式
+- **智能节点分析**：自动识别节点地区、协议和特殊用途
+- **多格式输出**：支持转换为Clash/Mihomo、Surge、V2Ray、SingBox等格式
+- **高性能设计**：异步处理、智能缓存和优化的内存使用
+- **完善的错误处理**：详细的日志和错误报告
+- **易于部署**：支持Cloudflare Workers一键部署
 
-## 如何使用
+## 🔥 最新改进 (v1.4.1)
 
-### 1. 配置订阅源
+- **增强订阅获取能力**：完全重写的`SubscriptionFetcher`类，提供更强的兼容性和稳定性
+- **智能内容检测**：自动识别和处理各种订阅格式，不再受限于订阅源类型
+- **增强解析能力**：优化的解析器能处理不规范的Base64编码和各种特殊情况
+- **多协议支持**：新增对Hysteria2、VLESS等协议的全面支持
 
-编辑 `config/subscriptions.json` 文件，添加您需要转换的订阅源：
+## 📋 快速开始
+
+### 方法一：部署到 Cloudflare Workers (推荐)
+
+1. **一键部署**：点击下方按钮，按照提示登录Cloudflare并完成部署。
+   [![Deploy to Cloudflare Workers](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/nociex/SubSyncForge)
+
+2. **配置订阅源**：在`config/subscriptions.json`中添加您的订阅源。
+
+3. **访问服务**：部署完成后，您可以通过分配的`.workers.dev`地址访问服务。
+
+### 方法二：本地部署
+
+1. **克隆仓库**：
+   ```bash
+   git clone https://github.com/nociex/SubSyncForge.git
+   cd SubSyncForge
+   ```
+
+2. **安装依赖**：
+   ```bash
+   pnpm install
+   ```
+
+3. **配置订阅**：
+   编辑`config/subscriptions.json`添加您的订阅源。
+
+4. **运行同步**：
+   ```bash
+   pnpm run sync
+   ```
+
+5. **测试订阅**：
+   ```bash
+   pnpm exec node test-subscription.js
+   ```
+
+## 💻 订阅配置
+
+### 订阅源配置
+
+编辑`config/subscriptions.json`：
 
 ```json
 {
@@ -20,33 +70,27 @@ SubSyncForge 是一个用于转换和管理代理订阅源的工具。它可以�
     {
       "id": "source-1",        // 唯一标识符
       "name": "我的订阅",      // 自定义名称
-      "url": "https://example.com/your-sub-url", // 您的原始订阅链接
-      "type": "v2ray",         // 原始订阅格式 (如 v2ray, clash, ss)
+      "url": "https://example.com/your-sub-url", // 原始订阅链接
+      "type": "auto",          // 订阅类型 (auto, v2ray, clash, ss等，推荐使用auto)
       "updateInterval": 21600  // 更新间隔 (秒)，0表示不自动更新
     },
-    {
-      "id": "source-2",
-      "name": "另一个订阅",
-      "url": "...",
-      "type": "clash"
-    }
-    // ...更多订阅源
+    // 更多订阅源...
   ]
 }
 ```
 
-*   将修改后的 `config/subscriptions.json` 推送到您的 GitHub 仓库，GitHub Actions 会自动同步并更新 Worker。
+> **注意**：最新版本推荐将`type`设置为`auto`，让系统自动检测订阅格式。
 
-### 2. 添加自定义节点 (可选)
+### 自定义节点配置
 
-如果您有单独的节点需要添加到订阅中，可以编辑 `config/custom.yaml`：
+如需添加自定义节点，编辑`config/custom.yaml`：
 
 ```yaml
 # 自定义节点
 nodes:
   # VMess 节点示例
   - type: vmess
-    name: "我的自定义VMess节点"
+    name: "我的VMess节点"
     server: my.server.com
     port: 443
     uuid: "your-uuid"
@@ -59,118 +103,118 @@ nodes:
       headers:
         Host: my.server.com
 
-  # Shadowsocks 节点示例
-  - type: ss
-    name: "我的自定义SS节点"
-    server: my.ss.server
-    port: 8388
-    cipher: aes-256-gcm
-    password: "your-password"
-
-# 订阅源配置 (会与subscriptions.json中的订阅合并)
-subscriptions:
-  - name: "订阅名称"      # 自定义名称
-    url: "订阅URL"       # 订阅链接
-    enabled: true       # 是否启用
-    # type: "clash"     # 可选: 订阅格式 (如clash, v2ray等)
-    # updateInterval: 21600 # 可选: 更新间隔(秒)
+  # 更多节点配置...
 ```
 
-*   同样，将修改后的 `config/custom.yaml` 推送到 GitHub 仓库以生效。
+## 🌐 使用转换后的订阅
 
-### 3. 获取转换后的订阅
+部署并配置完成后，您可以通过以下URL获取转换后的订阅：
 
-部署并配置完成后，您可以通过访问 Worker 地址获取转换后的订阅。
+### 完整订阅
 
-*   **获取完整订阅 (Clash/Mihomo 格式)**:
-    `https://<您的Worker地址>/`
-    或
-    `https://<您的Worker地址>/mihomo`
+- **Clash/Mihomo**: `https://<您的地址>/` 或 `https://<您的地址>/mihomo`
+- **Surge**: `https://<您的地址>/surge`
+- **V2Ray**: `https://<您的地址>/v2ray`
+- **SingBox**: `https://<您的地址>/singbox`
 
-*   **获取完整订阅 (其他格式)**:
-    *   Surge: `https://<您的Worker地址>/surge`
-    *   V2Ray (Base64): `https://<您的Worker地址>/v2ray`
-    *   SingBox: `https://<您的Worker地址>/singbox`
+### 分组订阅
 
-### 4. 使用分组节点 (核心功能)
+SubSyncForge会自动按地区和服务分组节点，您可以直接获取这些分组：
 
-SubSyncForge 会自动将节点按地区和常见服务（如 Netflix, OpenAI）分组。您可以通过特定链接直接获取这些分组后的节点订阅 (Base64 格式)：
+#### 按地区
 
-*   **按地区**:
-    *   香港: `https://<您的Worker地址>/groups/HK`
-    *   台湾: `https://<您的Worker地址>/groups/TW`
-    *   新加坡: `https://<您的Worker地址>/groups/SG`
-    *   美国: `https://<您的Worker地址>/groups/US`
-    *   日本: `https://<您的Worker地址>/groups/JP`
-    *   其他: `https://<您的Worker地址>/groups/Others`
+- 香港: `https://<您的地址>/groups/HK`
+- 台湾: `https://<您的地址>/groups/TW`
+- 新加坡: `https://<您的地址>/groups/SG`
+- 美国: `https://<您的地址>/groups/US`
+- 日本: `https://<您的地址>/groups/JP`
+- 其他: `https://<您的地址>/groups/Others`
 
-*   **按服务**:
-    *   OpenAI: `https://<您的Worker地址>/groups/OpenAI`
-    *   Netflix: `https://<您的Worker地址>/groups/Netflix`
-    *   Disney+: `https://<您的Worker地址>/groups/Disney+`
-    *   (更多服务分组请查看项目配置或实际输出)
+#### 按服务
 
-将这些链接添加到您的代理客户端即可使用特定分组的节点。
+- OpenAI: `https://<您的地址>/groups/OpenAI`
+- Netflix: `https://<您的地址>/groups/Netflix`
+- Disney+: `https://<您的地址>/groups/Disney+`
+- (更多服务分组请查看项目配置或实际输出)
 
-### 5. Bark 通知 (可选)
+## 🔔 Bark 通知 (可选)
 
-如果您使用 Bark (iOS/macOS 通知应用)，可以配置推送通知，以便在订阅更新时收到提醒。
+配置Bark通知，在订阅更新时收到推送：
 
-1.  获取您的 Bark 推送 URL (类似 `https://api.day.app/yourkey/`)。
-2.  在您的 GitHub Fork 仓库中，进入 `Settings` -> `Secrets and variables` -> `Actions`。
-3.  添加一个新的 `Repository secret`：
-    *   Name: `BARK_URL`
-    *   Value: 您的完整 Bark URL (必须包含最后的 `/`)
-4.  (可选) 添加另一个 Secret `BARK_TITLE` 来自定义通知标题。
+1. 获取您的Bark推送URL (类似`https://api.day.app/yourkey/`)
+2. 在GitHub仓库设置中添加Secret:
+   - `BARK_URL`: 您的Bark URL
+   - `BARK_TITLE`: 自定义通知标题 (可选)
 
-配置完成后，每次 GitHub Actions 成功同步订阅，您都会收到 Bark 推送。
+## 🧪 测试订阅
 
-## 注意
+SubSyncForge提供了一个便捷的测试脚本，用于测试订阅获取和解析功能：
 
-*   默认情况下，GitHub Actions 会定期运行 (通常是每6小时) 来同步和更新您的订阅。您可以在 `.github/workflows/sync-subscriptions.yml` 文件中修改 `schedule` 来调整频率。
-*   转换模板位于 `templates/` 目录，高级用户可以自行修改。
-*   规则配置位于 `config/rules.conf`，用于 Clash/Surge 等格式的规则分流。
+```bash
+pnpm exec node test-subscription.js
+```
 
----
+您可以编辑`test-subscription.js`文件中的订阅URL进行测试。
 
-## 项目架构
+## 🛠️ 高级功能
 
-SubSyncForge 采用模块化架构设计，主要包含以下核心模块：
+### 规则管理
 
-### 核心模块
+编辑`config/rules.conf`可自定义规则分流配置，支持以下规则类型：
 
-- **配置模块** - 负责加载和管理配置
-- **订阅获取模块** - 负责从远程服务器获取订阅内容
-- **节点处理模块** - 负责节点去重和过滤
-- **节点测试模块** - 负责测试节点连通性和性能
-- **配置生成模块** - 负责生成各种格式的配置文件
-- **代理管理模块** - 负责管理和提供代理
-- **工具模块** - 提供日志、文件系统和时间限制等功能
-- **同步管理器** - 整合以上模块，协调工作流程
+- DOMAIN / DOMAIN-SUFFIX / DOMAIN-KEYWORD
+- RULE-SET (远程规则集)
+- GEOIP
+- 复合规则 (AND / OR / NOT)
 
-### 目录结构
+### 模板定制
+
+`templates/`目录包含各种格式的配置模板，您可以根据需要自定义这些模板。
+
+### 节点管理
+
+SubSyncForge提供高级节点管理功能：
+
+- **智能分析**：自动识别节点的地区、协议和特殊用途
+- **标签系统**：添加自定义标签，便于筛选和分组
+- **重命名**：支持自定义节点命名格式
+- **去重处理**：自动去除重复节点
+
+## 📚 项目架构
+
+SubSyncForge采用模块化设计，主要包含以下组件：
 
 ```
 src/
-├── core/                  # 核心功能模块
-│   ├── config/            # 配置相关
-│   ├── subscription/      # 订阅获取
-│   ├── node/              # 节点处理
-│   ├── testing/           # 节点测试
-│   ├── output/            # 配置生成
-│   ├── proxy/             # 代理管理
-│   ├── utils/             # 通用工具
-│   └── SyncManager.js     # 同步管理器
-├── converter/             # 格式转换器
-├── scripts/               # 脚本
-│   └── sync-subscriptions.js # 主入口脚本
-└── ARCHITECTURE.md        # 详细架构文档
+├── converter/          # 核心转换模块
+│   ├── fetcher/        # 订阅获取
+│   ├── parser/         # 订阅解析
+│   ├── formats/        # 格式转换
+│   ├── dedup/          # 节点去重
+│   ├── analyzer/       # 节点分析
+│   └── rules/          # 规则处理
+├── utils/              # 通用工具
+│   ├── logger/         # 日志工具
+│   ├── events/         # 事件系统
+│   └── validation/     # 数据验证
+└── scripts/            # 脚本工具
 ```
 
-### 开发者文档
+## 📝 常见问题
 
-更多开发者信息请参阅 [src/ARCHITECTURE.md](src/ARCHITECTURE.md) 文档，其中包含详细的模块说明、数据流和主要接口。
+**Q: 为什么我的订阅无法获取或解析？**  
+A: 最新版本 (v1.4.1) 增强了订阅获取和解析能力，建议将订阅类型设置为`auto`，让系统自动检测格式。如果仍有问题，可以使用`test-subscription.js`进行测试诊断。
+
+**Q: 如何自定义分组？**  
+A: 编辑`config/groups.json`文件可以自定义节点分组规则。
+
+**Q: 如何修改更新频率？**  
+A: 您可以在`.github/workflows/sync-subscriptions.yml`中修改`schedule`配置。
+
+## 📄 许可证
+
+本项目使用MIT许可证。详情请查看[LICENSE](LICENSE)文件。
 
 ---
 
-*如需了解更多开发细节、API 或贡献，请参考原版 README 或相关文档。*
+*更多技术细节和API文档，请参考项目文档目录。*

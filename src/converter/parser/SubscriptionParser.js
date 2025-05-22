@@ -22,8 +22,11 @@ export class SubscriptionParser {
     
     this.logger.log(`开始解析订阅数据，长度: ${raw.length}`);
     
+    // 预处理订阅数据（修复常见问题）
+    const processedRaw = this._preprocessSubscriptionData(raw);
+    
     // 检测输入格式
-    const format = this.detectFormat(raw);
+    const format = this.detectFormat(processedRaw);
     this.logger.log(`检测到订阅格式: ${format}`);
     
     const parser = this.parsers[format];
@@ -36,7 +39,7 @@ export class SubscriptionParser {
     try {
       // 解析数据并转换为统一格式
       this.logger.log(`使用 ${format} 解析器解析数据...`);
-      const nodes = await parser.parse(raw);
+      const nodes = await parser.parse(processedRaw);
       this.logger.log(`解析成功，获取到 ${nodes.length} 个节点`);
       
       const normalizedNodes = this.normalize(nodes);
@@ -48,22 +51,87 @@ export class SubscriptionParser {
       // 尝试使用其他解析器
       this.logger.log(`尝试备用解析器...`);
       
+      // 尝试所有解析器，包括刚刚失败的那个（使用处理过的数据可能成功）
       for (const [backupFormat, backupParser] of Object.entries(this.parsers)) {
-        if (backupFormat !== format) {
-          try {
-            this.logger.log(`尝试使用 ${backupFormat} 解析器...`);
-            const nodes = await backupParser.parse(raw);
+        try {
+          this.logger.log(`尝试使用 ${backupFormat} 解析器...`);
+          // 对于Base64解析器，如果第一次尝试失败，尝试使用原始数据
+          const dataToTry = backupFormat === 'base64' && format === 'base64' ? raw : processedRaw;
+          const nodes = await backupParser.parse(dataToTry);
+          if (nodes && nodes.length > 0) {
             this.logger.log(`使用备用解析器 ${backupFormat} 成功，获取到 ${nodes.length} 个节点`);
             return this.normalize(nodes);
-          } catch (backupError) {
-            // 忽略备用解析器错误，继续尝试下一个
+          } else {
+            this.logger.log(`备用解析器 ${backupFormat} 未找到节点`);
+          }
+        } catch (backupError) {
+          // 忽略备用解析器错误，继续尝试下一个
+          this.logger.log(`备用解析器 ${backupFormat} 失败: ${backupError.message}`);
+        }
+      }
+      
+      // 所有解析器都失败，尝试直接解析是否有节点URI
+      try {
+        this.logger.log(`尝试直接提取节点URI...`);
+        const uriPattern = /(vmess|ss|ssr|trojan|hysteria2|hysteria|vless|socks|tuic):\/\/[A-Za-z0-9+/=]+/g;
+        const matches = processedRaw.match(uriPattern);
+        
+        if (matches && matches.length > 0) {
+          this.logger.log(`提取到 ${matches.length} 个节点URI`);
+          const nodes = [];
+          
+          for (const uri of matches) {
+            try {
+              const node = await this.parseLine(uri);
+              if (node) {
+                nodes.push(node);
+              }
+            } catch (e) {
+              // 忽略单个URI解析错误
+            }
+          }
+          
+          if (nodes.length > 0) {
+            this.logger.log(`成功从URI提取 ${nodes.length} 个节点`);
+            return this.normalize(nodes);
           }
         }
+      } catch (e) {
+        this.logger.error(`直接提取节点URI失败: ${e.message}`);
       }
       
       // 所有解析器都失败
       throw new Error(`Failed to parse subscription data: ${error.message}`);
     }
+  }
+
+  /**
+   * 预处理订阅数据，修复常见问题
+   * @private
+   */
+  _preprocessSubscriptionData(raw) {
+    if (!raw) return raw;
+    
+    // 处理Windows行尾
+    let processed = raw.replace(/\r\n/g, '\n');
+    
+    // 移除UTF-8 BOM
+    if (processed.charCodeAt(0) === 0xFEFF) {
+      processed = processed.slice(1);
+    }
+    
+    // 尝试检测并修复截断的Base64
+    if (/^[A-Za-z0-9+/=]+$/.test(processed.trim())) {
+      // 修复Base64填充
+      const length = processed.trim().length;
+      if (length % 4 !== 0) {
+        const paddingNeeded = 4 - (length % 4);
+        processed = processed.trim() + '='.repeat(paddingNeeded);
+        this.logger.log(`修复了Base64填充，添加了 ${paddingNeeded} 个'='`);
+      }
+    }
+    
+    return processed;
   }
 
   async parseLine(line) {
@@ -87,8 +155,15 @@ export class SubscriptionParser {
   detectFormat(raw) {
     this.logger.log(`检测订阅格式...`);
     
-    // 首先检查是否是Clash/YAML格式(优先级最高)
-    // Clash配置特征更明显，应该优先检测
+    // 首先检查是否是纯文本URI格式（vmess://, ss://等）
+    // 这样的格式更好识别，应该优先检查
+    const protocolUrls = (raw.match(/(vmess|ss|ssr|trojan|hysteria2|hysteria|vless|socks|tuic):\/\/[^\s]+/g) || []);
+    if (protocolUrls.length > 0) {
+      this.logger.log(`检测到纯文本格式 (含有 ${protocolUrls.length} 个协议URI链接)`);
+      return 'plain';
+    }
+    
+    // 检查是否是Clash/YAML格式(优先级较高)
     if (
         (raw.includes('proxies:') && (raw.includes('rules:') || raw.includes('proxy-groups:'))) || 
         raw.includes('port: ') && raw.includes('mode: ') && raw.includes('proxies:') ||
@@ -100,23 +175,33 @@ export class SubscriptionParser {
     
     // 检查JSON格式
     try {
-      JSON.parse(raw);
-      this.logger.log(`检测到JSON格式`);
-      return 'json';
+      if ((raw.trim().startsWith('{') && raw.trim().endsWith('}')) || 
+          (raw.trim().startsWith('[') && raw.trim().endsWith(']'))) {
+        JSON.parse(raw);
+        this.logger.log(`检测到JSON格式`);
+        return 'json';
+      }
     } catch (e) {
       // 不是有效JSON
+      this.logger.log(`JSON解析失败: ${e.message}`);
     }
     
-    // 检查纯文本格式（v2ray、ss、ssr等）
-    // 确保内容以这些协议开头，或者包含多个这样的URL
-    const protocolUrls = (raw.match(/(vmess|ss|ssr|trojan|hysteria2|hysteria|vless|socks|tuic):\/\/[^\s]+/g) || []);
-    if (protocolUrls.length > 0) {
-      this.logger.log(`检测到纯文本格式 (含有 ${protocolUrls.length} 个协议URI链接)`);
-      return 'plain';
+    // 检查是否是Surge配置
+    if (
+      (raw.includes('[Proxy]') || raw.includes('[Proxy Group]')) &&
+      /[^=]+=\s*(http|https|trojan|vmess|ss|socks5)/.test(raw)
+    ) {
+      this.logger.log(`检测到Surge格式配置`);
+      // Surge配置也由YAML解析器处理
+      return 'yaml';
     }
     
-    // 普通URL不应该用于判断节点格式
-    // 如果只是配置文件中包含了一些http/https链接，不应该判定为plain
+    // 检查是否是Quantumult X配置
+    if (raw.includes('[server_local]') || raw.includes('[server_remote]')) {
+      this.logger.log(`检测到QuantumultX格式配置`);
+      // Quantumult X配置也由YAML解析器处理
+      return 'yaml';
+    }
     
     // 尝试base64解码
     try {
@@ -144,10 +229,29 @@ export class SubscriptionParser {
             this.logger.log(`检测到Base64格式，解码后包含节点URI`);
             return 'base64';
           }
+          
+          // 检查解码后是否是JSON
+          try {
+            if ((decoded.trim().startsWith('{') && decoded.trim().endsWith('}')) || 
+                (decoded.trim().startsWith('[') && decoded.trim().endsWith(']'))) {
+              JSON.parse(decoded);
+              this.logger.log(`检测到Base64编码的JSON格式`);
+              return 'base64';
+            }
+          } catch (e) {
+            // 不是有效JSON
+          }
+          
+          // 检查解码后是否是YAML
+          if (decoded.includes('proxies:') || decoded.includes('Proxy:')) {
+            this.logger.log(`检测到Base64编码的YAML格式`);
+            return 'base64';
+          }
         }
       }
     } catch (e) {
       // 解码失败
+      this.logger.warn(`Base64解码尝试失败: ${e.message}`);
     }
     
     // 再次检查是否是其他类型的YAML
@@ -155,6 +259,20 @@ export class SubscriptionParser {
         (raw.includes('- name:') && raw.includes('type:'))) {
       this.logger.log(`检测到其他YAML格式`);
       return 'yaml';
+    }
+    
+    // 检查是否是SIP008格式（JSON）
+    if (raw.includes('"version"') && raw.includes('"servers"') && 
+        (raw.includes('"method"') || raw.includes('"password"'))) {
+      this.logger.log(`检测到可能的SIP008格式`);
+      return 'json';
+    }
+    
+    // 最后检查是否是Base64（可能是编码后的其他格式）
+    const base64Pattern = /^[A-Za-z0-9+/=\s]+$/;
+    if (base64Pattern.test(raw)) {
+      this.logger.log(`内容看起来像Base64编码，尝试Base64解析器`);
+      return 'base64';
     }
     
     // 默认使用YAML解析器
@@ -169,15 +287,39 @@ export class SubscriptionParser {
     }
     
     return nodes.filter(node => {
+      // 基本有效性检查
       const isValid = node && node.type && node.server && node.port;
       if (!isValid) {
         this.logger.warn(`忽略无效节点: ${JSON.stringify(node)}`);
+        return false;
       }
-      return isValid;
+      
+      // 额外检查：服务器不应该是保留IP或明显无效域名
+      if (
+        node.server === '0.0.0.0' || 
+        node.server === '127.0.0.1' || 
+        node.server === 'localhost' || 
+        node.server === 'example.com' ||
+        node.server.startsWith('192.168.') ||
+        node.server.startsWith('10.') ||
+        node.server === 'www.example.com'
+      ) {
+        this.logger.warn(`忽略使用保留IP或示例域名的节点: ${node.server}`);
+        return false;
+      }
+      
+      // 端口检查
+      const port = parseInt(node.port);
+      if (isNaN(port) || port <= 0 || port > 65535) {
+        this.logger.warn(`忽略无效端口的节点: ${node.port}`);
+        return false;
+      }
+      
+      return true;
     }).map(node => ({
       id: node.id || this.generateId(),
       type: node.type,
-      name: node.name || `${node.type}-${node.server}:${node.port}`,
+      name: this._sanitizeNodeName(node.name) || `${node.type}-${node.server}:${node.port}`,
       server: node.server,
       port: parseInt(node.port),
       protocol: node.protocol,
@@ -187,6 +329,21 @@ export class SubscriptionParser {
         addedAt: new Date().toISOString()
       }
     }));
+  }
+
+  /**
+   * 清理节点名称，移除不安全字符
+   * @private
+   */
+  _sanitizeNodeName(name) {
+    if (!name) return '';
+    
+    // 移除不可见字符、控制字符和特殊字符
+    return name
+      .replace(/[\u0000-\u001F\u007F-\u009F]/g, '') // 控制字符
+      .replace(/[\uFFFD\uFFFE\uFFFF]/g, '')         // 无效Unicode
+      .replace(/[\u200B-\u200D\uFEFF]/g, '')        // 零宽字符
+      .trim();
   }
 
   generateId() {

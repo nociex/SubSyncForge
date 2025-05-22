@@ -1,6 +1,7 @@
 // 引入 node-fetch 和 https-proxy-agent
 import fetch from 'node-fetch';
 import { HttpsProxyAgent } from 'https-proxy-agent';
+
 export class SubscriptionFetcher {
   constructor(options = {}) {
     this.timeout = options.timeout || 30000; // 默认30秒超时
@@ -12,28 +13,57 @@ export class SubscriptionFetcher {
     // 默认请求配置
     this.defaultOptions = {
       headers: {
-        // 使用v2rayN作为UA，很多订阅源都接受这个
-        'User-Agent': options.userAgent || 'v2rayN/5.29',
-        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+        // 使用更多常见订阅客户端的UA
+        'User-Agent': options.userAgent || 'v2rayN/5.38',
+        'Accept': '*/*',  // 接受任何内容类型
         'Accept-Language': 'zh-CN,zh;q=0.9,en;q=0.8',
         'Cache-Control': 'no-cache',
-        'Pragma': 'no-cache'
+        'Pragma': 'no-cache',
+        // 一些订阅服务提供商需要特定请求头
+        'Connection': 'keep-alive',
+        'Content-Type': 'application/json;charset=utf-8',
+        'Origin': 'clash',  // 一些订阅服务会检查这个字段
+        'Subscription-Userinfo': 'upload=0; download=0; total=0; expire=0'
       }
     };
     
     // 备用UA列表，如果请求失败会尝试使用不同UA
     this.userAgents = [
-      'v2rayN/5.29',
-      'Clash/1.15.1',  // 部分订阅源会特别接受Clash UA
+      'v2rayN/5.38',
+      'Clash/2.0.0',  // 新版Clash UA
+      'ClashX/1.96.1',
+      'ClashVerge/1.3.0',
+      'Shadowrocket/1906 CFNetwork/1410.0.3 Darwin/22.6.0',
+      'Quantumult/1.0.0 (iPhone; iOS 16.6; Scale/3.00)',
+      'Quantumult%20X/1.0.30 (iPhone14,3; iOS 16.6)',
+      'Stash/2.5.1 (iPhone; iOS 16.6; Scale/3.00)',
+      'Surge/5.8.0',
       'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
       'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.2 Safari/605.1.15',
       'Mozilla/5.0 (iPhone; CPU iPhone OS 17_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.2 Mobile/15E148 Safari/604.1',
       'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:121.0) Gecko/20100101 Firefox/121.0',
-      'ShadowrocketNG/2.0',
-      'Stash/2.4.6',
-      'Quantumult/1.0.0',
-      'ClashForAndroid/2.5.12'
     ];
+    
+    // 特定订阅源域名和对应的特殊配置
+    this.specialDomainConfigs = {
+      'sub.xeton.dev': {
+        headers: {
+          'User-Agent': 'clash',
+          'Origin': 'clash'
+        }
+      },
+      'api.v1.mk': {
+        headers: {
+          'User-Agent': 'ClashForAndroid/2.5.12'
+        }
+      },
+      'api.suda.cat': {
+        headers: {
+          'User-Agent': 'ClashMeta'
+        }
+      }
+      // 可以根据实际情况添加更多特殊域名的配置
+    };
   }
 
   /**
@@ -66,6 +96,34 @@ export class SubscriptionFetcher {
   }
 
   /**
+   * 获取域名特定配置
+   * @private
+   */
+  _getDomainSpecificConfig(url) {
+    try {
+      const parsedUrl = new URL(url);
+      const domain = parsedUrl.hostname;
+      
+      // 查找完整域名匹配
+      if (this.specialDomainConfigs[domain]) {
+        return this.specialDomainConfigs[domain];
+      }
+      
+      // 查找部分域名匹配（二级域名）
+      for (const [configDomain, config] of Object.entries(this.specialDomainConfigs)) {
+        if (domain.endsWith(`.${configDomain}`) || domain.includes(configDomain)) {
+          return config;
+        }
+      }
+      
+      return null;
+    } catch (e) {
+      this.logger.warn(`检查域名特定配置时出错: ${e.message}`);
+      return null;
+    }
+  }
+
+  /**
    * 尝试解析响应内容
    * @private
    */
@@ -91,12 +149,21 @@ export class SubscriptionFetcher {
     return data;
   }
 
-  async fetch(url, options = {}) { // 移除 requireChinaIP 处理
+  async fetch(url, options = {}) {
     let lastError;
     // 直接使用传入的 options 作为 requestOptions
     const requestOptions = options;
 
-    this.logger.log(`开始获取订阅: ${url}`); // 移除 requireChinaIP 相关日志
+    this.logger.log(`开始获取订阅: ${url}`);
+
+    // 检查是否有域名特定配置
+    const domainConfig = this._getDomainSpecificConfig(url);
+    if (domainConfig) {
+      this.logger.log(`发现域名特定配置，应用特殊请求头`);
+      if (domainConfig.headers) {
+        requestOptions.headers = { ...requestOptions.headers, ...domainConfig.headers };
+      }
+    }
 
     // 合并默认选项和用户提供的请求选项
     const baseFetchOptions = this._mergeOptions(this.defaultOptions, requestOptions);
@@ -108,51 +175,34 @@ export class SubscriptionFetcher {
 
     for (let attempt = 0; attempt < totalAttempts; attempt++) {
       const currentFetchOptions = { ...baseFetchOptions }; // 每次循环创建新的选项副本
-      let agent = null; // 重置 agent
-
+      let agent = null;
+      
       try {
-        // UA 切换逻辑保持不变
-        if (attempt > 0 && attempt % this.maxRetries === 0) {
-          uaIndex = (uaIndex + 1) % this.userAgents.length;
-          currentFetchOptions.headers['User-Agent'] = this.userAgents[uaIndex];
-          this.logger.log(`切换UA为: ${currentFetchOptions.headers['User-Agent']}`);
-        } else if (attempt === 0) {
-          currentFetchOptions.headers['User-Agent'] = baseFetchOptions.headers['User-Agent'] || this.userAgents[uaIndex];
-        }
-
-        if (attempt > 0) {
-          this.logger.log(`重试第${attempt}次获取: ${url}`);
-          this.logger.log(`使用UA: ${currentFetchOptions.headers['User-Agent']}`);
-        }
-
-        // --- 代理回退逻辑 ---
-        // 检查是否达到代理回退阈值
+        // 根据尝试次数切换UA
+        uaIndex = attempt % this.userAgents.length;
+        currentFetchOptions.headers['User-Agent'] = this.userAgents[uaIndex];
+        
+        this.logger.log(`尝试 #${attempt + 1}/${totalAttempts}, 使用UA: ${this.userAgents[uaIndex]}`);
+        
+        // 代理回退策略：如果失败次数达到阈值，尝试使用代理
         if (attempt >= this.proxyFallbackThreshold) {
-          if (!useProxy) { // 首次达到阈值时打印日志
-             this.logger.log(`尝试次数 (${attempt}) 已达阈值 (${this.proxyFallbackThreshold})，后续尝试将使用国内代理 (如果可用)`);
-             useProxy = true; // 标记后续尝试使用代理
-          }
-
-          if (this.chinaProxyProvider) {
-            const proxyUrl = this.chinaProxyProvider(); // 获取一个国内代理
-            if (proxyUrl) {
-              this.logger.log(`尝试使用国内代理 ${proxyUrl} 获取 ${url}`);
-              try {
-                agent = new HttpsProxyAgent(proxyUrl);
-              } catch (e) {
-                this.logger.error(`创建代理 Agent 失败 (${proxyUrl}): ${e.message}`);
-                // 创建失败，本次尝试不使用代理
-              }
+          useProxy = true;
+        }
+        
+        // 根据useProxy标志决定是否使用代理
+        if (useProxy && this.chinaProxyProvider) {
+          try {
+            const proxy = await this.chinaProxyProvider();
+            if (proxy) {
+              agent = new HttpsProxyAgent(proxy);
+              this.logger.log(`使用代理: ${proxy}`);
             } else {
-              this.logger.warn(`需要使用国内代理但未找到可用代理: ${url}`);
-              // 找不到代理，本次尝试不使用代理
+              this.logger.warn(`无法获取有效代理，将直接连接`);
             }
-          } else {
-             this.logger.warn(`需要使用国内代理但未配置 chinaProxyProvider`);
-             // 未配置 provider，本次尝试不使用代理
+          } catch (proxyError) {
+            this.logger.warn(`获取代理出错: ${proxyError.message}`);
           }
         }
-        // --- 结束代理回退逻辑 ---
 
         // 添加随机查询参数防止缓存
         const urlWithParam = this._addRandomParam(url);
@@ -173,7 +223,6 @@ export class SubscriptionFetcher {
         try {
           const fetchOpts = {
             ...currentFetchOptions,
-            // signal: controller.signal, // node-fetch@2 不直接用 AbortController signal
             timeout: this.timeout, // 使用 node-fetch 的 timeout 选项
             agent: agent // 传递 agent
           };
@@ -191,8 +240,6 @@ export class SubscriptionFetcher {
           // 处理其他 fetch 错误，例如 DNS 解析失败、连接被拒等
           this.logger.error(`Fetch API 调用出错: ${fetchError.message}, 类型: ${fetchError.type || 'N/A'}`);
           throw fetchError; // 重新抛出以便重试逻辑捕获
-        } finally {
-          // clearTimeout(timeoutId);
         }
         
         // 检查HTTP状态码
@@ -283,7 +330,7 @@ export class SubscriptionFetcher {
       if (/^[A-Za-z0-9+/=]+$/.test(data.trim())) {
         this.logger.log('检测到可能的Base64编码内容');
         try {
-          const decoded = Buffer.from(data, 'base64').toString('utf-8');
+          const decoded = Buffer.from(data.trim(), 'base64').toString('utf-8');
           // 检查解码后内容是否包含常见协议
           if (decoded.includes('vmess://') || decoded.includes('ss://') || 
               decoded.includes('ssr://') || decoded.includes('trojan://') || 
@@ -307,7 +354,13 @@ export class SubscriptionFetcher {
       if ((data.startsWith('{') && data.endsWith('}')) || 
           (data.startsWith('[') && data.endsWith(']'))) {
         this.logger.log('检测到可能的JSON内容');
-        return true;
+        try {
+          // 验证是否可解析为JSON
+          JSON.parse(data);
+          return true;
+        } catch (e) {
+          this.logger.warn(`JSON解析失败，可能不是有效的JSON: ${e.message}`);
+        }
       }
       
       // 检测URI格式
@@ -315,6 +368,24 @@ export class SubscriptionFetcher {
           data.includes('ssr://') || data.includes('trojan://') ||
           data.includes('hysteria2://') || data.includes('vless://')) {
         this.logger.log('检测到直接的节点URI');
+        return true;
+      }
+      
+      // 检测是否是旧版SSD格式
+      if (data.includes('"airport"') && data.includes('"port"') && data.includes('"servers"')) {
+        this.logger.log('检测到可能的SSD格式');
+        return true;
+      }
+      
+      // 检测是否是QX格式（含有=后面跟着http/https/trojan等字样）
+      if (/^[^=]+=\s*(http|https|trojan|vmess|shadowsocks)/.test(data)) {
+        this.logger.log('检测到可能的QuantumultX格式');
+        return true;
+      }
+      
+      // 检测是否是Surge/Loon格式
+      if (/^[^=]+=\s*(http|https|trojan|vmess|ss|socks5)/.test(data)) {
+        this.logger.log('检测到可能的Surge/Loon格式');
         return true;
       }
       
