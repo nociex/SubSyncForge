@@ -354,6 +354,13 @@ async function fetchSubscription(subscription, converter) {
             Origin: 'https://alalbb.top',
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
           };
+        } else if (subscription.url.includes('jikun.fun')) {
+          console.log(`检测到jikun.fun域名，添加特定请求头`);
+          customHeaders = {
+            Referer: 'https://zh.jikun.fun/',
+            Origin: 'https://zh.jikun.fun',
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
+          };
         }
         
         // 添加用户自定义请求头 (如果有)
@@ -390,6 +397,7 @@ async function fetchSubscription(subscription, converter) {
         
         try {
           // 获取订阅内容
+          console.log(`开始获取订阅内容...`);
           console.log(`开始获取订阅: ${subscription.url}`);
           
           // 添加时间戳防止缓存
@@ -450,16 +458,65 @@ async function fetchSubscription(subscription, converter) {
           // 检测格式类型
           if (content.includes('proxies:') || content.includes('Proxy:') || content.includes('proxy-groups:')) {
             console.log(`检测到可能的YAML/Clash配置`);
-          } else if (content.startsWith('ss://') || content.startsWith('ssr://') || content.startsWith('vmess://') || content.startsWith('trojan://')) {
+          } else if (content.startsWith('ss://') || content.startsWith('ssr://') || content.startsWith('vmess://') || content.startsWith('trojan://') || content.startsWith('vless://') || content.startsWith('socks://') || content.startsWith('tuic://') || content.startsWith('hysteria://')) {
             console.log(`检测到Base64/文本格式的节点列表`);
           } else if (content.startsWith('{') && content.includes('"outbounds"')) {
             console.log(`检测到V2Ray/Sing-box JSON配置`);
           } else if (/^[A-Za-z0-9+/=]+$/.test(content.trim())) {
             console.log(`检测到可能的Base64编码内容`);
+            
+            // 尝试解码Base64内容并查看是否包含有效协议
+            try {
+              const decodedContent = Buffer.from(content, 'base64').toString('utf-8');
+              if (decodedContent.includes('ss://') || decodedContent.includes('ssr://') || 
+                  decodedContent.includes('vmess://') || decodedContent.includes('trojan://') ||
+                  decodedContent.includes('vless://') || decodedContent.includes('socks://') ||
+                  decodedContent.includes('tuic://') || decodedContent.includes('hysteria://')) {
+                console.log(`Base64解码后发现有效协议前缀`);
+              }
+            } catch (e) {
+              console.error(`Base64解码失败: ${e.message}`);
+            }
           }
+          
+          // 保存原始订阅数据，方便调试
+          try {
+            const rawDataDir = path.join(CONFIG.rootDir, CONFIG.options.dataDir);
+            ensureDirectoryExists(rawDataDir);
+            fs.writeFileSync(path.join(rawDataDir, `${subscription.name}.txt`), content);
+            console.log(`原始订阅数据已保存到: ${path.join(rawDataDir, `${subscription.name}.txt`)}`);
+          } catch (e) {
+            console.error(`保存原始订阅数据失败: ${e.message}`);
+          }
+          
+          // 尝试识别订阅格式
+          let detectedFormat = null;
+          
+          if (/^[A-Za-z0-9+/=]+$/.test(content.trim())) {
+            console.log(`检测到Base64编码格式`);
+            detectedFormat = 'base64';
+          } else if (content.startsWith('{') && (content.includes('"outbounds"') || content.includes('"proxies"'))) {
+            console.log(`检测到JSON格式`);
+            detectedFormat = 'json';
+          } else if (content.includes('proxies:') || content.includes('Proxy:')) {
+            console.log(`检测到YAML格式`);
+            detectedFormat = 'yaml';
+          } else if (content.startsWith('ss://') || content.startsWith('ssr://') || 
+                    content.startsWith('vmess://') || content.startsWith('trojan://') ||
+                    content.startsWith('vless://') || content.startsWith('socks://') ||
+                    content.startsWith('tuic://') || content.startsWith('hysteria://')) {
+            console.log(`检测到纯文本节点列表`);
+            detectedFormat = 'text';
+          }
+          
+          console.log(`检测到的订阅格式: ${detectedFormat || '未知'}`);
+          console.log(`解析订阅数据...`);
+          
+          console.log(`成功获取订阅: ${subscription.name}, 原始数据大小: ${content.length} 字节`);
           
         } catch (fetchError) {
           console.error(`获取订阅出错: ${fetchError.message}`);
+          console.error(`详细错误信息: ${fetchError.stack}`);
           return {
             source: subscription.name,
             nodes: [],
@@ -470,6 +527,12 @@ async function fetchSubscription(subscription, converter) {
         
         // 解析订阅内容
         try {
+          console.log(`开始使用订阅解析器解析数据`);
+          console.log(`开始解析订阅数据，长度: ${content.length}`);
+          
+          // 添加更多日志以协助调试
+          console.log(`检测订阅格式...`);
+          
           const parsedNodes = await converter.parseSubscription(content, subscription.type);
           
           if (!parsedNodes || !Array.isArray(parsedNodes) || parsedNodes.length === 0) {
@@ -503,7 +566,8 @@ async function fetchSubscription(subscription, converter) {
             hash: contentHash
           };
         } catch (parseError) {
-          console.error(`获取订阅失败: ${parseError.message}`);
+          console.error(`解析订阅失败: ${parseError.message}`);
+          console.error(`解析错误详情: ${parseError.stack}`);
           return {
             source: subscription.name,
             nodes: [],
@@ -513,6 +577,7 @@ async function fetchSubscription(subscription, converter) {
         }
       } catch (error) {
         console.error(`处理 ${subscription.name} 订阅失败: ${error.message}`);
+        console.error(`错误堆栈: ${error.stack}`);
         // 尝试使用缓存作为后备
         if (cacheData && Array.isArray(cacheData.nodes)) {
           console.log(`使用缓存作为后备，包含 ${cacheData.nodes.length} 个节点`);

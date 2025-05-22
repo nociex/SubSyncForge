@@ -109,7 +109,7 @@ export class SubscriptionParser {
     
     // 检查纯文本格式（v2ray、ss、ssr等）
     // 确保内容以这些协议开头，或者包含多个这样的URL
-    const protocolUrls = (raw.match(/(vmess|ss|ssr|trojan|hysteria2|vless):\/\/[^\s]+/g) || []);
+    const protocolUrls = (raw.match(/(vmess|ss|ssr|trojan|hysteria2|hysteria|vless|socks|tuic):\/\/[^\s]+/g) || []);
     if (protocolUrls.length > 0) {
       this.logger.log(`检测到纯文本格式 (含有 ${protocolUrls.length} 个协议URI链接)`);
       return 'plain';
@@ -138,7 +138,9 @@ export class SubscriptionParser {
           // 检查解码后内容是否包含协议前缀
           if (decoded.includes('vmess://') || decoded.includes('ss://') || 
               decoded.includes('ssr://') || decoded.includes('trojan://') ||
-              decoded.includes('hysteria2://') || decoded.includes('vless://')) {
+              decoded.includes('hysteria2://') || decoded.includes('vless://') ||
+              decoded.includes('hysteria://') || decoded.includes('socks://') ||
+              decoded.includes('tuic://')) {
             this.logger.log(`检测到Base64格式，解码后包含节点URI`);
             return 'base64';
           }

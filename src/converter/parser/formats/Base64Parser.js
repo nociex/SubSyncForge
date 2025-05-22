@@ -60,8 +60,14 @@ export class Base64Parser {
       return this.parseTrojan(line);
     } else if (line.startsWith('hysteria2://')) {
       return this.parseHysteria2(line);
+    } else if (line.startsWith('hysteria://')) {
+      return this.parseHysteria(line);
     } else if (line.startsWith('vless://')) {
       return this.parseVless(line);
+    } else if (line.startsWith('socks://')) {
+      return this.parseSocks(line);
+    } else if (line.startsWith('tuic://')) {
+      return this.parseTuic(line);
     } else {
       console.warn(`Unsupported protocol: ${line.substring(0, 20)}...`);
       return null;
@@ -365,6 +371,161 @@ export class Base64Parser {
       };
     } catch (error) {
       console.error('Failed to parse VLESS node:', error);
+      return null;
+    }
+  }
+
+  /**
+   * 解析Socks节点
+   * @param {string} line Socks节点文本
+   * @returns {Object} 解析后的Socks节点对象
+   */
+  parseSocks(line) {
+    try {
+      // socks://[用户名:密码@]host:port#备注
+      // 例如: socks://username:password@server:port#name
+      const url = new URL(line);
+      
+      // 提取名称
+      const name = decodeURIComponent(url.hash.substring(1) || '');
+      
+      // 提取服务器和端口
+      const server = url.hostname;
+      const port = url.port || 1080;
+      
+      // 提取用户名和密码（如果有）
+      let username = '', password = '';
+      if (url.username) {
+        username = decodeURIComponent(url.username);
+        if (url.password) {
+          password = decodeURIComponent(url.password);
+        }
+      }
+      
+      return {
+        type: 'socks',
+        name: name || `Socks5 ${server}:${port}`,
+        server: server,
+        port: parseInt(port),
+        protocol: 'socks5',
+        settings: {
+          username: username,
+          password: password,
+          udp: true
+        },
+        extra: {
+          raw: line
+        }
+      };
+    } catch (error) {
+      console.error('Failed to parse Socks node:', error);
+      return null;
+    }
+  }
+
+  /**
+   * 解析Tuic节点
+   * @param {string} line Tuic节点文本
+   * @returns {Object} 解析后的Tuic节点对象
+   */
+  parseTuic(line) {
+    try {
+      // tuic://uuid:password@host:port?params#name
+      const url = new URL(line);
+      
+      // 提取名称
+      const name = decodeURIComponent(url.hash.substring(1) || '');
+      
+      // 提取服务器和端口
+      const server = url.hostname;
+      const port = url.port || 443;
+      
+      // 提取UUID和密码
+      let uuid = '', password = '';
+      if (url.username) {
+        uuid = decodeURIComponent(url.username);
+        if (url.password) {
+          password = decodeURIComponent(url.password);
+        }
+      }
+      
+      // 提取参数
+      const congestionControl = url.searchParams.get('congestion_control') || 'cubic';
+      const alpn = url.searchParams.get('alpn') || 'h3';
+      const udpRelayMode = url.searchParams.get('udp_relay_mode') || 'native';
+      const sni = url.searchParams.get('sni') || '';
+      
+      return {
+        type: 'tuic',
+        name: name || `TUIC ${server}:${port}`,
+        server: server,
+        port: parseInt(port),
+        protocol: 'tuic',
+        settings: {
+          uuid: uuid,
+          password: password,
+          congestionControl: congestionControl,
+          alpn: alpn,
+          udpRelayMode: udpRelayMode,
+          sni: sni
+        },
+        extra: {
+          raw: line
+        }
+      };
+    } catch (error) {
+      console.error('Failed to parse TUIC node:', error);
+      return null;
+    }
+  }
+
+  /**
+   * 解析Hysteria节点
+   * @param {string} line Hysteria节点文本
+   * @returns {Object} 解析后的Hysteria节点对象
+   */
+  parseHysteria(line) {
+    try {
+      // hysteria://host:port?auth=x&peer=sni&insecure=1&upmbps=100&downmbps=100#remarks
+      const url = new URL(line);
+      
+      // 提取名称
+      const name = decodeURIComponent(url.hash.substring(1) || '');
+      
+      // 提取服务器和端口
+      const server = url.hostname;
+      const port = url.port || 443;
+      
+      // 提取参数
+      const auth = url.searchParams.get('auth') || '';
+      const peer = url.searchParams.get('peer') || '';
+      const insecure = url.searchParams.get('insecure') === '1';
+      const upmbps = url.searchParams.get('upmbps') || '10';
+      const downmbps = url.searchParams.get('downmbps') || '50';
+      const obfs = url.searchParams.get('obfs') || '';
+      const protocol = url.searchParams.get('protocol') || 'udp';
+      
+      return {
+        type: 'hysteria',
+        name: name || `Hysteria ${server}:${port}`,
+        server: server,
+        port: parseInt(port),
+        protocol: 'hysteria',
+        settings: {
+          auth: auth,
+          peer: peer,
+          insecure: insecure,
+          upmbps: parseInt(upmbps),
+          downmbps: parseInt(downmbps),
+          obfs: obfs,
+          protocol: protocol
+        },
+        extra: {
+          raw: line
+        }
+      };
+    } catch (error) {
+      console.error('Failed to parse Hysteria node:', error);
       return null;
     }
   }

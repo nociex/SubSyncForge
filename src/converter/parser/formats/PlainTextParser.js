@@ -49,6 +49,14 @@ export class PlainTextParser {
       return this.parseHttp(line);
     } else if (line.startsWith('socks://') || line.startsWith('socks5://') || line.startsWith('sock://')) {
       return this.parseSocks(line);
+    } else if (line.startsWith('hysteria://')) {
+      return this.parseHysteria(line);
+    } else if (line.startsWith('hysteria2://')) {
+      return this.parseHysteria2(line);
+    } else if (line.startsWith('tuic://')) {
+      return this.parseTuic(line);
+    } else if (line.startsWith('vless://')) {
+      return this.parseVless(line);
     }
     
     return null;
@@ -484,6 +492,215 @@ export class PlainTextParser {
       };
     } catch (error) {
       console.error('Failed to parse Socks URI:', error.message);
+      return null;
+    }
+  }
+
+  /**
+   * 解析Hysteria URI
+   * @param {string} uri Hysteria URI
+   * @returns {Object|null} 解析后的节点对象
+   */
+  parseHysteria(uri) {
+    try {
+      // hysteria://host:port?auth=x&peer=sni&insecure=1&upmbps=100&downmbps=100#remarks
+      const url = new URL(uri);
+      
+      // 提取名称
+      const name = decodeURIComponent(url.hash.substring(1) || '');
+      
+      // 提取服务器和端口
+      const server = url.hostname;
+      const port = url.port || 443;
+      
+      // 提取参数
+      const auth = url.searchParams.get('auth') || '';
+      const peer = url.searchParams.get('peer') || '';
+      const insecure = url.searchParams.get('insecure') === '1';
+      const upmbps = url.searchParams.get('upmbps') || '10';
+      const downmbps = url.searchParams.get('downmbps') || '50';
+      const obfs = url.searchParams.get('obfs') || '';
+      const protocol = url.searchParams.get('protocol') || 'udp';
+      
+      return {
+        type: 'hysteria',
+        name: name || `Hysteria ${server}:${port}`,
+        server: server,
+        port: parseInt(port),
+        protocol: 'hysteria',
+        settings: {
+          auth: auth,
+          peer: peer,
+          insecure: insecure,
+          upmbps: parseInt(upmbps),
+          downmbps: parseInt(downmbps),
+          obfs: obfs,
+          protocol: protocol
+        },
+        extra: {
+          raw: uri
+        }
+      };
+    } catch (error) {
+      console.error('Failed to parse Hysteria URI:', error);
+      return null;
+    }
+  }
+
+  /**
+   * 解析Hysteria2 URI
+   * @param {string} uri Hysteria2 URI
+   * @returns {Object|null} 解析后的节点对象
+   */
+  parseHysteria2(uri) {
+    try {
+      // hysteria2://auth@host:port?sni=x&insecure=1&obfs=salamander&obfs-password=x#remarks
+      const url = new URL(uri);
+      
+      // 提取名称
+      const name = decodeURIComponent(url.hash.substring(1) || '');
+      
+      // 提取服务器和端口
+      const server = url.hostname;
+      const port = url.port || 443;
+      
+      // 提取认证信息
+      const auth = url.username;
+      
+      // 提取参数
+      const sni = url.searchParams.get('sni') || '';
+      const insecure = url.searchParams.get('insecure') === '1';
+      const obfs = url.searchParams.get('obfs') || '';
+      const obfsPassword = url.searchParams.get('obfs-password') || '';
+      
+      return {
+        type: 'hysteria2',
+        name: name || `Hysteria2 ${server}:${port}`,
+        server: server,
+        port: parseInt(port),
+        protocol: 'hysteria2',
+        settings: {
+          auth: auth,
+          sni: sni,
+          insecure: insecure,
+          obfs: obfs,
+          obfsPassword: obfsPassword
+        },
+        extra: {
+          raw: uri
+        }
+      };
+    } catch (error) {
+      console.error('Failed to parse Hysteria2 URI:', error);
+      return null;
+    }
+  }
+
+  /**
+   * 解析TUIC URI
+   * @param {string} uri TUIC URI
+   * @returns {Object|null} 解析后的节点对象
+   */
+  parseTuic(uri) {
+    try {
+      // tuic://uuid:password@host:port?congestion_control=cubic&alpn=h3&udp_relay_mode=native&sni=example.com#remarks
+      const url = new URL(uri);
+      
+      // 提取名称
+      const name = decodeURIComponent(url.hash.substring(1) || '');
+      
+      // 提取服务器和端口
+      const server = url.hostname;
+      const port = url.port || 443;
+      
+      // 提取UUID和密码
+      let uuid = '', password = '';
+      if (url.username) {
+        uuid = url.username;
+        if (url.password) {
+          password = url.password;
+        }
+      }
+      
+      // 提取参数
+      const congestionControl = url.searchParams.get('congestion_control') || 'cubic';
+      const alpn = url.searchParams.get('alpn') || 'h3';
+      const udpRelayMode = url.searchParams.get('udp_relay_mode') || 'native';
+      const sni = url.searchParams.get('sni') || '';
+      
+      return {
+        type: 'tuic',
+        name: name || `TUIC ${server}:${port}`,
+        server: server,
+        port: parseInt(port),
+        protocol: 'tuic',
+        settings: {
+          uuid: uuid,
+          password: password,
+          congestionControl: congestionControl,
+          alpn: alpn,
+          udpRelayMode: udpRelayMode,
+          sni: sni
+        },
+        extra: {
+          raw: uri
+        }
+      };
+    } catch (error) {
+      console.error('Failed to parse TUIC URI:', error);
+      return null;
+    }
+  }
+
+  /**
+   * 解析VLESS URI
+   * @param {string} uri VLESS URI
+   * @returns {Object|null} 解析后的节点对象
+   */
+  parseVless(uri) {
+    try {
+      // vless://uuid@host:port?encryption=none&security=tls&sni=example.com&type=tcp#remarks
+      const url = new URL(uri);
+      
+      // 提取名称
+      const name = decodeURIComponent(url.hash.substring(1) || '');
+      
+      // 提取服务器和端口
+      const server = url.hostname;
+      const port = url.port || 443;
+      
+      // 提取UUID
+      const uuid = url.username;
+      
+      // 提取参数
+      const encryption = url.searchParams.get('encryption') || 'none';
+      const security = url.searchParams.get('security') || '';
+      const sni = url.searchParams.get('sni') || '';
+      const type = url.searchParams.get('type') || 'tcp';
+      const path = url.searchParams.get('path') || '';
+      const flow = url.searchParams.get('flow') || '';
+      
+      return {
+        type: 'vless',
+        name: name || `VLESS ${server}:${port}`,
+        server: server,
+        port: parseInt(port),
+        protocol: 'vless',
+        settings: {
+          id: uuid,
+          encryption: encryption,
+          security: security,
+          sni: sni,
+          network: type,
+          path: path,
+          flow: flow
+        },
+        extra: {
+          raw: uri
+        }
+      };
+    } catch (error) {
+      console.error('Failed to parse VLESS URI:', error);
       return null;
     }
   }
