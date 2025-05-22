@@ -11,6 +11,7 @@ export class NodeProcessor {
   constructor(options = {}) {
     this.deduplication = options.deduplication !== false;
     this.logger = options.logger || console;
+    this.filterIrrelevant = options.filterIrrelevant !== false;
   }
 
   /**
@@ -30,6 +31,13 @@ export class NodeProcessor {
     // 过滤掉无效节点
     let validNodes = nodes.filter(node => this.isValidNode(node));
     this.logger.info(`过滤无效节点后数量: ${validNodes.length}`);
+    
+    // 过滤掉包含无关信息的节点
+    if (this.filterIrrelevant) {
+      const beforeCount = validNodes.length;
+      validNodes = this.filterIrrelevantNodes(validNodes);
+      this.logger.info(`过滤无关节点后数量: ${validNodes.length} (删除了 ${beforeCount - validNodes.length} 个节点)`);
+    }
     
     // 去重
     if (this.deduplication) {
@@ -56,6 +64,41 @@ export class NodeProcessor {
     validNodes = this.normalizeNodes(validNodes);
     
     return validNodes;
+  }
+
+  /**
+   * 过滤包含无关信息的节点
+   * @param {Array} nodes 节点数组
+   * @returns {Array} 过滤后的节点数组
+   */
+  filterIrrelevantNodes(nodes) {
+    if (!Array.isArray(nodes)) return [];
+    
+    // 定义无关关键词列表
+    const irrelevantKeywords = [
+      '剩余流量', '重置时间', '机场', '过期', '到期', '重置',
+      'expire', 'reset', 'remaining', 'traffic', 'balance',
+      '官网', '官方', 'website', 'channel', '频道', '客服',
+      '购买', '购物', 'buy', 'shop', 'time', 'left',
+      '续费', 'renewal', '网站', '流量', '套餐'
+    ];
+    
+    return nodes.filter(node => {
+      // 检查节点名称是否包含无关关键词
+      if (!node.name) return true;
+      
+      const nodeName = node.name.toLowerCase();
+      
+      // 如果节点名称包含任何无关关键词，则过滤掉
+      for (const keyword of irrelevantKeywords) {
+        if (nodeName.includes(keyword.toLowerCase())) {
+          this.logger.debug(`过滤掉无关节点: ${node.name}`);
+          return false;
+        }
+      }
+      
+      return true;
+    });
   }
 
   /**

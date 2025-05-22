@@ -10,6 +10,7 @@ export const defaultConfig = {
   outputConfigs: [],
   options: {
     deduplication: true,
+    filterIrrelevant: true,  // 过滤掉包含"剩余流量"、"重置时间"等无关信息的节点
     dataDir: 'data',
     outputDir: 'output',
     githubUser: '',         // GitHub 用户名，用于生成默认 URL

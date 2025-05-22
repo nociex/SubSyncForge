@@ -12,6 +12,7 @@ import { NodeProcessor } from './node/NodeProcessor.js';
 import { NodeTester } from './testing/NodeTester.js';
 import { ConfigGenerator } from './output/ConfigGenerator.js';
 import { ProxyManager } from './proxy/ProxyManager.js';
+import { SubscriptionConverter } from '../converter/SubscriptionConverter.js';
 
 export class SyncManager {
   /**
@@ -76,6 +77,14 @@ export class SyncManager {
         logger: this.logger
       });
       
+      // 创建订阅转换器
+      this.subscriptionConverter = new SubscriptionConverter({
+        logger: this.logger,
+        githubUser: this.config.options.githubUser || '',
+        repoName: this.config.options.repoName || 'SubSyncForge',
+        outputDir: this.config.options.outputDir || 'output'
+      });
+      
       // 创建订阅获取器
       this.subscriptionFetcher = new SubscriptionFetcher({
         rootDir: this.rootDir,
@@ -83,12 +92,14 @@ export class SyncManager {
         cacheTtl: this.config.advanced.cacheTtl,
         proxyManager: this.proxyManager,
         useProxy: this.config.advanced.proxyForSubscription,
+        converter: this.subscriptionConverter,
         logger: this.logger
       });
       
       // 创建节点处理器
       this.nodeProcessor = new NodeProcessor({
         deduplication: this.config.options.deduplication,
+        filterIrrelevant: this.config.options.filterIrrelevant !== false,
         logger: this.logger
       });
       
@@ -113,6 +124,7 @@ export class SyncManager {
         dataDir: this.config.options.dataDir,
         githubUser: this.config.options.githubUser || '',
         repoName: this.config.options.repoName || 'SubSyncForge',
+        converter: this.subscriptionConverter,
         logger: this.logger
       });
       

@@ -85,6 +85,10 @@ export class ConfigLoader {
         finalConfig.options.deduplication = userConfig.output.deduplication;
       }
       
+      if (userConfig.output.filterIrrelevant !== undefined) {
+        finalConfig.options.filterIrrelevant = userConfig.output.filterIrrelevant;
+      }
+      
       if (userConfig.output.dir) {
         finalConfig.options.outputDir = userConfig.output.dir;
       }

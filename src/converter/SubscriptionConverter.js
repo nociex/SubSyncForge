@@ -486,6 +486,32 @@ export class SubscriptionConverter {
   }
 
   /**
+   * 解析订阅内容
+   * @param {string} content 订阅内容
+   * @param {string} type 订阅类型
+   * @returns {Promise<Array>} 解析后的节点数组
+   */
+  async parseSubscription(content, type) {
+    try {
+      this.logger.info(`开始解析订阅，类型: ${type}, 内容长度: ${content.length}`);
+      
+      // 使用订阅解析器解析内容
+      const parsedNodes = await this.parser.parse(content, type);
+      
+      if (!parsedNodes || !Array.isArray(parsedNodes)) {
+        this.logger.warn(`解析结果不是有效的节点数组`);
+        return [];
+      }
+      
+      this.logger.info(`成功解析订阅，获取 ${parsedNodes.length} 个节点`);
+      return parsedNodes;
+    } catch (error) {
+      this.logger.error(`解析订阅失败: ${error.message}`);
+      throw new Error(`解析订阅失败: ${error.message}`);
+    }
+  }
+
+  /**
    * 将节点格式化为指定目标格式
    * @param {Object} node 节点对象
    * @param {string} format 目标格式

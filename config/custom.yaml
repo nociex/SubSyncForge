@@ -60,6 +60,9 @@ output:
   # 是否将节点去重
   deduplication: true
   
+  # 是否过滤掉包含"剩余流量"、"重置时间"等无关信息的节点
+  filterIrrelevant: true
+  
   # 输出目录
   dir: "output"
   
