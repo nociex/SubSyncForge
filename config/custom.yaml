@@ -120,6 +120,13 @@ output:
   
   # 生成的配置文件
   configs:
+    # 所有节点列表 - 包含所有可用节点
+    - name: "all_nodes"
+      template: "templates/txt_list.txt"
+      path: "all.txt"
+      enabled: true
+      options: {}  # 不设置任何过滤条件，包含所有节点
+    
     # Mihomo (Clash Meta) 配置
     - name: "mihomo"
       template: "templates/mihomo.yaml"
