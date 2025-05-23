@@ -1,44 +1,28 @@
 // 导入SubscriptionConverter
 import { SubscriptionConverter } from './src/converter/SubscriptionConverter.js';
 import { NodeManager } from './src/converter/analyzer/index.js';
-import { NodeTester } from './src/core/testing/NodeTester.js';
-import { NodeProcessor } from './src/core/node/NodeProcessor.js';
+import { SubscriptionParser } from './src/converter/parser/SubscriptionParser.js';
+import { NodeTester } from './src/tester/NodeTester.js';
 
 // 导入需要的工具
 import { logger } from './src/utils/index.js';
-import yaml from 'js-yaml'; // 导入js-yaml库用于解析YAML
 
 // 创建日志实例
 const testLogger = logger.defaultLogger.child({ component: 'TestScript' });
 
-// 测试订阅URL（使用一个公共可用的测试订阅链接）
-// 这里使用一个示例链接，您可以替换为实际可用的订阅链接
+// 测试订阅URL
 const testSubscriptionUrls = [
-  'https://sub.xeton.dev/sub?target=clash&url=https://raw.githubusercontent.com/freefq/free/master/v2&config=https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Mini.ini',
-  'https://raw.githubusercontent.com/freefq/free/master/v2', // 常见的Base64编码订阅
-  'https://github.com/ermaozi/get_subscribe/raw/main/subscribe/v2ray.txt' // 另一个测试订阅
+  'https://raw.githubusercontent.com/freefq/free/master/v2', // Base64编码订阅
 ];
 
-// 创建SubscriptionConverter实例
-const converter = new SubscriptionConverter({
-  logger: testLogger,
-  groupingMode: 'advanced',
-  dedup: true,
-  applyRules: true
-});
+// 创建订阅解析器
+const parser = new SubscriptionParser({ logger: testLogger });
 
-// 创建节点测试器
+// 创建节点测试器（包含IP检测）
 const nodeTester = new NodeTester({
-  concurrency: 10,
-  timeout: 5000,
-  filterInvalid: true,
-  logger: testLogger
-});
-
-// 创建节点处理器
-const nodeProcessor = new NodeProcessor({
-  deduplication: true,
-  filterIrrelevant: true,
+  concurrency: 5, // 限制并发数避免过多请求
+  timeout: 8000,
+  verifyLocation: true, // 启用地理位置验证
   logger: testLogger
 });
 
@@ -47,88 +31,120 @@ const nodeManager = new NodeManager();
 
 // 主函数
 async function testSubscription() {
-  testLogger.info('开始订阅测试');
+  testLogger.info('开始节点重命名测试（包含IP检测）');
   
   for (const url of testSubscriptionUrls) {
     testLogger.info(`测试订阅链接: ${url}`);
     
     try {
-      // 转换为clash格式
-      const result = await converter.convert(url, 'clash');
+      // 直接解析订阅获取节点
+      testLogger.info('开始获取订阅内容...');
+      const response = await fetch(url);
+      const content = await response.text();
+      testLogger.info(`获取到订阅内容，长度: ${content.length}`);
       
-      if (result.success) {
-        testLogger.info(`成功转换订阅! 获取到 ${result.nodeCount} 个节点`);
-        testLogger.info(`转换耗时: ${result.time}ms`);
+      // 解析订阅内容
+      testLogger.info('开始解析订阅内容...');
+      const nodes = await parser.parse(content, 'auto');
+      testLogger.info(`解析成功，获取到 ${nodes.length} 个节点`);
+      
+      if (nodes.length > 0) {
+        // 显示原始节点名称
+        testLogger.info(`原始节点名称示例:`);
+        nodes.slice(0, 5).forEach((node, index) => {
+          testLogger.info(`${index + 1}. ${node.name} (${node.type}) - ${node.server}:${node.port}`);
+        });
         
-        // 获取节点数据 - 使用js-yaml解析Clash配置
-        const clashData = yaml.load(result.data);
-        if (clashData.proxies && clashData.proxies.length > 0) {
-          // 获取节点
-          const nodes = clashData.proxies.map(proxy => ({
-            type: proxy.type,
-            name: proxy.name,
-            server: proxy.server,
-            port: proxy.port,
-            settings: {
-              password: proxy.password,
-              method: proxy.cipher || proxy.method,
-              id: proxy.uuid || proxy.id
-            }
-          }));
-          
-          testLogger.info(`开始测试节点有效性...`);
-          
-          // 测试节点有效性
-          const testedNodes = await nodeTester.testNodes(nodes);
-          const validNodes = testedNodes.filter(node => node.valid);
-          
-          testLogger.info(`测试完成，总共 ${testedNodes.length} 个节点，有效 ${validNodes.length} 个节点`);
-          
-          // 处理节点
-          const processedNodes = nodeProcessor.processNodes(validNodes, { onlyValid: true });
-          testLogger.info(`处理后有 ${processedNodes.length} 个有效节点`);
-          
-          // 分析节点
-          const { nodes: analyzedNodes } = nodeManager.processNodes(processedNodes);
-          
-          // 重命名节点
-          const renamedNodes = nodeManager.renameNodes(analyzedNodes);
-          
-          // 确保节点名称不重复
-          const uniqueNameMap = new Map();
-          let uniqueNodes = [];
-          
-          renamedNodes.forEach((node, index) => {
-            // 如果名称已存在，则添加后缀以确保唯一性
-            let baseName = node.name;
-            let uniqueName = baseName;
-            let counter = 1;
-            
-            while (uniqueNameMap.has(uniqueName)) {
-              uniqueName = `${baseName}-${counter}`;
-              counter++;
-            }
-            
-            uniqueNameMap.set(uniqueName, true);
-            uniqueNodes.push({
-              ...node,
-              name: uniqueName
-            });
-          });
-          
-          // 显示重命名后的节点
-          testLogger.info(`节点重命名完成，最终有效节点数量: ${uniqueNodes.length}`);
-          
-          // 显示前10个有效节点
-          testLogger.info(`有效节点示例:`);
-          uniqueNodes.slice(0, 10).forEach((node, index) => {
-            testLogger.info(`${index + 1}. ${node.name} (${node.type}) - ${node.server}:${node.port} - 延迟: ${node.latency}ms`);
-          });
-        }
+        // 进行节点连通性测试和IP地理位置检测
+        testLogger.info(`开始进行节点连通性测试和IP地理位置检测...`);
+        const testResults = await nodeTester.testNodes(nodes.slice(0, 10)); // 只测试前10个节点以节省时间
+        
+        const validResults = testResults.filter(result => result.status === 'up');
+        testLogger.info(`连通性测试完成: ${validResults.length}/${testResults.length} 个节点可用`);
+        
+        // 显示地理位置检测结果
+        testLogger.info(`地理位置检测结果:`);
+        validResults.forEach((result, index) => {
+          const location = result.locationInfo ? 
+            `${result.locationInfo.countryName || 'Unknown'} (${result.locationInfo.country || 'N/A'})` : 
+            'Unknown';
+          const needsCorrection = result.needsLocationCorrection ? ' [需要修正]' : '';
+          testLogger.info(`${index + 1}. ${result.node.name} -> ${location}${needsCorrection}`);
+        });
+        
+        // 修正节点地理位置信息
+        const validNodes = validResults.map(result => result.node);
+        const correctedNodes = nodeTester.correctNodeLocations(validNodes, validResults);
+        
+        // 显示修正后的节点名称
+        testLogger.info(`地理位置修正后的节点名称:`);
+        correctedNodes.forEach((node, index) => {
+          testLogger.info(`${index + 1}. ${node.name} (${node.type}) - ${node.server}:${node.port}`);
+        });
+        
+        // 分析节点
+        testLogger.info(`开始分析修正后的节点...`);
+        const { nodes: analyzedNodes } = nodeManager.processNodes(correctedNodes);
+        testLogger.info(`节点分析完成，分析后节点数: ${analyzedNodes.length}`);
+        
+        // 显示分析结果示例
+        testLogger.info(`节点分析结果示例:`);
+        analyzedNodes.slice(0, 3).forEach((node, index) => {
+          if (node.analysis) {
+            testLogger.info(`${index + 1}. ${node.name} -> 国家: ${node.analysis.country || 'Unknown'}, 国家代码: ${node.analysis.countryCode || 'N/A'}, 协议: ${node.analysis.protocol || 'Unknown'}, 标签: ${node.analysis.tags ? node.analysis.tags.join(', ') : 'None'}`);
+          }
+        });
+        
+        // 重命名节点 - 测试基本格式
+        testLogger.info(`\n开始重命名节点 (格式: {country}-{protocol}-{number})...`);
+        const renamedNodes1 = nodeManager.renameNodes(analyzedNodes, {
+          format: '{country}-{protocol}-{number}',
+          includeCountry: true,
+          includeProtocol: true,
+          includeNumber: true,
+          includeTags: false
+        });
+        
+        testLogger.info(`基本格式重命名结果:`);
+        renamedNodes1.forEach((node, index) => {
+          testLogger.info(`${index + 1}. ${node.name} (${node.type}) - ${node.server}:${node.port}`);
+        });
+        
+        // 测试包含标签的重命名
+        testLogger.info(`\n开始重命名节点 (包含标签格式: {country}-{protocol}-{number}-{tags})...`);
+        const renamedNodes2 = nodeManager.renameNodes(analyzedNodes, {
+          format: '{country}-{protocol}-{number}-{tags}',
+          includeCountry: true,
+          includeProtocol: true,
+          includeNumber: true,
+          includeTags: true,
+          tagLimit: 2
+        });
+        
+        testLogger.info(`包含标签的重命名结果:`);
+        renamedNodes2.forEach((node, index) => {
+          testLogger.info(`${index + 1}. ${node.name} (${node.type}) - ${node.server}:${node.port}`);
+        });
+        
+        // 测试自定义格式
+        testLogger.info(`\n开始重命名节点 (自定义格式: {protocol}[{country}]-{number})...`);
+        const renamedNodes3 = nodeManager.renameNodes(analyzedNodes, {
+          format: '{protocol}[{country}]-{number}',
+          includeCountry: true,
+          includeProtocol: true,
+          includeNumber: true,
+          includeTags: false
+        });
+        
+        testLogger.info(`自定义格式重命名结果:`);
+        renamedNodes3.forEach((node, index) => {
+          testLogger.info(`${index + 1}. ${node.name} (${node.type}) - ${node.server}:${node.port}`);
+        });
+        
       } else {
-        testLogger.error(`转换失败: ${result.error}`);
-        testLogger.error(`错误代码: ${result.code}`);
+        testLogger.warn('没有获取到任何节点');
       }
+      
     } catch (error) {
       testLogger.error(`处理订阅时出错: ${error.message}`);
       testLogger.error(error.stack);
@@ -137,7 +153,7 @@ async function testSubscription() {
     testLogger.info('-'.repeat(50));
   }
   
-  testLogger.info('订阅测试完成');
+  testLogger.info('节点重命名测试完成');
 }
 
 // 运行测试
