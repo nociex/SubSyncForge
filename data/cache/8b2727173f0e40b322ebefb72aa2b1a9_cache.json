@@ -1,7 +1,7 @@
 {
   "nodes": [
     {
-      "id": "acvzkmtcp",
+      "id": "n3jmuniql",
       "type": "vmess",
       "name": "⚫︎ Channel: @MxlShare",
       "server": "9.9.9.9",
@@ -35,14 +35,14 @@
             }
           }
         },
-        "addedAt": "2025-05-23T06:35:44.802Z"
+        "addedAt": "2025-05-23T13:36:55.895Z"
       },
       "metadata": {
         "source": "ss"
       }
     },
     {
-      "id": "asuy303n3",
+      "id": "5ubihpkvx",
       "type": "vmess",
       "name": "⚫︎ Website: https://mxlsub.me",
       "server": "9.9.9.9",
@@ -76,45 +76,59 @@
             }
           }
         },
-        "addedAt": "2025-05-23T06:35:44.802Z"
+        "addedAt": "2025-05-23T13:36:55.895Z"
       },
       "metadata": {
         "source": "ss"
       }
     },
     {
-      "id": "2d8ymlk2q",
-      "type": "ss",
-      "name": "🇨🇳 台湾 | TWN",
-      "server": "hinetiw0k.yooddns.stream",
-      "port": 26900,
-      "protocol": "shadowsocks",
+      "id": "dxytiy8ar",
+      "type": "vmess",
+      "name": "🇧🇷 巴西 | BRA",
+      "server": "tiamo3.tiamocloud.us.kg",
+      "port": 80,
+      "protocol": "vmess",
       "settings": {
-        "method": "chacha20-ietf-poly1305",
-        "password": "98c2c4a2-e9fe-4110-b908-9a4300273ddf",
-        "udp": true
+        "id": "ff266050-a243-4d9c-872d-32e7a371c2f5",
+        "alterId": 0,
+        "security": "auto",
+        "network": "ws",
+        "wsPath": "",
+        "wsHeaders": {},
+        "tls": false,
+        "serverName": ""
       },
       "extra": {
         "raw": {
-          "name": "🇨🇳 台湾 | TWN",
-          "server": "hinetiw0k.yooddns.stream",
-          "port": 26900,
+          "name": "🇧🇷 巴西 | BRA",
+          "server": "tiamo3.tiamocloud.us.kg",
+          "port": 80,
           "client-fingerprint": "chrome",
-          "type": "ss",
-          "cipher": "chacha20-ietf-poly1305",
-          "password": "98c2c4a2-e9fe-4110-b908-9a4300273ddf",
+          "type": "vmess",
+          "uuid": "ff266050-a243-4d9c-872d-32e7a371c2f5",
+          "alterId": 0,
+          "cipher": "auto",
+          "tls": false,
+          "network": "ws",
+          "ws-opts": {
+            "path": "/",
+            "headers": {
+              "Host": "tiamo3.tiamocloud.us.kg"
+            }
+          },
           "udp": true
         },
-        "addedAt": "2025-05-23T06:35:44.802Z"
+        "addedAt": "2025-05-23T13:36:55.895Z"
       },
       "metadata": {
         "source": "ss"
       }
     },
     {
-      "id": "ogurrc681",
+      "id": "r47so6gwt",
       "type": "ss",
-      "name": "🇨🇳 台湾 | TWN 2",
+      "name": "🇨🇳 台湾 | TWN",
       "server": "hinetiw0k.yooddns.stream",
       "port": 26900,
       "protocol": "shadowsocks",
@@ -125,7 +139,7 @@
       },
       "extra": {
         "raw": {
-          "name": "🇨🇳 台湾 | TWN 2",
+          "name": "🇨🇳 台湾 | TWN",
           "server": "hinetiw0k.yooddns.stream",
           "port": 26900,
           "client-fingerprint": "chrome",
@@ -134,14 +148,43 @@
           "password": "5c9b507c-bc14-4952-bd92-fee335c87d92",
           "udp": true
         },
-        "addedAt": "2025-05-23T06:35:44.802Z"
+        "addedAt": "2025-05-23T13:36:55.895Z"
       },
       "metadata": {
         "source": "ss"
       }
     },
     {
-      "id": "b0927ahp7",
+      "id": "4rd2l62h8",
+      "type": "ss",
+      "name": "🇨🇳 台湾 | TWN 2",
+      "server": "hinetiw0k.yooddns.stream",
+      "port": 26900,
+      "protocol": "shadowsocks",
+      "settings": {
+        "method": "chacha20-ietf-poly1305",
+        "password": "98c2c4a2-e9fe-4110-b908-9a4300273ddf",
+        "udp": true
+      },
+      "extra": {
+        "raw": {
+          "name": "🇨🇳 台湾 | TWN 2",
+          "server": "hinetiw0k.yooddns.stream",
+          "port": 26900,
+          "client-fingerprint": "chrome",
+          "type": "ss",
+          "cipher": "chacha20-ietf-poly1305",
+          "password": "98c2c4a2-e9fe-4110-b908-9a4300273ddf",
+          "udp": true
+        },
+        "addedAt": "2025-05-23T13:36:55.895Z"
+      },
+      "metadata": {
+        "source": "ss"
+      }
+    },
+    {
+      "id": "emvyh2490",
       "type": "ss",
       "name": "🇨🇳 台湾 | TWN 3",
       "server": "hinetiw0k.yooddns.stream",
@@ -149,7 +192,7 @@
       "protocol": "shadowsocks",
       "settings": {
         "method": "chacha20-ietf-poly1305",
-        "password": "d3f9db93-6383-407b-b858-b2dd08f935cd",
+        "password": "ed749f4c-171e-46ad-ad58-c5f2c670bfa1",
         "udp": true
       },
       "extra": {
@@ -160,17 +203,17 @@
           "client-fingerprint": "chrome",
           "type": "ss",
           "cipher": "chacha20-ietf-poly1305",
-          "password": "d3f9db93-6383-407b-b858-b2dd08f935cd",
+          "password": "ed749f4c-171e-46ad-ad58-c5f2c670bfa1",
           "udp": true
         },
-        "addedAt": "2025-05-23T06:35:44.802Z"
+        "addedAt": "2025-05-23T13:36:55.895Z"
       },
       "metadata": {
         "source": "ss"
       }
     },
     {
-      "id": "fuc8zwqgo",
+      "id": "ewg5rn14e",
       "type": "ss",
       "name": "🇨🇳 台湾 | TWN 4",
       "server": "hinetiw0k.yooddns.stream",
@@ -178,7 +221,7 @@
       "protocol": "shadowsocks",
       "settings": {
         "method": "chacha20-ietf-poly1305",
-        "password": "c0f3b308-d3f5-4094-b8be-29c20d5b0e92",
+        "password": "d3f9db93-6383-407b-b858-b2dd08f935cd",
         "udp": true
       },
       "extra": {
@@ -189,53 +232,67 @@
           "client-fingerprint": "chrome",
           "type": "ss",
           "cipher": "chacha20-ietf-poly1305",
-          "password": "c0f3b308-d3f5-4094-b8be-29c20d5b0e92",
+          "password": "d3f9db93-6383-407b-b858-b2dd08f935cd",
           "udp": true
         },
-        "addedAt": "2025-05-23T06:35:44.802Z"
+        "addedAt": "2025-05-23T13:36:55.895Z"
       },
       "metadata": {
         "source": "ss"
       }
     },
     {
-      "id": "1npn4hknx",
-      "type": "ss",
-      "name": "🇨🇳 台湾 | TWN 5",
-      "server": "hinetiw0k.yooddns.stream",
-      "port": 26900,
-      "protocol": "shadowsocks",
+      "id": "ipcay2ts2",
+      "type": "vmess",
+      "name": "🇪🇪 爱沙尼亚 | EST",
+      "server": "tiamo1.tiamocloud.us.kg",
+      "port": 80,
+      "protocol": "vmess",
       "settings": {
-        "method": "chacha20-ietf-poly1305",
-        "password": "c10f2e2b-ea4f-426e-a246-b1d4140dc699",
-        "udp": true
+        "id": "ff266050-a243-4d9c-872d-32e7a371c2f5",
+        "alterId": 0,
+        "security": "auto",
+        "network": "ws",
+        "wsPath": "",
+        "wsHeaders": {},
+        "tls": false,
+        "serverName": ""
       },
       "extra": {
         "raw": {
-          "name": "🇨🇳 台湾 | TWN 5",
-          "server": "hinetiw0k.yooddns.stream",
-          "port": 26900,
+          "name": "🇪🇪 爱沙尼亚 | EST",
+          "server": "tiamo1.tiamocloud.us.kg",
+          "port": 80,
           "client-fingerprint": "chrome",
-          "type": "ss",
-          "cipher": "chacha20-ietf-poly1305",
-          "password": "c10f2e2b-ea4f-426e-a246-b1d4140dc699",
+          "type": "vmess",
+          "uuid": "ff266050-a243-4d9c-872d-32e7a371c2f5",
+          "alterId": 0,
+          "cipher": "auto",
+          "tls": false,
+          "network": "ws",
+          "ws-opts": {
+            "path": "/",
+            "headers": {
+              "Host": "tiamo1.tiamocloud.us.kg"
+            }
+          },
           "udp": true
         },
-        "addedAt": "2025-05-23T06:35:44.802Z"
+        "addedAt": "2025-05-23T13:36:55.895Z"
       },
       "metadata": {
         "source": "ss"
       }
     },
     {
-      "id": "2nsdaqwwf",
+      "id": "nkr8pkzrq",
       "type": "vmess",
       "name": "🇭🇰 香港 | HKG",
       "server": "bevent.bilibili.tv",
       "port": 443,
       "protocol": "vmess",
       "settings": {
-        "id": "c0f3b308-d3f5-4094-b8be-29c20d5b0e92",
+        "id": "ed749f4c-171e-46ad-ad58-c5f2c670bfa1",
         "alterId": 0,
         "security": "auto",
         "network": "ws",
@@ -251,7 +308,7 @@
           "port": 443,
           "client-fingerprint": "chrome",
           "type": "vmess",
-          "uuid": "c0f3b308-d3f5-4094-b8be-29c20d5b0e92",
+          "uuid": "ed749f4c-171e-46ad-ad58-c5f2c670bfa1",
           "alterId": 0,
           "cipher": "auto",
           "tls": true,
@@ -265,21 +322,21 @@
           },
           "udp": true
         },
-        "addedAt": "2025-05-23T06:35:44.802Z"
+        "addedAt": "2025-05-23T13:36:55.895Z"
       },
       "metadata": {
         "source": "ss"
       }
     },
     {
-      "id": "jqfcrmioo",
+      "id": "z1ziuqf2a",
       "type": "vmess",
       "name": "🇭🇰 香港 | HKG 2",
       "server": "bevent.bilibili.tv",
       "port": 443,
       "protocol": "vmess",
       "settings": {
-        "id": "98c2c4a2-e9fe-4110-b908-9a4300273ddf",
+        "id": "5c9b507c-bc14-4952-bd92-fee335c87d92",
         "alterId": 0,
         "security": "auto",
         "network": "ws",
@@ -295,7 +352,7 @@
           "port": 443,
           "client-fingerprint": "chrome",
           "type": "vmess",
-          "uuid": "98c2c4a2-e9fe-4110-b908-9a4300273ddf",
+          "uuid": "5c9b507c-bc14-4952-bd92-fee335c87d92",
           "alterId": 0,
           "cipher": "auto",
           "tls": true,
@@ -309,21 +366,21 @@
           },
           "udp": true
         },
-        "addedAt": "2025-05-23T06:35:44.802Z"
+        "addedAt": "2025-05-23T13:36:55.895Z"
       },
       "metadata": {
         "source": "ss"
       }
     },
     {
-      "id": "knffp81gc",
+      "id": "94pubi96k",
       "type": "vmess",
       "name": "🇭🇰 香港 | HKG 3",
       "server": "bevent.bilibili.tv",
       "port": 443,
       "protocol": "vmess",
       "settings": {
-        "id": "5c9b507c-bc14-4952-bd92-fee335c87d92",
+        "id": "98c2c4a2-e9fe-4110-b908-9a4300273ddf",
         "alterId": 0,
         "security": "auto",
         "network": "ws",
@@ -339,7 +396,7 @@
           "port": 443,
           "client-fingerprint": "chrome",
           "type": "vmess",
-          "uuid": "5c9b507c-bc14-4952-bd92-fee335c87d92",
+          "uuid": "98c2c4a2-e9fe-4110-b908-9a4300273ddf",
           "alterId": 0,
           "cipher": "auto",
           "tls": true,
@@ -353,60 +410,16 @@
           },
           "udp": true
         },
-        "addedAt": "2025-05-23T06:35:44.802Z"
+        "addedAt": "2025-05-23T13:36:55.895Z"
       },
       "metadata": {
         "source": "ss"
       }
     },
     {
-      "id": "vbgaza8e0",
+      "id": "oe8jcz75x",
       "type": "vmess",
       "name": "🇭🇰 香港 | HKG 4",
-      "server": "bevent.bilibili.tv",
-      "port": 443,
-      "protocol": "vmess",
-      "settings": {
-        "id": "c10f2e2b-ea4f-426e-a246-b1d4140dc699",
-        "alterId": 0,
-        "security": "auto",
-        "network": "ws",
-        "wsPath": "",
-        "wsHeaders": {},
-        "tls": true,
-        "serverName": "hkt.xiaoqi555.xyz"
-      },
-      "extra": {
-        "raw": {
-          "name": "🇭🇰 香港 | HKG 4",
-          "server": "bevent.bilibili.tv",
-          "port": 443,
-          "client-fingerprint": "chrome",
-          "type": "vmess",
-          "uuid": "c10f2e2b-ea4f-426e-a246-b1d4140dc699",
-          "alterId": 0,
-          "cipher": "auto",
-          "tls": true,
-          "servername": "hkt.xiaoqi555.xyz",
-          "network": "ws",
-          "ws-opts": {
-            "path": "/",
-            "headers": {
-              "Host": "hkt.xiaoqi555.xyz"
-            }
-          },
-          "udp": true
-        },
-        "addedAt": "2025-05-23T06:35:44.802Z"
-      },
-      "metadata": {
-        "source": "ss"
-      }
-    },
-    {
-      "id": "si6ypz0qd",
-      "type": "vmess",
-      "name": "🇭🇰 香港 | HKG 5",
       "server": "bevent.bilibili.tv",
       "port": 443,
       "protocol": "vmess",
@@ -422,7 +435,7 @@
       },
       "extra": {
         "raw": {
-          "name": "🇭🇰 香港 | HKG 5",
+          "name": "🇭🇰 香港 | HKG 4",
           "server": "bevent.bilibili.tv",
           "port": 443,
           "client-fingerprint": "chrome",
@@ -441,17 +454,192 @@
           },
           "udp": true
         },
-        "addedAt": "2025-05-23T06:35:44.802Z"
+        "addedAt": "2025-05-23T13:36:55.895Z"
       },
       "metadata": {
         "source": "ss"
       }
     },
     {
-      "id": "8o4fgza4e",
+      "id": "bvu6bsx1y",
       "type": "vmess",
       "name": "🇯🇵 日本 | JPN",
+      "server": "bookmyshow.com",
+      "port": 443,
+      "protocol": "vmess",
+      "settings": {
+        "id": "ed749f4c-171e-46ad-ad58-c5f2c670bfa1",
+        "alterId": 0,
+        "security": "auto",
+        "network": "ws",
+        "wsPath": "",
+        "wsHeaders": {},
+        "tls": true,
+        "serverName": "jpv.xiaoqi555.xyz"
+      },
+      "extra": {
+        "raw": {
+          "name": "🇯🇵 日本 | JPN",
+          "server": "bookmyshow.com",
+          "port": 443,
+          "client-fingerprint": "chrome",
+          "type": "vmess",
+          "uuid": "ed749f4c-171e-46ad-ad58-c5f2c670bfa1",
+          "alterId": 0,
+          "cipher": "auto",
+          "tls": true,
+          "servername": "jpv.xiaoqi555.xyz",
+          "network": "ws",
+          "ws-opts": {
+            "path": "/",
+            "headers": {
+              "Host": "jpv.xiaoqi555.xyz"
+            }
+          },
+          "udp": true
+        },
+        "addedAt": "2025-05-23T13:36:55.895Z"
+      },
+      "metadata": {
+        "source": "ss"
+      }
+    },
+    {
+      "id": "2nfp32h14",
+      "type": "vmess",
+      "name": "🇯🇵 日本 | JPN 2",
+      "server": "www.visa.com",
+      "port": 443,
+      "protocol": "vmess",
+      "settings": {
+        "id": "ed749f4c-171e-46ad-ad58-c5f2c670bfa1",
+        "alterId": 0,
+        "security": "auto",
+        "network": "ws",
+        "wsPath": "",
+        "wsHeaders": {},
+        "tls": true,
+        "serverName": "jpv.xiaoqi555.xyz"
+      },
+      "extra": {
+        "raw": {
+          "name": "🇯🇵 日本 | JPN 2",
+          "server": "www.visa.com",
+          "port": 443,
+          "client-fingerprint": "chrome",
+          "type": "vmess",
+          "uuid": "ed749f4c-171e-46ad-ad58-c5f2c670bfa1",
+          "alterId": 0,
+          "cipher": "auto",
+          "tls": true,
+          "skip-cert-verify": true,
+          "servername": "jpv.xiaoqi555.xyz",
+          "network": "ws",
+          "ws-opts": {
+            "path": "/",
+            "headers": {
+              "Host": "jpv.xiaoqi555.xyz"
+            }
+          },
+          "udp": true
+        },
+        "addedAt": "2025-05-23T13:36:55.895Z"
+      },
+      "metadata": {
+        "source": "ss"
+      }
+    },
+    {
+      "id": "53w3vk19k",
+      "type": "vmess",
+      "name": "🇯🇵 日本 | JPN 3",
+      "server": "2001:19f0:7001:4c24:5400:5ff:fe2b:b8af",
+      "port": 443,
+      "protocol": "vmess",
+      "settings": {
+        "id": "98c2c4a2-e9fe-4110-b908-9a4300273ddf",
+        "alterId": 0,
+        "security": "auto",
+        "network": "tcp",
+        "wsPath": "",
+        "wsHeaders": {},
+        "tls": true,
+        "serverName": "yahoo.com"
+      },
+      "extra": {
+        "raw": {
+          "name": "🇯🇵 日本 | JPN 3",
+          "server": "2001:19f0:7001:4c24:5400:5ff:fe2b:b8af",
+          "port": 443,
+          "reality-opts": {
+            "public-key": "W959HKDLJPaAhQbTLSfP3oMxEeNk0JRJxvDZRrjFeRU",
+            "short-id": "0b8881d0"
+          },
+          "client-fingerprint": "safari",
+          "type": "vless",
+          "uuid": "98c2c4a2-e9fe-4110-b908-9a4300273ddf",
+          "tls": true,
+          "flow": "xtls-rprx-vision",
+          "servername": "yahoo.com",
+          "network": "tcp",
+          "udp": true
+        },
+        "addedAt": "2025-05-23T13:36:55.895Z"
+      },
+      "metadata": {
+        "source": "ss"
+      }
+    },
+    {
+      "id": "5bcpbjzv1",
+      "type": "vmess",
+      "name": "🇯🇵 日本 | JPN 4",
       "server": "time.is",
+      "port": 443,
+      "protocol": "vmess",
+      "settings": {
+        "id": "ed749f4c-171e-46ad-ad58-c5f2c670bfa1",
+        "alterId": 0,
+        "security": "auto",
+        "network": "ws",
+        "wsPath": "",
+        "wsHeaders": {},
+        "tls": true,
+        "serverName": "jpv.xiaoqi555.xyz"
+      },
+      "extra": {
+        "raw": {
+          "name": "🇯🇵 日本 | JPN 4",
+          "server": "time.is",
+          "port": 443,
+          "client-fingerprint": "chrome",
+          "type": "vmess",
+          "uuid": "ed749f4c-171e-46ad-ad58-c5f2c670bfa1",
+          "alterId": 0,
+          "cipher": "auto",
+          "tls": true,
+          "skip-cert-verify": true,
+          "servername": "jpv.xiaoqi555.xyz",
+          "network": "ws",
+          "ws-opts": {
+            "path": "/",
+            "headers": {
+              "Host": "jpv.xiaoqi555.xyz"
+            }
+          },
+          "udp": true
+        },
+        "addedAt": "2025-05-23T13:36:55.895Z"
+      },
+      "metadata": {
+        "source": "ss"
+      }
+    },
+    {
+      "id": "07m5xk2vj",
+      "type": "vmess",
+      "name": "🇯🇵 日本 | JPN 5",
+      "server": "www.visa.com",
       "port": 443,
       "protocol": "vmess",
       "settings": {
@@ -466,8 +654,8 @@
       },
       "extra": {
         "raw": {
-          "name": "🇯🇵 日本 | JPN",
-          "server": "time.is",
+          "name": "🇯🇵 日本 | JPN 5",
+          "server": "www.visa.com",
           "port": 443,
           "client-fingerprint": "chrome",
           "type": "vmess",
@@ -486,177 +674,17 @@
           },
           "udp": true
         },
-        "addedAt": "2025-05-23T06:35:44.802Z"
+        "addedAt": "2025-05-23T13:36:55.895Z"
       },
       "metadata": {
         "source": "ss"
       }
     },
     {
-      "id": "5ezwsp4r0",
-      "type": "vmess",
-      "name": "🇯🇵 日本 | JPN 2",
-      "server": "time.is",
-      "port": 443,
-      "protocol": "vmess",
-      "settings": {
-        "id": "d3f9db93-6383-407b-b858-b2dd08f935cd",
-        "alterId": 0,
-        "security": "auto",
-        "network": "ws",
-        "wsPath": "",
-        "wsHeaders": {},
-        "tls": true,
-        "serverName": "jpv.xiaoqi555.xyz"
-      },
-      "extra": {
-        "raw": {
-          "name": "🇯🇵 日本 | JPN 2",
-          "server": "time.is",
-          "port": 443,
-          "client-fingerprint": "chrome",
-          "type": "vmess",
-          "uuid": "d3f9db93-6383-407b-b858-b2dd08f935cd",
-          "alterId": 0,
-          "cipher": "auto",
-          "tls": true,
-          "skip-cert-verify": true,
-          "servername": "jpv.xiaoqi555.xyz",
-          "network": "ws",
-          "ws-opts": {
-            "path": "/",
-            "headers": {
-              "Host": "jpv.xiaoqi555.xyz"
-            }
-          },
-          "udp": true
-        },
-        "addedAt": "2025-05-23T06:35:44.802Z"
-      },
-      "metadata": {
-        "source": "ss"
-      }
-    },
-    {
-      "id": "814o97til",
-      "type": "vmess",
-      "name": "🇯🇵 日本 | JPN 3",
-      "server": "time.is",
-      "port": 443,
-      "protocol": "vmess",
-      "settings": {
-        "id": "c0f3b308-d3f5-4094-b8be-29c20d5b0e92",
-        "alterId": 0,
-        "security": "auto",
-        "network": "ws",
-        "wsPath": "",
-        "wsHeaders": {},
-        "tls": true,
-        "serverName": "jpv.xiaoqi555.xyz"
-      },
-      "extra": {
-        "raw": {
-          "name": "🇯🇵 日本 | JPN 3",
-          "server": "time.is",
-          "port": 443,
-          "client-fingerprint": "chrome",
-          "type": "vmess",
-          "uuid": "c0f3b308-d3f5-4094-b8be-29c20d5b0e92",
-          "alterId": 0,
-          "cipher": "auto",
-          "tls": true,
-          "skip-cert-verify": true,
-          "servername": "jpv.xiaoqi555.xyz",
-          "network": "ws",
-          "ws-opts": {
-            "path": "/",
-            "headers": {
-              "Host": "jpv.xiaoqi555.xyz"
-            }
-          },
-          "udp": true
-        },
-        "addedAt": "2025-05-23T06:35:44.802Z"
-      },
-      "metadata": {
-        "source": "ss"
-      }
-    },
-    {
-      "id": "0ahvd6c6e",
-      "type": "ss",
-      "name": "🇯🇵 日本 | JPN 4",
-      "server": "1c4.bulldognet-dstat.uk",
-      "port": 45679,
-      "protocol": "shadowsocks",
-      "settings": {
-        "method": "chacha20-ietf-poly1305",
-        "password": "d3f9db93-6383-407b-b858-b2dd08f935cd",
-        "udp": true
-      },
-      "extra": {
-        "raw": {
-          "name": "🇯🇵 日本 | JPN 4",
-          "server": "1c4.bulldognet-dstat.uk",
-          "port": 45679,
-          "client-fingerprint": "chrome",
-          "type": "ss",
-          "cipher": "chacha20-ietf-poly1305",
-          "password": "d3f9db93-6383-407b-b858-b2dd08f935cd",
-          "udp": true
-        },
-        "addedAt": "2025-05-23T06:35:44.802Z"
-      },
-      "metadata": {
-        "source": "ss"
-      }
-    },
-    {
-      "id": "9w4f1w6zz",
-      "type": "vmess",
-      "name": "🇯🇵 日本 | JPN 5",
-      "server": "2001:19f0:7001:4c24:5400:5ff:fe2b:b8af",
-      "port": 443,
-      "protocol": "vmess",
-      "settings": {
-        "id": "c10f2e2b-ea4f-426e-a246-b1d4140dc699",
-        "alterId": 0,
-        "security": "auto",
-        "network": "tcp",
-        "wsPath": "",
-        "wsHeaders": {},
-        "tls": true,
-        "serverName": "yahoo.com"
-      },
-      "extra": {
-        "raw": {
-          "name": "🇯🇵 日本 | JPN 5",
-          "server": "2001:19f0:7001:4c24:5400:5ff:fe2b:b8af",
-          "port": 443,
-          "reality-opts": {
-            "public-key": "W959HKDLJPaAhQbTLSfP3oMxEeNk0JRJxvDZRrjFeRU",
-            "short-id": "0b8881d0"
-          },
-          "client-fingerprint": "edge",
-          "type": "vless",
-          "uuid": "c10f2e2b-ea4f-426e-a246-b1d4140dc699",
-          "tls": true,
-          "flow": "xtls-rprx-vision",
-          "servername": "yahoo.com",
-          "network": "tcp",
-          "udp": true
-        },
-        "addedAt": "2025-05-23T06:35:44.802Z"
-      },
-      "metadata": {
-        "source": "ss"
-      }
-    },
-    {
-      "id": "2k51jujab",
+      "id": "rt8ei9qvh",
       "type": "vmess",
       "name": "🇯🇵 日本 | JPN 6",
-      "server": "www.visa.com",
+      "server": "bookmyshow.com",
       "port": 443,
       "protocol": "vmess",
       "settings": {
@@ -672,7 +700,7 @@
       "extra": {
         "raw": {
           "name": "🇯🇵 日本 | JPN 6",
-          "server": "www.visa.com",
+          "server": "bookmyshow.com",
           "port": 443,
           "client-fingerprint": "chrome",
           "type": "vmess",
@@ -680,7 +708,6 @@
           "alterId": 0,
           "cipher": "auto",
           "tls": true,
-          "skip-cert-verify": true,
           "servername": "jpv.xiaoqi555.xyz",
           "network": "ws",
           "ws-opts": {
@@ -691,21 +718,94 @@
           },
           "udp": true
         },
-        "addedAt": "2025-05-23T06:35:44.802Z"
+        "addedAt": "2025-05-23T13:36:55.895Z"
       },
       "metadata": {
         "source": "ss"
       }
     },
     {
-      "id": "f3zhepj9j",
+      "id": "qemb1pc6m",
       "type": "vmess",
       "name": "🇯🇵 日本 | JPN 7",
+      "server": "bookmyshow.com",
+      "port": 443,
+      "protocol": "vmess",
+      "settings": {
+        "id": "98c2c4a2-e9fe-4110-b908-9a4300273ddf",
+        "alterId": 0,
+        "security": "auto",
+        "network": "ws",
+        "wsPath": "",
+        "wsHeaders": {},
+        "tls": true,
+        "serverName": "jpv.xiaoqi555.xyz"
+      },
+      "extra": {
+        "raw": {
+          "name": "🇯🇵 日本 | JPN 7",
+          "server": "bookmyshow.com",
+          "port": 443,
+          "client-fingerprint": "chrome",
+          "type": "vmess",
+          "uuid": "98c2c4a2-e9fe-4110-b908-9a4300273ddf",
+          "alterId": 0,
+          "cipher": "auto",
+          "tls": true,
+          "servername": "jpv.xiaoqi555.xyz",
+          "network": "ws",
+          "ws-opts": {
+            "path": "/",
+            "headers": {
+              "Host": "jpv.xiaoqi555.xyz"
+            }
+          },
+          "udp": true
+        },
+        "addedAt": "2025-05-23T13:36:55.895Z"
+      },
+      "metadata": {
+        "source": "ss"
+      }
+    },
+    {
+      "id": "7wjx708cm",
+      "type": "ss",
+      "name": "🇯🇵 日本 | JPN 8",
+      "server": "1c4.bulldognet-dstat.uk",
+      "port": 45679,
+      "protocol": "shadowsocks",
+      "settings": {
+        "method": "chacha20-ietf-poly1305",
+        "password": "5c9b507c-bc14-4952-bd92-fee335c87d92",
+        "udp": true
+      },
+      "extra": {
+        "raw": {
+          "name": "🇯🇵 日本 | JPN 8",
+          "server": "1c4.bulldognet-dstat.uk",
+          "port": 45679,
+          "client-fingerprint": "chrome",
+          "type": "ss",
+          "cipher": "chacha20-ietf-poly1305",
+          "password": "5c9b507c-bc14-4952-bd92-fee335c87d92",
+          "udp": true
+        },
+        "addedAt": "2025-05-23T13:36:55.895Z"
+      },
+      "metadata": {
+        "source": "ss"
+      }
+    },
+    {
+      "id": "94pp8qt3e",
+      "type": "vmess",
+      "name": "🇯🇵 日本 | JPN 9",
       "server": "2001:19f0:7001:4c24:5400:5ff:fe2b:b8af",
       "port": 443,
       "protocol": "vmess",
       "settings": {
-        "id": "5c9b507c-bc14-4952-bd92-fee335c87d92",
+        "id": "ed749f4c-171e-46ad-ad58-c5f2c670bfa1",
         "alterId": 0,
         "security": "auto",
         "network": "tcp",
@@ -716,127 +816,37 @@
       },
       "extra": {
         "raw": {
-          "name": "🇯🇵 日本 | JPN 7",
+          "name": "🇯🇵 日本 | JPN 9",
           "server": "2001:19f0:7001:4c24:5400:5ff:fe2b:b8af",
           "port": 443,
           "reality-opts": {
             "public-key": "W959HKDLJPaAhQbTLSfP3oMxEeNk0JRJxvDZRrjFeRU",
             "short-id": "0b8881d0"
           },
-          "client-fingerprint": "qq",
+          "client-fingerprint": "chrome",
           "type": "vless",
-          "uuid": "5c9b507c-bc14-4952-bd92-fee335c87d92",
+          "uuid": "ed749f4c-171e-46ad-ad58-c5f2c670bfa1",
           "tls": true,
           "flow": "xtls-rprx-vision",
           "servername": "yahoo.com",
           "network": "tcp",
           "udp": true
         },
-        "addedAt": "2025-05-23T06:35:44.802Z"
+        "addedAt": "2025-05-23T13:36:55.895Z"
       },
       "metadata": {
         "source": "ss"
       }
     },
     {
-      "id": "hkqq3o4ub",
-      "type": "vmess",
-      "name": "🇯🇵 日本 | JPN 8",
-      "server": "www.visa.com",
-      "port": 443,
-      "protocol": "vmess",
-      "settings": {
-        "id": "c10f2e2b-ea4f-426e-a246-b1d4140dc699",
-        "alterId": 0,
-        "security": "auto",
-        "network": "ws",
-        "wsPath": "",
-        "wsHeaders": {},
-        "tls": true,
-        "serverName": "jpv.xiaoqi555.xyz"
-      },
-      "extra": {
-        "raw": {
-          "name": "🇯🇵 日本 | JPN 8",
-          "server": "www.visa.com",
-          "port": 443,
-          "client-fingerprint": "chrome",
-          "type": "vmess",
-          "uuid": "c10f2e2b-ea4f-426e-a246-b1d4140dc699",
-          "alterId": 0,
-          "cipher": "auto",
-          "tls": true,
-          "skip-cert-verify": true,
-          "servername": "jpv.xiaoqi555.xyz",
-          "network": "ws",
-          "ws-opts": {
-            "path": "/",
-            "headers": {
-              "Host": "jpv.xiaoqi555.xyz"
-            }
-          },
-          "udp": true
-        },
-        "addedAt": "2025-05-23T06:35:44.802Z"
-      },
-      "metadata": {
-        "source": "ss"
-      }
-    },
-    {
-      "id": "gp2kvnrzh",
-      "type": "vmess",
-      "name": "🇯🇵 日本 | JPN 9",
-      "server": "time.is",
-      "port": 443,
-      "protocol": "vmess",
-      "settings": {
-        "id": "5c9b507c-bc14-4952-bd92-fee335c87d92",
-        "alterId": 0,
-        "security": "auto",
-        "network": "ws",
-        "wsPath": "",
-        "wsHeaders": {},
-        "tls": true,
-        "serverName": "jpv.xiaoqi555.xyz"
-      },
-      "extra": {
-        "raw": {
-          "name": "🇯🇵 日本 | JPN 9",
-          "server": "time.is",
-          "port": 443,
-          "client-fingerprint": "chrome",
-          "type": "vmess",
-          "uuid": "5c9b507c-bc14-4952-bd92-fee335c87d92",
-          "alterId": 0,
-          "cipher": "auto",
-          "tls": true,
-          "skip-cert-verify": true,
-          "servername": "jpv.xiaoqi555.xyz",
-          "network": "ws",
-          "ws-opts": {
-            "path": "/",
-            "headers": {
-              "Host": "jpv.xiaoqi555.xyz"
-            }
-          },
-          "udp": true
-        },
-        "addedAt": "2025-05-23T06:35:44.802Z"
-      },
-      "metadata": {
-        "source": "ss"
-      }
-    },
-    {
-      "id": "eaqjw6krr",
+      "id": "jgtreon99",
       "type": "vmess",
       "name": "🇯🇵 日本 | JPN 10",
       "server": "2001:19f0:7001:4c24:5400:5ff:fe2b:b8af",
       "port": 443,
       "protocol": "vmess",
       "settings": {
-        "id": "98c2c4a2-e9fe-4110-b908-9a4300273ddf",
+        "id": "5c9b507c-bc14-4952-bd92-fee335c87d92",
         "alterId": 0,
         "security": "auto",
         "network": "tcp",
@@ -854,30 +864,30 @@
             "public-key": "W959HKDLJPaAhQbTLSfP3oMxEeNk0JRJxvDZRrjFeRU",
             "short-id": "0b8881d0"
           },
-          "client-fingerprint": "edge",
+          "client-fingerprint": "ios",
           "type": "vless",
-          "uuid": "98c2c4a2-e9fe-4110-b908-9a4300273ddf",
+          "uuid": "5c9b507c-bc14-4952-bd92-fee335c87d92",
           "tls": true,
           "flow": "xtls-rprx-vision",
           "servername": "yahoo.com",
           "network": "tcp",
           "udp": true
         },
-        "addedAt": "2025-05-23T06:35:44.802Z"
+        "addedAt": "2025-05-23T13:36:55.895Z"
       },
       "metadata": {
         "source": "ss"
       }
     },
     {
-      "id": "8kzwpfhc1",
+      "id": "g90jh71mj",
       "type": "vmess",
       "name": "🇯🇵 日本 | JPN 11",
       "server": "www.visa.com",
       "port": 443,
       "protocol": "vmess",
       "settings": {
-        "id": "c0f3b308-d3f5-4094-b8be-29c20d5b0e92",
+        "id": "d3f9db93-6383-407b-b858-b2dd08f935cd",
         "alterId": 0,
         "security": "auto",
         "network": "ws",
@@ -893,7 +903,7 @@
           "port": 443,
           "client-fingerprint": "chrome",
           "type": "vmess",
-          "uuid": "c0f3b308-d3f5-4094-b8be-29c20d5b0e92",
+          "uuid": "d3f9db93-6383-407b-b858-b2dd08f935cd",
           "alterId": 0,
           "cipher": "auto",
           "tls": true,
@@ -908,109 +918,79 @@
           },
           "udp": true
         },
-        "addedAt": "2025-05-23T06:35:44.802Z"
+        "addedAt": "2025-05-23T13:36:55.895Z"
       },
       "metadata": {
         "source": "ss"
       }
     },
     {
-      "id": "8usr2rucx",
-      "type": "vmess",
+      "id": "f7olvqlki",
+      "type": "ss",
       "name": "🇯🇵 日本 | JPN 12",
-      "server": "bookmyshow.com",
-      "port": 443,
-      "protocol": "vmess",
+      "server": "1c4.bulldognet-dstat.uk",
+      "port": 45679,
+      "protocol": "shadowsocks",
       "settings": {
-        "id": "d3f9db93-6383-407b-b858-b2dd08f935cd",
-        "alterId": 0,
-        "security": "auto",
-        "network": "ws",
-        "wsPath": "",
-        "wsHeaders": {},
-        "tls": true,
-        "serverName": "jpv.xiaoqi555.xyz"
+        "method": "chacha20-ietf-poly1305",
+        "password": "ed749f4c-171e-46ad-ad58-c5f2c670bfa1",
+        "udp": true
       },
       "extra": {
         "raw": {
           "name": "🇯🇵 日本 | JPN 12",
-          "server": "bookmyshow.com",
-          "port": 443,
+          "server": "1c4.bulldognet-dstat.uk",
+          "port": 45679,
           "client-fingerprint": "chrome",
-          "type": "vmess",
-          "uuid": "d3f9db93-6383-407b-b858-b2dd08f935cd",
-          "alterId": 0,
-          "cipher": "auto",
-          "tls": true,
-          "servername": "jpv.xiaoqi555.xyz",
-          "network": "ws",
-          "ws-opts": {
-            "path": "/",
-            "headers": {
-              "Host": "jpv.xiaoqi555.xyz"
-            }
-          },
+          "type": "ss",
+          "cipher": "chacha20-ietf-poly1305",
+          "password": "ed749f4c-171e-46ad-ad58-c5f2c670bfa1",
           "udp": true
         },
-        "addedAt": "2025-05-23T06:35:44.802Z"
+        "addedAt": "2025-05-23T13:36:55.895Z"
       },
       "metadata": {
         "source": "ss"
       }
     },
     {
-      "id": "05b15pyug",
-      "type": "vmess",
+      "id": "chmkhkru7",
+      "type": "ss",
       "name": "🇯🇵 日本 | JPN 13",
-      "server": "bookmyshow.com",
-      "port": 443,
-      "protocol": "vmess",
+      "server": "1c4.bulldognet-dstat.uk",
+      "port": 45679,
+      "protocol": "shadowsocks",
       "settings": {
-        "id": "c0f3b308-d3f5-4094-b8be-29c20d5b0e92",
-        "alterId": 0,
-        "security": "auto",
-        "network": "ws",
-        "wsPath": "",
-        "wsHeaders": {},
-        "tls": true,
-        "serverName": "jpv.xiaoqi555.xyz"
+        "method": "chacha20-ietf-poly1305",
+        "password": "d3f9db93-6383-407b-b858-b2dd08f935cd",
+        "udp": true
       },
       "extra": {
         "raw": {
           "name": "🇯🇵 日本 | JPN 13",
-          "server": "bookmyshow.com",
-          "port": 443,
+          "server": "1c4.bulldognet-dstat.uk",
+          "port": 45679,
           "client-fingerprint": "chrome",
-          "type": "vmess",
-          "uuid": "c0f3b308-d3f5-4094-b8be-29c20d5b0e92",
-          "alterId": 0,
-          "cipher": "auto",
-          "tls": true,
-          "servername": "jpv.xiaoqi555.xyz",
-          "network": "ws",
-          "ws-opts": {
-            "path": "/",
-            "headers": {
-              "Host": "jpv.xiaoqi555.xyz"
-            }
-          },
+          "type": "ss",
+          "cipher": "chacha20-ietf-poly1305",
+          "password": "d3f9db93-6383-407b-b858-b2dd08f935cd",
           "udp": true
         },
-        "addedAt": "2025-05-23T06:35:44.802Z"
+        "addedAt": "2025-05-23T13:36:55.895Z"
       },
       "metadata": {
         "source": "ss"
       }
     },
     {
-      "id": "2yqwgvurt",
+      "id": "fbpmx6zdv",
       "type": "vmess",
       "name": "🇯🇵 日本 | JPN 14",
-      "server": "bookmyshow.com",
+      "server": "time.is",
       "port": 443,
       "protocol": "vmess",
       "settings": {
-        "id": "98c2c4a2-e9fe-4110-b908-9a4300273ddf",
+        "id": "5c9b507c-bc14-4952-bd92-fee335c87d92",
         "alterId": 0,
         "security": "auto",
         "network": "ws",
@@ -1022,172 +1002,11 @@
       "extra": {
         "raw": {
           "name": "🇯🇵 日本 | JPN 14",
-          "server": "bookmyshow.com",
-          "port": 443,
-          "client-fingerprint": "chrome",
-          "type": "vmess",
-          "uuid": "98c2c4a2-e9fe-4110-b908-9a4300273ddf",
-          "alterId": 0,
-          "cipher": "auto",
-          "tls": true,
-          "servername": "jpv.xiaoqi555.xyz",
-          "network": "ws",
-          "ws-opts": {
-            "path": "/",
-            "headers": {
-              "Host": "jpv.xiaoqi555.xyz"
-            }
-          },
-          "udp": true
-        },
-        "addedAt": "2025-05-23T06:35:44.802Z"
-      },
-      "metadata": {
-        "source": "ss"
-      }
-    },
-    {
-      "id": "sg90js9zb",
-      "type": "vmess",
-      "name": "🇯🇵 日本 | JPN 15",
-      "server": "bookmyshow.com",
-      "port": 443,
-      "protocol": "vmess",
-      "settings": {
-        "id": "5c9b507c-bc14-4952-bd92-fee335c87d92",
-        "alterId": 0,
-        "security": "auto",
-        "network": "ws",
-        "wsPath": "",
-        "wsHeaders": {},
-        "tls": true,
-        "serverName": "jpv.xiaoqi555.xyz"
-      },
-      "extra": {
-        "raw": {
-          "name": "🇯🇵 日本 | JPN 15",
-          "server": "bookmyshow.com",
-          "port": 443,
-          "client-fingerprint": "chrome",
-          "type": "vmess",
-          "uuid": "5c9b507c-bc14-4952-bd92-fee335c87d92",
-          "alterId": 0,
-          "cipher": "auto",
-          "tls": true,
-          "servername": "jpv.xiaoqi555.xyz",
-          "network": "ws",
-          "ws-opts": {
-            "path": "/",
-            "headers": {
-              "Host": "jpv.xiaoqi555.xyz"
-            }
-          },
-          "udp": true
-        },
-        "addedAt": "2025-05-23T06:35:44.802Z"
-      },
-      "metadata": {
-        "source": "ss"
-      }
-    },
-    {
-      "id": "qcf57m9j1",
-      "type": "vmess",
-      "name": "🇯🇵 日本 | JPN 16",
-      "server": "bookmyshow.com",
-      "port": 443,
-      "protocol": "vmess",
-      "settings": {
-        "id": "c10f2e2b-ea4f-426e-a246-b1d4140dc699",
-        "alterId": 0,
-        "security": "auto",
-        "network": "ws",
-        "wsPath": "",
-        "wsHeaders": {},
-        "tls": true,
-        "serverName": "jpv.xiaoqi555.xyz"
-      },
-      "extra": {
-        "raw": {
-          "name": "🇯🇵 日本 | JPN 16",
-          "server": "bookmyshow.com",
-          "port": 443,
-          "client-fingerprint": "chrome",
-          "type": "vmess",
-          "uuid": "c10f2e2b-ea4f-426e-a246-b1d4140dc699",
-          "alterId": 0,
-          "cipher": "auto",
-          "tls": true,
-          "servername": "jpv.xiaoqi555.xyz",
-          "network": "ws",
-          "ws-opts": {
-            "path": "/",
-            "headers": {
-              "Host": "jpv.xiaoqi555.xyz"
-            }
-          },
-          "udp": true
-        },
-        "addedAt": "2025-05-23T06:35:44.802Z"
-      },
-      "metadata": {
-        "source": "ss"
-      }
-    },
-    {
-      "id": "fg6x0vm39",
-      "type": "ss",
-      "name": "🇯🇵 日本 | JPN 17",
-      "server": "1c4.bulldognet-dstat.uk",
-      "port": 45679,
-      "protocol": "shadowsocks",
-      "settings": {
-        "method": "chacha20-ietf-poly1305",
-        "password": "98c2c4a2-e9fe-4110-b908-9a4300273ddf",
-        "udp": true
-      },
-      "extra": {
-        "raw": {
-          "name": "🇯🇵 日本 | JPN 17",
-          "server": "1c4.bulldognet-dstat.uk",
-          "port": 45679,
-          "client-fingerprint": "chrome",
-          "type": "ss",
-          "cipher": "chacha20-ietf-poly1305",
-          "password": "98c2c4a2-e9fe-4110-b908-9a4300273ddf",
-          "udp": true
-        },
-        "addedAt": "2025-05-23T06:35:44.802Z"
-      },
-      "metadata": {
-        "source": "ss"
-      }
-    },
-    {
-      "id": "v7k75einp",
-      "type": "vmess",
-      "name": "🇯🇵 日本 | JPN 18",
-      "server": "time.is",
-      "port": 443,
-      "protocol": "vmess",
-      "settings": {
-        "id": "c10f2e2b-ea4f-426e-a246-b1d4140dc699",
-        "alterId": 0,
-        "security": "auto",
-        "network": "ws",
-        "wsPath": "",
-        "wsHeaders": {},
-        "tls": true,
-        "serverName": "jpv.xiaoqi555.xyz"
-      },
-      "extra": {
-        "raw": {
-          "name": "🇯🇵 日本 | JPN 18",
           "server": "time.is",
           "port": 443,
           "client-fingerprint": "chrome",
           "type": "vmess",
-          "uuid": "c10f2e2b-ea4f-426e-a246-b1d4140dc699",
+          "uuid": "5c9b507c-bc14-4952-bd92-fee335c87d92",
           "alterId": 0,
           "cipher": "auto",
           "tls": true,
@@ -1202,128 +1021,17 @@
           },
           "udp": true
         },
-        "addedAt": "2025-05-23T06:35:44.802Z"
+        "addedAt": "2025-05-23T13:36:55.895Z"
       },
       "metadata": {
         "source": "ss"
       }
     },
     {
-      "id": "aumt74jr6",
+      "id": "se4898bs0",
       "type": "vmess",
-      "name": "🇯🇵 日本 | JPN 19",
-      "server": "2001:19f0:7001:4c24:5400:5ff:fe2b:b8af",
-      "port": 443,
-      "protocol": "vmess",
-      "settings": {
-        "id": "d3f9db93-6383-407b-b858-b2dd08f935cd",
-        "alterId": 0,
-        "security": "auto",
-        "network": "tcp",
-        "wsPath": "",
-        "wsHeaders": {},
-        "tls": true,
-        "serverName": "yahoo.com"
-      },
-      "extra": {
-        "raw": {
-          "name": "🇯🇵 日本 | JPN 19",
-          "server": "2001:19f0:7001:4c24:5400:5ff:fe2b:b8af",
-          "port": 443,
-          "reality-opts": {
-            "public-key": "W959HKDLJPaAhQbTLSfP3oMxEeNk0JRJxvDZRrjFeRU",
-            "short-id": "0b8881d0"
-          },
-          "client-fingerprint": "chrome",
-          "type": "vless",
-          "uuid": "d3f9db93-6383-407b-b858-b2dd08f935cd",
-          "tls": true,
-          "flow": "xtls-rprx-vision",
-          "servername": "yahoo.com",
-          "network": "tcp",
-          "udp": true
-        },
-        "addedAt": "2025-05-23T06:35:44.802Z"
-      },
-      "metadata": {
-        "source": "ss"
-      }
-    },
-    {
-      "id": "a5jbhg8z0",
-      "type": "ss",
-      "name": "🇯🇵 日本 | JPN 20",
-      "server": "1c4.bulldognet-dstat.uk",
-      "port": 45679,
-      "protocol": "shadowsocks",
-      "settings": {
-        "method": "chacha20-ietf-poly1305",
-        "password": "5c9b507c-bc14-4952-bd92-fee335c87d92",
-        "udp": true
-      },
-      "extra": {
-        "raw": {
-          "name": "🇯🇵 日本 | JPN 20",
-          "server": "1c4.bulldognet-dstat.uk",
-          "port": 45679,
-          "client-fingerprint": "chrome",
-          "type": "ss",
-          "cipher": "chacha20-ietf-poly1305",
-          "password": "5c9b507c-bc14-4952-bd92-fee335c87d92",
-          "udp": true
-        },
-        "addedAt": "2025-05-23T06:35:44.802Z"
-      },
-      "metadata": {
-        "source": "ss"
-      }
-    },
-    {
-      "id": "uw5efo3ed",
-      "type": "vmess",
-      "name": "🇯🇵 日本 | JPN 21",
-      "server": "2001:19f0:7001:4c24:5400:5ff:fe2b:b8af",
-      "port": 443,
-      "protocol": "vmess",
-      "settings": {
-        "id": "c0f3b308-d3f5-4094-b8be-29c20d5b0e92",
-        "alterId": 0,
-        "security": "auto",
-        "network": "tcp",
-        "wsPath": "",
-        "wsHeaders": {},
-        "tls": true,
-        "serverName": "yahoo.com"
-      },
-      "extra": {
-        "raw": {
-          "name": "🇯🇵 日本 | JPN 21",
-          "server": "2001:19f0:7001:4c24:5400:5ff:fe2b:b8af",
-          "port": 443,
-          "reality-opts": {
-            "public-key": "W959HKDLJPaAhQbTLSfP3oMxEeNk0JRJxvDZRrjFeRU",
-            "short-id": "0b8881d0"
-          },
-          "client-fingerprint": "ios",
-          "type": "vless",
-          "uuid": "c0f3b308-d3f5-4094-b8be-29c20d5b0e92",
-          "tls": true,
-          "flow": "xtls-rprx-vision",
-          "servername": "yahoo.com",
-          "network": "tcp",
-          "udp": true
-        },
-        "addedAt": "2025-05-23T06:35:44.802Z"
-      },
-      "metadata": {
-        "source": "ss"
-      }
-    },
-    {
-      "id": "b00i1d67a",
-      "type": "vmess",
-      "name": "🇯🇵 日本 | JPN 22",
-      "server": "www.visa.com",
+      "name": "🇯🇵 日本 | JPN 15",
+      "server": "time.is",
       "port": 443,
       "protocol": "vmess",
       "settings": {
@@ -1338,8 +1046,8 @@
       },
       "extra": {
         "raw": {
-          "name": "🇯🇵 日本 | JPN 22",
-          "server": "www.visa.com",
+          "name": "🇯🇵 日本 | JPN 15",
+          "server": "time.is",
           "port": 443,
           "client-fingerprint": "chrome",
           "type": "vmess",
@@ -1358,75 +1066,58 @@
           },
           "udp": true
         },
-        "addedAt": "2025-05-23T06:35:44.802Z"
+        "addedAt": "2025-05-23T13:36:55.895Z"
       },
       "metadata": {
         "source": "ss"
       }
     },
     {
-      "id": "slc2vsfqy",
-      "type": "ss",
-      "name": "🇯🇵 日本 | JPN 23",
-      "server": "1c4.bulldognet-dstat.uk",
-      "port": 45679,
-      "protocol": "shadowsocks",
-      "settings": {
-        "method": "chacha20-ietf-poly1305",
-        "password": "c0f3b308-d3f5-4094-b8be-29c20d5b0e92",
-        "udp": true
-      },
-      "extra": {
-        "raw": {
-          "name": "🇯🇵 日本 | JPN 23",
-          "server": "1c4.bulldognet-dstat.uk",
-          "port": 45679,
-          "client-fingerprint": "chrome",
-          "type": "ss",
-          "cipher": "chacha20-ietf-poly1305",
-          "password": "c0f3b308-d3f5-4094-b8be-29c20d5b0e92",
-          "udp": true
-        },
-        "addedAt": "2025-05-23T06:35:44.802Z"
-      },
-      "metadata": {
-        "source": "ss"
-      }
-    },
-    {
-      "id": "2m4iayc0h",
-      "type": "ss",
-      "name": "🇯🇵 日本 | JPN 24",
-      "server": "1c4.bulldognet-dstat.uk",
-      "port": 45679,
-      "protocol": "shadowsocks",
-      "settings": {
-        "method": "chacha20-ietf-poly1305",
-        "password": "c10f2e2b-ea4f-426e-a246-b1d4140dc699",
-        "udp": true
-      },
-      "extra": {
-        "raw": {
-          "name": "🇯🇵 日本 | JPN 24",
-          "server": "1c4.bulldognet-dstat.uk",
-          "port": 45679,
-          "client-fingerprint": "chrome",
-          "type": "ss",
-          "cipher": "chacha20-ietf-poly1305",
-          "password": "c10f2e2b-ea4f-426e-a246-b1d4140dc699",
-          "udp": true
-        },
-        "addedAt": "2025-05-23T06:35:44.802Z"
-      },
-      "metadata": {
-        "source": "ss"
-      }
-    },
-    {
-      "id": "wb5egff1v",
+      "id": "nt3y2k5aj",
       "type": "vmess",
-      "name": "🇯🇵 日本 | JPN 25",
-      "server": "www.visa.com",
+      "name": "🇯🇵 日本 | JPN 16",
+      "server": "2001:19f0:7001:4c24:5400:5ff:fe2b:b8af",
+      "port": 443,
+      "protocol": "vmess",
+      "settings": {
+        "id": "d3f9db93-6383-407b-b858-b2dd08f935cd",
+        "alterId": 0,
+        "security": "auto",
+        "network": "tcp",
+        "wsPath": "",
+        "wsHeaders": {},
+        "tls": true,
+        "serverName": "yahoo.com"
+      },
+      "extra": {
+        "raw": {
+          "name": "🇯🇵 日本 | JPN 16",
+          "server": "2001:19f0:7001:4c24:5400:5ff:fe2b:b8af",
+          "port": 443,
+          "reality-opts": {
+            "public-key": "W959HKDLJPaAhQbTLSfP3oMxEeNk0JRJxvDZRrjFeRU",
+            "short-id": "0b8881d0"
+          },
+          "client-fingerprint": "firefox",
+          "type": "vless",
+          "uuid": "d3f9db93-6383-407b-b858-b2dd08f935cd",
+          "tls": true,
+          "flow": "xtls-rprx-vision",
+          "servername": "yahoo.com",
+          "network": "tcp",
+          "udp": true
+        },
+        "addedAt": "2025-05-23T13:36:55.895Z"
+      },
+      "metadata": {
+        "source": "ss"
+      }
+    },
+    {
+      "id": "u32zpqnzc",
+      "type": "vmess",
+      "name": "🇯🇵 日本 | JPN 17",
+      "server": "time.is",
       "port": 443,
       "protocol": "vmess",
       "settings": {
@@ -1441,8 +1132,8 @@
       },
       "extra": {
         "raw": {
-          "name": "🇯🇵 日本 | JPN 25",
-          "server": "www.visa.com",
+          "name": "🇯🇵 日本 | JPN 17",
+          "server": "time.is",
           "port": 443,
           "client-fingerprint": "chrome",
           "type": "vmess",
@@ -1461,21 +1152,182 @@
           },
           "udp": true
         },
-        "addedAt": "2025-05-23T06:35:44.802Z"
+        "addedAt": "2025-05-23T13:36:55.895Z"
       },
       "metadata": {
         "source": "ss"
       }
     },
     {
-      "id": "6mqljggjm",
+      "id": "peehyqecm",
+      "type": "ss",
+      "name": "🇯🇵 日本 | JPN 18",
+      "server": "1c4.bulldognet-dstat.uk",
+      "port": 45679,
+      "protocol": "shadowsocks",
+      "settings": {
+        "method": "chacha20-ietf-poly1305",
+        "password": "98c2c4a2-e9fe-4110-b908-9a4300273ddf",
+        "udp": true
+      },
+      "extra": {
+        "raw": {
+          "name": "🇯🇵 日本 | JPN 18",
+          "server": "1c4.bulldognet-dstat.uk",
+          "port": 45679,
+          "client-fingerprint": "chrome",
+          "type": "ss",
+          "cipher": "chacha20-ietf-poly1305",
+          "password": "98c2c4a2-e9fe-4110-b908-9a4300273ddf",
+          "udp": true
+        },
+        "addedAt": "2025-05-23T13:36:55.895Z"
+      },
+      "metadata": {
+        "source": "ss"
+      }
+    },
+    {
+      "id": "o1w59ax1t",
       "type": "vmess",
-      "name": "🇺🇸 美国 | USA",
-      "server": "cf.090227.xyz",
-      "port": 80,
+      "name": "🇯🇵 日本 | JPN 19",
+      "server": "bookmyshow.com",
+      "port": 443,
+      "protocol": "vmess",
+      "settings": {
+        "id": "d3f9db93-6383-407b-b858-b2dd08f935cd",
+        "alterId": 0,
+        "security": "auto",
+        "network": "ws",
+        "wsPath": "",
+        "wsHeaders": {},
+        "tls": true,
+        "serverName": "jpv.xiaoqi555.xyz"
+      },
+      "extra": {
+        "raw": {
+          "name": "🇯🇵 日本 | JPN 19",
+          "server": "bookmyshow.com",
+          "port": 443,
+          "client-fingerprint": "chrome",
+          "type": "vmess",
+          "uuid": "d3f9db93-6383-407b-b858-b2dd08f935cd",
+          "alterId": 0,
+          "cipher": "auto",
+          "tls": true,
+          "servername": "jpv.xiaoqi555.xyz",
+          "network": "ws",
+          "ws-opts": {
+            "path": "/",
+            "headers": {
+              "Host": "jpv.xiaoqi555.xyz"
+            }
+          },
+          "udp": true
+        },
+        "addedAt": "2025-05-23T13:36:55.895Z"
+      },
+      "metadata": {
+        "source": "ss"
+      }
+    },
+    {
+      "id": "y9j62nvzm",
+      "type": "vmess",
+      "name": "🇯🇵 日本 | JPN 20",
+      "server": "www.visa.com",
+      "port": 443,
       "protocol": "vmess",
       "settings": {
         "id": "5c9b507c-bc14-4952-bd92-fee335c87d92",
+        "alterId": 0,
+        "security": "auto",
+        "network": "ws",
+        "wsPath": "",
+        "wsHeaders": {},
+        "tls": true,
+        "serverName": "jpv.xiaoqi555.xyz"
+      },
+      "extra": {
+        "raw": {
+          "name": "🇯🇵 日本 | JPN 20",
+          "server": "www.visa.com",
+          "port": 443,
+          "client-fingerprint": "chrome",
+          "type": "vmess",
+          "uuid": "5c9b507c-bc14-4952-bd92-fee335c87d92",
+          "alterId": 0,
+          "cipher": "auto",
+          "tls": true,
+          "skip-cert-verify": true,
+          "servername": "jpv.xiaoqi555.xyz",
+          "network": "ws",
+          "ws-opts": {
+            "path": "/",
+            "headers": {
+              "Host": "jpv.xiaoqi555.xyz"
+            }
+          },
+          "udp": true
+        },
+        "addedAt": "2025-05-23T13:36:55.895Z"
+      },
+      "metadata": {
+        "source": "ss"
+      }
+    },
+    {
+      "id": "3glsmxvcz",
+      "type": "vmess",
+      "name": "🇸🇬 新加坡 | SGP",
+      "server": "tiamo2.tiamocloud.us.kg",
+      "port": 80,
+      "protocol": "vmess",
+      "settings": {
+        "id": "ff266050-a243-4d9c-872d-32e7a371c2f5",
+        "alterId": 0,
+        "security": "auto",
+        "network": "ws",
+        "wsPath": "",
+        "wsHeaders": {},
+        "tls": false,
+        "serverName": ""
+      },
+      "extra": {
+        "raw": {
+          "name": "🇸🇬 新加坡 | SGP",
+          "server": "tiamo2.tiamocloud.us.kg",
+          "port": 80,
+          "client-fingerprint": "chrome",
+          "type": "vmess",
+          "uuid": "ff266050-a243-4d9c-872d-32e7a371c2f5",
+          "alterId": 0,
+          "cipher": "auto",
+          "tls": false,
+          "network": "ws",
+          "ws-opts": {
+            "path": "/",
+            "headers": {
+              "Host": "tiamo2.tiamocloud.us.kg"
+            }
+          },
+          "udp": true
+        },
+        "addedAt": "2025-05-23T13:36:55.895Z"
+      },
+      "metadata": {
+        "source": "ss"
+      }
+    },
+    {
+      "id": "ctw4i8eqk",
+      "type": "vmess",
+      "name": "🇺🇸 美国 | USA",
+      "server": "bestcf.top",
+      "port": 80,
+      "protocol": "vmess",
+      "settings": {
+        "id": "ed749f4c-171e-46ad-ad58-c5f2c670bfa1",
         "alterId": 0,
         "security": "auto",
         "network": "ws",
@@ -1487,11 +1339,11 @@
       "extra": {
         "raw": {
           "name": "🇺🇸 美国 | USA",
-          "server": "cf.090227.xyz",
+          "server": "bestcf.top",
           "port": 80,
           "client-fingerprint": "chrome",
           "type": "vmess",
-          "uuid": "5c9b507c-bc14-4952-bd92-fee335c87d92",
+          "uuid": "ed749f4c-171e-46ad-ad58-c5f2c670bfa1",
           "alterId": 0,
           "cipher": "auto",
           "tls": false,
@@ -1504,21 +1356,21 @@
           },
           "udp": true
         },
-        "addedAt": "2025-05-23T06:35:44.802Z"
+        "addedAt": "2025-05-23T13:36:55.895Z"
       },
       "metadata": {
         "source": "ss"
       }
     },
     {
-      "id": "8y3jm1gkv",
+      "id": "b7zsqmrnk",
       "type": "vmess",
       "name": "🇺🇸 美国 | USA 2",
       "server": "zz.xiao666666.site",
       "port": 10001,
       "protocol": "vmess",
       "settings": {
-        "id": "c10f2e2b-ea4f-426e-a246-b1d4140dc699",
+        "id": "d3f9db93-6383-407b-b858-b2dd08f935cd",
         "alterId": 0,
         "security": "auto",
         "network": "ws",
@@ -1534,7 +1386,7 @@
           "port": 10001,
           "client-fingerprint": "chrome",
           "type": "vmess",
-          "uuid": "c10f2e2b-ea4f-426e-a246-b1d4140dc699",
+          "uuid": "d3f9db93-6383-407b-b858-b2dd08f935cd",
           "alterId": 0,
           "cipher": "auto",
           "tls": false,
@@ -1547,21 +1399,21 @@
           },
           "udp": true
         },
-        "addedAt": "2025-05-23T06:35:44.802Z"
+        "addedAt": "2025-05-23T13:36:55.895Z"
       },
       "metadata": {
         "source": "ss"
       }
     },
     {
-      "id": "pnhxmthil",
+      "id": "4cql47l49",
       "type": "vmess",
       "name": "🇺🇸 美国 | USA 3",
       "server": "cf.090227.xyz",
       "port": 80,
       "protocol": "vmess",
       "settings": {
-        "id": "c10f2e2b-ea4f-426e-a246-b1d4140dc699",
+        "id": "d3f9db93-6383-407b-b858-b2dd08f935cd",
         "alterId": 0,
         "security": "auto",
         "network": "ws",
@@ -1577,7 +1429,7 @@
           "port": 80,
           "client-fingerprint": "chrome",
           "type": "vmess",
-          "uuid": "c10f2e2b-ea4f-426e-a246-b1d4140dc699",
+          "uuid": "d3f9db93-6383-407b-b858-b2dd08f935cd",
           "alterId": 0,
           "cipher": "auto",
           "tls": false,
@@ -1590,21 +1442,21 @@
           },
           "udp": true
         },
-        "addedAt": "2025-05-23T06:35:44.802Z"
+        "addedAt": "2025-05-23T13:36:55.895Z"
       },
       "metadata": {
         "source": "ss"
       }
     },
     {
-      "id": "hvsqnfxqj",
+      "id": "cfvraey29",
       "type": "vmess",
       "name": "🇺🇸 美国 | USA 4",
-      "server": "bestcf.mfwl.art",
+      "server": "time.is",
       "port": 80,
       "protocol": "vmess",
       "settings": {
-        "id": "98c2c4a2-e9fe-4110-b908-9a4300273ddf",
+        "id": "d3f9db93-6383-407b-b858-b2dd08f935cd",
         "alterId": 0,
         "security": "auto",
         "network": "ws",
@@ -1616,11 +1468,11 @@
       "extra": {
         "raw": {
           "name": "🇺🇸 美国 | USA 4",
-          "server": "bestcf.mfwl.art",
+          "server": "time.is",
           "port": 80,
           "client-fingerprint": "chrome",
           "type": "vmess",
-          "uuid": "98c2c4a2-e9fe-4110-b908-9a4300273ddf",
+          "uuid": "d3f9db93-6383-407b-b858-b2dd08f935cd",
           "alterId": 0,
           "cipher": "auto",
           "tls": false,
@@ -1633,21 +1485,21 @@
           },
           "udp": true
         },
-        "addedAt": "2025-05-23T06:35:44.802Z"
+        "addedAt": "2025-05-23T13:36:55.895Z"
       },
       "metadata": {
         "source": "ss"
       }
     },
     {
-      "id": "58oe6h16s",
+      "id": "jteurumgd",
       "type": "vmess",
       "name": "🇺🇸 美国 | USA 5",
       "server": "zz.xiao666666.site",
       "port": 10001,
       "protocol": "vmess",
       "settings": {
-        "id": "5c9b507c-bc14-4952-bd92-fee335c87d92",
+        "id": "ed749f4c-171e-46ad-ad58-c5f2c670bfa1",
         "alterId": 0,
         "security": "auto",
         "network": "ws",
@@ -1663,7 +1515,7 @@
           "port": 10001,
           "client-fingerprint": "chrome",
           "type": "vmess",
-          "uuid": "5c9b507c-bc14-4952-bd92-fee335c87d92",
+          "uuid": "ed749f4c-171e-46ad-ad58-c5f2c670bfa1",
           "alterId": 0,
           "cipher": "auto",
           "tls": false,
@@ -1676,21 +1528,21 @@
           },
           "udp": true
         },
-        "addedAt": "2025-05-23T06:35:44.802Z"
+        "addedAt": "2025-05-23T13:36:55.895Z"
       },
       "metadata": {
         "source": "ss"
       }
     },
     {
-      "id": "z1nkxaaeh",
+      "id": "x32jo6mtd",
       "type": "vmess",
       "name": "🇺🇸 美国 | USA 6",
-      "server": "bestcf.top",
+      "server": "bestcf.mfwl.art",
       "port": 80,
       "protocol": "vmess",
       "settings": {
-        "id": "c10f2e2b-ea4f-426e-a246-b1d4140dc699",
+        "id": "ed749f4c-171e-46ad-ad58-c5f2c670bfa1",
         "alterId": 0,
         "security": "auto",
         "network": "ws",
@@ -1702,11 +1554,11 @@
       "extra": {
         "raw": {
           "name": "🇺🇸 美国 | USA 6",
-          "server": "bestcf.top",
+          "server": "bestcf.mfwl.art",
           "port": 80,
           "client-fingerprint": "chrome",
           "type": "vmess",
-          "uuid": "c10f2e2b-ea4f-426e-a246-b1d4140dc699",
+          "uuid": "ed749f4c-171e-46ad-ad58-c5f2c670bfa1",
           "alterId": 0,
           "cipher": "auto",
           "tls": false,
@@ -1719,21 +1571,21 @@
           },
           "udp": true
         },
-        "addedAt": "2025-05-23T06:35:44.802Z"
+        "addedAt": "2025-05-23T13:36:55.895Z"
       },
       "metadata": {
         "source": "ss"
       }
     },
     {
-      "id": "lpj0fpt3g",
+      "id": "8nndf0doz",
       "type": "vmess",
       "name": "🇺🇸 美国 | USA 7",
-      "server": "time.is",
+      "server": "cf.090227.xyz",
       "port": 80,
       "protocol": "vmess",
       "settings": {
-        "id": "c0f3b308-d3f5-4094-b8be-29c20d5b0e92",
+        "id": "5c9b507c-bc14-4952-bd92-fee335c87d92",
         "alterId": 0,
         "security": "auto",
         "network": "ws",
@@ -1745,11 +1597,11 @@
       "extra": {
         "raw": {
           "name": "🇺🇸 美国 | USA 7",
-          "server": "time.is",
+          "server": "cf.090227.xyz",
           "port": 80,
           "client-fingerprint": "chrome",
           "type": "vmess",
-          "uuid": "c0f3b308-d3f5-4094-b8be-29c20d5b0e92",
+          "uuid": "5c9b507c-bc14-4952-bd92-fee335c87d92",
           "alterId": 0,
           "cipher": "auto",
           "tls": false,
@@ -1762,21 +1614,21 @@
           },
           "udp": true
         },
-        "addedAt": "2025-05-23T06:35:44.802Z"
+        "addedAt": "2025-05-23T13:36:55.895Z"
       },
       "metadata": {
         "source": "ss"
       }
     },
     {
-      "id": "c8a4tatb6",
+      "id": "icsqrupry",
       "type": "vmess",
       "name": "🇺🇸 美国 | USA 8",
-      "server": "bestcf.top",
+      "server": "cf.090227.xyz",
       "port": 80,
       "protocol": "vmess",
       "settings": {
-        "id": "98c2c4a2-e9fe-4110-b908-9a4300273ddf",
+        "id": "ed749f4c-171e-46ad-ad58-c5f2c670bfa1",
         "alterId": 0,
         "security": "auto",
         "network": "ws",
@@ -1788,11 +1640,11 @@
       "extra": {
         "raw": {
           "name": "🇺🇸 美国 | USA 8",
-          "server": "bestcf.top",
+          "server": "cf.090227.xyz",
           "port": 80,
           "client-fingerprint": "chrome",
           "type": "vmess",
-          "uuid": "98c2c4a2-e9fe-4110-b908-9a4300273ddf",
+          "uuid": "ed749f4c-171e-46ad-ad58-c5f2c670bfa1",
           "alterId": 0,
           "cipher": "auto",
           "tls": false,
@@ -1805,21 +1657,21 @@
           },
           "udp": true
         },
-        "addedAt": "2025-05-23T06:35:44.802Z"
+        "addedAt": "2025-05-23T13:36:55.895Z"
       },
       "metadata": {
         "source": "ss"
       }
     },
     {
-      "id": "kzit1e0h5",
+      "id": "q9bm0bzhy",
       "type": "vmess",
       "name": "🇺🇸 美国 | USA 9",
-      "server": "time.is",
+      "server": "bestcf.top",
       "port": 80,
       "protocol": "vmess",
       "settings": {
-        "id": "c10f2e2b-ea4f-426e-a246-b1d4140dc699",
+        "id": "d3f9db93-6383-407b-b858-b2dd08f935cd",
         "alterId": 0,
         "security": "auto",
         "network": "ws",
@@ -1831,11 +1683,11 @@
       "extra": {
         "raw": {
           "name": "🇺🇸 美国 | USA 9",
-          "server": "time.is",
+          "server": "bestcf.top",
           "port": 80,
           "client-fingerprint": "chrome",
           "type": "vmess",
-          "uuid": "c10f2e2b-ea4f-426e-a246-b1d4140dc699",
+          "uuid": "d3f9db93-6383-407b-b858-b2dd08f935cd",
           "alterId": 0,
           "cipher": "auto",
           "tls": false,
@@ -1848,14 +1700,14 @@
           },
           "udp": true
         },
-        "addedAt": "2025-05-23T06:35:44.802Z"
+        "addedAt": "2025-05-23T13:36:55.895Z"
       },
       "metadata": {
         "source": "ss"
       }
     },
     {
-      "id": "aedec6l5w",
+      "id": "zbbegzyyc",
       "type": "vmess",
       "name": "🇺🇸 美国 | USA 10",
       "server": "bestcf.top",
@@ -1891,21 +1743,21 @@
           },
           "udp": true
         },
-        "addedAt": "2025-05-23T06:35:44.802Z"
+        "addedAt": "2025-05-23T13:36:55.895Z"
       },
       "metadata": {
         "source": "ss"
       }
     },
     {
-      "id": "1mcfuq7o1",
+      "id": "l5pj6i44e",
       "type": "vmess",
       "name": "🇺🇸 美国 | USA 11",
       "server": "time.is",
       "port": 80,
       "protocol": "vmess",
       "settings": {
-        "id": "5c9b507c-bc14-4952-bd92-fee335c87d92",
+        "id": "98c2c4a2-e9fe-4110-b908-9a4300273ddf",
         "alterId": 0,
         "security": "auto",
         "network": "ws",
@@ -1921,7 +1773,7 @@
           "port": 80,
           "client-fingerprint": "chrome",
           "type": "vmess",
-          "uuid": "5c9b507c-bc14-4952-bd92-fee335c87d92",
+          "uuid": "98c2c4a2-e9fe-4110-b908-9a4300273ddf",
           "alterId": 0,
           "cipher": "auto",
           "tls": false,
@@ -1934,489 +1786,16 @@
           },
           "udp": true
         },
-        "addedAt": "2025-05-23T06:35:44.802Z"
+        "addedAt": "2025-05-23T13:36:55.895Z"
       },
       "metadata": {
         "source": "ss"
       }
     },
     {
-      "id": "n50bjiijj",
+      "id": "ca0w5yrqq",
       "type": "vmess",
       "name": "🇺🇸 美国 | USA 12",
-      "server": "zz.xiao666666.site",
-      "port": 10001,
-      "protocol": "vmess",
-      "settings": {
-        "id": "d3f9db93-6383-407b-b858-b2dd08f935cd",
-        "alterId": 0,
-        "security": "auto",
-        "network": "ws",
-        "wsPath": "",
-        "wsHeaders": {},
-        "tls": false,
-        "serverName": ""
-      },
-      "extra": {
-        "raw": {
-          "name": "🇺🇸 美国 | USA 12",
-          "server": "zz.xiao666666.site",
-          "port": 10001,
-          "client-fingerprint": "chrome",
-          "type": "vmess",
-          "uuid": "d3f9db93-6383-407b-b858-b2dd08f935cd",
-          "alterId": 0,
-          "cipher": "auto",
-          "tls": false,
-          "network": "ws",
-          "ws-opts": {
-            "path": "/",
-            "headers": {
-              "Host": "by.xiao666666.site"
-            }
-          },
-          "udp": true
-        },
-        "addedAt": "2025-05-23T06:35:44.802Z"
-      },
-      "metadata": {
-        "source": "ss"
-      }
-    },
-    {
-      "id": "9kw1nwj2f",
-      "type": "vmess",
-      "name": "🇺🇸 美国 | USA 13",
-      "server": "zz.xiao666666.site",
-      "port": 10001,
-      "protocol": "vmess",
-      "settings": {
-        "id": "c0f3b308-d3f5-4094-b8be-29c20d5b0e92",
-        "alterId": 0,
-        "security": "auto",
-        "network": "ws",
-        "wsPath": "",
-        "wsHeaders": {},
-        "tls": false,
-        "serverName": ""
-      },
-      "extra": {
-        "raw": {
-          "name": "🇺🇸 美国 | USA 13",
-          "server": "zz.xiao666666.site",
-          "port": 10001,
-          "client-fingerprint": "chrome",
-          "type": "vmess",
-          "uuid": "c0f3b308-d3f5-4094-b8be-29c20d5b0e92",
-          "alterId": 0,
-          "cipher": "auto",
-          "tls": false,
-          "network": "ws",
-          "ws-opts": {
-            "path": "/",
-            "headers": {
-              "Host": "by.xiao666666.site"
-            }
-          },
-          "udp": true
-        },
-        "addedAt": "2025-05-23T06:35:44.802Z"
-      },
-      "metadata": {
-        "source": "ss"
-      }
-    },
-    {
-      "id": "tdoia2j8v",
-      "type": "vmess",
-      "name": "🇺🇸 美国 | USA 14",
-      "server": "cf.090227.xyz",
-      "port": 80,
-      "protocol": "vmess",
-      "settings": {
-        "id": "c0f3b308-d3f5-4094-b8be-29c20d5b0e92",
-        "alterId": 0,
-        "security": "auto",
-        "network": "ws",
-        "wsPath": "",
-        "wsHeaders": {},
-        "tls": false,
-        "serverName": ""
-      },
-      "extra": {
-        "raw": {
-          "name": "🇺🇸 美国 | USA 14",
-          "server": "cf.090227.xyz",
-          "port": 80,
-          "client-fingerprint": "chrome",
-          "type": "vmess",
-          "uuid": "c0f3b308-d3f5-4094-b8be-29c20d5b0e92",
-          "alterId": 0,
-          "cipher": "auto",
-          "tls": false,
-          "network": "ws",
-          "ws-opts": {
-            "path": "/",
-            "headers": {
-              "Host": "shs111.kejixiaoqi666.store"
-            }
-          },
-          "udp": true
-        },
-        "addedAt": "2025-05-23T06:35:44.802Z"
-      },
-      "metadata": {
-        "source": "ss"
-      }
-    },
-    {
-      "id": "y3p21dbjm",
-      "type": "vmess",
-      "name": "🇺🇸 美国 | USA 15",
-      "server": "cf.090227.xyz",
-      "port": 80,
-      "protocol": "vmess",
-      "settings": {
-        "id": "98c2c4a2-e9fe-4110-b908-9a4300273ddf",
-        "alterId": 0,
-        "security": "auto",
-        "network": "ws",
-        "wsPath": "",
-        "wsHeaders": {},
-        "tls": false,
-        "serverName": ""
-      },
-      "extra": {
-        "raw": {
-          "name": "🇺🇸 美国 | USA 15",
-          "server": "cf.090227.xyz",
-          "port": 80,
-          "client-fingerprint": "chrome",
-          "type": "vmess",
-          "uuid": "98c2c4a2-e9fe-4110-b908-9a4300273ddf",
-          "alterId": 0,
-          "cipher": "auto",
-          "tls": false,
-          "network": "ws",
-          "ws-opts": {
-            "path": "/",
-            "headers": {
-              "Host": "shs111.kejixiaoqi666.store"
-            }
-          },
-          "udp": true
-        },
-        "addedAt": "2025-05-23T06:35:44.802Z"
-      },
-      "metadata": {
-        "source": "ss"
-      }
-    },
-    {
-      "id": "s3ad09s1a",
-      "type": "vmess",
-      "name": "🇺🇸 美国 | USA 16",
-      "server": "zz.xiao666666.site",
-      "port": 10001,
-      "protocol": "vmess",
-      "settings": {
-        "id": "98c2c4a2-e9fe-4110-b908-9a4300273ddf",
-        "alterId": 0,
-        "security": "auto",
-        "network": "ws",
-        "wsPath": "",
-        "wsHeaders": {},
-        "tls": false,
-        "serverName": ""
-      },
-      "extra": {
-        "raw": {
-          "name": "🇺🇸 美国 | USA 16",
-          "server": "zz.xiao666666.site",
-          "port": 10001,
-          "client-fingerprint": "chrome",
-          "type": "vmess",
-          "uuid": "98c2c4a2-e9fe-4110-b908-9a4300273ddf",
-          "alterId": 0,
-          "cipher": "auto",
-          "tls": false,
-          "network": "ws",
-          "ws-opts": {
-            "path": "/",
-            "headers": {
-              "Host": "by.xiao666666.site"
-            }
-          },
-          "udp": true
-        },
-        "addedAt": "2025-05-23T06:35:44.802Z"
-      },
-      "metadata": {
-        "source": "ss"
-      }
-    },
-    {
-      "id": "vzua1oeu9",
-      "type": "vmess",
-      "name": "🇺🇸 美国 | USA 17",
-      "server": "bestcf.top",
-      "port": 80,
-      "protocol": "vmess",
-      "settings": {
-        "id": "c0f3b308-d3f5-4094-b8be-29c20d5b0e92",
-        "alterId": 0,
-        "security": "auto",
-        "network": "ws",
-        "wsPath": "",
-        "wsHeaders": {},
-        "tls": false,
-        "serverName": ""
-      },
-      "extra": {
-        "raw": {
-          "name": "🇺🇸 美国 | USA 17",
-          "server": "bestcf.top",
-          "port": 80,
-          "client-fingerprint": "chrome",
-          "type": "vmess",
-          "uuid": "c0f3b308-d3f5-4094-b8be-29c20d5b0e92",
-          "alterId": 0,
-          "cipher": "auto",
-          "tls": false,
-          "network": "ws",
-          "ws-opts": {
-            "path": "/",
-            "headers": {
-              "Host": "shs111.kejixiaoqi666.store"
-            }
-          },
-          "udp": true
-        },
-        "addedAt": "2025-05-23T06:35:44.802Z"
-      },
-      "metadata": {
-        "source": "ss"
-      }
-    },
-    {
-      "id": "9rslpcdvv",
-      "type": "vmess",
-      "name": "🇺🇸 美国 | USA 18",
-      "server": "time.is",
-      "port": 80,
-      "protocol": "vmess",
-      "settings": {
-        "id": "d3f9db93-6383-407b-b858-b2dd08f935cd",
-        "alterId": 0,
-        "security": "auto",
-        "network": "ws",
-        "wsPath": "",
-        "wsHeaders": {},
-        "tls": false,
-        "serverName": ""
-      },
-      "extra": {
-        "raw": {
-          "name": "🇺🇸 美国 | USA 18",
-          "server": "time.is",
-          "port": 80,
-          "client-fingerprint": "chrome",
-          "type": "vmess",
-          "uuid": "d3f9db93-6383-407b-b858-b2dd08f935cd",
-          "alterId": 0,
-          "cipher": "auto",
-          "tls": false,
-          "network": "ws",
-          "ws-opts": {
-            "path": "/",
-            "headers": {
-              "Host": "shs111.kejixiaoqi666.store"
-            }
-          },
-          "udp": true
-        },
-        "addedAt": "2025-05-23T06:35:44.802Z"
-      },
-      "metadata": {
-        "source": "ss"
-      }
-    },
-    {
-      "id": "mu8owasl6",
-      "type": "vmess",
-      "name": "🇺🇸 美国 | USA 19",
-      "server": "bestcf.mfwl.art",
-      "port": 80,
-      "protocol": "vmess",
-      "settings": {
-        "id": "c10f2e2b-ea4f-426e-a246-b1d4140dc699",
-        "alterId": 0,
-        "security": "auto",
-        "network": "ws",
-        "wsPath": "",
-        "wsHeaders": {},
-        "tls": false,
-        "serverName": ""
-      },
-      "extra": {
-        "raw": {
-          "name": "🇺🇸 美国 | USA 19",
-          "server": "bestcf.mfwl.art",
-          "port": 80,
-          "client-fingerprint": "chrome",
-          "type": "vmess",
-          "uuid": "c10f2e2b-ea4f-426e-a246-b1d4140dc699",
-          "alterId": 0,
-          "cipher": "auto",
-          "tls": false,
-          "network": "ws",
-          "ws-opts": {
-            "path": "/",
-            "headers": {
-              "Host": "shs111.kejixiaoqi666.store"
-            }
-          },
-          "udp": true
-        },
-        "addedAt": "2025-05-23T06:35:44.802Z"
-      },
-      "metadata": {
-        "source": "ss"
-      }
-    },
-    {
-      "id": "hyg9uu4hv",
-      "type": "vmess",
-      "name": "🇺🇸 美国 | USA 20",
-      "server": "bestcf.mfwl.art",
-      "port": 80,
-      "protocol": "vmess",
-      "settings": {
-        "id": "c0f3b308-d3f5-4094-b8be-29c20d5b0e92",
-        "alterId": 0,
-        "security": "auto",
-        "network": "ws",
-        "wsPath": "",
-        "wsHeaders": {},
-        "tls": false,
-        "serverName": ""
-      },
-      "extra": {
-        "raw": {
-          "name": "🇺🇸 美国 | USA 20",
-          "server": "bestcf.mfwl.art",
-          "port": 80,
-          "client-fingerprint": "chrome",
-          "type": "vmess",
-          "uuid": "c0f3b308-d3f5-4094-b8be-29c20d5b0e92",
-          "alterId": 0,
-          "cipher": "auto",
-          "tls": false,
-          "network": "ws",
-          "ws-opts": {
-            "path": "/",
-            "headers": {
-              "Host": "shs111.kejixiaoqi666.store"
-            }
-          },
-          "udp": true
-        },
-        "addedAt": "2025-05-23T06:35:44.802Z"
-      },
-      "metadata": {
-        "source": "ss"
-      }
-    },
-    {
-      "id": "vd2al4f0s",
-      "type": "vmess",
-      "name": "🇺🇸 美国 | USA 21",
-      "server": "time.is",
-      "port": 80,
-      "protocol": "vmess",
-      "settings": {
-        "id": "98c2c4a2-e9fe-4110-b908-9a4300273ddf",
-        "alterId": 0,
-        "security": "auto",
-        "network": "ws",
-        "wsPath": "",
-        "wsHeaders": {},
-        "tls": false,
-        "serverName": ""
-      },
-      "extra": {
-        "raw": {
-          "name": "🇺🇸 美国 | USA 21",
-          "server": "time.is",
-          "port": 80,
-          "client-fingerprint": "chrome",
-          "type": "vmess",
-          "uuid": "98c2c4a2-e9fe-4110-b908-9a4300273ddf",
-          "alterId": 0,
-          "cipher": "auto",
-          "tls": false,
-          "network": "ws",
-          "ws-opts": {
-            "path": "/",
-            "headers": {
-              "Host": "shs111.kejixiaoqi666.store"
-            }
-          },
-          "udp": true
-        },
-        "addedAt": "2025-05-23T06:35:44.802Z"
-      },
-      "metadata": {
-        "source": "ss"
-      }
-    },
-    {
-      "id": "z49ohjk2b",
-      "type": "vmess",
-      "name": "🇺🇸 美国 | USA 22",
-      "server": "cf.090227.xyz",
-      "port": 80,
-      "protocol": "vmess",
-      "settings": {
-        "id": "d3f9db93-6383-407b-b858-b2dd08f935cd",
-        "alterId": 0,
-        "security": "auto",
-        "network": "ws",
-        "wsPath": "",
-        "wsHeaders": {},
-        "tls": false,
-        "serverName": ""
-      },
-      "extra": {
-        "raw": {
-          "name": "🇺🇸 美国 | USA 22",
-          "server": "cf.090227.xyz",
-          "port": 80,
-          "client-fingerprint": "chrome",
-          "type": "vmess",
-          "uuid": "d3f9db93-6383-407b-b858-b2dd08f935cd",
-          "alterId": 0,
-          "cipher": "auto",
-          "tls": false,
-          "network": "ws",
-          "ws-opts": {
-            "path": "/",
-            "headers": {
-              "Host": "shs111.kejixiaoqi666.store"
-            }
-          },
-          "udp": true
-        },
-        "addedAt": "2025-05-23T06:35:44.802Z"
-      },
-      "metadata": {
-        "source": "ss"
-      }
-    },
-    {
-      "id": "zkkeesy18",
-      "type": "vmess",
-      "name": "🇺🇸 美国 | USA 23",
       "server": "bestcf.mfwl.art",
       "port": 80,
       "protocol": "vmess",
@@ -2432,7 +1811,7 @@
       },
       "extra": {
         "raw": {
-          "name": "🇺🇸 美国 | USA 23",
+          "name": "🇺🇸 美国 | USA 12",
           "server": "bestcf.mfwl.art",
           "port": 80,
           "client-fingerprint": "chrome",
@@ -2450,16 +1829,274 @@
           },
           "udp": true
         },
-        "addedAt": "2025-05-23T06:35:44.802Z"
+        "addedAt": "2025-05-23T13:36:55.895Z"
       },
       "metadata": {
         "source": "ss"
       }
     },
     {
-      "id": "o9er7y12c",
+      "id": "jjuiox3i7",
       "type": "vmess",
-      "name": "🇺🇸 美国 | USA 24",
+      "name": "🇺🇸 美国 | USA 13",
+      "server": "cf.090227.xyz",
+      "port": 80,
+      "protocol": "vmess",
+      "settings": {
+        "id": "98c2c4a2-e9fe-4110-b908-9a4300273ddf",
+        "alterId": 0,
+        "security": "auto",
+        "network": "ws",
+        "wsPath": "",
+        "wsHeaders": {},
+        "tls": false,
+        "serverName": ""
+      },
+      "extra": {
+        "raw": {
+          "name": "🇺🇸 美国 | USA 13",
+          "server": "cf.090227.xyz",
+          "port": 80,
+          "client-fingerprint": "chrome",
+          "type": "vmess",
+          "uuid": "98c2c4a2-e9fe-4110-b908-9a4300273ddf",
+          "alterId": 0,
+          "cipher": "auto",
+          "tls": false,
+          "network": "ws",
+          "ws-opts": {
+            "path": "/",
+            "headers": {
+              "Host": "shs111.kejixiaoqi666.store"
+            }
+          },
+          "udp": true
+        },
+        "addedAt": "2025-05-23T13:36:55.895Z"
+      },
+      "metadata": {
+        "source": "ss"
+      }
+    },
+    {
+      "id": "d8b7xudup",
+      "type": "vmess",
+      "name": "🇺🇸 美国 | USA 14",
+      "server": "zz.xiao666666.site",
+      "port": 10001,
+      "protocol": "vmess",
+      "settings": {
+        "id": "98c2c4a2-e9fe-4110-b908-9a4300273ddf",
+        "alterId": 0,
+        "security": "auto",
+        "network": "ws",
+        "wsPath": "",
+        "wsHeaders": {},
+        "tls": false,
+        "serverName": ""
+      },
+      "extra": {
+        "raw": {
+          "name": "🇺🇸 美国 | USA 14",
+          "server": "zz.xiao666666.site",
+          "port": 10001,
+          "client-fingerprint": "chrome",
+          "type": "vmess",
+          "uuid": "98c2c4a2-e9fe-4110-b908-9a4300273ddf",
+          "alterId": 0,
+          "cipher": "auto",
+          "tls": false,
+          "network": "ws",
+          "ws-opts": {
+            "path": "/",
+            "headers": {
+              "Host": "by.xiao666666.site"
+            }
+          },
+          "udp": true
+        },
+        "addedAt": "2025-05-23T13:36:55.895Z"
+      },
+      "metadata": {
+        "source": "ss"
+      }
+    },
+    {
+      "id": "48dzibylp",
+      "type": "vmess",
+      "name": "🇺🇸 美国 | USA 15",
+      "server": "time.is",
+      "port": 80,
+      "protocol": "vmess",
+      "settings": {
+        "id": "5c9b507c-bc14-4952-bd92-fee335c87d92",
+        "alterId": 0,
+        "security": "auto",
+        "network": "ws",
+        "wsPath": "",
+        "wsHeaders": {},
+        "tls": false,
+        "serverName": ""
+      },
+      "extra": {
+        "raw": {
+          "name": "🇺🇸 美国 | USA 15",
+          "server": "time.is",
+          "port": 80,
+          "client-fingerprint": "chrome",
+          "type": "vmess",
+          "uuid": "5c9b507c-bc14-4952-bd92-fee335c87d92",
+          "alterId": 0,
+          "cipher": "auto",
+          "tls": false,
+          "network": "ws",
+          "ws-opts": {
+            "path": "/",
+            "headers": {
+              "Host": "shs111.kejixiaoqi666.store"
+            }
+          },
+          "udp": true
+        },
+        "addedAt": "2025-05-23T13:36:55.895Z"
+      },
+      "metadata": {
+        "source": "ss"
+      }
+    },
+    {
+      "id": "kw8gbui2z",
+      "type": "vmess",
+      "name": "🇺🇸 美国 | USA 16",
+      "server": "zz.xiao666666.site",
+      "port": 10001,
+      "protocol": "vmess",
+      "settings": {
+        "id": "5c9b507c-bc14-4952-bd92-fee335c87d92",
+        "alterId": 0,
+        "security": "auto",
+        "network": "ws",
+        "wsPath": "",
+        "wsHeaders": {},
+        "tls": false,
+        "serverName": ""
+      },
+      "extra": {
+        "raw": {
+          "name": "🇺🇸 美国 | USA 16",
+          "server": "zz.xiao666666.site",
+          "port": 10001,
+          "client-fingerprint": "chrome",
+          "type": "vmess",
+          "uuid": "5c9b507c-bc14-4952-bd92-fee335c87d92",
+          "alterId": 0,
+          "cipher": "auto",
+          "tls": false,
+          "network": "ws",
+          "ws-opts": {
+            "path": "/",
+            "headers": {
+              "Host": "by.xiao666666.site"
+            }
+          },
+          "udp": true
+        },
+        "addedAt": "2025-05-23T13:36:55.895Z"
+      },
+      "metadata": {
+        "source": "ss"
+      }
+    },
+    {
+      "id": "q9u8zz6g2",
+      "type": "vmess",
+      "name": "🇺🇸 美国 | USA 17",
+      "server": "bestcf.mfwl.art",
+      "port": 80,
+      "protocol": "vmess",
+      "settings": {
+        "id": "98c2c4a2-e9fe-4110-b908-9a4300273ddf",
+        "alterId": 0,
+        "security": "auto",
+        "network": "ws",
+        "wsPath": "",
+        "wsHeaders": {},
+        "tls": false,
+        "serverName": ""
+      },
+      "extra": {
+        "raw": {
+          "name": "🇺🇸 美国 | USA 17",
+          "server": "bestcf.mfwl.art",
+          "port": 80,
+          "client-fingerprint": "chrome",
+          "type": "vmess",
+          "uuid": "98c2c4a2-e9fe-4110-b908-9a4300273ddf",
+          "alterId": 0,
+          "cipher": "auto",
+          "tls": false,
+          "network": "ws",
+          "ws-opts": {
+            "path": "/",
+            "headers": {
+              "Host": "shs111.kejixiaoqi666.store"
+            }
+          },
+          "udp": true
+        },
+        "addedAt": "2025-05-23T13:36:55.895Z"
+      },
+      "metadata": {
+        "source": "ss"
+      }
+    },
+    {
+      "id": "2p7ujygcg",
+      "type": "vmess",
+      "name": "🇺🇸 美国 | USA 18",
+      "server": "time.is",
+      "port": 80,
+      "protocol": "vmess",
+      "settings": {
+        "id": "ed749f4c-171e-46ad-ad58-c5f2c670bfa1",
+        "alterId": 0,
+        "security": "auto",
+        "network": "ws",
+        "wsPath": "",
+        "wsHeaders": {},
+        "tls": false,
+        "serverName": ""
+      },
+      "extra": {
+        "raw": {
+          "name": "🇺🇸 美国 | USA 18",
+          "server": "time.is",
+          "port": 80,
+          "client-fingerprint": "chrome",
+          "type": "vmess",
+          "uuid": "ed749f4c-171e-46ad-ad58-c5f2c670bfa1",
+          "alterId": 0,
+          "cipher": "auto",
+          "tls": false,
+          "network": "ws",
+          "ws-opts": {
+            "path": "/",
+            "headers": {
+              "Host": "shs111.kejixiaoqi666.store"
+            }
+          },
+          "udp": true
+        },
+        "addedAt": "2025-05-23T13:36:55.895Z"
+      },
+      "metadata": {
+        "source": "ss"
+      }
+    },
+    {
+      "id": "42yok87yg",
+      "type": "vmess",
+      "name": "🇺🇸 美国 | USA 19",
       "server": "bestcf.mfwl.art",
       "port": 80,
       "protocol": "vmess",
@@ -2475,7 +2112,7 @@
       },
       "extra": {
         "raw": {
-          "name": "🇺🇸 美国 | USA 24",
+          "name": "🇺🇸 美国 | USA 19",
           "server": "bestcf.mfwl.art",
           "port": 80,
           "client-fingerprint": "chrome",
@@ -2493,21 +2130,21 @@
           },
           "udp": true
         },
-        "addedAt": "2025-05-23T06:35:44.802Z"
+        "addedAt": "2025-05-23T13:36:55.895Z"
       },
       "metadata": {
         "source": "ss"
       }
     },
     {
-      "id": "qwn9hfwhb",
+      "id": "7cjgby2ot",
       "type": "vmess",
-      "name": "🇺🇸 美国 | USA 25",
+      "name": "🇺🇸 美国 | USA 20",
       "server": "bestcf.top",
       "port": 80,
       "protocol": "vmess",
       "settings": {
-        "id": "d3f9db93-6383-407b-b858-b2dd08f935cd",
+        "id": "98c2c4a2-e9fe-4110-b908-9a4300273ddf",
         "alterId": 0,
         "security": "auto",
         "network": "ws",
@@ -2518,12 +2155,12 @@
       },
       "extra": {
         "raw": {
-          "name": "🇺🇸 美国 | USA 25",
+          "name": "🇺🇸 美国 | USA 20",
           "server": "bestcf.top",
           "port": 80,
           "client-fingerprint": "chrome",
           "type": "vmess",
-          "uuid": "d3f9db93-6383-407b-b858-b2dd08f935cd",
+          "uuid": "98c2c4a2-e9fe-4110-b908-9a4300273ddf",
           "alterId": 0,
           "cipher": "auto",
           "tls": false,
@@ -2536,13 +2173,13 @@
           },
           "udp": true
         },
-        "addedAt": "2025-05-23T06:35:44.802Z"
+        "addedAt": "2025-05-23T13:36:55.895Z"
       },
       "metadata": {
         "source": "ss"
       }
     }
   ],
-  "timestamp": 1747982144802,
-  "hash": "863de3ab7f3587161b13c885dede76ac"
+  "timestamp": 1748007415895,
+  "hash": "81b922d67ac367c0029ff8b3690c1cd3"
 }
