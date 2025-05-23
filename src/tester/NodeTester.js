@@ -13,6 +13,7 @@ export class NodeTester {
     this.logger = options.logger || defaultLogger.child({ component: 'NodeTester' });
     this.testUrl = options.testUrl || 'http://www.google.com/generate_204'; // Default test URL
     this.verifyLocation = options.verifyLocation !== false; // 默认启用地区验证
+    this.maxLatency = options.maxLatency || 3000; // 最大延迟限制，默认3秒
   }
 
   /**
@@ -92,15 +93,16 @@ export class NodeTester {
         let finalError = result.error || null;
 
         if (result.status) {
-          // 检查延迟是否低于 1000ms
-          if (latency < 1000) {
+          // 使用配置的最大延迟限制
+          const maxLatency = this.maxLatency || 3000; // 默认3秒
+          if (latency < maxLatency) {
             finalStatus = 'up';
             finalLatency = latency;
           } else {
-            this.logger.warn(`节点 ${node.name} 延迟过高 (${latency}ms)，标记为 down`);
+            this.logger.warn(`节点 ${node.name} 延迟过高 (${latency}ms，限制${maxLatency}ms)，标记为 down`);
             finalStatus = 'down';
             finalLatency = null; // 延迟过高视为不可用，不记录延迟
-            finalError = `延迟过高 (${latency}ms)`; // 添加错误信息
+            finalError = `延迟过高 (${latency}ms，限制${maxLatency}ms)`; // 添加错误信息
           }
         }
 

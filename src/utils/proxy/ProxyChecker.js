@@ -54,6 +54,15 @@ export class ProxyChecker {
                 this.logger.warn(`Connectivity check for trojan is not fully supported yet. Performing basic TLS check.`);
                 // 对于Trojan协议，尝试进行TLS连接检查，因为Trojan是基于TLS的
                 return this.checkTlsConnection(node.server, node.port, timeout);
+            case 'hysteria2':
+            case 'hy2':
+                this.logger.debug(`${node.type} is a UDP-based protocol, should be tested via proxy core. Performing basic UDP check.`);
+                // Hysteria2是基于UDP的协议，不适合HTTP代理测试，应该通过代理核心测试
+                return this.checkTcpConnection(node.server, node.port, timeout); // 先检查端口是否开放
+            case 'tuic':
+                this.logger.debug(`${node.type} is a UDP-based protocol, should be tested via proxy core. Performing basic UDP check.`);
+                // TUIC也是基于UDP的协议
+                return this.checkTcpConnection(node.server, node.port, timeout); // 先检查端口是否开放
             case 'ss':
             case 'ssr':
                 this.logger.warn(`SSR protocol detected, using SSR specific check with extended timeout`);

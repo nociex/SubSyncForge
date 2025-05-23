@@ -1,0 +1,229 @@
+name: Advanced Node Testing
+
+on:
+  workflow_dispatch:
+    inputs:
+      core_type:
+        description: '选择代理核心类型'
+        required: true
+        default: 'mihomo'
+        type: choice
+        options:
+          - mihomo
+          - v2ray
+      test_mode:
+        description: '测试模式'
+        required: true
+        default: 'core'
+        type: choice
+        options:
+          - core
+          - basic
+          - both
+      subscription_url:
+        description: '订阅链接 (可选)'
+        required: false
+        type: string
+      node_count:
+        description: '测试节点数量限制'
+        required: false
+        default: '50'
+        type: string
+  schedule:
+    # 每天凌晨2点运行 (UTC)
+    - cron: '0 2 * * *'
+  push:
+    paths:
+      - 'src/core/**'
+      - 'src/tester/**'
+      - '.github/workflows/test-nodes-advanced.yml'
+
+env:
+  NODE_VERSION: '18'
+  CORE_CACHE_KEY: 'proxy-cores-v1'
+
+jobs:
+  test-nodes-advanced:
+    name: 高级节点测试
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    
+    strategy:
+      matrix:
+        core_type: ${{ github.event.inputs.core_type && fromJson(format('["{0}"]', github.event.inputs.core_type)) || fromJson('["mihomo", "v2ray"]') }}
+      fail-fast: false
+    
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+        
+      - name: 设置 Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+          
+      - name: 安装依赖
+        run: |
+          npm ci
+          
+      - name: 创建核心缓存目录
+        run: |
+          mkdir -p .cores/configs
+          chmod 755 .cores
+          
+      - name: 缓存代理核心
+        uses: actions/cache@v3
+        with:
+          path: |
+            .cores
+            !.cores/configs/*.json
+          key: ${{ env.CORE_CACHE_KEY }}-${{ matrix.core_type }}-${{ runner.os }}-${{ runner.arch }}
+          restore-keys: |
+            ${{ env.CORE_CACHE_KEY }}-${{ matrix.core_type }}-${{ runner.os }}-
+            ${{ env.CORE_CACHE_KEY }}-${{ matrix.core_type }}-
+            
+      - name: 系统信息
+        run: |
+          echo "操作系统: $(uname -s)"
+          echo "架构: $(uname -m)"
+          echo "Node.js 版本: $(node --version)"
+          echo "npm 版本: $(npm --version)"
+          echo "当前用户: $(whoami)"
+          echo "工作目录: $(pwd)"
+          ls -la
+          
+      - name: 构建项目
+        run: |
+          npm run build
+          
+      - name: 准备测试数据
+        run: |
+          # 如果提供了订阅链接，下载并解析
+          if [ -n "${{ github.event.inputs.subscription_url }}" ]; then
+            echo "下载订阅数据..."
+            curl -L "${{ github.event.inputs.subscription_url }}" > subscription.txt
+            echo "订阅数据大小: $(wc -c < subscription.txt) 字节"
+          else
+            echo "使用内置测试节点"
+          fi
+          
+      - name: 运行核心测试 (${{ matrix.core_type }})
+        if: ${{ github.event.inputs.test_mode != 'basic' }}
+        run: |
+          echo "🚀 开始 ${{ matrix.core_type }} 核心测试..."
+          
+          # 设置测试参数
+          TEST_ARGS="--${{ matrix.core_type }}"
+          
+          if [ "${{ github.event.inputs.test_mode }}" = "core" ]; then
+            TEST_ARGS="$TEST_ARGS --no-fallback"
+          fi
+          
+          # 运行测试
+          timeout 20m node src/scripts/test-advanced-nodes.js $TEST_ARGS || {
+            echo "❌ ${{ matrix.core_type }} 核心测试失败或超时"
+            exit 1
+          }
+          
+      - name: 运行基本连接测试
+        if: ${{ github.event.inputs.test_mode == 'basic' || github.event.inputs.test_mode == 'both' }}
+        run: |
+          echo "🔧 开始基本连接测试..."
+          timeout 15m node src/scripts/test-advanced-nodes.js --no-core || {
+            echo "❌ 基本连接测试失败或超时"
+            exit 1
+          }
+          
+      - name: 生成测试报告
+        if: always()
+        run: |
+          # 创建测试报告目录
+          mkdir -p test-reports
+          
+          # 生成系统信息报告
+          cat > test-reports/system-info.md << EOF
+          # 系统信息
+          
+          - **操作系统**: $(uname -s) $(uname -r)
+          - **架构**: $(uname -m)
+          - **核心类型**: ${{ matrix.core_type }}
+          - **Node.js 版本**: $(node --version)
+          - **测试时间**: $(date -u '+%Y-%m-%d %H:%M:%S UTC')
+          - **工作流**: ${{ github.workflow }}
+          - **运行ID**: ${{ github.run_id }}
+          
+          ## 核心文件状态
+          \`\`\`
+          $(ls -la .cores/ 2>/dev/null || echo "核心目录不存在")
+          \`\`\`
+          
+          ## 磁盘使用情况
+          \`\`\`
+          $(df -h)
+          \`\`\`
+          EOF
+          
+          # 检查核心是否下载成功
+          if [ -f ".cores/mihomo" ] || [ -f ".cores/v2ray" ]; then
+            echo "✅ 代理核心下载成功" >> test-reports/system-info.md
+          else
+            echo "❌ 代理核心下载失败" >> test-reports/system-info.md
+          fi
+          
+      - name: 上传测试报告
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-reports-${{ matrix.core_type }}-${{ github.run_number }}
+          path: test-reports/
+          retention-days: 7
+          
+      - name: 清理临时文件
+        if: always()
+        run: |
+          # 清理敏感数据和临时文件
+          rm -f subscription.txt
+          find .cores/configs -name "test-*.json" -delete 2>/dev/null || true
+          
+      - name: 测试结果总结
+        if: always()
+        run: |
+          echo "## 🎯 测试结果总结" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "- **核心类型**: ${{ matrix.core_type }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **测试模式**: ${{ github.event.inputs.test_mode || 'auto' }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **运行状态**: ${{ job.status }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **运行时间**: $(date -u '+%Y-%m-%d %H:%M:%S UTC')" >> $GITHUB_STEP_SUMMARY
+          
+          if [ "${{ job.status }}" = "success" ]; then
+            echo "✅ 测试完成，无错误发现" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "❌ 测试过程中发现问题，请查看日志" >> $GITHUB_STEP_SUMMARY
+          fi
+
+  notify:
+    name: 通知测试结果
+    runs-on: ubuntu-latest
+    needs: test-nodes-advanced
+    if: always() && github.event_name != 'pull_request'
+    
+    steps:
+      - name: 测试结果汇总
+        run: |
+          echo "## 🔄 高级节点测试汇总" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          
+          # 统计成功和失败的作业
+          SUCCESS_COUNT=0
+          FAILURE_COUNT=0
+          
+          # 这里可以添加更复杂的结果汇总逻辑
+          echo "- **触发方式**: ${{ github.event_name }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **提交**: ${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **分支**: ${{ github.ref_name }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **执行者**: ${{ github.actor }}" >> $GITHUB_STEP_SUMMARY
+          
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### 📊 详细结果" >> $GITHUB_STEP_SUMMARY
+          echo "请查看各个作业的具体日志和报告文件。" >> $GITHUB_STEP_SUMMARY 

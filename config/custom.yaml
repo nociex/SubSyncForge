@@ -9,66 +9,92 @@ subscriptions:
     url: "https://zh.jikun.fun/share/col/%E6%B1%9F%E6%B1%9F%E5%85%AC%E7%9B%8A?token=1yGRuU-x6r_zEz28cE_pE"
     type: "url"
     enabled: true
+    timeout: 15000  # 减少超时时间到15秒
+    maxRetries: 1   # 减少重试次数
 
   - name: "loc" 
     url: "https://kkb.9901158.xyz/loc.yaml"
     type: "url"
     enabled: true
+    timeout: 15000
+    maxRetries: 1
 
   - name: "alalbb"
     url: "https://c.alalbb.top/clash"
     type: "url"
     enabled: true
+    timeout: 15000
+    maxRetries: 1
 
   - name: "zu"
     url: "https://hssq.cc/5dccpz"
     type: "url"
     enabled: true
+    timeout: 15000
+    maxRetries: 1
 
   - name: "ss"
     url: "https://mxlsub.me/newfull"
     type: "url"
     enabled: true
+    timeout: 15000
+    maxRetries: 1
 
   - name: "pianyi"
     url: "https://pianyi.sub.sub.subsub123456789.com/answer/land?token=d427a3103269fd0778efdff19d087d12"
     type: "url"
     enabled: true
+    timeout: 15000
+    maxRetries: 1
 
   - name: "edgesub"
     url: "http://sub2.127665.xyz/s/37442697d1092ed5ececa7609f851afe"
     type: "url"
     enabled: true
+    timeout: 15000
+    maxRetries: 1
 
   - name: "miaopu"
     url: "https://sub.miaopu.cf/lsub/SWl6knyYIxEPTLmH?clash=1&extend=1"
     type: "url"
-    enabled: true
+    enabled: false  # 暂时禁用经常失败的订阅源
+    timeout: 15000
+    maxRetries: 1
 
   - name: "sub2"
     url: "http://sub2.127665.xyz/s/37442697d1092ed5ececa7609f851afe"
     type: "url"
     enabled: true
+    timeout: 15000
+    maxRetries: 1
 
   - name: "amaoa"
     url: "https://sub.amaoa.xyz/storage?filename=base64.txt&token=sub_ruruo"
     type: "url"
     enabled: true
+    timeout: 15000
+    maxRetries: 1
 
   - name: "v2ray"
     url: "https://raw.githubusercontent.com/a2470982985/getNode/main/v2ray.txt"
     type: "url"
     enabled: true
+    timeout: 15000
+    maxRetries: 1
 
   - name: "hxapi"
     url: "https://api-hx.02000.net/api/v1/client/subscribe?token=647da51d982c8c972577c18208d94e59"
     type: "url"
     enabled: true
+    timeout: 15000
+    maxRetries: 1
 
   - name: "xship"
     url: "https://xship.top/v1/subscribe?starlink=free"
     type: "url"
-    enabled: true
+    enabled: false  # 暂时禁用经常超时的订阅源
+    timeout: 15000
+    maxRetries: 1
     
 # 输出配置
 output:
@@ -198,10 +224,10 @@ testing:
   enabled: true
   
   # 测试并发数（同时测试多少个节点）
-  concurrency: 20
+  concurrency: 10  
   
   # 测试超时时间（毫秒）
-  timeout: 5000
+  timeout: 8000  
   
   # 测试URL
   test_url: "http://latency-test.skk.moe/endpoint"
@@ -213,13 +239,31 @@ testing:
   sort_by_latency: true
   
   # 保留延迟低于此值的节点（毫秒，0表示不限制）
-  max_latency: 1000
+  max_latency: 5000  
   
   # 保留最大节点数量（0表示不限制）
   max_nodes: 0
   
+  # 每个类型的最大节点数量（0表示不限制）
+  max_nodes_per_type: 0
+  
+  # 每个地区的最大节点数量（0表示不限制）
+  max_nodes_per_region: 0
+  
   # 是否验证并更正节点地区信息
   verify_location: true
+  
+  # 核心类型
+  coreType: "mihomo"
+  
+  # 是否使用核心测试
+  useCoreTest: true
+  
+  # 失败时是否回退到基本测试
+  fallbackToBasic: true
+  
+  # 是否自动重命名
+  autoRename: true
   
   # IP地址定位相关配置
   ip_location:
@@ -236,10 +280,10 @@ advanced:
   cache_ttl: 3600
   
   # 日志级别: debug, info, warn, error
-  log_level: "debug"
+  log_level: "info"  # 改为info级别，减少日志输出
   
   # 使用代理获取订阅内容
-  proxy_for_subscription: true
+  proxy_for_subscription: false  # 暂时关闭代理，避免额外延迟
   
   # 节点排序
   sort_nodes: true

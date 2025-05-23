@@ -1,6 +1,6 @@
 {
   "name": "subsyncforge",
-  "version": "1.5.1",
+  "version": "1.6.0",
   "description": "SubSyncForge - 强大的订阅转换工具",
   "main": "dist/index.js",
   "type": "module",
@@ -10,6 +10,14 @@
     "build": "rollup -c",
     "sync": "npm run build && node dist/sync-subscriptions.js",
     "test": "node src/scripts/sync-subscriptions.js",
+    "test:nodes": "node src/scripts/test-advanced-nodes.js",
+    "test:nodes:mihomo": "node src/scripts/test-advanced-nodes.js --mihomo",
+    "test:nodes:v2ray": "node src/scripts/test-advanced-nodes.js --v2ray",
+    "test:nodes:basic": "node src/scripts/test-advanced-nodes.js --no-core",
+    "local:run": "node src/scripts/local-run.js",
+    "local:mode1": "node -e \"import('./src/core/LocalRunManager.js').then(({default: M}) => new M().initialize().then(m => m.runMode1UpdateAndTest()))\"",
+    "local:mode2": "node -e \"import('./src/core/LocalRunManager.js').then(({default: M}) => new M().initialize().then(m => m.runMode2ConfigTest()))\"",
+    "blacklist:report": "node -e \"import('./src/core/LocalRunManager.js').then(({default: M}) => new M().initialize().then(m => m.getBlacklistReport()).then(r => console.log(JSON.stringify(r, null, 2))))\"",
     "clean": "node src/scripts/clean-cache.js",
     "schedule": "node src/scripts/schedule.js",
     "generate-icons": "node src/scripts/generateGroupIcons.js",
@@ -22,7 +30,8 @@
     "socks-proxy-agent": "^8.0.2",
     "cron": "^3.1.6",
     "webdav": "^5.3.0",
-    "@aws-sdk/client-s3": "^3.472.0"
+    "@aws-sdk/client-s3": "^3.472.0",
+    "unzipper": "^0.10.14"
   },
   "devDependencies": {
     "wrangler": "^3.0.0",

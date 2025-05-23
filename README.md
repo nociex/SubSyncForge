@@ -15,14 +15,40 @@ SubSyncForge 是一个功能强大的代理订阅转换和管理工具。它能�
 - **完善的错误处理**：详细的日志和错误报告
 - **易于部署**：支持Cloudflare Workers一键部署 (TODO: 尚未实现)
 
-## 🔥 最新改进 (v1.5.0)
+## 🔥 最新重大更新 (v1.6.0)
 
-- **增强订阅获取能力**：完全重写的`SubscriptionFetcher`类，提供更强的兼容性和稳定性
-- **智能内容检测**：自动识别和处理各种订阅格式，不再受限于订阅源类型
-- **增强解析能力**：优化的解析器能处理不规范的Base64编码和各种特殊情况
-- **多协议支持**：新增对Hysteria2、VLESS等协议的全面支持
-- **多种存储服务**：新增支持WebDAV和Cloudflare R2等存储服务，方便部署到自己的服务器
-- **高级订阅管理**：通过分组订阅模式实现更灵活的节点管理
+### ✨ 核心功能全面升级
+
+- **🚀 Mihomo核心集成**：完整集成Mihomo代理核心，支持更精确的节点测试
+  - 自动下载和管理Mihomo/V2Ray核心
+  - 支持多平台（Linux、macOS、Windows、ARM）
+  - 智能核心版本管理和缓存
+  - 核心级别节点连接测试，测试精度大幅提升
+
+- **🌍 智能IP定位系统**：全面重构IP地理位置检测服务
+  - 集成5个可靠的IP定位API提供商（ip-api.com、ipapi.co、ip.cn等）
+  - 智能API轮换和故障转移机制
+  - 支持速率限制和错误恢复
+  - 177个地区的本地缓存系统，大幅提升查询速度
+
+- **✏️ 自动节点重命名**：基于真实IP位置的智能重命名
+  - 自动检测节点真实地理位置
+  - 智能修正错误的地区标识
+  - 支持40+国家的emoji国旗标识
+  - 格式：`🇺🇸 美国 | 原始节点名称`
+
+- **🔧 高级节点测试器**：全新的AdvancedNodeTester
+  - Mihomo核心优先测试，失败时自动回退到基础测试
+  - 并发测试优化，支持自定义并发数
+  - 位置验证和自动修正
+  - 详细的测试统计和报告
+
+### 📊 性能和稳定性提升
+
+- **缓存优化**：IP位置信息7天缓存，减少API调用
+- **错误恢复**：多层故障恢复机制，单个服务故障不影响整体运行
+- **内存优化**：批量处理机制，减少大量节点处理时的内存占用
+- **速率控制**：智能API调用频率控制，避免触发限制
 
 ## 📋 快速开始
 
@@ -44,22 +70,6 @@ SubSyncForge 是一个功能强大的代理订阅转换和管理工具。它能�
 5. **设置自动更新**：
    默认情况下，GitHub Actions 会按计划自动运行。您可以在 `.github/workflows/sync-subscriptions.yml` 中调整更新频率。
 
-6. **配置远程存储** (可选)：
-   如果您想将订阅文件部署到自己的服务器或存储服务，可以在GitHub仓库设置中添加以下Secrets：
-   
-   - WebDAV存储:
-     - `WEBDAV_URL`: WebDAV服务器地址
-     - `WEBDAV_USERNAME`: WebDAV用户名
-     - `WEBDAV_PASSWORD`: WebDAV密码
-     - `WEBDAV_PATH`: 远程目录路径 (可选，默认: sub-sync)
-   
-   - Cloudflare R2存储:
-     - `R2_ACCOUNT_ID`: Cloudflare账户ID
-     - `R2_ACCESS_KEY_ID`: R2访问密钥ID
-     - `R2_SECRET_ACCESS_KEY`: R2访问密钥
-     - `R2_BUCKET_NAME`: R2存储桶名称
-     - `R2_PATH`: 远程目录路径 (可选，默认: sub-sync)
-
 ### 方法二：本地运行
 
 1. **克隆仓库**：
@@ -70,29 +80,78 @@ SubSyncForge 是一个功能强大的代理订阅转换和管理工具。它能�
 
 2. **安装依赖**：
    ```bash
+   # 推荐使用pnpm
    pnpm install
+   
+   # 或使用npm
+   npm install
    ```
 
 3. **配置订阅**：
    编辑 `config/subscriptions.json` 添加您的订阅源。
 
-4. **配置上传器** (可选)：
-   编辑 `config/uploader.json` 配置您的存储方式。
-
-5. **构建并运行同步程序**：
-   ```bash
-   # 构建项目并运行同步程序
-   pnpm run sync
+4. **配置高级测试** (可选)：
+   编辑 `config/custom.yaml` 启用Mihomo核心测试：
+   ```yaml
+   testing:
+     enabled: true
+     coreType: mihomo         # 或 v2ray
+     useCoreTest: true        # 启用核心测试
+     autoRename: true         # 启用自动重命名
+     verifyLocation: true     # 启用位置验证
+     timeout: 10000           # 测试超时时间
+     concurrency: 10          # 并发测试数
    ```
 
-6. **测试订阅**：
+5. **运行同步程序**：
    ```bash
-   # 测试订阅获取和解析
-   node test-subscription.js
+   # 完整同步（包含Mihomo核心测试）
+   pnpm run sync
+   
+   # 或使用npm
+   npm run sync
+   ```
+
+6. **测试特定功能**：
+   ```bash
+   # 测试Mihomo核心和自动重命名
+   node test-mihomo-renaming.js
+   
+   # 测试节点（使用Mihomo核心）
+   pnpm run test:nodes:mihomo
+   
+   # 测试节点（使用V2Ray核心）
+   pnpm run test:nodes:v2ray
+   
+   # 基础连接测试
+   pnpm run test:nodes:basic
    ```
 
 7. **查看生成的订阅**：
-   转换后的订阅文件将保存在 `output/` 目录中，您可以直接查看或使用这些文件。
+   转换后的订阅文件将保存在 `output/` 目录中。
+
+## 💻 高级配置
+
+### 测试配置
+
+在 `config/custom.yaml` 中配置高级测试选项：
+
+```yaml
+testing:
+  enabled: true                    # 启用节点测试
+  coreType: mihomo                # 核心类型：mihomo | v2ray
+  useCoreTest: true               # 启用核心级测试
+  fallbackToBasic: true           # 核心测试失败时回退到基础测试
+  autoRename: true                # 自动重命名功能
+  verifyLocation: true            # 验证节点位置
+  timeout: 10000                  # 单个节点测试超时（毫秒）
+  concurrency: 10                 # 并发测试数量
+  maxLatency: 5000               # 最大可接受延迟（毫秒）
+  max_nodes: 500                 # 最大节点数限制
+  max_nodes_per_type: 50         # 每种协议最大节点数
+  max_nodes_per_region: 30       # 每个地区最大节点数
+  filter_invalid: true           # 过滤无效节点
+```
 
 ## 💻 订阅配置
 

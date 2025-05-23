@@ -5,8 +5,87 @@
 格式基于 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.0.0/)，
 并且本项目遵循 [语义化版本](https://semver.org/lang/zh-CN/)。
 
+## [1.6.0] - 2025-05-23
+
+### 重大新增功能
+- **🚀 Mihomo核心集成**：
+  - 完整集成Mihomo代理核心，支持精确的节点连接测试
+  - 新增`ProxyCoreManager`类，支持自动下载和管理Mihomo/V2Ray核心
+  - 支持多平台架构（Linux、macOS、Windows、ARM64、x86等）
+  - 智能核心版本管理和路径缓存机制
+  - 支持SS、VMess、Trojan、VLESS、Hysteria2、TUIC等多种协议的核心级测试
+
+- **🌍 智能IP定位系统重构**：
+  - 完全重写`IPLocator`类，集成5个可靠的IP定位API提供商
+  - 支持的API：ip-api.com、ipapi.co、ip.cn、ipwhois.app、freeipapi.com
+  - 智能API轮换机制，单个API失败自动切换下一个
+  - 内置速率限制保护（500ms间隔），避免触发API限制
+  - 本地缓存系统，支持177个地区的IP段缓存，7天过期时间
+  - 强大的错误恢复和重试机制
+
+- **✏️ 自动节点重命名功能**：
+  - 基于真实IP位置的智能节点重命名
+  - 支持40+国家和地区的emoji国旗标识
+  - 自动检测和修正错误的地区标识
+  - 重命名格式：`🇺🇸 美国 | 原始节点名称`
+  - 保留原始节点名称到`extra.originalName`字段
+
+- **🔧 高级节点测试器**：
+  - 新增`AdvancedNodeTester`类，继承并扩展基础测试功能
+  - Mihomo核心优先测试策略，失败时自动回退到基础连接测试
+  - 批量并发测试优化，支持自定义并发数量
+  - 地理位置验证和自动修正功能
+  - 详细的测试统计和方法分布报告
+  - 支持按节点类型过滤测试
+
+### 性能优化
+- **缓存系统优化**：
+  - IP位置信息本地缓存，减少70%的API调用
+  - 核心路径缓存，避免重复安装检查
+  - 智能缓存过期和清理机制
+
+- **并发处理优化**：
+  - 批量节点测试机制，减少内存占用
+  - 可配置的并发数量控制
+  - 优化的任务调度和资源管理
+
+- **错误处理增强**：
+  - 多层故障恢复机制
+  - 单个服务故障不影响整体运行
+  - 详细的错误日志和调试信息
+
+### 新增配置选项
+- **测试配置**：
+  - `coreType`: 核心类型选择（mihomo/v2ray）
+  - `useCoreTest`: 启用核心级测试
+  - `fallbackToBasic`: 核心测试失败时回退
+  - `autoRename`: 自动重命名功能开关
+  - `verifyLocation`: 地理位置验证开关
+  - `concurrency`: 并发测试数量
+
+- **脚本命令**：
+  - `pnpm run test:nodes:mihomo`: Mihomo核心测试
+  - `pnpm run test:nodes:v2ray`: V2Ray核心测试
+  - `pnpm run test:nodes:basic`: 基础连接测试
+
+### 代码架构改进
+- 完善的TypeScript类型支持和JSDoc文档
+- 模块化设计，提高代码可维护性
+- 统一的错误处理和日志记录机制
+- 符合ES Module规范的导入导出
+
+### 测试和调试
+- 新增`test-mihomo-renaming.js`测试脚本
+- 全面的功能验证和性能测试
+- 详细的测试报告和统计信息
+
 ## [未发布]
 
+### 配置
+- **测试配置调整**：
+  - 在 [`config/custom.yaml`](config/custom.yaml) 文件中，将 `testing.max_nodes_per_type` 设置为 `0`。
+  - 在 [`config/custom.yaml`](config/custom.yaml) 文件中，将 `testing.max_nodes_per_region` 设置为 `0`。
+  - 在 [`config/custom.yaml`](config/custom.yaml) 文件中，确保 `testing.max_nodes` 保持或设置为 `0`。
 ### 优化
 - **配置文件URL统一**：
   - 统一所有配置模板（Surge, Clash, SingBox）中的订阅URL格式

@@ -1,0 +1,500 @@
+port: 7890
+socks-port: 7891
+allow-lan: true
+mode: rule
+log-level: info
+external-controller: 127.0.0.1:9090
+proxies:
+  - name: '  江江荷兰 IEPL｜公益 33'
+    server: 5.181.177.22
+    port: 38777
+    type: hysteria2
+    password: 4af95db1
+    skip-cert-verify: false
+    sni: www.bing.com
+  - name: 江江新加坡 IEPL｜公益 13
+    server: 51.79.141.63
+    port: 25022
+    type: hysteria2
+    password: 53bdfd4a-7f38-4cb6-b07e-49974de1a800
+    skip-cert-verify: false
+    sni: www.bing.com
+  - name: 江江美国 IEPL｜公益 108
+    server: cd4281bd-sw3ts0-syhw90-1rsuw.hy2.gotochinatown.net
+    port: 8443
+    type: hysteria2
+    password: 0de37cdc-abff-11ef-b7c6-f23c913c8d2b
+    skip-cert-verify: false
+    sni: cd4281bd-sw3ts0-syhw90-1rsuw.hy2.gotochinatown.net
+  - name: 江江美国 IEPL｜公益 109
+    server: af230121-swd340-tcvn0z-1tlyg.hy2.gotochinatown.net
+    port: 8443
+    type: hysteria2
+    password: be8ba532-0dcf-11f0-9a65-f23c9164ca5d
+    skip-cert-verify: false
+    sni: af230121-swd340-tcvn0z-1tlyg.hy2.gotochinatown.net
+  - name: 江江美国 IEPL｜公益 110
+    server: 5514f9ee-swexs0-syhw90-1rsuw.hy2.gotochinatown.net
+    port: 8443
+    type: hysteria2
+    password: 0de37cdc-abff-11ef-b7c6-f23c913c8d2b
+    skip-cert-verify: false
+    sni: 5514f9ee-swexs0-syhw90-1rsuw.hy2.gotochinatown.net
+  - name: 江江印度 IEPL｜公益 05
+    server: jiangzhiyd.54264944.xyz
+    port: 43999
+    type: hysteria2
+    password: ab8799f5-a891-4e4d-9236-adebb0f497ab
+    skip-cert-verify: false
+    sni: jiangzhiyd.54264944.xyz
+  - name: 江江列支敦士登 IEPL｜公益 01
+    server: sinavm.ru
+    port: 8080
+    type: hysteria2
+    password: Bia-SiNAVM-Telegram-SiNAVM-Bia-SiNAVM
+    skip-cert-verify: false
+    sni: sinavm.ru
+    obfs: salamander
+  - name: '  江江土耳其 IEPL｜公益 04'
+    server: 46.203.248.224
+    port: 20412
+    type: hysteria2
+    password: 0mUrFkOPdpuGgvkahALIMESZq8
+    skip-cert-verify: false
+    sni: bing.com
+  - name: 江江美国 IEPL｜公益 153
+    server: 318b56f1-swq1s0-syfwbx-1k0yf.hy2.gotochinatown.net
+    port: 8443
+    type: hysteria2
+    password: 9cc3c03e-21fd-11ee-a642-f23c91369f2d
+    skip-cert-verify: false
+    sni: 318b56f1-swq1s0-syfwbx-1k0yf.hy2.gotochinatown.net
+  - name: '  江江俄罗斯 IEPL｜公益 03'
+    server: 46.17.41.5
+    port: 12904
+    type: hysteria2
+    password: dongtaiwang.com
+    skip-cert-verify: false
+    sni: apple.com
+  - name: '  江江俄罗斯 IEPL｜公益 05'
+    server: 45.135.134.33
+    port: 10297
+    type: hysteria2
+    password: 6c7a6a6a-6a6a-4000-8000-000000000002
+    skip-cert-verify: false
+    sni: www.bing.com
+  - name: 江江日本 IEPL｜公益 13
+    server: 160.16.205.217
+    port: 21077
+    type: hysteria2
+    password: f6552825-6e1b-4fd2-9a2b-1d2b363d9d36
+    skip-cert-verify: false
+    sni: bestcast.pw
+  - name: 江江日本 IEPL｜公益 14
+    server: 160.16.114.236
+    port: 21077
+    type: hysteria2
+    password: f6552825-6e1b-4fd2-9a2b-1d2b363d9d36
+    skip-cert-verify: false
+    sni: bestcast.pw
+  - name: 江江日本 IEPL｜公益 15
+    server: 160.16.134.79
+    port: 21077
+    type: hysteria2
+    password: f6552825-6e1b-4fd2-9a2b-1d2b363d9d36
+    skip-cert-verify: false
+    sni: bestcast.pw
+  - name: 江江日本 IEPL｜公益 16
+    server: 153.121.72.155
+    port: 21077
+    type: hysteria2
+    password: f6552825-6e1b-4fd2-9a2b-1d2b363d9d36
+    skip-cert-verify: false
+    sni: bestcast.pw
+  - name: 江江日本 IEPL｜公益 11
+    server: 160.16.53.111
+    port: 21077
+    type: hysteria2
+    password: f6552825-6e1b-4fd2-9a2b-1d2b363d9d36
+    skip-cert-verify: false
+    sni: bestcast.pw
+  - name: 江江日本 IEPL｜公益 12
+    server: 160.16.107.214
+    port: 21077
+    type: hysteria2
+    password: f6552825-6e1b-4fd2-9a2b-1d2b363d9d36
+    skip-cert-verify: false
+    sni: bestcast.pw
+  - name: '  江江奥地利 IEPL｜公益 03'
+    server: 152.53.47.16
+    port: 13852
+    type: hysteria2
+    password: fbZYdngMs7US5yJHmFNEpqOtfUQ
+    skip-cert-verify: false
+    sni: bing.com
+  - name: 🇻🇳 越南1|0.7倍
+    server: vn1r.node.cross666.top
+    port: 38700
+    type: hysteria2
+    password: 8f854788-85ba-4ab5-8626-5071bb6a43d3
+    skip-cert-verify: false
+    sni: mirror.sg.gs
+  - name: 🇻🇳 越南A1|0.7倍
+    server: vna1.node.cross666.top
+    port: 35862
+    type: hysteria2
+    password: 8f854788-85ba-4ab5-8626-5071bb6a43d3
+    skip-cert-verify: false
+    sni: mirror.sg.gs
+  - name: '  江江巴西 IEPL｜公益 09'
+    server: 164.152.33.5
+    port: 60521
+    type: hysteria2
+    password: 84169100-34da-431a-88be-825430caa62c
+    skip-cert-verify: false
+  - name: '  江江加拿大 IEPL｜公益 07'
+    server: 40.233.70.163
+    port: 45979
+    type: hysteria2
+    password: cfe032e4-1bc3-454f-9d09-301b0aea08ff
+    skip-cert-verify: false
+    sni: www.bing.com
+  - name: 🌀其他6-VN | ⬇️ 1.2MB/s
+    server: vna1.node.cross666.top
+    port: 36481
+    type: hysteria2
+    password: e88cb266-71c1-4d02-acf1-86d208fc7371
+    skip-cert-verify: false
+    sni: mirror.sg.gs
+  - name: 🌀其他5-VN | ⬇️ 2.4MB/s
+    server: vn1r.node.cross666.top
+    port: 35064
+    type: hysteria2
+    password: 9514a813-c237-4bfa-87d8-da48b2d020c8
+    skip-cert-verify: false
+    sni: mirror.sg.gs
+  - name: '  江江加拿大 IEPL｜公益 08'
+    server: 129.153.59.124
+    port: 54530
+    type: hysteria2
+    password: 862e90e1-2f26-4506-b8b9-0adf20da05fc
+    skip-cert-verify: false
+    sni: www.bing.com
+  - name: '  江江越南 IEPL｜公益 04'
+    server: 103.186.154.32
+    port: 38388
+    type: ss
+    cipher: aes-256-cfb
+    password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
+  - name: 🇷🇺 RU 311
+    server: ru2.node.cross666.top
+    port: 35912
+    type: hysteria2
+    password: 7b8dc3c9-cd74-4c22-9b29-273794751447
+    skip-cert-verify: false
+    sni: mirror.hyperdedic.ru
+  - name: 🇷🇺 RU 226
+    server: ru2.node.cross666.top
+    port: 37910
+    type: hysteria2
+    password: 638a9299-abc9-42c9-b803-6a8b416b7b73
+    skip-cert-verify: false
+    sni: mirror.hyperdedic.ru
+  - name: 🇷🇺 俄罗斯A2|0.6倍
+    server: rua.node.cross666.top
+    port: 39140
+    type: hysteria2
+    password: 8f854788-85ba-4ab5-8626-5071bb6a43d3
+    skip-cert-verify: false
+    sni: mirror.hyperdedic.ru
+  - name: 🇷🇺 RU 243
+    server: ru2.node.cross666.top
+    port: 39465
+    type: hysteria2
+    password: 3fc383ac-5934-4139-a9a6-dbad72c41027
+    skip-cert-verify: false
+    sni: mirror.hyperdedic.ru
+  - name: 🇷🇺 俄罗斯A1|0.6倍
+    server: rua.node.cross666.top
+    port: 39084
+    type: hysteria2
+    password: 8f854788-85ba-4ab5-8626-5071bb6a43d3
+    skip-cert-verify: false
+    sni: mirror.hyperdedic.ru
+  - name: '  江江越南 IEPL｜公益 03'
+    server: 103.186.154.23
+    port: 38388
+    type: ss
+    cipher: aes-256-cfb
+    password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
+  - name: '  江江越南 IEPL｜公益 05'
+    server: 103.186.154.19
+    port: 38388
+    type: ss
+    cipher: aes-256-cfb
+    password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
+  - name: '  江江越南 IEPL｜公益 14'
+    server: 221.132.29.208
+    port: 38388
+    type: ss
+    cipher: aes-256-cfb
+    password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
+  - name: '  江江越南 IEPL｜公益 06'
+    server: 103.186.154.30
+    port: 38388
+    type: ss
+    cipher: aes-256-cfb
+    password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
+  - name: '  江江越南 IEPL｜公益 09'
+    server: 103.186.154.35
+    port: 38388
+    type: ss
+    cipher: aes-256-cfb
+    password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
+  - name: 🇷🇺 RU 307
+    server: ru2.node.cross666.top
+    port: 35966
+    type: hysteria2
+    password: e88cb266-71c1-4d02-acf1-86d208fc7371
+    skip-cert-verify: false
+    sni: mirror.hyperdedic.ru
+  - name: 江江日本 IEPL｜公益 05
+    server: 54.168.106.133
+    port: 443
+    type: ss
+    cipher: aes-256-cfb
+    password: awsps0501
+  - name: 🇷🇺 RU 349
+    server: ru2.node.cross666.top
+    port: 37547
+    type: hysteria2
+    password: 3fc383ac-5934-4139-a9a6-dbad72c41027
+    skip-cert-verify: false
+    sni: mirror.hyperdedic.ru
+  - name: 🇹🇷 土耳其1|0.8倍
+    server: tr01.node.cross666.top
+    port: 39102
+    type: hysteria2
+    password: 8f854788-85ba-4ab5-8626-5071bb6a43d3
+    skip-cert-verify: false
+    sni: mirror.dogado.de
+  - name: 🇺🇸 US 345
+    server: us2.node.cross666.top
+    port: 36248
+    type: hysteria2
+    password: e88cb266-71c1-4d02-acf1-86d208fc7371
+    skip-cert-verify: false
+    sni: www.yahoo.com
+  - name: 🇺🇸 US 358
+    server: us2.node.cross666.top
+    port: 36386
+    type: hysteria2
+    password: e88cb266-71c1-4d02-acf1-86d208fc7371
+    skip-cert-verify: false
+    sni: www.yahoo.com
+  - name: 🇺🇸 US 090
+    server: us3.node.cross666.top
+    port: 38417
+    type: hysteria2
+    password: 3fc383ac-5934-4139-a9a6-dbad72c41027
+    skip-cert-verify: false
+    sni: www.yahoo.com
+  - name: 🇺🇸 US 361
+    server: us2.node.cross666.top
+    port: 35026
+    type: hysteria2
+    password: 3fc383ac-5934-4139-a9a6-dbad72c41027
+    skip-cert-verify: false
+    sni: www.yahoo.com
+  - name: 🇺🇸 US 488
+    server: use.node.cross666.top
+    port: 36281
+    type: hysteria2
+    password: 638a9299-abc9-42c9-b803-6a8b416b7b73
+    skip-cert-verify: false
+    sni: www.yahoo.com
+  - name: 🇺🇸 美国1|0.9倍
+    server: us01.node.cross666.top
+    port: 36586
+    type: hysteria2
+    password: 8f854788-85ba-4ab5-8626-5071bb6a43d3
+    skip-cert-verify: false
+    sni: www.yahoo.com
+  - name: 🇺🇸 US 040
+    server: us4.node.cross666.top
+    port: 36487
+    type: hysteria2
+    password: e88cb266-71c1-4d02-acf1-86d208fc7371
+    skip-cert-verify: false
+    sni: www.yahoo.com
+  - name: 🇺🇸 US 350
+    server: us2.node.cross666.top
+    port: 37402
+    type: hysteria2
+    password: e88cb266-71c1-4d02-acf1-86d208fc7371
+    skip-cert-verify: false
+    sni: www.yahoo.com
+  - name: 🇨🇳 江江香港 IEPL｜公益 12
+    server: 183.236.51.38
+    port: 41024
+    type: vmess
+    uuid: 418048af-a293-4b99-9b0c-98ca3580dd24
+    alterId: 0
+    cipher: auto
+    tls: false
+    network: tcp
+  - name: 🇺🇸 美国3|0.6倍
+    server: us3.node.cross666.top
+    port: 38460
+    type: hysteria2
+    password: 8f854788-85ba-4ab5-8626-5071bb6a43d3
+    skip-cert-verify: false
+    sni: www.yahoo.com
+  - name: ' 江江越南 IEPL｜公益 13'
+    server: 103.186.154.38
+    port: 38388
+    type: ss
+    cipher: aes-256-cfb
+    password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
+  - name: ' 江江越南 IEPL｜公益 01'
+    server: 103.151.57.123
+    port: 38388
+    type: ss
+    cipher: aes-256-cfb
+    password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
+  - name: ' UN 565'
+    server: 103.186.155.19
+    port: 38388
+    type: ss
+    cipher: aes-256-cfb
+    password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
+proxy-groups:
+  - name: 🚀 节点选择
+    type: select
+    proxies:
+      - ♻️ 自动选择
+      - 🎯 全球直连
+      - '  江江荷兰 IEPL｜公益 33'
+      - 江江新加坡 IEPL｜公益 13
+      - 江江美国 IEPL｜公益 108
+      - 江江美国 IEPL｜公益 109
+      - 江江美国 IEPL｜公益 110
+      - 江江印度 IEPL｜公益 05
+      - 江江列支敦士登 IEPL｜公益 01
+      - '  江江土耳其 IEPL｜公益 04'
+      - 江江美国 IEPL｜公益 153
+      - '  江江俄罗斯 IEPL｜公益 03'
+      - '  江江俄罗斯 IEPL｜公益 05'
+      - 江江日本 IEPL｜公益 13
+      - 江江日本 IEPL｜公益 14
+      - 江江日本 IEPL｜公益 15
+      - 江江日本 IEPL｜公益 16
+      - 江江日本 IEPL｜公益 11
+      - 江江日本 IEPL｜公益 12
+      - '  江江奥地利 IEPL｜公益 03'
+      - 🇻🇳 越南1|0.7倍
+      - 🇻🇳 越南A1|0.7倍
+      - '  江江巴西 IEPL｜公益 09'
+      - '  江江加拿大 IEPL｜公益 07'
+      - 🌀其他6-VN | ⬇️ 1.2MB/s
+      - 🌀其他5-VN | ⬇️ 2.4MB/s
+      - '  江江加拿大 IEPL｜公益 08'
+      - '  江江越南 IEPL｜公益 04'
+      - 🇷🇺 RU 311
+      - 🇷🇺 RU 226
+      - 🇷🇺 俄罗斯A2|0.6倍
+      - 🇷🇺 RU 243
+      - 🇷🇺 俄罗斯A1|0.6倍
+      - '  江江越南 IEPL｜公益 03'
+      - '  江江越南 IEPL｜公益 05'
+      - '  江江越南 IEPL｜公益 14'
+      - '  江江越南 IEPL｜公益 06'
+      - '  江江越南 IEPL｜公益 09'
+      - 🇷🇺 RU 307
+      - 江江日本 IEPL｜公益 05
+      - 🇷🇺 RU 349
+      - 🇹🇷 土耳其1|0.8倍
+      - 🇺🇸 US 345
+      - 🇺🇸 US 358
+      - 🇺🇸 US 090
+      - 🇺🇸 US 361
+      - 🇺🇸 US 488
+      - 🇺🇸 美国1|0.9倍
+      - 🇺🇸 US 040
+      - 🇺🇸 US 350
+      - 🇨🇳 江江香港 IEPL｜公益 12
+      - 🇺🇸 美国3|0.6倍
+      - ' 江江越南 IEPL｜公益 13'
+      - ' 江江越南 IEPL｜公益 01'
+      - ' UN 565'
+  - name: ♻️ 自动选择
+    type: url-test
+    proxies:
+      - '  江江荷兰 IEPL｜公益 33'
+      - 江江新加坡 IEPL｜公益 13
+      - 江江美国 IEPL｜公益 108
+      - 江江美国 IEPL｜公益 109
+      - 江江美国 IEPL｜公益 110
+      - 江江印度 IEPL｜公益 05
+      - 江江列支敦士登 IEPL｜公益 01
+      - '  江江土耳其 IEPL｜公益 04'
+      - 江江美国 IEPL｜公益 153
+      - '  江江俄罗斯 IEPL｜公益 03'
+      - '  江江俄罗斯 IEPL｜公益 05'
+      - 江江日本 IEPL｜公益 13
+      - 江江日本 IEPL｜公益 14
+      - 江江日本 IEPL｜公益 15
+      - 江江日本 IEPL｜公益 16
+      - 江江日本 IEPL｜公益 11
+      - 江江日本 IEPL｜公益 12
+      - '  江江奥地利 IEPL｜公益 03'
+      - 🇻🇳 越南1|0.7倍
+      - 🇻🇳 越南A1|0.7倍
+      - '  江江巴西 IEPL｜公益 09'
+      - '  江江加拿大 IEPL｜公益 07'
+      - 🌀其他6-VN | ⬇️ 1.2MB/s
+      - 🌀其他5-VN | ⬇️ 2.4MB/s
+      - '  江江加拿大 IEPL｜公益 08'
+      - '  江江越南 IEPL｜公益 04'
+      - 🇷🇺 RU 311
+      - 🇷🇺 RU 226
+      - 🇷🇺 俄罗斯A2|0.6倍
+      - 🇷🇺 RU 243
+      - 🇷🇺 俄罗斯A1|0.6倍
+      - '  江江越南 IEPL｜公益 03'
+      - '  江江越南 IEPL｜公益 05'
+      - '  江江越南 IEPL｜公益 14'
+      - '  江江越南 IEPL｜公益 06'
+      - '  江江越南 IEPL｜公益 09'
+      - 🇷🇺 RU 307
+      - 江江日本 IEPL｜公益 05
+      - 🇷🇺 RU 349
+      - 🇹🇷 土耳其1|0.8倍
+      - 🇺🇸 US 345
+      - 🇺🇸 US 358
+      - 🇺🇸 US 090
+      - 🇺🇸 US 361
+      - 🇺🇸 US 488
+      - 🇺🇸 美国1|0.9倍
+      - 🇺🇸 US 040
+      - 🇺🇸 US 350
+      - 🇨🇳 江江香港 IEPL｜公益 12
+      - 🇺🇸 美国3|0.6倍
+      - ' 江江越南 IEPL｜公益 13'
+      - ' 江江越南 IEPL｜公益 01'
+      - ' UN 565'
+    url: http://www.gstatic.com/generate_204
+    interval: 300
+  - name: 🎯 全球直连
+    type: select
+    proxies:
+      - DIRECT
+rules:
+  - DOMAIN-SUFFIX,local,DIRECT
+  - IP-CIDR,127.0.0.0/8,DIRECT
+  - IP-CIDR,172.16.0.0/12,DIRECT
+  - IP-CIDR,192.168.0.0/16,DIRECT
+  - IP-CIDR,10.0.0.0/8,DIRECT
+  - IP-CIDR,17.0.0.0/8,DIRECT
+  - IP-CIDR,100.64.0.0/10,DIRECT
+  - MATCH,🚀 节点选择

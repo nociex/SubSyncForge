@@ -14,100 +14,62 @@ export class IPLocator {
   constructor(options = {}) {
     this.logger = options.logger || defaultLogger.child({ component: 'IPLocator' });
     
-    // 配置多个备选API
+    // 配置多个备选API，移除失效的ipinfo.io
     this.apiProviders = [
       // 1. IP-API.com - 每分钟150次请求的免费API
       {
         name: 'ip-api',
-        url: 'http://ip-api.com/json/{ip}?lang=zh-CN',
+        url: 'http://ip-api.com/json/{ip}?fields=status,country,countryCode,regionName,city,isp,query&lang=zh-CN',
         needsKey: false,
         rateLimit: 145, // 保守估计为每分钟145次
-        parser: this.parseIpApiResponse,
+        parser: this.parseIpApiResponse.bind(this),
         status: 'ready' // ready, limited, failed
       },
-      // 2. IP.CN
+      // 2. ipapi.co - 可靠的IP地理位置API
+      {
+        name: 'ipapi.co',
+        url: 'https://ipapi.co/{ip}/json/',
+        needsKey: false,
+        rateLimit: 1000, // 每天1000次
+        parser: this.parseIpapiCoResponse.bind(this),
+        status: 'ready'
+      },
+      // 3. IP.CN - 中文IP查询
       {
         name: 'ip.cn',
         url: 'https://www.ip.cn/api/index?ip={ip}&type=0',
         needsKey: false,
-        rateLimit: 30, // 保守估计每分钟30次(每日限额500次)
-        parser: this.parseIpCnResponse,
+        rateLimit: 500, // 每天500次
+        parser: this.parseIpCnResponse.bind(this),
         status: 'ready'
       },
-      // 3. 36IP.cn
+      // 4. ipwhois.app - 无需API key
       {
-        name: '36ip',
-        url: 'https://www.36ip.cn/?type=json&ip={ip}',
+        name: 'ipwhois',
+        url: 'https://ipwhois.app/json/{ip}',
         needsKey: false,
-        rateLimit: 40, // 保守估计每分钟40次
-        parser: this.parse36ipResponse,
+        rateLimit: 10000, // 每月10000次
+        parser: this.parseIpWhoisResponse.bind(this),
         status: 'ready'
       },
-      // 4. api.vore.top
-      {
-        name: 'vore',
-        url: 'https://api.vore.top/api/IPdata?ip={ip}',
-        needsKey: false,
-        rateLimit: 50, // 无频率限制，保守设置
-        parser: this.parseVoreResponse,
-        status: 'ready'
-      },
-      // 保留原有的备选API
+      // 5. freeipapi.com - 备选API
       {
         name: 'freeipapi',
         url: 'https://freeipapi.com/api/json/{ip}',
         needsKey: false,
-        rateLimit: 30,
-        parser: this.parseGenericResponse,
-        status: 'ready'
-      },
-      {
-        name: 'iplocation.net',
-        url: 'https://api.iplocation.net/?ip={ip}',
-        needsKey: false,
-        rateLimit: 30,
-        parser: this.parseIplocationNetResponse,
+        rateLimit: 1000,
+        parser: this.parseGenericResponse.bind(this),
         status: 'ready'
       }
     ];
     
-    // 读取环境变量或传入的API URL
-    const apiUrl = process.env.IP_API_URL || options.apiUrl;
-    if (apiUrl) {
-      // 找到匹配的已配置提供商或添加新的自定义提供商
-      const matchedProvider = this.apiProviders.find(p => apiUrl.includes(p.name));
-      if (matchedProvider) {
-        matchedProvider.url = apiUrl;
-        this.logger.info(`使用配置的API URL: ${apiUrl} (${matchedProvider.name})`);
-        this.currentProvider = matchedProvider;
-      } else {
-        // 添加自定义API提供商
-        const customProvider = {
-          name: 'custom',
-          url: apiUrl,
-          needsKey: options.apiKey ? true : false,
-          rateLimit: 15, // 默认的保守限制
-          parser: this.parseGenericResponse,
-          status: 'ready'
-        };
-        this.apiProviders.unshift(customProvider);
-        this.currentProvider = customProvider;
-        this.logger.info(`使用自定义API: ${apiUrl}`);
-      }
-    } else {
-      // 默认使用第一个提供商(ip-api.com)
-      this.currentProvider = this.apiProviders[0];
-      this.logger.info(`使用默认API提供商: ${this.currentProvider.name}`);
-    }
+    // 请求间隔控制 (毫秒)
+    this.requestInterval = 500; // 每个请求间隔500ms
+    this.lastRequestTime = 0;
     
-    this.apiKey = process.env.IP_API_KEY || options.apiKey || '';
-    this.timeout = options.timeout || 5000;
-    this.cacheDir = options.cacheDir || 'data/ip_cache';
-    this.cacheTime = options.cacheTime || 7 * 24 * 60 * 60 * 1000; // 默认缓存7天
-    
-    // 请求计数器，用于限流
-    this.requestCounter = {};
-    this.counterResetTime = Date.now();
+    // 缓存配置
+    this.cacheTime = options.cacheTime || 604800000; // 7天缓存
+    this.cacheDir = path.join(options.rootDir || process.cwd(), options.dataDir || 'data', 'ip_cache');
     
     // 确保缓存目录存在
     if (!fs.existsSync(this.cacheDir)) {
@@ -161,7 +123,6 @@ export class IPLocator {
       'AE': '阿联酋',
       'SA': '沙特阿拉伯',
       'ZA': '南非'
-      // 可以根据需要添加更多国家/地区代码
     };
   }
 
@@ -208,7 +169,7 @@ export class IPLocator {
     // 检查是否是域名而非IP
     const isDomain = !this.isIPAddress(ip);
     if (isDomain) {
-      this.logger.debug(`获取IP地址位置: ${ip}`);
+      this.logger.debug(`跳过域名IP查询: ${ip}`);
       // 对于域名，提供基本信息而不进行IP查询
       return {
         ip: ip,
@@ -243,226 +204,95 @@ export class IPLocator {
     if (cachedInfo) {
       // 更新内存缓存
       this.memoryCache[ip] = cachedInfo;
-      this.logger.debug(`使用地区缓存的IP信息: ${ip}`);
+      this.logger.debug(`使用文件缓存的IP信息: ${ip}`);
       return cachedInfo;
     }
     
-    // 尝试最多3次不同的API
-    let attempts = 0;
-    const maxAttempts = 3;
+    // 控制请求频率
+    await this.rateLimitControl();
+    
+    // 尝试使用多个API提供商
     let lastError = null;
     
-    while (attempts < maxAttempts) {
-      attempts++;
+    for (const provider of this.apiProviders) {
+      if (provider.status === 'failed') continue;
       
       try {
-        this.logger.debug(`获取IP地址位置: ${ip} (尝试 ${attempts}/${maxAttempts}, 使用提供商: ${this.currentProvider.name})`);
+        this.logger.debug(`尝试使用 ${provider.name} 查询IP: ${ip}`);
+        const result = await this.queryProvider(provider, ip);
         
-        // 检查是否需要重置计数器
-        this.checkAndResetCounter();
-        
-        // 检查当前提供商是否达到限制
-        if (this.isProviderLimited(this.currentProvider)) {
-          this.logger.warn(`当前提供商 ${this.currentProvider.name} 已达到请求限制，尝试切换`);
-          const switched = this.switchToNextProvider();
-          if (!switched) {
-            this.logger.error("无可用的API提供商，所有API均达到限制或失败");
-            throw new Error("所有API提供商均不可用");
-          }
-          continue; // 切换后重试
+        if (result) {
+          // 缓存结果
+          this.memoryCache[ip] = result;
+          this.saveToCache(ip, result);
+          
+          this.logger.info(`成功获取IP位置信息: ${ip} -> ${result.countryName} (${result.country})`);
+          return result;
         }
-        
-        // 增加当前提供商的请求计数
-        this.incrementRequestCounter(this.currentProvider.name);
-        
-        // 构建请求URL
-        let url;
-        if (this.currentProvider.url.includes('{ip}')) {
-          url = this.currentProvider.url.replace('{ip}', ip);
-        } else {
-          const urlObj = new URL(this.currentProvider.url);
-          urlObj.searchParams.append('ip', ip);
-          url = urlObj.toString();
-        }
-        
-        // 添加API密钥（如果需要）
-        if (this.currentProvider.needsKey && this.apiKey) {
-          // 根据不同的提供商添加不同的参数名
-          if (url.includes('?')) {
-            if (this.currentProvider.name === 'ipinfo') {
-              url += `&token=${this.apiKey}`;
-            } else if (this.currentProvider.name === 'ipgeolocation') {
-              url += `&apiKey=${this.apiKey}`;
-            } else {
-              url += `&key=${this.apiKey}`;
-            }
-          } else {
-            if (this.currentProvider.name === 'ipinfo') {
-              url += `?token=${this.apiKey}`;
-            } else if (this.currentProvider.name === 'ipgeolocation') {
-              url += `?apiKey=${this.apiKey}`;
-            } else {
-              url += `?key=${this.apiKey}`;
-            }
-          }
-        }
-        
-        // 超时控制
-        const controller = new AbortController();
-        const timeoutId = setTimeout(() => {
-          controller.abort();
-        }, this.timeout);
-        
-        // 发起请求
-        const response = await this.makeRequest(url, controller.signal);
-        clearTimeout(timeoutId);
-        
-        // 使用对应的解析器处理响应
-        const parsedData = this.currentProvider.parser.call(this, response, ip);
-        
-        // 添加来源信息
-        if (!parsedData.source) {
-          parsedData.source = this.currentProvider.name;
-        }
-        
-        // 保存到缓存
-        this.saveToCache(ip, parsedData);
-        
-        // 更新内存缓存
-        this.memoryCache[ip] = parsedData;
-        
-        return parsedData;
       } catch (error) {
-        this.logger.error(`获取IP地址位置失败 (${this.currentProvider.name}): ${ip}, 错误: ${error.message}`);
         lastError = error;
+        this.logger.warn(`${provider.name} 查询失败: ${error.message}`);
         
-        // 标记当前提供商状态
-        if (error.message.includes('429') || error.message.includes('rate limit')) {
-          this.currentProvider.status = 'limited';
-          this.logger.warn(`提供商 ${this.currentProvider.name} 已达到请求限制`);
-        } else if (error.message.includes('timeout') || error.name === 'AbortError') {
-          this.currentProvider.status = 'timeout';
-          this.logger.warn(`提供商 ${this.currentProvider.name} 请求超时`);
-        } else if (error.message.includes('404')) {
-          this.currentProvider.status = 'failed';
-          this.logger.warn(`提供商 ${this.currentProvider.name} 返回 404 错误，可能API已变更`);
-        } else {
-          this.currentProvider.status = 'failed';
-          this.logger.warn(`提供商 ${this.currentProvider.name} 请求失败: ${error.message}`);
+        // 如果是频率限制错误，标记API为受限状态
+        if (error.message.includes('rate') || error.message.includes('limit')) {
+          provider.status = 'limited';
+          this.logger.warn(`${provider.name} 达到频率限制，暂时跳过`);
         }
         
-        // 尝试切换到下一个提供商
-        const switched = this.switchToNextProvider();
-        if (!switched) {
-          this.logger.error("无可用的API提供商，所有API均达到限制或失败");
-          break; // 无法切换，退出循环
-        }
+        // 继续尝试下一个提供商
+        continue;
       }
     }
     
-    // 所有尝试都失败了，返回一个基本结果
-    this.logger.error(`所有API提供商尝试都失败: ${ip}, 尝试次数: ${attempts}`);
-    return {
-      ip: ip,
-      error: lastError?.message || "所有API提供商均失败",
-      country: null,
-      countryName: '其他',
-      region: '',
-      city: '',
-      org: '',
-      loc: '',
-      timezone: '',
-      timestamp: new Date().toISOString(),
-      source: 'fallback'
-    };
+    // 所有API都失败了
+    this.logger.error(`所有IP查询API都失败了，IP: ${ip}，最后错误: ${lastError?.message}`);
+    throw new Error(`无法获取IP位置信息: ${lastError?.message || 'All APIs failed'}`);
   }
-  
+
   /**
-   * 发起HTTP/HTTPS请求
-   * @param {string} url 请求URL
-   * @param {AbortSignal} signal 中止信号
-   * @returns {Promise<Object>} 解析后的JSON数据
+   * 请求频率控制
    */
-  async makeRequest(url, signal) {
-    return new Promise((resolve, reject) => {
-      try {
-        const isHttps = url.startsWith('https');
-        const requestFn = isHttps ? https.get : http.get;
-        
-        // 设置请求选项
-        const options = { 
-          signal,
-          headers: {
-            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.114 Safari/537.36',
-            'Accept': 'application/json, text/plain, */*',
-            'Accept-Language': 'zh-CN,zh;q=0.9,en;q=0.8'
-          },
-          timeout: this.timeout // 显式设置超时
-        };
-        
-        const req = requestFn(url, options, (res) => {
-          // 处理HTTP状态码
-          if (res.statusCode === 429) {
-            reject(new Error('请求频率限制 (429)'));
-            return;
-          } else if (res.statusCode === 404) {
-            reject(new Error('HTTP error: 404'));
-            return;
-          } else if (res.statusCode === 403) {
-            reject(new Error('访问被禁止 (403)'));
-            return;
-          } else if (res.statusCode >= 400) {
-            reject(new Error(`HTTP错误: ${res.statusCode}`));
-            return;
-          }
-          
-          // 收集响应数据
-          let data = '';
-          res.on('data', (chunk) => {
-            data += chunk;
-          });
-          
-          res.on('end', () => {
-            try {
-              // 尝试解析JSON数据
-              let jsonData;
-              try {
-                jsonData = JSON.parse(data);
-              } catch (e) {
-                // 如果解析失败，可能是非JSON响应
-                this.logger.warn(`JSON解析失败: ${e.message}, 响应内容: ${data.substring(0, 100)}...`);
-                reject(new Error(`解析响应失败: ${e.message}`));
-                return;
-              }
-              
-              // 成功解析，返回数据
-              resolve(jsonData);
-            } catch (e) {
-              reject(new Error(`处理响应失败: ${e.message}`));
-            }
-          });
-        });
-        
-        // 设置请求错误处理
-        req.on('error', (err) => {
-          if (err.name === 'AbortError') {
-            reject(new Error('请求超时'));
-          } else {
-            reject(new Error(`请求失败: ${err.message}`));
-          }
-        });
-        
-        // 设置超时处理
-        req.on('timeout', () => {
-          req.destroy();
-          reject(new Error('请求超时'));
-        });
-      } catch (error) {
-        reject(new Error(`创建请求失败: ${error.message}`));
-      }
-    });
+  async rateLimitControl() {
+    const now = Date.now();
+    const timeSinceLastRequest = now - this.lastRequestTime;
+    
+    if (timeSinceLastRequest < this.requestInterval) {
+      const waitTime = this.requestInterval - timeSinceLastRequest;
+      this.logger.debug(`频率控制等待 ${waitTime}ms`);
+      await new Promise(resolve => setTimeout(resolve, waitTime));
+    }
+    
+    this.lastRequestTime = Date.now();
   }
-  
+
+  /**
+   * 查询指定的API提供商
+   */
+  async queryProvider(provider, ip) {
+    const url = provider.url.replace('{ip}', ip);
+    
+    try {
+      const response = await fetch(url, {
+        timeout: 8000,
+        headers: {
+          'User-Agent': 'SubSyncForge/1.0 (https://github.com/username/SubSyncForge)',
+          'Accept': 'application/json',
+          'Accept-Language': 'zh-CN,zh;q=0.9,en;q=0.8'
+        }
+      });
+      
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+      }
+      
+      const data = await response.json();
+      return provider.parser(data, ip);
+      
+    } catch (error) {
+      throw new Error(`${provider.name} API错误: ${error.message}`);
+    }
+  }
+
   /**
    * 解析ip-api.com的响应
    */
@@ -479,11 +309,59 @@ export class IPLocator {
       ip: data.query || ip,
       country: countryCode,
       countryName: this.getCountryName(countryCode) || data.country || '其他',
-      region: data.regionName,
-      city: data.city,
-      org: data.isp || data.org,
+      region: data.regionName || '',
+      city: data.city || '',
+      org: data.isp || '',
       loc: data.lat && data.lon ? `${data.lat},${data.lon}` : '',
-      timezone: data.timezone,
+      timezone: data.timezone || '',
+      timestamp: new Date().toISOString()
+    };
+  }
+
+  /**
+   * 解析ipapi.co的响应
+   */
+  parseIpapiCoResponse(data, ip) {
+    // 检查是否有错误
+    if (data.error) {
+      throw new Error(`ipapi.co错误: ${data.reason || data.error}`);
+    }
+    
+    const countryCode = data.country_code || data.country || null;
+    
+    return {
+      ip: data.ip || ip,
+      country: countryCode,
+      countryName: this.getCountryName(countryCode) || data.country_name || '其他',
+      region: data.region || '',
+      city: data.city || '',
+      org: data.org || '',
+      loc: data.latitude && data.longitude ? `${data.latitude},${data.longitude}` : '',
+      timezone: data.timezone || '',
+      timestamp: new Date().toISOString()
+    };
+  }
+
+  /**
+   * 解析ipwhois.app的响应
+   */
+  parseIpWhoisResponse(data, ip) {
+    // 检查是否有错误
+    if (!data.success || data.success === false) {
+      throw new Error('ipwhois.app查询失败');
+    }
+    
+    const countryCode = data.country_code || null;
+    
+    return {
+      ip: data.ip || ip,
+      country: countryCode,
+      countryName: this.getCountryName(countryCode) || data.country || '其他',
+      region: data.region || '',
+      city: data.city || '',
+      org: data.isp || '',
+      loc: data.latitude && data.longitude ? `${data.latitude},${data.longitude}` : '',
+      timezone: data.timezone || '',
       timestamp: new Date().toISOString()
     };
   }

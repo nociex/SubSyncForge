@@ -1,0 +1,53 @@
+{
+  "mode": "config_test",
+  "success": true,
+  "startTime": "2025-05-23T02:10:14.613Z",
+  "steps": {
+    "loadNodes": {
+      "totalNodes": 231,
+      "sources": [
+        "hk.txt",
+        "mihomo-test.yaml",
+        "others.txt",
+        "tw.txt"
+      ]
+    },
+    "filterBlacklist": {
+      "originalCount": 231,
+      "filteredCount": 231,
+      "removedCount": 0
+    },
+    "nodeTest": {
+      "total": 231,
+      "successful": 53,
+      "failed": 178,
+      "successRate": "22.94%",
+      "averageLatency": 402,
+      "methodStatistics": {
+        "mihomo-core": 188,
+        "basic": 43
+      },
+      "typeStatistics": {
+        "vmess": 50,
+        "vless": 48,
+        "ss": 47,
+        "hysteria2": 43,
+        "trojan": 42,
+        "tuic": 1
+      },
+      "needLocationCorrection": 17
+    },
+    "nameCorrection": {
+      "totalNodes": 53,
+      "correctedNodes": 17
+    },
+    "generateMihomoConfig": {
+      "configPath": "/Users/nciexbin/Documents/augment-projects/SubSyncForge/output/mihomo-test.yaml",
+      "nodeCount": 53,
+      "proxyGroups": 3
+    }
+  },
+  "error": null,
+  "duration": 31305,
+  "endTime": "2025-05-23T02:10:45.918Z"
+}

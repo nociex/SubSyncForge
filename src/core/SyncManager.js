@@ -17,6 +17,8 @@ import { NodeManager } from '../converter/analyzer/index.js';
 import fs from 'fs';
 import { ensureDirectoryExists } from './utils/FileSystem.js';
 import yaml from 'js-yaml';
+import { AdvancedNodeTester } from '../tester/AdvancedNodeTester.js';
+import { NodeAnalyzer } from '../converter/analyzer/NodeAnalyzer.js';
 
 export class SyncManager {
   /**
@@ -111,18 +113,20 @@ export class SyncManager {
       
       // 创建节点测试器
       const testingConfig = this.config.testing || {};
-      this.nodeTester = new NodeTester({
+      this.nodeTester = new AdvancedNodeTester({
+        logger: this.logger,
         rootDir: this.rootDir,
         dataDir: this.config.options.dataDir,
-        concurrency: testingConfig.concurrency || 5,
-        timeout: testingConfig.timeout || 5000,
-        testUrl: testingConfig.test_url || 'http://www.google.com/generate_204',
-        maxLatency: testingConfig.max_latency || 5000,
-        minLatency: testingConfig.min_latency || 0,
-        filterInvalid: testingConfig.filter_invalid !== false,
-        filterUnreasonableLatency: testingConfig.filter_unreasonable_latency !== false,
-        verifyLocation: testingConfig.verify_location === true,
-        logger: this.logger
+        coreType: testingConfig.coreType || 'mihomo',
+        useCoreTest: testingConfig.useCoreTest !== false,
+        fallbackToBasic: testingConfig.fallbackToBasic !== false,
+        autoRename: testingConfig.autoRename !== false,
+        verifyLocation: testingConfig.verifyLocation !== false,
+        timeout: testingConfig.timeout || 8000,
+        concurrency: testingConfig.concurrency || 10,
+        maxLatency: testingConfig.maxLatency || 5000,
+        filterUnreasonableLatency: testingConfig.filterUnreasonableLatency !== false,
+        ...testingConfig
       });
       
       // 创建配置生成器
@@ -273,107 +277,58 @@ export class SyncManager {
   async testNodes(nodes) {
     this.logger.info(`开始测试 ${nodes.length} 个节点...`);
     
-    // 检查时间限制
-    if (this.timeLimit.isNearingLimit(0.7)) {
-      this.logger.warn('执行时间接近限制，跳过测试以确保完成');
-      return nodes;
+    if (!Array.isArray(nodes) || nodes.length === 0) {
+      this.logger.warn('没有节点需要测试');
+      return [];
     }
     
-    // 记录节点类型分布
-    const nodeTypes = {};
-    nodes.forEach(node => {
-      if (node && node.type) {
-        nodeTypes[node.type] = (nodeTypes[node.type] || 0) + 1;
+    // 使用高级节点测试器进行测试，自动包含IP定位和重命名功能
+    const testResults = await this.nodeTester.testNodes(nodes);
+    
+    // 处理测试结果，确保正确设置valid属性
+    const allTestedNodes = testResults.map(result => {
+      const node = { ...result.node };
+      
+      // 设置节点的有效性和延迟信息
+      if (result.status === 'up') {
+        node.valid = true;
+        node.latency = result.latency || null;
+        node.error = null;
+      } else {
+        node.valid = false;
+        node.latency = null;
+        node.error = result.error || 'Connection failed';
       }
-    });
-    this.logger.info(`测试前节点类型分布: ${JSON.stringify(nodeTypes)}`);
-    
-    // 正常测试节点
-    const testedNodes = await this.nodeTester.testNodes(nodes);
-    
-    // 分析测试结果
-    const validNodes = testedNodes.filter(node => node.valid);
-    const invalidNodes = testedNodes.filter(node => !node.valid);
-    
-    // 汇总无效原因
-    const errorCounts = {};
-    invalidNodes.forEach(node => {
-      if (node.error) {
-        errorCounts[node.error] = (errorCounts[node.error] || 0) + 1;
+      
+      // 保留其他测试信息
+      if (result.locationInfo) {
+        node.locationInfo = result.locationInfo;
       }
-    });
-    
-    // 有效节点类型分布
-    const validNodeTypes = {};
-    validNodes.forEach(node => {
-      if (node && node.type) {
-        validNodeTypes[node.type] = (validNodeTypes[node.type] || 0) + 1;
-      }
+      
+      return node;
     });
     
-    this.logger.info(`节点测试完成，有效节点数量: ${validNodes.length}/${testedNodes.length}`);
-    this.logger.info(`有效节点类型分布: ${JSON.stringify(validNodeTypes)}`);
+    // 筛选成功的节点
+    const validNodes = allTestedNodes.filter(node => node.valid === true);
     
-    if (Object.keys(errorCounts).length > 0) {
-      this.logger.info(`无效节点错误分布: ${JSON.stringify(errorCounts)}`);
+    this.logger.info(`测试完成: ${validNodes.length}/${nodes.length} 个节点可用`);
+    
+    // 显示测试统计信息
+    const stats = this.nodeTester.getTestStatistics(testResults);
+    this.logger.info(`测试统计: 成功率 ${stats.successRate}, 平均延迟 ${stats.averageLatency}ms`);
+    
+    if (stats.needLocationCorrection > 0) {
+      this.logger.info(`已自动修正 ${stats.needLocationCorrection} 个节点的地区信息`);
     }
     
-    // 保存测试状态到文件
-    this.saveTestStatus({
-      timestamp: new Date().toISOString(),
-      totalNodes: testedNodes.length,
-      validNodes: validNodes.length,
-      invalidNodes: invalidNodes.length,
-      errorDistribution: errorCounts,
-      typeDistribution: validNodeTypes
+    // 显示测试方法分布
+    this.logger.info('测试方法统计:');
+    Object.entries(stats.methodStatistics).forEach(([method, count]) => {
+      this.logger.info(`  - ${method}: ${count} 个节点`);
     });
     
-    // 重要修复：IP检测后重新进行节点分析和分类
-    this.logger.info(`IP检测完成，开始重新分析和分类节点...`);
-    
-    // 创建节点管理器，用于重新分析节点
-    const nodeManager = new NodeManager();
-    
-    // 重新分析测试后的节点，添加地区、服务等标记
-    this.logger.info(`开始重新分析节点...`);
-    const { nodes: reanalyzedNodes } = nodeManager.processNodes(validNodes); // 只对有效节点进行重新分析
-    this.logger.info(`节点重新分析完成`);
-    
-    // 使用NodeAnalyzer重命名节点，确保格式为"国家+协议+编号"
-    this.logger.info(`开始按统一格式重命名节点...`);
-    const renamedNodes = nodeManager.renameNodes(reanalyzedNodes, {
-      format: '{country}-{protocol}-{number}',
-      includeCountry: true,
-      includeProtocol: true,
-      includeNumber: true,
-      includeTags: false
-    });
-    
-    // 确保节点名称不重复
-    const uniqueNameMap = new Map();
-    let uniqueNodes = [];
-    
-    renamedNodes.forEach((node, index) => {
-      // 如果名称已存在，则添加后缀以确保唯一性
-      let baseName = node.name;
-      let uniqueName = baseName;
-      let counter = 1;
-      
-      while (uniqueNameMap.has(uniqueName)) {
-        uniqueName = `${baseName}-${counter}`;
-        counter++;
-      }
-      
-      uniqueNameMap.set(uniqueName, true);
-      uniqueNodes.push({
-        ...node,
-        name: uniqueName
-      });
-    });
-    
-    this.logger.info(`节点重命名完成，最终有效节点数量: ${uniqueNodes.length}`);
-    
-    return uniqueNodes;
+    // 返回所有测试过的节点（包括失败的），让NodeProcessor根据配置决定是否过滤
+    return allTestedNodes;
   }
 
   /**
