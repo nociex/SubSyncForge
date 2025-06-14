@@ -1,208 +1,28 @@
 {
   "nodes": [
     {
-      "id": "fzn3yzsuz",
-      "type": "hysteria2",
-      "name": "🇸🇬新加坡1 | ⬇️ 2.2MB/s",
-      "server": "asg.pagate.top",
-      "port": 10086,
-      "protocol": "hysteria2",
-      "settings": {
-        "auth": "e6d8d743-a9bc-48c9-be99-8f3cc94d16e1",
-        "sni": "asg.pagate.top",
-        "insecure": false,
-        "obfs": "",
-        "obfsPassword": "",
-        "uploadBandwidth": "",
-        "downloadBandwidth": ""
-      },
-      "extra": {
-        "raw": "hysteria2://e6d8d743-a9bc-48c9-be99-8f3cc94d16e1@asg.pagate.top:10086?sni=asg.pagate.top#%F0%9F%87%B8%F0%9F%87%AC%E6%96%B0%E5%8A%A0%E5%9D%A11%20%7C%20%E2%AC%87%EF%B8%8F%202.2MB%2Fs",
-        "addedAt": "2025-06-14T01:21:14.203Z"
-      },
-      "metadata": {
-        "source": "amaoa"
-      }
-    },
-    {
-      "id": "7vax2ufp2",
-      "type": "hysteria",
-      "name": "🇫🇷法国1 | ⬇️ 1.2MB/s",
-      "server": "195.154.200.178",
-      "port": 46938,
-      "protocol": "hysteria",
-      "settings": {
-        "auth": "dongtaiwang.com",
-        "peer": "apple.com",
-        "insecure": true,
-        "upmbps": 11,
-        "downmbps": 55,
-        "obfs": "",
-        "protocol": "udp"
-      },
-      "extra": {
-        "raw": "hysteria://195.154.200.178:46938?alpn=h3&auth=dongtaiwang.com&auth_str=dongtaiwang.com&delay=1050&downmbps=55&obfsParam=&insecure=1&peer=apple.com&upmbps=11#%F0%9F%87%AB%F0%9F%87%B7%E6%B3%95%E5%9B%BD1%20%7C%20%E2%AC%87%EF%B8%8F%201.2MB%2Fs",
-        "addedAt": "2025-06-14T01:21:14.203Z"
-      },
-      "metadata": {
-        "source": "amaoa"
-      }
-    },
-    {
-      "id": "k8830v4kt",
-      "type": "vmess",
-      "name": "🌀其他1-未识别 | ⬇️ 2.2MB/s",
-      "server": "1111-2222.0002.bbbb-cloud-cdna-apia-gwsd-aaaa-aabb.com",
-      "port": 49111,
-      "protocol": "vmess",
-      "settings": {
-        "id": "b79d2468-b606-3803-a863-fbc8f5c4d1aa",
-        "alterId": 0,
-        "security": "auto",
-        "network": "tcp",
-        "ws": false,
-        "wsPath": "",
-        "wsHeaders": {},
-        "tls": false,
-        "serverName": ""
-      },
-      "extra": {
-        "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+MgOWFtuS7ljEt5pyq6K+G5YirIHwg4qyH77iPIDIuMk1CL3MiLCJhZGQiOiIxMTExLTIyMjIuMDAwMi5iYmJiLWNsb3VkLWNkbmEtYXBpYS1nd3NkLWFhYWEtYWFiYi5jb20iLCJwb3J0Ijo0OTExMSwiaWQiOiJiNzlkMjQ2OC1iNjA2LTM4MDMtYTg2My1mYmM4ZjVjNGQxYWEiLCJ0eXBlIjoiIiwiYWlkIjowLCJuZXQiOiJ0Y3AiLCJ0bHMiOiIifQ==",
-        "addedAt": "2025-06-14T01:21:14.203Z"
-      },
-      "metadata": {
-        "source": "amaoa"
-      }
-    },
-    {
-      "id": "9u4o8myh6",
-      "type": "hysteria",
-      "name": "🇺🇸美国1 | ⬇️ 2.0MB/s",
-      "server": "198.40.52.27",
-      "port": 36194,
-      "protocol": "hysteria",
-      "settings": {
-        "auth": "dongtaiwang.com",
-        "peer": "apple.com",
-        "insecure": true,
-        "upmbps": 100,
-        "downmbps": 100,
-        "obfs": "",
-        "protocol": "udp"
-      },
-      "extra": {
-        "raw": "hysteria://198.40.52.27:36194?alpn=h3&auth=dongtaiwang.com&delay=2641&downmbps=100&protocol=udp&insecure=1&peer=apple.com&udp=true&upmbps=100#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD1%20%7C%20%E2%AC%87%EF%B8%8F%202.0MB%2Fs",
-        "addedAt": "2025-06-14T01:21:14.203Z"
-      },
-      "metadata": {
-        "source": "amaoa"
-      }
-    },
-    {
-      "id": "o8tdp77lx",
-      "type": "vless",
-      "name": "🇺🇸美国2 | ⬇️ 4.7MB/s",
-      "server": "135.84.64.208",
-      "port": 443,
-      "protocol": "vless",
-      "settings": {
-        "id": "d7eae7a4-052e-4ab4-98c5-0100f2e26be7",
-        "network": "ws",
-        "security": "tls",
-        "sni": "madcity3.mianfeicf.lol",
-        "fp": "chrome",
-        "alpn": "h3,h2,http/1.1",
-        "path": "/?ed=2560",
-        "host": "madcity3.mianfeicf.lol",
-        "encryption": "none",
-        "flow": ""
-      },
-      "extra": {
-        "raw": "vless://d7eae7a4-052e-4ab4-98c5-0100f2e26be7@135.84.64.208:443?security=tls&type=ws&path=%2F%3Fed%3D2560&host=madcity3.mianfeicf.lol&alpn=h3%2Ch2%2Chttp%2F1.1&sni=madcity3.mianfeicf.lol&fp=chrome#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD2%20%7C%20%E2%AC%87%EF%B8%8F%204.7MB%2Fs",
-        "addedAt": "2025-06-14T01:21:14.203Z"
-      },
-      "metadata": {
-        "source": "amaoa"
-      }
-    },
-    {
-      "id": "qceyl9ibj",
-      "type": "vless",
-      "name": "🇺🇸美国3 | ⬇️ 4.2MB/s",
-      "server": "135.84.64.208",
-      "port": 443,
-      "protocol": "vless",
-      "settings": {
-        "id": "149e1f3d-b2e0-4879-8d9c-7a13d01c32ed",
-        "network": "ws",
-        "security": "tls",
-        "sni": "mc1.777999.lol",
-        "fp": "chrome",
-        "alpn": "h3,h2,http/1.1",
-        "path": "/?ed=2560",
-        "host": "mc1.777999.lol",
-        "encryption": "none",
-        "flow": ""
-      },
-      "extra": {
-        "raw": "vless://149e1f3d-b2e0-4879-8d9c-7a13d01c32ed@135.84.64.208:443?security=tls&type=ws&path=%2F%3Fed%3D2560&host=mc1.777999.lol&alpn=h3%2Ch2%2Chttp%2F1.1&sni=mc1.777999.lol&fp=chrome#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD3%20%7C%20%E2%AC%87%EF%B8%8F%204.2MB%2Fs",
-        "addedAt": "2025-06-14T01:21:14.203Z"
-      },
-      "metadata": {
-        "source": "amaoa"
-      }
-    },
-    {
-      "id": "p85wm8emu",
-      "type": "vless",
-      "name": "🇭🇰香港1 | ⬇️ 5.1MB/s",
-      "server": "45.144.167.46",
-      "port": 19816,
-      "protocol": "vless",
-      "settings": {
-        "id": "6337837a-2b47-4e0d-a695-75c5a4a8ad51",
-        "network": "ws",
-        "security": "tls",
-        "sni": "rs-hk.lzjnb.shop",
-        "fp": "chrome",
-        "alpn": "",
-        "path": "/lzjjjj666",
-        "host": "rs-hk.lzjnb.shop",
-        "encryption": "none",
-        "flow": ""
-      },
-      "extra": {
-        "raw": "vless://6337837a-2b47-4e0d-a695-75c5a4a8ad51@45.144.167.46:19816?security=tls&type=ws&path=%2Flzjjjj666&host=rs-hk.lzjnb.shop&sni=rs-hk.lzjnb.shop&fp=chrome#%F0%9F%87%AD%F0%9F%87%B0%E9%A6%99%E6%B8%AF1%20%7C%20%E2%AC%87%EF%B8%8F%205.1MB%2Fs",
-        "addedAt": "2025-06-14T01:21:14.203Z"
-      },
-      "metadata": {
-        "source": "amaoa"
-      }
-    },
-    {
-      "id": "c0c2fgphw",
-      "type": "trojan",
-      "name": "🌀其他2-MY | ⬇️ 7.3MB/s",
-      "server": "iepl.tube-cat.com",
-      "port": 20047,
-      "protocol": "trojan",
-      "settings": {
-        "password": "/d4ee748f-5778-4fc1-8b6b-a1c7f2b8a2ec",
-        "sni": "my.catxstar.com",
-        "allowInsecure": true
-      },
-      "extra": {
-        "raw": "trojan://d4ee748f-5778-4fc1-8b6b-a1c7f2b8a2ec@iepl.tube-cat.com:20047?sni=my.catxstar.com&allowInsecure=1#%F0%9F%8C%80%E5%85%B6%E4%BB%962-MY%20%7C%20%E2%AC%87%EF%B8%8F%207.3MB%2Fs",
-        "addedAt": "2025-06-14T01:21:14.203Z"
-      },
-      "metadata": {
-        "source": "amaoa"
-      }
-    },
-    {
-      "id": "brvjc0d9k",
+      "id": "2emy1d4o9",
       "type": "ss",
-      "name": "🇰🇷韩国1 | ⬇️ 3.0MB/s",
+      "name": "🇰🇷韩国1 | ⬇️ 2.2MB/s",
+      "server": "125.141.31.100",
+      "port": 17770,
+      "protocol": "shadowsocks",
+      "settings": {
+        "method": "aes-256-cfb",
+        "password": "qwerREWQ@@\r��"
+      },
+      "extra": {
+        "raw": "ss://YWVzLTI1Ni1jZmI6cXdlclJFV1FAQA==@125.141.31.100:17770#%F0%9F%87%B0%F0%9F%87%B7%E9%9F%A9%E5%9B%BD1%20%7C%20%E2%AC%87%EF%B8%8F%202.2MB%2Fs",
+        "addedAt": "2025-06-14T06:24:04.073Z"
+      },
+      "metadata": {
+        "source": "amaoa"
+      }
+    },
+    {
+      "id": "c8tlb8k6u",
+      "type": "ss",
+      "name": "🇰🇷韩国2 | ⬇️ 1.4MB/s",
       "server": "p237.panda004.net",
       "port": 50345,
       "protocol": "shadowsocks",
@@ -211,183 +31,17 @@
         "password": "qwerREWQ@@\r��"
       },
       "extra": {
-        "raw": "ss://YWVzLTI1Ni1jZmI6cXdlclJFV1FAQA==@p237.panda004.net:50345#%F0%9F%87%B0%F0%9F%87%B7%E9%9F%A9%E5%9B%BD1%20%7C%20%E2%AC%87%EF%B8%8F%203.0MB%2Fs",
-        "addedAt": "2025-06-14T01:21:14.203Z"
+        "raw": "ss://YWVzLTI1Ni1jZmI6cXdlclJFV1FAQA==@p237.panda004.net:50345#%F0%9F%87%B0%F0%9F%87%B7%E9%9F%A9%E5%9B%BD2%20%7C%20%E2%AC%87%EF%B8%8F%201.4MB%2Fs",
+        "addedAt": "2025-06-14T06:24:04.073Z"
       },
       "metadata": {
         "source": "amaoa"
       }
     },
     {
-      "id": "3fyqfd6za",
-      "type": "trojan",
-      "name": "🌀其他3-MY | ⬇️ 1.5MB/s",
-      "server": "9ebd1192-sxsxs0-t4nd8s-wujn.cm5.cnkuaishou.com",
-      "port": 21233,
-      "protocol": "trojan",
-      "settings": {
-        "password": "/51362ab6-b5e6-11ea-ad28-f23c913c8d2b",
-        "sni": "9ebd1192-sxsxs0-t4nd8s-wujn.cm5.cnkuaishou.com",
-        "allowInsecure": false
-      },
-      "extra": {
-        "raw": "trojan://51362ab6-b5e6-11ea-ad28-f23c913c8d2b@9ebd1192-sxsxs0-t4nd8s-wujn.cm5.cnkuaishou.com:21233?sni=9ebd1192-sxsxs0-t4nd8s-wujn.cm5.cnkuaishou.com#%F0%9F%8C%80%E5%85%B6%E4%BB%963-MY%20%7C%20%E2%AC%87%EF%B8%8F%201.5MB%2Fs",
-        "addedAt": "2025-06-14T01:21:14.203Z"
-      },
-      "metadata": {
-        "source": "amaoa"
-      }
-    },
-    {
-      "id": "q35ersefq",
-      "type": "trojan",
-      "name": "🇺🇸美国4 | ⬇️ 1.9MB/s",
-      "server": "83157169-sxr340-syuosn-1mffg.cu.plebai.net",
-      "port": 15229,
-      "protocol": "trojan",
-      "settings": {
-        "password": "/6aaaf4f4-be44-11ed-a8bf-f23c91cfbbc9",
-        "sni": "83157169-sxr340-syuosn-1mffg.cu.plebai.net",
-        "allowInsecure": false
-      },
-      "extra": {
-        "raw": "trojan://6aaaf4f4-be44-11ed-a8bf-f23c91cfbbc9@83157169-sxr340-syuosn-1mffg.cu.plebai.net:15229?sni=83157169-sxr340-syuosn-1mffg.cu.plebai.net#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD4%20%7C%20%E2%AC%87%EF%B8%8F%201.9MB%2Fs",
-        "addedAt": "2025-06-14T01:21:14.203Z"
-      },
-      "metadata": {
-        "source": "amaoa"
-      }
-    },
-    {
-      "id": "fbsdbogqq",
+      "id": "k962m3gem",
       "type": "hysteria2",
-      "name": "🌀其他4-未识别 | ⬇️ 1.4MB/s",
-      "server": "sinavm.sinavm.ir",
-      "port": 80,
-      "protocol": "hysteria2",
-      "settings": {
-        "auth": "Bia-SiNAVM-Telegram-SiNAVM-Bia-SiNAVM",
-        "sni": "sinavm.sinavm.ir",
-        "insecure": false,
-        "obfs": "salamander",
-        "obfsPassword": "Bia-Telegram__SiNAVM-SiNAVM__Telegram__SiNAVM-SiNAVM",
-        "uploadBandwidth": "",
-        "downloadBandwidth": ""
-      },
-      "extra": {
-        "raw": "hysteria2://Bia-SiNAVM-Telegram-SiNAVM-Bia-SiNAVM@sinavm.sinavm.ir:80?obfs=salamander&obfs-password=Bia-Telegram__SiNAVM-SiNAVM__Telegram__SiNAVM-SiNAVM&sni=sinavm.sinavm.ir#%F0%9F%8C%80%E5%85%B6%E4%BB%964-%E6%9C%AA%E8%AF%86%E5%88%AB%20%7C%20%E2%AC%87%EF%B8%8F%201.4MB%2Fs",
-        "addedAt": "2025-06-14T01:21:14.203Z"
-      },
-      "metadata": {
-        "source": "amaoa"
-      }
-    },
-    {
-      "id": "hxh68i6xt",
-      "type": "hysteria",
-      "name": "🇳🇱荷兰1 | ⬇️ 1.6MB/s",
-      "server": "51.159.226.1",
-      "port": 14241,
-      "protocol": "hysteria",
-      "settings": {
-        "auth": "dongtaiwang.com",
-        "peer": "apple.com",
-        "insecure": true,
-        "upmbps": 100,
-        "downmbps": 100,
-        "obfs": "",
-        "protocol": "udp"
-      },
-      "extra": {
-        "raw": "hysteria://51.159.226.1:14241?alpn=h3&auth=dongtaiwang.com&auth_str=dongtaiwang.com&delay=932&downmbps=100&protocol=udp&insecure=1&peer=apple.com&udp=true&upmbps=100#%F0%9F%87%B3%F0%9F%87%B1%E8%8D%B7%E5%85%B01%20%7C%20%E2%AC%87%EF%B8%8F%201.6MB%2Fs",
-        "addedAt": "2025-06-14T01:21:14.203Z"
-      },
-      "metadata": {
-        "source": "amaoa"
-      }
-    },
-    {
-      "id": "hjw3ojcjm",
-      "type": "hysteria",
-      "name": "🇷🇺俄罗斯1 | ⬇️ 1.4MB/s",
-      "server": "185.22.155.71",
-      "port": 10803,
-      "protocol": "hysteria",
-      "settings": {
-        "auth": "dongtaiwang.com",
-        "peer": "www.bing.com",
-        "insecure": true,
-        "upmbps": 1000,
-        "downmbps": 1000,
-        "obfs": "",
-        "protocol": "udp"
-      },
-      "extra": {
-        "raw": "hysteria://185.22.155.71:10803?alpn=h3&auth=dongtaiwang.com&auth_str=dongtaiwang.com&delay=1391&downmbps=1000&obfsParam=&insecure=1&peer=www.bing.com&upmbps=1000#%F0%9F%87%B7%F0%9F%87%BA%E4%BF%84%E7%BD%97%E6%96%AF1%20%7C%20%E2%AC%87%EF%B8%8F%201.4MB%2Fs",
-        "addedAt": "2025-06-14T01:21:14.203Z"
-      },
-      "metadata": {
-        "source": "amaoa"
-      }
-    },
-    {
-      "id": "qnupld8vz",
-      "type": "vless",
-      "name": "🇺🇸美国5 | ⬇️ 4.6MB/s",
-      "server": "5.10.245.109",
-      "port": 443,
-      "protocol": "vless",
-      "settings": {
-        "id": "149e1f3d-b2e0-4879-8d9c-7a13d01c32ed",
-        "network": "ws",
-        "security": "tls",
-        "sni": "mc1.777999.lol",
-        "fp": "chrome",
-        "alpn": "h3,h2,http/1.1",
-        "path": "/?ed=2560",
-        "host": "mc1.777999.lol",
-        "encryption": "none",
-        "flow": ""
-      },
-      "extra": {
-        "raw": "vless://149e1f3d-b2e0-4879-8d9c-7a13d01c32ed@5.10.245.109:443?security=tls&type=ws&path=%2F%3Fed%3D2560&host=mc1.777999.lol&alpn=h3%2Ch2%2Chttp%2F1.1&sni=mc1.777999.lol&fp=chrome#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD5%20%7C%20%E2%AC%87%EF%B8%8F%204.6MB%2Fs",
-        "addedAt": "2025-06-14T01:21:14.203Z"
-      },
-      "metadata": {
-        "source": "amaoa"
-      }
-    },
-    {
-      "id": "jzm4qrfzb",
-      "type": "vless",
-      "name": "🇺🇸美国6 | ⬇️ 4.0MB/s",
-      "server": "5.10.245.109",
-      "port": 443,
-      "protocol": "vless",
-      "settings": {
-        "id": "d7eae7a4-052e-4ab4-98c5-0100f2e26be7",
-        "network": "ws",
-        "security": "tls",
-        "sni": "madcity3.mianfeicf.lol",
-        "fp": "chrome",
-        "alpn": "h3,h2,http/1.1",
-        "path": "/?ed=2560",
-        "host": "madcity3.mianfeicf.lol",
-        "encryption": "none",
-        "flow": ""
-      },
-      "extra": {
-        "raw": "vless://d7eae7a4-052e-4ab4-98c5-0100f2e26be7@5.10.245.109:443?security=tls&type=ws&path=%2F%3Fed%3D2560&host=madcity3.mianfeicf.lol&alpn=h3%2Ch2%2Chttp%2F1.1&sni=madcity3.mianfeicf.lol&fp=chrome#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD6%20%7C%20%E2%AC%87%EF%B8%8F%204.0MB%2Fs",
-        "addedAt": "2025-06-14T01:21:14.203Z"
-      },
-      "metadata": {
-        "source": "amaoa"
-      }
-    },
-    {
-      "id": "5v2exy9kd",
-      "type": "hysteria2",
-      "name": "🇸🇬新加坡2 | ⬇️ 1.9MB/s",
+      "name": "🇸🇬新加坡1 | ⬇️ 2.4MB/s",
       "server": "hy.vax2568.ggff.net",
       "port": 443,
       "protocol": "hysteria2",
@@ -401,97 +55,517 @@
         "downloadBandwidth": ""
       },
       "extra": {
-        "raw": "hysteria2://a53b4f10-7454-4c6e-9280-afa53b64a0ef@hy.vax2568.ggff.net:443?sni=hy.vax2568.ggff.net#%F0%9F%87%B8%F0%9F%87%AC%E6%96%B0%E5%8A%A0%E5%9D%A12%20%7C%20%E2%AC%87%EF%B8%8F%201.9MB%2Fs",
-        "addedAt": "2025-06-14T01:21:14.203Z"
+        "raw": "hysteria2://a53b4f10-7454-4c6e-9280-afa53b64a0ef@hy.vax2568.ggff.net:443?sni=hy.vax2568.ggff.net#%F0%9F%87%B8%F0%9F%87%AC%E6%96%B0%E5%8A%A0%E5%9D%A11%20%7C%20%E2%AC%87%EF%B8%8F%202.4MB%2Fs",
+        "addedAt": "2025-06-14T06:24:04.073Z"
       },
       "metadata": {
         "source": "amaoa"
       }
     },
     {
-      "id": "9wdg3is9w",
-      "type": "vmess",
-      "name": "🇺🇸美国7 | ⬇️ 4.5MB/s",
-      "server": "5.10.245.89",
+      "id": "xvm2zji4l",
+      "type": "ss",
+      "name": "🇰🇷韩国3 | ⬇️ 1.8MB/s",
+      "server": "125.141.26.14",
+      "port": 5344,
+      "protocol": "shadowsocks",
+      "settings": {
+        "method": "aes-256-cfb",
+        "password": "qwerREWQ@@\r��"
+      },
+      "extra": {
+        "raw": "ss://YWVzLTI1Ni1jZmI6cXdlclJFV1FAQA==@125.141.26.14:5344#%F0%9F%87%B0%F0%9F%87%B7%E9%9F%A9%E5%9B%BD3%20%7C%20%E2%AC%87%EF%B8%8F%201.8MB%2Fs",
+        "addedAt": "2025-06-14T06:24:04.073Z"
+      },
+      "metadata": {
+        "source": "amaoa"
+      }
+    },
+    {
+      "id": "g42vj7mgv",
+      "type": "trojan",
+      "name": "🇸🇬新加坡2 | ⬇️ 1.9MB/s",
+      "server": "36.151.251.62",
+      "port": 38632,
+      "protocol": "trojan",
+      "settings": {
+        "password": "/HrTsLJvh",
+        "sni": "36.151.251.62",
+        "allowInsecure": true
+      },
+      "extra": {
+        "raw": "trojan://HrTsLJvh@36.151.251.62:38632?sni=36.151.251.62&allowInsecure=1#%F0%9F%87%B8%F0%9F%87%AC%E6%96%B0%E5%8A%A0%E5%9D%A12%20%7C%20%E2%AC%87%EF%B8%8F%201.9MB%2Fs",
+        "addedAt": "2025-06-14T06:24:04.073Z"
+      },
+      "metadata": {
+        "source": "amaoa"
+      }
+    },
+    {
+      "id": "wjjh5j8vr",
+      "type": "ss",
+      "name": "🇰🇷韩国4 | ⬇️ 1.4MB/s",
+      "server": "3.38.180.137",
       "port": 443,
-      "protocol": "vmess",
+      "protocol": "shadowsocks",
       "settings": {
-        "id": "8913bd2c-fd6b-4253-9076-753edbbbc90c",
-        "alterId": 0,
-        "security": "auto",
-        "network": "ws",
-        "ws": true,
-        "wsPath": "/fd6b",
-        "wsHeaders": {
-          "Host": "us1.lzjnb.shop"
-        },
-        "tls": true,
-        "serverName": "us1.lzjnb.shop"
+        "method": "aes-256-cfb",
+        "password": "yijian0503\r��"
       },
       "extra": {
-        "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HuvCfh7jnvo7lm703IHwg4qyH77iPIDQuNU1CL3MiLCJhZGQiOiI1LjEwLjI0NS44OSIsInBvcnQiOjQ0MywiaWQiOiI4OTEzYmQyYy1mZDZiLTQyNTMtOTA3Ni03NTNlZGJiYmM5MGMiLCJ0eXBlIjoiIiwiYWlkIjoiMCIsIm5ldCI6IndzIiwidGxzIjoidGxzIiwic25pIjoidXMxLmx6am5iLnNob3AiLCJwYXRoIjoiL2ZkNmIiLCJob3N0IjoidXMxLmx6am5iLnNob3AifQ==",
-        "addedAt": "2025-06-14T01:21:14.203Z"
+        "raw": "ss://YWVzLTI1Ni1jZmI6eWlqaWFuMDUwMw==@3.38.180.137:443#%F0%9F%87%B0%F0%9F%87%B7%E9%9F%A9%E5%9B%BD4%20%7C%20%E2%AC%87%EF%B8%8F%201.4MB%2Fs",
+        "addedAt": "2025-06-14T06:24:04.073Z"
       },
       "metadata": {
         "source": "amaoa"
       }
     },
     {
-      "id": "cej4ju8yd",
-      "type": "vmess",
-      "name": "🇵🇱波兰1 | ⬇️ 4.1MB/s",
-      "server": "172.64.156.197",
-      "port": 8443,
-      "protocol": "vmess",
+      "id": "hme2ot1gi",
+      "type": "trojan",
+      "name": "🇺🇸美国1 | ⬇️ 1.6MB/s",
+      "server": "83157169-sxr340-syuosn-1mffg.cu.plebai.net",
+      "port": 15229,
+      "protocol": "trojan",
       "settings": {
-        "id": "4d8e1e52-5ad6-4849-beef-ef1c5a084020",
-        "alterId": 0,
-        "security": "auto",
-        "network": "ws",
-        "ws": true,
-        "wsPath": "/4d8e1e52-5ad6-4849-beef-ef1c5a084020-vm",
-        "wsHeaders": {
-          "Host": "super-justice-supporters-mills.trycloudflare.com"
-        },
-        "tls": true,
-        "serverName": "super-justice-supporters-mills.trycloudflare.com"
+        "password": "/6aaaf4f4-be44-11ed-a8bf-f23c91cfbbc9",
+        "sni": "83157169-sxr340-syuosn-1mffg.cu.plebai.net",
+        "allowInsecure": false
       },
       "extra": {
-        "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HtfCfh7Hms6LlhbAxIHwg4qyH77iPIDQuMU1CL3MiLCJhZGQiOiIxNzIuNjQuMTU2LjE5NyIsInBvcnQiOjg0NDMsImlkIjoiNGQ4ZTFlNTItNWFkNi00ODQ5LWJlZWYtZWYxYzVhMDg0MDIwIiwidHlwZSI6IiIsImFpZCI6IjAiLCJuZXQiOiJ3cyIsInRscyI6InRscyIsInNuaSI6InN1cGVyLWp1c3RpY2Utc3VwcG9ydGVycy1taWxscy50cnljbG91ZGZsYXJlLmNvbSIsInBhdGgiOiIvNGQ4ZTFlNTItNWFkNi00ODQ5LWJlZWYtZWYxYzVhMDg0MDIwLXZtIiwiaG9zdCI6InN1cGVyLWp1c3RpY2Utc3VwcG9ydGVycy1taWxscy50cnljbG91ZGZsYXJlLmNvbSJ9",
-        "addedAt": "2025-06-14T01:21:14.203Z"
+        "raw": "trojan://6aaaf4f4-be44-11ed-a8bf-f23c91cfbbc9@83157169-sxr340-syuosn-1mffg.cu.plebai.net:15229?sni=83157169-sxr340-syuosn-1mffg.cu.plebai.net#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD1%20%7C%20%E2%AC%87%EF%B8%8F%201.6MB%2Fs",
+        "addedAt": "2025-06-14T06:24:04.073Z"
       },
       "metadata": {
         "source": "amaoa"
       }
     },
     {
-      "id": "0fbblwpy4",
+      "id": "hsod2nykf",
+      "type": "ss",
+      "name": "🌀其他1-GT | ⬇️ 1.1MB/s",
+      "server": "185.47.254.177",
+      "port": 20007,
+      "protocol": "shadowsocks",
+      "settings": {
+        "method": "aes-256-gcm",
+        "password": "F3OJNULJ3HQKONXK\r��"
+      },
+      "extra": {
+        "raw": "ss://YWVzLTI1Ni1nY206RjNPSk5VTEozSFFLT05YSw==@185.47.254.177:20007#%F0%9F%8C%80%E5%85%B6%E4%BB%961-GT%20%7C%20%E2%AC%87%EF%B8%8F%201.1MB%2Fs",
+        "addedAt": "2025-06-14T06:24:04.073Z"
+      },
+      "metadata": {
+        "source": "amaoa"
+      }
+    },
+    {
+      "id": "x07if59ko",
       "type": "vless",
-      "name": "🇺🇸美国8 | ⬇️ 1.1MB/s",
-      "server": "162.159.140.167",
+      "name": "🇩🇪德国1 | ⬇️ 2.3MB/s",
+      "server": "vpn_proxy_channel_vpn_proxy_channel.hohod.ir",
       "port": 443,
       "protocol": "vless",
       "settings": {
-        "id": "585acd30-52bf-4b70-a537-e13649fafefc",
-        "network": "ws",
-        "security": "tls",
-        "sni": "XszAW34.7282728.xYZ",
+        "id": "33707040-edcf-4185-94e4-2a071315c602",
+        "network": "raw",
+        "security": "reality",
+        "sni": "vpn_proxy_channel_vpn_proxy_channel.hohod.ir",
         "fp": "chrome",
-        "alpn": "http/1.1",
-        "path": "/rU9rSjDSOd4yY2fOe?ed=2048/@Evay_vpn----@Evay_vpn----@Evay_vpn----@Evay_vpn----@Evay_vpn----@Evay_vpn----@Evay_vpn----@Evay_vpn----@Evay_vpn----@Evay_vpn----@Evay_vpn",
-        "host": "xszaw34.7282728.xyz",
+        "alpn": "",
+        "path": "/",
+        "host": "",
         "encryption": "none",
         "flow": ""
       },
       "extra": {
-        "raw": "vless://585acd30-52bf-4b70-a537-e13649fafefc@162.159.140.167:443?security=tls&type=ws&path=%2FrU9rSjDSOd4yY2fOe%3Fed%3D2048%2F%40Evay_vpn----%40Evay_vpn----%40Evay_vpn----%40Evay_vpn----%40Evay_vpn----%40Evay_vpn----%40Evay_vpn----%40Evay_vpn----%40Evay_vpn----%40Evay_vpn----%40Evay_vpn&host=xszaw34.7282728.xyz&alpn=http%2F1.1&sni=XszAW34.7282728.xYZ&fp=chrome#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD8%20%7C%20%E2%AC%87%EF%B8%8F%201.1MB%2Fs",
-        "addedAt": "2025-06-14T01:21:14.203Z"
+        "raw": "vless://33707040-edcf-4185-94e4-2a071315c602@vpn_proxy_channel_vpn_proxy_channel.hohod.ir:443?security=reality&type=raw&sni=vpn_proxy_channel_vpn_proxy_channel.hohod.ir&fp=chrome&sid=7def4dde&pbk=GpgfsA-U8Y8M3LRcTfsaBViDtp2VlN5riSLLZ2kxEiQ#%F0%9F%87%A9%F0%9F%87%AA%E5%BE%B7%E5%9B%BD1%20%7C%20%E2%AC%87%EF%B8%8F%202.3MB%2Fs",
+        "addedAt": "2025-06-14T06:24:04.073Z"
+      },
+      "metadata": {
+        "source": "amaoa"
+      }
+    },
+    {
+      "id": "od1n8wcat",
+      "type": "trojan",
+      "name": "🇺🇸美国2 | ⬇️ 4.7MB/s",
+      "server": "36.151.251.56",
+      "port": 4447,
+      "protocol": "trojan",
+      "settings": {
+        "password": "/FpQhGpIr",
+        "sni": "36.151.251.56",
+        "allowInsecure": true
+      },
+      "extra": {
+        "raw": "trojan://FpQhGpIr@36.151.251.56:4447?sni=36.151.251.56&allowInsecure=1#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD2%20%7C%20%E2%AC%87%EF%B8%8F%204.7MB%2Fs",
+        "addedAt": "2025-06-14T06:24:04.073Z"
+      },
+      "metadata": {
+        "source": "amaoa"
+      }
+    },
+    {
+      "id": "ctol2sfav",
+      "type": "vless",
+      "name": "🇸🇬新加坡3 | ⬇️ 2.6MB/s",
+      "server": "ip.sb",
+      "port": 8080,
+      "protocol": "vless",
+      "settings": {
+        "id": "bddbc661-a058-4722-dd74-5f8199a4fab6",
+        "network": "ws",
+        "security": "none",
+        "sni": "ip.sb",
+        "fp": "",
+        "alpn": "",
+        "path": "/",
+        "host": "0611.heweiyi.dpdns.org",
+        "encryption": "none",
+        "flow": ""
+      },
+      "extra": {
+        "raw": "vless://bddbc661-a058-4722-dd74-5f8199a4fab6@ip.sb:8080?security=none&type=ws&path=%2F&host=0611.heweiyi.dpdns.org#%F0%9F%87%B8%F0%9F%87%AC%E6%96%B0%E5%8A%A0%E5%9D%A13%20%7C%20%E2%AC%87%EF%B8%8F%202.6MB%2Fs",
+        "addedAt": "2025-06-14T06:24:04.073Z"
+      },
+      "metadata": {
+        "source": "amaoa"
+      }
+    },
+    {
+      "id": "bzhlui61m",
+      "type": "trojan",
+      "name": "🇨🇦加拿大1 | ⬇️ 2.9MB/s",
+      "server": "194.53.53.249",
+      "port": 2083,
+      "protocol": "trojan",
+      "settings": {
+        "password": "/d6b8011a-c725-435a-9fec-bf6d3530392c",
+        "sni": "vle.amclubsvip.dpdns.org",
+        "allowInsecure": true
+      },
+      "extra": {
+        "raw": "trojan://d6b8011a-c725-435a-9fec-bf6d3530392c@194.53.53.249:2083?sni=vle.amclubsvip.dpdns.org&allowInsecure=1&type=ws&path=%2F%3Fed%3D2560%26PROT_TYPE%3Dtrojan&host=vle.amclubsvip.dpdns.org#%F0%9F%87%A8%F0%9F%87%A6%E5%8A%A0%E6%8B%BF%E5%A4%A71%20%7C%20%E2%AC%87%EF%B8%8F%202.9MB%2Fs",
+        "addedAt": "2025-06-14T06:24:04.073Z"
+      },
+      "metadata": {
+        "source": "amaoa"
+      }
+    },
+    {
+      "id": "4mz2ph9qi",
+      "type": "vless",
+      "name": "🇩🇪德国2 | ⬇️ 2.2MB/s",
+      "server": "5.231.26.127",
+      "port": 25360,
+      "protocol": "vless",
+      "settings": {
+        "id": "367991e3-a5cc-4b1a-fed8-2efe19933291",
+        "network": "grpc",
+        "security": "none",
+        "sni": "5.231.26.127",
+        "fp": "",
+        "alpn": "",
+        "path": "/",
+        "host": "",
+        "encryption": "none",
+        "flow": ""
+      },
+      "extra": {
+        "raw": "vless://367991e3-a5cc-4b1a-fed8-2efe19933291@5.231.26.127:25360?security=none&type=grpc&mode=gun&serviceName=%40Zerov2shop#%F0%9F%87%A9%F0%9F%87%AA%E5%BE%B7%E5%9B%BD2%20%7C%20%E2%AC%87%EF%B8%8F%202.2MB%2Fs",
+        "addedAt": "2025-06-14T06:24:04.073Z"
+      },
+      "metadata": {
+        "source": "amaoa"
+      }
+    },
+    {
+      "id": "9om37swyt",
+      "type": "vless",
+      "name": "🇸🇬新加坡4 | ⬇️ 7.7MB/s",
+      "server": "168.138.181.208",
+      "port": 443,
+      "protocol": "vless",
+      "settings": {
+        "id": "0783b1b9-5d8b-4d03-adc3-b050acc71a29",
+        "network": "ws",
+        "security": "tls",
+        "sni": "sgp.rtot.me",
+        "fp": "chrome",
+        "alpn": "",
+        "path": "/bing",
+        "host": "sgp.rtot.me",
+        "encryption": "none",
+        "flow": ""
+      },
+      "extra": {
+        "raw": "vless://0783b1b9-5d8b-4d03-adc3-b050acc71a29@168.138.181.208:443?security=tls&type=ws&path=%2Fbing&host=sgp.rtot.me&allowInsecure=1&sni=sgp.rtot.me&fp=chrome#%F0%9F%87%B8%F0%9F%87%AC%E6%96%B0%E5%8A%A0%E5%9D%A14%20%7C%20%E2%AC%87%EF%B8%8F%207.7MB%2Fs",
+        "addedAt": "2025-06-14T06:24:04.073Z"
+      },
+      "metadata": {
+        "source": "amaoa"
+      }
+    },
+    {
+      "id": "i7q12gn2w",
+      "type": "ss",
+      "name": "🇫🇮芬兰1 | ⬇️ 1.2MB/s",
+      "server": "zf1.10101251.xyz",
+      "port": 20251,
+      "protocol": "shadowsocks",
+      "settings": {
+        "method": "aes-256-gcm",
+        "password": "3ee90aa9-8831-4ea3-9425-c361090a938d"
+      },
+      "extra": {
+        "raw": "ss://YWVzLTI1Ni1nY206M2VlOTBhYTktODgzMS00ZWEzLTk0MjUtYzM2MTA5MGE5Mzhk@zf1.10101251.xyz:20251#%F0%9F%87%AB%F0%9F%87%AE%E8%8A%AC%E5%85%B01%20%7C%20%E2%AC%87%EF%B8%8F%201.2MB%2Fs",
+        "addedAt": "2025-06-14T06:24:04.073Z"
+      },
+      "metadata": {
+        "source": "amaoa"
+      }
+    },
+    {
+      "id": "hx58df360",
+      "type": "vless",
+      "name": "🇺🇸美国3 | ⬇️ 2.2MB/s",
+      "server": "zula.ir",
+      "port": 2087,
+      "protocol": "vless",
+      "settings": {
+        "id": "904cdf83-1b0c-4cd5-a0c1-6690c1ee6219",
+        "network": "ws",
+        "security": "tls",
+        "sni": "rita.adaspoloandco.com",
+        "fp": "chrome",
+        "alpn": "h2,http/1.1",
+        "path": "/downloader",
+        "host": "rita.adaspoloandco.com",
+        "encryption": "none",
+        "flow": ""
+      },
+      "extra": {
+        "raw": "vless://904cdf83-1b0c-4cd5-a0c1-6690c1ee6219@zula.ir:2087?security=tls&type=ws&path=%2Fdownloader&host=rita.adaspoloandco.com&alpn=h2%2Chttp%2F1.1&sni=rita.adaspoloandco.com&fp=chrome#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD3%20%7C%20%E2%AC%87%EF%B8%8F%202.2MB%2Fs",
+        "addedAt": "2025-06-14T06:24:04.073Z"
+      },
+      "metadata": {
+        "source": "amaoa"
+      }
+    },
+    {
+      "id": "3x8ftpmfe",
+      "type": "vless",
+      "name": "🇩🇪德国3 | ⬇️ 2.3MB/s",
+      "server": "152.53.231.109",
+      "port": 56701,
+      "protocol": "vless",
+      "settings": {
+        "id": "b1676447-0825-4b60-be37-735c9586735e",
+        "network": "tcp",
+        "security": "reality",
+        "sni": "addons.mozilla.org",
+        "fp": "firefox",
+        "alpn": "",
+        "path": "/",
+        "host": "",
+        "encryption": "none",
+        "flow": "xtls-rprx-vision"
+      },
+      "extra": {
+        "raw": "vless://b1676447-0825-4b60-be37-735c9586735e@152.53.231.109:56701?security=reality&type=tcp&sni=addons.mozilla.org&fp=firefox&flow=xtls-rprx-vision&sid=792147b8&pbk=sW8BfHeovVzmbFuAnr9nH8oJaKYze6shKoKMdek5ai8#%F0%9F%87%A9%F0%9F%87%AA%E5%BE%B7%E5%9B%BD3%20%7C%20%E2%AC%87%EF%B8%8F%202.3MB%2Fs",
+        "addedAt": "2025-06-14T06:24:04.073Z"
+      },
+      "metadata": {
+        "source": "amaoa"
+      }
+    },
+    {
+      "id": "c9du0vgvg",
+      "type": "vmess",
+      "name": "🇺🇸美国4 | ⬇️ 1.1MB/s",
+      "server": "v8.heduian.link",
+      "port": 30808,
+      "protocol": "vmess",
+      "settings": {
+        "id": "cbb3f877-d1fb-344c-87a9-d153bffd5484",
+        "alterId": 2,
+        "security": "auto",
+        "network": "ws",
+        "ws": true,
+        "wsPath": "/oooo",
+        "wsHeaders": {
+          "Host": "v8.heduian.link"
+        },
+        "tls": false,
+        "serverName": "v8.heduian.link"
+      },
+      "extra": {
+        "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HuvCfh7jnvo7lm700IHwg4qyH77iPIDEuMU1CL3MiLCJhZGQiOiJ2OC5oZWR1aWFuLmxpbmsiLCJwb3J0IjozMDgwOCwiaWQiOiJjYmIzZjg3Ny1kMWZiLTM0NGMtODdhOS1kMTUzYmZmZDU0ODQiLCJ0eXBlIjoiIiwiYWlkIjoyLCJuZXQiOiJ3cyIsInRscyI6IiIsInBhdGgiOiIvb29vbyIsImhvc3QiOiJ2OC5oZWR1aWFuLmxpbmsifQ==",
+        "addedAt": "2025-06-14T06:24:04.073Z"
+      },
+      "metadata": {
+        "source": "amaoa"
+      }
+    },
+    {
+      "id": "cbue019wc",
+      "type": "vless",
+      "name": "🌀其他2-未识别 | ⬇️ 4.2MB/s",
+      "server": "185.148.106.192",
+      "port": 80,
+      "protocol": "vless",
+      "settings": {
+        "id": "89b3cbba-e6ac-485a-9481-976a0415eab9",
+        "network": "ws",
+        "security": "none",
+        "sni": "185.148.106.192",
+        "fp": "",
+        "alpn": "",
+        "path": "/Telegram:@ShadowProxy66/?ed=2560",
+        "host": "uuhUHYygEsdFGH.UYHJHGvgFcjGUJhbUIlbVFDxDxM.xyz",
+        "encryption": "none",
+        "flow": ""
+      },
+      "extra": {
+        "raw": "vless://89b3cbba-e6ac-485a-9481-976a0415eab9@185.148.106.192:80?security=none&type=ws&path=%2FTelegram%3A%40ShadowProxy66%2F%3Fed%3D2560&host=uuhUHYygEsdFGH.UYHJHGvgFcjGUJhbUIlbVFDxDxM.xyz#%F0%9F%8C%80%E5%85%B6%E4%BB%962-%E6%9C%AA%E8%AF%86%E5%88%AB%20%7C%20%E2%AC%87%EF%B8%8F%204.2MB%2Fs",
+        "addedAt": "2025-06-14T06:24:04.073Z"
+      },
+      "metadata": {
+        "source": "amaoa"
+      }
+    },
+    {
+      "id": "azut3f9xe",
+      "type": "vmess",
+      "name": "🇺🇸美国5 | ⬇️ 5.3MB/s",
+      "server": "104.18.43.21",
+      "port": 8443,
+      "protocol": "vmess",
+      "settings": {
+        "id": "b3b28da5-a27d-4d33-ee13-dcdf5c7fc45b",
+        "alterId": 0,
+        "security": "auto",
+        "network": "ws",
+        "ws": true,
+        "wsPath": "/",
+        "wsHeaders": {
+          "Host": "mailman-backing-facilitate-cents.trycloudflare.com"
+        },
+        "tls": true,
+        "serverName": "mailman-backing-facilitate-cents.trycloudflare.com"
+      },
+      "extra": {
+        "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HuvCfh7jnvo7lm701IHwg4qyH77iPIDUuM01CL3MiLCJhZGQiOiIxMDQuMTguNDMuMjEiLCJwb3J0Ijo4NDQzLCJpZCI6ImIzYjI4ZGE1LWEyN2QtNGQzMy1lZTEzLWRjZGY1YzdmYzQ1YiIsInR5cGUiOiIiLCJhaWQiOiIwIiwibmV0Ijoid3MiLCJ0bHMiOiJ0bHMiLCJzbmkiOiJtYWlsbWFuLWJhY2tpbmctZmFjaWxpdGF0ZS1jZW50cy50cnljbG91ZGZsYXJlLmNvbSIsInBhdGgiOiIvIiwiaG9zdCI6Im1haWxtYW4tYmFja2luZy1mYWNpbGl0YXRlLWNlbnRzLnRyeWNsb3VkZmxhcmUuY29tIn0=",
+        "addedAt": "2025-06-14T06:24:04.073Z"
+      },
+      "metadata": {
+        "source": "amaoa"
+      }
+    },
+    {
+      "id": "sm7n972i2",
+      "type": "trojan",
+      "name": "🇺🇸美国6 | ⬇️ 2.0MB/s",
+      "server": "gghui.4444936.xyz",
+      "port": 443,
+      "protocol": "trojan",
+      "settings": {
+        "password": "/512d9674-db12-44ca-a1b5-654244549b65",
+        "sni": "gghui.4444936.xyz",
+        "allowInsecure": true
+      },
+      "extra": {
+        "raw": "trojan://512d9674-db12-44ca-a1b5-654244549b65@gghui.4444936.xyz:443?sni=gghui.4444936.xyz&allowInsecure=1&type=ws&path=%2FHOi2k5ElZdeML7Ua7dX3JIrYk7zm&alpn=http%2F1.1&fp=chrome#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD6%20%7C%20%E2%AC%87%EF%B8%8F%202.0MB%2Fs",
+        "addedAt": "2025-06-14T06:24:04.073Z"
+      },
+      "metadata": {
+        "source": "amaoa"
+      }
+    },
+    {
+      "id": "iocas5jqm",
+      "type": "vless",
+      "name": "🇺🇸美国7 | ⬇️ 1.6MB/s",
+      "server": "ccvfgtyuio.444752.xyz",
+      "port": 443,
+      "protocol": "vless",
+      "settings": {
+        "id": "512d9674-db12-44ca-a1b5-654244549b65",
+        "network": "ws",
+        "security": "tls",
+        "sni": "ccvfgtyuio.444752.xyz",
+        "fp": "chrome",
+        "alpn": "http/1.1",
+        "path": "/zzMtGpHptl8a7dX3JIrYk7zm",
+        "host": "ccvfgtyuio.444752.xyz",
+        "encryption": "none",
+        "flow": ""
+      },
+      "extra": {
+        "raw": "vless://512d9674-db12-44ca-a1b5-654244549b65@ccvfgtyuio.444752.xyz:443?security=tls&type=ws&path=%2FzzMtGpHptl8a7dX3JIrYk7zm&host=ccvfgtyuio.444752.xyz&alpn=http%2F1.1&sni=ccvfgtyuio.444752.xyz&fp=chrome#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD7%20%7C%20%E2%AC%87%EF%B8%8F%201.6MB%2Fs",
+        "addedAt": "2025-06-14T06:24:04.073Z"
+      },
+      "metadata": {
+        "source": "amaoa"
+      }
+    },
+    {
+      "id": "githixp9s",
+      "type": "vmess",
+      "name": "🇭🇰香港1 | ⬇️ 1.1MB/s",
+      "server": "104.18.33.28",
+      "port": 2053,
+      "protocol": "vmess",
+      "settings": {
+        "id": "7959b4da-3747-4ea1-c083-f1763979943e",
+        "alterId": 0,
+        "security": "auto",
+        "network": "ws",
+        "ws": true,
+        "wsPath": "/",
+        "wsHeaders": {
+          "Host": "cet-blink-plans-fioricet.trycloudflare.com"
+        },
+        "tls": true,
+        "serverName": "cet-blink-plans-fioricet.trycloudflare.com"
+      },
+      "extra": {
+        "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrfCfh7DpppnmuK8xIHwg4qyH77iPIDEuMU1CL3MiLCJhZGQiOiIxMDQuMTguMzMuMjgiLCJwb3J0IjoyMDUzLCJpZCI6Ijc5NTliNGRhLTM3NDctNGVhMS1jMDgzLWYxNzYzOTc5OTQzZSIsInR5cGUiOiIiLCJhaWQiOiIwIiwibmV0Ijoid3MiLCJ0bHMiOiJ0bHMiLCJzbmkiOiJjZXQtYmxpbmstcGxhbnMtZmlvcmljZXQudHJ5Y2xvdWRmbGFyZS5jb20iLCJwYXRoIjoiLyIsImhvc3QiOiJjZXQtYmxpbmstcGxhbnMtZmlvcmljZXQudHJ5Y2xvdWRmbGFyZS5jb20ifQ==",
+        "addedAt": "2025-06-14T06:24:04.073Z"
+      },
+      "metadata": {
+        "source": "amaoa"
+      }
+    },
+    {
+      "id": "x5a2i64gz",
+      "type": "vless",
+      "name": "🇺🇸美国8 | ⬇️ 2.3MB/s",
+      "server": "sssxxxcft6.444752.xyz",
+      "port": 443,
+      "protocol": "vless",
+      "settings": {
+        "id": "512d9674-db12-44ca-a1b5-654244549b65",
+        "network": "ws",
+        "security": "tls",
+        "sni": "sssxxxcft6.444752.xyz",
+        "fp": "chrome",
+        "alpn": "http/1.1",
+        "path": "/zzMtGpHptl8a7dX3JIrYk7zm",
+        "host": "sssxxxcft6.444752.xyz",
+        "encryption": "none",
+        "flow": ""
+      },
+      "extra": {
+        "raw": "vless://512d9674-db12-44ca-a1b5-654244549b65@sssxxxcft6.444752.xyz:443?security=tls&type=ws&path=%2FzzMtGpHptl8a7dX3JIrYk7zm&host=sssxxxcft6.444752.xyz&alpn=http%2F1.1&sni=sssxxxcft6.444752.xyz&fp=chrome#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD8%20%7C%20%E2%AC%87%EF%B8%8F%202.3MB%2Fs",
+        "addedAt": "2025-06-14T06:24:04.073Z"
       },
       "metadata": {
         "source": "amaoa"
       }
     }
   ],
-  "timestamp": 1749864074203,
-  "hash": "7737471a7671e014edc6cb5f4e71b0dd"
+  "timestamp": 1749882244073,
+  "hash": "6be8a6e07c58d58df7936953b2b95b28"
 }
