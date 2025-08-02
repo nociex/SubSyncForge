@@ -1,7 +1,7 @@
 {
   "nodes": [
     {
-      "id": "kzllffrp8",
+      "id": "nivwpsrlr",
       "type": "vmess",
       "name": "⚫︎ Channel: @MxlShare",
       "server": "9.9.9.9",
@@ -38,14 +38,14 @@
           },
           "udp": true
         },
-        "addedAt": "2025-08-01T18:28:32.062Z"
+        "addedAt": "2025-08-02T01:27:49.928Z"
       },
       "metadata": {
         "source": "ss"
       }
     },
     {
-      "id": "ielcxwhtj",
+      "id": "gru8ly8rq",
       "type": "vmess",
       "name": "⚫︎ Website: https://mxlsub.me",
       "server": "9.9.9.9",
@@ -82,14 +82,14 @@
           },
           "udp": true
         },
-        "addedAt": "2025-08-01T18:28:32.062Z"
+        "addedAt": "2025-08-02T01:27:49.928Z"
       },
       "metadata": {
         "source": "ss"
       }
     },
     {
-      "id": "fzhbodda4",
+      "id": "xv948qnqk",
       "type": "ss",
       "name": "🇭🇰 香港 | HKG",
       "server": "156.224.77.215",
@@ -110,70 +110,71 @@
           "password": "9bb81ca9-9eef-4494-84f8-d4c7ef2800c3",
           "udp": true
         },
-        "addedAt": "2025-08-01T18:28:32.062Z"
+        "addedAt": "2025-08-02T01:27:49.928Z"
       },
       "metadata": {
         "source": "ss"
       }
     },
     {
-      "id": "yy0v3j71d",
-      "type": "ss",
+      "id": "cflfu66qm",
+      "type": "trojan",
       "name": "🇭🇰 香港 | HKG 2",
-      "server": "156.224.77.215",
-      "port": 22800,
-      "protocol": "shadowsocks",
+      "server": "hk-aws-171.77vpn.com",
+      "port": 1080,
+      "protocol": "trojan",
       "settings": {
-        "method": "chacha20-ietf-poly1305",
-        "password": "f0a78340-f887-4562-8901-b4ddd8958408",
-        "udp": true
+        "password": "e3cf9a68-214c-4551-9309-d7fb5d5113bf",
+        "sni": "hk-aws-171.77vpn.com",
+        "allowInsecure": true
       },
       "extra": {
         "raw": {
           "name": "🇭🇰 香港 | HKG 2",
-          "server": "156.224.77.215",
-          "port": 22800,
-          "type": "ss",
-          "cipher": "chacha20-ietf-poly1305",
-          "password": "f0a78340-f887-4562-8901-b4ddd8958408",
+          "server": "hk-aws-171.77vpn.com",
+          "port": 1080,
+          "type": "trojan",
+          "password": "e3cf9a68-214c-4551-9309-d7fb5d5113bf",
+          "sni": "hk-aws-171.77vpn.com",
+          "skip-cert-verify": true,
           "udp": true
         },
-        "addedAt": "2025-08-01T18:28:32.062Z"
+        "addedAt": "2025-08-02T01:27:49.928Z"
       },
       "metadata": {
         "source": "ss"
       }
     },
     {
-      "id": "i23fvcimo",
+      "id": "8r4c4z0i3",
       "type": "ss",
       "name": "🇭🇰 香港 | HKG 3",
-      "server": "156.224.77.215",
-      "port": 22800,
+      "server": "hk-aws-171.77vpn.com",
+      "port": 1081,
       "protocol": "shadowsocks",
       "settings": {
         "method": "chacha20-ietf-poly1305",
-        "password": "bb23f49f-703c-4e0f-95c7-e917617faaa1",
+        "password": "e3cf9a68-214c-4551-9309-d7fb5d5113bf",
         "udp": true
       },
       "extra": {
         "raw": {
           "name": "🇭🇰 香港 | HKG 3",
-          "server": "156.224.77.215",
-          "port": 22800,
+          "server": "hk-aws-171.77vpn.com",
+          "port": 1081,
           "type": "ss",
           "cipher": "chacha20-ietf-poly1305",
-          "password": "bb23f49f-703c-4e0f-95c7-e917617faaa1",
+          "password": "e3cf9a68-214c-4551-9309-d7fb5d5113bf",
           "udp": true
         },
-        "addedAt": "2025-08-01T18:28:32.062Z"
+        "addedAt": "2025-08-02T01:27:49.928Z"
       },
       "metadata": {
         "source": "ss"
       }
     },
     {
-      "id": "ltdrlcvcq",
+      "id": "cc8tlr9hy",
       "type": "ss",
       "name": "🇭🇰 香港 | HKG 4",
       "server": "156.224.77.215",
@@ -194,143 +195,102 @@
           "password": "762e1d75-9cc7-4c4e-9d51-4e27a7958117",
           "udp": true
         },
-        "addedAt": "2025-08-01T18:28:32.062Z"
+        "addedAt": "2025-08-02T01:27:49.928Z"
       },
       "metadata": {
         "source": "ss"
       }
     },
     {
-      "id": "4klc8iost",
-      "type": "vmess",
+      "id": "5c67rhodl",
+      "type": "ss",
       "name": "🇭🇰 香港 | HKG 5",
-      "server": "hk-aws-171.77vpn.com",
-      "port": 1083,
-      "protocol": "vmess",
-      "settings": {
-        "id": "e3cf9a68-214c-4551-9309-d7fb5d5113bf",
-        "alterId": 0,
-        "security": "auto",
-        "network": "grpc",
-        "wsPath": "",
-        "wsHeaders": {},
-        "tls": true,
-        "serverName": "hk-aws-171.77vpn.com"
-      },
-      "extra": {
-        "raw": {
-          "name": "🇭🇰 香港 | HKG 5",
-          "server": "hk-aws-171.77vpn.com",
-          "port": 1083,
-          "type": "vmess",
-          "uuid": "e3cf9a68-214c-4551-9309-d7fb5d5113bf",
-          "alterId": 0,
-          "cipher": "auto",
-          "tls": true,
-          "skip-cert-verify": true,
-          "servername": "hk-aws-171.77vpn.com",
-          "network": "grpc",
-          "grpc-opts": {
-            "grpc-service-name": "/"
-          },
-          "udp": true
-        },
-        "addedAt": "2025-08-01T18:28:32.062Z"
-      },
-      "metadata": {
-        "source": "ss"
-      }
-    },
-    {
-      "id": "kgvxk7uu5",
-      "type": "ss",
-      "name": "🇭🇰 香港 | HKG 6",
-      "server": "hk-aws-171.77vpn.com",
-      "port": 1081,
-      "protocol": "shadowsocks",
-      "settings": {
-        "method": "chacha20-ietf-poly1305",
-        "password": "e3cf9a68-214c-4551-9309-d7fb5d5113bf",
-        "udp": true
-      },
-      "extra": {
-        "raw": {
-          "name": "🇭🇰 香港 | HKG 6",
-          "server": "hk-aws-171.77vpn.com",
-          "port": 1081,
-          "type": "ss",
-          "cipher": "chacha20-ietf-poly1305",
-          "password": "e3cf9a68-214c-4551-9309-d7fb5d5113bf",
-          "udp": true
-        },
-        "addedAt": "2025-08-01T18:28:32.062Z"
-      },
-      "metadata": {
-        "source": "ss"
-      }
-    },
-    {
-      "id": "l3t82hfof",
-      "type": "ss",
-      "name": "🇭🇰 香港 | HKG 7",
-      "server": "115.120.244.50",
-      "port": 20001,
-      "protocol": "shadowsocks",
-      "settings": {
-        "method": "chacha20-ietf-poly1305",
-        "password": "e3cf9a68-214c-4551-9309-d7fb5d5113bf",
-        "udp": true
-      },
-      "extra": {
-        "raw": {
-          "name": "🇭🇰 香港 | HKG 7",
-          "server": "115.120.244.50",
-          "port": 20001,
-          "type": "ss",
-          "cipher": "chacha20-ietf-poly1305",
-          "password": "e3cf9a68-214c-4551-9309-d7fb5d5113bf",
-          "udp": true
-        },
-        "addedAt": "2025-08-01T18:28:32.062Z"
-      },
-      "metadata": {
-        "source": "ss"
-      }
-    },
-    {
-      "id": "r7q0eprqj",
-      "type": "ss",
-      "name": "🇭🇰 香港 | HKG 8",
       "server": "156.224.77.215",
       "port": 22800,
       "protocol": "shadowsocks",
       "settings": {
         "method": "chacha20-ietf-poly1305",
-        "password": "734e116b-544e-4c85-83aa-154bd1ff5c1e",
+        "password": "6fa721a0-8117-4935-b60f-0ea126960ae3",
         "udp": true
       },
       "extra": {
         "raw": {
-          "name": "🇭🇰 香港 | HKG 8",
+          "name": "🇭🇰 香港 | HKG 5",
           "server": "156.224.77.215",
           "port": 22800,
           "type": "ss",
           "cipher": "chacha20-ietf-poly1305",
-          "password": "734e116b-544e-4c85-83aa-154bd1ff5c1e",
+          "password": "6fa721a0-8117-4935-b60f-0ea126960ae3",
           "udp": true
         },
-        "addedAt": "2025-08-01T18:28:32.062Z"
+        "addedAt": "2025-08-02T01:27:49.928Z"
       },
       "metadata": {
         "source": "ss"
       }
     },
     {
-      "id": "zm9xg4xea",
+      "id": "n4v5l9mxi",
       "type": "ss",
-      "name": "🇭🇰 香港 | HKG 9",
-      "server": "115.120.244.50",
-      "port": 20101,
+      "name": "🇭🇰 香港 | HKG 6",
+      "server": "156.224.77.215",
+      "port": 22800,
+      "protocol": "shadowsocks",
+      "settings": {
+        "method": "chacha20-ietf-poly1305",
+        "password": "a2b89b74-e6a3-485b-b8d9-8ae566601f40",
+        "udp": true
+      },
+      "extra": {
+        "raw": {
+          "name": "🇭🇰 香港 | HKG 6",
+          "server": "156.224.77.215",
+          "port": 22800,
+          "type": "ss",
+          "cipher": "chacha20-ietf-poly1305",
+          "password": "a2b89b74-e6a3-485b-b8d9-8ae566601f40",
+          "udp": true
+        },
+        "addedAt": "2025-08-02T01:27:49.928Z"
+      },
+      "metadata": {
+        "source": "ss"
+      }
+    },
+    {
+      "id": "e02x7gb4r",
+      "type": "ss",
+      "name": "🇭🇰 香港 | HKG 7",
+      "server": "156.224.77.215",
+      "port": 22800,
+      "protocol": "shadowsocks",
+      "settings": {
+        "method": "chacha20-ietf-poly1305",
+        "password": "df0c8338-15c4-413e-b8ce-5ba673b017db",
+        "udp": true
+      },
+      "extra": {
+        "raw": {
+          "name": "🇭🇰 香港 | HKG 7",
+          "server": "156.224.77.215",
+          "port": 22800,
+          "type": "ss",
+          "cipher": "chacha20-ietf-poly1305",
+          "password": "df0c8338-15c4-413e-b8ce-5ba673b017db",
+          "udp": true
+        },
+        "addedAt": "2025-08-02T01:27:49.928Z"
+      },
+      "metadata": {
+        "source": "ss"
+      }
+    },
+    {
+      "id": "hdybirgej",
+      "type": "ss",
+      "name": "🇭🇰 香港 | HKG 8",
+      "server": "16.162.50.142",
+      "port": 10001,
       "protocol": "shadowsocks",
       "settings": {
         "method": "chacha20-ietf-poly1305",
@@ -339,22 +299,50 @@
       },
       "extra": {
         "raw": {
-          "name": "🇭🇰 香港 | HKG 9",
-          "server": "115.120.244.50",
-          "port": 20101,
+          "name": "🇭🇰 香港 | HKG 8",
+          "server": "16.162.50.142",
+          "port": 10001,
           "type": "ss",
           "cipher": "chacha20-ietf-poly1305",
           "password": "e3cf9a68-214c-4551-9309-d7fb5d5113bf",
           "udp": true
         },
-        "addedAt": "2025-08-01T18:28:32.062Z"
+        "addedAt": "2025-08-02T01:27:49.928Z"
       },
       "metadata": {
         "source": "ss"
       }
     },
     {
-      "id": "ya5x6atex",
+      "id": "czmlebu1c",
+      "type": "ss",
+      "name": "🇭🇰 香港 | HKG 9",
+      "server": "156.224.77.215",
+      "port": 22800,
+      "protocol": "shadowsocks",
+      "settings": {
+        "method": "chacha20-ietf-poly1305",
+        "password": "c32986fc-063d-43ea-bd5a-1d94c7ed8912",
+        "udp": true
+      },
+      "extra": {
+        "raw": {
+          "name": "🇭🇰 香港 | HKG 9",
+          "server": "156.224.77.215",
+          "port": 22800,
+          "type": "ss",
+          "cipher": "chacha20-ietf-poly1305",
+          "password": "c32986fc-063d-43ea-bd5a-1d94c7ed8912",
+          "udp": true
+        },
+        "addedAt": "2025-08-02T01:27:49.928Z"
+      },
+      "metadata": {
+        "source": "ss"
+      }
+    },
+    {
+      "id": "77oblafao",
       "type": "ss",
       "name": "🇭🇰 香港 | HKG 10",
       "server": "156.224.77.215",
@@ -375,129 +363,44 @@
           "password": "bd5bfee1-405a-4cfd-af86-cc093c95bc4f",
           "udp": true
         },
-        "addedAt": "2025-08-01T18:28:32.062Z"
+        "addedAt": "2025-08-02T01:27:49.928Z"
       },
       "metadata": {
         "source": "ss"
       }
     },
     {
-      "id": "auy1ibxlt",
+      "id": "1mqhxnetm",
       "type": "ss",
       "name": "🇭🇰 香港 | HKG 11",
-      "server": "156.224.77.215",
-      "port": 22800,
+      "server": "115.120.244.50",
+      "port": 20001,
       "protocol": "shadowsocks",
       "settings": {
         "method": "chacha20-ietf-poly1305",
-        "password": "97321265-eb20-4b6d-a1f0-2b2b8e546701",
+        "password": "e3cf9a68-214c-4551-9309-d7fb5d5113bf",
         "udp": true
       },
       "extra": {
         "raw": {
           "name": "🇭🇰 香港 | HKG 11",
-          "server": "156.224.77.215",
-          "port": 22800,
+          "server": "115.120.244.50",
+          "port": 20001,
           "type": "ss",
           "cipher": "chacha20-ietf-poly1305",
-          "password": "97321265-eb20-4b6d-a1f0-2b2b8e546701",
+          "password": "e3cf9a68-214c-4551-9309-d7fb5d5113bf",
           "udp": true
         },
-        "addedAt": "2025-08-01T18:28:32.062Z"
+        "addedAt": "2025-08-02T01:27:49.928Z"
       },
       "metadata": {
         "source": "ss"
       }
     },
     {
-      "id": "9eq54ewvd",
+      "id": "cu7736rxe",
       "type": "ss",
       "name": "🇭🇰 香港 | HKG 12",
-      "server": "156.224.77.215",
-      "port": 22800,
-      "protocol": "shadowsocks",
-      "settings": {
-        "method": "chacha20-ietf-poly1305",
-        "password": "df0c8338-15c4-413e-b8ce-5ba673b017db",
-        "udp": true
-      },
-      "extra": {
-        "raw": {
-          "name": "🇭🇰 香港 | HKG 12",
-          "server": "156.224.77.215",
-          "port": 22800,
-          "type": "ss",
-          "cipher": "chacha20-ietf-poly1305",
-          "password": "df0c8338-15c4-413e-b8ce-5ba673b017db",
-          "udp": true
-        },
-        "addedAt": "2025-08-01T18:28:32.062Z"
-      },
-      "metadata": {
-        "source": "ss"
-      }
-    },
-    {
-      "id": "fktlg1ak0",
-      "type": "trojan",
-      "name": "🇭🇰 香港 | HKG 13",
-      "server": "hk-aws-171.77vpn.com",
-      "port": 1080,
-      "protocol": "trojan",
-      "settings": {
-        "password": "e3cf9a68-214c-4551-9309-d7fb5d5113bf",
-        "sni": "hk-aws-171.77vpn.com",
-        "allowInsecure": true
-      },
-      "extra": {
-        "raw": {
-          "name": "🇭🇰 香港 | HKG 13",
-          "server": "hk-aws-171.77vpn.com",
-          "port": 1080,
-          "type": "trojan",
-          "password": "e3cf9a68-214c-4551-9309-d7fb5d5113bf",
-          "sni": "hk-aws-171.77vpn.com",
-          "skip-cert-verify": true,
-          "udp": true
-        },
-        "addedAt": "2025-08-01T18:28:32.062Z"
-      },
-      "metadata": {
-        "source": "ss"
-      }
-    },
-    {
-      "id": "3ui2hu743",
-      "type": "ss",
-      "name": "🇭🇰 香港 | HKG 14",
-      "server": "16.162.50.142",
-      "port": 10001,
-      "protocol": "shadowsocks",
-      "settings": {
-        "method": "chacha20-ietf-poly1305",
-        "password": "e3cf9a68-214c-4551-9309-d7fb5d5113bf",
-        "udp": true
-      },
-      "extra": {
-        "raw": {
-          "name": "🇭🇰 香港 | HKG 14",
-          "server": "16.162.50.142",
-          "port": 10001,
-          "type": "ss",
-          "cipher": "chacha20-ietf-poly1305",
-          "password": "e3cf9a68-214c-4551-9309-d7fb5d5113bf",
-          "udp": true
-        },
-        "addedAt": "2025-08-01T18:28:32.062Z"
-      },
-      "metadata": {
-        "source": "ss"
-      }
-    },
-    {
-      "id": "anl9cqo11",
-      "type": "ss",
-      "name": "🇭🇰 香港 | HKG 15",
       "server": "156.224.77.215",
       "port": 22800,
       "protocol": "shadowsocks",
@@ -508,7 +411,7 @@
       },
       "extra": {
         "raw": {
-          "name": "🇭🇰 香港 | HKG 15",
+          "name": "🇭🇰 香港 | HKG 12",
           "server": "156.224.77.215",
           "port": 22800,
           "type": "ss",
@@ -516,100 +419,44 @@
           "password": "37c973c5-8152-401e-b9c8-4ef0c9f2ac16",
           "udp": true
         },
-        "addedAt": "2025-08-01T18:28:32.062Z"
+        "addedAt": "2025-08-02T01:27:49.928Z"
       },
       "metadata": {
         "source": "ss"
       }
     },
     {
-      "id": "t2ho0ben9",
+      "id": "fguglsv3p",
       "type": "ss",
-      "name": "🇭🇰 香港 | HKG 16",
+      "name": "🇭🇰 香港 | HKG 13",
       "server": "156.224.77.215",
       "port": 22800,
       "protocol": "shadowsocks",
       "settings": {
         "method": "chacha20-ietf-poly1305",
-        "password": "d530253f-a26e-4dde-b82b-fdb67521e203",
+        "password": "97321265-eb20-4b6d-a1f0-2b2b8e546701",
         "udp": true
       },
       "extra": {
         "raw": {
-          "name": "🇭🇰 香港 | HKG 16",
+          "name": "🇭🇰 香港 | HKG 13",
           "server": "156.224.77.215",
           "port": 22800,
           "type": "ss",
           "cipher": "chacha20-ietf-poly1305",
-          "password": "d530253f-a26e-4dde-b82b-fdb67521e203",
+          "password": "97321265-eb20-4b6d-a1f0-2b2b8e546701",
           "udp": true
         },
-        "addedAt": "2025-08-01T18:28:32.062Z"
+        "addedAt": "2025-08-02T01:27:49.928Z"
       },
       "metadata": {
         "source": "ss"
       }
     },
     {
-      "id": "y6xz74lj9",
-      "type": "ss",
-      "name": "🇭🇰 香港 | HKG 17",
-      "server": "156.224.77.215",
-      "port": 22800,
-      "protocol": "shadowsocks",
-      "settings": {
-        "method": "chacha20-ietf-poly1305",
-        "password": "a2b89b74-e6a3-485b-b8d9-8ae566601f40",
-        "udp": true
-      },
-      "extra": {
-        "raw": {
-          "name": "🇭🇰 香港 | HKG 17",
-          "server": "156.224.77.215",
-          "port": 22800,
-          "type": "ss",
-          "cipher": "chacha20-ietf-poly1305",
-          "password": "a2b89b74-e6a3-485b-b8d9-8ae566601f40",
-          "udp": true
-        },
-        "addedAt": "2025-08-01T18:28:32.062Z"
-      },
-      "metadata": {
-        "source": "ss"
-      }
-    },
-    {
-      "id": "vutmin8so",
-      "type": "ss",
-      "name": "🇭🇰 香港 | HKG 18",
-      "server": "156.224.77.215",
-      "port": 22800,
-      "protocol": "shadowsocks",
-      "settings": {
-        "method": "chacha20-ietf-poly1305",
-        "password": "c32986fc-063d-43ea-bd5a-1d94c7ed8912",
-        "udp": true
-      },
-      "extra": {
-        "raw": {
-          "name": "🇭🇰 香港 | HKG 18",
-          "server": "156.224.77.215",
-          "port": 22800,
-          "type": "ss",
-          "cipher": "chacha20-ietf-poly1305",
-          "password": "c32986fc-063d-43ea-bd5a-1d94c7ed8912",
-          "udp": true
-        },
-        "addedAt": "2025-08-01T18:28:32.062Z"
-      },
-      "metadata": {
-        "source": "ss"
-      }
-    },
-    {
-      "id": "eo8pn3jmz",
+      "id": "mm5nzsubs",
       "type": "vmess",
-      "name": "🇭🇰 香港 | HKG 19",
+      "name": "🇭🇰 香港 | HKG 14",
       "server": "hk-aws-171.77vpn.com",
       "port": 1082,
       "protocol": "vmess",
@@ -625,7 +472,7 @@
       },
       "extra": {
         "raw": {
-          "name": "🇭🇰 香港 | HKG 19",
+          "name": "🇭🇰 香港 | HKG 14",
           "server": "hk-aws-171.77vpn.com",
           "port": 1082,
           "type": "vmess",
@@ -644,44 +491,169 @@
           },
           "udp": true
         },
-        "addedAt": "2025-08-01T18:28:32.062Z"
+        "addedAt": "2025-08-02T01:27:49.928Z"
       },
       "metadata": {
         "source": "ss"
       }
     },
     {
-      "id": "x0smyylzz",
+      "id": "zxey271oo",
       "type": "ss",
-      "name": "🇮🇪 爱尔兰 | IRL",
-      "server": "107.175.187.181",
-      "port": 22800,
+      "name": "🇭🇰 香港 | HKG 15",
+      "server": "115.120.244.50",
+      "port": 20101,
       "protocol": "shadowsocks",
       "settings": {
         "method": "chacha20-ietf-poly1305",
-        "password": "762e1d75-9cc7-4c4e-9d51-4e27a7958117",
+        "password": "e3cf9a68-214c-4551-9309-d7fb5d5113bf",
         "udp": true
       },
       "extra": {
         "raw": {
-          "name": "🇮🇪 爱尔兰 | IRL",
-          "server": "107.175.187.181",
-          "port": 22800,
+          "name": "🇭🇰 香港 | HKG 15",
+          "server": "115.120.244.50",
+          "port": 20101,
           "type": "ss",
           "cipher": "chacha20-ietf-poly1305",
-          "password": "762e1d75-9cc7-4c4e-9d51-4e27a7958117",
+          "password": "e3cf9a68-214c-4551-9309-d7fb5d5113bf",
           "udp": true
         },
-        "addedAt": "2025-08-01T18:28:32.062Z"
+        "addedAt": "2025-08-02T01:27:49.928Z"
       },
       "metadata": {
         "source": "ss"
       }
     },
     {
-      "id": "6u240czt3",
+      "id": "0m0euh7oh",
+      "type": "vmess",
+      "name": "🇭🇰 香港 | HKG 16",
+      "server": "hk-aws-171.77vpn.com",
+      "port": 1083,
+      "protocol": "vmess",
+      "settings": {
+        "id": "e3cf9a68-214c-4551-9309-d7fb5d5113bf",
+        "alterId": 0,
+        "security": "auto",
+        "network": "grpc",
+        "wsPath": "",
+        "wsHeaders": {},
+        "tls": true,
+        "serverName": "hk-aws-171.77vpn.com"
+      },
+      "extra": {
+        "raw": {
+          "name": "🇭🇰 香港 | HKG 16",
+          "server": "hk-aws-171.77vpn.com",
+          "port": 1083,
+          "type": "vmess",
+          "uuid": "e3cf9a68-214c-4551-9309-d7fb5d5113bf",
+          "alterId": 0,
+          "cipher": "auto",
+          "tls": true,
+          "skip-cert-verify": true,
+          "servername": "hk-aws-171.77vpn.com",
+          "network": "grpc",
+          "grpc-opts": {
+            "grpc-service-name": "/"
+          },
+          "udp": true
+        },
+        "addedAt": "2025-08-02T01:27:49.928Z"
+      },
+      "metadata": {
+        "source": "ss"
+      }
+    },
+    {
+      "id": "pfnf3eyd1",
       "type": "ss",
-      "name": "🇮🇪 爱尔兰 | IRL 2",
+      "name": "🇭🇰 香港 | HKG 17",
+      "server": "156.224.77.215",
+      "port": 22800,
+      "protocol": "shadowsocks",
+      "settings": {
+        "method": "chacha20-ietf-poly1305",
+        "password": "d530253f-a26e-4dde-b82b-fdb67521e203",
+        "udp": true
+      },
+      "extra": {
+        "raw": {
+          "name": "🇭🇰 香港 | HKG 17",
+          "server": "156.224.77.215",
+          "port": 22800,
+          "type": "ss",
+          "cipher": "chacha20-ietf-poly1305",
+          "password": "d530253f-a26e-4dde-b82b-fdb67521e203",
+          "udp": true
+        },
+        "addedAt": "2025-08-02T01:27:49.928Z"
+      },
+      "metadata": {
+        "source": "ss"
+      }
+    },
+    {
+      "id": "s0j0354xo",
+      "type": "ss",
+      "name": "🇭🇰 香港 | HKG 18",
+      "server": "156.224.77.215",
+      "port": 22800,
+      "protocol": "shadowsocks",
+      "settings": {
+        "method": "chacha20-ietf-poly1305",
+        "password": "f0a78340-f887-4562-8901-b4ddd8958408",
+        "udp": true
+      },
+      "extra": {
+        "raw": {
+          "name": "🇭🇰 香港 | HKG 18",
+          "server": "156.224.77.215",
+          "port": 22800,
+          "type": "ss",
+          "cipher": "chacha20-ietf-poly1305",
+          "password": "f0a78340-f887-4562-8901-b4ddd8958408",
+          "udp": true
+        },
+        "addedAt": "2025-08-02T01:27:49.928Z"
+      },
+      "metadata": {
+        "source": "ss"
+      }
+    },
+    {
+      "id": "jzsocfk3b",
+      "type": "ss",
+      "name": "🇭🇰 香港 | HKG 19",
+      "server": "156.224.77.215",
+      "port": 22800,
+      "protocol": "shadowsocks",
+      "settings": {
+        "method": "chacha20-ietf-poly1305",
+        "password": "bb23f49f-703c-4e0f-95c7-e917617faaa1",
+        "udp": true
+      },
+      "extra": {
+        "raw": {
+          "name": "🇭🇰 香港 | HKG 19",
+          "server": "156.224.77.215",
+          "port": 22800,
+          "type": "ss",
+          "cipher": "chacha20-ietf-poly1305",
+          "password": "bb23f49f-703c-4e0f-95c7-e917617faaa1",
+          "udp": true
+        },
+        "addedAt": "2025-08-02T01:27:49.928Z"
+      },
+      "metadata": {
+        "source": "ss"
+      }
+    },
+    {
+      "id": "1y3xqfzn7",
+      "type": "ss",
+      "name": "🇮🇪 爱尔兰 | IRL",
       "server": "107.175.187.181",
       "port": 22800,
       "protocol": "shadowsocks",
@@ -692,7 +664,7 @@
       },
       "extra": {
         "raw": {
-          "name": "🇮🇪 爱尔兰 | IRL 2",
+          "name": "🇮🇪 爱尔兰 | IRL",
           "server": "107.175.187.181",
           "port": 22800,
           "type": "ss",
@@ -700,268 +672,44 @@
           "password": "37c973c5-8152-401e-b9c8-4ef0c9f2ac16",
           "udp": true
         },
-        "addedAt": "2025-08-01T18:28:32.062Z"
+        "addedAt": "2025-08-02T01:27:49.928Z"
       },
       "metadata": {
         "source": "ss"
       }
     },
     {
-      "id": "rirb8njiw",
+      "id": "ncuyqlgbo",
+      "type": "ss",
+      "name": "🇮🇪 爱尔兰 | IRL 2",
+      "server": "107.175.187.181",
+      "port": 22800,
+      "protocol": "shadowsocks",
+      "settings": {
+        "method": "chacha20-ietf-poly1305",
+        "password": "6fa721a0-8117-4935-b60f-0ea126960ae3",
+        "udp": true
+      },
+      "extra": {
+        "raw": {
+          "name": "🇮🇪 爱尔兰 | IRL 2",
+          "server": "107.175.187.181",
+          "port": 22800,
+          "type": "ss",
+          "cipher": "chacha20-ietf-poly1305",
+          "password": "6fa721a0-8117-4935-b60f-0ea126960ae3",
+          "udp": true
+        },
+        "addedAt": "2025-08-02T01:27:49.928Z"
+      },
+      "metadata": {
+        "source": "ss"
+      }
+    },
+    {
+      "id": "6x0g3y10u",
       "type": "ss",
       "name": "🇮🇪 爱尔兰 | IRL 3",
-      "server": "107.175.187.181",
-      "port": 22800,
-      "protocol": "shadowsocks",
-      "settings": {
-        "method": "chacha20-ietf-poly1305",
-        "password": "97321265-eb20-4b6d-a1f0-2b2b8e546701",
-        "udp": true
-      },
-      "extra": {
-        "raw": {
-          "name": "🇮🇪 爱尔兰 | IRL 3",
-          "server": "107.175.187.181",
-          "port": 22800,
-          "type": "ss",
-          "cipher": "chacha20-ietf-poly1305",
-          "password": "97321265-eb20-4b6d-a1f0-2b2b8e546701",
-          "udp": true
-        },
-        "addedAt": "2025-08-01T18:28:32.062Z"
-      },
-      "metadata": {
-        "source": "ss"
-      }
-    },
-    {
-      "id": "moa88zs7a",
-      "type": "ss",
-      "name": "🇮🇪 爱尔兰 | IRL 4",
-      "server": "107.175.187.181",
-      "port": 22800,
-      "protocol": "shadowsocks",
-      "settings": {
-        "method": "chacha20-ietf-poly1305",
-        "password": "c32986fc-063d-43ea-bd5a-1d94c7ed8912",
-        "udp": true
-      },
-      "extra": {
-        "raw": {
-          "name": "🇮🇪 爱尔兰 | IRL 4",
-          "server": "107.175.187.181",
-          "port": 22800,
-          "type": "ss",
-          "cipher": "chacha20-ietf-poly1305",
-          "password": "c32986fc-063d-43ea-bd5a-1d94c7ed8912",
-          "udp": true
-        },
-        "addedAt": "2025-08-01T18:28:32.062Z"
-      },
-      "metadata": {
-        "source": "ss"
-      }
-    },
-    {
-      "id": "w4ztptpf3",
-      "type": "ss",
-      "name": "🇮🇪 爱尔兰 | IRL 5",
-      "server": "107.175.187.181",
-      "port": 22800,
-      "protocol": "shadowsocks",
-      "settings": {
-        "method": "chacha20-ietf-poly1305",
-        "password": "d530253f-a26e-4dde-b82b-fdb67521e203",
-        "udp": true
-      },
-      "extra": {
-        "raw": {
-          "name": "🇮🇪 爱尔兰 | IRL 5",
-          "server": "107.175.187.181",
-          "port": 22800,
-          "type": "ss",
-          "cipher": "chacha20-ietf-poly1305",
-          "password": "d530253f-a26e-4dde-b82b-fdb67521e203",
-          "udp": true
-        },
-        "addedAt": "2025-08-01T18:28:32.062Z"
-      },
-      "metadata": {
-        "source": "ss"
-      }
-    },
-    {
-      "id": "y4vt1buun",
-      "type": "ss",
-      "name": "🇮🇪 爱尔兰 | IRL 6",
-      "server": "107.175.187.181",
-      "port": 22800,
-      "protocol": "shadowsocks",
-      "settings": {
-        "method": "chacha20-ietf-poly1305",
-        "password": "bb23f49f-703c-4e0f-95c7-e917617faaa1",
-        "udp": true
-      },
-      "extra": {
-        "raw": {
-          "name": "🇮🇪 爱尔兰 | IRL 6",
-          "server": "107.175.187.181",
-          "port": 22800,
-          "type": "ss",
-          "cipher": "chacha20-ietf-poly1305",
-          "password": "bb23f49f-703c-4e0f-95c7-e917617faaa1",
-          "udp": true
-        },
-        "addedAt": "2025-08-01T18:28:32.062Z"
-      },
-      "metadata": {
-        "source": "ss"
-      }
-    },
-    {
-      "id": "oy7w2zw8h",
-      "type": "ss",
-      "name": "🇮🇪 爱尔兰 | IRL 7",
-      "server": "107.175.187.181",
-      "port": 22800,
-      "protocol": "shadowsocks",
-      "settings": {
-        "method": "chacha20-ietf-poly1305",
-        "password": "df0c8338-15c4-413e-b8ce-5ba673b017db",
-        "udp": true
-      },
-      "extra": {
-        "raw": {
-          "name": "🇮🇪 爱尔兰 | IRL 7",
-          "server": "107.175.187.181",
-          "port": 22800,
-          "type": "ss",
-          "cipher": "chacha20-ietf-poly1305",
-          "password": "df0c8338-15c4-413e-b8ce-5ba673b017db",
-          "udp": true
-        },
-        "addedAt": "2025-08-01T18:28:32.062Z"
-      },
-      "metadata": {
-        "source": "ss"
-      }
-    },
-    {
-      "id": "zykmv0m04",
-      "type": "ss",
-      "name": "🇮🇪 爱尔兰 | IRL 8",
-      "server": "107.175.187.181",
-      "port": 22800,
-      "protocol": "shadowsocks",
-      "settings": {
-        "method": "chacha20-ietf-poly1305",
-        "password": "a2b89b74-e6a3-485b-b8d9-8ae566601f40",
-        "udp": true
-      },
-      "extra": {
-        "raw": {
-          "name": "🇮🇪 爱尔兰 | IRL 8",
-          "server": "107.175.187.181",
-          "port": 22800,
-          "type": "ss",
-          "cipher": "chacha20-ietf-poly1305",
-          "password": "a2b89b74-e6a3-485b-b8d9-8ae566601f40",
-          "udp": true
-        },
-        "addedAt": "2025-08-01T18:28:32.062Z"
-      },
-      "metadata": {
-        "source": "ss"
-      }
-    },
-    {
-      "id": "qlheyzhqm",
-      "type": "ss",
-      "name": "🇮🇪 爱尔兰 | IRL 9",
-      "server": "107.175.187.181",
-      "port": 22800,
-      "protocol": "shadowsocks",
-      "settings": {
-        "method": "chacha20-ietf-poly1305",
-        "password": "f0a78340-f887-4562-8901-b4ddd8958408",
-        "udp": true
-      },
-      "extra": {
-        "raw": {
-          "name": "🇮🇪 爱尔兰 | IRL 9",
-          "server": "107.175.187.181",
-          "port": 22800,
-          "type": "ss",
-          "cipher": "chacha20-ietf-poly1305",
-          "password": "f0a78340-f887-4562-8901-b4ddd8958408",
-          "udp": true
-        },
-        "addedAt": "2025-08-01T18:28:32.062Z"
-      },
-      "metadata": {
-        "source": "ss"
-      }
-    },
-    {
-      "id": "r1yyzfaf8",
-      "type": "ss",
-      "name": "🇮🇪 爱尔兰 | IRL 10",
-      "server": "107.175.187.181",
-      "port": 22800,
-      "protocol": "shadowsocks",
-      "settings": {
-        "method": "chacha20-ietf-poly1305",
-        "password": "9bb81ca9-9eef-4494-84f8-d4c7ef2800c3",
-        "udp": true
-      },
-      "extra": {
-        "raw": {
-          "name": "🇮🇪 爱尔兰 | IRL 10",
-          "server": "107.175.187.181",
-          "port": 22800,
-          "type": "ss",
-          "cipher": "chacha20-ietf-poly1305",
-          "password": "9bb81ca9-9eef-4494-84f8-d4c7ef2800c3",
-          "udp": true
-        },
-        "addedAt": "2025-08-01T18:28:32.062Z"
-      },
-      "metadata": {
-        "source": "ss"
-      }
-    },
-    {
-      "id": "1u8oiik3o",
-      "type": "ss",
-      "name": "🇮🇪 爱尔兰 | IRL 11",
-      "server": "107.175.187.181",
-      "port": 22800,
-      "protocol": "shadowsocks",
-      "settings": {
-        "method": "chacha20-ietf-poly1305",
-        "password": "734e116b-544e-4c85-83aa-154bd1ff5c1e",
-        "udp": true
-      },
-      "extra": {
-        "raw": {
-          "name": "🇮🇪 爱尔兰 | IRL 11",
-          "server": "107.175.187.181",
-          "port": 22800,
-          "type": "ss",
-          "cipher": "chacha20-ietf-poly1305",
-          "password": "734e116b-544e-4c85-83aa-154bd1ff5c1e",
-          "udp": true
-        },
-        "addedAt": "2025-08-01T18:28:32.062Z"
-      },
-      "metadata": {
-        "source": "ss"
-      }
-    },
-    {
-      "id": "8kavucjud",
-      "type": "ss",
-      "name": "🇮🇪 爱尔兰 | IRL 12",
       "server": "107.175.187.181",
       "port": 22800,
       "protocol": "shadowsocks",
@@ -972,7 +720,7 @@
       },
       "extra": {
         "raw": {
-          "name": "🇮🇪 爱尔兰 | IRL 12",
+          "name": "🇮🇪 爱尔兰 | IRL 3",
           "server": "107.175.187.181",
           "port": 22800,
           "type": "ss",
@@ -980,14 +728,266 @@
           "password": "bd5bfee1-405a-4cfd-af86-cc093c95bc4f",
           "udp": true
         },
-        "addedAt": "2025-08-01T18:28:32.062Z"
+        "addedAt": "2025-08-02T01:27:49.928Z"
       },
       "metadata": {
         "source": "ss"
       }
     },
     {
-      "id": "aua36ixac",
+      "id": "sftd7oejs",
+      "type": "ss",
+      "name": "🇮🇪 爱尔兰 | IRL 4",
+      "server": "107.175.187.181",
+      "port": 22800,
+      "protocol": "shadowsocks",
+      "settings": {
+        "method": "chacha20-ietf-poly1305",
+        "password": "9bb81ca9-9eef-4494-84f8-d4c7ef2800c3",
+        "udp": true
+      },
+      "extra": {
+        "raw": {
+          "name": "🇮🇪 爱尔兰 | IRL 4",
+          "server": "107.175.187.181",
+          "port": 22800,
+          "type": "ss",
+          "cipher": "chacha20-ietf-poly1305",
+          "password": "9bb81ca9-9eef-4494-84f8-d4c7ef2800c3",
+          "udp": true
+        },
+        "addedAt": "2025-08-02T01:27:49.928Z"
+      },
+      "metadata": {
+        "source": "ss"
+      }
+    },
+    {
+      "id": "tdfrirmt3",
+      "type": "ss",
+      "name": "🇮🇪 爱尔兰 | IRL 5",
+      "server": "107.175.187.181",
+      "port": 22800,
+      "protocol": "shadowsocks",
+      "settings": {
+        "method": "chacha20-ietf-poly1305",
+        "password": "bb23f49f-703c-4e0f-95c7-e917617faaa1",
+        "udp": true
+      },
+      "extra": {
+        "raw": {
+          "name": "🇮🇪 爱尔兰 | IRL 5",
+          "server": "107.175.187.181",
+          "port": 22800,
+          "type": "ss",
+          "cipher": "chacha20-ietf-poly1305",
+          "password": "bb23f49f-703c-4e0f-95c7-e917617faaa1",
+          "udp": true
+        },
+        "addedAt": "2025-08-02T01:27:49.928Z"
+      },
+      "metadata": {
+        "source": "ss"
+      }
+    },
+    {
+      "id": "i17coiwly",
+      "type": "ss",
+      "name": "🇮🇪 爱尔兰 | IRL 6",
+      "server": "107.175.187.181",
+      "port": 22800,
+      "protocol": "shadowsocks",
+      "settings": {
+        "method": "chacha20-ietf-poly1305",
+        "password": "df0c8338-15c4-413e-b8ce-5ba673b017db",
+        "udp": true
+      },
+      "extra": {
+        "raw": {
+          "name": "🇮🇪 爱尔兰 | IRL 6",
+          "server": "107.175.187.181",
+          "port": 22800,
+          "type": "ss",
+          "cipher": "chacha20-ietf-poly1305",
+          "password": "df0c8338-15c4-413e-b8ce-5ba673b017db",
+          "udp": true
+        },
+        "addedAt": "2025-08-02T01:27:49.928Z"
+      },
+      "metadata": {
+        "source": "ss"
+      }
+    },
+    {
+      "id": "eyi2sfbg2",
+      "type": "ss",
+      "name": "🇮🇪 爱尔兰 | IRL 7",
+      "server": "107.175.187.181",
+      "port": 22800,
+      "protocol": "shadowsocks",
+      "settings": {
+        "method": "chacha20-ietf-poly1305",
+        "password": "f0a78340-f887-4562-8901-b4ddd8958408",
+        "udp": true
+      },
+      "extra": {
+        "raw": {
+          "name": "🇮🇪 爱尔兰 | IRL 7",
+          "server": "107.175.187.181",
+          "port": 22800,
+          "type": "ss",
+          "cipher": "chacha20-ietf-poly1305",
+          "password": "f0a78340-f887-4562-8901-b4ddd8958408",
+          "udp": true
+        },
+        "addedAt": "2025-08-02T01:27:49.928Z"
+      },
+      "metadata": {
+        "source": "ss"
+      }
+    },
+    {
+      "id": "lh6sa4k0m",
+      "type": "ss",
+      "name": "🇮🇪 爱尔兰 | IRL 8",
+      "server": "107.175.187.181",
+      "port": 22800,
+      "protocol": "shadowsocks",
+      "settings": {
+        "method": "chacha20-ietf-poly1305",
+        "password": "762e1d75-9cc7-4c4e-9d51-4e27a7958117",
+        "udp": true
+      },
+      "extra": {
+        "raw": {
+          "name": "🇮🇪 爱尔兰 | IRL 8",
+          "server": "107.175.187.181",
+          "port": 22800,
+          "type": "ss",
+          "cipher": "chacha20-ietf-poly1305",
+          "password": "762e1d75-9cc7-4c4e-9d51-4e27a7958117",
+          "udp": true
+        },
+        "addedAt": "2025-08-02T01:27:49.928Z"
+      },
+      "metadata": {
+        "source": "ss"
+      }
+    },
+    {
+      "id": "5j9fmtn6t",
+      "type": "ss",
+      "name": "🇮🇪 爱尔兰 | IRL 9",
+      "server": "107.175.187.181",
+      "port": 22800,
+      "protocol": "shadowsocks",
+      "settings": {
+        "method": "chacha20-ietf-poly1305",
+        "password": "d530253f-a26e-4dde-b82b-fdb67521e203",
+        "udp": true
+      },
+      "extra": {
+        "raw": {
+          "name": "🇮🇪 爱尔兰 | IRL 9",
+          "server": "107.175.187.181",
+          "port": 22800,
+          "type": "ss",
+          "cipher": "chacha20-ietf-poly1305",
+          "password": "d530253f-a26e-4dde-b82b-fdb67521e203",
+          "udp": true
+        },
+        "addedAt": "2025-08-02T01:27:49.928Z"
+      },
+      "metadata": {
+        "source": "ss"
+      }
+    },
+    {
+      "id": "55f5ctkvv",
+      "type": "ss",
+      "name": "🇮🇪 爱尔兰 | IRL 10",
+      "server": "107.175.187.181",
+      "port": 22800,
+      "protocol": "shadowsocks",
+      "settings": {
+        "method": "chacha20-ietf-poly1305",
+        "password": "a2b89b74-e6a3-485b-b8d9-8ae566601f40",
+        "udp": true
+      },
+      "extra": {
+        "raw": {
+          "name": "🇮🇪 爱尔兰 | IRL 10",
+          "server": "107.175.187.181",
+          "port": 22800,
+          "type": "ss",
+          "cipher": "chacha20-ietf-poly1305",
+          "password": "a2b89b74-e6a3-485b-b8d9-8ae566601f40",
+          "udp": true
+        },
+        "addedAt": "2025-08-02T01:27:49.928Z"
+      },
+      "metadata": {
+        "source": "ss"
+      }
+    },
+    {
+      "id": "epe6ppp6b",
+      "type": "ss",
+      "name": "🇮🇪 爱尔兰 | IRL 11",
+      "server": "107.175.187.181",
+      "port": 22800,
+      "protocol": "shadowsocks",
+      "settings": {
+        "method": "chacha20-ietf-poly1305",
+        "password": "97321265-eb20-4b6d-a1f0-2b2b8e546701",
+        "udp": true
+      },
+      "extra": {
+        "raw": {
+          "name": "🇮🇪 爱尔兰 | IRL 11",
+          "server": "107.175.187.181",
+          "port": 22800,
+          "type": "ss",
+          "cipher": "chacha20-ietf-poly1305",
+          "password": "97321265-eb20-4b6d-a1f0-2b2b8e546701",
+          "udp": true
+        },
+        "addedAt": "2025-08-02T01:27:49.928Z"
+      },
+      "metadata": {
+        "source": "ss"
+      }
+    },
+    {
+      "id": "9ijb3v268",
+      "type": "ss",
+      "name": "🇮🇪 爱尔兰 | IRL 12",
+      "server": "107.175.187.181",
+      "port": 22800,
+      "protocol": "shadowsocks",
+      "settings": {
+        "method": "chacha20-ietf-poly1305",
+        "password": "c32986fc-063d-43ea-bd5a-1d94c7ed8912",
+        "udp": true
+      },
+      "extra": {
+        "raw": {
+          "name": "🇮🇪 爱尔兰 | IRL 12",
+          "server": "107.175.187.181",
+          "port": 22800,
+          "type": "ss",
+          "cipher": "chacha20-ietf-poly1305",
+          "password": "c32986fc-063d-43ea-bd5a-1d94c7ed8912",
+          "udp": true
+        },
+        "addedAt": "2025-08-02T01:27:49.928Z"
+      },
+      "metadata": {
+        "source": "ss"
+      }
+    },
+    {
+      "id": "q5fyukwus",
       "type": "vmess",
       "name": "🇺🇸 美国 | USA",
       "server": "us-elegang-aws-100.77vpn.com",
@@ -1021,44 +1021,16 @@
           },
           "udp": true
         },
-        "addedAt": "2025-08-01T18:28:32.062Z"
+        "addedAt": "2025-08-02T01:27:49.928Z"
       },
       "metadata": {
         "source": "ss"
       }
     },
     {
-      "id": "2dwrnil14",
-      "type": "ss",
-      "name": "🇺🇸 美国 | USA 3",
-      "server": "us-elegang-aws-100.77vpn.com",
-      "port": 1081,
-      "protocol": "shadowsocks",
-      "settings": {
-        "method": "chacha20-ietf-poly1305",
-        "password": "e3cf9a68-214c-4551-9309-d7fb5d5113bf",
-        "udp": true
-      },
-      "extra": {
-        "raw": {
-          "name": "🇺🇸 美国 | USA 3",
-          "server": "us-elegang-aws-100.77vpn.com",
-          "port": 1081,
-          "type": "ss",
-          "cipher": "chacha20-ietf-poly1305",
-          "password": "e3cf9a68-214c-4551-9309-d7fb5d5113bf",
-          "udp": true
-        },
-        "addedAt": "2025-08-01T18:28:32.062Z"
-      },
-      "metadata": {
-        "source": "ss"
-      }
-    },
-    {
-      "id": "x0xc8abbl",
+      "id": "hratdxbln",
       "type": "vmess",
-      "name": "🇺🇸 美国 | USA 4",
+      "name": "🇺🇸 美国 | USA 2",
       "server": "us-elegang-aws-100.77vpn.com",
       "port": 1082,
       "protocol": "vmess",
@@ -1074,7 +1046,7 @@
       },
       "extra": {
         "raw": {
-          "name": "🇺🇸 美国 | USA 4",
+          "name": "🇺🇸 美国 | USA 2",
           "server": "us-elegang-aws-100.77vpn.com",
           "port": 1082,
           "type": "vmess",
@@ -1093,16 +1065,44 @@
           },
           "udp": true
         },
-        "addedAt": "2025-08-01T18:28:32.062Z"
+        "addedAt": "2025-08-02T01:27:49.928Z"
       },
       "metadata": {
         "source": "ss"
       }
     },
     {
-      "id": "s741nozp3",
+      "id": "ecx8izv3r",
+      "type": "ss",
+      "name": "🇺🇸 美国 | USA 5",
+      "server": "us-elegang-aws-100.77vpn.com",
+      "port": 1081,
+      "protocol": "shadowsocks",
+      "settings": {
+        "method": "chacha20-ietf-poly1305",
+        "password": "e3cf9a68-214c-4551-9309-d7fb5d5113bf",
+        "udp": true
+      },
+      "extra": {
+        "raw": {
+          "name": "🇺🇸 美国 | USA 5",
+          "server": "us-elegang-aws-100.77vpn.com",
+          "port": 1081,
+          "type": "ss",
+          "cipher": "chacha20-ietf-poly1305",
+          "password": "e3cf9a68-214c-4551-9309-d7fb5d5113bf",
+          "udp": true
+        },
+        "addedAt": "2025-08-02T01:27:49.928Z"
+      },
+      "metadata": {
+        "source": "ss"
+      }
+    },
+    {
+      "id": "3ioul5so4",
       "type": "trojan",
-      "name": "🇺🇸 美国 | USA 6",
+      "name": "🇺🇸 美国 | USA 7",
       "server": "us-elegang-aws-100.77vpn.com",
       "port": 1080,
       "protocol": "trojan",
@@ -1113,7 +1113,7 @@
       },
       "extra": {
         "raw": {
-          "name": "🇺🇸 美国 | USA 6",
+          "name": "🇺🇸 美国 | USA 7",
           "server": "us-elegang-aws-100.77vpn.com",
           "port": 1080,
           "type": "trojan",
@@ -1122,13 +1122,13 @@
           "skip-cert-verify": true,
           "udp": true
         },
-        "addedAt": "2025-08-01T18:28:32.062Z"
+        "addedAt": "2025-08-02T01:27:49.928Z"
       },
       "metadata": {
         "source": "ss"
       }
     }
   ],
-  "timestamp": 1754072912062,
-  "hash": "949b830de7cddf356bff32f45a7a5e4b"
+  "timestamp": 1754098069928,
+  "hash": "ccc6957296e2c40900f54cc6c93b99f1"
 }
