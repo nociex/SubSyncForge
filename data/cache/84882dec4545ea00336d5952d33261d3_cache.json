@@ -1,7 +1,35 @@
 {
   "nodes": [
     {
-      "id": "jnop9smk6",
+      "id": "uypo1308b",
+      "type": "vmess",
+      "name": "欧盟 V2CROSS.COM",
+      "server": "45.85.119.190",
+      "port": 443,
+      "protocol": "vmess",
+      "settings": {
+        "id": "de94cc0a-0592-4969-b1fc-97ea8f0ea0b3",
+        "alterId": 0,
+        "security": "auto",
+        "network": "ws",
+        "ws": true,
+        "wsPath": "/us.kkp.me.eu.org/aa",
+        "wsHeaders": {
+          "Host": "farid.1.berozha.ir"
+        },
+        "tls": true,
+        "serverName": "farid.1.berozha.ir"
+      },
+      "extra": {
+        "raw": "vmess://eyJ2IjoiMiIsInBzIjoi5qyn55ufIFYyQ1JPU1MuQ09NIiwiYWRkIjoiNDUuODUuMTE5LjE5MCIsInBvcnQiOiI0NDMiLCJ0eXBlIjoibm9uZSIsImlkIjoiZGU5NGNjMGEtMDU5Mi00OTY5LWIxZmMtOTdlYThmMGVhMGIzIiwiYWlkIjoiMCIsIm5ldCI6IndzIiwicGF0aCI6Ii91cy5ra3AubWUuZXUub3JnL2FhIiwiaG9zdCI6ImZhcmlkLjEuYmVyb3poYS5pciIsInRscyI6InRscyJ9",
+        "addedAt": "2025-08-09T06:27:01.435Z"
+      },
+      "metadata": {
+        "source": "v2ray"
+      }
+    },
+    {
+      "id": "nmvnsd5a7",
       "type": "vmess",
       "name": "🇨🇦 _CA_加拿大",
       "server": "108.181.10.17",
@@ -20,14 +48,14 @@
       },
       "extra": {
         "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HqPCfh6YgX0NBX+WKoOaLv+WkpyIsImFkZCI6IjEwOC4xODEuMTAuMTciLCJwb3J0IjoiODAiLCJ0eXBlIjoibm9uZSIsImlkIjoiNDc0ZTg2ODAtNzAxZi0xMWVlLWI0MzYtMjA1YzZkNWY1ZDc4IiwiYWlkIjoiMCIsIm5ldCI6IndzIiwicGF0aCI6Ii8iLCJob3N0IjoiIiwidGxzIjoiIn0=",
-        "addedAt": "2025-08-08T12:40:54.652Z"
+        "addedAt": "2025-08-09T06:27:01.435Z"
       },
       "metadata": {
         "source": "v2ray"
       }
     },
     {
-      "id": "7h3mbak2d",
+      "id": "5yxeu8y4m",
       "type": "vmess",
       "name": "🇨🇳 _TW_台湾->🇺🇸_US_美国",
       "server": "107.167.182.230",
@@ -46,14 +74,70 @@
       },
       "extra": {
         "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HqPCfh7MgX1RXX+WPsOa5vi0+8J+HuvCfh7hfVVNf576O5Zu9IiwiYWRkIjoiMTA3LjE2Ny4xODIuMjMwIiwicG9ydCI6IjgwIiwidHlwZSI6Im5vbmUiLCJpZCI6ImVmY2I3ZDdjLWM1ODItNDZmNS1lZWZmLTBlNTUzMzQyNTI4ZCIsImFpZCI6IjAiLCJuZXQiOiJ3cyIsInBhdGgiOiIvdGdAaGthYTAiLCJob3N0IjoiIiwidGxzIjoiIn0=",
-        "addedAt": "2025-08-08T12:40:54.652Z"
+        "addedAt": "2025-08-09T06:27:01.435Z"
       },
       "metadata": {
         "source": "v2ray"
       }
     },
     {
-      "id": "1qv3mnr5q",
+      "id": "y0qmiyw8c",
+      "type": "vmess",
+      "name": "🇨🇳 江苏省 移动",
+      "server": "v29.heduian.link",
+      "port": 30829,
+      "protocol": "vmess",
+      "settings": {
+        "id": "cbb3f877-d1fb-344c-87a9-d153bffd5484",
+        "alterId": 2,
+        "security": "auto",
+        "network": "ws",
+        "ws": true,
+        "wsPath": "/oooo",
+        "wsHeaders": {
+          "Host": "ocbc.com"
+        },
+        "tls": false,
+        "serverName": "ocbc.com"
+      },
+      "extra": {
+        "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HqPCfh7Mg5rGf6IuP55yBIOenu+WKqCIsImFkZCI6InYyOS5oZWR1aWFuLmxpbmsiLCJwb3J0IjoiMzA4MjkiLCJ0eXBlIjoibm9uZSIsImlkIjoiY2JiM2Y4NzctZDFmYi0zNDRjLTg3YTktZDE1M2JmZmQ1NDg0IiwiYWlkIjoiMiIsIm5ldCI6IndzIiwicGF0aCI6Ii9vb29vIiwiaG9zdCI6Im9jYmMuY29tIiwidGxzIjoiIn0=",
+        "addedAt": "2025-08-09T06:27:01.435Z"
+      },
+      "metadata": {
+        "source": "v2ray"
+      }
+    },
+    {
+      "id": "qznnks3bc",
+      "type": "vmess",
+      "name": "🇨🇳 江苏省 移动",
+      "server": "v33.heduian.link",
+      "port": 30833,
+      "protocol": "vmess",
+      "settings": {
+        "id": "cbb3f877-d1fb-344c-87a9-d153bffd5484",
+        "alterId": 2,
+        "security": "auto",
+        "network": "ws",
+        "ws": true,
+        "wsPath": "/oooo",
+        "wsHeaders": {
+          "Host": "v33.heduian.link"
+        },
+        "tls": false,
+        "serverName": "v33.heduian.link"
+      },
+      "extra": {
+        "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HqPCfh7Mg5rGf6IuP55yBIOenu+WKqCIsImFkZCI6InYzMy5oZWR1aWFuLmxpbmsiLCJwb3J0IjoiMzA4MzMiLCJ0eXBlIjoibm9uZSIsImlkIjoiY2JiM2Y4NzctZDFmYi0zNDRjLTg3YTktZDE1M2JmZmQ1NDg0IiwiYWlkIjoiMiIsIm5ldCI6IndzIiwicGF0aCI6Ii9vb29vIiwiaG9zdCI6InYzMy5oZWR1aWFuLmxpbmsiLCJ0bHMiOiIifQ==",
+        "addedAt": "2025-08-09T06:27:01.435Z"
+      },
+      "metadata": {
+        "source": "v2ray"
+      }
+    },
+    {
+      "id": "a7u9ade6w",
       "type": "vmess",
       "name": "🇩🇪 _US_美国->🇩🇪_DE_德国",
       "server": "flkf2.shabijichang.com",
@@ -74,42 +158,14 @@
       },
       "extra": {
         "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HqfCfh6ogX1VTX+e+juWbvS0+8J+HqfCfh6pfREVf5b635Zu9IiwiYWRkIjoiZmxrZjIuc2hhYmlqaWNoYW5nLmNvbSIsInBvcnQiOiI4MCIsInR5cGUiOiJub25lIiwiaWQiOiJjNDU4Njk1ZC02OTA4LTQ1YzMtOTUxMi1lMGM0NjQxODQ1NGMiLCJhaWQiOiIwIiwibmV0Ijoid3MiLCJwYXRoIjoiLyIsImhvc3QiOiJmbGtmMi5zaGFiaWppY2hhbmcuY29tIiwidGxzIjoiIn0=",
-        "addedAt": "2025-08-08T12:40:54.652Z"
+        "addedAt": "2025-08-09T06:27:01.435Z"
       },
       "metadata": {
         "source": "v2ray"
       }
     },
     {
-      "id": "3dnxgsx18",
-      "type": "vmess",
-      "name": "🇩🇰 丹麦 V2CROSS.COM",
-      "server": "fastcup.net",
-      "port": 80,
-      "protocol": "vmess",
-      "settings": {
-        "id": "76414574-71e0-4706-89cc-c5b09c13445d",
-        "alterId": 0,
-        "security": "auto",
-        "network": "ws",
-        "ws": true,
-        "wsPath": "/profile/telegram@ssrsub",
-        "wsHeaders": {
-          "Host": "cdn-node-oss-99.paofu.de"
-        },
-        "tls": false,
-        "serverName": "cdn-node-oss-99.paofu.de"
-      },
-      "extra": {
-        "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HqfCfh7Ag5Li56bqmIFYyQ1JPU1MuQ09NIiwiYWRkIjoiZmFzdGN1cC5uZXQiLCJwb3J0IjoiODAiLCJ0eXBlIjoibm9uZSIsImlkIjoiNzY0MTQ1NzQtNzFlMC00NzA2LTg5Y2MtYzViMDljMTM0NDVkIiwiYWlkIjoiMCIsIm5ldCI6IndzIiwicGF0aCI6Ii9wcm9maWxlL3RlbGVncmFtQHNzcnN1YiIsImhvc3QiOiJjZG4tbm9kZS1vc3MtOTkucGFvZnUuZGUiLCJ0bHMiOiIifQ==",
-        "addedAt": "2025-08-08T12:40:54.652Z"
-      },
-      "metadata": {
-        "source": "v2ray"
-      }
-    },
-    {
-      "id": "6p5ure6fo",
+      "id": "65nz6rgms",
       "type": "vmess",
       "name": "🇬🇧 _US_美国->🇬🇧_GB_英国_1",
       "server": "mrb2.shabijichang.com",
@@ -130,14 +186,14 @@
       },
       "extra": {
         "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrPCfh6cgX1VTX+e+juWbvS0+8J+HrPCfh6dfR0Jf6Iux5Zu9XzEiLCJhZGQiOiJtcmIyLnNoYWJpamljaGFuZy5jb20iLCJwb3J0IjoiODAiLCJ0eXBlIjoibm9uZSIsImlkIjoiYzQ1ODY5NWQtNjkwOC00NWMzLTk1MTItZTBjNDY0MTg0NTRjIiwiYWlkIjoiMCIsIm5ldCI6IndzIiwicGF0aCI6Ii8iLCJob3N0IjoibXJiMi5zaGFiaWppY2hhbmcuY29tIiwidGxzIjoiIn0=",
-        "addedAt": "2025-08-08T12:40:54.652Z"
+        "addedAt": "2025-08-09T06:27:01.435Z"
       },
       "metadata": {
         "source": "v2ray"
       }
     },
     {
-      "id": "fyhvtadnh",
+      "id": "pr6dg33yw",
       "type": "vmess",
       "name": "🇬🇧 _US_美国->🇬🇧_GB_英国_2",
       "server": "ld2.shabijichang.com",
@@ -158,42 +214,14 @@
       },
       "extra": {
         "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrPCfh6cgX1VTX+e+juWbvS0+8J+HrPCfh6dfR0Jf6Iux5Zu9XzIiLCJhZGQiOiJsZDIuc2hhYmlqaWNoYW5nLmNvbSIsInBvcnQiOiI4MCIsInR5cGUiOiJub25lIiwiaWQiOiJjNDU4Njk1ZC02OTA4LTQ1YzMtOTUxMi1lMGM0NjQxODQ1NGMiLCJhaWQiOiIwIiwibmV0Ijoid3MiLCJwYXRoIjoiLyIsImhvc3QiOiJsZDIuc2hhYmlqaWNoYW5nLmNvbSIsInRscyI6IiJ9",
-        "addedAt": "2025-08-08T12:40:54.652Z"
+        "addedAt": "2025-08-09T06:27:01.435Z"
       },
       "metadata": {
         "source": "v2ray"
       }
     },
     {
-      "id": "d9k82dle1",
-      "type": "vmess",
-      "name": "🇭🇰 香港 电讯盈科有限公司",
-      "server": "v10.heduian.link",
-      "port": 30807,
-      "protocol": "vmess",
-      "settings": {
-        "id": "cbb3f877-d1fb-344c-87a9-d153bffd5484",
-        "alterId": 2,
-        "security": "auto",
-        "network": "ws",
-        "ws": true,
-        "wsPath": "/oooo",
-        "wsHeaders": {
-          "Host": "baidu.com"
-        },
-        "tls": false,
-        "serverName": "baidu.com"
-      },
-      "extra": {
-        "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrfCfh7Ag6aaZ5rivIOeUteiur+ebiOenkeaciemZkOWFrOWPuCIsImFkZCI6InYxMC5oZWR1aWFuLmxpbmsiLCJwb3J0IjoiMzA4MDciLCJ0eXBlIjoibm9uZSIsImlkIjoiY2JiM2Y4NzctZDFmYi0zNDRjLTg3YTktZDE1M2JmZmQ1NDg0IiwiYWlkIjoiMiIsIm5ldCI6IndzIiwicGF0aCI6Ii9vb29vIiwiaG9zdCI6ImJhaWR1LmNvbSIsInRscyI6IiJ9",
-        "addedAt": "2025-08-08T12:40:54.652Z"
-      },
-      "metadata": {
-        "source": "v2ray"
-      }
-    },
-    {
-      "id": "m8l56gove",
+      "id": "44w655mot",
       "type": "vmess",
       "name": "🇮🇳 _US_美国->🇮🇳_IN_印度_1",
       "server": "104.17.18.26",
@@ -212,14 +240,14 @@
       },
       "extra": {
         "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrvCfh7MgX1VTX+e+juWbvS0+8J+HrvCfh7NfSU5f5Y2w5bqmXzEiLCJhZGQiOiIxMDQuMTcuMTguMjYiLCJwb3J0IjoiODAiLCJ0eXBlIjoibm9uZSIsImlkIjoiNTE4MDQ0NGEtNDc1Ni00M2I0LTk2MGItNDllYjkwNTJlNGU4IiwiYWlkIjoiMCIsIm5ldCI6IndzIiwicGF0aCI6Ii8iLCJob3N0IjoiIiwidGxzIjoiIn0=",
-        "addedAt": "2025-08-08T12:40:54.652Z"
+        "addedAt": "2025-08-09T06:27:01.435Z"
       },
       "metadata": {
         "source": "v2ray"
       }
     },
     {
-      "id": "cge0qqzum",
+      "id": "koy35kp7v",
       "type": "vmess",
       "name": "🇮🇳 _US_美国->🇮🇳_IN_印度_2",
       "server": "104.26.8.44",
@@ -238,14 +266,14 @@
       },
       "extra": {
         "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrvCfh7MgX1VTX+e+juWbvS0+8J+HrvCfh7NfSU5f5Y2w5bqmXzIiLCJhZGQiOiIxMDQuMjYuOC40NCIsInBvcnQiOiI4MCIsInR5cGUiOiJub25lIiwiaWQiOiI1MTgwNDQ0YS00NzU2LTQzYjQtOTYwYi00OWViOTA1MmU0ZTgiLCJhaWQiOiIwIiwibmV0Ijoid3MiLCJwYXRoIjoiLyIsImhvc3QiOiIiLCJ0bHMiOiIifQ==",
-        "addedAt": "2025-08-08T12:40:54.652Z"
+        "addedAt": "2025-08-09T06:27:01.435Z"
       },
       "metadata": {
         "source": "v2ray"
       }
     },
     {
-      "id": "bktel7pz8",
+      "id": "uvv9x0snn",
       "type": "vmess",
       "name": "🇮🇳 _US_美国->🇮🇳_IN_印度_3",
       "server": "mm2.shabijichang.com",
@@ -266,14 +294,14 @@
       },
       "extra": {
         "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrvCfh7MgX1VTX+e+juWbvS0+8J+HrvCfh7NfSU5f5Y2w5bqmXzMiLCJhZGQiOiJtbTIuc2hhYmlqaWNoYW5nLmNvbSIsInBvcnQiOiI4MCIsInR5cGUiOiJub25lIiwiaWQiOiJjNDU4Njk1ZC02OTA4LTQ1YzMtOTUxMi1lMGM0NjQxODQ1NGMiLCJhaWQiOiIwIiwibmV0Ijoid3MiLCJwYXRoIjoiLyIsImhvc3QiOiJtbTIuc2hhYmlqaWNoYW5nLmNvbSIsInRscyI6IiJ9",
-        "addedAt": "2025-08-08T12:40:54.652Z"
+        "addedAt": "2025-08-09T06:27:01.435Z"
       },
       "metadata": {
         "source": "v2ray"
       }
     },
     {
-      "id": "q26sptxu8",
+      "id": "xy81i50rn",
       "type": "vmess",
       "name": "🇮🇳 _US_美国->🇮🇳_IN_印度_4",
       "server": "mm3.shabijichang.com",
@@ -294,14 +322,14 @@
       },
       "extra": {
         "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrvCfh7MgX1VTX+e+juWbvS0+8J+HrvCfh7NfSU5f5Y2w5bqmXzQiLCJhZGQiOiJtbTMuc2hhYmlqaWNoYW5nLmNvbSIsInBvcnQiOiI4MCIsInR5cGUiOiJub25lIiwiaWQiOiJjNDU4Njk1ZC02OTA4LTQ1YzMtOTUxMi1lMGM0NjQxODQ1NGMiLCJhaWQiOiIwIiwibmV0Ijoid3MiLCJwYXRoIjoiLyIsImhvc3QiOiJtbTMuc2hhYmlqaWNoYW5nLmNvbSIsInRscyI6IiJ9",
-        "addedAt": "2025-08-08T12:40:54.652Z"
+        "addedAt": "2025-08-09T06:27:01.435Z"
       },
       "metadata": {
         "source": "v2ray"
       }
     },
     {
-      "id": "pwpcmia4w",
+      "id": "xcg431jww",
       "type": "vmess",
       "name": "🇳🇱 _US_美国->🇳🇱_NL_荷兰",
       "server": "45.199.138.191",
@@ -320,14 +348,14 @@
       },
       "extra": {
         "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+Hs/Cfh7EgX1VTX+e+juWbvS0+8J+Hs/Cfh7FfTkxf6I235YWwIiwiYWRkIjoiNDUuMTk5LjEzOC4xOTEiLCJwb3J0IjoiMzAwMDAiLCJ0eXBlIjoibm9uZSIsImlkIjoiNDE4MDQ4YWYtYTI5My00Yjk5LTliMGMtOThjYTM1ODBkZDI0IiwiYWlkIjoiNjQiLCJuZXQiOiJ3cyIsInBhdGgiOiIvcGF0aC8xNjk2MjUxNTIyNDM4IiwiaG9zdCI6IiIsInRscyI6InRscyJ9",
-        "addedAt": "2025-08-08T12:40:54.652Z"
+        "addedAt": "2025-08-09T06:27:01.435Z"
       },
       "metadata": {
         "source": "v2ray"
       }
     },
     {
-      "id": "9whkjlb7c",
+      "id": "vl732jbwt",
       "type": "vmess",
       "name": "🇸🇦 _US_美国->🇸🇦_SA_沙特阿拉伯",
       "server": "jd3.shabijichang.com",
@@ -348,14 +376,14 @@
       },
       "extra": {
         "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HuPCfh6YgX1VTX+e+juWbvS0+8J+HuPCfh6ZfU0Ff5rKZ54m56Zi/5ouJ5LyvIiwiYWRkIjoiamQzLnNoYWJpamljaGFuZy5jb20iLCJwb3J0IjoiODAiLCJ0eXBlIjoibm9uZSIsImlkIjoiYzQ1ODY5NWQtNjkwOC00NWMzLTk1MTItZTBjNDY0MTg0NTRjIiwiYWlkIjoiMCIsIm5ldCI6IndzIiwicGF0aCI6Ii8iLCJob3N0IjoiamQzLnNoYWJpamljaGFuZy5jb20iLCJ0bHMiOiIifQ==",
-        "addedAt": "2025-08-08T12:40:54.652Z"
+        "addedAt": "2025-08-09T06:27:01.435Z"
       },
       "metadata": {
         "source": "v2ray"
       }
     },
     {
-      "id": "0n8l8kn9n",
+      "id": "voh6gaxzi",
       "type": "vmess",
       "name": "🇺🇸 _US_美国_1",
       "server": "206.168.190.219",
@@ -374,14 +402,14 @@
       },
       "extra": {
         "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HuvCfh7ggX1VTX+e+juWbvV8xIiwiYWRkIjoiMjA2LjE2OC4xOTAuMjE5IiwicG9ydCI6IjIwODIiLCJ0eXBlIjoibm9uZSIsImlkIjoiZTMxY2E3NTAtNzFmNy0xMWVlLWI5MjAtMTIzOWQwMjU1MjcyIiwiYWlkIjoiMCIsIm5ldCI6IndzIiwicGF0aCI6Ii92bXdzIiwiaG9zdCI6IiIsInRscyI6IiJ9",
-        "addedAt": "2025-08-08T12:40:54.652Z"
+        "addedAt": "2025-08-09T06:27:01.435Z"
       },
       "metadata": {
         "source": "v2ray"
       }
     },
     {
-      "id": "iypnjvr0z",
+      "id": "o7rxmvknz",
       "type": "vmess",
       "name": "🇺🇸 _US_美国_2",
       "server": "wnd2.shabijichang.com",
@@ -402,14 +430,14 @@
       },
       "extra": {
         "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HuvCfh7ggX1VTX+e+juWbvV8yIiwiYWRkIjoid25kMi5zaGFiaWppY2hhbmcuY29tIiwicG9ydCI6IjgwIiwidHlwZSI6Im5vbmUiLCJpZCI6ImM0NTg2OTVkLTY5MDgtNDVjMy05NTEyLWUwYzQ2NDE4NDU0YyIsImFpZCI6IjAiLCJuZXQiOiJ3cyIsInBhdGgiOiIvIiwiaG9zdCI6InduZDIuc2hhYmlqaWNoYW5nLmNvbSIsInRscyI6IiJ9",
-        "addedAt": "2025-08-08T12:40:54.652Z"
+        "addedAt": "2025-08-09T06:27:01.435Z"
       },
       "metadata": {
         "source": "v2ray"
       }
     },
     {
-      "id": "ni2aqt55t",
+      "id": "9fzfrxryz",
       "type": "vmess",
       "name": "🇺🇸 _US_美国_3",
       "server": "45.199.138.186",
@@ -428,14 +456,14 @@
       },
       "extra": {
         "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HuvCfh7ggX1VTX+e+juWbvV8zIiwiYWRkIjoiNDUuMTk5LjEzOC4xODYiLCJwb3J0IjoiMzAwMDAiLCJ0eXBlIjoibm9uZSIsImlkIjoiNGVjMGFlNjItZGUwOS00MDI5LTkwNGEtMDMxM2Q0NjI4ZWNmIiwiYWlkIjoiNjQiLCJuZXQiOiJ3cyIsInBhdGgiOiIvcGF0aC8xNjk2NjgyNzIwMTM4IiwiaG9zdCI6IiIsInRscyI6InRscyJ9",
-        "addedAt": "2025-08-08T12:40:54.652Z"
+        "addedAt": "2025-08-09T06:27:01.435Z"
       },
       "metadata": {
         "source": "v2ray"
       }
     },
     {
-      "id": "jgvc7sln1",
+      "id": "urr82woer",
       "type": "vmess",
       "name": "🇺🇸 _US_美国_4",
       "server": "wnd3.shabijichang.com",
@@ -456,14 +484,14 @@
       },
       "extra": {
         "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HuvCfh7ggX1VTX+e+juWbvV80IiwiYWRkIjoid25kMy5zaGFiaWppY2hhbmcuY29tIiwicG9ydCI6IjgwIiwidHlwZSI6Im5vbmUiLCJpZCI6ImM0NTg2OTVkLTY5MDgtNDVjMy05NTEyLWUwYzQ2NDE4NDU0YyIsImFpZCI6IjAiLCJuZXQiOiJ3cyIsInBhdGgiOiIvIiwiaG9zdCI6InduZDMuc2hhYmlqaWNoYW5nLmNvbSIsInRscyI6IiJ9",
-        "addedAt": "2025-08-08T12:40:54.652Z"
+        "addedAt": "2025-08-09T06:27:01.435Z"
       },
       "metadata": {
         "source": "v2ray"
       }
     },
     {
-      "id": "4r6xg34mt",
+      "id": "g4htvyuxl",
       "type": "vmess",
       "name": "🇺🇸 _US_美国_5",
       "server": "104.21.75.246",
@@ -482,97 +510,41 @@
       },
       "extra": {
         "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HuvCfh7ggX1VTX+e+juWbvV81IiwiYWRkIjoiMTA0LjIxLjc1LjI0NiIsInBvcnQiOiI4MCIsInR5cGUiOiJub25lIiwiaWQiOiJjNDU4Njk1ZC02OTA4LTQ1YzMtOTUxMi1lMGM0NjQxODQ1NGMiLCJhaWQiOiIwIiwibmV0Ijoid3MiLCJwYXRoIjoiLyIsImhvc3QiOiIiLCJ0bHMiOiIifQ==",
-        "addedAt": "2025-08-08T12:40:54.652Z"
+        "addedAt": "2025-08-09T06:27:01.435Z"
       },
       "metadata": {
         "source": "v2ray"
       }
     },
     {
-      "id": "khag5vs65",
+      "id": "st81inkum",
       "type": "vmess",
-      "name": "🇺🇸 美国 CloudFlare节点",
-      "server": "cloudgetservice.mcloudservice.site",
+      "name": "🇺🇸 美国 V2CROSS.COM",
+      "server": "199.181.197.60",
       "port": 443,
       "protocol": "vmess",
       "settings": {
-        "id": "37f464cb-b826-4278-9bf8-11bdf1ec892b",
+        "id": "de94cc0a-0592-4969-b1fc-97ea8f0ea0b3",
         "alterId": 0,
         "security": "auto",
         "network": "ws",
         "ws": true,
-        "wsPath": "/linvkws",
+        "wsPath": "/us.kkp.me.eu.org/aa",
         "wsHeaders": {
-          "Host": "Fra-Vp-123.BLaZECLOUD.Site"
+          "Host": "farid.1.berozha.ir"
         },
         "tls": true,
-        "serverName": "Fra-Vp-123.BLaZECLOUD.Site"
+        "serverName": "farid.1.berozha.ir"
       },
       "extra": {
-        "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HuvCfh7gg576O5Zu9IENsb3VkRmxhcmXoioLngrkiLCJhZGQiOiJjbG91ZGdldHNlcnZpY2UubWNsb3Vkc2VydmljZS5zaXRlIiwicG9ydCI6IjQ0MyIsInR5cGUiOiJub25lIiwiaWQiOiIzN2Y0NjRjYi1iODI2LTQyNzgtOWJmOC0xMWJkZjFlYzg5MmIiLCJhaWQiOiIwIiwibmV0Ijoid3MiLCJwYXRoIjoiL2xpbnZrd3MiLCJob3N0IjoiRnJhLVZwLTEyMy5CTGFaRUNMT1VELlNpdGUiLCJ0bHMiOiJ0bHMifQ==",
-        "addedAt": "2025-08-08T12:40:54.652Z"
-      },
-      "metadata": {
-        "source": "v2ray"
-      }
-    },
-    {
-      "id": "omdgv24ky",
-      "type": "vmess",
-      "name": "🇺🇸 美国 CloudFlare节点",
-      "server": "test.flha.ru",
-      "port": 80,
-      "protocol": "vmess",
-      "settings": {
-        "id": "2bab6b8f-8d6e-463a-8331-b9de3d56921d",
-        "alterId": 0,
-        "security": "auto",
-        "network": "ws",
-        "ws": true,
-        "wsPath": "/2bab6b8f-8d6e-463a-8331-b9de3d56921d-vmess",
-        "wsHeaders": {
-          "Host": "test.flha.ru"
-        },
-        "tls": false,
-        "serverName": "test.flha.ru"
-      },
-      "extra": {
-        "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HuvCfh7gg576O5Zu9IENsb3VkRmxhcmXoioLngrkiLCJhZGQiOiJ0ZXN0LmZsaGEucnUiLCJwb3J0IjoiODAiLCJ0eXBlIjoibm9uZSIsImlkIjoiMmJhYjZiOGYtOGQ2ZS00NjNhLTgzMzEtYjlkZTNkNTY5MjFkIiwiYWlkIjoiMCIsIm5ldCI6IndzIiwicGF0aCI6Ii8yYmFiNmI4Zi04ZDZlLTQ2M2EtODMzMS1iOWRlM2Q1NjkyMWQtdm1lc3MiLCJob3N0IjoidGVzdC5mbGhhLnJ1IiwidGxzIjoiIn0=",
-        "addedAt": "2025-08-08T12:40:54.652Z"
-      },
-      "metadata": {
-        "source": "v2ray"
-      }
-    },
-    {
-      "id": "rmwvhkv8c",
-      "type": "vmess",
-      "name": "🇺🇸 美国 CloudFlare节点",
-      "server": "www.meter.net",
-      "port": 2083,
-      "protocol": "vmess",
-      "settings": {
-        "id": "d218dfe5-fae6-408e-b615-8666df7f0924",
-        "alterId": 0,
-        "security": "auto",
-        "network": "ws",
-        "ws": true,
-        "wsPath": "/wssss",
-        "wsHeaders": {
-          "Host": "blaze-uk-48.pinkle7.site"
-        },
-        "tls": true,
-        "serverName": "blaze-uk-48.pinkle7.site"
-      },
-      "extra": {
-        "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HuvCfh7gg576O5Zu9IENsb3VkRmxhcmXoioLngrkiLCJhZGQiOiJ3d3cubWV0ZXIubmV0IiwicG9ydCI6IjIwODMiLCJ0eXBlIjoibm9uZSIsImlkIjoiZDIxOGRmZTUtZmFlNi00MDhlLWI2MTUtODY2NmRmN2YwOTI0IiwiYWlkIjoiMCIsIm5ldCI6IndzIiwicGF0aCI6Ii93c3NzcyIsImhvc3QiOiJibGF6ZS11ay00OC5waW5rbGU3LnNpdGUiLCJ0bHMiOiJ0bHMifQ==",
-        "addedAt": "2025-08-08T12:40:54.652Z"
+        "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HuvCfh7gg576O5Zu9IFYyQ1JPU1MuQ09NIiwiYWRkIjoiMTk5LjE4MS4xOTcuNjAiLCJwb3J0IjoiNDQzIiwidHlwZSI6Im5vbmUiLCJpZCI6ImRlOTRjYzBhLTA1OTItNDk2OS1iMWZjLTk3ZWE4ZjBlYTBiMyIsImFpZCI6IjAiLCJuZXQiOiJ3cyIsInBhdGgiOiIvdXMua2twLm1lLmV1Lm9yZy9hYSIsImhvc3QiOiJmYXJpZC4xLmJlcm96aGEuaXIiLCJ0bHMiOiJ0bHMifQ==",
+        "addedAt": "2025-08-09T06:27:01.435Z"
       },
       "metadata": {
         "source": "v2ray"
       }
     }
   ],
-  "timestamp": 1754656854652,
-  "hash": "890bb0648109ec27322fd815a81a417e"
+  "timestamp": 1754720821435,
+  "hash": "c9af6ba4996ee377678ab886157fb790"
 }
