@@ -1,31 +1,30 @@
 {
   "nodes": [
     {
-      "id": "eb635a3rj",
+      "id": "q9cmk1nqw",
       "type": "vmess",
-      "name": "Pool_🇸🇬SG_214-HysteriaNode-worker-general",
-      "server": "www.speedtest.net",
+      "name": "Relay_-🇺🇸US_53-HysteriaNode-worker-general",
+      "server": "auth0.openai.com",
       "port": 443,
       "protocol": "vmess",
       "settings": {
-        "id": "418048af-a293-4b99-9b0c-98ca3580dd24",
-        "alterId": 64,
+        "id": "606ece17-7279-4a43-b879-f8502103de8f",
+        "alterId": 0,
         "security": "auto",
         "network": "ws",
-        "wsPath": "/www.32278117.xyz/path/170733132233",
+        "wsPath": "/vall.codefyinc.com/vmessws",
         "wsHeaders": {},
         "tls": true,
         "serverName": "c.alalbb.top"
       },
       "extra": {
         "raw": {
-          "name": "Pool_🇸🇬SG_214-HysteriaNode-worker-general",
-          "server": "www.speedtest.net",
+          "name": "Relay_-🇺🇸US_53-HysteriaNode-worker-general",
+          "server": "auth0.openai.com",
           "type": "vmess",
-          "country": "🇸🇬SG",
           "port": 443,
-          "uuid": "418048af-a293-4b99-9b0c-98ca3580dd24",
-          "alterId": 64,
+          "uuid": "606ece17-7279-4a43-b879-f8502103de8f",
+          "alterId": 0,
           "cipher": "auto",
           "network": "ws",
           "servername": "c.alalbb.top",
@@ -34,25 +33,24 @@
           "tls": true,
           "skip-cert-verify": true,
           "ws-opts": {
-            "path": "/path/170733132233",
+            "path": "/vmessws",
             "headers": {
-              "HOST": "www.32278117.xyz",
               "Host": "c.alalbb.top"
             }
           },
-          "path": "/www.32278117.xyz/path/170733132233"
+          "path": "/vall.codefyinc.com/vmessws"
         },
-        "addedAt": "2025-09-10T01:15:14.004Z"
+        "addedAt": "2025-09-10T06:25:29.267Z"
       },
       "metadata": {
         "source": "alalbb"
       }
     },
     {
-      "id": "z8fpcf13g",
+      "id": "0q70wowq2",
       "type": "vmess",
-      "name": "Relay_-🇺🇸US_39-HysteriaNode-worker-general",
-      "server": "workers.dev",
+      "name": "Relay_-🇺🇸US_57-HysteriaNode-worker-general",
+      "server": "cdnjs.com",
       "port": 443,
       "protocol": "vmess",
       "settings": {
@@ -67,8 +65,8 @@
       },
       "extra": {
         "raw": {
-          "name": "Relay_-🇺🇸US_39-HysteriaNode-worker-general",
-          "server": "workers.dev",
+          "name": "Relay_-🇺🇸US_57-HysteriaNode-worker-general",
+          "server": "cdnjs.com",
           "type": "vmess",
           "port": 443,
           "uuid": "2c981164-9b93-4bca-94ff-b78d3f8498d7",
@@ -88,17 +86,63 @@
           "servername": "c.alalbb.top",
           "path": "/v2ray.codefyinc.com/vmessws"
         },
-        "addedAt": "2025-09-10T01:15:14.004Z"
+        "addedAt": "2025-09-10T06:25:29.267Z"
       },
       "metadata": {
         "source": "alalbb"
       }
     },
     {
-      "id": "ubb9nrj9m",
+      "id": "qfoqwty6t",
       "type": "vmess",
-      "name": "_45-HysteriaNode-worker-general",
-      "server": "chat.openai.com",
+      "name": "Relay_-🇺🇸US_41-HysteriaNode-worker-general",
+      "server": "workers.dev",
+      "port": 443,
+      "protocol": "vmess",
+      "settings": {
+        "id": "de94cc0a-0592-4969-b1fc-97ea8f0ea0b3",
+        "alterId": 0,
+        "security": "auto",
+        "network": "ws",
+        "wsPath": "/farid.1.berozha.ir/us.kkp.me.eu.org/aa",
+        "wsHeaders": {},
+        "tls": true,
+        "serverName": "c.alalbb.top"
+      },
+      "extra": {
+        "raw": {
+          "name": "Relay_-🇺🇸US_41-HysteriaNode-worker-general",
+          "server": "workers.dev",
+          "type": "vmess",
+          "port": 443,
+          "udp": true,
+          "uuid": "de94cc0a-0592-4969-b1fc-97ea8f0ea0b3",
+          "alterId": 0,
+          "cipher": "auto",
+          "network": "ws",
+          "http-opts": {},
+          "h2-opts": {},
+          "tls": true,
+          "ws-opts": {
+            "path": "/us.kkp.me.eu.org/aa",
+            "headers": {
+              "Host": "c.alalbb.top"
+            }
+          },
+          "servername": "c.alalbb.top",
+          "path": "/farid.1.berozha.ir/us.kkp.me.eu.org/aa"
+        },
+        "addedAt": "2025-09-10T06:25:29.267Z"
+      },
+      "metadata": {
+        "source": "alalbb"
+      }
+    },
+    {
+      "id": "cnc1yfjo1",
+      "type": "vmess",
+      "name": "🇧🇪BE_92-HysteriaNode-worker-general",
+      "server": "auth0.openai.com",
       "port": 443,
       "protocol": "vmess",
       "settings": {
@@ -106,18 +150,66 @@
         "alterId": 0,
         "security": "auto",
         "network": "ws",
-        "wsPath": "/inna.cfd/linkvws",
+        "wsPath": "/kapelleng.com/linkvws",
         "wsHeaders": {},
         "tls": true,
         "serverName": "c.alalbb.top"
       },
       "extra": {
         "raw": {
-          "name": "_45-HysteriaNode-worker-general",
-          "server": "chat.openai.com",
+          "name": "🇧🇪BE_92-HysteriaNode-worker-general",
+          "server": "auth0.openai.com",
           "type": "vmess",
+          "country": "🇧🇪BE",
           "port": 443,
           "uuid": "03fcc618-b93d-6796-6aed-8a38c975d581",
+          "alterId": 0,
+          "cipher": "auto",
+          "network": "ws",
+          "servername": "c.alalbb.top",
+          "http-opts": {},
+          "h2-opts": {},
+          "tls": true,
+          "skip-cert-verify": true,
+          "ws-opts": {
+            "path": "/linkvws",
+            "headers": {
+              "HOST": "kapelleng.com",
+              "Host": "c.alalbb.top"
+            }
+          },
+          "path": "/kapelleng.com/linkvws"
+        },
+        "addedAt": "2025-09-10T06:25:29.267Z"
+      },
+      "metadata": {
+        "source": "alalbb"
+      }
+    },
+    {
+      "id": "cunberjgx",
+      "type": "vmess",
+      "name": "Relay_-🇫🇷FR_61-HysteriaNode-worker-general",
+      "server": "cdnjs.com",
+      "port": 443,
+      "protocol": "vmess",
+      "settings": {
+        "id": "b7acf44f-3c3a-430c-8ed0-fb64ccc9a13a",
+        "alterId": 0,
+        "security": "auto",
+        "network": "ws",
+        "wsPath": "/BLaZE-fRA-64.BLaZECLOuD.sitE/linkvkwss",
+        "wsHeaders": {},
+        "tls": true,
+        "serverName": "c.alalbb.top"
+      },
+      "extra": {
+        "raw": {
+          "name": "Relay_-🇫🇷FR_61-HysteriaNode-worker-general",
+          "server": "cdnjs.com",
+          "type": "vmess",
+          "port": 443,
+          "uuid": "b7acf44f-3c3a-430c-8ed0-fb64ccc9a13a",
           "alterId": 0,
           "cipher": "auto",
           "network": "ws",
@@ -126,25 +218,73 @@
           "tls": true,
           "skip-cert-verify": true,
           "ws-opts": {
-            "path": "/linkvws",
+            "path": "/linkvkwss",
             "headers": {
               "Host": "c.alalbb.top"
             }
           },
           "servername": "c.alalbb.top",
-          "path": "/inna.cfd/linkvws"
+          "path": "/BLaZE-fRA-64.BLaZECLOuD.sitE/linkvkwss"
         },
-        "addedAt": "2025-09-10T01:15:14.004Z"
+        "addedAt": "2025-09-10T06:25:29.267Z"
       },
       "metadata": {
         "source": "alalbb"
       }
     },
     {
-      "id": "ly0qj7o7q",
+      "id": "x9e8gaxnr",
       "type": "vmess",
-      "name": "Relay_-🇮🇳IN_47-HysteriaNode-worker-general",
-      "server": "laravel.com",
+      "name": "🇺🇸 US_302-HysteriaNode-worker-general",
+      "server": "workers.dev",
+      "port": 443,
+      "protocol": "vmess",
+      "settings": {
+        "id": "03fcc618-b93d-6796-6aed-8a38c975d581",
+        "alterId": 0,
+        "security": "auto",
+        "network": "ws",
+        "wsPath": "/wrmelmwxlf.gktevlrqznwqqozy.fabpfs66gizmnojhcvqxwl.kytrcfzqla87gvgvs6c7kjnrubuh.cc/linkvws",
+        "wsHeaders": {},
+        "tls": true,
+        "serverName": "c.alalbb.top"
+      },
+      "extra": {
+        "raw": {
+          "name": "🇺🇸 US_302-HysteriaNode-worker-general",
+          "server": "workers.dev",
+          "type": "vmess",
+          "country": "🇺🇸 US",
+          "port": 443,
+          "uuid": "03fcc618-b93d-6796-6aed-8a38c975d581",
+          "alterId": 0,
+          "cipher": "auto",
+          "network": "ws",
+          "servername": "c.alalbb.top",
+          "http-opts": {},
+          "h2-opts": {},
+          "tls": true,
+          "skip-cert-verify": true,
+          "ws-opts": {
+            "path": "/linkvws",
+            "headers": {
+              "HOST": "wrmelmwxlf.gktevlrqznwqqozy.fabpfs66gizmnojhcvqxwl.kytrcfzqla87gvgvs6c7kjnrubuh.cc",
+              "Host": "c.alalbb.top"
+            }
+          },
+          "path": "/wrmelmwxlf.gktevlrqznwqqozy.fabpfs66gizmnojhcvqxwl.kytrcfzqla87gvgvs6c7kjnrubuh.cc/linkvws"
+        },
+        "addedAt": "2025-09-10T06:25:29.267Z"
+      },
+      "metadata": {
+        "source": "alalbb"
+      }
+    },
+    {
+      "id": "9ydo8q404",
+      "type": "vmess",
+      "name": "Relay_-🇮🇳IN_60-HysteriaNode-worker-general",
+      "server": "auth0.openai.com",
       "port": 2087,
       "protocol": "vmess",
       "settings": {
@@ -159,8 +299,8 @@
       },
       "extra": {
         "raw": {
-          "name": "Relay_-🇮🇳IN_47-HysteriaNode-worker-general",
-          "server": "laravel.com",
+          "name": "Relay_-🇮🇳IN_60-HysteriaNode-worker-general",
+          "server": "auth0.openai.com",
           "type": "vmess",
           "port": 2087,
           "uuid": "a78fc14e-4e8b-4fc0-8cab-86fd81c583ca",
@@ -181,36 +321,130 @@
           },
           "path": "/v019.emovpn.xyz/"
         },
-        "addedAt": "2025-09-10T01:15:14.004Z"
+        "addedAt": "2025-09-10T06:25:29.267Z"
       },
       "metadata": {
         "source": "alalbb"
       }
     },
     {
-      "id": "dnp4k8p1w",
+      "id": "9keq7vhpm",
       "type": "vmess",
-      "name": "Relay_-🇺🇸US_73-HysteriaNode-worker-general",
+      "name": "Relay_-🇺🇸US_66-HysteriaNode-worker-general",
+      "server": "api.jquery.com",
+      "port": 443,
+      "protocol": "vmess",
+      "settings": {
+        "id": "de94cc0a-0592-4969-b1fc-97ea8f0ea0b3",
+        "alterId": 0,
+        "security": "auto",
+        "network": "ws",
+        "wsPath": "/admin.kasrax.ir/us.kkp.me.eu.org/aa",
+        "wsHeaders": {},
+        "tls": true,
+        "serverName": "c.alalbb.top"
+      },
+      "extra": {
+        "raw": {
+          "name": "Relay_-🇺🇸US_66-HysteriaNode-worker-general",
+          "server": "api.jquery.com",
+          "type": "vmess",
+          "port": 443,
+          "uuid": "de94cc0a-0592-4969-b1fc-97ea8f0ea0b3",
+          "alterId": 0,
+          "cipher": "auto",
+          "network": "ws",
+          "servername": "c.alalbb.top",
+          "http-opts": {},
+          "h2-opts": {},
+          "tls": true,
+          "ws-opts": {
+            "path": "/us.kkp.me.eu.org/aa",
+            "headers": {
+              "Host": "c.alalbb.top"
+            }
+          },
+          "path": "/admin.kasrax.ir/us.kkp.me.eu.org/aa"
+        },
+        "addedAt": "2025-09-10T06:25:29.267Z"
+      },
+      "metadata": {
+        "source": "alalbb"
+      }
+    },
+    {
+      "id": "vtsntgfj3",
+      "type": "vmess",
+      "name": "🇧🇪 BE_83-HysteriaNode-worker-general",
+      "server": "chat.openai.com",
+      "port": 443,
+      "protocol": "vmess",
+      "settings": {
+        "id": "03fcc618-b93d-6796-6aed-8a38c975d581",
+        "alterId": 0,
+        "security": "auto",
+        "network": "ws",
+        "wsPath": "/wrmelmwxlf.gktevlrqznwqqozy.fabpfs66gizmnojhcvqxwl.kytrcfzqla87gvgvs6c7kjnrubuh.cc/linkvws",
+        "wsHeaders": {},
+        "tls": true,
+        "serverName": "c.alalbb.top"
+      },
+      "extra": {
+        "raw": {
+          "name": "🇧🇪 BE_83-HysteriaNode-worker-general",
+          "server": "chat.openai.com",
+          "type": "vmess",
+          "country": "🇧🇪 BE",
+          "port": 443,
+          "uuid": "03fcc618-b93d-6796-6aed-8a38c975d581",
+          "alterId": 0,
+          "cipher": "auto",
+          "network": "ws",
+          "servername": "c.alalbb.top",
+          "http-opts": {},
+          "h2-opts": {},
+          "tls": true,
+          "skip-cert-verify": true,
+          "ws-opts": {
+            "path": "/linkvws",
+            "headers": {
+              "HOST": "wrmelmwxlf.gktevlrqznwqqozy.fabpfs66gizmnojhcvqxwl.kytrcfzqla87gvgvs6c7kjnrubuh.cc",
+              "Host": "c.alalbb.top"
+            }
+          },
+          "path": "/wrmelmwxlf.gktevlrqznwqqozy.fabpfs66gizmnojhcvqxwl.kytrcfzqla87gvgvs6c7kjnrubuh.cc/linkvws"
+        },
+        "addedAt": "2025-09-10T06:25:29.267Z"
+      },
+      "metadata": {
+        "source": "alalbb"
+      }
+    },
+    {
+      "id": "h1fng6n69",
+      "type": "vmess",
+      "name": "🇧🇪 BE_87-HysteriaNode-worker-general",
       "server": "www.speedtest.net",
       "port": 443,
       "protocol": "vmess",
       "settings": {
-        "id": "606ece17-7279-4a43-b879-f8502103de8f",
+        "id": "03fcc618-b93d-6796-6aed-8a38c975d581",
         "alterId": 0,
         "security": "auto",
         "network": "ws",
-        "wsPath": "/vall.codefyinc.com/vmessws",
+        "wsPath": "/f.khilei.com/linkvws",
         "wsHeaders": {},
         "tls": true,
         "serverName": "c.alalbb.top"
       },
       "extra": {
         "raw": {
-          "name": "Relay_-🇺🇸US_73-HysteriaNode-worker-general",
+          "name": "🇧🇪 BE_87-HysteriaNode-worker-general",
           "server": "www.speedtest.net",
           "type": "vmess",
+          "country": "🇧🇪 BE",
           "port": 443,
-          "uuid": "606ece17-7279-4a43-b879-f8502103de8f",
+          "uuid": "03fcc618-b93d-6796-6aed-8a38c975d581",
           "alterId": 0,
           "cipher": "auto",
           "network": "ws",
@@ -220,72 +454,25 @@
           "tls": true,
           "skip-cert-verify": true,
           "ws-opts": {
-            "path": "/vmessws",
+            "path": "/linkvws",
             "headers": {
+              "HOST": "f.khilei.com",
               "Host": "c.alalbb.top"
             }
           },
-          "path": "/vall.codefyinc.com/vmessws"
+          "path": "/f.khilei.com/linkvws"
         },
-        "addedAt": "2025-09-10T01:15:14.004Z"
+        "addedAt": "2025-09-10T06:25:29.267Z"
       },
       "metadata": {
         "source": "alalbb"
       }
     },
     {
-      "id": "lbfvo9aji",
+      "id": "fkx7b36wv",
       "type": "vmess",
-      "name": "Relay_🇸🇬SG-🇸🇬SG_213-HysteriaNode-worker-general",
-      "server": "nginx.com",
-      "port": 443,
-      "protocol": "vmess",
-      "settings": {
-        "id": "14a79148-3d75-41d6-a998-2be9edef88cb",
-        "alterId": 0,
-        "security": "auto",
-        "network": "ws",
-        "wsPath": "/singapore2.helloshuai.com/39cb4/",
-        "wsHeaders": {},
-        "tls": true,
-        "serverName": "c.alalbb.top"
-      },
-      "extra": {
-        "raw": {
-          "name": "Relay_🇸🇬SG-🇸🇬SG_213-HysteriaNode-worker-general",
-          "server": "nginx.com",
-          "type": "vmess",
-          "country": "🇸🇬SG",
-          "port": 443,
-          "uuid": "14a79148-3d75-41d6-a998-2be9edef88cb",
-          "alterId": 0,
-          "cipher": "auto",
-          "network": "ws",
-          "servername": "c.alalbb.top",
-          "http-opts": {},
-          "h2-opts": {},
-          "tls": true,
-          "skip-cert-verify": true,
-          "ws-opts": {
-            "path": "/39cb4/",
-            "headers": {
-              "HOST": "singapore2.helloshuai.com",
-              "Host": "c.alalbb.top"
-            }
-          },
-          "path": "/singapore2.helloshuai.com/39cb4/"
-        },
-        "addedAt": "2025-09-10T01:15:14.004Z"
-      },
-      "metadata": {
-        "source": "alalbb"
-      }
-    },
-    {
-      "id": "ga64xchxv",
-      "type": "vmess",
-      "name": "Relay_🇫🇷FR-🇫🇷FR_119-HysteriaNode-worker-general",
-      "server": "api.jquery.com",
+      "name": "Relay_🇫🇷FR-🇫🇷FR_135-HysteriaNode-worker-general",
+      "server": "chat.openai.com",
       "port": 8443,
       "protocol": "vmess",
       "settings": {
@@ -300,8 +487,8 @@
       },
       "extra": {
         "raw": {
-          "name": "Relay_🇫🇷FR-🇫🇷FR_119-HysteriaNode-worker-general",
-          "server": "api.jquery.com",
+          "name": "Relay_🇫🇷FR-🇫🇷FR_135-HysteriaNode-worker-general",
+          "server": "chat.openai.com",
           "type": "vmess",
           "country": "🇫🇷FR",
           "port": 8443,
@@ -323,36 +510,612 @@
           },
           "path": "/ov-germany7.09vpn.com/vmess/"
         },
-        "addedAt": "2025-09-10T01:15:14.004Z"
+        "addedAt": "2025-09-10T06:25:29.267Z"
       },
       "metadata": {
         "source": "alalbb"
       }
     },
     {
-      "id": "t04h9c89e",
+      "id": "utjjerjs7",
       "type": "vmess",
-      "name": "Relay_-🇫🇷FR_76-HysteriaNode-worker-general",
-      "server": "codepen.io",
+      "name": "Pool_🇸🇬SG_271-HysteriaNode-worker-general",
+      "server": "discord.com",
       "port": 443,
       "protocol": "vmess",
       "settings": {
-        "id": "b7acf44f-3c3a-430c-8ed0-fb64ccc9a13a",
-        "alterId": 0,
+        "id": "418048af-a293-4b99-9b0c-98ca3580dd24",
+        "alterId": 64,
         "security": "auto",
         "network": "ws",
-        "wsPath": "/BLaZE-fRA-64.BLaZECLOuD.sitE/linkvkwss",
+        "wsPath": "/www.32278117.xyz/path/170733132233",
         "wsHeaders": {},
         "tls": true,
         "serverName": "c.alalbb.top"
       },
       "extra": {
         "raw": {
-          "name": "Relay_-🇫🇷FR_76-HysteriaNode-worker-general",
+          "name": "Pool_🇸🇬SG_271-HysteriaNode-worker-general",
+          "server": "discord.com",
+          "type": "vmess",
+          "country": "🇸🇬SG",
+          "port": 443,
+          "uuid": "418048af-a293-4b99-9b0c-98ca3580dd24",
+          "alterId": 64,
+          "cipher": "auto",
+          "network": "ws",
+          "servername": "c.alalbb.top",
+          "http-opts": {},
+          "h2-opts": {},
+          "tls": true,
+          "skip-cert-verify": true,
+          "ws-opts": {
+            "path": "/path/170733132233",
+            "headers": {
+              "HOST": "www.32278117.xyz",
+              "Host": "c.alalbb.top"
+            }
+          },
+          "path": "/www.32278117.xyz/path/170733132233"
+        },
+        "addedAt": "2025-09-10T06:25:29.267Z"
+      },
+      "metadata": {
+        "source": "alalbb"
+      }
+    },
+    {
+      "id": "w8m1yom7w",
+      "type": "vmess",
+      "name": "netflix_US-HysteriaNode-worker-general",
+      "server": "workers.dev",
+      "port": 443,
+      "protocol": "vmess",
+      "settings": {
+        "id": "de94cc0a-0592-4969-b1fc-97ea8f0ea0b3",
+        "alterId": 0,
+        "security": "auto",
+        "network": "ws",
+        "wsPath": "/farid.1.berozha.ir/us.kkp.me.eu.org/aa",
+        "wsHeaders": {},
+        "tls": true,
+        "serverName": "c.alalbb.top"
+      },
+      "extra": {
+        "raw": {
+          "name": "netflix_US-HysteriaNode-worker-general",
+          "server": "workers.dev",
+          "type": "vmess",
+          "country": "🇺🇸US",
+          "port": 443,
+          "uuid": "de94cc0a-0592-4969-b1fc-97ea8f0ea0b3",
+          "alterId": 0,
+          "cipher": "auto",
+          "network": "ws",
+          "servername": "c.alalbb.top",
+          "http-opts": {},
+          "h2-opts": {},
+          "tls": true,
+          "skip-cert-verify": true,
+          "ws-opts": {
+            "path": "/us.kkp.me.eu.org/aa",
+            "headers": {
+              "HOST": "farid.1.berozha.ir",
+              "Host": "c.alalbb.top"
+            }
+          },
+          "path": "/farid.1.berozha.ir/us.kkp.me.eu.org/aa"
+        },
+        "addedAt": "2025-09-10T06:25:29.267Z"
+      },
+      "metadata": {
+        "source": "alalbb"
+      }
+    },
+    {
+      "id": "azzrq0tpz",
+      "type": "vmess",
+      "name": "🇺🇸 US_316-HysteriaNode-worker-general",
+      "server": "auth0.openai.com",
+      "port": 443,
+      "protocol": "vmess",
+      "settings": {
+        "id": "03fcc618-b93d-6796-6aed-8a38c975d581",
+        "alterId": 0,
+        "security": "auto",
+        "network": "ws",
+        "wsPath": "/baradiha.com/linkvws",
+        "wsHeaders": {},
+        "tls": true,
+        "serverName": "c.alalbb.top"
+      },
+      "extra": {
+        "raw": {
+          "name": "🇺🇸 US_316-HysteriaNode-worker-general",
+          "server": "auth0.openai.com",
+          "type": "vmess",
+          "country": "🇺🇸 US",
+          "port": 443,
+          "uuid": "03fcc618-b93d-6796-6aed-8a38c975d581",
+          "alterId": 0,
+          "cipher": "auto",
+          "network": "ws",
+          "servername": "c.alalbb.top",
+          "http-opts": {},
+          "h2-opts": {},
+          "tls": true,
+          "skip-cert-verify": true,
+          "ws-opts": {
+            "path": "/linkvws",
+            "headers": {
+              "HOST": "baradiha.com",
+              "Host": "c.alalbb.top"
+            }
+          },
+          "path": "/baradiha.com/linkvws"
+        },
+        "addedAt": "2025-09-10T06:25:29.267Z"
+      },
+      "metadata": {
+        "source": "alalbb"
+      }
+    },
+    {
+      "id": "wml5kwr8h",
+      "type": "vmess",
+      "name": "🇳🇴 NO_250-HysteriaNode-worker-general",
+      "server": "codepen.io",
+      "port": 443,
+      "protocol": "vmess",
+      "settings": {
+        "id": "03fcc618-b93d-6796-6aed-8a38c975d581",
+        "alterId": 0,
+        "security": "auto",
+        "network": "ws",
+        "wsPath": "/o.metuji.com/linkvws",
+        "wsHeaders": {},
+        "tls": true,
+        "serverName": "c.alalbb.top"
+      },
+      "extra": {
+        "raw": {
+          "name": "🇳🇴 NO_250-HysteriaNode-worker-general",
           "server": "codepen.io",
           "type": "vmess",
+          "country": "🇳🇴 NO",
           "port": 443,
-          "uuid": "b7acf44f-3c3a-430c-8ed0-fb64ccc9a13a",
+          "uuid": "03fcc618-b93d-6796-6aed-8a38c975d581",
+          "alterId": 0,
+          "cipher": "auto",
+          "network": "ws",
+          "servername": "c.alalbb.top",
+          "http-opts": {},
+          "h2-opts": {},
+          "tls": true,
+          "skip-cert-verify": true,
+          "ws-opts": {
+            "path": "/linkvws",
+            "headers": {
+              "HOST": "o.metuji.com",
+              "Host": "c.alalbb.top"
+            }
+          },
+          "path": "/o.metuji.com/linkvws"
+        },
+        "addedAt": "2025-09-10T06:25:29.267Z"
+      },
+      "metadata": {
+        "source": "alalbb"
+      }
+    },
+    {
+      "id": "fseb7knl8",
+      "type": "vmess",
+      "name": "🇧🇪 BE_84-HysteriaNode-worker-general",
+      "server": "api.jquery.com",
+      "port": 443,
+      "protocol": "vmess",
+      "settings": {
+        "id": "03fcc618-b93d-6796-6aed-8a38c975d581",
+        "alterId": 0,
+        "security": "auto",
+        "network": "ws",
+        "wsPath": "/baradiha.com/linkvws",
+        "wsHeaders": {},
+        "tls": true,
+        "serverName": "c.alalbb.top"
+      },
+      "extra": {
+        "raw": {
+          "name": "🇧🇪 BE_84-HysteriaNode-worker-general",
+          "server": "api.jquery.com",
+          "type": "vmess",
+          "country": "🇧🇪 BE",
+          "port": 443,
+          "uuid": "03fcc618-b93d-6796-6aed-8a38c975d581",
+          "alterId": 0,
+          "cipher": "auto",
+          "network": "ws",
+          "servername": "c.alalbb.top",
+          "http-opts": {},
+          "h2-opts": {},
+          "tls": true,
+          "skip-cert-verify": true,
+          "ws-opts": {
+            "path": "/linkvws",
+            "headers": {
+              "HOST": "baradiha.com",
+              "Host": "c.alalbb.top"
+            }
+          },
+          "path": "/baradiha.com/linkvws"
+        },
+        "addedAt": "2025-09-10T06:25:29.267Z"
+      },
+      "metadata": {
+        "source": "alalbb"
+      }
+    },
+    {
+      "id": "i5zk67ekv",
+      "type": "vmess",
+      "name": "🇧🇪 BE_88-HysteriaNode-worker-general",
+      "server": "nginx.com",
+      "port": 443,
+      "protocol": "vmess",
+      "settings": {
+        "id": "03fcc618-b93d-6796-6aed-8a38c975d581",
+        "alterId": 0,
+        "security": "auto",
+        "network": "ws",
+        "wsPath": "/wrmelmwxlf.gktevlrqznwqqozy.fabpfs66gizmnojhcvqxwl.kytrcfzqla87gvgvs6c7kjnrubuh.cc/linkvws",
+        "wsHeaders": {},
+        "tls": true,
+        "serverName": "c.alalbb.top"
+      },
+      "extra": {
+        "raw": {
+          "name": "🇧🇪 BE_88-HysteriaNode-worker-general",
+          "server": "nginx.com",
+          "type": "vmess",
+          "country": "🇧🇪 BE",
+          "port": 443,
+          "uuid": "03fcc618-b93d-6796-6aed-8a38c975d581",
+          "alterId": 0,
+          "cipher": "auto",
+          "network": "ws",
+          "servername": "c.alalbb.top",
+          "http-opts": {},
+          "h2-opts": {},
+          "tls": true,
+          "skip-cert-verify": true,
+          "ws-opts": {
+            "path": "/linkvws",
+            "headers": {
+              "HOST": "wrmelmwxlf.gktevlrqznwqqozy.fabpfs66gizmnojhcvqxwl.kytrcfzqla87gvgvs6c7kjnrubuh.cc",
+              "Host": "c.alalbb.top"
+            }
+          },
+          "path": "/wrmelmwxlf.gktevlrqznwqqozy.fabpfs66gizmnojhcvqxwl.kytrcfzqla87gvgvs6c7kjnrubuh.cc/linkvws"
+        },
+        "addedAt": "2025-09-10T06:25:29.267Z"
+      },
+      "metadata": {
+        "source": "alalbb"
+      }
+    },
+    {
+      "id": "hylani1ev",
+      "type": "vmess",
+      "name": "🇺🇸 US_304-HysteriaNode-worker-general",
+      "server": "api.jquery.com",
+      "port": 443,
+      "protocol": "vmess",
+      "settings": {
+        "id": "03fcc618-b93d-6796-6aed-8a38c975d581",
+        "alterId": 0,
+        "security": "auto",
+        "network": "ws",
+        "wsPath": "/mankadmu.com/linkvws",
+        "wsHeaders": {},
+        "tls": true,
+        "serverName": "c.alalbb.top"
+      },
+      "extra": {
+        "raw": {
+          "name": "🇺🇸 US_304-HysteriaNode-worker-general",
+          "server": "api.jquery.com",
+          "type": "vmess",
+          "country": "🇺🇸 US",
+          "port": 443,
+          "uuid": "03fcc618-b93d-6796-6aed-8a38c975d581",
+          "alterId": 0,
+          "cipher": "auto",
+          "network": "ws",
+          "servername": "c.alalbb.top",
+          "http-opts": {},
+          "h2-opts": {},
+          "tls": true,
+          "skip-cert-verify": true,
+          "ws-opts": {
+            "path": "/linkvws",
+            "headers": {
+              "HOST": "mankadmu.com",
+              "Host": "c.alalbb.top"
+            }
+          },
+          "path": "/mankadmu.com/linkvws"
+        },
+        "addedAt": "2025-09-10T06:25:29.267Z"
+      },
+      "metadata": {
+        "source": "alalbb"
+      }
+    },
+    {
+      "id": "da9xmvb7g",
+      "type": "vmess",
+      "name": "Relay_🇺🇸US-🇺🇸US_365-HysteriaNode-worker-general",
+      "server": "laravel.com",
+      "port": 443,
+      "protocol": "vmess",
+      "settings": {
+        "id": "de94cc0a-0592-4969-b1fc-97ea8f0ea0b3",
+        "alterId": 0,
+        "security": "auto",
+        "network": "ws",
+        "wsPath": "/farid.1.berozha.ir/us.kkp.me.eu.org/aa",
+        "wsHeaders": {},
+        "tls": true,
+        "serverName": "c.alalbb.top"
+      },
+      "extra": {
+        "raw": {
+          "name": "Relay_🇺🇸US-🇺🇸US_365-HysteriaNode-worker-general",
+          "server": "laravel.com",
+          "type": "vmess",
+          "country": "🇺🇸US",
+          "port": 443,
+          "uuid": "de94cc0a-0592-4969-b1fc-97ea8f0ea0b3",
+          "alterId": 0,
+          "cipher": "auto",
+          "network": "ws",
+          "servername": "c.alalbb.top",
+          "http-opts": {},
+          "h2-opts": {},
+          "tls": true,
+          "skip-cert-verify": true,
+          "ws-opts": {
+            "path": "/us.kkp.me.eu.org/aa",
+            "headers": {
+              "HOST": "farid.1.berozha.ir",
+              "Host": "c.alalbb.top"
+            }
+          },
+          "path": "/farid.1.berozha.ir/us.kkp.me.eu.org/aa"
+        },
+        "addedAt": "2025-09-10T06:25:29.267Z"
+      },
+      "metadata": {
+        "source": "alalbb"
+      }
+    },
+    {
+      "id": "2fmawweob",
+      "type": "vmess",
+      "name": "Relay_🇷🇴RO-🇺🇸US_255-HysteriaNode-worker-general",
+      "server": "chat.openai.com",
+      "port": 443,
+      "protocol": "vmess",
+      "settings": {
+        "id": "de94cc0a-0592-4969-b1fc-97ea8f0ea0b3",
+        "alterId": 0,
+        "security": "auto",
+        "network": "ws",
+        "wsPath": "/farid.1.berozha.ir/us.kkp.me.eu.org/aa",
+        "wsHeaders": {},
+        "tls": true,
+        "serverName": "c.alalbb.top"
+      },
+      "extra": {
+        "raw": {
+          "name": "Relay_🇷🇴RO-🇺🇸US_255-HysteriaNode-worker-general",
+          "server": "chat.openai.com",
+          "type": "vmess",
+          "country": "🇷🇴RO",
+          "port": 443,
+          "uuid": "de94cc0a-0592-4969-b1fc-97ea8f0ea0b3",
+          "alterId": 0,
+          "cipher": "auto",
+          "network": "ws",
+          "servername": "c.alalbb.top",
+          "http-opts": {},
+          "h2-opts": {},
+          "tls": true,
+          "skip-cert-verify": true,
+          "ws-opts": {
+            "path": "/us.kkp.me.eu.org/aa",
+            "headers": {
+              "HOST": "farid.1.berozha.ir",
+              "Host": "c.alalbb.top"
+            }
+          },
+          "path": "/farid.1.berozha.ir/us.kkp.me.eu.org/aa"
+        },
+        "addedAt": "2025-09-10T06:25:29.267Z"
+      },
+      "metadata": {
+        "source": "alalbb"
+      }
+    },
+    {
+      "id": "rjol2x50d",
+      "type": "vmess",
+      "name": "Relay_🏁ZZ-🇺🇸US_374-HysteriaNode-worker-general",
+      "server": "auth0.openai.com",
+      "port": 443,
+      "protocol": "vmess",
+      "settings": {
+        "id": "de94cc0a-0592-4969-b1fc-97ea8f0ea0b3",
+        "alterId": 0,
+        "security": "auto",
+        "network": "ws",
+        "wsPath": "/farid.1.berozha.ir/us.kkp.me.eu.org/aa",
+        "wsHeaders": {},
+        "tls": true,
+        "serverName": "c.alalbb.top"
+      },
+      "extra": {
+        "raw": {
+          "name": "Relay_🏁ZZ-🇺🇸US_374-HysteriaNode-worker-general",
+          "server": "auth0.openai.com",
+          "type": "vmess",
+          "country": "🏁ZZ",
+          "port": 443,
+          "uuid": "de94cc0a-0592-4969-b1fc-97ea8f0ea0b3",
+          "alterId": 0,
+          "cipher": "auto",
+          "network": "ws",
+          "servername": "c.alalbb.top",
+          "http-opts": {},
+          "h2-opts": {},
+          "tls": true,
+          "skip-cert-verify": true,
+          "ws-opts": {
+            "path": "/us.kkp.me.eu.org/aa",
+            "headers": {
+              "HOST": "farid.1.berozha.ir",
+              "Host": "c.alalbb.top"
+            }
+          },
+          "path": "/farid.1.berozha.ir/us.kkp.me.eu.org/aa"
+        },
+        "addedAt": "2025-09-10T06:25:29.267Z"
+      },
+      "metadata": {
+        "source": "alalbb"
+      }
+    },
+    {
+      "id": "jmllq6dx8",
+      "type": "vmess",
+      "name": "🇧🇪 BE_85-HysteriaNode-worker-general",
+      "server": "workers.dev",
+      "port": 443,
+      "protocol": "vmess",
+      "settings": {
+        "id": "03fcc618-b93d-6796-6aed-8a38c975d581",
+        "alterId": 0,
+        "security": "auto",
+        "network": "ws",
+        "wsPath": "/aveiror.com/linkvws",
+        "wsHeaders": {},
+        "tls": true,
+        "serverName": "c.alalbb.top"
+      },
+      "extra": {
+        "raw": {
+          "name": "🇧🇪 BE_85-HysteriaNode-worker-general",
+          "server": "workers.dev",
+          "type": "vmess",
+          "country": "🇧🇪 BE",
+          "port": 443,
+          "uuid": "03fcc618-b93d-6796-6aed-8a38c975d581",
+          "alterId": 0,
+          "cipher": "auto",
+          "network": "ws",
+          "servername": "c.alalbb.top",
+          "http-opts": {},
+          "h2-opts": {},
+          "tls": true,
+          "skip-cert-verify": true,
+          "ws-opts": {
+            "path": "/linkvws",
+            "headers": {
+              "HOST": "aveiror.com",
+              "Host": "c.alalbb.top"
+            }
+          },
+          "path": "/aveiror.com/linkvws"
+        },
+        "addedAt": "2025-09-10T06:25:29.267Z"
+      },
+      "metadata": {
+        "source": "alalbb"
+      }
+    },
+    {
+      "id": "qbe9fc243",
+      "type": "vmess",
+      "name": "🇺🇸 US_296-HysteriaNode-worker-general",
+      "server": "www.speedtest.net",
+      "port": 443,
+      "protocol": "vmess",
+      "settings": {
+        "id": "03fcc618-b93d-6796-6aed-8a38c975d581",
+        "alterId": 0,
+        "security": "auto",
+        "network": "ws",
+        "wsPath": "/tilebani.com/linkvws",
+        "wsHeaders": {},
+        "tls": true,
+        "serverName": "c.alalbb.top"
+      },
+      "extra": {
+        "raw": {
+          "name": "🇺🇸 US_296-HysteriaNode-worker-general",
+          "server": "www.speedtest.net",
+          "type": "vmess",
+          "country": "🇺🇸 US",
+          "port": 443,
+          "uuid": "03fcc618-b93d-6796-6aed-8a38c975d581",
+          "alterId": 0,
+          "cipher": "auto",
+          "network": "ws",
+          "servername": "c.alalbb.top",
+          "http-opts": {},
+          "h2-opts": {},
+          "tls": true,
+          "skip-cert-verify": true,
+          "ws-opts": {
+            "path": "/linkvws",
+            "headers": {
+              "HOST": "tilebani.com",
+              "Host": "c.alalbb.top"
+            }
+          },
+          "path": "/tilebani.com/linkvws"
+        },
+        "addedAt": "2025-09-10T06:25:29.267Z"
+      },
+      "metadata": {
+        "source": "alalbb"
+      }
+    },
+    {
+      "id": "s5zzdwsp4",
+      "type": "vmess",
+      "name": "_73-HysteriaNode-worker-general",
+      "server": "cdnjs.com",
+      "port": 443,
+      "protocol": "vmess",
+      "settings": {
+        "id": "03fcc618-b93d-6796-6aed-8a38c975d581",
+        "alterId": 0,
+        "security": "auto",
+        "network": "ws",
+        "wsPath": "/inna.cfd/linkvws",
+        "wsHeaders": {},
+        "tls": true,
+        "serverName": "c.alalbb.top"
+      },
+      "extra": {
+        "raw": {
+          "name": "_73-HysteriaNode-worker-general",
+          "server": "cdnjs.com",
+          "type": "vmess",
+          "port": 443,
+          "uuid": "03fcc618-b93d-6796-6aed-8a38c975d581",
           "alterId": 0,
           "cipher": "auto",
           "network": "ws",
@@ -361,63 +1124,166 @@
           "tls": true,
           "skip-cert-verify": true,
           "ws-opts": {
-            "path": "/linkvkwss",
+            "path": "/linkvws",
             "headers": {
               "Host": "c.alalbb.top"
             }
           },
           "servername": "c.alalbb.top",
-          "path": "/BLaZE-fRA-64.BLaZECLOuD.sitE/linkvkwss"
+          "path": "/inna.cfd/linkvws"
         },
-        "addedAt": "2025-09-10T01:15:14.004Z"
+        "addedAt": "2025-09-10T06:25:29.267Z"
       },
       "metadata": {
         "source": "alalbb"
       }
     },
     {
-      "id": "vtgmtumpu",
+      "id": "xd7irj56m",
       "type": "vmess",
-      "name": "US_speednode_0058-speednodes",
-      "server": "92.112.124.23",
-      "port": 10012,
+      "name": "🇧🇪 BE_86-HysteriaNode-worker-general",
+      "server": "auth0.openai.com",
+      "port": 443,
       "protocol": "vmess",
       "settings": {
-        "id": "a799dcce-7b7f-492d-a2c5-10acb8514995",
-        "alterId": 0,
+        "id": "03fcc618-b93d-6796-6aed-8a38c975d581",
+        "alterId": 1,
         "security": "auto",
-        "network": "tcp",
-        "wsPath": "",
+        "network": "ws",
+        "wsPath": "/57.129.25.20/linkvws",
         "wsHeaders": {},
         "tls": true,
-        "serverName": "www.douyin.com"
+        "serverName": "c.alalbb.top"
       },
       "extra": {
         "raw": {
-          "name": "US_speednode_0058-speednodes",
-          "server": "92.112.124.23",
-          "port": 10012,
-          "type": "vless",
-          "uuid": "a799dcce-7b7f-492d-a2c5-10acb8514995",
-          "flow": "xtls-rprx-vision",
+          "name": "🇧🇪 BE_86-HysteriaNode-worker-general",
+          "server": "auth0.openai.com",
+          "type": "vmess",
+          "country": "🇧🇪 BE",
+          "port": 443,
+          "uuid": "03fcc618-b93d-6796-6aed-8a38c975d581",
+          "alterId": 1,
+          "cipher": "auto",
+          "network": "ws",
+          "servername": "c.alalbb.top",
+          "http-opts": {},
+          "h2-opts": {},
           "tls": true,
-          "skip-cert-verify": false,
-          "client-fingerprint": "edge",
-          "servername": "www.douyin.com",
-          "reality-opts": {
-            "public-key": "YrlNvJF4RA_lYQcQzoHZUcy4-dn-gtma9FCRMwkkXTc",
-            "short-id": "33a1ba41"
+          "skip-cert-verify": true,
+          "ws-opts": {
+            "path": "linkvws",
+            "headers": {
+              "HOST": "57.129.25.20",
+              "Host": "c.alalbb.top"
+            }
           },
-          "udp": true
+          "path": "/57.129.25.20/linkvws"
         },
-        "addedAt": "2025-09-10T01:15:14.004Z"
+        "addedAt": "2025-09-10T06:25:29.267Z"
       },
       "metadata": {
         "source": "alalbb"
       }
     },
     {
-      "id": "gg0kfobqp",
+      "id": "zby2ew263",
+      "type": "vmess",
+      "name": "🇧🇪BE_91-HysteriaNode-worker-general",
+      "server": "www.speedtest.net",
+      "port": 443,
+      "protocol": "vmess",
+      "settings": {
+        "id": "03fcc618-b93d-6796-6aed-8a38c975d581",
+        "alterId": 0,
+        "security": "auto",
+        "network": "ws",
+        "wsPath": "/kapelleng.com/linkvws",
+        "wsHeaders": {},
+        "tls": true,
+        "serverName": "c.alalbb.top"
+      },
+      "extra": {
+        "raw": {
+          "name": "🇧🇪BE_91-HysteriaNode-worker-general",
+          "server": "www.speedtest.net",
+          "type": "vmess",
+          "country": "🇧🇪BE",
+          "port": 443,
+          "uuid": "03fcc618-b93d-6796-6aed-8a38c975d581",
+          "alterId": 0,
+          "cipher": "auto",
+          "network": "ws",
+          "servername": "c.alalbb.top",
+          "http-opts": {},
+          "h2-opts": {},
+          "tls": true,
+          "skip-cert-verify": true,
+          "ws-opts": {
+            "path": "/linkvws",
+            "headers": {
+              "HOST": "kapelleng.com",
+              "Host": "c.alalbb.top"
+            }
+          },
+          "path": "/kapelleng.com/linkvws"
+        },
+        "addedAt": "2025-09-10T06:25:29.267Z"
+      },
+      "metadata": {
+        "source": "alalbb"
+      }
+    },
+    {
+      "id": "bikdn02v7",
+      "type": "vmess",
+      "name": "Relay_🇸🇬SG-🇸🇬SG_269-HysteriaNode-worker-general",
+      "server": "cdnjs.com",
+      "port": 443,
+      "protocol": "vmess",
+      "settings": {
+        "id": "14a79148-3d75-41d6-a998-2be9edef88cb",
+        "alterId": 0,
+        "security": "auto",
+        "network": "ws",
+        "wsPath": "/singapore2.helloshuai.com/39cb4/",
+        "wsHeaders": {},
+        "tls": true,
+        "serverName": "c.alalbb.top"
+      },
+      "extra": {
+        "raw": {
+          "name": "Relay_🇸🇬SG-🇸🇬SG_269-HysteriaNode-worker-general",
+          "server": "cdnjs.com",
+          "type": "vmess",
+          "country": "🇸🇬SG",
+          "port": 443,
+          "uuid": "14a79148-3d75-41d6-a998-2be9edef88cb",
+          "alterId": 0,
+          "cipher": "auto",
+          "network": "ws",
+          "servername": "c.alalbb.top",
+          "http-opts": {},
+          "h2-opts": {},
+          "tls": true,
+          "skip-cert-verify": true,
+          "ws-opts": {
+            "path": "/39cb4/",
+            "headers": {
+              "HOST": "singapore2.helloshuai.com",
+              "Host": "c.alalbb.top"
+            }
+          },
+          "path": "/singapore2.helloshuai.com/39cb4/"
+        },
+        "addedAt": "2025-09-10T06:25:29.267Z"
+      },
+      "metadata": {
+        "source": "alalbb"
+      }
+    },
+    {
+      "id": "14dmra9kl",
       "type": "vmess",
       "name": "GB_speednode_0025-speednodes",
       "server": "82.29.71.43",
@@ -444,48 +1310,14 @@
           "skip-cert-verify": true,
           "udp": true
         },
-        "addedAt": "2025-09-10T01:15:14.004Z"
+        "addedAt": "2025-09-10T06:25:29.267Z"
       },
       "metadata": {
         "source": "alalbb"
       }
     },
     {
-      "id": "82z39hc5k",
-      "type": "vmess",
-      "name": "US_speednode_0068-speednodes",
-      "server": "156.244.46.198",
-      "port": 44746,
-      "protocol": "vmess",
-      "settings": {
-        "id": "f89b31c8-07f8-4aa3-f8f7-ae5172e03bd6",
-        "alterId": 0,
-        "security": "auto",
-        "network": "tcp",
-        "wsPath": "",
-        "wsHeaders": {},
-        "tls": true,
-        "serverName": ""
-      },
-      "extra": {
-        "raw": {
-          "name": "US_speednode_0068-speednodes",
-          "server": "156.244.46.198",
-          "port": 44746,
-          "type": "vless",
-          "uuid": "f89b31c8-07f8-4aa3-f8f7-ae5172e03bd6",
-          "tls": true,
-          "skip-cert-verify": true,
-          "udp": true
-        },
-        "addedAt": "2025-09-10T01:15:14.004Z"
-      },
-      "metadata": {
-        "source": "alalbb"
-      }
-    },
-    {
-      "id": "rx8gaefdg",
+      "id": "tx79vnapi",
       "type": "vmess",
       "name": "HK_speednode_0032-speednodes",
       "server": "45.78.17.19",
@@ -523,14 +1355,14 @@
           },
           "udp": true
         },
-        "addedAt": "2025-09-10T01:15:14.004Z"
+        "addedAt": "2025-09-10T06:25:29.267Z"
       },
       "metadata": {
         "source": "alalbb"
       }
     },
     {
-      "id": "ezky1ecsj",
+      "id": "dm65my5a6",
       "type": "vmess",
       "name": "HK_speednode_0033-speednodes",
       "server": "45.78.17.19",
@@ -568,57 +1400,14 @@
           },
           "udp": true
         },
-        "addedAt": "2025-09-10T01:15:14.004Z"
+        "addedAt": "2025-09-10T06:25:29.267Z"
       },
       "metadata": {
         "source": "alalbb"
       }
     },
     {
-      "id": "8yyi6y796",
-      "type": "vmess",
-      "name": "NL_speednode_0043-speednodes",
-      "server": "185.18.184.66",
-      "port": 80,
-      "protocol": "vmess",
-      "settings": {
-        "id": "d342d11e-d424-4583-b36e-524ab1f0afa4",
-        "alterId": 0,
-        "security": "auto",
-        "network": "ws",
-        "wsPath": "",
-        "wsHeaders": {},
-        "tls": false,
-        "serverName": "hello.96xckkzx.workers.dev"
-      },
-      "extra": {
-        "raw": {
-          "name": "NL_speednode_0043-speednodes",
-          "server": "185.18.184.66",
-          "port": 80,
-          "type": "vless",
-          "uuid": "d342d11e-d424-4583-b36e-524ab1f0afa4",
-          "tls": false,
-          "skip-cert-verify": false,
-          "client-fingerprint": "chrome",
-          "servername": "hello.96xckkzx.workers.dev",
-          "network": "ws",
-          "ws-opts": {
-            "path": "/?ed=2048",
-            "headers": {
-              "Host": "hello.96xckkzx.workers.dev"
-            }
-          },
-          "udp": true
-        },
-        "addedAt": "2025-09-10T01:15:14.004Z"
-      },
-      "metadata": {
-        "source": "alalbb"
-      }
-    },
-    {
-      "id": "8q8ntgfm4",
+      "id": "i6qkovjmn",
       "type": "vmess",
       "name": "US_speednode_0066-speednodes",
       "server": "23.95.231.71",
@@ -652,56 +1441,14 @@
           },
           "udp": true
         },
-        "addedAt": "2025-09-10T01:15:14.004Z"
+        "addedAt": "2025-09-10T06:25:29.267Z"
       },
       "metadata": {
         "source": "alalbb"
       }
     },
     {
-      "id": "qaxnb265j",
-      "type": "vmess",
-      "name": "NL_speednode_0046-speednodes",
-      "server": "185.18.184.66",
-      "port": 80,
-      "protocol": "vmess",
-      "settings": {
-        "id": "d342d11e-d424-4583-b36e-524ab1f0afa4",
-        "alterId": 0,
-        "security": "auto",
-        "network": "ws",
-        "wsPath": "",
-        "wsHeaders": {},
-        "tls": false,
-        "serverName": "hello.96xckkzx.workers.dev"
-      },
-      "extra": {
-        "raw": {
-          "name": "NL_speednode_0046-speednodes",
-          "server": "185.18.184.66",
-          "port": 80,
-          "type": "vless",
-          "uuid": "d342d11e-d424-4583-b36e-524ab1f0afa4",
-          "tls": false,
-          "skip-cert-verify": false,
-          "servername": "hello.96xckkzx.workers.dev",
-          "network": "ws",
-          "ws-opts": {
-            "path": "/🔒",
-            "headers": {
-              "Host": "hello.96xckkzx.workers.dev"
-            }
-          },
-          "udp": true
-        },
-        "addedAt": "2025-09-10T01:15:14.004Z"
-      },
-      "metadata": {
-        "source": "alalbb"
-      }
-    },
-    {
-      "id": "niyngezvm",
+      "id": "cb4n2qy99",
       "type": "vmess",
       "name": "US_speednode_0057-speednodes",
       "server": "154.17.10.111",
@@ -739,13 +1486,173 @@
           },
           "udp": true
         },
-        "addedAt": "2025-09-10T01:15:14.004Z"
+        "addedAt": "2025-09-10T06:25:29.267Z"
+      },
+      "metadata": {
+        "source": "alalbb"
+      }
+    },
+    {
+      "id": "kj2p6kh3v",
+      "type": "vmess",
+      "name": "US_speednode_0068-speednodes",
+      "server": "156.244.46.198",
+      "port": 44746,
+      "protocol": "vmess",
+      "settings": {
+        "id": "f89b31c8-07f8-4aa3-f8f7-ae5172e03bd6",
+        "alterId": 0,
+        "security": "auto",
+        "network": "tcp",
+        "wsPath": "",
+        "wsHeaders": {},
+        "tls": true,
+        "serverName": ""
+      },
+      "extra": {
+        "raw": {
+          "name": "US_speednode_0068-speednodes",
+          "server": "156.244.46.198",
+          "port": 44746,
+          "type": "vless",
+          "uuid": "f89b31c8-07f8-4aa3-f8f7-ae5172e03bd6",
+          "tls": true,
+          "skip-cert-verify": true,
+          "udp": true
+        },
+        "addedAt": "2025-09-10T06:25:29.267Z"
+      },
+      "metadata": {
+        "source": "alalbb"
+      }
+    },
+    {
+      "id": "lz8n8ybz4",
+      "type": "vmess",
+      "name": "NL_speednode_0046-speednodes",
+      "server": "185.18.184.66",
+      "port": 80,
+      "protocol": "vmess",
+      "settings": {
+        "id": "d342d11e-d424-4583-b36e-524ab1f0afa4",
+        "alterId": 0,
+        "security": "auto",
+        "network": "ws",
+        "wsPath": "",
+        "wsHeaders": {},
+        "tls": false,
+        "serverName": "hello.96xckkzx.workers.dev"
+      },
+      "extra": {
+        "raw": {
+          "name": "NL_speednode_0046-speednodes",
+          "server": "185.18.184.66",
+          "port": 80,
+          "type": "vless",
+          "uuid": "d342d11e-d424-4583-b36e-524ab1f0afa4",
+          "tls": false,
+          "skip-cert-verify": false,
+          "servername": "hello.96xckkzx.workers.dev",
+          "network": "ws",
+          "ws-opts": {
+            "path": "/🔒",
+            "headers": {
+              "Host": "hello.96xckkzx.workers.dev"
+            }
+          },
+          "udp": true
+        },
+        "addedAt": "2025-09-10T06:25:29.267Z"
+      },
+      "metadata": {
+        "source": "alalbb"
+      }
+    },
+    {
+      "id": "dgrdgad07",
+      "type": "vmess",
+      "name": "NL_speednode_0043-speednodes",
+      "server": "185.18.184.66",
+      "port": 80,
+      "protocol": "vmess",
+      "settings": {
+        "id": "d342d11e-d424-4583-b36e-524ab1f0afa4",
+        "alterId": 0,
+        "security": "auto",
+        "network": "ws",
+        "wsPath": "",
+        "wsHeaders": {},
+        "tls": false,
+        "serverName": "hello.96xckkzx.workers.dev"
+      },
+      "extra": {
+        "raw": {
+          "name": "NL_speednode_0043-speednodes",
+          "server": "185.18.184.66",
+          "port": 80,
+          "type": "vless",
+          "uuid": "d342d11e-d424-4583-b36e-524ab1f0afa4",
+          "tls": false,
+          "skip-cert-verify": false,
+          "client-fingerprint": "chrome",
+          "servername": "hello.96xckkzx.workers.dev",
+          "network": "ws",
+          "ws-opts": {
+            "path": "/?ed=2048",
+            "headers": {
+              "Host": "hello.96xckkzx.workers.dev"
+            }
+          },
+          "udp": true
+        },
+        "addedAt": "2025-09-10T06:25:29.267Z"
+      },
+      "metadata": {
+        "source": "alalbb"
+      }
+    },
+    {
+      "id": "gqulqsj10",
+      "type": "vmess",
+      "name": "US_speednode_0058-speednodes",
+      "server": "92.112.124.23",
+      "port": 10012,
+      "protocol": "vmess",
+      "settings": {
+        "id": "a799dcce-7b7f-492d-a2c5-10acb8514995",
+        "alterId": 0,
+        "security": "auto",
+        "network": "tcp",
+        "wsPath": "",
+        "wsHeaders": {},
+        "tls": true,
+        "serverName": "www.douyin.com"
+      },
+      "extra": {
+        "raw": {
+          "name": "US_speednode_0058-speednodes",
+          "server": "92.112.124.23",
+          "port": 10012,
+          "type": "vless",
+          "uuid": "a799dcce-7b7f-492d-a2c5-10acb8514995",
+          "flow": "xtls-rprx-vision",
+          "tls": true,
+          "skip-cert-verify": false,
+          "client-fingerprint": "edge",
+          "servername": "www.douyin.com",
+          "reality-opts": {
+            "public-key": "YrlNvJF4RA_lYQcQzoHZUcy4-dn-gtma9FCRMwkkXTc",
+            "short-id": "33a1ba41"
+          },
+          "udp": true
+        },
+        "addedAt": "2025-09-10T06:25:29.267Z"
       },
       "metadata": {
         "source": "alalbb"
       }
     }
   ],
-  "timestamp": 1757466914004,
-  "hash": "7292808c2d3f3552c50b3756a3d6a29b"
+  "timestamp": 1757485529267,
+  "hash": "19205e69f6098d9b3483ea7873f2b9a2"
 }
