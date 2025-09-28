@@ -1,236 +1,90 @@
-# SubSyncForge API 文档
+# Cloudflare Worker API 指南
 
-## 概述
+SubSyncForge 提供了一个基于 Cloudflare Worker 的 HTTP 入口，主要用于实验性地演示订阅转换服务的接口形态。当前仓库版本中，Worker 仅返回演示数据，并未真正调用核心的 `SubscriptionConverter` / `SyncManager`。本文档旨在说明现状、演示接口格式，并为未来扩展提供指引。
 
-SubSyncForge 提供了一组 RESTful API，用于订阅转换、订阅管理和系统监控。本文档详细介绍了这些 API 的使用方法和参数说明。
+> ⚠️ **注意**：若需要生产可用的在线转换服务，需要额外实现数据校验、鉴权、速率控制以及与核心模块的集成。本指南仅适用于本地调试或二次开发的参考。
 
-## 基础信息
+## 1. 环境准备
 
-- **基础 URL**: `https://your-worker.workers.dev`
-- **响应格式**: JSON
-- **认证方式**: 无需认证（公共 API）
+- 安装依赖：`pnpm install`
+- 构建代码：`pnpm run build`（或直接使用 `src/worker` 源码）
+- 启动本地 Worker：
+  ```bash
+  pnpm wrangler dev
+  ```
+  默认会在 `http://127.0.0.1:8787` 提供服务。
 
-## API 端点
+## 2. 路由与当前行为
 
-### 1. 订阅转换 API
+| 路由 | 方法 | 当前实现 | 备注 |
+|------|------|----------|------|
+| `/api/subscriptions` | GET | 返回硬编码的单条订阅示例 | 未来应读取 `config/subscriptions.json` 或外部存储 |
+| `/api/convert` | POST | 回传请求体中的 `url`、`format` 并生成示例文本 | 未执行真实抓取/解析/转换 |
+| `/api/status` | GET | 返回版本号、运行时长等静态信息 | 无真实监控数据 |
+| `/api/health` | GET | 透出简单健康检查（位于 `handlers/healthHandler.js`） | 可扩展为真实依赖检测 |
+| `/output/:groupName` | GET | 调用 `groupHandler`，读取本地 `output/` 下的指定文件 | 需确保产物存在且可公开 |
 
-将订阅源转换为指定格式。
-
-```http
-POST /api/convert
-Content-Type: application/json
-```
-
-#### 请求参数
-
-| 参数名 | 类型 | 必填 | 描述 |
-|--------|------|------|------|
-| url | string | 是 | 订阅源 URL |
-| format | string | 是 | 目标格式，支持 `v2ray`、`clash`、`surge` |
-| template | string | 否 | 自定义模板名称 |
-
-#### 请求示例
-
-```json
-{
-  "url": "https://example.com/subscription",
-  "format": "clash",
-  "template": "custom"
-}
-```
-
-#### 响应示例
-
-成功响应：
+示例响应可参考 `src/worker/handlers` 中的实现。以下为 `/api/convert` 当前返回的数据结构：
 
 ```json
 {
   "success": true,
-  "data": "...(转换后的内容)...",
-  "nodeCount": 42,
-  "time": 235
+  "format": "clash",
+  "nodeCount": 10,
+  "data": "# 这是一个示例转换结果\n# 格式: clash\n# 来源: https://example.com"
 }
 ```
 
-错误响应：
+## 3. 与核心流程集成的建议步骤
 
-```json
-{
-  "success": false,
-  "error": "Failed to fetch subscription: HTTP error! status: 404",
-  "code": "ERR_FETCH_FAILED",
-  "context": {
-    "source": "https://example.com/subscription"
-  }
-}
-```
+要让 Worker 真正完成订阅转换，可参考以下思路：
 
-### 2. 订阅列表 API
+1. **引入构建产物**：
+   - 将 `dist/` 中的同步/转换模块通过 Rollup 打包为 Worker 可用版本。
+   - 或者直接在 Worker 中使用 `src/converter/SubscriptionConverter.js`，注意 Cloudflare Worker 的运行时限制。
+2. **实现输入校验**：解析请求体时使用 `validation` 模块或新增 JSON Schema，确保 URL、格式、选项有效。
+3. **调用转换器**：
+   ```javascript
+   import { SubscriptionConverter } from '../../converter/SubscriptionConverter.js';
 
-获取系统中配置的订阅源列表。
+   const converter = new SubscriptionConverter({
+     logger: defaultLogger.child({ component: 'worker' }),
+     outputDir: 'output',
+     // 根据需要传入 nodeManager、ruleManager 参数
+   });
 
-```http
-GET /api/subscriptions
-```
+   const { data, nodeCount } = await converter.convert(url, format, options);
+   ```
+4. **增加缓存与速率限制**：可使用 Cloudflare KV、Durable Objects 或绑定存储，以减轻源站压力。
+5. **安全控制**：
+   - 引入令牌或 IP 白名单，防止公共滥用。
+   - 避免原始订阅 URL、核心日志直接暴露给终端用户。
+6. **错误处理**：统一捕获 `FetchError`、`ParseError`、`ConversionError` 等，返回结构化的错误响应。
 
-#### 响应示例
+## 4. 部署参考（实验性）
 
-```json
-{
-  "subscriptions": [
-    {
-      "id": "public-source-1",
-      "name": "Public Source 1",
-      "type": "v2ray",
-      "updateInterval": 21600,
-      "enabled": true
-    }
-  ]
-}
-```
+1. 登录 Cloudflare 并创建一个新的 Worker。
+2. 在仓库根目录创建或更新 `wrangler.toml`，设定 `name`、`main`、`compatibility_date` 等字段。
+3. 执行：
+   ```bash
+   pnpm wrangler deploy
+   ```
+4. 验证：使用 `curl` 或 Postman 调用对应路由，确认返回期望结果。
 
-### 3. 系统状态 API
+> 部署前务必对订阅 URL、输出内容进行脱敏处理，避免泄露私有节点。实际线上服务应配合日志监控、限流与告警体系。
 
-获取系统运行状态信息。
+## 5. 后续改进计划（建议）
 
-```http
-GET /api/status
-```
+- [ ] 将 `/api/convert` 与 `SubscriptionConverter` 打通，支持多格式输出和模板选择。
+- [ ] `/api/subscriptions` 动态读取 `config/subscriptions.json` 并支持分组、过滤参数。
+- [ ] 增加鉴权、速率限制与审计日志，提升安全性。
+- [ ] 输出结果支持压缩/短期缓存，减轻源站压力。
+- [ ] 引入自动化测试（单元、契约测试）确保接口变更可控。
 
-#### 响应示例
+## 6. 参考资料
 
-```json
-{
-  "status": "running",
-  "version": "1.1.0",
-  "uptime": 3600,
-  "lastUpdate": "2023-01-01T00:00:00Z",
-  "stats": {
-    "conversions": 100,
-    "errors": 5,
-    "avgResponseTime": 150
-  }
-}
-```
+- `src/worker/index.js`、`src/worker/router.js`、`src/worker/handlers/*`
+- `docs/DEVELOPMENT.md`：包含脚本说明与目录结构。
+- Cloudflare Workers 官方文档：[https://developers.cloudflare.com/workers/](https://developers.cloudflare.com/workers/)
 
-### 4. 健康检查 API
-
-获取系统健康状态信息。
-
-```http
-GET /api/health
-```
-
-#### 响应示例
-
-```json
-{
-  "name": "subsyncforge",
-  "description": "SubSyncForge Health Check",
-  "status": "up",
-  "checks": [
-    {
-      "name": "system",
-      "status": "up",
-      "message": "System is running",
-      "details": {
-        "version": "1.1.0",
-        "environment": "production"
-      },
-      "timestamp": "2023-01-01T00:00:00Z"
-    },
-    {
-      "name": "memory",
-      "status": "up",
-      "message": "Memory usage is normal",
-      "details": {
-        "heapUsed": 10000000,
-        "heapTotal": 20000000
-      },
-      "timestamp": "2023-01-01T00:00:00Z"
-    }
-  ],
-  "timestamp": "2023-01-01T00:00:00Z"
-}
-```
-
-## 错误处理
-
-API 可能返回以下错误状态码：
-
-| 状态码 | 描述 |
-|--------|------|
-| 400 | 请求参数错误 |
-| 404 | 资源不存在 |
-| 500 | 服务器内部错误 |
-| 503 | 服务不可用 |
-
-错误响应格式：
-
-```json
-{
-  "success": false,
-  "error": "错误信息",
-  "code": "错误代码",
-  "context": {
-    "相关上下文信息"
-  }
-}
-```
-
-## 使用示例
-
-### 使用 cURL 转换订阅
-
-```bash
-curl -X POST https://your-worker.workers.dev/api/convert \
-  -H "Content-Type: application/json" \
-  -d '{"url":"https://example.com/subscription","format":"clash"}'
-```
-
-### 使用 JavaScript 转换订阅
-
-```javascript
-async function convertSubscription() {
-  const response = await fetch('https://your-worker.workers.dev/api/convert', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      url: 'https://example.com/subscription',
-      format: 'clash'
-    })
-  });
-  
-  const result = await response.json();
-  
-  if (result.success) {
-    console.log(`转换成功，共 ${result.nodeCount} 个节点`);
-    console.log(result.data);
-  } else {
-    console.error(`转换失败: ${result.error}`);
-  }
-}
-```
-
-## 限制说明
-
-- API 请求频率限制：每 IP 每分钟最多 60 次请求
-- 单次转换节点数量限制：最多 1000 个节点
-- 响应大小限制：最大 10MB
-
-## 更新日志
-
-### v1.1.0
-
-- 添加健康检查 API
-- 增强错误处理和日志系统
-- 添加性能监控指标
-- 支持 Webhook 事件通知
-
-### v1.0.0
-
-- 初始版本发布
-- 支持基本的订阅转换功能
-- 支持多种格式转换
+如需贡献 Worker 相关能力，欢迎在 Issue 中讨论设计方案，并在 PR 中同步更新本指南。

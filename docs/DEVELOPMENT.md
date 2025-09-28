@@ -1,447 +1,151 @@
 # SubSyncForge 开发指南
 
-本文档提供了 SubSyncForge 项目的开发指南，包括项目结构、核心组件、开发流程和最佳实践。
+本指南面向希望扩展或维护 SubSyncForge 的开发者，介绍项目结构、运行环境、常用脚本以及当前的质量保障策略。所有内容基于现有源码的真实状态，力求避免“文不对题”。
 
-## 项目架构
+## 1. 运行环境与依赖
 
-SubSyncForge 采用模块化架构，主要由以下几个部分组成：
+- **Node.js**：18.0.0 及以上（`package.json` 中的 `engines` 要求）
+- **包管理器**：推荐 `pnpm`，亦可使用 `npm`
+- **可选工具**：
+  - `wrangler`（由 `pnpm install` 自动安装）用于本地运行 Cloudflare Worker
+  - `git`、`curl` 等常见命令行工具
+- **系统要求**：
+  - 节点测试依赖外部网络访问与核心二进制（Mihomo/V2Ray）。首次运行会自动下载适配平台的核心，因此必须具备写入 `.cores/` 目录的权限。
 
-1. **Worker 模块**：基于 Cloudflare Worker 的服务端代码
-2. **转换器模块**：负责订阅源的获取、解析、转换等核心功能
-3. **工具模块**：提供日志、事件、验证、监控等通用功能
-4. **配置模块**：管理订阅源和转换规则的配置
+安装依赖：
 
-### 目录结构
+```bash
+pnpm install
+# 或者
+npm install
+```
+
+## 2. 项目目录结构
 
 ```
 SubSyncForge/
+├── config/                 # 自定义配置、订阅、黑名单等
+├── data/                   # 运行期缓存与测试结果（会自动创建子目录）
+├── docs/                   # 项目文档
+├── output/                 # 同步任务生成的配置文件
 ├── src/
-│   ├── worker/          # Cloudflare Worker 代码
-│   │   ├── index.js     # Worker 入口文件
-│   │   ├── router.js    # 请求路由处理
-│   │   └── handlers/    # 各类请求处理器
-│   ├── converter/       # 订阅转换核心逻辑
-│   │   ├── index.js     # 转换器入口
-│   │   ├── fetcher/     # 订阅源获取
-│   │   ├── parser/      # 订阅解析
-│   │   ├── dedup/       # 节点去重
-│   │   └── formats/     # 格式转换
-│   └── utils/           # 通用工具函数
-│       ├── logger/      # 日志系统
-│       ├── events/      # 事件系统
-│       ├── validation/  # 数据验证
-│       ├── metrics/     # 性能监控
-│       └── health/      # 健康检查
-├── config/              # 配置文件目录
-├── templates/           # 转换模板
-├── web/                 # 前端界面
-└── docs/                # 文档
+│   ├── core/               # 同步流程的核心模块
+│   ├── converter/          # 订阅转换相关逻辑
+│   ├── scripts/            # 可直接执行的 Node.js 脚本
+│   ├── tester/             # 节点测试实现
+│   ├── utils/              # 公共工具库
+│   └── worker/             # Cloudflare Worker 入口及处理器
+├── templates/              # 输出配置所用的模板文件
+├── package.json
+└── wrangler.toml
 ```
 
-## 核心组件
-
-### 1. SubscriptionConverter
+> **提示**：仓库中不存在 `web/` 前端目录，也没有 `src/converter/index.js` 入口；请以实际文件为准。
+
+## 3. 核心模块概览
+
+### 3.1 同步流程（`src/core`）
+- `SyncManager.js`：整个同步任务的协调者，负责加载配置、获取订阅、处理节点、执行测试并生成输出。
+- `config/`：包含默认配置(`ConfigDefaults.js`)与加载器(`ConfigLoader.js`)，将 `config/custom.yaml` 与代码内默认值合并。
+- `subscription/SubscriptionFetcher.js`：按配置抓取远端订阅，支持缓存与代理。
+- `node/NodeProcessor.js`：执行去重、过滤、排序、分组等操作。
+- `output/ConfigGenerator.js`：基于模板输出 Clash/Mihomo、Surge、SingBox、V2Ray 等格式的配置文件。
+- `proxy/ProxyManager.js` 与 `ProxyCoreManager.js`：管理外部代理与 Mihomo/V2Ray 核心。
+- `testing/AdvancedNodeTester.js`：结合核心进行批量拨测，统计性能数据并可自动重命名。
+
+### 3.2 转换器（`src/converter`）
+- `SubscriptionConverter.js` 将抓取、解析、去重、规则处理、格式转换串联起来。
+- `analyzer/`、`rules/`、`formats/` 等子目录提供节点分析、规则加载、格式化输出的实现。
+
+### 3.3 Cloudflare Worker（`src/worker`）
+- 为 `/api/subscriptions`、`/api/convert`、`/api/status` 等提供处理器，但目前主要是示例级响应，尚未完整接入转换流水线。
+
+### 3.4 工具模块（`src/utils`）
+- 提供日志、事件、指标、健康检查、IP 定位、文件系统等基础能力。
+
+## 4. 常用脚本与工作流
+
+| 命令 | 说明 |
+|------|------|
+| `pnpm run build` | 使用 Rollup 构建 `dist/` 产物（供 Worker 或脚本部署使用） |
+| `pnpm run sync` | 构建后执行 `dist/sync-subscriptions.js`，完成一次完整同步流程 |
+| `pnpm run test` | 运行 `src/scripts/sync-subscriptions.js`（目前等价于一次本地同步，尚非自动化测试） |
+| `pnpm run test:nodes` | 调用 `src/scripts/test-advanced-nodes.js`，使用默认核心拨测节点 |
+| `pnpm run test:nodes:mihomo` / `:v2ray` / `:basic` | 强制指定拨测模式 |
+| `pnpm run local:run` | 读取本地配置并执行一轮同步，便于调试 |
+| `wrangler dev` | 启动 Cloudflare Worker 本地调试（需先构建或指向源码） |
+
+> **注意**：大部分脚本依赖 `config/custom.yaml` 与 `config/subscriptions.json`。缺失或格式错误会导致任务失败。
+
+## 5. 配置说明
+
+### 5.1 `config/custom.yaml`
+- `options.*`：控制输出目录、数据目录、去重策略等。
+- `subscriptions`：可定义额外的自定义节点。
+- `testing.*`：节点测试参数（核心类型、并发、超时、重命名等）。
+- `outputs` 或旧版 `outputConfigs.outputs`：定义需要生成的输出文件、模板及过滤规则。
+
+### 5.2 `config/subscriptions.json`
+- `defaults`：订阅源的默认参数（例如 `type`, `updateInterval`）。
+- `sources`：实际订阅源列表。
+- `conversionRules`：指定默认启用的输出模板。
+
+### 5.3 数据路径
+- `data/`：运行时缓存、IP 定位结果、测试报告等。
+- `.cores/`：在拨测时下载的 Mihomo/V2Ray 核心与临时配置。
+- `output/`：最终同步后的配置文件。
+
+> 可以通过 `pnpm run validate:config` 调用 `config/schema/` 下的 JSON Schema 对 `config/subscriptions.json` 与 `config/custom.yaml` 进行静态校验，详见 `docs/CONFIG_VALIDATION.md`。
+
+## 6. 推荐开发流程
+
+1. **准备配置**：
+   - 复制并编辑 `config/custom.yaml`、`config/subscriptions.json`（注意备份个人敏感信息）。
+2. **快速验收**：
+   - 执行 `pnpm run test:nodes:mihomo` 观察拨测结果，确认核心下载与网络访问正常。
+   - 执行 `pnpm run sync` 生成 `output/` 文件，检查日志与结果是否符合预期。
+3. **调试节点处理**：
+   - 使用 `src/scripts/local-run.js` 或 `LocalRunManager` 中的自定义模式。
+4. **调试 Worker**：
+   - 构建后运行 `wrangler dev`，验证路由与响应。
+
+## 7. 质量与测试策略
+
+- **当前现状**：尚无系统化的单元测试/集成测试，`pnpm run test` 仅复用同步脚本。
+- **建议实践**：
+  1. 为核心模块（如 `NodeProcessor`, `SubscriptionFetcher`, `ConfigLoader`）编写单元测试，覆盖主要分支逻辑。
+  2. 使用虚拟订阅源或本地样例构建集成测试，验证端到端同步流程。
+  3. 为 Worker 引入契约测试，确保文档与实际响应保持一致。
+- **CI 集成**：`.github/workflows/` 中包含 `sync-subscriptions.yml` 与 `test-nodes-advanced.yml`，可按需扩展为真正的回归测试流程。
+- **更多细节**：参见 `docs/TESTING.md`，涵盖测试基线、目录规划与 CI 建议。
+
+## 8. 代码风格与工具
+
+- 项目尚未配置 ESLint/Prettier，但建议在提交前通过统一的格式化工具。
+- 代码注释原则：对复杂逻辑提供简短注释，避免冗余描述。
+- 目录结构遵循职责单一原则：如需新增模块，请置于合适子目录并补充文档。
+
+## 9. 文档维护约定
+
+- `README.md`：针对用户的快速入门与特性介绍。
+- `docs/ARCHITECTURE.md`：整体架构与模块关系。
+- `docs/ADVANCED_NODE_TESTING.md`：拨测功能的详细说明。
+- **本文件**：面向开发者的操作与约定。
+- 新增功能应同时更新相关文档，并在变更记录中标注。
+
+## 10. 贡献流程
+
+1. Fork 仓库并创建分支：`git checkout -b feature/<your-topic>`
+2. 根据贡献内容更新文档与配置示例。
+3. 运行 `pnpm run sync` 等关键脚本验证变更。
+4. 提交代码并在 PR 中说明测试方式及影响范围。
+5. 如修改公共接口或配置格式，请同步更新对应文档。
+
+## 11. 后续改进方向（建议）
 
-`SubscriptionConverter` 是整个转换流程的核心类，负责协调各个组件完成订阅转换。
+- 将 Worker 端点真正接入 `SubscriptionConverter`，或在文档中明确其示例性质。
+- 引入 JSON Schema/YAML Schema 校验，提升配置错误的可诊断性。
+- 建立基础测试套件并驱动 CI，保证同步与拨测流程的稳定性。
+- 对核心下载、缓存目录等潜在“坑点”写入更加详细的运维指南。
 
-```javascript
-const converter = new SubscriptionConverter({
-  // 配置选项
-  dedup: true,              // 是否启用去重
-  validateInput: true,      // 是否验证输入
-  recordMetrics: true,      // 是否记录性能指标
-  emitEvents: true,         // 是否发出事件
-  logger: customLogger,     // 自定义日志器
-  template: 'custom'        // 自定义模板
-});
-
-// 转换订阅
-const result = await converter.convert(
-  'https://example.com/subscription',  // 订阅源 URL
-  'clash'                             // 目标格式
-);
-```
-
-### 2. 日志系统
-
-日志系统提供了分级日志记录和可配置的日志处理器。
-
-```javascript
-import { logger } from '../utils';
-
-// 创建子日志器
-const log = logger.defaultLogger.child({ component: 'MyComponent' });
-
-// 记录不同级别的日志
-log.debug('调试信息', { extra: 'data' });
-log.info('普通信息');
-log.warn('警告信息');
-log.error('错误信息', { error: err });
-log.fatal('致命错误', { critical: true });
-```
-
-### 3. 事件系统
-
-事件系统提供了发布/订阅模式的事件通知。
-
-```javascript
-import { events } from '../utils';
-
-// 监听事件
-events.eventEmitter.on(events.EventType.CONVERSION_COMPLETE, (data) => {
-  console.log('转换完成:', data);
-});
-
-// 发出事件
-events.eventEmitter.emit(events.EventType.CONVERSION_START, {
-  source: 'https://example.com/sub',
-  format: 'clash'
-});
-```
-
-### 4. 数据验证
-
-数据验证模块提供了灵活的数据验证功能。
-
-```javascript
-import { validation } from '../utils';
-
-// 定义验证模式
-const schema = {
-  url: ['required', 'string', { pattern: /^https?:\/\/.+/ }],
-  format: ['required', 'string', { enum: ['clash', 'surge', 'v2ray'] }]
-};
-
-// 验证数据
-const result = validation.validate({
-  url: 'https://example.com/sub',
-  format: 'clash'
-}, schema);
-
-if (result.valid) {
-  // 数据有效
-  console.log(result.data);
-} else {
-  // 数据无效
-  console.error(result.errors);
-}
-```
-
-### 5. 性能监控
-
-性能监控模块提供了详细的性能指标收集和分析功能。
-
-```javascript
-import { metrics } from '../utils';
-
-// 记录计数器
-metrics.metrics.increment('api.calls', 1, { endpoint: '/api/convert' });
-
-// 记录仪表值
-metrics.metrics.gauge('memory.usage', process.memoryUsage().heapUsed);
-
-// 记录直方图值
-metrics.metrics.histogram('response.time', 150, { status: 200 });
-
-// 计时器
-const timer = metrics.metrics.startTimer('function.time');
-// ... 执行代码 ...
-const duration = timer.stop();
-```
-
-### 6. 健康检查
-
-健康检查模块提供了系统健康状态监控功能。
-
-```javascript
-import { health } from '../utils';
-
-// 添加自定义健康检查
-health.healthCheck.addCheck(async () => {
-  return {
-    name: 'database',
-    status: isDbConnected ? health.HealthStatus.UP : health.HealthStatus.DOWN,
-    message: isDbConnected ? 'Database is connected' : 'Database connection failed',
-    details: { connectionTime: dbConnectionTime }
-  };
-});
-
-// 执行健康检查
-const healthResult = await health.healthCheck.check();
-```
-
-## 开发流程
-
-### 1. 环境设置
-
-```bash
-# 安装依赖
-pnpm install
-
-# 运行开发服务器
-pnpm dev
-```
-
-### 2. 测试
-
-```bash
-# 运行单元测试
-pnpm test
-
-# 运行特定测试
-pnpm test -- --filter=SubscriptionConverter
-```
-
-### 3. 部署
-
-```bash
-# 部署到 Cloudflare Worker
-pnpm deploy
-```
-
-## 示例代码
-
-### 1. 自定义订阅源
-
-以下是在 `config/custom.yaml` 中添加自定义订阅源的示例：
-
-```yaml
-# 订阅源列表
-subscriptions:
-  # 从 URL 获取订阅
-  - type: url
-    value: "https://example.com/subscription"
-    name: "示例订阅1"
-
-  # 直接使用 Base64 编码的节点列表
-  - type: base64
-    value: "dm1lc3M6Ly9leUoySWpvaU1pSXNJbkJ6SWpvaVhIVTVPVGs1WEhVMlpUSm1MakY4WjJOd2ZGeDFOV1UzWmx4MU5tVXlabHgxT1dGa09GeDFPVEF4WmlJc0ltRmtaQ0k2SW5Ob2F5NWpaREV5TXpRdWVIbDZJaXdpY0c5eWRDSTZJakkyT0RFNUlpd2lhV1FpT2lKbVpqTmxOak01TkMwMll6TmxMVFJpWVdFdFlUUTROaTFrWWpnMU5XWmtORFV4TURRaUxDSmhhV1FpT2lJd0lpd2libVYwSWpvaWQzTWlMQ0owZVhCbElqb2libTl1WlNJc0ltaHZjM1FpT2lKc2FXNTFhR0Z2TG1OdmJTSXNJbkJoZEdnaU9pSmNMM05vYXk1alpERXlNelF1ZUhsNklpd2lkR3h6SWpvaUluMD0="
-    name: "Base64示例"
-```
-
-### 2. 使用转换器 API
-
-以下是使用 `SubscriptionConverter` 类进行订阅转换的示例：
-
-```javascript
-import { SubscriptionConverter } from './src/converter';
-
-// 创建转换器实例
-const converter = new SubscriptionConverter({
-  dedup: true,              // 启用去重
-  validateInput: true,      // 启用输入验证
-  recordMetrics: true,      // 记录性能指标
-  emitEvents: true          // 发出事件通知
-});
-
-// 转换订阅
-async function convertSubscription() {
-  try {
-    const result = await converter.convert(
-      'https://example.com/subscription',  // 订阅源 URL
-      'clash',                            // 目标格式
-      {
-        template: 'templates/mihomo.yaml'  // 自定义模板
-      }
-    );
-
-    if (result.success) {
-      console.log(`转换成功，共 ${result.nodeCount} 个节点`);
-      console.log(result.data);
-    } else {
-      console.error(`转换失败: ${result.error}`);
-    }
-  } catch (error) {
-    console.error('转换过程出错:', error);
-  }
-}
-
-convertSubscription();
-```
-
-### 3. 自定义模板
-
-以下是创建自定义 Clash 模板的示例：
-
-```yaml
-# 自定义 Clash 模板
-port: 7890
-socks-port: 7891
-allow-lan: true
-mode: rule
-log-level: info
-
-# 节点信息将被替换到这里
-proxies:
-  {{proxies}}
-
-# 代理组
-proxy-groups:
-  - name: "PROXY"
-    type: select
-    proxies:
-      - AUTO
-      {{proxyNames}}
-
-  - name: "AUTO"
-    type: url-test
-    url: http://www.gstatic.com/generate_204
-    interval: 300
-    proxies:
-      {{proxyNames}}
-
-# 规则
-rules:
-  - DOMAIN-SUFFIX,google.com,PROXY
-  - DOMAIN-SUFFIX,github.com,PROXY
-  - GEOIP,CN,DIRECT
-  - MATCH,PROXY
-```
-
-### 4. 使用事件系统
-
-以下是使用事件系统监听转换过程的示例：
-
-```javascript
-import { events } from './src/utils';
-
-// 监听转换开始事件
-events.eventEmitter.on(events.EventType.CONVERSION_START, (data) => {
-  console.log('转换开始:', data);
-});
-
-// 监听转换完成事件
-events.eventEmitter.on(events.EventType.CONVERSION_COMPLETE, (data) => {
-  console.log('转换完成:', data);
-  console.log(`处理了 ${data.nodeCount} 个节点，耗时 ${data.time}ms`);
-});
-
-// 监听错误事件
-events.eventEmitter.on(events.EventType.CONVERSION_ERROR, (data) => {
-  console.error('转换错误:', data.error);
-});
-```
-
-### 5. 使用 Webhook 通知
-
-以下是配置 Webhook 通知的示例：
-
-```javascript
-import { events } from './src/utils';
-
-// 创建 Webhook 通知器
-const webhookNotifier = new events.WebhookNotifier({
-  webhookUrl: 'https://your-webhook-url.com/hook',
-  events: [
-    events.EventType.CONVERSION_COMPLETE,
-    events.EventType.CONVERSION_ERROR
-  ],
-  headers: {
-    'Content-Type': 'application/json',
-    'Authorization': 'Bearer your-token'
-  }
-});
-
-// Webhook 将自动发送指定事件的通知
-```
-
-## 最佳实践
-
-### 错误处理
-
-- 使用自定义错误类型（`FetchError`, `ParseError` 等）
-- 提供详细的错误上下文
-- 使用 try-catch 块捕获和处理错误
-- 记录错误日志，包括堆栈跟踪
-
-```javascript
-try {
-  // 可能出错的代码
-} catch (error) {
-  const fetchError = new FetchError(`Failed to fetch: ${error.message}`, {
-    cause: error,
-    context: { url }
-  });
-
-  logger.error('Fetch failed', fetchError.getDetails());
-  throw fetchError;
-}
-```
-
-### 异步编程
-
-- 使用 async/await 处理异步操作
-- 使用 Promise.all 并行处理多个异步操作
-- 设置合理的超时时间
-
-```javascript
-async function fetchMultiple(urls) {
-  const promises = urls.map(async (url) => {
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 10000);
-
-    try {
-      const response = await fetch(url, { signal: controller.signal });
-      clearTimeout(timeoutId);
-      return response.text();
-    } catch (error) {
-      logger.error(`Failed to fetch ${url}`, { error });
-      return null;
-    }
-  });
-
-  return Promise.all(promises);
-}
-```
-
-### 性能优化
-
-- 使用缓存减少重复计算
-- 避免不必要的深拷贝
-- 使用 Map 和 Set 提高查找效率
-- 记录和分析性能指标
-
-```javascript
-// 使用 Map 提高查找效率
-const nodeMap = new Map();
-for (const node of nodes) {
-  const key = `${node.server}:${node.port}`;
-  nodeMap.set(key, node);
-}
-```
-
-### 代码风格
-
-- 使用 ESLint 和 Prettier 保持代码风格一致
-- 编写清晰的注释和文档
-- 遵循模块化和单一职责原则
-- 使用有意义的变量和函数名
-
-## 贡献指南
-
-1. Fork 仓库
-2. 创建功能分支 (`git checkout -b feature/amazing-feature`)
-3. 提交更改 (`git commit -m 'Add some amazing feature'`)
-4. 推送到分支 (`git push origin feature/amazing-feature`)
-5. 创建 Pull Request
-
-## 常见问题
-
-### Q: 如何添加新的转换格式？
-
-A: 在 `src/converter/formats` 目录下创建新的格式转换器，并在 `FormatConverter` 类中注册。
-
-### Q: 如何自定义日志输出？
-
-A: 创建自定义的 `LogHandler` 实现，并将其添加到 `Logger` 实例中。
-
-### Q: 如何处理大量节点的性能问题？
-
-A: 使用分批处理、并行处理和缓存机制来优化性能。
-
-## 参考资源
-
-- [Cloudflare Workers 文档](https://developers.cloudflare.com/workers/)
-- [GitHub Actions 文档](https://docs.github.com/en/actions)
-- [JavaScript 异步编程](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous)
-- [性能优化最佳实践](https://web.dev/fast/)
+保持此文档与代码同步，是确保团队成员快速上手与稳定演进的关键。欢迎在提出改动时附带文档更新，共同完善 SubSyncForge。

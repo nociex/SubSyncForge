@@ -82,10 +82,23 @@
 ## [未发布]
 
 ### 配置
+- **配置校验体系**：新增 `config/schema/subscriptions.schema.json` 与 `config/schema/custom.schema.json`，为关键配置提供 JSON Schema 定义。
 - **测试配置调整**：
   - 在 [`config/custom.yaml`](config/custom.yaml) 文件中，将 `testing.max_nodes_per_type` 设置为 `0`。
   - 在 [`config/custom.yaml`](config/custom.yaml) 文件中，将 `testing.max_nodes_per_region` 设置为 `0`。
   - 在 [`config/custom.yaml`](config/custom.yaml) 文件中，确保 `testing.max_nodes` 保持或设置为 `0`。
+
+### 工具
+- 新增 `pnpm run validate:config` 脚本，并提供 `src/scripts/validate-config.js` 结合 Ajv 对配置文件进行校验。
+- 引入 `ajv` 与 `ajv-formats` 依赖支撑 Schema 验证。
+
+### 文档
+- 更新 `README.md` 文档索引，补充配置校验、测试基线与 Worker 集成指引。
+- 新增 `docs/CONFIG_VALIDATION.md` 说明 Schema 结构与验证流程。
+- 新增 `docs/TESTING.md` 规划单元/集成测试以及 CI 基线。
+- 新增 `docs/WORKER_INTEGRATION.md` 评估 Cloudflare Worker 与核心流程的集成方案。
+- 在 `docs/DEVELOPMENT.md` 与 `docs/OPERATIONS.md` 中加入配置校验提示。
+
 ### 优化
 - **配置文件URL统一**：
   - 统一所有配置模板（Surge, Clash, SingBox）中的订阅URL格式

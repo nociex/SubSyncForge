@@ -1,0 +1,159 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://subsyncforge.dev/schemas/custom-config.json",
+  "title": "SubSyncForge Custom Configuration",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "options": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "deduplication": { "type": "boolean" },
+        "filterIrrelevant": { "type": "boolean" },
+        "dataDir": { "type": "string" },
+        "outputDir": { "type": "string" },
+        "githubUser": { "type": "string" },
+        "repoName": { "type": "string" }
+      }
+    },
+    "advanced": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "logLevel": {
+          "type": "string",
+          "enum": ["trace", "debug", "info", "warn", "error", "fatal"]
+        },
+        "log_level": {
+          "type": "string",
+          "enum": ["trace", "debug", "info", "warn", "error", "fatal"]
+        },
+        "cacheTtl": { "type": "integer", "minimum": 0 },
+        "cache_ttl": { "type": "integer", "minimum": 0 },
+        "proxyForSubscription": { "type": "boolean" },
+        "proxy_for_subscription": { "type": "boolean" },
+        "sortNodes": { "type": "boolean" },
+        "sort_nodes": { "type": "boolean" },
+        "syncInterval": { "type": "integer", "minimum": 0 },
+        "sync_interval": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "testing": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "enabled": { "type": "boolean" },
+        "coreType": { "type": "string", "enum": ["mihomo", "v2ray"] },
+        "core_type": { "type": "string", "enum": ["mihomo", "v2ray"] },
+        "useCoreTest": { "type": "boolean" },
+        "use_core_test": { "type": "boolean" },
+        "fallbackToBasic": { "type": "boolean" },
+        "fallback_to_basic": { "type": "boolean" },
+        "autoRename": { "type": "boolean" },
+        "auto_rename": { "type": "boolean" },
+        "verifyLocation": { "type": "boolean" },
+        "verify_location": { "type": "boolean" },
+        "timeout": { "type": "integer", "minimum": 0 },
+        "concurrency": { "type": "integer", "minimum": 1 },
+        "test_url": { "type": "string" },
+        "maxLatency": { "type": "integer", "minimum": 0 },
+        "max_latency": { "type": "integer", "minimum": 0 },
+        "max_nodes": { "type": "integer", "minimum": 0 },
+        "max_nodes_per_type": { "type": "integer", "minimum": 0 },
+        "max_nodes_per_region": { "type": "integer", "minimum": 0 },
+        "filter_invalid": { "type": "boolean" },
+        "sort_by_latency": { "type": "boolean" },
+        "ip_location": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "api_url": { "type": "string" },
+            "api_key": { "type": "string" },
+            "cache_time": { "type": "integer", "minimum": 0 }
+          }
+        }
+      }
+    },
+    "chinaProxy": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "enabled": { "type": "boolean" },
+        "configFile": { "type": "string" },
+        "useForSubscription": { "type": "boolean" },
+        "useForTesting": { "type": "boolean" }
+      }
+    },
+    "outputs": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/outputConfig" }
+    },
+    "outputConfigs": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "outputs": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/outputConfig" }
+        }
+      }
+    },
+    "nodes": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/manualNode" }
+    }
+  },
+  "definitions": {
+    "outputConfig": {
+      "type": "object",
+      "required": ["path"],
+      "additionalProperties": false,
+      "properties": {
+        "name": { "type": "string" },
+        "format": { "type": "string", "enum": ["clash", "mihomo", "surge", "singbox", "v2ray", "url", "text"] },
+        "template": { "type": "string" },
+        "path": { "type": "string" },
+        "enabled": { "type": "boolean" },
+        "options": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "filter_by_region": {
+              "type": "array",
+              "items": { "type": "string" }
+            },
+            "exclude_regions": {
+              "type": "array",
+              "items": { "type": "string" }
+            },
+            "filter_by_service": {
+              "type": "array",
+              "items": { "type": "string" }
+            },
+            "max_nodes": { "type": "integer", "minimum": 0 }
+          }
+        }
+      }
+    },
+    "manualNode": {
+      "type": "object",
+      "required": ["type", "name", "server", "port"],
+      "additionalProperties": true,
+      "properties": {
+        "type": { "type": "string" },
+        "name": { "type": "string" },
+        "server": { "type": "string" },
+        "port": { "type": "integer", "minimum": 1, "maximum": 65535 },
+        "uuid": { "type": "string" },
+        "cipher": { "type": "string" },
+        "tls": { "type": "boolean" },
+        "network": { "type": "string" },
+        "tags": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    }
+  }
+}

@@ -21,7 +21,8 @@
     "clean": "node src/scripts/clean-cache.js",
     "schedule": "node src/scripts/schedule.js",
     "generate-icons": "node src/scripts/generateGroupIcons.js",
-    "generate-groups": "node src/scripts/generateGroupConfigs.js"
+    "generate-groups": "node src/scripts/generateGroupConfigs.js",
+    "validate:config": "node src/scripts/validate-config.js"
   },
   "dependencies": {
     "node-fetch": "^3.3.2",
@@ -38,7 +39,9 @@
     "@rollup/plugin-commonjs": "^25.0.0",
     "@rollup/plugin-json": "^6.0.0",
     "@rollup/plugin-node-resolve": "^15.0.0",
-    "rollup": "^3.25.0"
+    "rollup": "^3.25.0",
+    "ajv": "^8.12.0",
+    "ajv-formats": "^2.1.1"
   },
   "engines": {
     "node": ">=18.0.0"

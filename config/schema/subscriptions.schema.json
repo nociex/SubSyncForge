@@ -1,0 +1,104 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://subsyncforge.dev/schemas/subscriptions.json",
+  "title": "SubSyncForge Subscriptions",
+  "type": "object",
+  "required": ["sources"],
+  "additionalProperties": false,
+  "properties": {
+    "version": {
+      "type": "string",
+      "description": "Schema version tag for external tooling."
+    },
+    "defaults": {
+      "type": "object",
+      "description": "Default values merged into each subscription source.",
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["auto", "v2ray", "clash", "surge", "ss", "ssr", "trojan"],
+          "default": "auto"
+        },
+        "updateInterval": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Refresh interval in seconds (0 to disable scheduling)."
+        },
+        "enabled": {
+          "type": "boolean",
+          "default": true
+        },
+        "name": {
+          "type": "string",
+          "description": "Human readable default name applied when a source omits it."
+        }
+      }
+    },
+    "sources": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "url"],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "name": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string",
+            "format": "uri"
+          },
+          "type": {
+            "type": "string",
+            "enum": ["auto", "url", "v2ray", "clash", "surge", "ss", "ssr", "trojan"]
+          },
+          "updateInterval": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "enabled": {
+            "type": "boolean"
+          },
+          "timeout": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Request timeout (ms) for this source"
+          },
+          "maxRetries": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Retry count when fetching this source"
+          },
+          "priority": {
+            "type": "integer",
+            "description": "Optional priority flag for scheduling or custom scripts."
+          }
+        }
+      }
+    },
+    "conversionRules": {
+      "type": "object",
+      "description": "Default conversion settings per target format.",
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "enabledByDefault": {
+            "type": "boolean",
+            "default": true
+          },
+          "template": {
+            "type": "string",
+            "description": "Template path relative to repository root."
+          }
+        }
+      }
+    }
+  }
+}
