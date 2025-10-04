@@ -1,602 +1,33 @@
 {
   "nodes": [
     {
-      "id": "cn8x1g4ij",
-      "type": "ss",
-      "name": "🇩🇪德国1 | ⬇️ 1.3MB/s",
-      "server": "mm.huawei-api.top",
-      "port": 19585,
-      "protocol": "shadowsocks",
+      "id": "jp84wqrgj",
+      "type": "hysteria2",
+      "name": "🇺🇸美国1 | ⬇️ 2.7MB/s",
+      "server": "els.ylccloud.top",
+      "port": 16090,
+      "protocol": "hysteria2",
       "settings": {
-        "method": "chacha20-ietf-poly1305",
-        "password": "c3ffd605-d9fb-42b7-98f2-a29fb999e5b67"
+        "auth": "ce6b100f-7fec-4496-b08e-30c3ce7b303d",
+        "sni": "els.ylccloud.top",
+        "insecure": true,
+        "obfs": "",
+        "obfsPassword": "",
+        "uploadBandwidth": "",
+        "downloadBandwidth": ""
       },
       "extra": {
-        "raw": "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpjM2ZmZDYwNS1kOWZiLTQyYjctOThmMi1hMjlmYjk5OWU1YjY=@mm.huawei-api.top:19585#%F0%9F%87%A9%F0%9F%87%AA%E5%BE%B7%E5%9B%BD1%20%7C%20%E2%AC%87%EF%B8%8F%201.3MB%2Fs",
-        "addedAt": "2025-10-04T06:23:44.518Z"
+        "raw": "hysteria2://ce6b100f-7fec-4496-b08e-30c3ce7b303d@els.ylccloud.top:16090?insecure=1&sni=els.ylccloud.top#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD1%20%7C%20%E2%AC%87%EF%B8%8F%202.7MB%2Fs",
+        "addedAt": "2025-10-04T12:31:34.713Z"
       },
       "metadata": {
         "source": "amaoa"
       }
     },
     {
-      "id": "426bw27cm",
-      "type": "ss",
-      "name": "🇬🇧英国1 | ⬇️ 1.1MB/s",
-      "server": "mm.huawei-api.top",
-      "port": 19587,
-      "protocol": "shadowsocks",
-      "settings": {
-        "method": "chacha20-ietf-poly1305",
-        "password": "c3ffd605-d9fb-42b7-98f2-a29fb999e5b67"
-      },
-      "extra": {
-        "raw": "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpjM2ZmZDYwNS1kOWZiLTQyYjctOThmMi1hMjlmYjk5OWU1YjY=@mm.huawei-api.top:19587#%F0%9F%87%AC%F0%9F%87%A7%E8%8B%B1%E5%9B%BD1%20%7C%20%E2%AC%87%EF%B8%8F%201.1MB%2Fs",
-        "addedAt": "2025-10-04T06:23:44.518Z"
-      },
-      "metadata": {
-        "source": "amaoa"
-      }
-    },
-    {
-      "id": "qqdixev0o",
+      "id": "ve9nvam2o",
       "type": "vless",
-      "name": "🇫🇮芬兰1 | ⬇️ 3.3MB/s",
-      "server": "141.227.170.131",
-      "port": 39113,
-      "protocol": "vless",
-      "settings": {
-        "id": "787979c0-3691-4612-86a1-e0f1101d5eb2",
-        "network": "grpc",
-        "security": "none",
-        "sni": "141.227.170.131",
-        "fp": "",
-        "alpn": "",
-        "path": "/",
-        "host": "",
-        "encryption": "none",
-        "flow": ""
-      },
-      "extra": {
-        "raw": "vless://787979c0-3691-4612-86a1-e0f1101d5eb2@141.227.170.131:39113?security=none&type=grpc&mode=gun&serviceName=ZEDMODEON-ZEDMODEON-ZEDMODEON-bia-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON#%F0%9F%87%AB%F0%9F%87%AE%E8%8A%AC%E5%85%B01%20%7C%20%E2%AC%87%EF%B8%8F%203.3MB%2Fs",
-        "addedAt": "2025-10-04T06:23:44.518Z"
-      },
-      "metadata": {
-        "source": "amaoa"
-      }
-    },
-    {
-      "id": "p5rfzojsr",
-      "type": "vless",
-      "name": "🌀其他1-RO | ⬇️ 3.1MB/s",
-      "server": "141.227.180.86",
-      "port": 43239,
-      "protocol": "vless",
-      "settings": {
-        "id": "0001e585-a648-4db2-8c9e-af346110c642",
-        "network": "grpc",
-        "security": "none",
-        "sni": "141.227.180.86",
-        "fp": "",
-        "alpn": "",
-        "path": "/",
-        "host": "",
-        "encryption": "none",
-        "flow": ""
-      },
-      "extra": {
-        "raw": "vless://0001e585-a648-4db2-8c9e-af346110c642@141.227.180.86:43239?security=none&type=grpc&mode=gun&serviceName=ZEDMODEON-ZEDMODEON-ZEDMODEON-bia-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON#%F0%9F%8C%80%E5%85%B6%E4%BB%961-RO%20%7C%20%E2%AC%87%EF%B8%8F%203.1MB%2Fs",
-        "addedAt": "2025-10-04T06:23:44.518Z"
-      },
-      "metadata": {
-        "source": "amaoa"
-      }
-    },
-    {
-      "id": "nph52u1xg",
-      "type": "vless",
-      "name": "🌀其他2-NO | ⬇️ 3.3MB/s",
-      "server": "141.227.166.55",
-      "port": 20421,
-      "protocol": "vless",
-      "settings": {
-        "id": "a9a5a7ed-d852-4b3b-af5d-6e8d721300b5",
-        "network": "grpc",
-        "security": "none",
-        "sni": "141.227.166.55",
-        "fp": "",
-        "alpn": "",
-        "path": "/",
-        "host": "",
-        "encryption": "none",
-        "flow": ""
-      },
-      "extra": {
-        "raw": "vless://a9a5a7ed-d852-4b3b-af5d-6e8d721300b5@141.227.166.55:20421?security=none&type=grpc&mode=gun&serviceName=ZEDMODEON-ZEDMODEON-ZEDMODEON-bia-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON#%F0%9F%8C%80%E5%85%B6%E4%BB%962-NO%20%7C%20%E2%AC%87%EF%B8%8F%203.3MB%2Fs",
-        "addedAt": "2025-10-04T06:23:44.518Z"
-      },
-      "metadata": {
-        "source": "amaoa"
-      }
-    },
-    {
-      "id": "ha2vdxqx0",
-      "type": "vless",
-      "name": "🇬🇧英国2 | ⬇️ 1.2MB/s",
-      "server": "141.227.174.221",
-      "port": 18409,
-      "protocol": "vless",
-      "settings": {
-        "id": "5342a980-50a4-4daa-9c45-e83f2ebab024",
-        "network": "grpc",
-        "security": "none",
-        "sni": "141.227.174.221",
-        "fp": "",
-        "alpn": "",
-        "path": "/",
-        "host": "",
-        "encryption": "none",
-        "flow": ""
-      },
-      "extra": {
-        "raw": "vless://5342a980-50a4-4daa-9c45-e83f2ebab024@141.227.174.221:18409?security=none&type=grpc&mode=gun&serviceName=ZEDMODEON-ZEDMODEON-ZEDMODEON-bia-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON#%F0%9F%87%AC%F0%9F%87%A7%E8%8B%B1%E5%9B%BD2%20%7C%20%E2%AC%87%EF%B8%8F%201.2MB%2Fs",
-        "addedAt": "2025-10-04T06:23:44.518Z"
-      },
-      "metadata": {
-        "source": "amaoa"
-      }
-    },
-    {
-      "id": "flz7t2m7n",
-      "type": "hysteria",
-      "name": "🇫🇷法国1 | ⬇️ 2.1MB/s",
-      "server": "62.210.127.217",
-      "port": 50011,
-      "protocol": "hysteria",
-      "settings": {
-        "auth": "dongtaiwang.com",
-        "peer": "apple.com",
-        "insecure": true,
-        "upmbps": 11,
-        "downmbps": 55,
-        "obfs": "",
-        "protocol": "udp"
-      },
-      "extra": {
-        "raw": "hysteria://62.210.127.217:50011?alpn=h3&auth=dongtaiwang.com&auth_str=dongtaiwang.com&downmbps=55 Mbps&protocol=udp&insecure=1&peer=apple.com&udp=true&upmbps=11 Mbps#%F0%9F%87%AB%F0%9F%87%B7%E6%B3%95%E5%9B%BD1%20%7C%20%E2%AC%87%EF%B8%8F%202.1MB%2Fs",
-        "addedAt": "2025-10-04T06:23:44.518Z"
-      },
-      "metadata": {
-        "source": "amaoa"
-      }
-    },
-    {
-      "id": "sb948s2o5",
-      "type": "trojan",
-      "name": "🇰🇷韩国1 | ⬇️ 4.3MB/s",
-      "server": "baigou1.kkieo555.cn",
-      "port": 21871,
-      "protocol": "trojan",
-      "settings": {
-        "password": "/dc0281c1-5f69-45bf-9b72-f56d2edb3966",
-        "sni": "douyin.com",
-        "allowInsecure": true
-      },
-      "extra": {
-        "raw": "trojan://dc0281c1-5f69-45bf-9b72-f56d2edb3966@baigou1.kkieo555.cn:21871?sni=douyin.com&allowInsecure=1#%F0%9F%87%B0%F0%9F%87%B7%E9%9F%A9%E5%9B%BD1%20%7C%20%E2%AC%87%EF%B8%8F%204.3MB%2Fs",
-        "addedAt": "2025-10-04T06:23:44.518Z"
-      },
-      "metadata": {
-        "source": "amaoa"
-      }
-    },
-    {
-      "id": "elc8ut7bk",
-      "type": "hysteria",
-      "name": "🇫🇷法国2 | ⬇️ 2.1MB/s",
-      "server": "62.210.127.217",
-      "port": 35511,
-      "protocol": "hysteria",
-      "settings": {
-        "auth": "dongtaiwang.com",
-        "peer": "apple.com",
-        "insecure": true,
-        "upmbps": 11,
-        "downmbps": 55,
-        "obfs": "",
-        "protocol": "udp"
-      },
-      "extra": {
-        "raw": "hysteria://62.210.127.217:35511?alpn=h3&auth=dongtaiwang.com&auth_str=dongtaiwang.com&downmbps=55&protocol=udp&insecure=1&peer=apple.com&udp=true&upmbps=11#%F0%9F%87%AB%F0%9F%87%B7%E6%B3%95%E5%9B%BD2%20%7C%20%E2%AC%87%EF%B8%8F%202.1MB%2Fs",
-        "addedAt": "2025-10-04T06:23:44.518Z"
-      },
-      "metadata": {
-        "source": "amaoa"
-      }
-    },
-    {
-      "id": "o4kvmqyb0",
-      "type": "hysteria2",
-      "name": "🇺🇸美国1 | ⬇️ 1.5MB/s",
-      "server": "yd.jjzcloud.top",
-      "port": 57338,
-      "protocol": "hysteria2",
-      "settings": {
-        "auth": "696d48d3-44c9-4e59-91c7-778200ba7c90",
-        "sni": "yd.jjzcloud.top",
-        "insecure": true,
-        "obfs": "",
-        "obfsPassword": "",
-        "uploadBandwidth": "",
-        "downloadBandwidth": ""
-      },
-      "extra": {
-        "raw": "hysteria2://696d48d3-44c9-4e59-91c7-778200ba7c90@yd.jjzcloud.top:57338?insecure=1&sni=yd.jjzcloud.top#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD1%20%7C%20%E2%AC%87%EF%B8%8F%201.5MB%2Fs",
-        "addedAt": "2025-10-04T06:23:44.518Z"
-      },
-      "metadata": {
-        "source": "amaoa"
-      }
-    },
-    {
-      "id": "uva9tdhw6",
-      "type": "hysteria2",
-      "name": "🇺🇸美国2 | ⬇️ 1.2MB/s",
-      "server": "yd.jjzcloud.top",
-      "port": 57338,
-      "protocol": "hysteria2",
-      "settings": {
-        "auth": "05a5a4d4-796f-49aa-99ba-dba6edafa47e",
-        "sni": "yd.jjzcloud.top",
-        "insecure": true,
-        "obfs": "",
-        "obfsPassword": "",
-        "uploadBandwidth": "",
-        "downloadBandwidth": ""
-      },
-      "extra": {
-        "raw": "hysteria2://05a5a4d4-796f-49aa-99ba-dba6edafa47e@yd.jjzcloud.top:57338?insecure=1&sni=yd.jjzcloud.top#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD2%20%7C%20%E2%AC%87%EF%B8%8F%201.2MB%2Fs",
-        "addedAt": "2025-10-04T06:23:44.518Z"
-      },
-      "metadata": {
-        "source": "amaoa"
-      }
-    },
-    {
-      "id": "j2aj601dq",
-      "type": "trojan",
-      "name": "🇺🇸美国3 | ⬇️ 5.4MB/s",
-      "server": "baigou1.kkieo555.cn",
-      "port": 27865,
-      "protocol": "trojan",
-      "settings": {
-        "password": "/dc0281c1-5f69-45bf-9b72-f56d2edb3966",
-        "sni": "douyin.com",
-        "allowInsecure": true
-      },
-      "extra": {
-        "raw": "trojan://dc0281c1-5f69-45bf-9b72-f56d2edb3966@baigou1.kkieo555.cn:27865?sni=douyin.com&allowInsecure=1#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD3%20%7C%20%E2%AC%87%EF%B8%8F%205.4MB%2Fs",
-        "addedAt": "2025-10-04T06:23:44.518Z"
-      },
-      "metadata": {
-        "source": "amaoa"
-      }
-    },
-    {
-      "id": "e2xkub3f1",
-      "type": "trojan",
-      "name": "🇯🇵日本1 | ⬇️ 5.6MB/s",
-      "server": "baigou1.kkieo555.cn",
-      "port": 21868,
-      "protocol": "trojan",
-      "settings": {
-        "password": "/d9c1d3c5-12ea-4ea7-8ab3-1312d67ec181",
-        "sni": "douyin.com",
-        "allowInsecure": true
-      },
-      "extra": {
-        "raw": "trojan://d9c1d3c5-12ea-4ea7-8ab3-1312d67ec181@baigou1.kkieo555.cn:21868?sni=douyin.com&allowInsecure=1#%F0%9F%87%AF%F0%9F%87%B5%E6%97%A5%E6%9C%AC1%20%7C%20%E2%AC%87%EF%B8%8F%205.6MB%2Fs",
-        "addedAt": "2025-10-04T06:23:44.518Z"
-      },
-      "metadata": {
-        "source": "amaoa"
-      }
-    },
-    {
-      "id": "h9cokfy6c",
-      "type": "hysteria2",
-      "name": "🇺🇸美国4 | ⬇️ 1.5MB/s",
-      "server": "yd.jjzcloud.top",
-      "port": 57338,
-      "protocol": "hysteria2",
-      "settings": {
-        "auth": "a283eacc-0157-410f-93d9-50cb91e0565e",
-        "sni": "yd.jjzcloud.top",
-        "insecure": true,
-        "obfs": "",
-        "obfsPassword": "",
-        "uploadBandwidth": "",
-        "downloadBandwidth": ""
-      },
-      "extra": {
-        "raw": "hysteria2://a283eacc-0157-410f-93d9-50cb91e0565e@yd.jjzcloud.top:57338?insecure=1&sni=yd.jjzcloud.top#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD4%20%7C%20%E2%AC%87%EF%B8%8F%201.5MB%2Fs",
-        "addedAt": "2025-10-04T06:23:44.518Z"
-      },
-      "metadata": {
-        "source": "amaoa"
-      }
-    },
-    {
-      "id": "o5dcq4hxf",
-      "type": "trojan",
-      "name": "🇭🇰香港1 | ⬇️ 2.0MB/s",
-      "server": "baigou1.kkieo555.cn",
-      "port": 21866,
-      "protocol": "trojan",
-      "settings": {
-        "password": "/d9c1d3c5-12ea-4ea7-8ab3-1312d67ec181",
-        "sni": "douyin.com",
-        "allowInsecure": true
-      },
-      "extra": {
-        "raw": "trojan://d9c1d3c5-12ea-4ea7-8ab3-1312d67ec181@baigou1.kkieo555.cn:21866?sni=douyin.com&allowInsecure=1#%F0%9F%87%AD%F0%9F%87%B0%E9%A6%99%E6%B8%AF1%20%7C%20%E2%AC%87%EF%B8%8F%202.0MB%2Fs",
-        "addedAt": "2025-10-04T06:23:44.518Z"
-      },
-      "metadata": {
-        "source": "amaoa"
-      }
-    },
-    {
-      "id": "niztywjp6",
-      "type": "trojan",
-      "name": "🇹🇼台湾1 | ⬇️ 4.1MB/s",
-      "server": "baigou1.kkieo555.cn",
-      "port": 21878,
-      "protocol": "trojan",
-      "settings": {
-        "password": "/8594be9b-94ed-419e-aebb-a92f5d3fbd0a",
-        "sni": "douyin.com",
-        "allowInsecure": true
-      },
-      "extra": {
-        "raw": "trojan://8594be9b-94ed-419e-aebb-a92f5d3fbd0a@baigou1.kkieo555.cn:21878?sni=douyin.com&allowInsecure=1#%F0%9F%87%B9%F0%9F%87%BC%E5%8F%B0%E6%B9%BE1%20%7C%20%E2%AC%87%EF%B8%8F%204.1MB%2Fs",
-        "addedAt": "2025-10-04T06:23:44.518Z"
-      },
-      "metadata": {
-        "source": "amaoa"
-      }
-    },
-    {
-      "id": "krkoviz08",
-      "type": "hysteria2",
-      "name": "🇺🇸美国5 | ⬇️ 2.5MB/s",
-      "server": "xg.jjzcloud.top",
-      "port": 57338,
-      "protocol": "hysteria2",
-      "settings": {
-        "auth": "d9ecfba7-c435-44c6-a747-554fd476570a",
-        "sni": "xg.jjzcloud.top",
-        "insecure": true,
-        "obfs": "",
-        "obfsPassword": "",
-        "uploadBandwidth": "",
-        "downloadBandwidth": ""
-      },
-      "extra": {
-        "raw": "hysteria2://d9ecfba7-c435-44c6-a747-554fd476570a@xg.jjzcloud.top:57338?insecure=1&sni=xg.jjzcloud.top#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD5%20%7C%20%E2%AC%87%EF%B8%8F%202.5MB%2Fs",
-        "addedAt": "2025-10-04T06:23:44.518Z"
-      },
-      "metadata": {
-        "source": "amaoa"
-      }
-    },
-    {
-      "id": "mg8tkgstr",
-      "type": "hysteria2",
-      "name": "🇺🇸美国6 | ⬇️ 1.8MB/s",
-      "server": "xg.jjzcloud.top",
-      "port": 57338,
-      "protocol": "hysteria2",
-      "settings": {
-        "auth": "a283eacc-0157-410f-93d9-50cb91e0565e",
-        "sni": "xg.jjzcloud.top",
-        "insecure": true,
-        "obfs": "",
-        "obfsPassword": "",
-        "uploadBandwidth": "",
-        "downloadBandwidth": ""
-      },
-      "extra": {
-        "raw": "hysteria2://a283eacc-0157-410f-93d9-50cb91e0565e@xg.jjzcloud.top:57338?insecure=1&sni=xg.jjzcloud.top#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD6%20%7C%20%E2%AC%87%EF%B8%8F%201.8MB%2Fs",
-        "addedAt": "2025-10-04T06:23:44.518Z"
-      },
-      "metadata": {
-        "source": "amaoa"
-      }
-    },
-    {
-      "id": "3w0nabkr6",
-      "type": "hysteria2",
-      "name": "🇺🇸美国7 | ⬇️ 2.6MB/s",
-      "server": "xg.jjzcloud.top",
-      "port": 57338,
-      "protocol": "hysteria2",
-      "settings": {
-        "auth": "b9e696f4-8877-42a6-8918-078987d64aed",
-        "sni": "xg.jjzcloud.top",
-        "insecure": true,
-        "obfs": "",
-        "obfsPassword": "",
-        "uploadBandwidth": "",
-        "downloadBandwidth": ""
-      },
-      "extra": {
-        "raw": "hysteria2://b9e696f4-8877-42a6-8918-078987d64aed@xg.jjzcloud.top:57338?insecure=1&sni=xg.jjzcloud.top#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD7%20%7C%20%E2%AC%87%EF%B8%8F%202.6MB%2Fs",
-        "addedAt": "2025-10-04T06:23:44.518Z"
-      },
-      "metadata": {
-        "source": "amaoa"
-      }
-    },
-    {
-      "id": "tmy3usa48",
-      "type": "hysteria2",
-      "name": "🇺🇸美国8 | ⬇️ 2.1MB/s",
-      "server": "xg.jjzcloud.top",
-      "port": 57338,
-      "protocol": "hysteria2",
-      "settings": {
-        "auth": "96395e75-4c9b-4230-aa4c-f6c204b1d5ed",
-        "sni": "xg.jjzcloud.top",
-        "insecure": true,
-        "obfs": "",
-        "obfsPassword": "",
-        "uploadBandwidth": "",
-        "downloadBandwidth": ""
-      },
-      "extra": {
-        "raw": "hysteria2://96395e75-4c9b-4230-aa4c-f6c204b1d5ed@xg.jjzcloud.top:57338?insecure=1&sni=xg.jjzcloud.top#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD8%20%7C%20%E2%AC%87%EF%B8%8F%202.1MB%2Fs",
-        "addedAt": "2025-10-04T06:23:44.518Z"
-      },
-      "metadata": {
-        "source": "amaoa"
-      }
-    },
-    {
-      "id": "w10mfj6jo",
-      "type": "hysteria2",
-      "name": "🇺🇸美国9 | ⬇️ 2.5MB/s",
-      "server": "xg.jjzcloud.top",
-      "port": 57338,
-      "protocol": "hysteria2",
-      "settings": {
-        "auth": "b40b10a2-c776-4627-bead-350b22161f16",
-        "sni": "xg.jjzcloud.top",
-        "insecure": true,
-        "obfs": "",
-        "obfsPassword": "",
-        "uploadBandwidth": "",
-        "downloadBandwidth": ""
-      },
-      "extra": {
-        "raw": "hysteria2://b40b10a2-c776-4627-bead-350b22161f16@xg.jjzcloud.top:57338?insecure=1&sni=xg.jjzcloud.top#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD9%20%7C%20%E2%AC%87%EF%B8%8F%202.5MB%2Fs",
-        "addedAt": "2025-10-04T06:23:44.518Z"
-      },
-      "metadata": {
-        "source": "amaoa"
-      }
-    },
-    {
-      "id": "hkvlydy1w",
-      "type": "trojan",
-      "name": "🇺🇸美国10 | ⬇️ 6.8MB/s",
-      "server": "baigou1.kkieo555.cn",
-      "port": 27865,
-      "protocol": "trojan",
-      "settings": {
-        "password": "/e0cd7b9f-0846-499c-af0d-e415d9c811f5",
-        "sni": "douyin.com",
-        "allowInsecure": true
-      },
-      "extra": {
-        "raw": "trojan://e0cd7b9f-0846-499c-af0d-e415d9c811f5@baigou1.kkieo555.cn:27865?sni=douyin.com&allowInsecure=1#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD10%20%7C%20%E2%AC%87%EF%B8%8F%206.8MB%2Fs",
-        "addedAt": "2025-10-04T06:23:44.518Z"
-      },
-      "metadata": {
-        "source": "amaoa"
-      }
-    },
-    {
-      "id": "dl3dx65yt",
-      "type": "vless",
-      "name": "🌀其他3-LT | ⬇️ 1.1MB/s",
-      "server": "lt3.9966662.xyz",
-      "port": 51423,
-      "protocol": "vless",
-      "settings": {
-        "id": "a24c6851-2055-42c1-9c20-2d3bad97334f",
-        "network": "tcp",
-        "security": "reality",
-        "sni": "www.cloudflare.com",
-        "fp": "chrome",
-        "alpn": "",
-        "path": "/",
-        "host": "",
-        "encryption": "none",
-        "flow": "xtls-rprx-vision"
-      },
-      "extra": {
-        "raw": "vless://a24c6851-2055-42c1-9c20-2d3bad97334f@lt3.9966662.xyz:51423?security=reality&type=tcp&sni=www.cloudflare.com&fp=chrome&flow=xtls-rprx-vision&sid=a6b64b8c&pbk=MvjyJD_JDqDnDKSG2r8il6gSrEijZtdmlvXOOuvqO0w#%F0%9F%8C%80%E5%85%B6%E4%BB%963-LT%20%7C%20%E2%AC%87%EF%B8%8F%201.1MB%2Fs",
-        "addedAt": "2025-10-04T06:23:44.518Z"
-      },
-      "metadata": {
-        "source": "amaoa"
-      }
-    },
-    {
-      "id": "ow93t9x3e",
-      "type": "trojan",
-      "name": "🇹🇼台湾2 | ⬇️ 1.4MB/s",
-      "server": "baigou1.kkieo555.cn",
-      "port": 21874,
-      "protocol": "trojan",
-      "settings": {
-        "password": "/dc0281c1-5f69-45bf-9b72-f56d2edb3966",
-        "sni": "douyin.com",
-        "allowInsecure": true
-      },
-      "extra": {
-        "raw": "trojan://dc0281c1-5f69-45bf-9b72-f56d2edb3966@baigou1.kkieo555.cn:21874?sni=douyin.com&allowInsecure=1#%F0%9F%87%B9%F0%9F%87%BC%E5%8F%B0%E6%B9%BE2%20%7C%20%E2%AC%87%EF%B8%8F%201.4MB%2Fs",
-        "addedAt": "2025-10-04T06:23:44.518Z"
-      },
-      "metadata": {
-        "source": "amaoa"
-      }
-    },
-    {
-      "id": "u84rk5gm2",
-      "type": "trojan",
-      "name": "🇯🇵日本2 | ⬇️ 4.6MB/s",
-      "server": "baigou1.kkieo555.cn",
-      "port": 21869,
-      "protocol": "trojan",
-      "settings": {
-        "password": "/d9c1d3c5-12ea-4ea7-8ab3-1312d67ec181",
-        "sni": "douyin.com",
-        "allowInsecure": true
-      },
-      "extra": {
-        "raw": "trojan://d9c1d3c5-12ea-4ea7-8ab3-1312d67ec181@baigou1.kkieo555.cn:21869?sni=douyin.com&allowInsecure=1#%F0%9F%87%AF%F0%9F%87%B5%E6%97%A5%E6%9C%AC2%20%7C%20%E2%AC%87%EF%B8%8F%204.6MB%2Fs",
-        "addedAt": "2025-10-04T06:23:44.518Z"
-      },
-      "metadata": {
-        "source": "amaoa"
-      }
-    },
-    {
-      "id": "i4p4nbink",
-      "type": "trojan",
-      "name": "🇯🇵日本3 | ⬇️ 1.4MB/s",
-      "server": "baigou1.kkieo555.cn",
-      "port": 21867,
-      "protocol": "trojan",
-      "settings": {
-        "password": "/e0cd7b9f-0846-499c-af0d-e415d9c811f5",
-        "sni": "douyin.com",
-        "allowInsecure": true
-      },
-      "extra": {
-        "raw": "trojan://e0cd7b9f-0846-499c-af0d-e415d9c811f5@baigou1.kkieo555.cn:21867?sni=douyin.com&allowInsecure=1#%F0%9F%87%AF%F0%9F%87%B5%E6%97%A5%E6%9C%AC3%20%7C%20%E2%AC%87%EF%B8%8F%201.4MB%2Fs",
-        "addedAt": "2025-10-04T06:23:44.518Z"
-      },
-      "metadata": {
-        "source": "amaoa"
-      }
-    },
-    {
-      "id": "h9pf00gv0",
-      "type": "vless",
-      "name": "🌀其他4-PT | ⬇️ 3.4MB/s",
+      "name": "🌀其他1-PT | ⬇️ 1.4MB/s",
       "server": "141.227.176.171",
       "port": 36090,
       "protocol": "vless",
@@ -613,17 +44,68 @@
         "flow": ""
       },
       "extra": {
-        "raw": "vless://8347825d-e85b-4735-b27d-7c60ca32bd0c@141.227.176.171:36090?security=none&type=grpc&mode=gun&serviceName=ZEDMODEON-ZEDMODEON-ZEDMODEON-bia-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON#%F0%9F%8C%80%E5%85%B6%E4%BB%964-PT%20%7C%20%E2%AC%87%EF%B8%8F%203.4MB%2Fs",
-        "addedAt": "2025-10-04T06:23:44.518Z"
+        "raw": "vless://8347825d-e85b-4735-b27d-7c60ca32bd0c@141.227.176.171:36090?security=none&type=grpc&mode=gun&serviceName=ZEDMODEON-ZEDMODEON-ZEDMODEON-bia-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON#%F0%9F%8C%80%E5%85%B6%E4%BB%961-PT%20%7C%20%E2%AC%87%EF%B8%8F%201.4MB%2Fs",
+        "addedAt": "2025-10-04T12:31:34.713Z"
       },
       "metadata": {
         "source": "amaoa"
       }
     },
     {
-      "id": "qkajhudlo",
+      "id": "cemwo462d",
       "type": "vless",
-      "name": "🌀其他5-NO | ⬇️ 3.0MB/s",
+      "name": "🌀其他2-NO | ⬇️ 1.6MB/s",
+      "server": "141.227.166.55",
+      "port": 20421,
+      "protocol": "vless",
+      "settings": {
+        "id": "a9a5a7ed-d852-4b3b-af5d-6e8d721300b5",
+        "network": "grpc",
+        "security": "none",
+        "sni": "141.227.166.55",
+        "fp": "",
+        "alpn": "",
+        "path": "/",
+        "host": "",
+        "encryption": "none",
+        "flow": ""
+      },
+      "extra": {
+        "raw": "vless://a9a5a7ed-d852-4b3b-af5d-6e8d721300b5@141.227.166.55:20421?security=none&type=grpc&mode=gun&serviceName=ZEDMODEON-ZEDMODEON-ZEDMODEON-bia-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON#%F0%9F%8C%80%E5%85%B6%E4%BB%962-NO%20%7C%20%E2%AC%87%EF%B8%8F%201.6MB%2Fs",
+        "addedAt": "2025-10-04T12:31:34.713Z"
+      },
+      "metadata": {
+        "source": "amaoa"
+      }
+    },
+    {
+      "id": "u6gxse9rt",
+      "type": "hysteria",
+      "name": "🇳🇱荷兰1 | ⬇️ 2.9MB/s",
+      "server": "51.159.226.1",
+      "port": 49003,
+      "protocol": "hysteria",
+      "settings": {
+        "auth": "dongtaiwang.com",
+        "peer": "apple.com",
+        "insecure": true,
+        "upmbps": 11,
+        "downmbps": 55,
+        "obfs": "",
+        "protocol": "udp"
+      },
+      "extra": {
+        "raw": "hysteria://51.159.226.1:49003?alpn=h3&auth=dongtaiwang.com&auth_str=dongtaiwang.com&downmbps=55&protocol=udp&insecure=1&peer=apple.com&udp=true&upmbps=11#%F0%9F%87%B3%F0%9F%87%B1%E8%8D%B7%E5%85%B01%20%7C%20%E2%AC%87%EF%B8%8F%202.9MB%2Fs",
+        "addedAt": "2025-10-04T12:31:34.713Z"
+      },
+      "metadata": {
+        "source": "amaoa"
+      }
+    },
+    {
+      "id": "zbtt5q5ad",
+      "type": "vless",
+      "name": "🌀其他3-NO | ⬇️ 1.0MB/s",
       "server": "141.227.166.78",
       "port": 35728,
       "protocol": "vless",
@@ -640,866 +122,73 @@
         "flow": ""
       },
       "extra": {
-        "raw": "vless://7bd98eb6-5408-492c-a9f2-54776a68aeb6@141.227.166.78:35728?security=none&type=grpc&mode=gun&serviceName=ZEDMODEON-ZEDMODEON-ZEDMODEON-bia-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON#%F0%9F%8C%80%E5%85%B6%E4%BB%965-NO%20%7C%20%E2%AC%87%EF%B8%8F%203.0MB%2Fs",
-        "addedAt": "2025-10-04T06:23:44.518Z"
+        "raw": "vless://7bd98eb6-5408-492c-a9f2-54776a68aeb6@141.227.166.78:35728?security=none&type=grpc&mode=gun&serviceName=ZEDMODEON-ZEDMODEON-ZEDMODEON-bia-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON#%F0%9F%8C%80%E5%85%B6%E4%BB%963-NO%20%7C%20%E2%AC%87%EF%B8%8F%201.0MB%2Fs",
+        "addedAt": "2025-10-04T12:31:34.713Z"
       },
       "metadata": {
         "source": "amaoa"
       }
     },
     {
-      "id": "75zs3we34",
-      "type": "hysteria2",
-      "name": "🇺🇸美国11 | ⬇️ 2.9MB/s",
-      "server": "xg.jjzcloud.top",
-      "port": 57338,
-      "protocol": "hysteria2",
-      "settings": {
-        "auth": "bbd27921-0581-47a7-b8be-4d873767bb3c",
-        "sni": "xg.jjzcloud.top",
-        "insecure": true,
-        "obfs": "",
-        "obfsPassword": "",
-        "uploadBandwidth": "",
-        "downloadBandwidth": ""
-      },
-      "extra": {
-        "raw": "hysteria2://bbd27921-0581-47a7-b8be-4d873767bb3c@xg.jjzcloud.top:57338?insecure=1&sni=xg.jjzcloud.top#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD11%20%7C%20%E2%AC%87%EF%B8%8F%202.9MB%2Fs",
-        "addedAt": "2025-10-04T06:23:44.518Z"
-      },
-      "metadata": {
-        "source": "amaoa"
-      }
-    },
-    {
-      "id": "ro6stdmdl",
-      "type": "hysteria2",
-      "name": "🇺🇸美国12 | ⬇️ 3.1MB/s",
-      "server": "xg.jjzcloud.top",
-      "port": 57338,
-      "protocol": "hysteria2",
-      "settings": {
-        "auth": "c19c63ee-b44a-4bc4-9661-8b0d335e4b84",
-        "sni": "xg.jjzcloud.top",
-        "insecure": true,
-        "obfs": "",
-        "obfsPassword": "",
-        "uploadBandwidth": "",
-        "downloadBandwidth": ""
-      },
-      "extra": {
-        "raw": "hysteria2://c19c63ee-b44a-4bc4-9661-8b0d335e4b84@xg.jjzcloud.top:57338?insecure=1&sni=xg.jjzcloud.top#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD12%20%7C%20%E2%AC%87%EF%B8%8F%203.1MB%2Fs",
-        "addedAt": "2025-10-04T06:23:44.518Z"
-      },
-      "metadata": {
-        "source": "amaoa"
-      }
-    },
-    {
-      "id": "zqgc1vui8",
-      "type": "trojan",
-      "name": "🇸🇬新加坡1 | ⬇️ 6.2MB/s",
-      "server": "baigou1.kkieo555.cn",
-      "port": 21877,
-      "protocol": "trojan",
-      "settings": {
-        "password": "/e0cd7b9f-0846-499c-af0d-e415d9c811f5",
-        "sni": "douyin.com",
-        "allowInsecure": true
-      },
-      "extra": {
-        "raw": "trojan://e0cd7b9f-0846-499c-af0d-e415d9c811f5@baigou1.kkieo555.cn:21877?sni=douyin.com&allowInsecure=1#%F0%9F%87%B8%F0%9F%87%AC%E6%96%B0%E5%8A%A0%E5%9D%A11%20%7C%20%E2%AC%87%EF%B8%8F%206.2MB%2Fs",
-        "addedAt": "2025-10-04T06:23:44.518Z"
-      },
-      "metadata": {
-        "source": "amaoa"
-      }
-    },
-    {
-      "id": "4otddu9i4",
-      "type": "hysteria2",
-      "name": "🇺🇸美国13 | ⬇️ 3.9MB/s",
-      "server": "xg.jjzcloud.top",
-      "port": 57338,
-      "protocol": "hysteria2",
-      "settings": {
-        "auth": "696d48d3-44c9-4e59-91c7-778200ba7c90",
-        "sni": "xg.jjzcloud.top",
-        "insecure": true,
-        "obfs": "",
-        "obfsPassword": "",
-        "uploadBandwidth": "",
-        "downloadBandwidth": ""
-      },
-      "extra": {
-        "raw": "hysteria2://696d48d3-44c9-4e59-91c7-778200ba7c90@xg.jjzcloud.top:57338?insecure=1&sni=xg.jjzcloud.top#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD13%20%7C%20%E2%AC%87%EF%B8%8F%203.9MB%2Fs",
-        "addedAt": "2025-10-04T06:23:44.518Z"
-      },
-      "metadata": {
-        "source": "amaoa"
-      }
-    },
-    {
-      "id": "tgbmijr1q",
-      "type": "hysteria2",
-      "name": "🇺🇸美国14 | ⬇️ 1.7MB/s",
-      "server": "yd.jjzcloud.top",
-      "port": 57338,
-      "protocol": "hysteria2",
-      "settings": {
-        "auth": "3cda8cd5-c367-4f96-b6fd-01a76ec8996f",
-        "sni": "yd.jjzcloud.top",
-        "insecure": true,
-        "obfs": "",
-        "obfsPassword": "",
-        "uploadBandwidth": "",
-        "downloadBandwidth": ""
-      },
-      "extra": {
-        "raw": "hysteria2://3cda8cd5-c367-4f96-b6fd-01a76ec8996f@yd.jjzcloud.top:57338?insecure=1&sni=yd.jjzcloud.top#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD14%20%7C%20%E2%AC%87%EF%B8%8F%201.7MB%2Fs",
-        "addedAt": "2025-10-04T06:23:44.518Z"
-      },
-      "metadata": {
-        "source": "amaoa"
-      }
-    },
-    {
-      "id": "dy543yv28",
-      "type": "trojan",
-      "name": "🇰🇷韩国2 | ⬇️ 3.0MB/s",
-      "server": "baigou1.kkieo555.cn",
-      "port": 21871,
-      "protocol": "trojan",
-      "settings": {
-        "password": "/8594be9b-94ed-419e-aebb-a92f5d3fbd0a",
-        "sni": "douyin.com",
-        "allowInsecure": true
-      },
-      "extra": {
-        "raw": "trojan://8594be9b-94ed-419e-aebb-a92f5d3fbd0a@baigou1.kkieo555.cn:21871?sni=douyin.com&allowInsecure=1#%F0%9F%87%B0%F0%9F%87%B7%E9%9F%A9%E5%9B%BD2%20%7C%20%E2%AC%87%EF%B8%8F%203.0MB%2Fs",
-        "addedAt": "2025-10-04T06:23:44.518Z"
-      },
-      "metadata": {
-        "source": "amaoa"
-      }
-    },
-    {
-      "id": "s97akifb6",
-      "type": "trojan",
-      "name": "🇹🇼台湾3 | ⬇️ 3.2MB/s",
-      "server": "baigou1.kkieo555.cn",
-      "port": 21874,
-      "protocol": "trojan",
-      "settings": {
-        "password": "/d9c1d3c5-12ea-4ea7-8ab3-1312d67ec181",
-        "sni": "douyin.com",
-        "allowInsecure": true
-      },
-      "extra": {
-        "raw": "trojan://d9c1d3c5-12ea-4ea7-8ab3-1312d67ec181@baigou1.kkieo555.cn:21874?sni=douyin.com&allowInsecure=1#%F0%9F%87%B9%F0%9F%87%BC%E5%8F%B0%E6%B9%BE3%20%7C%20%E2%AC%87%EF%B8%8F%203.2MB%2Fs",
-        "addedAt": "2025-10-04T06:23:44.518Z"
-      },
-      "metadata": {
-        "source": "amaoa"
-      }
-    },
-    {
-      "id": "h5l63yrjy",
-      "type": "hysteria2",
-      "name": "🇺🇸美国15 | ⬇️ 1.6MB/s",
-      "server": "yd.jjzcloud.top",
-      "port": 57338,
-      "protocol": "hysteria2",
-      "settings": {
-        "auth": "bd83ed66-a775-4f7d-9827-386928ba42dc",
-        "sni": "yd.jjzcloud.top",
-        "insecure": true,
-        "obfs": "",
-        "obfsPassword": "",
-        "uploadBandwidth": "",
-        "downloadBandwidth": ""
-      },
-      "extra": {
-        "raw": "hysteria2://bd83ed66-a775-4f7d-9827-386928ba42dc@yd.jjzcloud.top:57338?insecure=1&sni=yd.jjzcloud.top#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD15%20%7C%20%E2%AC%87%EF%B8%8F%201.6MB%2Fs",
-        "addedAt": "2025-10-04T06:23:44.518Z"
-      },
-      "metadata": {
-        "source": "amaoa"
-      }
-    },
-    {
-      "id": "6x0vi7sig",
-      "type": "hysteria2",
-      "name": "🇺🇸美国16 | ⬇️ 4.1MB/s",
-      "server": "xg.jjzcloud.top",
-      "port": 57338,
-      "protocol": "hysteria2",
-      "settings": {
-        "auth": "2fc13fd3-f056-42a6-a7d4-9105fe1d915b",
-        "sni": "xg.jjzcloud.top",
-        "insecure": true,
-        "obfs": "",
-        "obfsPassword": "",
-        "uploadBandwidth": "",
-        "downloadBandwidth": ""
-      },
-      "extra": {
-        "raw": "hysteria2://2fc13fd3-f056-42a6-a7d4-9105fe1d915b@xg.jjzcloud.top:57338?insecure=1&sni=xg.jjzcloud.top#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD16%20%7C%20%E2%AC%87%EF%B8%8F%204.1MB%2Fs",
-        "addedAt": "2025-10-04T06:23:44.518Z"
-      },
-      "metadata": {
-        "source": "amaoa"
-      }
-    },
-    {
-      "id": "af362ufsx",
-      "type": "hysteria2",
-      "name": "🇺🇸美国17 | ⬇️ 1.1MB/s",
-      "server": "els.ylccloud.top",
-      "port": 16090,
-      "protocol": "hysteria2",
-      "settings": {
-        "auth": "fabd6d78-c449-486b-8ed5-b8a779f0cb55",
-        "sni": "els.ylccloud.top",
-        "insecure": true,
-        "obfs": "",
-        "obfsPassword": "",
-        "uploadBandwidth": "",
-        "downloadBandwidth": ""
-      },
-      "extra": {
-        "raw": "hysteria2://fabd6d78-c449-486b-8ed5-b8a779f0cb55@els.ylccloud.top:16090?insecure=1&sni=els.ylccloud.top#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD17%20%7C%20%E2%AC%87%EF%B8%8F%201.1MB%2Fs",
-        "addedAt": "2025-10-04T06:23:44.518Z"
-      },
-      "metadata": {
-        "source": "amaoa"
-      }
-    },
-    {
-      "id": "20lj7kutf",
-      "type": "hysteria2",
-      "name": "🇺🇸美国18 | ⬇️ 1.5MB/s",
-      "server": "xg.jjzcloud.top",
-      "port": 57338,
-      "protocol": "hysteria2",
-      "settings": {
-        "auth": "5053816f-e508-48ff-bb15-eecbc4401fd9",
-        "sni": "xg.jjzcloud.top",
-        "insecure": true,
-        "obfs": "",
-        "obfsPassword": "",
-        "uploadBandwidth": "",
-        "downloadBandwidth": ""
-      },
-      "extra": {
-        "raw": "hysteria2://5053816f-e508-48ff-bb15-eecbc4401fd9@xg.jjzcloud.top:57338?insecure=1&sni=xg.jjzcloud.top#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD18%20%7C%20%E2%AC%87%EF%B8%8F%201.5MB%2Fs",
-        "addedAt": "2025-10-04T06:23:44.518Z"
-      },
-      "metadata": {
-        "source": "amaoa"
-      }
-    },
-    {
-      "id": "r3azxoijk",
-      "type": "trojan",
-      "name": "🌀其他6-VN | ⬇️ 1.5MB/s",
-      "server": "baigou1.kkieo555.cn",
-      "port": 21870,
-      "protocol": "trojan",
-      "settings": {
-        "password": "/e0cd7b9f-0846-499c-af0d-e415d9c811f5",
-        "sni": "douyin.com",
-        "allowInsecure": true
-      },
-      "extra": {
-        "raw": "trojan://e0cd7b9f-0846-499c-af0d-e415d9c811f5@baigou1.kkieo555.cn:21870?sni=douyin.com&allowInsecure=1#%F0%9F%8C%80%E5%85%B6%E4%BB%966-VN%20%7C%20%E2%AC%87%EF%B8%8F%201.5MB%2Fs",
-        "addedAt": "2025-10-04T06:23:44.518Z"
-      },
-      "metadata": {
-        "source": "amaoa"
-      }
-    },
-    {
-      "id": "cgv013k9f",
-      "type": "hysteria2",
-      "name": "🇺🇸美国19 | ⬇️ 1.0MB/s",
-      "server": "xg.jjzcloud.top",
-      "port": 57338,
-      "protocol": "hysteria2",
-      "settings": {
-        "auth": "05a5a4d4-796f-49aa-99ba-dba6edafa47e",
-        "sni": "xg.jjzcloud.top",
-        "insecure": true,
-        "obfs": "",
-        "obfsPassword": "",
-        "uploadBandwidth": "",
-        "downloadBandwidth": ""
-      },
-      "extra": {
-        "raw": "hysteria2://05a5a4d4-796f-49aa-99ba-dba6edafa47e@xg.jjzcloud.top:57338?insecure=1&sni=xg.jjzcloud.top#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD19%20%7C%20%E2%AC%87%EF%B8%8F%201.0MB%2Fs",
-        "addedAt": "2025-10-04T06:23:44.518Z"
-      },
-      "metadata": {
-        "source": "amaoa"
-      }
-    },
-    {
-      "id": "bmlruexjh",
+      "id": "nncn5cj11",
       "type": "vless",
-      "name": "🇩🇪德国2 | ⬇️ 7.1MB/s",
-      "server": "www.speedtest.net",
-      "port": 2082,
+      "name": "🇫🇮芬兰1 | ⬇️ 1.9MB/s",
+      "server": "141.227.170.131",
+      "port": 39113,
       "protocol": "vless",
       "settings": {
-        "id": "f559ca93-4afb-45ad-b0e4-04be667388f2",
-        "network": "ws",
+        "id": "787979c0-3691-4612-86a1-e0f1101d5eb2",
+        "network": "grpc",
         "security": "none",
-        "sni": "www.speedtest.net",
+        "sni": "141.227.170.131",
         "fp": "",
         "alpn": "",
-        "path": "/@spikevpn-@spikevpn-@spikevpn-@spikevpn-@spikevpn-@spikevpn?ed=2082",
-        "host": "novinsoft.ir.oradoshop.com.persiangsm.ir.digikala.com.abadis.ir.shad.ir.divar.ir.downloadly.com.aparat.com.cafebazar.ir.varzesh3.com.ninisite.com.abadis.ir.bama.ir.p30download.ir.telewebion.bmi.ir.shad.ir.mayket.com.ninisite.top.",
+        "path": "/",
+        "host": "",
         "encryption": "none",
         "flow": ""
       },
       "extra": {
-        "raw": "vless://f559ca93-4afb-45ad-b0e4-04be667388f2@www.speedtest.net:2082?security=none&type=ws&path=%2F%40spikevpn-%40spikevpn-%40spikevpn-%40spikevpn-%40spikevpn-%40spikevpn%3Fed%3D2082&host=novinsoft.ir.oradoshop.com.persiangsm.ir.digikala.com.abadis.ir.shad.ir.divar.ir.downloadly.com.aparat.com.cafebazar.ir.varzesh3.com.ninisite.com.abadis.ir.bama.ir.p30download.ir.telewebion.bmi.ir.shad.ir.mayket.com.ninisite.top.#%F0%9F%87%A9%F0%9F%87%AA%E5%BE%B7%E5%9B%BD2%20%7C%20%E2%AC%87%EF%B8%8F%207.1MB%2Fs",
-        "addedAt": "2025-10-04T06:23:44.518Z"
+        "raw": "vless://787979c0-3691-4612-86a1-e0f1101d5eb2@141.227.170.131:39113?security=none&type=grpc&mode=gun&serviceName=ZEDMODEON-ZEDMODEON-ZEDMODEON-bia-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON#%F0%9F%87%AB%F0%9F%87%AE%E8%8A%AC%E5%85%B01%20%7C%20%E2%AC%87%EF%B8%8F%201.9MB%2Fs",
+        "addedAt": "2025-10-04T12:31:34.713Z"
       },
       "metadata": {
         "source": "amaoa"
       }
     },
     {
-      "id": "hfz50tg48",
-      "type": "hysteria2",
-      "name": "🇺🇸美国20 | ⬇️ 1.2MB/s",
-      "server": "mg1.jjzcloud.top",
-      "port": 57238,
-      "protocol": "hysteria2",
+      "id": "w41hd0dev",
+      "type": "vless",
+      "name": "🌀其他4-RO | ⬇️ 3.1MB/s",
+      "server": "141.227.180.86",
+      "port": 43239,
+      "protocol": "vless",
       "settings": {
-        "auth": "bbd27921-0581-47a7-b8be-4d873767bb3c",
-        "sni": "mg1.jjzcloud.top",
-        "insecure": true,
-        "obfs": "",
-        "obfsPassword": "",
-        "uploadBandwidth": "",
-        "downloadBandwidth": ""
+        "id": "0001e585-a648-4db2-8c9e-af346110c642",
+        "network": "grpc",
+        "security": "none",
+        "sni": "141.227.180.86",
+        "fp": "",
+        "alpn": "",
+        "path": "/",
+        "host": "",
+        "encryption": "none",
+        "flow": ""
       },
       "extra": {
-        "raw": "hysteria2://bbd27921-0581-47a7-b8be-4d873767bb3c@mg1.jjzcloud.top:57238?insecure=1&sni=mg1.jjzcloud.top#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD20%20%7C%20%E2%AC%87%EF%B8%8F%201.2MB%2Fs",
-        "addedAt": "2025-10-04T06:23:44.518Z"
+        "raw": "vless://0001e585-a648-4db2-8c9e-af346110c642@141.227.180.86:43239?security=none&type=grpc&mode=gun&serviceName=ZEDMODEON-ZEDMODEON-ZEDMODEON-bia-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON#%F0%9F%8C%80%E5%85%B6%E4%BB%964-RO%20%7C%20%E2%AC%87%EF%B8%8F%203.1MB%2Fs",
+        "addedAt": "2025-10-04T12:31:34.713Z"
       },
       "metadata": {
         "source": "amaoa"
       }
     },
     {
-      "id": "5odxri43j",
-      "type": "trojan",
-      "name": "🇹🇼台湾4 | ⬇️ 4.5MB/s",
-      "server": "baigou1.kkieo555.cn",
-      "port": 21874,
-      "protocol": "trojan",
-      "settings": {
-        "password": "/8594be9b-94ed-419e-aebb-a92f5d3fbd0a",
-        "sni": "douyin.com",
-        "allowInsecure": true
-      },
-      "extra": {
-        "raw": "trojan://8594be9b-94ed-419e-aebb-a92f5d3fbd0a@baigou1.kkieo555.cn:21874?sni=douyin.com&allowInsecure=1#%F0%9F%87%B9%F0%9F%87%BC%E5%8F%B0%E6%B9%BE4%20%7C%20%E2%AC%87%EF%B8%8F%204.5MB%2Fs",
-        "addedAt": "2025-10-04T06:23:44.518Z"
-      },
-      "metadata": {
-        "source": "amaoa"
-      }
-    },
-    {
-      "id": "8uf8o4ktm",
-      "type": "trojan",
-      "name": "🇹🇼台湾5 | ⬇️ 5.0MB/s",
-      "server": "baigou1.kkieo555.cn",
-      "port": 21878,
-      "protocol": "trojan",
-      "settings": {
-        "password": "/d9c1d3c5-12ea-4ea7-8ab3-1312d67ec181",
-        "sni": "douyin.com",
-        "allowInsecure": true
-      },
-      "extra": {
-        "raw": "trojan://d9c1d3c5-12ea-4ea7-8ab3-1312d67ec181@baigou1.kkieo555.cn:21878?sni=douyin.com&allowInsecure=1#%F0%9F%87%B9%F0%9F%87%BC%E5%8F%B0%E6%B9%BE5%20%7C%20%E2%AC%87%EF%B8%8F%205.0MB%2Fs",
-        "addedAt": "2025-10-04T06:23:44.518Z"
-      },
-      "metadata": {
-        "source": "amaoa"
-      }
-    },
-    {
-      "id": "o2dfqk3i1",
-      "type": "hysteria2",
-      "name": "🇺🇸美国21 | ⬇️ 2.4MB/s",
-      "server": "mf1.ylccloud.top",
-      "port": 16090,
-      "protocol": "hysteria2",
-      "settings": {
-        "auth": "a523da1c-1dae-45d1-be4f-ccb800321315",
-        "sni": "mf1.ylccloud.top",
-        "insecure": true,
-        "obfs": "",
-        "obfsPassword": "",
-        "uploadBandwidth": "",
-        "downloadBandwidth": ""
-      },
-      "extra": {
-        "raw": "hysteria2://a523da1c-1dae-45d1-be4f-ccb800321315@mf1.ylccloud.top:16090?insecure=1&sni=mf1.ylccloud.top#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD21%20%7C%20%E2%AC%87%EF%B8%8F%202.4MB%2Fs",
-        "addedAt": "2025-10-04T06:23:44.518Z"
-      },
-      "metadata": {
-        "source": "amaoa"
-      }
-    },
-    {
-      "id": "qc5wleoyr",
-      "type": "trojan",
-      "name": "🌀其他7-VN | ⬇️ 1.9MB/s",
-      "server": "baigou1.kkieo555.cn",
-      "port": 21870,
-      "protocol": "trojan",
-      "settings": {
-        "password": "/f231bb6b-dfe6-4a5e-8b89-9c1fb110bedc",
-        "sni": "douyin.com",
-        "allowInsecure": true
-      },
-      "extra": {
-        "raw": "trojan://f231bb6b-dfe6-4a5e-8b89-9c1fb110bedc@baigou1.kkieo555.cn:21870?sni=douyin.com&allowInsecure=1#%F0%9F%8C%80%E5%85%B6%E4%BB%967-VN%20%7C%20%E2%AC%87%EF%B8%8F%201.9MB%2Fs",
-        "addedAt": "2025-10-04T06:23:44.518Z"
-      },
-      "metadata": {
-        "source": "amaoa"
-      }
-    },
-    {
-      "id": "5jufrgnyk",
-      "type": "trojan",
-      "name": "🇯🇵日本4 | ⬇️ 2.3MB/s",
-      "server": "baigou1.kkieo555.cn",
-      "port": 21867,
-      "protocol": "trojan",
-      "settings": {
-        "password": "/8594be9b-94ed-419e-aebb-a92f5d3fbd0a",
-        "sni": "douyin.com",
-        "allowInsecure": true
-      },
-      "extra": {
-        "raw": "trojan://8594be9b-94ed-419e-aebb-a92f5d3fbd0a@baigou1.kkieo555.cn:21867?sni=douyin.com&allowInsecure=1#%F0%9F%87%AF%F0%9F%87%B5%E6%97%A5%E6%9C%AC4%20%7C%20%E2%AC%87%EF%B8%8F%202.3MB%2Fs",
-        "addedAt": "2025-10-04T06:23:44.518Z"
-      },
-      "metadata": {
-        "source": "amaoa"
-      }
-    },
-    {
-      "id": "vlhczjmpg",
-      "type": "hysteria2",
-      "name": "🇺🇸美国22 | ⬇️ 2.7MB/s",
-      "server": "75.127.13.83",
-      "port": 47974,
-      "protocol": "hysteria2",
-      "settings": {
-        "auth": "2c833c5d-cbcc-4afb-89ba-d17dc39db6f0",
-        "sni": "www.bing.com",
-        "insecure": true,
-        "obfs": "",
-        "obfsPassword": "",
-        "uploadBandwidth": "",
-        "downloadBandwidth": ""
-      },
-      "extra": {
-        "raw": "hysteria2://2c833c5d-cbcc-4afb-89ba-d17dc39db6f0@75.127.13.83:47974?insecure=1&sni=www.bing.com#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD22%20%7C%20%E2%AC%87%EF%B8%8F%202.7MB%2Fs",
-        "addedAt": "2025-10-04T06:23:44.518Z"
-      },
-      "metadata": {
-        "source": "amaoa"
-      }
-    },
-    {
-      "id": "mz9xqbzmq",
-      "type": "hysteria2",
-      "name": "🇺🇸美国23 | ⬇️ 1.3MB/s",
-      "server": "mg1.jjzcloud.top",
-      "port": 57238,
-      "protocol": "hysteria2",
-      "settings": {
-        "auth": "1610231f-7d6f-43dd-9bcf-dc6a665802e7",
-        "sni": "mg1.jjzcloud.top",
-        "insecure": true,
-        "obfs": "",
-        "obfsPassword": "",
-        "uploadBandwidth": "",
-        "downloadBandwidth": ""
-      },
-      "extra": {
-        "raw": "hysteria2://1610231f-7d6f-43dd-9bcf-dc6a665802e7@mg1.jjzcloud.top:57238?insecure=1&sni=mg1.jjzcloud.top#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD23%20%7C%20%E2%AC%87%EF%B8%8F%201.3MB%2Fs",
-        "addedAt": "2025-10-04T06:23:44.518Z"
-      },
-      "metadata": {
-        "source": "amaoa"
-      }
-    },
-    {
-      "id": "b9xms4g22",
-      "type": "hysteria2",
-      "name": "🇺🇸美国24 | ⬇️ 1.3MB/s",
-      "server": "xg.jjzcloud.top",
-      "port": 57338,
-      "protocol": "hysteria2",
-      "settings": {
-        "auth": "1610231f-7d6f-43dd-9bcf-dc6a665802e7",
-        "sni": "xg.jjzcloud.top",
-        "insecure": true,
-        "obfs": "",
-        "obfsPassword": "",
-        "uploadBandwidth": "",
-        "downloadBandwidth": ""
-      },
-      "extra": {
-        "raw": "hysteria2://1610231f-7d6f-43dd-9bcf-dc6a665802e7@xg.jjzcloud.top:57338?insecure=1&sni=xg.jjzcloud.top#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD24%20%7C%20%E2%AC%87%EF%B8%8F%201.3MB%2Fs",
-        "addedAt": "2025-10-04T06:23:44.518Z"
-      },
-      "metadata": {
-        "source": "amaoa"
-      }
-    },
-    {
-      "id": "o7he59fre",
-      "type": "trojan",
-      "name": "🇺🇸美国25 | ⬇️ 3.7MB/s",
-      "server": "baigou1.kkieo555.cn",
-      "port": 21865,
-      "protocol": "trojan",
-      "settings": {
-        "password": "/e0cd7b9f-0846-499c-af0d-e415d9c811f5",
-        "sni": "douyin.com",
-        "allowInsecure": true
-      },
-      "extra": {
-        "raw": "trojan://e0cd7b9f-0846-499c-af0d-e415d9c811f5@baigou1.kkieo555.cn:21865?sni=douyin.com&allowInsecure=1#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD25%20%7C%20%E2%AC%87%EF%B8%8F%203.7MB%2Fs",
-        "addedAt": "2025-10-04T06:23:44.518Z"
-      },
-      "metadata": {
-        "source": "amaoa"
-      }
-    },
-    {
-      "id": "gsel6o18b",
-      "type": "hysteria2",
-      "name": "🇺🇸美国26 | ⬇️ 1.1MB/s",
-      "server": "xg.jjzcloud.top",
-      "port": 57338,
-      "protocol": "hysteria2",
-      "settings": {
-        "auth": "b671e3e8-a271-4a36-b746-573d7c00e72c",
-        "sni": "xg.jjzcloud.top",
-        "insecure": true,
-        "obfs": "",
-        "obfsPassword": "",
-        "uploadBandwidth": "",
-        "downloadBandwidth": ""
-      },
-      "extra": {
-        "raw": "hysteria2://b671e3e8-a271-4a36-b746-573d7c00e72c@xg.jjzcloud.top:57338?insecure=1&sni=xg.jjzcloud.top#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD26%20%7C%20%E2%AC%87%EF%B8%8F%201.1MB%2Fs",
-        "addedAt": "2025-10-04T06:23:44.518Z"
-      },
-      "metadata": {
-        "source": "amaoa"
-      }
-    },
-    {
-      "id": "7d7j1tjfn",
-      "type": "hysteria2",
-      "name": "🇺🇸美国27 | ⬇️ 2.6MB/s",
-      "server": "mf1.ylccloud.top",
-      "port": 16090,
-      "protocol": "hysteria2",
-      "settings": {
-        "auth": "fac7194a-60b3-4d4d-9c21-8a46fdfb2d43",
-        "sni": "mf1.ylccloud.top",
-        "insecure": true,
-        "obfs": "",
-        "obfsPassword": "",
-        "uploadBandwidth": "",
-        "downloadBandwidth": ""
-      },
-      "extra": {
-        "raw": "hysteria2://fac7194a-60b3-4d4d-9c21-8a46fdfb2d43@mf1.ylccloud.top:16090?insecure=1&sni=mf1.ylccloud.top#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD27%20%7C%20%E2%AC%87%EF%B8%8F%202.6MB%2Fs",
-        "addedAt": "2025-10-04T06:23:44.518Z"
-      },
-      "metadata": {
-        "source": "amaoa"
-      }
-    },
-    {
-      "id": "g99g4rzx9",
-      "type": "hysteria2",
-      "name": "🇺🇸美国28 | ⬇️ 1.0MB/s",
-      "server": "yd.jjzcloud.top",
-      "port": 57338,
-      "protocol": "hysteria2",
-      "settings": {
-        "auth": "fb5e424a-fce4-4dd1-bae7-c482c401bdee",
-        "sni": "yd.jjzcloud.top",
-        "insecure": true,
-        "obfs": "",
-        "obfsPassword": "",
-        "uploadBandwidth": "",
-        "downloadBandwidth": ""
-      },
-      "extra": {
-        "raw": "hysteria2://fb5e424a-fce4-4dd1-bae7-c482c401bdee@yd.jjzcloud.top:57338?insecure=1&sni=yd.jjzcloud.top#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD28%20%7C%20%E2%AC%87%EF%B8%8F%201.0MB%2Fs",
-        "addedAt": "2025-10-04T06:23:44.518Z"
-      },
-      "metadata": {
-        "source": "amaoa"
-      }
-    },
-    {
-      "id": "279rj29dj",
-      "type": "trojan",
-      "name": "🇺🇸美国29 | ⬇️ 5.5MB/s",
-      "server": "baigou1.kkieo555.cn",
-      "port": 21864,
-      "protocol": "trojan",
-      "settings": {
-        "password": "/d9c1d3c5-12ea-4ea7-8ab3-1312d67ec181",
-        "sni": "douyin.com",
-        "allowInsecure": true
-      },
-      "extra": {
-        "raw": "trojan://d9c1d3c5-12ea-4ea7-8ab3-1312d67ec181@baigou1.kkieo555.cn:21864?sni=douyin.com&allowInsecure=1#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD29%20%7C%20%E2%AC%87%EF%B8%8F%205.5MB%2Fs",
-        "addedAt": "2025-10-04T06:23:44.518Z"
-      },
-      "metadata": {
-        "source": "amaoa"
-      }
-    },
-    {
-      "id": "s3bl0vw6q",
-      "type": "hysteria2",
-      "name": "🇺🇸美国30 | ⬇️ 2.2MB/s",
-      "server": "xg.jjzcloud.top",
-      "port": 57338,
-      "protocol": "hysteria2",
-      "settings": {
-        "auth": "838282bf-646b-44d8-9075-41dac5e44e2d",
-        "sni": "xg.jjzcloud.top",
-        "insecure": true,
-        "obfs": "",
-        "obfsPassword": "",
-        "uploadBandwidth": "",
-        "downloadBandwidth": ""
-      },
-      "extra": {
-        "raw": "hysteria2://838282bf-646b-44d8-9075-41dac5e44e2d@xg.jjzcloud.top:57338?insecure=1&sni=xg.jjzcloud.top#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD30%20%7C%20%E2%AC%87%EF%B8%8F%202.2MB%2Fs",
-        "addedAt": "2025-10-04T06:23:44.518Z"
-      },
-      "metadata": {
-        "source": "amaoa"
-      }
-    },
-    {
-      "id": "7ymby6b5q",
-      "type": "hysteria2",
-      "name": "🇺🇸美国31 | ⬇️ 1.3MB/s",
-      "server": "xg.jjzcloud.top",
-      "port": 57338,
-      "protocol": "hysteria2",
-      "settings": {
-        "auth": "e575c3da-0d28-4903-835c-f73406efb19a",
-        "sni": "xg.jjzcloud.top",
-        "insecure": true,
-        "obfs": "",
-        "obfsPassword": "",
-        "uploadBandwidth": "",
-        "downloadBandwidth": ""
-      },
-      "extra": {
-        "raw": "hysteria2://e575c3da-0d28-4903-835c-f73406efb19a@xg.jjzcloud.top:57338?insecure=1&sni=xg.jjzcloud.top#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD31%20%7C%20%E2%AC%87%EF%B8%8F%201.3MB%2Fs",
-        "addedAt": "2025-10-04T06:23:44.518Z"
-      },
-      "metadata": {
-        "source": "amaoa"
-      }
-    },
-    {
-      "id": "oc9tc4m9i",
-      "type": "hysteria2",
-      "name": "🇺🇸美国32 | ⬇️ 2.3MB/s",
-      "server": "yd.jjzcloud.top",
-      "port": 57338,
-      "protocol": "hysteria2",
-      "settings": {
-        "auth": "1c79b7e4-aadc-4657-8552-8ab436feae17",
-        "sni": "yd.jjzcloud.top",
-        "insecure": true,
-        "obfs": "",
-        "obfsPassword": "",
-        "uploadBandwidth": "",
-        "downloadBandwidth": ""
-      },
-      "extra": {
-        "raw": "hysteria2://1c79b7e4-aadc-4657-8552-8ab436feae17@yd.jjzcloud.top:57338?insecure=1&sni=yd.jjzcloud.top#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD32%20%7C%20%E2%AC%87%EF%B8%8F%202.3MB%2Fs",
-        "addedAt": "2025-10-04T06:23:44.518Z"
-      },
-      "metadata": {
-        "source": "amaoa"
-      }
-    },
-    {
-      "id": "nwhqgc1wl",
-      "type": "hysteria2",
-      "name": "🇺🇸美国33 | ⬇️ 1.3MB/s",
-      "server": "yd.jjzcloud.top",
-      "port": 57338,
-      "protocol": "hysteria2",
-      "settings": {
-        "auth": "f3fac66e-e149-4f04-a340-c449e5e02bfa",
-        "sni": "yd.jjzcloud.top",
-        "insecure": true,
-        "obfs": "",
-        "obfsPassword": "",
-        "uploadBandwidth": "",
-        "downloadBandwidth": ""
-      },
-      "extra": {
-        "raw": "hysteria2://f3fac66e-e149-4f04-a340-c449e5e02bfa@yd.jjzcloud.top:57338?insecure=1&sni=yd.jjzcloud.top#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD33%20%7C%20%E2%AC%87%EF%B8%8F%201.3MB%2Fs",
-        "addedAt": "2025-10-04T06:23:44.518Z"
-      },
-      "metadata": {
-        "source": "amaoa"
-      }
-    },
-    {
-      "id": "msk15st9c",
-      "type": "trojan",
-      "name": "🌀其他8-VN | ⬇️ 2.5MB/s",
-      "server": "baigou1.kkieo555.cn",
-      "port": 21870,
-      "protocol": "trojan",
-      "settings": {
-        "password": "/dc0281c1-5f69-45bf-9b72-f56d2edb3966",
-        "sni": "douyin.com",
-        "allowInsecure": true
-      },
-      "extra": {
-        "raw": "trojan://dc0281c1-5f69-45bf-9b72-f56d2edb3966@baigou1.kkieo555.cn:21870?sni=douyin.com&allowInsecure=1#%F0%9F%8C%80%E5%85%B6%E4%BB%968-VN%20%7C%20%E2%AC%87%EF%B8%8F%202.5MB%2Fs",
-        "addedAt": "2025-10-04T06:23:44.518Z"
-      },
-      "metadata": {
-        "source": "amaoa"
-      }
-    },
-    {
-      "id": "4a2jtr7hz",
-      "type": "hysteria2",
-      "name": "🇺🇸美国34 | ⬇️ 1.1MB/s",
-      "server": "els.ylccloud.top",
-      "port": 16090,
-      "protocol": "hysteria2",
-      "settings": {
-        "auth": "ce6b100f-7fec-4496-b08e-30c3ce7b303d",
-        "sni": "els.ylccloud.top",
-        "insecure": true,
-        "obfs": "",
-        "obfsPassword": "",
-        "uploadBandwidth": "",
-        "downloadBandwidth": ""
-      },
-      "extra": {
-        "raw": "hysteria2://ce6b100f-7fec-4496-b08e-30c3ce7b303d@els.ylccloud.top:16090?insecure=1&sni=els.ylccloud.top#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD34%20%7C%20%E2%AC%87%EF%B8%8F%201.1MB%2Fs",
-        "addedAt": "2025-10-04T06:23:44.518Z"
-      },
-      "metadata": {
-        "source": "amaoa"
-      }
-    },
-    {
-      "id": "pb1v4eo42",
-      "type": "hysteria2",
-      "name": "🇺🇸美国35 | ⬇️ 1.3MB/s",
-      "server": "mf1.ylccloud.top",
-      "port": 16090,
-      "protocol": "hysteria2",
-      "settings": {
-        "auth": "0089fdba-e67f-4994-9df6-db45e9aa0e46",
-        "sni": "mf1.ylccloud.top",
-        "insecure": true,
-        "obfs": "",
-        "obfsPassword": "",
-        "uploadBandwidth": "",
-        "downloadBandwidth": ""
-      },
-      "extra": {
-        "raw": "hysteria2://0089fdba-e67f-4994-9df6-db45e9aa0e46@mf1.ylccloud.top:16090?insecure=1&sni=mf1.ylccloud.top#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD35%20%7C%20%E2%AC%87%EF%B8%8F%201.3MB%2Fs",
-        "addedAt": "2025-10-04T06:23:44.518Z"
-      },
-      "metadata": {
-        "source": "amaoa"
-      }
-    },
-    {
-      "id": "2ht60wk11",
-      "type": "hysteria2",
-      "name": "🇺🇸美国36 | ⬇️ 1.1MB/s",
-      "server": "mf1.ylccloud.top",
-      "port": 16090,
-      "protocol": "hysteria2",
-      "settings": {
-        "auth": "c86814b3-dcda-42ba-ae8f-75e9e94277bb",
-        "sni": "mf1.ylccloud.top",
-        "insecure": true,
-        "obfs": "",
-        "obfsPassword": "",
-        "uploadBandwidth": "",
-        "downloadBandwidth": ""
-      },
-      "extra": {
-        "raw": "hysteria2://c86814b3-dcda-42ba-ae8f-75e9e94277bb@mf1.ylccloud.top:16090?insecure=1&sni=mf1.ylccloud.top#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD36%20%7C%20%E2%AC%87%EF%B8%8F%201.1MB%2Fs",
-        "addedAt": "2025-10-04T06:23:44.518Z"
-      },
-      "metadata": {
-        "source": "amaoa"
-      }
-    },
-    {
-      "id": "53iyyytt7",
-      "type": "hysteria2",
-      "name": "🇺🇸美国37 | ⬇️ 1.2MB/s",
-      "server": "xg.jjzcloud.top",
-      "port": 57338,
-      "protocol": "hysteria2",
-      "settings": {
-        "auth": "4e5c855b-ce85-4362-9af1-183dfe5c9257",
-        "sni": "xg.jjzcloud.top",
-        "insecure": true,
-        "obfs": "",
-        "obfsPassword": "",
-        "uploadBandwidth": "",
-        "downloadBandwidth": ""
-      },
-      "extra": {
-        "raw": "hysteria2://4e5c855b-ce85-4362-9af1-183dfe5c9257@xg.jjzcloud.top:57338?insecure=1&sni=xg.jjzcloud.top#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD37%20%7C%20%E2%AC%87%EF%B8%8F%201.2MB%2Fs",
-        "addedAt": "2025-10-04T06:23:44.518Z"
-      },
-      "metadata": {
-        "source": "amaoa"
-      }
-    },
-    {
-      "id": "b3oyjetda",
+      "id": "i5qi58709",
       "type": "hysteria",
-      "name": "🇳🇱荷兰1 | ⬇️ 1.1MB/s",
-      "server": "51.159.226.1",
-      "port": 49003,
+      "name": "🇫🇷法国1 | ⬇️ 1.8MB/s",
+      "server": "62.210.127.217",
+      "port": 50011,
       "protocol": "hysteria",
       "settings": {
         "auth": "dongtaiwang.com",
@@ -1511,310 +200,47 @@
         "protocol": "udp"
       },
       "extra": {
-        "raw": "hysteria://51.159.226.1:49003?alpn=h3&auth=dongtaiwang.com&auth_str=dongtaiwang.com&downmbps=55&protocol=udp&insecure=1&peer=apple.com&udp=true&upmbps=11#%F0%9F%87%B3%F0%9F%87%B1%E8%8D%B7%E5%85%B01%20%7C%20%E2%AC%87%EF%B8%8F%201.1MB%2Fs",
-        "addedAt": "2025-10-04T06:23:44.518Z"
+        "raw": "hysteria://62.210.127.217:50011?alpn=h3&auth=dongtaiwang.com&auth_str=dongtaiwang.com&downmbps=55 Mbps&protocol=udp&insecure=1&peer=apple.com&udp=true&upmbps=11 Mbps#%F0%9F%87%AB%F0%9F%87%B7%E6%B3%95%E5%9B%BD1%20%7C%20%E2%AC%87%EF%B8%8F%201.8MB%2Fs",
+        "addedAt": "2025-10-04T12:31:34.713Z"
       },
       "metadata": {
         "source": "amaoa"
       }
     },
     {
-      "id": "rnpzesek8",
-      "type": "hysteria2",
-      "name": "🇺🇸美国38 | ⬇️ 1.5MB/s",
-      "server": "xg.jjzcloud.top",
-      "port": 57338,
-      "protocol": "hysteria2",
+      "id": "5aww44gyr",
+      "type": "hysteria",
+      "name": "🇫🇷法国2 | ⬇️ 2.1MB/s",
+      "server": "62.210.127.217",
+      "port": 35511,
+      "protocol": "hysteria",
       "settings": {
-        "auth": "fb5e424a-fce4-4dd1-bae7-c482c401bdee",
-        "sni": "xg.jjzcloud.top",
+        "auth": "dongtaiwang.com",
+        "peer": "apple.com",
         "insecure": true,
+        "upmbps": 11,
+        "downmbps": 55,
         "obfs": "",
-        "obfsPassword": "",
-        "uploadBandwidth": "",
-        "downloadBandwidth": ""
+        "protocol": "udp"
       },
       "extra": {
-        "raw": "hysteria2://fb5e424a-fce4-4dd1-bae7-c482c401bdee@xg.jjzcloud.top:57338?insecure=1&sni=xg.jjzcloud.top#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD38%20%7C%20%E2%AC%87%EF%B8%8F%201.5MB%2Fs",
-        "addedAt": "2025-10-04T06:23:44.518Z"
+        "raw": "hysteria://62.210.127.217:35511?alpn=h3&auth=dongtaiwang.com&auth_str=dongtaiwang.com&downmbps=55&protocol=udp&insecure=1&peer=apple.com&udp=true&upmbps=11#%F0%9F%87%AB%F0%9F%87%B7%E6%B3%95%E5%9B%BD2%20%7C%20%E2%AC%87%EF%B8%8F%202.1MB%2Fs",
+        "addedAt": "2025-10-04T12:31:34.713Z"
       },
       "metadata": {
         "source": "amaoa"
       }
     },
     {
-      "id": "b324gweal",
+      "id": "54mgdc5hy",
       "type": "hysteria2",
-      "name": "🇺🇸美国39 | ⬇️ 5.5MB/s",
-      "server": "wels1.wanlidag.top",
-      "port": 5555,
-      "protocol": "hysteria2",
-      "settings": {
-        "auth": "ff002814-cf46-4a80-8bbf-674aaea9429f",
-        "sni": "wels1.wanlidag.top",
-        "insecure": true,
-        "obfs": "",
-        "obfsPassword": "",
-        "uploadBandwidth": "",
-        "downloadBandwidth": ""
-      },
-      "extra": {
-        "raw": "hysteria2://ff002814-cf46-4a80-8bbf-674aaea9429f@wels1.wanlidag.top:5555?insecure=1&sni=wels1.wanlidag.top#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD39%20%7C%20%E2%AC%87%EF%B8%8F%205.5MB%2Fs",
-        "addedAt": "2025-10-04T06:23:44.518Z"
-      },
-      "metadata": {
-        "source": "amaoa"
-      }
-    },
-    {
-      "id": "6yh7h62iw",
-      "type": "hysteria2",
-      "name": "🇺🇸美国40 | ⬇️ 4.0MB/s",
-      "server": "xg.jjzcloud.top",
-      "port": 57338,
-      "protocol": "hysteria2",
-      "settings": {
-        "auth": "b2ef2b03-4754-4e64-abb7-7d0f449ca677",
-        "sni": "xg.jjzcloud.top",
-        "insecure": true,
-        "obfs": "",
-        "obfsPassword": "",
-        "uploadBandwidth": "",
-        "downloadBandwidth": ""
-      },
-      "extra": {
-        "raw": "hysteria2://b2ef2b03-4754-4e64-abb7-7d0f449ca677@xg.jjzcloud.top:57338?insecure=1&sni=xg.jjzcloud.top#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD40%20%7C%20%E2%AC%87%EF%B8%8F%204.0MB%2Fs",
-        "addedAt": "2025-10-04T06:23:44.518Z"
-      },
-      "metadata": {
-        "source": "amaoa"
-      }
-    },
-    {
-      "id": "kq6530j0r",
-      "type": "hysteria2",
-      "name": "🇺🇸美国41 | ⬇️ 1.3MB/s",
-      "server": "yd.jjzcloud.top",
-      "port": 57338,
-      "protocol": "hysteria2",
-      "settings": {
-        "auth": "879fa4e5-4d26-4dab-aa15-39fbaa0419a1",
-        "sni": "yd.jjzcloud.top",
-        "insecure": true,
-        "obfs": "",
-        "obfsPassword": "",
-        "uploadBandwidth": "",
-        "downloadBandwidth": ""
-      },
-      "extra": {
-        "raw": "hysteria2://879fa4e5-4d26-4dab-aa15-39fbaa0419a1@yd.jjzcloud.top:57338?insecure=1&sni=yd.jjzcloud.top#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD41%20%7C%20%E2%AC%87%EF%B8%8F%201.3MB%2Fs",
-        "addedAt": "2025-10-04T06:23:44.518Z"
-      },
-      "metadata": {
-        "source": "amaoa"
-      }
-    },
-    {
-      "id": "om5iix19s",
-      "type": "trojan",
-      "name": "🇭🇰香港2 | ⬇️ 1.1MB/s",
-      "server": "baigou1.kkieo555.cn",
-      "port": 21866,
-      "protocol": "trojan",
-      "settings": {
-        "password": "/8594be9b-94ed-419e-aebb-a92f5d3fbd0a",
-        "sni": "douyin.com",
-        "allowInsecure": true
-      },
-      "extra": {
-        "raw": "trojan://8594be9b-94ed-419e-aebb-a92f5d3fbd0a@baigou1.kkieo555.cn:21866?sni=douyin.com&allowInsecure=1#%F0%9F%87%AD%F0%9F%87%B0%E9%A6%99%E6%B8%AF2%20%7C%20%E2%AC%87%EF%B8%8F%201.1MB%2Fs",
-        "addedAt": "2025-10-04T06:23:44.518Z"
-      },
-      "metadata": {
-        "source": "amaoa"
-      }
-    },
-    {
-      "id": "11d79kwoi",
-      "type": "hysteria2",
-      "name": "🇺🇸美国42 | ⬇️ 1.8MB/s",
-      "server": "mg2.jjzcloud.top",
-      "port": 57338,
-      "protocol": "hysteria2",
-      "settings": {
-        "auth": "bceae433-e84f-4c0a-b6d4-20f170c87a14",
-        "sni": "mg2.jjzcloud.top",
-        "insecure": true,
-        "obfs": "",
-        "obfsPassword": "",
-        "uploadBandwidth": "",
-        "downloadBandwidth": ""
-      },
-      "extra": {
-        "raw": "hysteria2://bceae433-e84f-4c0a-b6d4-20f170c87a14@mg2.jjzcloud.top:57338?insecure=1&sni=mg2.jjzcloud.top#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD42%20%7C%20%E2%AC%87%EF%B8%8F%201.8MB%2Fs",
-        "addedAt": "2025-10-04T06:23:44.518Z"
-      },
-      "metadata": {
-        "source": "amaoa"
-      }
-    },
-    {
-      "id": "gmqxs4446",
-      "type": "hysteria2",
-      "name": "🇺🇸美国43 | ⬇️ 2.0MB/s",
-      "server": "yd.jjzcloud.top",
-      "port": 57338,
-      "protocol": "hysteria2",
-      "settings": {
-        "auth": "bc4b33b3-b706-40e9-a612-3c5a967ca1c9",
-        "sni": "yd.jjzcloud.top",
-        "insecure": true,
-        "obfs": "",
-        "obfsPassword": "",
-        "uploadBandwidth": "",
-        "downloadBandwidth": ""
-      },
-      "extra": {
-        "raw": "hysteria2://bc4b33b3-b706-40e9-a612-3c5a967ca1c9@yd.jjzcloud.top:57338?insecure=1&sni=yd.jjzcloud.top#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD43%20%7C%20%E2%AC%87%EF%B8%8F%202.0MB%2Fs",
-        "addedAt": "2025-10-04T06:23:44.518Z"
-      },
-      "metadata": {
-        "source": "amaoa"
-      }
-    },
-    {
-      "id": "ch4tqsv04",
-      "type": "vless",
-      "name": "🌀其他9-ES | ⬇️ 1.2MB/s",
-      "server": "ae1-3.9966662.xyz",
-      "port": 20223,
-      "protocol": "vless",
-      "settings": {
-        "id": "a24c6851-2055-42c1-9c20-2d3bad97334f",
-        "network": "tcp",
-        "security": "reality",
-        "sni": "www.cloudflare.com",
-        "fp": "chrome",
-        "alpn": "",
-        "path": "/",
-        "host": "",
-        "encryption": "none",
-        "flow": "xtls-rprx-vision"
-      },
-      "extra": {
-        "raw": "vless://a24c6851-2055-42c1-9c20-2d3bad97334f@ae1-3.9966662.xyz:20223?security=reality&type=tcp&sni=www.cloudflare.com&fp=chrome&flow=xtls-rprx-vision&sid=c6842be1&pbk=RsbED0LyE3f2byTPx5t-dQewju6z9R4xqTWrADM4WnM#%F0%9F%8C%80%E5%85%B6%E4%BB%969-ES%20%7C%20%E2%AC%87%EF%B8%8F%201.2MB%2Fs",
-        "addedAt": "2025-10-04T06:23:44.518Z"
-      },
-      "metadata": {
-        "source": "amaoa"
-      }
-    },
-    {
-      "id": "bkxzctmu0",
-      "type": "hysteria2",
-      "name": "🇺🇸美国44 | ⬇️ 1.6MB/s",
-      "server": "yd.jjzcloud.top",
-      "port": 57338,
-      "protocol": "hysteria2",
-      "settings": {
-        "auth": "d14a338a-90bc-4d61-8a9f-03207dc62551",
-        "sni": "yd.jjzcloud.top",
-        "insecure": true,
-        "obfs": "",
-        "obfsPassword": "",
-        "uploadBandwidth": "",
-        "downloadBandwidth": ""
-      },
-      "extra": {
-        "raw": "hysteria2://d14a338a-90bc-4d61-8a9f-03207dc62551@yd.jjzcloud.top:57338?insecure=1&sni=yd.jjzcloud.top#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD44%20%7C%20%E2%AC%87%EF%B8%8F%201.6MB%2Fs",
-        "addedAt": "2025-10-04T06:23:44.518Z"
-      },
-      "metadata": {
-        "source": "amaoa"
-      }
-    },
-    {
-      "id": "wrx6wj2er",
-      "type": "hysteria2",
-      "name": "🇺🇸美国45 | ⬇️ 1.1MB/s",
-      "server": "mg2.jjzcloud.top",
-      "port": 57338,
-      "protocol": "hysteria2",
-      "settings": {
-        "auth": "8a1f066f-a4f2-4187-957d-53c56155d2f0",
-        "sni": "mg2.jjzcloud.top",
-        "insecure": true,
-        "obfs": "",
-        "obfsPassword": "",
-        "uploadBandwidth": "",
-        "downloadBandwidth": ""
-      },
-      "extra": {
-        "raw": "hysteria2://8a1f066f-a4f2-4187-957d-53c56155d2f0@mg2.jjzcloud.top:57338?insecure=1&sni=mg2.jjzcloud.top#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD45%20%7C%20%E2%AC%87%EF%B8%8F%201.1MB%2Fs",
-        "addedAt": "2025-10-04T06:23:44.518Z"
-      },
-      "metadata": {
-        "source": "amaoa"
-      }
-    },
-    {
-      "id": "1e1m3am67",
-      "type": "hysteria2",
-      "name": "🇺🇸美国46 | ⬇️ 1.3MB/s",
-      "server": "yd.jjzcloud.top",
-      "port": 57338,
-      "protocol": "hysteria2",
-      "settings": {
-        "auth": "40e600c5-530b-4f2a-8a19-94564e5c6b83",
-        "sni": "yd.jjzcloud.top",
-        "insecure": true,
-        "obfs": "",
-        "obfsPassword": "",
-        "uploadBandwidth": "",
-        "downloadBandwidth": ""
-      },
-      "extra": {
-        "raw": "hysteria2://40e600c5-530b-4f2a-8a19-94564e5c6b83@yd.jjzcloud.top:57338?insecure=1&sni=yd.jjzcloud.top#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD46%20%7C%20%E2%AC%87%EF%B8%8F%201.3MB%2Fs",
-        "addedAt": "2025-10-04T06:23:44.518Z"
-      },
-      "metadata": {
-        "source": "amaoa"
-      }
-    },
-    {
-      "id": "x0x2vu8n5",
-      "type": "hysteria2",
-      "name": "🇺🇸美国47 | ⬇️ 3.6MB/s",
-      "server": "xg.jjzcloud.top",
-      "port": 57338,
-      "protocol": "hysteria2",
-      "settings": {
-        "auth": "d494721e-e62d-474c-be9b-2dffd028039a",
-        "sni": "xg.jjzcloud.top",
-        "insecure": true,
-        "obfs": "",
-        "obfsPassword": "",
-        "uploadBandwidth": "",
-        "downloadBandwidth": ""
-      },
-      "extra": {
-        "raw": "hysteria2://d494721e-e62d-474c-be9b-2dffd028039a@xg.jjzcloud.top:57338?insecure=1&sni=xg.jjzcloud.top#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD47%20%7C%20%E2%AC%87%EF%B8%8F%203.6MB%2Fs",
-        "addedAt": "2025-10-04T06:23:44.518Z"
-      },
-      "metadata": {
-        "source": "amaoa"
-      }
-    },
-    {
-      "id": "w3jppakay",
-      "type": "hysteria2",
-      "name": "🇺🇸美国48 | ⬇️ 1.9MB/s",
-      "server": "mf1.ylccloud.top",
+      "name": "🇺🇸美国2 | ⬇️ 3.2MB/s",
+      "server": "els.ylccloud.top",
       "port": 16090,
       "protocol": "hysteria2",
       "settings": {
-        "auth": "d4645231-e4ad-4310-ae53-137b4230f7de",
-        "sni": "mf1.ylccloud.top",
+        "auth": "e6a347a8-2f87-4c9e-9f5a-935e698f6327",
+        "sni": "els.ylccloud.top",
         "insecure": true,
         "obfs": "",
         "obfsPassword": "",
@@ -1822,23 +248,23 @@
         "downloadBandwidth": ""
       },
       "extra": {
-        "raw": "hysteria2://d4645231-e4ad-4310-ae53-137b4230f7de@mf1.ylccloud.top:16090?insecure=1&sni=mf1.ylccloud.top#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD48%20%7C%20%E2%AC%87%EF%B8%8F%201.9MB%2Fs",
-        "addedAt": "2025-10-04T06:23:44.518Z"
+        "raw": "hysteria2://e6a347a8-2f87-4c9e-9f5a-935e698f6327@els.ylccloud.top:16090?insecure=1&sni=els.ylccloud.top#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD2%20%7C%20%E2%AC%87%EF%B8%8F%203.2MB%2Fs",
+        "addedAt": "2025-10-04T12:31:34.713Z"
       },
       "metadata": {
         "source": "amaoa"
       }
     },
     {
-      "id": "olpnlh9wf",
+      "id": "pf0en13sg",
       "type": "hysteria2",
-      "name": "🇺🇸美国49 | ⬇️ 1.6MB/s",
-      "server": "yd.jjzcloud.top",
-      "port": 57338,
+      "name": "🇺🇸美国3 | ⬇️ 3.7MB/s",
+      "server": "els.ylccloud.top",
+      "port": 16090,
       "protocol": "hysteria2",
       "settings": {
-        "auth": "c19c63ee-b44a-4bc4-9661-8b0d335e4b84",
-        "sni": "yd.jjzcloud.top",
+        "auth": "ef553253-723c-4724-a2cf-15e9fb2c72d6",
+        "sni": "els.ylccloud.top",
         "insecure": true,
         "obfs": "",
         "obfsPassword": "",
@@ -1846,22 +272,70 @@
         "downloadBandwidth": ""
       },
       "extra": {
-        "raw": "hysteria2://c19c63ee-b44a-4bc4-9661-8b0d335e4b84@yd.jjzcloud.top:57338?insecure=1&sni=yd.jjzcloud.top#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD49%20%7C%20%E2%AC%87%EF%B8%8F%201.6MB%2Fs",
-        "addedAt": "2025-10-04T06:23:44.518Z"
+        "raw": "hysteria2://ef553253-723c-4724-a2cf-15e9fb2c72d6@els.ylccloud.top:16090?insecure=1&sni=els.ylccloud.top#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD3%20%7C%20%E2%AC%87%EF%B8%8F%203.7MB%2Fs",
+        "addedAt": "2025-10-04T12:31:34.713Z"
       },
       "metadata": {
         "source": "amaoa"
       }
     },
     {
-      "id": "ukp4u558h",
+      "id": "8ykygq3xf",
       "type": "hysteria2",
-      "name": "🇺🇸美国50 | ⬇️ 1.0MB/s",
+      "name": "🇺🇸美国4 | ⬇️ 3.3MB/s",
+      "server": "els.ylccloud.top",
+      "port": 16090,
+      "protocol": "hysteria2",
+      "settings": {
+        "auth": "d7569bd1-9eba-48a4-be9b-8efd9fe48adf",
+        "sni": "els.ylccloud.top",
+        "insecure": true,
+        "obfs": "",
+        "obfsPassword": "",
+        "uploadBandwidth": "",
+        "downloadBandwidth": ""
+      },
+      "extra": {
+        "raw": "hysteria2://d7569bd1-9eba-48a4-be9b-8efd9fe48adf@els.ylccloud.top:16090?insecure=1&sni=els.ylccloud.top#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD4%20%7C%20%E2%AC%87%EF%B8%8F%203.3MB%2Fs",
+        "addedAt": "2025-10-04T12:31:34.713Z"
+      },
+      "metadata": {
+        "source": "amaoa"
+      }
+    },
+    {
+      "id": "4m435ao9d",
+      "type": "hysteria2",
+      "name": "🇺🇸美国5 | ⬇️ 2.3MB/s",
+      "server": "els.ylccloud.top",
+      "port": 16090,
+      "protocol": "hysteria2",
+      "settings": {
+        "auth": "ec6b9f96-958c-4d79-8fd9-4667457c05a0",
+        "sni": "els.ylccloud.top",
+        "insecure": true,
+        "obfs": "",
+        "obfsPassword": "",
+        "uploadBandwidth": "",
+        "downloadBandwidth": ""
+      },
+      "extra": {
+        "raw": "hysteria2://ec6b9f96-958c-4d79-8fd9-4667457c05a0@els.ylccloud.top:16090?insecure=1&sni=els.ylccloud.top#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD5%20%7C%20%E2%AC%87%EF%B8%8F%202.3MB%2Fs",
+        "addedAt": "2025-10-04T12:31:34.713Z"
+      },
+      "metadata": {
+        "source": "amaoa"
+      }
+    },
+    {
+      "id": "kl2qrfywa",
+      "type": "hysteria2",
+      "name": "🇺🇸美国6 | ⬇️ 4.6MB/s",
       "server": "mg2.jjzcloud.top",
       "port": 57338,
       "protocol": "hysteria2",
       "settings": {
-        "auth": "f3fac66e-e149-4f04-a340-c449e5e02bfa",
+        "auth": "cb223828-57af-4aa0-be36-79e0439a1d62",
         "sni": "mg2.jjzcloud.top",
         "insecure": true,
         "obfs": "",
@@ -1870,43 +344,23 @@
         "downloadBandwidth": ""
       },
       "extra": {
-        "raw": "hysteria2://f3fac66e-e149-4f04-a340-c449e5e02bfa@mg2.jjzcloud.top:57338?insecure=1&sni=mg2.jjzcloud.top#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD50%20%7C%20%E2%AC%87%EF%B8%8F%201.0MB%2Fs",
-        "addedAt": "2025-10-04T06:23:44.518Z"
+        "raw": "hysteria2://cb223828-57af-4aa0-be36-79e0439a1d62@mg2.jjzcloud.top:57338?insecure=1&sni=mg2.jjzcloud.top#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD6%20%7C%20%E2%AC%87%EF%B8%8F%204.6MB%2Fs",
+        "addedAt": "2025-10-04T12:31:34.713Z"
       },
       "metadata": {
         "source": "amaoa"
       }
     },
     {
-      "id": "045orrb8s",
-      "type": "trojan",
-      "name": "🇭🇰香港3 | ⬇️ 6.5MB/s",
-      "server": "baigou1.kkieo555.cn",
-      "port": 21863,
-      "protocol": "trojan",
-      "settings": {
-        "password": "/8594be9b-94ed-419e-aebb-a92f5d3fbd0a",
-        "sni": "douyin.com",
-        "allowInsecure": true
-      },
-      "extra": {
-        "raw": "trojan://8594be9b-94ed-419e-aebb-a92f5d3fbd0a@baigou1.kkieo555.cn:21863?sni=douyin.com&allowInsecure=1#%F0%9F%87%AD%F0%9F%87%B0%E9%A6%99%E6%B8%AF3%20%7C%20%E2%AC%87%EF%B8%8F%206.5MB%2Fs",
-        "addedAt": "2025-10-04T06:23:44.518Z"
-      },
-      "metadata": {
-        "source": "amaoa"
-      }
-    },
-    {
-      "id": "yo09onl1p",
+      "id": "or3jjnkz0",
       "type": "hysteria2",
-      "name": "🇺🇸美国51 | ⬇️ 1.4MB/s",
-      "server": "mg2.jjzcloud.top",
-      "port": 57338,
+      "name": "🇺🇸美国7 | ⬇️ 2.1MB/s",
+      "server": "els.ylccloud.top",
+      "port": 16090,
       "protocol": "hysteria2",
       "settings": {
-        "auth": "64d3ac52-c337-4f43-868c-f5dc63d99826",
-        "sni": "mg2.jjzcloud.top",
+        "auth": "5da87dcd-ec4b-43d1-b6d0-ab11eaacec5c",
+        "sni": "els.ylccloud.top",
         "insecure": true,
         "obfs": "",
         "obfsPassword": "",
@@ -1914,23 +368,95 @@
         "downloadBandwidth": ""
       },
       "extra": {
-        "raw": "hysteria2://64d3ac52-c337-4f43-868c-f5dc63d99826@mg2.jjzcloud.top:57338?insecure=1&sni=mg2.jjzcloud.top#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD51%20%7C%20%E2%AC%87%EF%B8%8F%201.4MB%2Fs",
-        "addedAt": "2025-10-04T06:23:44.518Z"
+        "raw": "hysteria2://5da87dcd-ec4b-43d1-b6d0-ab11eaacec5c@els.ylccloud.top:16090?insecure=1&sni=els.ylccloud.top#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD7%20%7C%20%E2%AC%87%EF%B8%8F%202.1MB%2Fs",
+        "addedAt": "2025-10-04T12:31:34.713Z"
       },
       "metadata": {
         "source": "amaoa"
       }
     },
     {
-      "id": "10l8h13hu",
+      "id": "9l823q2n9",
       "type": "hysteria2",
-      "name": "🇺🇸美国52 | ⬇️ 2.8MB/s",
-      "server": "xg.jjzcloud.top",
-      "port": 57338,
+      "name": "🌀其他5-VN | ⬇️ 3.1MB/s",
+      "server": "vnvnnian-u-do-vn2.9966661.xyz",
+      "port": 3000,
       "protocol": "hysteria2",
       "settings": {
-        "auth": "8a1f066f-a4f2-4187-957d-53c56155d2f0",
-        "sni": "xg.jjzcloud.top",
+        "auth": "abf03bbd-ec5c-45d9-bf63-c1851a1f4c4d",
+        "sni": "vnvnnian-u-do-vn2.9966661.xyz",
+        "insecure": false,
+        "obfs": "",
+        "obfsPassword": "",
+        "uploadBandwidth": "",
+        "downloadBandwidth": ""
+      },
+      "extra": {
+        "raw": "hysteria2://abf03bbd-ec5c-45d9-bf63-c1851a1f4c4d@vnvnnian-u-do-vn2.9966661.xyz:3000?sni=vnvnnian-u-do-vn2.9966661.xyz#%F0%9F%8C%80%E5%85%B6%E4%BB%965-VN%20%7C%20%E2%AC%87%EF%B8%8F%203.1MB%2Fs",
+        "addedAt": "2025-10-04T12:31:34.713Z"
+      },
+      "metadata": {
+        "source": "amaoa"
+      }
+    },
+    {
+      "id": "s0d3zsvg5",
+      "type": "hysteria2",
+      "name": "🌀其他6-VN | ⬇️ 1.3MB/s",
+      "server": "vnvnnian-u-do-vn2-4.9966661.xyz",
+      "port": 3000,
+      "protocol": "hysteria2",
+      "settings": {
+        "auth": "abf03bbd-ec5c-45d9-bf63-c1851a1f4c4d",
+        "sni": "vnvnnian-u-do-vn2.9966661.xyz",
+        "insecure": false,
+        "obfs": "",
+        "obfsPassword": "",
+        "uploadBandwidth": "",
+        "downloadBandwidth": ""
+      },
+      "extra": {
+        "raw": "hysteria2://abf03bbd-ec5c-45d9-bf63-c1851a1f4c4d@vnvnnian-u-do-vn2-4.9966661.xyz:3000?sni=vnvnnian-u-do-vn2.9966661.xyz#%F0%9F%8C%80%E5%85%B6%E4%BB%966-VN%20%7C%20%E2%AC%87%EF%B8%8F%201.3MB%2Fs",
+        "addedAt": "2025-10-04T12:31:34.713Z"
+      },
+      "metadata": {
+        "source": "amaoa"
+      }
+    },
+    {
+      "id": "f24btap4o",
+      "type": "hysteria2",
+      "name": "🇺🇸美国8 | ⬇️ 2.6MB/s",
+      "server": "wmg2.wanlidag.top",
+      "port": 5555,
+      "protocol": "hysteria2",
+      "settings": {
+        "auth": "cecf3df6-a1eb-4609-9914-b9fe2b8a2b11",
+        "sni": "wmg2.wanlidag.top",
+        "insecure": false,
+        "obfs": "",
+        "obfsPassword": "",
+        "uploadBandwidth": "",
+        "downloadBandwidth": ""
+      },
+      "extra": {
+        "raw": "hysteria2://cecf3df6-a1eb-4609-9914-b9fe2b8a2b11@wmg2.wanlidag.top:5555?sni=wmg2.wanlidag.top#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD8%20%7C%20%E2%AC%87%EF%B8%8F%202.6MB%2Fs",
+        "addedAt": "2025-10-04T12:31:34.713Z"
+      },
+      "metadata": {
+        "source": "amaoa"
+      }
+    },
+    {
+      "id": "g96ok23mk",
+      "type": "hysteria2",
+      "name": "🇺🇸美国9 | ⬇️ 4.8MB/s",
+      "server": "els.ylccloud.top",
+      "port": 16090,
+      "protocol": "hysteria2",
+      "settings": {
+        "auth": "c86814b3-dcda-42ba-ae8f-75e9e94277bb",
+        "sni": "els.ylccloud.top",
         "insecure": true,
         "obfs": "",
         "obfsPassword": "",
@@ -1938,43 +464,23 @@
         "downloadBandwidth": ""
       },
       "extra": {
-        "raw": "hysteria2://8a1f066f-a4f2-4187-957d-53c56155d2f0@xg.jjzcloud.top:57338?insecure=1&sni=xg.jjzcloud.top#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD52%20%7C%20%E2%AC%87%EF%B8%8F%202.8MB%2Fs",
-        "addedAt": "2025-10-04T06:23:44.518Z"
+        "raw": "hysteria2://c86814b3-dcda-42ba-ae8f-75e9e94277bb@els.ylccloud.top:16090?insecure=1&sni=els.ylccloud.top#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD9%20%7C%20%E2%AC%87%EF%B8%8F%204.8MB%2Fs",
+        "addedAt": "2025-10-04T12:31:34.713Z"
       },
       "metadata": {
         "source": "amaoa"
       }
     },
     {
-      "id": "rxoh2no9h",
-      "type": "trojan",
-      "name": "🇺🇸美国53 | ⬇️ 7.4MB/s",
-      "server": "baigou1.kkieo555.cn",
-      "port": 21865,
-      "protocol": "trojan",
-      "settings": {
-        "password": "/8594be9b-94ed-419e-aebb-a92f5d3fbd0a",
-        "sni": "douyin.com",
-        "allowInsecure": true
-      },
-      "extra": {
-        "raw": "trojan://8594be9b-94ed-419e-aebb-a92f5d3fbd0a@baigou1.kkieo555.cn:21865?sni=douyin.com&allowInsecure=1#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD53%20%7C%20%E2%AC%87%EF%B8%8F%207.4MB%2Fs",
-        "addedAt": "2025-10-04T06:23:44.518Z"
-      },
-      "metadata": {
-        "source": "amaoa"
-      }
-    },
-    {
-      "id": "95wkxk18n",
+      "id": "jtvwmhjwv",
       "type": "hysteria2",
-      "name": "🇺🇸美国54 | ⬇️ 2.0MB/s",
-      "server": "mg1.jjzcloud.top",
-      "port": 57238,
+      "name": "🇺🇸美国10 | ⬇️ 1.8MB/s",
+      "server": "els.ylccloud.top",
+      "port": 16090,
       "protocol": "hysteria2",
       "settings": {
-        "auth": "c19c63ee-b44a-4bc4-9661-8b0d335e4b84",
-        "sni": "mg1.jjzcloud.top",
+        "auth": "f139baf1-a317-49eb-8105-00581c322ca4",
+        "sni": "els.ylccloud.top",
         "insecure": true,
         "obfs": "",
         "obfsPassword": "",
@@ -1982,18 +488,189 @@
         "downloadBandwidth": ""
       },
       "extra": {
-        "raw": "hysteria2://c19c63ee-b44a-4bc4-9661-8b0d335e4b84@mg1.jjzcloud.top:57238?insecure=1&sni=mg1.jjzcloud.top#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD54%20%7C%20%E2%AC%87%EF%B8%8F%202.0MB%2Fs",
-        "addedAt": "2025-10-04T06:23:44.518Z"
+        "raw": "hysteria2://f139baf1-a317-49eb-8105-00581c322ca4@els.ylccloud.top:16090?insecure=1&sni=els.ylccloud.top#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD10%20%7C%20%E2%AC%87%EF%B8%8F%201.8MB%2Fs",
+        "addedAt": "2025-10-04T12:31:34.713Z"
       },
       "metadata": {
         "source": "amaoa"
       }
     },
     {
-      "id": "wzacz6srt",
+      "id": "mhbwwbu7v",
+      "type": "hysteria2",
+      "name": "🌀其他7-VN | ⬇️ 1.9MB/s",
+      "server": "vnvnnian-u-do-vn2-3.9966661.xyz",
+      "port": 3000,
+      "protocol": "hysteria2",
+      "settings": {
+        "auth": "a24c6851-2055-42c1-9c20-2d3bad97334f",
+        "sni": "vnvnnian-u-do-vn2.9966661.xyz",
+        "insecure": false,
+        "obfs": "",
+        "obfsPassword": "",
+        "uploadBandwidth": "",
+        "downloadBandwidth": ""
+      },
+      "extra": {
+        "raw": "hysteria2://a24c6851-2055-42c1-9c20-2d3bad97334f@vnvnnian-u-do-vn2-3.9966661.xyz:3000?sni=vnvnnian-u-do-vn2.9966661.xyz#%F0%9F%8C%80%E5%85%B6%E4%BB%967-VN%20%7C%20%E2%AC%87%EF%B8%8F%201.9MB%2Fs",
+        "addedAt": "2025-10-04T12:31:34.713Z"
+      },
+      "metadata": {
+        "source": "amaoa"
+      }
+    },
+    {
+      "id": "wnfhyf9ja",
+      "type": "hysteria2",
+      "name": "🇩🇪德国1 | ⬇️ 1.2MB/s",
+      "server": "138.2.179.192",
+      "port": 1,
+      "protocol": "hysteria2",
+      "settings": {
+        "auth": "edf777e9-09f0-4118-b290-81c663941789",
+        "sni": "www.bing.com",
+        "insecure": true,
+        "obfs": "",
+        "obfsPassword": "",
+        "uploadBandwidth": "",
+        "downloadBandwidth": ""
+      },
+      "extra": {
+        "raw": "hysteria2://edf777e9-09f0-4118-b290-81c663941789@138.2.179.192:1?insecure=1&sni=www.bing.com#%F0%9F%87%A9%F0%9F%87%AA%E5%BE%B7%E5%9B%BD1%20%7C%20%E2%AC%87%EF%B8%8F%201.2MB%2Fs",
+        "addedAt": "2025-10-04T12:31:34.713Z"
+      },
+      "metadata": {
+        "source": "amaoa"
+      }
+    },
+    {
+      "id": "cm0e2rj1q",
+      "type": "hysteria2",
+      "name": "🇨🇦加拿大1 | ⬇️ 4.6MB/s",
+      "server": "40.233.77.86",
+      "port": 65535,
+      "protocol": "hysteria2",
+      "settings": {
+        "auth": "edf777e9-09f0-4118-b290-81c663941789",
+        "sni": "www.microsoft.com",
+        "insecure": true,
+        "obfs": "",
+        "obfsPassword": "",
+        "uploadBandwidth": "",
+        "downloadBandwidth": ""
+      },
+      "extra": {
+        "raw": "hysteria2://edf777e9-09f0-4118-b290-81c663941789@40.233.77.86:65535?insecure=1&sni=www.microsoft.com#%F0%9F%87%A8%F0%9F%87%A6%E5%8A%A0%E6%8B%BF%E5%A4%A71%20%7C%20%E2%AC%87%EF%B8%8F%204.6MB%2Fs",
+        "addedAt": "2025-10-04T12:31:34.713Z"
+      },
+      "metadata": {
+        "source": "amaoa"
+      }
+    },
+    {
+      "id": "03t33rnkz",
+      "type": "hysteria2",
+      "name": "🇺🇸美国11 | ⬇️ 1.4MB/s",
+      "server": "ce044a-330-2.9966661.xyz",
+      "port": 3000,
+      "protocol": "hysteria2",
+      "settings": {
+        "auth": "abf03bbd-ec5c-45d9-bf63-c1851a1f4c4d",
+        "sni": "ce044a-330.9966661.xyz",
+        "insecure": false,
+        "obfs": "",
+        "obfsPassword": "",
+        "uploadBandwidth": "",
+        "downloadBandwidth": ""
+      },
+      "extra": {
+        "raw": "hysteria2://abf03bbd-ec5c-45d9-bf63-c1851a1f4c4d@ce044a-330-2.9966661.xyz:3000?sni=ce044a-330.9966661.xyz#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD11%20%7C%20%E2%AC%87%EF%B8%8F%201.4MB%2Fs",
+        "addedAt": "2025-10-04T12:31:34.713Z"
+      },
+      "metadata": {
+        "source": "amaoa"
+      }
+    },
+    {
+      "id": "3z99994r4",
+      "type": "hysteria2",
+      "name": "🌀其他8-SE | ⬇️ 3.2MB/s",
+      "server": "129.151.193.163",
+      "port": 50000,
+      "protocol": "hysteria2",
+      "settings": {
+        "auth": "edf777e9-09f0-4118-b290-81c663941789",
+        "sni": "www.microsoft.com",
+        "insecure": true,
+        "obfs": "",
+        "obfsPassword": "",
+        "uploadBandwidth": "",
+        "downloadBandwidth": ""
+      },
+      "extra": {
+        "raw": "hysteria2://edf777e9-09f0-4118-b290-81c663941789@129.151.193.163:50000?insecure=1&sni=www.microsoft.com&mport=50000-53000#%F0%9F%8C%80%E5%85%B6%E4%BB%968-SE%20%7C%20%E2%AC%87%EF%B8%8F%203.2MB%2Fs",
+        "addedAt": "2025-10-04T12:31:34.713Z"
+      },
+      "metadata": {
+        "source": "amaoa"
+      }
+    },
+    {
+      "id": "48nbj52k7",
       "type": "vless",
-      "name": "🌀其他10-ES | ⬇️ 2.2MB/s",
-      "server": "ae1-2.9966662.xyz",
+      "name": "🇫🇷法国3 | ⬇️ 2.1MB/s",
+      "server": "38.54.122.118",
+      "port": 443,
+      "protocol": "vless",
+      "settings": {
+        "id": "9f4b9824-df02-49c3-a976-d4f9a31f81fe",
+        "network": "tcp",
+        "security": "reality",
+        "sni": "dash.cloudflare.com",
+        "fp": "chrome",
+        "alpn": "",
+        "path": "/",
+        "host": "",
+        "encryption": "none",
+        "flow": "xtls-rprx-vision"
+      },
+      "extra": {
+        "raw": "vless://9f4b9824-df02-49c3-a976-d4f9a31f81fe@38.54.122.118:443?security=reality&type=tcp&sni=dash.cloudflare.com&fp=chrome&flow=xtls-rprx-vision&pbk=21MNt-O8tq9gP9o7yeT9iVQslHPdNVHtqI9Kg5p-lHo#%F0%9F%87%AB%F0%9F%87%B7%E6%B3%95%E5%9B%BD3%20%7C%20%E2%AC%87%EF%B8%8F%202.1MB%2Fs",
+        "addedAt": "2025-10-04T12:31:34.713Z"
+      },
+      "metadata": {
+        "source": "amaoa"
+      }
+    },
+    {
+      "id": "ex1ypjk4a",
+      "type": "hysteria2",
+      "name": "🇺🇸美国12 | ⬇️ 2.3MB/s",
+      "server": "mg2.jjzcloud.top",
+      "port": 57338,
+      "protocol": "hysteria2",
+      "settings": {
+        "auth": "05a5a4d4-796f-49aa-99ba-dba6edafa47e",
+        "sni": "mg2.jjzcloud.top",
+        "insecure": true,
+        "obfs": "",
+        "obfsPassword": "",
+        "uploadBandwidth": "",
+        "downloadBandwidth": ""
+      },
+      "extra": {
+        "raw": "hysteria2://05a5a4d4-796f-49aa-99ba-dba6edafa47e@mg2.jjzcloud.top:57338?insecure=1&sni=mg2.jjzcloud.top#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD12%20%7C%20%E2%AC%87%EF%B8%8F%202.3MB%2Fs",
+        "addedAt": "2025-10-04T12:31:34.713Z"
+      },
+      "metadata": {
+        "source": "amaoa"
+      }
+    },
+    {
+      "id": "8qbn42wc0",
+      "type": "vless",
+      "name": "🇫🇮芬兰2 | ⬇️ 2.5MB/s",
+      "server": "fi1-1.9966662.xyz",
       "port": 20223,
       "protocol": "vless",
       "settings": {
@@ -2009,23 +686,23 @@
         "flow": "xtls-rprx-vision"
       },
       "extra": {
-        "raw": "vless://a24c6851-2055-42c1-9c20-2d3bad97334f@ae1-2.9966662.xyz:20223?security=reality&type=tcp&sni=www.cloudflare.com&fp=chrome&flow=xtls-rprx-vision&sid=c6842be1&pbk=RsbED0LyE3f2byTPx5t-dQewju6z9R4xqTWrADM4WnM#%F0%9F%8C%80%E5%85%B6%E4%BB%9610-ES%20%7C%20%E2%AC%87%EF%B8%8F%202.2MB%2Fs",
-        "addedAt": "2025-10-04T06:23:44.518Z"
+        "raw": "vless://a24c6851-2055-42c1-9c20-2d3bad97334f@fi1-1.9966662.xyz:20223?security=reality&type=tcp&sni=www.cloudflare.com&fp=chrome&flow=xtls-rprx-vision&sid=587d20c4&pbk=2hmTpdZk2JPHCIBM0ism_AAr9HjtnyMV9syarwvj-Q4#%F0%9F%87%AB%F0%9F%87%AE%E8%8A%AC%E5%85%B02%20%7C%20%E2%AC%87%EF%B8%8F%202.5MB%2Fs",
+        "addedAt": "2025-10-04T12:31:34.713Z"
       },
       "metadata": {
         "source": "amaoa"
       }
     },
     {
-      "id": "5qq4ogxr9",
+      "id": "h5peyctg4",
       "type": "hysteria2",
-      "name": "🇺🇸美国55 | ⬇️ 4.0MB/s",
-      "server": "wmg1.wanlidag.top",
+      "name": "🇺🇸美国13 | ⬇️ 2.2MB/s",
+      "server": "wmg2.wanlidag.top",
       "port": 5555,
       "protocol": "hysteria2",
       "settings": {
         "auth": "5fe87ec5-d448-43e6-ba81-f7a63bc0eb10",
-        "sni": "wmg1.wanlidag.top",
+        "sni": "wmg2.wanlidag.top",
         "insecure": true,
         "obfs": "",
         "obfsPassword": "",
@@ -2033,134 +710,22 @@
         "downloadBandwidth": ""
       },
       "extra": {
-        "raw": "hysteria2://5fe87ec5-d448-43e6-ba81-f7a63bc0eb10@wmg1.wanlidag.top:5555?insecure=1&sni=wmg1.wanlidag.top#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD55%20%7C%20%E2%AC%87%EF%B8%8F%204.0MB%2Fs",
-        "addedAt": "2025-10-04T06:23:44.518Z"
+        "raw": "hysteria2://5fe87ec5-d448-43e6-ba81-f7a63bc0eb10@wmg2.wanlidag.top:5555?insecure=1&sni=wmg2.wanlidag.top#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD13%20%7C%20%E2%AC%87%EF%B8%8F%202.2MB%2Fs",
+        "addedAt": "2025-10-04T12:31:34.713Z"
       },
       "metadata": {
         "source": "amaoa"
       }
     },
     {
-      "id": "wulwhihjj",
+      "id": "gkljwjru1",
       "type": "hysteria2",
-      "name": "🇺🇸美国56 | ⬇️ 3.3MB/s",
-      "server": "xg.jjzcloud.top",
-      "port": 57338,
-      "protocol": "hysteria2",
-      "settings": {
-        "auth": "879fa4e5-4d26-4dab-aa15-39fbaa0419a1",
-        "sni": "xg.jjzcloud.top",
-        "insecure": true,
-        "obfs": "",
-        "obfsPassword": "",
-        "uploadBandwidth": "",
-        "downloadBandwidth": ""
-      },
-      "extra": {
-        "raw": "hysteria2://879fa4e5-4d26-4dab-aa15-39fbaa0419a1@xg.jjzcloud.top:57338?insecure=1&sni=xg.jjzcloud.top#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD56%20%7C%20%E2%AC%87%EF%B8%8F%203.3MB%2Fs",
-        "addedAt": "2025-10-04T06:23:44.518Z"
-      },
-      "metadata": {
-        "source": "amaoa"
-      }
-    },
-    {
-      "id": "2p8p3sdul",
-      "type": "trojan",
-      "name": "🇯🇵日本5 | ⬇️ 6.5MB/s",
-      "server": "baigou1.kkieo555.cn",
-      "port": 21867,
-      "protocol": "trojan",
-      "settings": {
-        "password": "/d9c1d3c5-12ea-4ea7-8ab3-1312d67ec181",
-        "sni": "douyin.com",
-        "allowInsecure": true
-      },
-      "extra": {
-        "raw": "trojan://d9c1d3c5-12ea-4ea7-8ab3-1312d67ec181@baigou1.kkieo555.cn:21867?sni=douyin.com&allowInsecure=1#%F0%9F%87%AF%F0%9F%87%B5%E6%97%A5%E6%9C%AC5%20%7C%20%E2%AC%87%EF%B8%8F%206.5MB%2Fs",
-        "addedAt": "2025-10-04T06:23:44.518Z"
-      },
-      "metadata": {
-        "source": "amaoa"
-      }
-    },
-    {
-      "id": "36waxlcvo",
-      "type": "hysteria2",
-      "name": "🇺🇸美国57 | ⬇️ 3.8MB/s",
-      "server": "mg1.jjzcloud.top",
-      "port": 57238,
-      "protocol": "hysteria2",
-      "settings": {
-        "auth": "2fc13fd3-f056-42a6-a7d4-9105fe1d915b",
-        "sni": "mg1.jjzcloud.top",
-        "insecure": true,
-        "obfs": "",
-        "obfsPassword": "",
-        "uploadBandwidth": "",
-        "downloadBandwidth": ""
-      },
-      "extra": {
-        "raw": "hysteria2://2fc13fd3-f056-42a6-a7d4-9105fe1d915b@mg1.jjzcloud.top:57238?insecure=1&sni=mg1.jjzcloud.top#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD57%20%7C%20%E2%AC%87%EF%B8%8F%203.8MB%2Fs",
-        "addedAt": "2025-10-04T06:23:44.518Z"
-      },
-      "metadata": {
-        "source": "amaoa"
-      }
-    },
-    {
-      "id": "buifb3iou",
-      "type": "hysteria2",
-      "name": "🇺🇸美国58 | ⬇️ 1.7MB/s",
-      "server": "mg1.jjzcloud.top",
-      "port": 57238,
-      "protocol": "hysteria2",
-      "settings": {
-        "auth": "b40b10a2-c776-4627-bead-350b22161f16",
-        "sni": "mg1.jjzcloud.top",
-        "insecure": true,
-        "obfs": "",
-        "obfsPassword": "",
-        "uploadBandwidth": "",
-        "downloadBandwidth": ""
-      },
-      "extra": {
-        "raw": "hysteria2://b40b10a2-c776-4627-bead-350b22161f16@mg1.jjzcloud.top:57238?insecure=1&sni=mg1.jjzcloud.top#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD58%20%7C%20%E2%AC%87%EF%B8%8F%201.7MB%2Fs",
-        "addedAt": "2025-10-04T06:23:44.518Z"
-      },
-      "metadata": {
-        "source": "amaoa"
-      }
-    },
-    {
-      "id": "3vha5gbyb",
-      "type": "trojan",
-      "name": "🇯🇵日本6 | ⬇️ 1.7MB/s",
-      "server": "baigou1.kkieo555.cn",
-      "port": 21868,
-      "protocol": "trojan",
-      "settings": {
-        "password": "/dc0281c1-5f69-45bf-9b72-f56d2edb3966",
-        "sni": "douyin.com",
-        "allowInsecure": true
-      },
-      "extra": {
-        "raw": "trojan://dc0281c1-5f69-45bf-9b72-f56d2edb3966@baigou1.kkieo555.cn:21868?sni=douyin.com&allowInsecure=1#%F0%9F%87%AF%F0%9F%87%B5%E6%97%A5%E6%9C%AC6%20%7C%20%E2%AC%87%EF%B8%8F%201.7MB%2Fs",
-        "addedAt": "2025-10-04T06:23:44.518Z"
-      },
-      "metadata": {
-        "source": "amaoa"
-      }
-    },
-    {
-      "id": "d7hhn8kia",
-      "type": "hysteria2",
-      "name": "🇺🇸美国59 | ⬇️ 2.3MB/s",
+      "name": "🇺🇸美国14 | ⬇️ 1.3MB/s",
       "server": "mg2.jjzcloud.top",
       "port": 57338,
       "protocol": "hysteria2",
       "settings": {
-        "auth": "3cda8cd5-c367-4f96-b6fd-01a76ec8996f",
+        "auth": "d494721e-e62d-474c-be9b-2dffd028039a",
         "sni": "mg2.jjzcloud.top",
         "insecure": true,
         "obfs": "",
@@ -2169,42 +734,22 @@
         "downloadBandwidth": ""
       },
       "extra": {
-        "raw": "hysteria2://3cda8cd5-c367-4f96-b6fd-01a76ec8996f@mg2.jjzcloud.top:57338?insecure=1&sni=mg2.jjzcloud.top#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD59%20%7C%20%E2%AC%87%EF%B8%8F%202.3MB%2Fs",
-        "addedAt": "2025-10-04T06:23:44.518Z"
+        "raw": "hysteria2://d494721e-e62d-474c-be9b-2dffd028039a@mg2.jjzcloud.top:57338?insecure=1&sni=mg2.jjzcloud.top#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD14%20%7C%20%E2%AC%87%EF%B8%8F%201.3MB%2Fs",
+        "addedAt": "2025-10-04T12:31:34.713Z"
       },
       "metadata": {
         "source": "amaoa"
       }
     },
     {
-      "id": "5oo8v2ihz",
-      "type": "trojan",
-      "name": "🇹🇼台湾6 | ⬇️ 4.9MB/s",
-      "server": "baigou1.kkieo555.cn",
-      "port": 21874,
-      "protocol": "trojan",
-      "settings": {
-        "password": "/e0cd7b9f-0846-499c-af0d-e415d9c811f5",
-        "sni": "douyin.com",
-        "allowInsecure": true
-      },
-      "extra": {
-        "raw": "trojan://e0cd7b9f-0846-499c-af0d-e415d9c811f5@baigou1.kkieo555.cn:21874?sni=douyin.com&allowInsecure=1#%F0%9F%87%B9%F0%9F%87%BC%E5%8F%B0%E6%B9%BE6%20%7C%20%E2%AC%87%EF%B8%8F%204.9MB%2Fs",
-        "addedAt": "2025-10-04T06:23:44.518Z"
-      },
-      "metadata": {
-        "source": "amaoa"
-      }
-    },
-    {
-      "id": "xbx1h1411",
+      "id": "swaszkuwu",
       "type": "hysteria2",
-      "name": "🇺🇸美国60 | ⬇️ 1.7MB/s",
+      "name": "🇺🇸美国15 | ⬇️ 1.0MB/s",
       "server": "xg.jjzcloud.top",
       "port": 57338,
       "protocol": "hysteria2",
       "settings": {
-        "auth": "1c79b7e4-aadc-4657-8552-8ab436feae17",
+        "auth": "754eb16a-4d52-4e45-b7b9-d1af6cc86d66",
         "sni": "xg.jjzcloud.top",
         "insecure": true,
         "obfs": "",
@@ -2213,110 +758,26 @@
         "downloadBandwidth": ""
       },
       "extra": {
-        "raw": "hysteria2://1c79b7e4-aadc-4657-8552-8ab436feae17@xg.jjzcloud.top:57338?insecure=1&sni=xg.jjzcloud.top#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD60%20%7C%20%E2%AC%87%EF%B8%8F%201.7MB%2Fs",
-        "addedAt": "2025-10-04T06:23:44.518Z"
+        "raw": "hysteria2://754eb16a-4d52-4e45-b7b9-d1af6cc86d66@xg.jjzcloud.top:57338?insecure=1&sni=xg.jjzcloud.top#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD15%20%7C%20%E2%AC%87%EF%B8%8F%201.0MB%2Fs",
+        "addedAt": "2025-10-04T12:31:34.713Z"
       },
       "metadata": {
         "source": "amaoa"
       }
     },
     {
-      "id": "7u8uyfx2q",
-      "type": "trojan",
-      "name": "🇸🇬新加坡2 | ⬇️ 3.9MB/s",
-      "server": "baigou1.kkieo555.cn",
-      "port": 21877,
-      "protocol": "trojan",
-      "settings": {
-        "password": "/dc0281c1-5f69-45bf-9b72-f56d2edb3966",
-        "sni": "douyin.com",
-        "allowInsecure": true
-      },
-      "extra": {
-        "raw": "trojan://dc0281c1-5f69-45bf-9b72-f56d2edb3966@baigou1.kkieo555.cn:21877?sni=douyin.com&allowInsecure=1#%F0%9F%87%B8%F0%9F%87%AC%E6%96%B0%E5%8A%A0%E5%9D%A12%20%7C%20%E2%AC%87%EF%B8%8F%203.9MB%2Fs",
-        "addedAt": "2025-10-04T06:23:44.518Z"
-      },
-      "metadata": {
-        "source": "amaoa"
-      }
-    },
-    {
-      "id": "twbq3ur44",
-      "type": "trojan",
-      "name": "🇯🇵日本7 | ⬇️ 2.8MB/s",
-      "server": "baigou1.kkieo555.cn",
-      "port": 21869,
-      "protocol": "trojan",
-      "settings": {
-        "password": "/dc0281c1-5f69-45bf-9b72-f56d2edb3966",
-        "sni": "douyin.com",
-        "allowInsecure": true
-      },
-      "extra": {
-        "raw": "trojan://dc0281c1-5f69-45bf-9b72-f56d2edb3966@baigou1.kkieo555.cn:21869?sni=douyin.com&allowInsecure=1#%F0%9F%87%AF%F0%9F%87%B5%E6%97%A5%E6%9C%AC7%20%7C%20%E2%AC%87%EF%B8%8F%202.8MB%2Fs",
-        "addedAt": "2025-10-04T06:23:44.518Z"
-      },
-      "metadata": {
-        "source": "amaoa"
-      }
-    },
-    {
-      "id": "xg47awnma",
-      "type": "trojan",
-      "name": "🇭🇰香港4 | ⬇️ 11.1MB/s",
-      "server": "baigou1.kkieo555.cn",
-      "port": 21863,
-      "protocol": "trojan",
-      "settings": {
-        "password": "/dc0281c1-5f69-45bf-9b72-f56d2edb3966",
-        "sni": "douyin.com",
-        "allowInsecure": true
-      },
-      "extra": {
-        "raw": "trojan://dc0281c1-5f69-45bf-9b72-f56d2edb3966@baigou1.kkieo555.cn:21863?sni=douyin.com&allowInsecure=1#%F0%9F%87%AD%F0%9F%87%B0%E9%A6%99%E6%B8%AF4%20%7C%20%E2%AC%87%EF%B8%8F%2011.1MB%2Fs",
-        "addedAt": "2025-10-04T06:23:44.518Z"
-      },
-      "metadata": {
-        "source": "amaoa"
-      }
-    },
-    {
-      "id": "dv6vcprcn",
-      "type": "hysteria2",
-      "name": "🇺🇸美国61 | ⬇️ 1.1MB/s",
-      "server": "mg2.jjzcloud.top",
-      "port": 57338,
-      "protocol": "hysteria2",
-      "settings": {
-        "auth": "879fa4e5-4d26-4dab-aa15-39fbaa0419a1",
-        "sni": "mg2.jjzcloud.top",
-        "insecure": true,
-        "obfs": "",
-        "obfsPassword": "",
-        "uploadBandwidth": "",
-        "downloadBandwidth": ""
-      },
-      "extra": {
-        "raw": "hysteria2://879fa4e5-4d26-4dab-aa15-39fbaa0419a1@mg2.jjzcloud.top:57338?insecure=1&sni=mg2.jjzcloud.top#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD61%20%7C%20%E2%AC%87%EF%B8%8F%201.1MB%2Fs",
-        "addedAt": "2025-10-04T06:23:44.518Z"
-      },
-      "metadata": {
-        "source": "amaoa"
-      }
-    },
-    {
-      "id": "sdozw7nkc",
+      "id": "cogjlhlb3",
       "type": "vless",
-      "name": "🌀其他11-ES | ⬇️ 2.4MB/s",
-      "server": "ae1-4.9966662.xyz",
-      "port": 20223,
+      "name": "🇩🇪德国2 | ⬇️ 2.4MB/s",
+      "server": "77.90.41.131",
+      "port": 10878,
       "protocol": "vless",
       "settings": {
-        "id": "a24c6851-2055-42c1-9c20-2d3bad97334f",
+        "id": "b3df6283-ce5d-4588-80f0-cd4af160881b",
         "network": "tcp",
         "security": "reality",
-        "sni": "www.cloudflare.com",
-        "fp": "chrome",
+        "sni": "www.otto.de",
+        "fp": "safari",
         "alpn": "",
         "path": "/",
         "host": "",
@@ -2324,23 +785,122 @@
         "flow": "xtls-rprx-vision"
       },
       "extra": {
-        "raw": "vless://a24c6851-2055-42c1-9c20-2d3bad97334f@ae1-4.9966662.xyz:20223?security=reality&type=tcp&sni=www.cloudflare.com&fp=chrome&flow=xtls-rprx-vision&sid=c6842be1&pbk=RsbED0LyE3f2byTPx5t-dQewju6z9R4xqTWrADM4WnM#%F0%9F%8C%80%E5%85%B6%E4%BB%9611-ES%20%7C%20%E2%AC%87%EF%B8%8F%202.4MB%2Fs",
-        "addedAt": "2025-10-04T06:23:44.518Z"
+        "raw": "vless://b3df6283-ce5d-4588-80f0-cd4af160881b@77.90.41.131:10878?security=reality&type=tcp&sni=www.otto.de&fp=safari&flow=xtls-rprx-vision&sid=fa2ac87f&pbk=3YzHh7Yjh7jwmzxU9B1FiOe1Tq_XBz9Fdms5iIcI6k4#%F0%9F%87%A9%F0%9F%87%AA%E5%BE%B7%E5%9B%BD2%20%7C%20%E2%AC%87%EF%B8%8F%202.4MB%2Fs",
+        "addedAt": "2025-10-04T12:31:34.713Z"
       },
       "metadata": {
         "source": "amaoa"
       }
     },
     {
-      "id": "1h8zrh32o",
+      "id": "xyuyyx4g7",
       "type": "hysteria2",
-      "name": "🇺🇸美国62 | ⬇️ 1.1MB/s",
-      "server": "xjp1.xiaohuolongjc.top",
-      "port": 37771,
+      "name": "🌀其他9-VN | ⬇️ 3.8MB/s",
+      "server": "vnvnnian-u-do-vn2.9966661.xyz",
+      "port": 3000,
       "protocol": "hysteria2",
       "settings": {
-        "auth": "e33b95f1-4363-40d4-afdd-1ce468882df4",
-        "sni": "xjp1.xiaohuolongjc.top",
+        "auth": "a24c6851-2055-42c1-9c20-2d3bad97334f",
+        "sni": "vnvnnian-u-do-vn2.9966661.xyz",
+        "insecure": false,
+        "obfs": "",
+        "obfsPassword": "",
+        "uploadBandwidth": "",
+        "downloadBandwidth": ""
+      },
+      "extra": {
+        "raw": "hysteria2://a24c6851-2055-42c1-9c20-2d3bad97334f@vnvnnian-u-do-vn2.9966661.xyz:3000?sni=vnvnnian-u-do-vn2.9966661.xyz#%F0%9F%8C%80%E5%85%B6%E4%BB%969-VN%20%7C%20%E2%AC%87%EF%B8%8F%203.8MB%2Fs",
+        "addedAt": "2025-10-04T12:31:34.713Z"
+      },
+      "metadata": {
+        "source": "amaoa"
+      }
+    },
+    {
+      "id": "58y8b18su",
+      "type": "hysteria2",
+      "name": "🇺🇸美国16 | ⬇️ 1.9MB/s",
+      "server": "1e3fb9-330-co.9966661.xyz",
+      "port": 3000,
+      "protocol": "hysteria2",
+      "settings": {
+        "auth": "abf03bbd-ec5c-45d9-bf63-c1851a1f4c4d",
+        "sni": "1e3fb9-330-co.9966661.xyz",
+        "insecure": false,
+        "obfs": "",
+        "obfsPassword": "",
+        "uploadBandwidth": "",
+        "downloadBandwidth": ""
+      },
+      "extra": {
+        "raw": "hysteria2://abf03bbd-ec5c-45d9-bf63-c1851a1f4c4d@1e3fb9-330-co.9966661.xyz:3000?sni=1e3fb9-330-co.9966661.xyz#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD16%20%7C%20%E2%AC%87%EF%B8%8F%201.9MB%2Fs",
+        "addedAt": "2025-10-04T12:31:34.713Z"
+      },
+      "metadata": {
+        "source": "amaoa"
+      }
+    },
+    {
+      "id": "5fx96d02u",
+      "type": "vless",
+      "name": "🇫🇮芬兰3 | ⬇️ 2.3MB/s",
+      "server": "141.227.170.178",
+      "port": 21232,
+      "protocol": "vless",
+      "settings": {
+        "id": "5e0eddef-95cd-4109-9807-0f32062939f3",
+        "network": "grpc",
+        "security": "none",
+        "sni": "141.227.170.178",
+        "fp": "",
+        "alpn": "",
+        "path": "/",
+        "host": "",
+        "encryption": "none",
+        "flow": ""
+      },
+      "extra": {
+        "raw": "vless://5e0eddef-95cd-4109-9807-0f32062939f3@141.227.170.178:21232?security=none&type=grpc&mode=gun&serviceName=ZEDMODEON-ZEDMODEON-ZEDMODEON-bia-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON#%F0%9F%87%AB%F0%9F%87%AE%E8%8A%AC%E5%85%B03%20%7C%20%E2%AC%87%EF%B8%8F%202.3MB%2Fs",
+        "addedAt": "2025-10-04T12:31:34.713Z"
+      },
+      "metadata": {
+        "source": "amaoa"
+      }
+    },
+    {
+      "id": "dlhtdwhnq",
+      "type": "hysteria2",
+      "name": "🌀其他10-VN | ⬇️ 5.0MB/s",
+      "server": "vnvn-u-do-vn1-3.9966661.xyz",
+      "port": 3000,
+      "protocol": "hysteria2",
+      "settings": {
+        "auth": "abf03bbd-ec5c-45d9-bf63-c1851a1f4c4d",
+        "sni": "vnvn-u-do-vn1.9966661.xyz",
+        "insecure": false,
+        "obfs": "",
+        "obfsPassword": "",
+        "uploadBandwidth": "",
+        "downloadBandwidth": ""
+      },
+      "extra": {
+        "raw": "hysteria2://abf03bbd-ec5c-45d9-bf63-c1851a1f4c4d@vnvn-u-do-vn1-3.9966661.xyz:3000?sni=vnvn-u-do-vn1.9966661.xyz#%F0%9F%8C%80%E5%85%B6%E4%BB%9610-VN%20%7C%20%E2%AC%87%EF%B8%8F%205.0MB%2Fs",
+        "addedAt": "2025-10-04T12:31:34.713Z"
+      },
+      "metadata": {
+        "source": "amaoa"
+      }
+    },
+    {
+      "id": "acmnw8er6",
+      "type": "hysteria2",
+      "name": "🇦🇺澳大利亚1 | ⬇️ 5.0MB/s",
+      "server": "159.13.38.138",
+      "port": 50000,
+      "protocol": "hysteria2",
+      "settings": {
+        "auth": "edf777e9-09f0-4118-b290-81c663941789",
+        "sni": "www.hoyoverse.com",
         "insecure": true,
         "obfs": "",
         "obfsPassword": "",
@@ -2348,14 +908,797 @@
         "downloadBandwidth": ""
       },
       "extra": {
-        "raw": "hysteria2://e33b95f1-4363-40d4-afdd-1ce468882df4@xjp1.xiaohuolongjc.top:37771?insecure=1&sni=xjp1.xiaohuolongjc.top#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD62%20%7C%20%E2%AC%87%EF%B8%8F%201.1MB%2Fs",
-        "addedAt": "2025-10-04T06:23:44.518Z"
+        "raw": "hysteria2://edf777e9-09f0-4118-b290-81c663941789@159.13.38.138:50000?insecure=1&sni=www.hoyoverse.com&mport=50000-53000#%F0%9F%87%A6%F0%9F%87%BA%E6%BE%B3%E5%A4%A7%E5%88%A9%E4%BA%9A1%20%7C%20%E2%AC%87%EF%B8%8F%205.0MB%2Fs",
+        "addedAt": "2025-10-04T12:31:34.713Z"
+      },
+      "metadata": {
+        "source": "amaoa"
+      }
+    },
+    {
+      "id": "qs764ekqy",
+      "type": "hysteria2",
+      "name": "🇺🇸美国17 | ⬇️ 1.6MB/s",
+      "server": "yd.jjzcloud.top",
+      "port": 57338,
+      "protocol": "hysteria2",
+      "settings": {
+        "auth": "0ecd8e7d-eb8f-402e-8cb1-beef52e3fd18",
+        "sni": "yd.jjzcloud.top",
+        "insecure": true,
+        "obfs": "",
+        "obfsPassword": "",
+        "uploadBandwidth": "",
+        "downloadBandwidth": ""
+      },
+      "extra": {
+        "raw": "hysteria2://0ecd8e7d-eb8f-402e-8cb1-beef52e3fd18@yd.jjzcloud.top:57338?insecure=1&sni=yd.jjzcloud.top#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD17%20%7C%20%E2%AC%87%EF%B8%8F%201.6MB%2Fs",
+        "addedAt": "2025-10-04T12:31:34.713Z"
+      },
+      "metadata": {
+        "source": "amaoa"
+      }
+    },
+    {
+      "id": "11f2v9sez",
+      "type": "hysteria2",
+      "name": "🇺🇸美国18 | ⬇️ 1.2MB/s",
+      "server": "els.ylccloud.top",
+      "port": 16090,
+      "protocol": "hysteria2",
+      "settings": {
+        "auth": "7e8e9ce5-e6f8-4c86-bda2-fa29f74cb41e",
+        "sni": "els.ylccloud.top",
+        "insecure": true,
+        "obfs": "",
+        "obfsPassword": "",
+        "uploadBandwidth": "",
+        "downloadBandwidth": ""
+      },
+      "extra": {
+        "raw": "hysteria2://7e8e9ce5-e6f8-4c86-bda2-fa29f74cb41e@els.ylccloud.top:16090?insecure=1&sni=els.ylccloud.top#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD18%20%7C%20%E2%AC%87%EF%B8%8F%201.2MB%2Fs",
+        "addedAt": "2025-10-04T12:31:34.713Z"
+      },
+      "metadata": {
+        "source": "amaoa"
+      }
+    },
+    {
+      "id": "25ndn7m3f",
+      "type": "hysteria2",
+      "name": "🇺🇸美国19 | ⬇️ 2.3MB/s",
+      "server": "yd.jjzcloud.top",
+      "port": 57338,
+      "protocol": "hysteria2",
+      "settings": {
+        "auth": "b40b10a2-c776-4627-bead-350b22161f16",
+        "sni": "yd.jjzcloud.top",
+        "insecure": true,
+        "obfs": "",
+        "obfsPassword": "",
+        "uploadBandwidth": "",
+        "downloadBandwidth": ""
+      },
+      "extra": {
+        "raw": "hysteria2://b40b10a2-c776-4627-bead-350b22161f16@yd.jjzcloud.top:57338?insecure=1&sni=yd.jjzcloud.top#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD19%20%7C%20%E2%AC%87%EF%B8%8F%202.3MB%2Fs",
+        "addedAt": "2025-10-04T12:31:34.713Z"
+      },
+      "metadata": {
+        "source": "amaoa"
+      }
+    },
+    {
+      "id": "voyyz0ihc",
+      "type": "hysteria2",
+      "name": "🇺🇸美国20 | ⬇️ 1.1MB/s",
+      "server": "xg.jjzcloud.top",
+      "port": 57338,
+      "protocol": "hysteria2",
+      "settings": {
+        "auth": "f3fac66e-e149-4f04-a340-c449e5e02bfa",
+        "sni": "xg.jjzcloud.top",
+        "insecure": true,
+        "obfs": "",
+        "obfsPassword": "",
+        "uploadBandwidth": "",
+        "downloadBandwidth": ""
+      },
+      "extra": {
+        "raw": "hysteria2://f3fac66e-e149-4f04-a340-c449e5e02bfa@xg.jjzcloud.top:57338?insecure=1&sni=xg.jjzcloud.top#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD20%20%7C%20%E2%AC%87%EF%B8%8F%201.1MB%2Fs",
+        "addedAt": "2025-10-04T12:31:34.713Z"
+      },
+      "metadata": {
+        "source": "amaoa"
+      }
+    },
+    {
+      "id": "yi9ronccd",
+      "type": "hysteria2",
+      "name": "🇺🇸美国21 | ⬇️ 1.4MB/s",
+      "server": "els.ylccloud.top",
+      "port": 16090,
+      "protocol": "hysteria2",
+      "settings": {
+        "auth": "d4645231-e4ad-4310-ae53-137b4230f7de",
+        "sni": "els.ylccloud.top",
+        "insecure": true,
+        "obfs": "",
+        "obfsPassword": "",
+        "uploadBandwidth": "",
+        "downloadBandwidth": ""
+      },
+      "extra": {
+        "raw": "hysteria2://d4645231-e4ad-4310-ae53-137b4230f7de@els.ylccloud.top:16090?insecure=1&sni=els.ylccloud.top#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD21%20%7C%20%E2%AC%87%EF%B8%8F%201.4MB%2Fs",
+        "addedAt": "2025-10-04T12:31:34.713Z"
+      },
+      "metadata": {
+        "source": "amaoa"
+      }
+    },
+    {
+      "id": "bmz7or1ys",
+      "type": "hysteria2",
+      "name": "🇺🇸美国22 | ⬇️ 2.5MB/s",
+      "server": "141.148.131.27",
+      "port": 50000,
+      "protocol": "hysteria2",
+      "settings": {
+        "auth": "edf777e9-09f0-4118-b290-81c663941789",
+        "sni": "www.bing.com",
+        "insecure": true,
+        "obfs": "",
+        "obfsPassword": "",
+        "uploadBandwidth": "",
+        "downloadBandwidth": ""
+      },
+      "extra": {
+        "raw": "hysteria2://edf777e9-09f0-4118-b290-81c663941789@141.148.131.27:50000?insecure=1&sni=www.bing.com&mport=50000-53000#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD22%20%7C%20%E2%AC%87%EF%B8%8F%202.5MB%2Fs",
+        "addedAt": "2025-10-04T12:31:34.713Z"
+      },
+      "metadata": {
+        "source": "amaoa"
+      }
+    },
+    {
+      "id": "0ot2e0gip",
+      "type": "hysteria2",
+      "name": "🇺🇸美国23 | ⬇️ 1.5MB/s",
+      "server": "els.ylccloud.top",
+      "port": 16090,
+      "protocol": "hysteria2",
+      "settings": {
+        "auth": "b2364864-014a-4a80-a83f-fa7536c671e0",
+        "sni": "els.ylccloud.top",
+        "insecure": true,
+        "obfs": "",
+        "obfsPassword": "",
+        "uploadBandwidth": "",
+        "downloadBandwidth": ""
+      },
+      "extra": {
+        "raw": "hysteria2://b2364864-014a-4a80-a83f-fa7536c671e0@els.ylccloud.top:16090?insecure=1&sni=els.ylccloud.top#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD23%20%7C%20%E2%AC%87%EF%B8%8F%201.5MB%2Fs",
+        "addedAt": "2025-10-04T12:31:34.713Z"
+      },
+      "metadata": {
+        "source": "amaoa"
+      }
+    },
+    {
+      "id": "u7v5v4nfh",
+      "type": "hysteria2",
+      "name": "🇬🇧英国1 | ⬇️ 3.3MB/s",
+      "server": "132.145.52.10",
+      "port": 65535,
+      "protocol": "hysteria2",
+      "settings": {
+        "auth": "edf777e9-09f0-4118-b290-81c663941789",
+        "sni": "www.microsoft.com",
+        "insecure": true,
+        "obfs": "",
+        "obfsPassword": "",
+        "uploadBandwidth": "",
+        "downloadBandwidth": ""
+      },
+      "extra": {
+        "raw": "hysteria2://edf777e9-09f0-4118-b290-81c663941789@132.145.52.10:65535?insecure=1&sni=www.microsoft.com#%F0%9F%87%AC%F0%9F%87%A7%E8%8B%B1%E5%9B%BD1%20%7C%20%E2%AC%87%EF%B8%8F%203.3MB%2Fs",
+        "addedAt": "2025-10-04T12:31:34.713Z"
+      },
+      "metadata": {
+        "source": "amaoa"
+      }
+    },
+    {
+      "id": "swe16wry3",
+      "type": "hysteria2",
+      "name": "🇺🇸美国24 | ⬇️ 2.6MB/s",
+      "server": "144.24.54.157",
+      "port": 50000,
+      "protocol": "hysteria2",
+      "settings": {
+        "auth": "edf777e9-09f0-4118-b290-81c663941789",
+        "sni": "www.bing.com",
+        "insecure": true,
+        "obfs": "",
+        "obfsPassword": "",
+        "uploadBandwidth": "",
+        "downloadBandwidth": ""
+      },
+      "extra": {
+        "raw": "hysteria2://edf777e9-09f0-4118-b290-81c663941789@144.24.54.157:50000?insecure=1&sni=www.bing.com&mport=50000-53000#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD24%20%7C%20%E2%AC%87%EF%B8%8F%202.6MB%2Fs",
+        "addedAt": "2025-10-04T12:31:34.713Z"
+      },
+      "metadata": {
+        "source": "amaoa"
+      }
+    },
+    {
+      "id": "wb29oj1ly",
+      "type": "hysteria2",
+      "name": "🇯🇵日本1 | ⬇️ 6.2MB/s",
+      "server": "131.186.42.162",
+      "port": 50000,
+      "protocol": "hysteria2",
+      "settings": {
+        "auth": "edf777e9-09f0-4118-b290-81c663941789",
+        "sni": "www.microsoft.com",
+        "insecure": true,
+        "obfs": "",
+        "obfsPassword": "",
+        "uploadBandwidth": "",
+        "downloadBandwidth": ""
+      },
+      "extra": {
+        "raw": "hysteria2://edf777e9-09f0-4118-b290-81c663941789@131.186.42.162:50000?insecure=1&sni=www.microsoft.com&mport=50000-53000#%F0%9F%87%AF%F0%9F%87%B5%E6%97%A5%E6%9C%AC1%20%7C%20%E2%AC%87%EF%B8%8F%206.2MB%2Fs",
+        "addedAt": "2025-10-04T12:31:34.713Z"
+      },
+      "metadata": {
+        "source": "amaoa"
+      }
+    },
+    {
+      "id": "5jikum0bp",
+      "type": "vless",
+      "name": "🇩🇪德国3 | ⬇️ 1.1MB/s",
+      "server": "77.90.41.131",
+      "port": 10878,
+      "protocol": "vless",
+      "settings": {
+        "id": "468065b5-aade-41d5-94fd-83cc59e54901",
+        "network": "tcp",
+        "security": "reality",
+        "sni": "www.otto.de",
+        "fp": "ios",
+        "alpn": "",
+        "path": "/",
+        "host": "",
+        "encryption": "none",
+        "flow": "xtls-rprx-vision"
+      },
+      "extra": {
+        "raw": "vless://468065b5-aade-41d5-94fd-83cc59e54901@77.90.41.131:10878?security=reality&type=tcp&sni=www.otto.de&fp=ios&flow=xtls-rprx-vision&sid=fa2ac87f&pbk=3YzHh7Yjh7jwmzxU9B1FiOe1Tq_XBz9Fdms5iIcI6k4#%F0%9F%87%A9%F0%9F%87%AA%E5%BE%B7%E5%9B%BD3%20%7C%20%E2%AC%87%EF%B8%8F%201.1MB%2Fs",
+        "addedAt": "2025-10-04T12:31:34.713Z"
+      },
+      "metadata": {
+        "source": "amaoa"
+      }
+    },
+    {
+      "id": "1fpojq1eg",
+      "type": "hysteria2",
+      "name": "🇬🇧英国2 | ⬇️ 8.5MB/s",
+      "server": "132.145.28.17",
+      "port": 65535,
+      "protocol": "hysteria2",
+      "settings": {
+        "auth": "edf777e9-09f0-4118-b290-81c663941789",
+        "sni": "www.microsoft.com",
+        "insecure": true,
+        "obfs": "",
+        "obfsPassword": "",
+        "uploadBandwidth": "",
+        "downloadBandwidth": ""
+      },
+      "extra": {
+        "raw": "hysteria2://edf777e9-09f0-4118-b290-81c663941789@132.145.28.17:65535?insecure=1&sni=www.microsoft.com#%F0%9F%87%AC%F0%9F%87%A7%E8%8B%B1%E5%9B%BD2%20%7C%20%E2%AC%87%EF%B8%8F%208.5MB%2Fs",
+        "addedAt": "2025-10-04T12:31:34.713Z"
+      },
+      "metadata": {
+        "source": "amaoa"
+      }
+    },
+    {
+      "id": "1or6mt2xx",
+      "type": "hysteria2",
+      "name": "🇺🇸美国25 | ⬇️ 1.1MB/s",
+      "server": "els.ylccloud.top",
+      "port": 16090,
+      "protocol": "hysteria2",
+      "settings": {
+        "auth": "0089fdba-e67f-4994-9df6-db45e9aa0e46",
+        "sni": "els.ylccloud.top",
+        "insecure": true,
+        "obfs": "",
+        "obfsPassword": "",
+        "uploadBandwidth": "",
+        "downloadBandwidth": ""
+      },
+      "extra": {
+        "raw": "hysteria2://0089fdba-e67f-4994-9df6-db45e9aa0e46@els.ylccloud.top:16090?insecure=1&sni=els.ylccloud.top#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD25%20%7C%20%E2%AC%87%EF%B8%8F%201.1MB%2Fs",
+        "addedAt": "2025-10-04T12:31:34.713Z"
+      },
+      "metadata": {
+        "source": "amaoa"
+      }
+    },
+    {
+      "id": "0mwhh8zjv",
+      "type": "hysteria2",
+      "name": "🇺🇸美国26 | ⬇️ 2.4MB/s",
+      "server": "mg2.jjzcloud.top",
+      "port": 57338,
+      "protocol": "hysteria2",
+      "settings": {
+        "auth": "754eb16a-4d52-4e45-b7b9-d1af6cc86d66",
+        "sni": "mg2.jjzcloud.top",
+        "insecure": true,
+        "obfs": "",
+        "obfsPassword": "",
+        "uploadBandwidth": "",
+        "downloadBandwidth": ""
+      },
+      "extra": {
+        "raw": "hysteria2://754eb16a-4d52-4e45-b7b9-d1af6cc86d66@mg2.jjzcloud.top:57338?insecure=1&sni=mg2.jjzcloud.top#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD26%20%7C%20%E2%AC%87%EF%B8%8F%202.4MB%2Fs",
+        "addedAt": "2025-10-04T12:31:34.713Z"
+      },
+      "metadata": {
+        "source": "amaoa"
+      }
+    },
+    {
+      "id": "e6nfimp0z",
+      "type": "hysteria2",
+      "name": "🇺🇸美国27 | ⬇️ 3.4MB/s",
+      "server": "mg2.jjzcloud.top",
+      "port": 57338,
+      "protocol": "hysteria2",
+      "settings": {
+        "auth": "fb5e424a-fce4-4dd1-bae7-c482c401bdee",
+        "sni": "mg2.jjzcloud.top",
+        "insecure": true,
+        "obfs": "",
+        "obfsPassword": "",
+        "uploadBandwidth": "",
+        "downloadBandwidth": ""
+      },
+      "extra": {
+        "raw": "hysteria2://fb5e424a-fce4-4dd1-bae7-c482c401bdee@mg2.jjzcloud.top:57338?insecure=1&sni=mg2.jjzcloud.top#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD27%20%7C%20%E2%AC%87%EF%B8%8F%203.4MB%2Fs",
+        "addedAt": "2025-10-04T12:31:34.713Z"
+      },
+      "metadata": {
+        "source": "amaoa"
+      }
+    },
+    {
+      "id": "n95ffvk80",
+      "type": "vless",
+      "name": "🌀其他11-RO | ⬇️ 2.3MB/s",
+      "server": "141.227.180.39",
+      "port": 22287,
+      "protocol": "vless",
+      "settings": {
+        "id": "312b10a5-a604-4199-bf43-6a773e8b24e4",
+        "network": "grpc",
+        "security": "none",
+        "sni": "141.227.180.39",
+        "fp": "",
+        "alpn": "",
+        "path": "/",
+        "host": "",
+        "encryption": "none",
+        "flow": ""
+      },
+      "extra": {
+        "raw": "vless://312b10a5-a604-4199-bf43-6a773e8b24e4@141.227.180.39:22287?security=none&type=grpc&mode=gun&serviceName=ZEDMODEON-ZEDMODEON-ZEDMODEON-bia-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON#%F0%9F%8C%80%E5%85%B6%E4%BB%9611-RO%20%7C%20%E2%AC%87%EF%B8%8F%202.3MB%2Fs",
+        "addedAt": "2025-10-04T12:31:34.713Z"
+      },
+      "metadata": {
+        "source": "amaoa"
+      }
+    },
+    {
+      "id": "s1zcq2gnm",
+      "type": "hysteria2",
+      "name": "🇺🇸美国28 | ⬇️ 2.3MB/s",
+      "server": "mg2.jjzcloud.top",
+      "port": 57338,
+      "protocol": "hysteria2",
+      "settings": {
+        "auth": "b40b10a2-c776-4627-bead-350b22161f16",
+        "sni": "mg2.jjzcloud.top",
+        "insecure": true,
+        "obfs": "",
+        "obfsPassword": "",
+        "uploadBandwidth": "",
+        "downloadBandwidth": ""
+      },
+      "extra": {
+        "raw": "hysteria2://b40b10a2-c776-4627-bead-350b22161f16@mg2.jjzcloud.top:57338?insecure=1&sni=mg2.jjzcloud.top#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD28%20%7C%20%E2%AC%87%EF%B8%8F%202.3MB%2Fs",
+        "addedAt": "2025-10-04T12:31:34.713Z"
+      },
+      "metadata": {
+        "source": "amaoa"
+      }
+    },
+    {
+      "id": "mhn2o86e2",
+      "type": "hysteria2",
+      "name": "🇺🇸美国29 | ⬇️ 3.0MB/s",
+      "server": "mg2.jjzcloud.top",
+      "port": 57338,
+      "protocol": "hysteria2",
+      "settings": {
+        "auth": "d9ecfba7-c435-44c6-a747-554fd476570a",
+        "sni": "mg2.jjzcloud.top",
+        "insecure": true,
+        "obfs": "",
+        "obfsPassword": "",
+        "uploadBandwidth": "",
+        "downloadBandwidth": ""
+      },
+      "extra": {
+        "raw": "hysteria2://d9ecfba7-c435-44c6-a747-554fd476570a@mg2.jjzcloud.top:57338?insecure=1&sni=mg2.jjzcloud.top#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD29%20%7C%20%E2%AC%87%EF%B8%8F%203.0MB%2Fs",
+        "addedAt": "2025-10-04T12:31:34.713Z"
+      },
+      "metadata": {
+        "source": "amaoa"
+      }
+    },
+    {
+      "id": "gwdxbknl3",
+      "type": "hysteria2",
+      "name": "🇺🇸美国30 | ⬇️ 2.5MB/s",
+      "server": "mg2.jjzcloud.top",
+      "port": 57338,
+      "protocol": "hysteria2",
+      "settings": {
+        "auth": "b671e3e8-a271-4a36-b746-573d7c00e72c",
+        "sni": "mg2.jjzcloud.top",
+        "insecure": true,
+        "obfs": "",
+        "obfsPassword": "",
+        "uploadBandwidth": "",
+        "downloadBandwidth": ""
+      },
+      "extra": {
+        "raw": "hysteria2://b671e3e8-a271-4a36-b746-573d7c00e72c@mg2.jjzcloud.top:57338?insecure=1&sni=mg2.jjzcloud.top#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD30%20%7C%20%E2%AC%87%EF%B8%8F%202.5MB%2Fs",
+        "addedAt": "2025-10-04T12:31:34.713Z"
+      },
+      "metadata": {
+        "source": "amaoa"
+      }
+    },
+    {
+      "id": "jb1hg4gca",
+      "type": "hysteria2",
+      "name": "🇺🇸美国31 | ⬇️ 2.5MB/s",
+      "server": "mg2.jjzcloud.top",
+      "port": 57338,
+      "protocol": "hysteria2",
+      "settings": {
+        "auth": "e575c3da-0d28-4903-835c-f73406efb19a",
+        "sni": "mg2.jjzcloud.top",
+        "insecure": true,
+        "obfs": "",
+        "obfsPassword": "",
+        "uploadBandwidth": "",
+        "downloadBandwidth": ""
+      },
+      "extra": {
+        "raw": "hysteria2://e575c3da-0d28-4903-835c-f73406efb19a@mg2.jjzcloud.top:57338?insecure=1&sni=mg2.jjzcloud.top#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD31%20%7C%20%E2%AC%87%EF%B8%8F%202.5MB%2Fs",
+        "addedAt": "2025-10-04T12:31:34.713Z"
+      },
+      "metadata": {
+        "source": "amaoa"
+      }
+    },
+    {
+      "id": "lsydvh6rn",
+      "type": "hysteria2",
+      "name": "🇺🇸美国32 | ⬇️ 1.2MB/s",
+      "server": "132.226.30.123",
+      "port": 50000,
+      "protocol": "hysteria2",
+      "settings": {
+        "auth": "edf777e9-09f0-4118-b290-81c663941789",
+        "sni": "www.bing.com",
+        "insecure": true,
+        "obfs": "",
+        "obfsPassword": "",
+        "uploadBandwidth": "",
+        "downloadBandwidth": ""
+      },
+      "extra": {
+        "raw": "hysteria2://edf777e9-09f0-4118-b290-81c663941789@132.226.30.123:50000?insecure=1&sni=www.bing.com&mport=50000-53000#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD32%20%7C%20%E2%AC%87%EF%B8%8F%201.2MB%2Fs",
+        "addedAt": "2025-10-04T12:31:34.713Z"
+      },
+      "metadata": {
+        "source": "amaoa"
+      }
+    },
+    {
+      "id": "ogbaxguz0",
+      "type": "hysteria2",
+      "name": "🇺🇸美国33 | ⬇️ 1.4MB/s",
+      "server": "els.ylccloud.top",
+      "port": 16090,
+      "protocol": "hysteria2",
+      "settings": {
+        "auth": "a411e0db-8437-4169-9649-273aece86bbd",
+        "sni": "els.ylccloud.top",
+        "insecure": true,
+        "obfs": "",
+        "obfsPassword": "",
+        "uploadBandwidth": "",
+        "downloadBandwidth": ""
+      },
+      "extra": {
+        "raw": "hysteria2://a411e0db-8437-4169-9649-273aece86bbd@els.ylccloud.top:16090?insecure=1&sni=els.ylccloud.top#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD33%20%7C%20%E2%AC%87%EF%B8%8F%201.4MB%2Fs",
+        "addedAt": "2025-10-04T12:31:34.713Z"
+      },
+      "metadata": {
+        "source": "amaoa"
+      }
+    },
+    {
+      "id": "xvrjbifq8",
+      "type": "hysteria2",
+      "name": "🇺🇸美国34 | ⬇️ 1.3MB/s",
+      "server": "els.ylccloud.top",
+      "port": 16090,
+      "protocol": "hysteria2",
+      "settings": {
+        "auth": "b356766b-edbf-417d-8ef3-1d9e8c7cec44",
+        "sni": "els.ylccloud.top",
+        "insecure": true,
+        "obfs": "",
+        "obfsPassword": "",
+        "uploadBandwidth": "",
+        "downloadBandwidth": ""
+      },
+      "extra": {
+        "raw": "hysteria2://b356766b-edbf-417d-8ef3-1d9e8c7cec44@els.ylccloud.top:16090?insecure=1&sni=els.ylccloud.top#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD34%20%7C%20%E2%AC%87%EF%B8%8F%201.3MB%2Fs",
+        "addedAt": "2025-10-04T12:31:34.713Z"
+      },
+      "metadata": {
+        "source": "amaoa"
+      }
+    },
+    {
+      "id": "401tew8k0",
+      "type": "hysteria2",
+      "name": "🇺🇸美国35 | ⬇️ 3.2MB/s",
+      "server": "mg2.jjzcloud.top",
+      "port": 57338,
+      "protocol": "hysteria2",
+      "settings": {
+        "auth": "0ecd8e7d-eb8f-402e-8cb1-beef52e3fd18",
+        "sni": "mg2.jjzcloud.top",
+        "insecure": true,
+        "obfs": "",
+        "obfsPassword": "",
+        "uploadBandwidth": "",
+        "downloadBandwidth": ""
+      },
+      "extra": {
+        "raw": "hysteria2://0ecd8e7d-eb8f-402e-8cb1-beef52e3fd18@mg2.jjzcloud.top:57338?insecure=1&sni=mg2.jjzcloud.top#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD35%20%7C%20%E2%AC%87%EF%B8%8F%203.2MB%2Fs",
+        "addedAt": "2025-10-04T12:31:34.713Z"
+      },
+      "metadata": {
+        "source": "amaoa"
+      }
+    },
+    {
+      "id": "oinu9j204",
+      "type": "vless",
+      "name": "🇩🇪德国4 | ⬇️ 1.3MB/s",
+      "server": "77.90.41.131",
+      "port": 10878,
+      "protocol": "vless",
+      "settings": {
+        "id": "e13c9253-329f-471f-a070-65d7864c5e27",
+        "network": "tcp",
+        "security": "reality",
+        "sni": "www.otto.de",
+        "fp": "ios",
+        "alpn": "",
+        "path": "/",
+        "host": "",
+        "encryption": "none",
+        "flow": "xtls-rprx-vision"
+      },
+      "extra": {
+        "raw": "vless://e13c9253-329f-471f-a070-65d7864c5e27@77.90.41.131:10878?security=reality&type=tcp&sni=www.otto.de&fp=ios&flow=xtls-rprx-vision&sid=fa2ac87f&pbk=3YzHh7Yjh7jwmzxU9B1FiOe1Tq_XBz9Fdms5iIcI6k4#%F0%9F%87%A9%F0%9F%87%AA%E5%BE%B7%E5%9B%BD4%20%7C%20%E2%AC%87%EF%B8%8F%201.3MB%2Fs",
+        "addedAt": "2025-10-04T12:31:34.713Z"
+      },
+      "metadata": {
+        "source": "amaoa"
+      }
+    },
+    {
+      "id": "uih0r31ms",
+      "type": "vless",
+      "name": "🇺🇸美国36 | ⬇️ 4.8MB/s",
+      "server": "104.16.246.85",
+      "port": 443,
+      "protocol": "vless",
+      "settings": {
+        "id": "0c0537c3-f0fb-40e6-bd59-f5038e1855ed",
+        "network": "ws",
+        "security": "tls",
+        "sni": "juzi.634676.xyz",
+        "fp": "chrome",
+        "alpn": "",
+        "path": "/?ed=2560",
+        "host": "juzi.634676.xyz",
+        "encryption": "none",
+        "flow": ""
+      },
+      "extra": {
+        "raw": "vless://0c0537c3-f0fb-40e6-bd59-f5038e1855ed@104.16.246.85:443?security=tls&type=ws&path=%2F%3Fed%3D2560&host=juzi.634676.xyz&sni=juzi.634676.xyz&fp=chrome#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD36%20%7C%20%E2%AC%87%EF%B8%8F%204.8MB%2Fs",
+        "addedAt": "2025-10-04T12:31:34.713Z"
+      },
+      "metadata": {
+        "source": "amaoa"
+      }
+    },
+    {
+      "id": "a1hctsiwb",
+      "type": "hysteria2",
+      "name": "🇺🇸美国37 | ⬇️ 1.1MB/s",
+      "server": "els.ylccloud.top",
+      "port": 16090,
+      "protocol": "hysteria2",
+      "settings": {
+        "auth": "6b1e5732-80ca-43cd-9e27-c22037f00496",
+        "sni": "els.ylccloud.top",
+        "insecure": true,
+        "obfs": "",
+        "obfsPassword": "",
+        "uploadBandwidth": "",
+        "downloadBandwidth": ""
+      },
+      "extra": {
+        "raw": "hysteria2://6b1e5732-80ca-43cd-9e27-c22037f00496@els.ylccloud.top:16090?insecure=1&sni=els.ylccloud.top#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD37%20%7C%20%E2%AC%87%EF%B8%8F%201.1MB%2Fs",
+        "addedAt": "2025-10-04T12:31:34.713Z"
+      },
+      "metadata": {
+        "source": "amaoa"
+      }
+    },
+    {
+      "id": "1iqqja4os",
+      "type": "hysteria2",
+      "name": "🇺🇸美国38 | ⬇️ 1.5MB/s",
+      "server": "els.ylccloud.top",
+      "port": 16090,
+      "protocol": "hysteria2",
+      "settings": {
+        "auth": "834f205e-90b1-4d9b-9583-d9bacb43c0ca",
+        "sni": "els.ylccloud.top",
+        "insecure": true,
+        "obfs": "",
+        "obfsPassword": "",
+        "uploadBandwidth": "",
+        "downloadBandwidth": ""
+      },
+      "extra": {
+        "raw": "hysteria2://834f205e-90b1-4d9b-9583-d9bacb43c0ca@els.ylccloud.top:16090?insecure=1&sni=els.ylccloud.top#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD38%20%7C%20%E2%AC%87%EF%B8%8F%201.5MB%2Fs",
+        "addedAt": "2025-10-04T12:31:34.713Z"
+      },
+      "metadata": {
+        "source": "amaoa"
+      }
+    },
+    {
+      "id": "mg2wyj0ec",
+      "type": "hysteria2",
+      "name": "🇨🇦加拿大2 | ⬇️ 2.4MB/s",
+      "server": "40.233.81.116",
+      "port": 54530,
+      "protocol": "hysteria2",
+      "settings": {
+        "auth": "862e90e1-2f26-4506-b8b9-0adf20da05fc",
+        "sni": "www.bing.com",
+        "insecure": true,
+        "obfs": "",
+        "obfsPassword": "",
+        "uploadBandwidth": "",
+        "downloadBandwidth": ""
+      },
+      "extra": {
+        "raw": "hysteria2://862e90e1-2f26-4506-b8b9-0adf20da05fc@40.233.81.116:54530?insecure=1&sni=www.bing.com#%F0%9F%87%A8%F0%9F%87%A6%E5%8A%A0%E6%8B%BF%E5%A4%A72%20%7C%20%E2%AC%87%EF%B8%8F%202.4MB%2Fs",
+        "addedAt": "2025-10-04T12:31:34.713Z"
+      },
+      "metadata": {
+        "source": "amaoa"
+      }
+    },
+    {
+      "id": "8ri0ice94",
+      "type": "hysteria2",
+      "name": "🇺🇸美国39 | ⬇️ 1.9MB/s",
+      "server": "els.ylccloud.top",
+      "port": 16090,
+      "protocol": "hysteria2",
+      "settings": {
+        "auth": "61a24f49-9698-438f-8919-e13b6b0f208c",
+        "sni": "els.ylccloud.top",
+        "insecure": true,
+        "obfs": "",
+        "obfsPassword": "",
+        "uploadBandwidth": "",
+        "downloadBandwidth": ""
+      },
+      "extra": {
+        "raw": "hysteria2://61a24f49-9698-438f-8919-e13b6b0f208c@els.ylccloud.top:16090?insecure=1&sni=els.ylccloud.top#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD39%20%7C%20%E2%AC%87%EF%B8%8F%201.9MB%2Fs",
+        "addedAt": "2025-10-04T12:31:34.713Z"
+      },
+      "metadata": {
+        "source": "amaoa"
+      }
+    },
+    {
+      "id": "h5509b5vb",
+      "type": "vless",
+      "name": "🇬🇧英国3 | ⬇️ 4.7MB/s",
+      "server": "141.227.174.234",
+      "port": 47765,
+      "protocol": "vless",
+      "settings": {
+        "id": "5dd4bf42-5df0-49ff-bd5b-3a4fb6f7f1db",
+        "network": "grpc",
+        "security": "none",
+        "sni": "141.227.174.234",
+        "fp": "",
+        "alpn": "",
+        "path": "/",
+        "host": "",
+        "encryption": "none",
+        "flow": ""
+      },
+      "extra": {
+        "raw": "vless://5dd4bf42-5df0-49ff-bd5b-3a4fb6f7f1db@141.227.174.234:47765?security=none&type=grpc&mode=gun&serviceName=ZEDMODEON-ZEDMODEON-ZEDMODEON-bia-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON#%F0%9F%87%AC%F0%9F%87%A7%E8%8B%B1%E5%9B%BD3%20%7C%20%E2%AC%87%EF%B8%8F%204.7MB%2Fs",
+        "addedAt": "2025-10-04T12:31:34.713Z"
+      },
+      "metadata": {
+        "source": "amaoa"
+      }
+    },
+    {
+      "id": "4nrxq156u",
+      "type": "hysteria2",
+      "name": "🇺🇸美国40 | ⬇️ 3.7MB/s",
+      "server": "141.148.158.54",
+      "port": 50000,
+      "protocol": "hysteria2",
+      "settings": {
+        "auth": "edf777e9-09f0-4118-b290-81c663941789",
+        "sni": "www.bing.com",
+        "insecure": true,
+        "obfs": "",
+        "obfsPassword": "",
+        "uploadBandwidth": "",
+        "downloadBandwidth": ""
+      },
+      "extra": {
+        "raw": "hysteria2://edf777e9-09f0-4118-b290-81c663941789@141.148.158.54:50000?insecure=1&sni=www.bing.com&mport=50000-53000#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD40%20%7C%20%E2%AC%87%EF%B8%8F%203.7MB%2Fs",
+        "addedAt": "2025-10-04T12:31:34.713Z"
       },
       "metadata": {
         "source": "amaoa"
       }
     }
   ],
-  "timestamp": 1759559024518,
-  "hash": "19d8615ba6b0c99cee5596d66f82b55a"
+  "timestamp": 1759581094713,
+  "hash": "c75adae6802cf1194a450358fb40d0f3"
 }
