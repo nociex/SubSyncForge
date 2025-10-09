@@ -1,135 +1,9 @@
 {
   "nodes": [
     {
-      "id": "eiydkf30h",
+      "id": "z8ii4jpr3",
       "type": "vless",
-      "name": "🇬🇧英国1 | ⬇️ 1.9MB/s",
-      "server": "141.227.174.234",
-      "port": 47765,
-      "protocol": "vless",
-      "settings": {
-        "id": "5dd4bf42-5df0-49ff-bd5b-3a4fb6f7f1db",
-        "network": "grpc",
-        "security": "none",
-        "sni": "141.227.174.234",
-        "fp": "",
-        "alpn": "",
-        "path": "/",
-        "host": "",
-        "encryption": "none",
-        "flow": ""
-      },
-      "extra": {
-        "raw": "vless://5dd4bf42-5df0-49ff-bd5b-3a4fb6f7f1db@141.227.174.234:47765?security=none&type=grpc&mode=gun&serviceName=ZEDMODEON-ZEDMODEON-ZEDMODEON-bia-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON#%F0%9F%87%AC%F0%9F%87%A7%E8%8B%B1%E5%9B%BD1%20%7C%20%E2%AC%87%EF%B8%8F%201.9MB%2Fs",
-        "addedAt": "2025-10-09T06:27:33.212Z"
-      },
-      "metadata": {
-        "source": "amaoa"
-      }
-    },
-    {
-      "id": "ty4fzk557",
-      "type": "vless",
-      "name": "🇺🇸美国1 | ⬇️ 11.3MB/s",
-      "server": "104.16.246.85",
-      "port": 443,
-      "protocol": "vless",
-      "settings": {
-        "id": "0c0537c3-f0fb-40e6-bd59-f5038e1855ed",
-        "network": "ws",
-        "security": "tls",
-        "sni": "juzi.634676.xyz",
-        "fp": "chrome",
-        "alpn": "",
-        "path": "/?ed=2560",
-        "host": "juzi.634676.xyz",
-        "encryption": "none",
-        "flow": ""
-      },
-      "extra": {
-        "raw": "vless://0c0537c3-f0fb-40e6-bd59-f5038e1855ed@104.16.246.85:443?security=tls&type=ws&path=%2F%3Fed%3D2560&host=juzi.634676.xyz&sni=juzi.634676.xyz&fp=chrome#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD1%20%7C%20%E2%AC%87%EF%B8%8F%2011.3MB%2Fs",
-        "addedAt": "2025-10-09T06:27:33.212Z"
-      },
-      "metadata": {
-        "source": "amaoa"
-      }
-    },
-    {
-      "id": "fcxymkg01",
-      "type": "hysteria",
-      "name": "🇳🇱荷兰1 | ⬇️ 2.4MB/s",
-      "server": "51.159.226.1",
-      "port": 49003,
-      "protocol": "hysteria",
-      "settings": {
-        "auth": "dongtaiwang.com",
-        "peer": "apple.com",
-        "insecure": true,
-        "upmbps": 11,
-        "downmbps": 55,
-        "obfs": "",
-        "protocol": "udp"
-      },
-      "extra": {
-        "raw": "hysteria://51.159.226.1:49003?alpn=h3&auth=dongtaiwang.com&auth_str=dongtaiwang.com&downmbps=55&protocol=udp&insecure=1&peer=apple.com&udp=true&upmbps=11#%F0%9F%87%B3%F0%9F%87%B1%E8%8D%B7%E5%85%B01%20%7C%20%E2%AC%87%EF%B8%8F%202.4MB%2Fs",
-        "addedAt": "2025-10-09T06:27:33.212Z"
-      },
-      "metadata": {
-        "source": "amaoa"
-      }
-    },
-    {
-      "id": "ghrgvojzu",
-      "type": "hysteria",
-      "name": "🇫🇷法国1 | ⬇️ 2.1MB/s",
-      "server": "62.210.127.217",
-      "port": 50011,
-      "protocol": "hysteria",
-      "settings": {
-        "auth": "dongtaiwang.com",
-        "peer": "apple.com",
-        "insecure": true,
-        "upmbps": 11,
-        "downmbps": 55,
-        "obfs": "",
-        "protocol": "udp"
-      },
-      "extra": {
-        "raw": "hysteria://62.210.127.217:50011?alpn=h3&auth=dongtaiwang.com&auth_str=dongtaiwang.com&downmbps=55 Mbps&protocol=udp&insecure=1&peer=apple.com&udp=true&upmbps=11 Mbps#%F0%9F%87%AB%F0%9F%87%B7%E6%B3%95%E5%9B%BD1%20%7C%20%E2%AC%87%EF%B8%8F%202.1MB%2Fs",
-        "addedAt": "2025-10-09T06:27:33.212Z"
-      },
-      "metadata": {
-        "source": "amaoa"
-      }
-    },
-    {
-      "id": "c34eah25y",
-      "type": "hysteria",
-      "name": "🇫🇷法国2 | ⬇️ 2.1MB/s",
-      "server": "62.210.127.217",
-      "port": 35511,
-      "protocol": "hysteria",
-      "settings": {
-        "auth": "dongtaiwang.com",
-        "peer": "apple.com",
-        "insecure": true,
-        "upmbps": 11,
-        "downmbps": 55,
-        "obfs": "",
-        "protocol": "udp"
-      },
-      "extra": {
-        "raw": "hysteria://62.210.127.217:35511?alpn=h3&auth=dongtaiwang.com&auth_str=dongtaiwang.com&downmbps=55&protocol=udp&insecure=1&peer=apple.com&udp=true&upmbps=11#%F0%9F%87%AB%F0%9F%87%B7%E6%B3%95%E5%9B%BD2%20%7C%20%E2%AC%87%EF%B8%8F%202.1MB%2Fs",
-        "addedAt": "2025-10-09T06:27:33.212Z"
-      },
-      "metadata": {
-        "source": "amaoa"
-      }
-    },
-    {
-      "id": "alisinfay",
-      "type": "vless",
-      "name": "🌀其他1-RO | ⬇️ 6.4MB/s",
+      "name": "🌀其他1-RO | ⬇️ 2.6MB/s",
       "server": "141.227.180.86",
       "port": 43239,
       "protocol": "vless",
@@ -146,52 +20,49 @@
         "flow": ""
       },
       "extra": {
-        "raw": "vless://0001e585-a648-4db2-8c9e-af346110c642@141.227.180.86:43239?security=none&type=grpc&mode=gun&serviceName=ZEDMODEON-ZEDMODEON-ZEDMODEON-bia-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON#%F0%9F%8C%80%E5%85%B6%E4%BB%961-RO%20%7C%20%E2%AC%87%EF%B8%8F%206.4MB%2Fs",
-        "addedAt": "2025-10-09T06:27:33.212Z"
+        "raw": "vless://0001e585-a648-4db2-8c9e-af346110c642@141.227.180.86:43239?security=none&type=grpc&mode=gun&serviceName=ZEDMODEON-ZEDMODEON-ZEDMODEON-bia-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON#%F0%9F%8C%80%E5%85%B6%E4%BB%961-RO%20%7C%20%E2%AC%87%EF%B8%8F%202.6MB%2Fs",
+        "addedAt": "2025-10-09T12:37:01.089Z"
       },
       "metadata": {
         "source": "amaoa"
       }
     },
     {
-      "id": "lvlwiqzt1",
-      "type": "vless",
-      "name": "🇺🇸美国2 | ⬇️ 1.4MB/s",
-      "server": "45.38.145.174",
-      "port": 443,
-      "protocol": "vless",
+      "id": "7czbgpl4f",
+      "type": "hysteria",
+      "name": "🇳🇱荷兰1 | ⬇️ 2.4MB/s",
+      "server": "51.159.226.1",
+      "port": 49003,
+      "protocol": "hysteria",
       "settings": {
-        "id": "0c0537c3-f0fb-40e6-bd59-f5038e1855ed",
-        "network": "ws",
-        "security": "tls",
-        "sni": "juzi.634676.xyz",
-        "fp": "",
-        "alpn": "",
-        "path": "/?ed=2560",
-        "host": "juzi.634676.xyz",
-        "encryption": "none",
-        "flow": ""
+        "auth": "dongtaiwang.com",
+        "peer": "apple.com",
+        "insecure": true,
+        "upmbps": 11,
+        "downmbps": 55,
+        "obfs": "",
+        "protocol": "udp"
       },
       "extra": {
-        "raw": "vless://0c0537c3-f0fb-40e6-bd59-f5038e1855ed@45.38.145.174:443?security=tls&type=ws&path=%2F%3Fed%3D2560&host=juzi.634676.xyz&sni=juzi.634676.xyz#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD2%20%7C%20%E2%AC%87%EF%B8%8F%201.4MB%2Fs",
-        "addedAt": "2025-10-09T06:27:33.212Z"
+        "raw": "hysteria://51.159.226.1:49003?alpn=h3&auth=dongtaiwang.com&auth_str=dongtaiwang.com&downmbps=55&protocol=udp&insecure=1&peer=apple.com&udp=true&upmbps=11#%F0%9F%87%B3%F0%9F%87%B1%E8%8D%B7%E5%85%B01%20%7C%20%E2%AC%87%EF%B8%8F%202.4MB%2Fs",
+        "addedAt": "2025-10-09T12:37:01.089Z"
       },
       "metadata": {
         "source": "amaoa"
       }
     },
     {
-      "id": "6z8l7vg3p",
+      "id": "lg3ogyl95",
       "type": "vless",
-      "name": "🇫🇮芬兰1 | ⬇️ 5.7MB/s",
-      "server": "141.227.170.178",
-      "port": 21232,
+      "name": "🇬🇧英国1 | ⬇️ 2.2MB/s",
+      "server": "141.227.174.234",
+      "port": 47765,
       "protocol": "vless",
       "settings": {
-        "id": "5e0eddef-95cd-4109-9807-0f32062939f3",
+        "id": "5dd4bf42-5df0-49ff-bd5b-3a4fb6f7f1db",
         "network": "grpc",
         "security": "none",
-        "sni": "141.227.170.178",
+        "sni": "141.227.174.234",
         "fp": "",
         "alpn": "",
         "path": "/",
@@ -200,36 +71,17 @@
         "flow": ""
       },
       "extra": {
-        "raw": "vless://5e0eddef-95cd-4109-9807-0f32062939f3@141.227.170.178:21232?security=none&type=grpc&mode=gun&serviceName=ZEDMODEON-ZEDMODEON-ZEDMODEON-bia-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON#%F0%9F%87%AB%F0%9F%87%AE%E8%8A%AC%E5%85%B01%20%7C%20%E2%AC%87%EF%B8%8F%205.7MB%2Fs",
-        "addedAt": "2025-10-09T06:27:33.212Z"
+        "raw": "vless://5dd4bf42-5df0-49ff-bd5b-3a4fb6f7f1db@141.227.174.234:47765?security=none&type=grpc&mode=gun&serviceName=ZEDMODEON-ZEDMODEON-ZEDMODEON-bia-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON#%F0%9F%87%AC%F0%9F%87%A7%E8%8B%B1%E5%9B%BD1%20%7C%20%E2%AC%87%EF%B8%8F%202.2MB%2Fs",
+        "addedAt": "2025-10-09T12:37:01.089Z"
       },
       "metadata": {
         "source": "amaoa"
       }
     },
     {
-      "id": "07sf4bss4",
-      "type": "ss",
-      "name": "🌀其他2-VN | ⬇️ 1.6MB/s",
-      "server": "103.186.154.22",
-      "port": 38388,
-      "protocol": "shadowsocks",
-      "settings": {
-        "method": "aes-256-cfb",
-        "password": "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
-      },
-      "extra": {
-        "raw": "ss://YWVzLTI1Ni1jZmI6WG44aktkbURNMDBJZU8lIyQjZkpBTXRzRUFFVU9wSC9ZV1l0WXFERm5UMFNW@103.186.154.22:38388#%F0%9F%8C%80%E5%85%B6%E4%BB%962-VN%20%7C%20%E2%AC%87%EF%B8%8F%201.6MB%2Fs",
-        "addedAt": "2025-10-09T06:27:33.212Z"
-      },
-      "metadata": {
-        "source": "amaoa"
-      }
-    },
-    {
-      "id": "5alw184f5",
+      "id": "asczuq9kc",
       "type": "vless",
-      "name": "🌀其他3-CZ | ⬇️ 4.2MB/s",
+      "name": "🌀其他2-CZ | ⬇️ 1.1MB/s",
       "server": "141.227.134.241",
       "port": 13905,
       "protocol": "vless",
@@ -246,17 +98,44 @@
         "flow": ""
       },
       "extra": {
-        "raw": "vless://9eecee32-1abb-42db-b296-af0168c17412@141.227.134.241:13905?security=none&type=grpc&mode=gun&serviceName=ZEDMODEON-ZEDMODEON-ZEDMODEON-bia-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON#%F0%9F%8C%80%E5%85%B6%E4%BB%963-CZ%20%7C%20%E2%AC%87%EF%B8%8F%204.2MB%2Fs",
-        "addedAt": "2025-10-09T06:27:33.212Z"
+        "raw": "vless://9eecee32-1abb-42db-b296-af0168c17412@141.227.134.241:13905?security=none&type=grpc&mode=gun&serviceName=ZEDMODEON-ZEDMODEON-ZEDMODEON-bia-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON#%F0%9F%8C%80%E5%85%B6%E4%BB%962-CZ%20%7C%20%E2%AC%87%EF%B8%8F%201.1MB%2Fs",
+        "addedAt": "2025-10-09T12:37:01.089Z"
       },
       "metadata": {
         "source": "amaoa"
       }
     },
     {
-      "id": "gm0ae0o72",
+      "id": "o8tm8ckj7",
       "type": "vless",
-      "name": "🌀其他4-IE | ⬇️ 4.0MB/s",
+      "name": "🇫🇮芬兰1 | ⬇️ 2.6MB/s",
+      "server": "141.227.170.178",
+      "port": 21232,
+      "protocol": "vless",
+      "settings": {
+        "id": "5e0eddef-95cd-4109-9807-0f32062939f3",
+        "network": "grpc",
+        "security": "none",
+        "sni": "141.227.170.178",
+        "fp": "",
+        "alpn": "",
+        "path": "/",
+        "host": "",
+        "encryption": "none",
+        "flow": ""
+      },
+      "extra": {
+        "raw": "vless://5e0eddef-95cd-4109-9807-0f32062939f3@141.227.170.178:21232?security=none&type=grpc&mode=gun&serviceName=ZEDMODEON-ZEDMODEON-ZEDMODEON-bia-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON#%F0%9F%87%AB%F0%9F%87%AE%E8%8A%AC%E5%85%B01%20%7C%20%E2%AC%87%EF%B8%8F%202.6MB%2Fs",
+        "addedAt": "2025-10-09T12:37:01.089Z"
+      },
+      "metadata": {
+        "source": "amaoa"
+      }
+    },
+    {
+      "id": "67idqnoln",
+      "type": "vless",
+      "name": "🌀其他3-IE | ⬇️ 2.2MB/s",
       "server": "141.227.162.18",
       "port": 59995,
       "protocol": "vless",
@@ -273,122 +152,119 @@
         "flow": ""
       },
       "extra": {
-        "raw": "vless://7467739e-fe86-43a4-93ae-1669886e80d5@141.227.162.18:59995?security=none&type=grpc&mode=gun&serviceName=ZEDMODEON-ZEDMODEON-ZEDMODEON-bia-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON#%F0%9F%8C%80%E5%85%B6%E4%BB%964-IE%20%7C%20%E2%AC%87%EF%B8%8F%204.0MB%2Fs",
-        "addedAt": "2025-10-09T06:27:33.212Z"
+        "raw": "vless://7467739e-fe86-43a4-93ae-1669886e80d5@141.227.162.18:59995?security=none&type=grpc&mode=gun&serviceName=ZEDMODEON-ZEDMODEON-ZEDMODEON-bia-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON-ZEDMODEON#%F0%9F%8C%80%E5%85%B6%E4%BB%963-IE%20%7C%20%E2%AC%87%EF%B8%8F%202.2MB%2Fs",
+        "addedAt": "2025-10-09T12:37:01.089Z"
       },
       "metadata": {
         "source": "amaoa"
       }
     },
     {
-      "id": "dbjl68zfc",
+      "id": "oiawbmgz3",
+      "type": "hysteria",
+      "name": "🇫🇷法国1 | ⬇️ 2.0MB/s",
+      "server": "62.210.127.217",
+      "port": 50011,
+      "protocol": "hysteria",
+      "settings": {
+        "auth": "dongtaiwang.com",
+        "peer": "apple.com",
+        "insecure": true,
+        "upmbps": 11,
+        "downmbps": 55,
+        "obfs": "",
+        "protocol": "udp"
+      },
+      "extra": {
+        "raw": "hysteria://62.210.127.217:50011?alpn=h3&auth=dongtaiwang.com&auth_str=dongtaiwang.com&downmbps=55 Mbps&protocol=udp&insecure=1&peer=apple.com&udp=true&upmbps=11 Mbps#%F0%9F%87%AB%F0%9F%87%B7%E6%B3%95%E5%9B%BD1%20%7C%20%E2%AC%87%EF%B8%8F%202.0MB%2Fs",
+        "addedAt": "2025-10-09T12:37:01.089Z"
+      },
+      "metadata": {
+        "source": "amaoa"
+      }
+    },
+    {
+      "id": "8wru8br4f",
+      "type": "hysteria",
+      "name": "🇫🇷法国2 | ⬇️ 2.1MB/s",
+      "server": "62.210.127.217",
+      "port": 35511,
+      "protocol": "hysteria",
+      "settings": {
+        "auth": "dongtaiwang.com",
+        "peer": "apple.com",
+        "insecure": true,
+        "upmbps": 11,
+        "downmbps": 55,
+        "obfs": "",
+        "protocol": "udp"
+      },
+      "extra": {
+        "raw": "hysteria://62.210.127.217:35511?alpn=h3&auth=dongtaiwang.com&auth_str=dongtaiwang.com&downmbps=55&protocol=udp&insecure=1&peer=apple.com&udp=true&upmbps=11#%F0%9F%87%AB%F0%9F%87%B7%E6%B3%95%E5%9B%BD2%20%7C%20%E2%AC%87%EF%B8%8F%202.1MB%2Fs",
+        "addedAt": "2025-10-09T12:37:01.089Z"
+      },
+      "metadata": {
+        "source": "amaoa"
+      }
+    },
+    {
+      "id": "ay2qlrnla",
       "type": "vless",
-      "name": "🇺🇸美国3 | ⬇️ 1.3MB/s",
-      "server": "138.201.88.80",
+      "name": "🇩🇪德国1 | ⬇️ 4.0MB/s",
+      "server": "74.48.140.177",
+      "port": 443,
+      "protocol": "vless",
+      "settings": {
+        "id": "01996549-6892-dbf0-0453-f700236936bd",
+        "network": "ws",
+        "security": "tls",
+        "sni": "kejiland.freewarp.eu.org",
+        "fp": "chrome",
+        "alpn": "",
+        "path": "/snippets/ip=proxyip.fxxk.dedyn.io:443",
+        "host": "kejiland.freewarp.eu.org",
+        "encryption": "none",
+        "flow": ""
+      },
+      "extra": {
+        "raw": "vless://01996549-6892-dbf0-0453-f700236936bd@74.48.140.177:443?security=tls&type=ws&path=%2Fsnippets%2Fip%3Dproxyip.fxxk.dedyn.io%3A443&host=kejiland.freewarp.eu.org&sni=kejiland.freewarp.eu.org&fp=chrome#%F0%9F%87%A9%F0%9F%87%AA%E5%BE%B7%E5%9B%BD1%20%7C%20%E2%AC%87%EF%B8%8F%204.0MB%2Fs",
+        "addedAt": "2025-10-09T12:37:01.089Z"
+      },
+      "metadata": {
+        "source": "amaoa"
+      }
+    },
+    {
+      "id": "p5unuxxua",
+      "type": "vless",
+      "name": "🇺🇸美国1 | ⬇️ 1.2MB/s",
+      "server": "192.65.217.32",
       "port": 2096,
       "protocol": "vless",
       "settings": {
-        "id": "0c0537c3-f0fb-40e6-bd59-f5038e1855ed",
+        "id": "b65f4df7-f6af-42b2-877a-cef33f21675e",
         "network": "ws",
         "security": "tls",
-        "sni": "juzi.634676.xyz",
+        "sni": "kejiland.freewarp.eu.org",
         "fp": "",
         "alpn": "",
-        "path": "/?ed=2560",
-        "host": "juzi.634676.xyz",
+        "path": "/snippets",
+        "host": "kejiland.freewarp.eu.org",
         "encryption": "none",
         "flow": ""
       },
       "extra": {
-        "raw": "vless://0c0537c3-f0fb-40e6-bd59-f5038e1855ed@138.201.88.80:2096?security=tls&type=ws&path=%2F%3Fed%3D2560&host=juzi.634676.xyz&sni=juzi.634676.xyz#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD3%20%7C%20%E2%AC%87%EF%B8%8F%201.3MB%2Fs",
-        "addedAt": "2025-10-09T06:27:33.212Z"
+        "raw": "vless://b65f4df7-f6af-42b2-877a-cef33f21675e@192.65.217.32:2096?security=tls&type=ws&path=%2Fsnippets&host=kejiland.freewarp.eu.org&sni=kejiland.freewarp.eu.org#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD1%20%7C%20%E2%AC%87%EF%B8%8F%201.2MB%2Fs",
+        "addedAt": "2025-10-09T12:37:01.089Z"
       },
       "metadata": {
         "source": "amaoa"
       }
     },
     {
-      "id": "43o1hpvu7",
+      "id": "bwgm8872d",
       "type": "vless",
-      "name": "🇩🇪德国1 | ⬇️ 7.8MB/s",
-      "server": "www.speedtest.net",
-      "port": 2082,
-      "protocol": "vless",
-      "settings": {
-        "id": "3adb83c2-3d4d-4629-cb83-58466cabfd7f",
-        "network": "ws",
-        "security": "none",
-        "sni": "www.speedtest.net",
-        "fp": "",
-        "alpn": "",
-        "path": "/@spikevpn-@spikevpn-@spikevpn-@spikevpn-@spikevpn-@spikevpn?ed=2082",
-        "host": "novinsoft.ir.oradoshop.com.persiangsm.ir.digikala.com.abadis.ir.shad.ir.divar.ir.downloadly.com.aparat.com.cafebazar.ir.varzesh3.com.ninisite.com.abadis.ir.bama.ir.p30download.ir.telewebion.bmi.ir.shad.ir.mayket.com.ninisite.top.",
-        "encryption": "none",
-        "flow": ""
-      },
-      "extra": {
-        "raw": "vless://3adb83c2-3d4d-4629-cb83-58466cabfd7f@www.speedtest.net:2082?security=none&type=ws&path=%2F%40spikevpn-%40spikevpn-%40spikevpn-%40spikevpn-%40spikevpn-%40spikevpn%3Fed%3D2082&host=novinsoft.ir.oradoshop.com.persiangsm.ir.digikala.com.abadis.ir.shad.ir.divar.ir.downloadly.com.aparat.com.cafebazar.ir.varzesh3.com.ninisite.com.abadis.ir.bama.ir.p30download.ir.telewebion.bmi.ir.shad.ir.mayket.com.ninisite.top.#%F0%9F%87%A9%F0%9F%87%AA%E5%BE%B7%E5%9B%BD1%20%7C%20%E2%AC%87%EF%B8%8F%207.8MB%2Fs",
-        "addedAt": "2025-10-09T06:27:33.212Z"
-      },
-      "metadata": {
-        "source": "amaoa"
-      }
-    },
-    {
-      "id": "m1s129x0r",
-      "type": "hysteria2",
-      "name": "🇬🇧英国2 | ⬇️ 2.5MB/s",
-      "server": "20f7cc-330-co-uk1.9966661.xyz",
-      "port": 3000,
-      "protocol": "hysteria2",
-      "settings": {
-        "auth": "abf03bbd-ec5c-45d9-bf63-c1851a1f4c4d",
-        "sni": "20f7cc-330-co-uk1.9966661.xyz",
-        "insecure": false,
-        "obfs": "",
-        "obfsPassword": "",
-        "uploadBandwidth": "",
-        "downloadBandwidth": ""
-      },
-      "extra": {
-        "raw": "hysteria2://abf03bbd-ec5c-45d9-bf63-c1851a1f4c4d@20f7cc-330-co-uk1.9966661.xyz:3000?sni=20f7cc-330-co-uk1.9966661.xyz#%F0%9F%87%AC%F0%9F%87%A7%E8%8B%B1%E5%9B%BD2%20%7C%20%E2%AC%87%EF%B8%8F%202.5MB%2Fs",
-        "addedAt": "2025-10-09T06:27:33.212Z"
-      },
-      "metadata": {
-        "source": "amaoa"
-      }
-    },
-    {
-      "id": "f3lgdf8by",
-      "type": "vless",
-      "name": "🌀其他5-LT | ⬇️ 2.2MB/s",
-      "server": "lt5.9966662.xyz",
-      "port": 51423,
-      "protocol": "vless",
-      "settings": {
-        "id": "abf03bbd-ec5c-45d9-bf63-c1851a1f4c4d",
-        "network": "tcp",
-        "security": "reality",
-        "sni": "www.cloudflare.com",
-        "fp": "chrome",
-        "alpn": "",
-        "path": "/",
-        "host": "",
-        "encryption": "none",
-        "flow": "xtls-rprx-vision"
-      },
-      "extra": {
-        "raw": "vless://abf03bbd-ec5c-45d9-bf63-c1851a1f4c4d@lt5.9966662.xyz:51423?security=reality&type=tcp&sni=www.cloudflare.com&fp=chrome&flow=xtls-rprx-vision&sid=a6b64b8c&pbk=MvjyJD_JDqDnDKSG2r8il6gSrEijZtdmlvXOOuvqO0w#%F0%9F%8C%80%E5%85%B6%E4%BB%965-LT%20%7C%20%E2%AC%87%EF%B8%8F%202.2MB%2Fs",
-        "addedAt": "2025-10-09T06:27:33.212Z"
-      },
-      "metadata": {
-        "source": "amaoa"
-      }
-    },
-    {
-      "id": "sew71i85s",
-      "type": "vless",
-      "name": "🇳🇱荷兰2 | ⬇️ 4.4MB/s",
+      "name": "🇳🇱荷兰2 | ⬇️ 2.9MB/s",
       "server": "188.130.207.158",
       "port": 2053,
       "protocol": "vless",
@@ -405,18 +281,204 @@
         "flow": ""
       },
       "extra": {
-        "raw": "vless://01998846-8a17-c5bf-5b2f-6e85f5964400@188.130.207.158:2053?security=tls&type=ws&path=%2Fsnippets%2Fip%3Dproxyip.fxxk.dedyn.io%3A443%3Fed%3D2560&host=kejiland.freewarp.eu.org&sni=kejiland.freewarp.eu.org#%F0%9F%87%B3%F0%9F%87%B1%E8%8D%B7%E5%85%B02%20%7C%20%E2%AC%87%EF%B8%8F%204.4MB%2Fs",
-        "addedAt": "2025-10-09T06:27:33.212Z"
+        "raw": "vless://01998846-8a17-c5bf-5b2f-6e85f5964400@188.130.207.158:2053?security=tls&type=ws&path=%2Fsnippets%2Fip%3Dproxyip.fxxk.dedyn.io%3A443%3Fed%3D2560&host=kejiland.freewarp.eu.org&sni=kejiland.freewarp.eu.org#%F0%9F%87%B3%F0%9F%87%B1%E8%8D%B7%E5%85%B02%20%7C%20%E2%AC%87%EF%B8%8F%202.9MB%2Fs",
+        "addedAt": "2025-10-09T12:37:01.089Z"
       },
       "metadata": {
         "source": "amaoa"
       }
     },
     {
-      "id": "3ruq4lbq4",
+      "id": "k44wz1a30",
+      "type": "hysteria2",
+      "name": "🇯🇵日本1 | ⬇️ 1.5MB/s",
+      "server": "133.18.163.202",
+      "port": 50000,
+      "protocol": "hysteria2",
+      "settings": {
+        "auth": "e0fafa17-7ac1-4435-af1a-d61e2904f367",
+        "sni": "www.microsoft.com",
+        "insecure": true,
+        "obfs": "",
+        "obfsPassword": "",
+        "uploadBandwidth": "",
+        "downloadBandwidth": ""
+      },
+      "extra": {
+        "raw": "hysteria2://e0fafa17-7ac1-4435-af1a-d61e2904f367@133.18.163.202:50000?insecure=1&sni=www.microsoft.com&mport=50000-55000#%F0%9F%87%AF%F0%9F%87%B5%E6%97%A5%E6%9C%AC1%20%7C%20%E2%AC%87%EF%B8%8F%201.5MB%2Fs",
+        "addedAt": "2025-10-09T12:37:01.089Z"
+      },
+      "metadata": {
+        "source": "amaoa"
+      }
+    },
+    {
+      "id": "byw2r98eo",
       "type": "vless",
-      "name": "🇬🇧英国3 | ⬇️ 2.1MB/s",
-      "server": "166.62.111.32",
+      "name": "🇺🇸美国2 | ⬇️ 1.1MB/s",
+      "server": "92.60.74.44",
+      "port": 2096,
+      "protocol": "vless",
+      "settings": {
+        "id": "12345678-1234-1234-1234-123456789123",
+        "network": "ws",
+        "security": "tls",
+        "sni": "kejiland.freewarp.eu.org",
+        "fp": "chrome",
+        "alpn": "",
+        "path": "/snippets&freecodes@节点狂魔/",
+        "host": "kejiland.freewarp.eu.org",
+        "encryption": "none",
+        "flow": ""
+      },
+      "extra": {
+        "raw": "vless://12345678-1234-1234-1234-123456789123@92.60.74.44:2096?security=tls&type=ws&path=%2Fsnippets%26freecodes%40%E8%8A%82%E7%82%B9%E7%8B%82%E9%AD%94%2F&host=kejiland.freewarp.eu.org&sni=kejiland.freewarp.eu.org&fp=chrome#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD2%20%7C%20%E2%AC%87%EF%B8%8F%201.1MB%2Fs",
+        "addedAt": "2025-10-09T12:37:01.089Z"
+      },
+      "metadata": {
+        "source": "amaoa"
+      }
+    },
+    {
+      "id": "nmnuxdgrn",
+      "type": "vless",
+      "name": "🇺🇸美国3 | ⬇️ 1.3MB/s",
+      "server": "94.247.142.44",
+      "port": 2096,
+      "protocol": "vless",
+      "settings": {
+        "id": "12345678-1234-1234-1234-123456789123",
+        "network": "ws",
+        "security": "tls",
+        "sni": "kejiland.freewarp.eu.org",
+        "fp": "chrome",
+        "alpn": "",
+        "path": "/snippets&freecodes@节点狂魔/",
+        "host": "kejiland.freewarp.eu.org",
+        "encryption": "none",
+        "flow": ""
+      },
+      "extra": {
+        "raw": "vless://12345678-1234-1234-1234-123456789123@94.247.142.44:2096?security=tls&type=ws&path=%2Fsnippets%26freecodes%40%E8%8A%82%E7%82%B9%E7%8B%82%E9%AD%94%2F&host=kejiland.freewarp.eu.org&sni=kejiland.freewarp.eu.org&fp=chrome#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD3%20%7C%20%E2%AC%87%EF%B8%8F%201.3MB%2Fs",
+        "addedAt": "2025-10-09T12:37:01.089Z"
+      },
+      "metadata": {
+        "source": "amaoa"
+      }
+    },
+    {
+      "id": "engwqf7il",
+      "type": "vless",
+      "name": "🇺🇸美国4 | ⬇️ 1.2MB/s",
+      "server": "91.209.253.43",
+      "port": 2096,
+      "protocol": "vless",
+      "settings": {
+        "id": "01997b9d-a1f7-e188-981a-c665b723cfef",
+        "network": "ws",
+        "security": "tls",
+        "sni": "kejiland.freewarp.eu.org",
+        "fp": "chrome",
+        "alpn": "",
+        "path": "/snippets",
+        "host": "kejiland.freewarp.eu.org",
+        "encryption": "none",
+        "flow": ""
+      },
+      "extra": {
+        "raw": "vless://01997b9d-a1f7-e188-981a-c665b723cfef@91.209.253.43:2096?security=tls&type=ws&path=%2Fsnippets&host=kejiland.freewarp.eu.org&sni=kejiland.freewarp.eu.org&fp=chrome#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD4%20%7C%20%E2%AC%87%EF%B8%8F%201.2MB%2Fs",
+        "addedAt": "2025-10-09T12:37:01.089Z"
+      },
+      "metadata": {
+        "source": "amaoa"
+      }
+    },
+    {
+      "id": "k802sxurc",
+      "type": "vless",
+      "name": "🇺🇸美国5 | ⬇️ 1.4MB/s",
+      "server": "185.251.80.32",
+      "port": 2096,
+      "protocol": "vless",
+      "settings": {
+        "id": "b65f4df7-f6af-42b2-877a-cef33f21675e",
+        "network": "ws",
+        "security": "tls",
+        "sni": "kejiland.freewarp.eu.org",
+        "fp": "chrome",
+        "alpn": "",
+        "path": "/snippets",
+        "host": "kejiland.freewarp.eu.org",
+        "encryption": "none",
+        "flow": ""
+      },
+      "extra": {
+        "raw": "vless://b65f4df7-f6af-42b2-877a-cef33f21675e@185.251.80.32:2096?security=tls&type=ws&path=%2Fsnippets&host=kejiland.freewarp.eu.org&sni=kejiland.freewarp.eu.org&fp=chrome#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD5%20%7C%20%E2%AC%87%EF%B8%8F%201.4MB%2Fs",
+        "addedAt": "2025-10-09T12:37:01.089Z"
+      },
+      "metadata": {
+        "source": "amaoa"
+      }
+    },
+    {
+      "id": "xccv7dpxs",
+      "type": "vless",
+      "name": "🇺🇸美国6 | ⬇️ 1.2MB/s",
+      "server": "193.227.99.43",
+      "port": 2096,
+      "protocol": "vless",
+      "settings": {
+        "id": "01997b9d-a1f7-e188-981a-c665b723cfef",
+        "network": "ws",
+        "security": "tls",
+        "sni": "kejiland.freewarp.eu.org",
+        "fp": "chrome",
+        "alpn": "",
+        "path": "/snippets&freecodes@节点狂魔/",
+        "host": "kejiland.freewarp.eu.org",
+        "encryption": "none",
+        "flow": ""
+      },
+      "extra": {
+        "raw": "vless://01997b9d-a1f7-e188-981a-c665b723cfef@193.227.99.43:2096?security=tls&type=ws&path=%2Fsnippets%26freecodes%40%E8%8A%82%E7%82%B9%E7%8B%82%E9%AD%94%2F&host=kejiland.freewarp.eu.org&sni=kejiland.freewarp.eu.org&fp=chrome#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD6%20%7C%20%E2%AC%87%EF%B8%8F%201.2MB%2Fs",
+        "addedAt": "2025-10-09T12:37:01.089Z"
+      },
+      "metadata": {
+        "source": "amaoa"
+      }
+    },
+    {
+      "id": "peqj9j0mk",
+      "type": "vless",
+      "name": "🇺🇸美国7 | ⬇️ 1.0MB/s",
+      "server": "45.196.29.43",
+      "port": 2096,
+      "protocol": "vless",
+      "settings": {
+        "id": "01997b9d-a1f7-e188-981a-c665b723cfef",
+        "network": "ws",
+        "security": "tls",
+        "sni": "kejiland.freewarp.eu.org",
+        "fp": "chrome",
+        "alpn": "",
+        "path": "/snippets&freecodes@节点狂魔/",
+        "host": "kejiland.freewarp.eu.org",
+        "encryption": "none",
+        "flow": ""
+      },
+      "extra": {
+        "raw": "vless://01997b9d-a1f7-e188-981a-c665b723cfef@45.196.29.43:2096?security=tls&type=ws&path=%2Fsnippets%26freecodes%40%E8%8A%82%E7%82%B9%E7%8B%82%E9%AD%94%2F&host=kejiland.freewarp.eu.org&sni=kejiland.freewarp.eu.org&fp=chrome#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD7%20%7C%20%E2%AC%87%EF%B8%8F%201.0MB%2Fs",
+        "addedAt": "2025-10-09T12:37:01.089Z"
+      },
+      "metadata": {
+        "source": "amaoa"
+      }
+    },
+    {
+      "id": "m0p7v7kd3",
+      "type": "vless",
+      "name": "🇺🇸美国8 | ⬇️ 1.2MB/s",
+      "server": "102.132.188.32",
       "port": 2096,
       "protocol": "vless",
       "settings": {
@@ -432,46 +494,155 @@
         "flow": ""
       },
       "extra": {
-        "raw": "vless://b65f4df7-f6af-42b2-877a-cef33f21675e@166.62.111.32:2096?security=tls&type=ws&path=%2Fsnippets&host=kejiland.freewarp.eu.org&sni=kejiland.freewarp.eu.org#%F0%9F%87%AC%F0%9F%87%A7%E8%8B%B1%E5%9B%BD3%20%7C%20%E2%AC%87%EF%B8%8F%202.1MB%2Fs",
-        "addedAt": "2025-10-09T06:27:33.212Z"
+        "raw": "vless://b65f4df7-f6af-42b2-877a-cef33f21675e@102.132.188.32:2096?security=tls&type=ws&path=%2Fsnippets&host=kejiland.freewarp.eu.org&sni=kejiland.freewarp.eu.org#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD8%20%7C%20%E2%AC%87%EF%B8%8F%201.2MB%2Fs",
+        "addedAt": "2025-10-09T12:37:01.089Z"
       },
       "metadata": {
         "source": "amaoa"
       }
     },
     {
-      "id": "9y9y7x7mi",
+      "id": "4ta43igjg",
       "type": "vless",
-      "name": "🇺🇸美国4 | ⬇️ 1.1MB/s",
-      "server": "45.38.145.240",
-      "port": 443,
+      "name": "🇺🇸美国9 | ⬇️ 1.1MB/s",
+      "server": "159.242.242.44",
+      "port": 2096,
       "protocol": "vless",
       "settings": {
-        "id": "0c0537c3-f0fb-40e6-bd59-f5038e1855ed",
+        "id": "12345678-1234-1234-1234-123456789123",
         "network": "ws",
         "security": "tls",
-        "sni": "juzi.634676.xyz",
-        "fp": "",
+        "sni": "kejiland.freewarp.eu.org",
+        "fp": "chrome",
         "alpn": "",
-        "path": "/?ed=2560",
-        "host": "juzi.634676.xyz",
+        "path": "/snippets&freecodes@节点狂魔/",
+        "host": "kejiland.freewarp.eu.org",
         "encryption": "none",
         "flow": ""
       },
       "extra": {
-        "raw": "vless://0c0537c3-f0fb-40e6-bd59-f5038e1855ed@45.38.145.240:443?security=tls&type=ws&path=%2F%3Fed%3D2560&host=juzi.634676.xyz&sni=juzi.634676.xyz#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD4%20%7C%20%E2%AC%87%EF%B8%8F%201.1MB%2Fs",
-        "addedAt": "2025-10-09T06:27:33.213Z"
+        "raw": "vless://12345678-1234-1234-1234-123456789123@159.242.242.44:2096?security=tls&type=ws&path=%2Fsnippets%26freecodes%40%E8%8A%82%E7%82%B9%E7%8B%82%E9%AD%94%2F&host=kejiland.freewarp.eu.org&sni=kejiland.freewarp.eu.org&fp=chrome#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD9%20%7C%20%E2%AC%87%EF%B8%8F%201.1MB%2Fs",
+        "addedAt": "2025-10-09T12:37:01.089Z"
       },
       "metadata": {
         "source": "amaoa"
       }
     },
     {
-      "id": "osjiu7h8k",
+      "id": "tfb0wl4ro",
       "type": "vless",
-      "name": "🇳🇱荷兰3 | ⬇️ 3.6MB/s",
-      "server": "142.171.156.182",
-      "port": 15801,
+      "name": "🇺🇸美国10 | ⬇️ 1.1MB/s",
+      "server": "92.53.190.43",
+      "port": 2096,
+      "protocol": "vless",
+      "settings": {
+        "id": "01997b9d-a1f7-e188-981a-c665b723cfef",
+        "network": "ws",
+        "security": "tls",
+        "sni": "kejiland.freewarp.eu.org",
+        "fp": "chrome",
+        "alpn": "",
+        "path": "/snippets&freecodes@节点狂魔/",
+        "host": "kejiland.freewarp.eu.org",
+        "encryption": "none",
+        "flow": ""
+      },
+      "extra": {
+        "raw": "vless://01997b9d-a1f7-e188-981a-c665b723cfef@92.53.190.43:2096?security=tls&type=ws&path=%2Fsnippets%26freecodes%40%E8%8A%82%E7%82%B9%E7%8B%82%E9%AD%94%2F&host=kejiland.freewarp.eu.org&sni=kejiland.freewarp.eu.org&fp=chrome#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD10%20%7C%20%E2%AC%87%EF%B8%8F%201.1MB%2Fs",
+        "addedAt": "2025-10-09T12:37:01.089Z"
+      },
+      "metadata": {
+        "source": "amaoa"
+      }
+    },
+    {
+      "id": "nmk6k5eh0",
+      "type": "vless",
+      "name": "🇳🇱荷兰3 | ⬇️ 1.4MB/s",
+      "server": "92.42.102.73",
+      "port": 8443,
+      "protocol": "vless",
+      "settings": {
+        "id": "b65f4df7-f6af-42b2-877a-cef33f21675e",
+        "network": "ws",
+        "security": "tls",
+        "sni": "kejiland.freewarp.eu.org",
+        "fp": "",
+        "alpn": "",
+        "path": "/snippets/ip=proxyip.fxxk.dedyn.io:443",
+        "host": "kejiland.freewarp.eu.org",
+        "encryption": "none",
+        "flow": ""
+      },
+      "extra": {
+        "raw": "vless://b65f4df7-f6af-42b2-877a-cef33f21675e@92.42.102.73:8443?security=tls&type=ws&path=%2Fsnippets%2Fip%3Dproxyip.fxxk.dedyn.io%3A443&host=kejiland.freewarp.eu.org&sni=kejiland.freewarp.eu.org#%F0%9F%87%B3%F0%9F%87%B1%E8%8D%B7%E5%85%B03%20%7C%20%E2%AC%87%EF%B8%8F%201.4MB%2Fs",
+        "addedAt": "2025-10-09T12:37:01.089Z"
+      },
+      "metadata": {
+        "source": "amaoa"
+      }
+    },
+    {
+      "id": "b43vagw2z",
+      "type": "vless",
+      "name": "🇺🇸美国11 | ⬇️ 1.2MB/s",
+      "server": "155.46.213.32",
+      "port": 2096,
+      "protocol": "vless",
+      "settings": {
+        "id": "b65f4df7-f6af-42b2-877a-cef33f21675e",
+        "network": "ws",
+        "security": "tls",
+        "sni": "kejiland.freewarp.eu.org",
+        "fp": "",
+        "alpn": "",
+        "path": "/snippets",
+        "host": "kejiland.freewarp.eu.org",
+        "encryption": "none",
+        "flow": ""
+      },
+      "extra": {
+        "raw": "vless://b65f4df7-f6af-42b2-877a-cef33f21675e@155.46.213.32:2096?security=tls&type=ws&path=%2Fsnippets&host=kejiland.freewarp.eu.org&sni=kejiland.freewarp.eu.org#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD11%20%7C%20%E2%AC%87%EF%B8%8F%201.2MB%2Fs",
+        "addedAt": "2025-10-09T12:37:01.089Z"
+      },
+      "metadata": {
+        "source": "amaoa"
+      }
+    },
+    {
+      "id": "y14deuxo8",
+      "type": "vmess",
+      "name": "🇭🇰香港1 | ⬇️ 3.1MB/s",
+      "server": "46.3.26.12",
+      "port": 443,
+      "protocol": "vmess",
+      "settings": {
+        "id": "4bf075f5-4d5e-4d39-f5ab-b32a86250f0e",
+        "alterId": 0,
+        "security": "auto",
+        "network": "ws",
+        "ws": true,
+        "wsPath": "/aa",
+        "wsHeaders": {
+          "Host": "hk.nbee.pp.ua"
+        },
+        "tls": true,
+        "serverName": "hk.nbee.pp.ua"
+      },
+      "extra": {
+        "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrfCfh7DpppnmuK8xIHwg4qyH77iPIDMuMU1CL3MiLCJhZGQiOiI0Ni4zLjI2LjEyIiwicG9ydCI6NDQzLCJpZCI6IjRiZjA3NWY1LTRkNWUtNGQzOS1mNWFiLWIzMmE4NjI1MGYwZSIsInR5cGUiOiIiLCJhaWQiOjAsIm5ldCI6IndzIiwidGxzIjoidGxzIiwic25pIjoiaGsubmJlZS5wcC51YSIsInBhdGgiOiIvYWEiLCJob3N0IjoiaGsubmJlZS5wcC51YSJ9",
+        "addedAt": "2025-10-09T12:37:01.089Z"
+      },
+      "metadata": {
+        "source": "amaoa"
+      }
+    },
+    {
+      "id": "8579abj8j",
+      "type": "vless",
+      "name": "🇬🇧英国2 | ⬇️ 3.7MB/s",
+      "server": "166.62.104.32",
+      "port": 2096,
       "protocol": "vless",
       "settings": {
         "id": "b65f4df7-f6af-42b2-877a-cef33f21675e",
@@ -480,126 +651,78 @@
         "sni": "kejiland.freewarp.eu.org",
         "fp": "chrome",
         "alpn": "",
-        "path": "/snippets/ip=proxyip.fxxk.dedyn.io:443?ed=2560",
+        "path": "/snippets",
         "host": "kejiland.freewarp.eu.org",
         "encryption": "none",
         "flow": ""
       },
       "extra": {
-        "raw": "vless://b65f4df7-f6af-42b2-877a-cef33f21675e@142.171.156.182:15801?security=tls&type=ws&path=%2Fsnippets%2Fip%3Dproxyip.fxxk.dedyn.io%3A443%3Fed%3D2560&host=kejiland.freewarp.eu.org&sni=kejiland.freewarp.eu.org&fp=chrome#%F0%9F%87%B3%F0%9F%87%B1%E8%8D%B7%E5%85%B03%20%7C%20%E2%AC%87%EF%B8%8F%203.6MB%2Fs",
-        "addedAt": "2025-10-09T06:27:33.213Z"
+        "raw": "vless://b65f4df7-f6af-42b2-877a-cef33f21675e@166.62.104.32:2096?security=tls&type=ws&path=%2Fsnippets&host=kejiland.freewarp.eu.org&sni=kejiland.freewarp.eu.org&fp=chrome#%F0%9F%87%AC%F0%9F%87%A7%E8%8B%B1%E5%9B%BD2%20%7C%20%E2%AC%87%EF%B8%8F%203.7MB%2Fs",
+        "addedAt": "2025-10-09T12:37:01.089Z"
       },
       "metadata": {
         "source": "amaoa"
       }
     },
     {
-      "id": "krwdi6489",
-      "type": "hysteria2",
-      "name": "🇬🇧英国4 | ⬇️ 2.6MB/s",
-      "server": "20f7cc-330-co-uk1-4.9966661.xyz",
-      "port": 3000,
-      "protocol": "hysteria2",
-      "settings": {
-        "auth": "abf03bbd-ec5c-45d9-bf63-c1851a1f4c4d",
-        "sni": "20f7cc-330-co-uk1.9966661.xyz",
-        "insecure": false,
-        "obfs": "",
-        "obfsPassword": "",
-        "uploadBandwidth": "",
-        "downloadBandwidth": ""
-      },
-      "extra": {
-        "raw": "hysteria2://abf03bbd-ec5c-45d9-bf63-c1851a1f4c4d@20f7cc-330-co-uk1-4.9966661.xyz:3000?sni=20f7cc-330-co-uk1.9966661.xyz#%F0%9F%87%AC%F0%9F%87%A7%E8%8B%B1%E5%9B%BD4%20%7C%20%E2%AC%87%EF%B8%8F%202.6MB%2Fs",
-        "addedAt": "2025-10-09T06:27:33.213Z"
-      },
-      "metadata": {
-        "source": "amaoa"
-      }
-    },
-    {
-      "id": "o7ijfi0kv",
+      "id": "gz5r35l4m",
       "type": "vless",
-      "name": "🌀其他6-LT | ⬇️ 2.1MB/s",
-      "server": "lt4.9966662.xyz",
-      "port": 51423,
+      "name": "🇺🇸美国12 | ⬇️ 1.4MB/s",
+      "server": "94.140.0.32",
+      "port": 2096,
       "protocol": "vless",
       "settings": {
-        "id": "abf03bbd-ec5c-45d9-bf63-c1851a1f4c4d",
-        "network": "tcp",
-        "security": "reality",
-        "sni": "www.cloudflare.com",
-        "fp": "chrome",
+        "id": "b65f4df7-f6af-42b2-877a-cef33f21675e",
+        "network": "ws",
+        "security": "tls",
+        "sni": "kejiland.freewarp.eu.org",
+        "fp": "",
         "alpn": "",
-        "path": "/",
-        "host": "",
+        "path": "/snippets",
+        "host": "kejiland.freewarp.eu.org",
         "encryption": "none",
-        "flow": "xtls-rprx-vision"
+        "flow": ""
       },
       "extra": {
-        "raw": "vless://abf03bbd-ec5c-45d9-bf63-c1851a1f4c4d@lt4.9966662.xyz:51423?security=reality&type=tcp&sni=www.cloudflare.com&fp=chrome&flow=xtls-rprx-vision&sid=a6b64b8c&pbk=MvjyJD_JDqDnDKSG2r8il6gSrEijZtdmlvXOOuvqO0w#%F0%9F%8C%80%E5%85%B6%E4%BB%966-LT%20%7C%20%E2%AC%87%EF%B8%8F%202.1MB%2Fs",
-        "addedAt": "2025-10-09T06:27:33.213Z"
+        "raw": "vless://b65f4df7-f6af-42b2-877a-cef33f21675e@94.140.0.32:2096?security=tls&type=ws&path=%2Fsnippets&host=kejiland.freewarp.eu.org&sni=kejiland.freewarp.eu.org#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD12%20%7C%20%E2%AC%87%EF%B8%8F%201.4MB%2Fs",
+        "addedAt": "2025-10-09T12:37:01.089Z"
       },
       "metadata": {
         "source": "amaoa"
       }
     },
     {
-      "id": "m6100yjcs",
-      "type": "hysteria2",
-      "name": "🌀其他7-VN | ⬇️ 3.3MB/s",
-      "server": "vnvnnian-u-do-vn2-2.9966661.xyz",
-      "port": 3000,
-      "protocol": "hysteria2",
-      "settings": {
-        "auth": "abf03bbd-ec5c-45d9-bf63-c1851a1f4c4d",
-        "sni": "vnvnnian-u-do-vn2.9966661.xyz",
-        "insecure": false,
-        "obfs": "",
-        "obfsPassword": "",
-        "uploadBandwidth": "",
-        "downloadBandwidth": ""
-      },
-      "extra": {
-        "raw": "hysteria2://abf03bbd-ec5c-45d9-bf63-c1851a1f4c4d@vnvnnian-u-do-vn2-2.9966661.xyz:3000?sni=vnvnnian-u-do-vn2.9966661.xyz#%F0%9F%8C%80%E5%85%B6%E4%BB%967-VN%20%7C%20%E2%AC%87%EF%B8%8F%203.3MB%2Fs",
-        "addedAt": "2025-10-09T06:27:33.213Z"
-      },
-      "metadata": {
-        "source": "amaoa"
-      }
-    },
-    {
-      "id": "m35c0x102",
+      "id": "286a1yqgj",
       "type": "vless",
-      "name": "🇺🇸美国5 | ⬇️ 2.1MB/s",
-      "server": "mengying.eu.org",
-      "port": 25801,
+      "name": "🇺🇸美国13 | ⬇️ 1.6MB/s",
+      "server": "139.64.235.32",
+      "port": 2096,
       "protocol": "vless",
       "settings": {
-        "id": "4c7f66da-af49-4e6d-b60c-f6a0eaa00919",
-        "network": "tcp",
-        "security": "reality",
-        "sni": "updates.cdn-apple.com",
-        "fp": "chrome",
+        "id": "b65f4df7-f6af-42b2-877a-cef33f21675e",
+        "network": "ws",
+        "security": "tls",
+        "sni": "kejiland.freewarp.eu.org",
+        "fp": "",
         "alpn": "",
-        "path": "/",
-        "host": "",
+        "path": "/snippets",
+        "host": "kejiland.freewarp.eu.org",
         "encryption": "none",
-        "flow": "xtls-rprx-vision"
+        "flow": ""
       },
       "extra": {
-        "raw": "vless://4c7f66da-af49-4e6d-b60c-f6a0eaa00919@mengying.eu.org:25801?security=reality&type=tcp&sni=updates.cdn-apple.com&fp=chrome&flow=xtls-rprx-vision&pbk=iC7qQK0Yu8sQsiIj5JPTGDVTrFkZDoesDUn24pDwgQk#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD5%20%7C%20%E2%AC%87%EF%B8%8F%202.1MB%2Fs",
-        "addedAt": "2025-10-09T06:27:33.213Z"
+        "raw": "vless://b65f4df7-f6af-42b2-877a-cef33f21675e@139.64.235.32:2096?security=tls&type=ws&path=%2Fsnippets&host=kejiland.freewarp.eu.org&sni=kejiland.freewarp.eu.org#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD13%20%7C%20%E2%AC%87%EF%B8%8F%201.6MB%2Fs",
+        "addedAt": "2025-10-09T12:37:01.089Z"
       },
       "metadata": {
         "source": "amaoa"
       }
     },
     {
-      "id": "jdzad4vec",
+      "id": "cjhted6hy",
       "type": "ss",
-      "name": "🌀其他8-VN | ⬇️ 1.1MB/s",
-      "server": "103.186.155.112",
+      "name": "🌀其他4-VN | ⬇️ 1.2MB/s",
+      "server": "103.186.154.216",
       "port": 38388,
       "protocol": "shadowsocks",
       "settings": {
@@ -607,92 +730,890 @@
         "password": "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
       },
       "extra": {
-        "raw": "ss://YWVzLTI1Ni1jZmI6WG44aktkbURNMDBJZU8lIyQjZkpBTXRzRUFFVU9wSC9ZV1l0WXFERm5UMFNW@103.186.155.112:38388#%F0%9F%8C%80%E5%85%B6%E4%BB%968-VN%20%7C%20%E2%AC%87%EF%B8%8F%201.1MB%2Fs",
-        "addedAt": "2025-10-09T06:27:33.213Z"
+        "raw": "ss://YWVzLTI1Ni1jZmI6WG44aktkbURNMDBJZU8lIyQjZkpBTXRzRUFFVU9wSC9ZV1l0WXFERm5UMFNW@103.186.154.216:38388#%F0%9F%8C%80%E5%85%B6%E4%BB%964-VN%20%7C%20%E2%AC%87%EF%B8%8F%201.2MB%2Fs",
+        "addedAt": "2025-10-09T12:37:01.089Z"
       },
       "metadata": {
         "source": "amaoa"
       }
     },
     {
-      "id": "r0dgwvjci",
-      "type": "hysteria2",
-      "name": "🌀其他9-VN | ⬇️ 4.2MB/s",
-      "server": "vnvn-u-do-vn1-3.9966661.xyz",
-      "port": 3000,
-      "protocol": "hysteria2",
-      "settings": {
-        "auth": "abf03bbd-ec5c-45d9-bf63-c1851a1f4c4d",
-        "sni": "vnvn-u-do-vn1.9966661.xyz",
-        "insecure": false,
-        "obfs": "",
-        "obfsPassword": "",
-        "uploadBandwidth": "",
-        "downloadBandwidth": ""
-      },
-      "extra": {
-        "raw": "hysteria2://abf03bbd-ec5c-45d9-bf63-c1851a1f4c4d@vnvn-u-do-vn1-3.9966661.xyz:3000?sni=vnvn-u-do-vn1.9966661.xyz#%F0%9F%8C%80%E5%85%B6%E4%BB%969-VN%20%7C%20%E2%AC%87%EF%B8%8F%204.2MB%2Fs",
-        "addedAt": "2025-10-09T06:27:33.213Z"
-      },
-      "metadata": {
-        "source": "amaoa"
-      }
-    },
-    {
-      "id": "3gtbiawd8",
+      "id": "mw36dtn4w",
       "type": "vless",
-      "name": "🌀其他10-LT | ⬇️ 2.3MB/s",
-      "server": "lt3.9966662.xyz",
-      "port": 51423,
+      "name": "🇺🇸美国14 | ⬇️ 1.1MB/s",
+      "server": "185.59.218.43",
+      "port": 2096,
       "protocol": "vless",
       "settings": {
-        "id": "abf03bbd-ec5c-45d9-bf63-c1851a1f4c4d",
-        "network": "tcp",
-        "security": "reality",
-        "sni": "www.cloudflare.com",
-        "fp": "chrome",
-        "alpn": "",
-        "path": "/",
-        "host": "",
-        "encryption": "none",
-        "flow": "xtls-rprx-vision"
-      },
-      "extra": {
-        "raw": "vless://abf03bbd-ec5c-45d9-bf63-c1851a1f4c4d@lt3.9966662.xyz:51423?security=reality&type=tcp&sni=www.cloudflare.com&fp=chrome&flow=xtls-rprx-vision&sid=a6b64b8c&pbk=MvjyJD_JDqDnDKSG2r8il6gSrEijZtdmlvXOOuvqO0w#%F0%9F%8C%80%E5%85%B6%E4%BB%9610-LT%20%7C%20%E2%AC%87%EF%B8%8F%202.3MB%2Fs",
-        "addedAt": "2025-10-09T06:27:33.213Z"
-      },
-      "metadata": {
-        "source": "amaoa"
-      }
-    },
-    {
-      "id": "ktj49qydz",
-      "type": "vless",
-      "name": "🇺🇸美国6 | ⬇️ 1.4MB/s",
-      "server": "marco67.sylu.net",
-      "port": 443,
-      "protocol": "vless",
-      "settings": {
-        "id": "32698d90-d663-41ff-83e5-c4f74fac12cd",
+        "id": "01997b9d-a1f7-e188-981a-c665b723cfef",
         "network": "ws",
         "security": "tls",
-        "sni": "marco67.sylu.net",
-        "fp": "",
+        "sni": "kejiland.freewarp.eu.org",
+        "fp": "chrome",
         "alpn": "",
-        "path": "/",
-        "host": "marco67.sylu.net",
+        "path": "/snippets&freecodes@节点狂魔/",
+        "host": "kejiland.freewarp.eu.org",
         "encryption": "none",
         "flow": ""
       },
       "extra": {
-        "raw": "vless://32698d90-d663-41ff-83e5-c4f74fac12cd@marco67.sylu.net:443?security=tls&type=ws&path=%2F&host=marco67.sylu.net&sni=marco67.sylu.net#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD6%20%7C%20%E2%AC%87%EF%B8%8F%201.4MB%2Fs",
-        "addedAt": "2025-10-09T06:27:33.213Z"
+        "raw": "vless://01997b9d-a1f7-e188-981a-c665b723cfef@185.59.218.43:2096?security=tls&type=ws&path=%2Fsnippets%26freecodes%40%E8%8A%82%E7%82%B9%E7%8B%82%E9%AD%94%2F&host=kejiland.freewarp.eu.org&sni=kejiland.freewarp.eu.org&fp=chrome#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD14%20%7C%20%E2%AC%87%EF%B8%8F%201.1MB%2Fs",
+        "addedAt": "2025-10-09T12:37:01.089Z"
+      },
+      "metadata": {
+        "source": "amaoa"
+      }
+    },
+    {
+      "id": "i28u6ftoy",
+      "type": "vless",
+      "name": "🇺🇸美国15 | ⬇️ 1.1MB/s",
+      "server": "45.192.224.44",
+      "port": 2096,
+      "protocol": "vless",
+      "settings": {
+        "id": "12345678-1234-1234-1234-123456789123",
+        "network": "ws",
+        "security": "tls",
+        "sni": "kejiland.freewarp.eu.org",
+        "fp": "chrome",
+        "alpn": "",
+        "path": "/snippets&freecodes@节点狂魔/",
+        "host": "kejiland.freewarp.eu.org",
+        "encryption": "none",
+        "flow": ""
+      },
+      "extra": {
+        "raw": "vless://12345678-1234-1234-1234-123456789123@45.192.224.44:2096?security=tls&type=ws&path=%2Fsnippets%26freecodes%40%E8%8A%82%E7%82%B9%E7%8B%82%E9%AD%94%2F&host=kejiland.freewarp.eu.org&sni=kejiland.freewarp.eu.org&fp=chrome#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD15%20%7C%20%E2%AC%87%EF%B8%8F%201.1MB%2Fs",
+        "addedAt": "2025-10-09T12:37:01.089Z"
+      },
+      "metadata": {
+        "source": "amaoa"
+      }
+    },
+    {
+      "id": "ro3uf1ag8",
+      "type": "vless",
+      "name": "🇺🇸美国16 | ⬇️ 1.2MB/s",
+      "server": "130.250.137.43",
+      "port": 2096,
+      "protocol": "vless",
+      "settings": {
+        "id": "01997b9d-a1f7-e188-981a-c665b723cfef",
+        "network": "ws",
+        "security": "tls",
+        "sni": "kejiland.freewarp.eu.org",
+        "fp": "chrome",
+        "alpn": "",
+        "path": "/snippets",
+        "host": "kejiland.freewarp.eu.org",
+        "encryption": "none",
+        "flow": ""
+      },
+      "extra": {
+        "raw": "vless://01997b9d-a1f7-e188-981a-c665b723cfef@130.250.137.43:2096?security=tls&type=ws&path=%2Fsnippets&host=kejiland.freewarp.eu.org&sni=kejiland.freewarp.eu.org&fp=chrome#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD16%20%7C%20%E2%AC%87%EF%B8%8F%201.2MB%2Fs",
+        "addedAt": "2025-10-09T12:37:01.089Z"
+      },
+      "metadata": {
+        "source": "amaoa"
+      }
+    },
+    {
+      "id": "hpa0deeq0",
+      "type": "vless",
+      "name": "🇩🇪德国2 | ⬇️ 2.7MB/s",
+      "server": "www.speedtest.net",
+      "port": 2082,
+      "protocol": "vless",
+      "settings": {
+        "id": "b27ead24-5cfa-4dd4-daca-cfd1daa26f90",
+        "network": "ws",
+        "security": "none",
+        "sni": "www.speedtest.net",
+        "fp": "",
+        "alpn": "",
+        "path": "/@spikevpn-@spikevpn-@spikevpn-@spikevpn-@spikevpn-@spikevpn?ed=2082",
+        "host": "novinsoft.ir.oradoshop.com.persiangsm.ir.digikala.com.abadis.ir.shad.ir.divar.ir.downloadly.com.aparat.com.cafebazar.ir.varzesh3.com.ninisite.com.abadis.ir.bama.ir.p30download.ir.telewebion.bmi.ir.shad.ir.mayket.com.ninisite.top.",
+        "encryption": "none",
+        "flow": ""
+      },
+      "extra": {
+        "raw": "vless://b27ead24-5cfa-4dd4-daca-cfd1daa26f90@www.speedtest.net:2082?security=none&type=ws&path=%2F%40spikevpn-%40spikevpn-%40spikevpn-%40spikevpn-%40spikevpn-%40spikevpn%3Fed%3D2082&host=novinsoft.ir.oradoshop.com.persiangsm.ir.digikala.com.abadis.ir.shad.ir.divar.ir.downloadly.com.aparat.com.cafebazar.ir.varzesh3.com.ninisite.com.abadis.ir.bama.ir.p30download.ir.telewebion.bmi.ir.shad.ir.mayket.com.ninisite.top.#%F0%9F%87%A9%F0%9F%87%AA%E5%BE%B7%E5%9B%BD2%20%7C%20%E2%AC%87%EF%B8%8F%202.7MB%2Fs",
+        "addedAt": "2025-10-09T12:37:01.089Z"
+      },
+      "metadata": {
+        "source": "amaoa"
+      }
+    },
+    {
+      "id": "famifjl2r",
+      "type": "vless",
+      "name": "🇺🇸美国17 | ⬇️ 1.7MB/s",
+      "server": "45.8.211.44",
+      "port": 2096,
+      "protocol": "vless",
+      "settings": {
+        "id": "12345678-1234-1234-1234-123456789123",
+        "network": "ws",
+        "security": "tls",
+        "sni": "kejiland.freewarp.eu.org",
+        "fp": "",
+        "alpn": "",
+        "path": "/snippets&freecodes @节点狂魔 /",
+        "host": "kejiland.freewarp.eu.org",
+        "encryption": "none",
+        "flow": ""
+      },
+      "extra": {
+        "raw": "vless://12345678-1234-1234-1234-123456789123@45.8.211.44:2096?security=tls&type=ws&path=%2Fsnippets%26freecodes%20%40%E8%8A%82%E7%82%B9%E7%8B%82%E9%AD%94%20%2F&host=kejiland.freewarp.eu.org&sni=kejiland.freewarp.eu.org#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD17%20%7C%20%E2%AC%87%EF%B8%8F%201.7MB%2Fs",
+        "addedAt": "2025-10-09T12:37:01.089Z"
+      },
+      "metadata": {
+        "source": "amaoa"
+      }
+    },
+    {
+      "id": "gqqlx59vx",
+      "type": "vless",
+      "name": "🇺🇸美国18 | ⬇️ 1.4MB/s",
+      "server": "102.132.188.44",
+      "port": 2096,
+      "protocol": "vless",
+      "settings": {
+        "id": "12345678-1234-1234-1234-123456789123",
+        "network": "ws",
+        "security": "tls",
+        "sni": "kejiland.freewarp.eu.org",
+        "fp": "chrome",
+        "alpn": "",
+        "path": "/snippets&freecodes@节点狂魔/",
+        "host": "kejiland.freewarp.eu.org",
+        "encryption": "none",
+        "flow": ""
+      },
+      "extra": {
+        "raw": "vless://12345678-1234-1234-1234-123456789123@102.132.188.44:2096?security=tls&type=ws&path=%2Fsnippets%26freecodes%40%E8%8A%82%E7%82%B9%E7%8B%82%E9%AD%94%2F&host=kejiland.freewarp.eu.org&sni=kejiland.freewarp.eu.org&fp=chrome#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD18%20%7C%20%E2%AC%87%EF%B8%8F%201.4MB%2Fs",
+        "addedAt": "2025-10-09T12:37:01.089Z"
+      },
+      "metadata": {
+        "source": "amaoa"
+      }
+    },
+    {
+      "id": "cvdbkki07",
+      "type": "vless",
+      "name": "🇺🇸美国19 | ⬇️ 1.0MB/s",
+      "server": "185.174.138.32",
+      "port": 2096,
+      "protocol": "vless",
+      "settings": {
+        "id": "b65f4df7-f6af-42b2-877a-cef33f21675e",
+        "network": "ws",
+        "security": "tls",
+        "sni": "kejiland.freewarp.eu.org",
+        "fp": "",
+        "alpn": "",
+        "path": "/snippets",
+        "host": "kejiland.freewarp.eu.org",
+        "encryption": "none",
+        "flow": ""
+      },
+      "extra": {
+        "raw": "vless://b65f4df7-f6af-42b2-877a-cef33f21675e@185.174.138.32:2096?security=tls&type=ws&path=%2Fsnippets&host=kejiland.freewarp.eu.org&sni=kejiland.freewarp.eu.org#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD19%20%7C%20%E2%AC%87%EF%B8%8F%201.0MB%2Fs",
+        "addedAt": "2025-10-09T12:37:01.089Z"
+      },
+      "metadata": {
+        "source": "amaoa"
+      }
+    },
+    {
+      "id": "943uvz1qy",
+      "type": "vless",
+      "name": "🇺🇸美国20 | ⬇️ 1.4MB/s",
+      "server": "154.219.5.43",
+      "port": 2096,
+      "protocol": "vless",
+      "settings": {
+        "id": "01997b9d-a1f7-e188-981a-c665b723cfef",
+        "network": "ws",
+        "security": "tls",
+        "sni": "kejiland.freewarp.eu.org",
+        "fp": "",
+        "alpn": "",
+        "path": "/snippets&freecodes @节点狂魔 /",
+        "host": "kejiland.freewarp.eu.org",
+        "encryption": "none",
+        "flow": ""
+      },
+      "extra": {
+        "raw": "vless://01997b9d-a1f7-e188-981a-c665b723cfef@154.219.5.43:2096?security=tls&type=ws&path=%2Fsnippets%26freecodes%20%40%E8%8A%82%E7%82%B9%E7%8B%82%E9%AD%94%20%2F&host=kejiland.freewarp.eu.org&sni=kejiland.freewarp.eu.org#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD20%20%7C%20%E2%AC%87%EF%B8%8F%201.4MB%2Fs",
+        "addedAt": "2025-10-09T12:37:01.089Z"
+      },
+      "metadata": {
+        "source": "amaoa"
+      }
+    },
+    {
+      "id": "1a8nt00qn",
+      "type": "vless",
+      "name": "🇺🇸美国21 | ⬇️ 1.2MB/s",
+      "server": "92.53.188.43",
+      "port": 2096,
+      "protocol": "vless",
+      "settings": {
+        "id": "01997b9d-a1f7-e188-981a-c665b723cfef",
+        "network": "ws",
+        "security": "tls",
+        "sni": "kejiland.freewarp.eu.org",
+        "fp": "chrome",
+        "alpn": "",
+        "path": "/snippets&freecodes@节点狂魔/",
+        "host": "kejiland.freewarp.eu.org",
+        "encryption": "none",
+        "flow": ""
+      },
+      "extra": {
+        "raw": "vless://01997b9d-a1f7-e188-981a-c665b723cfef@92.53.188.43:2096?security=tls&type=ws&path=%2Fsnippets%26freecodes%40%E8%8A%82%E7%82%B9%E7%8B%82%E9%AD%94%2F&host=kejiland.freewarp.eu.org&sni=kejiland.freewarp.eu.org&fp=chrome#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD21%20%7C%20%E2%AC%87%EF%B8%8F%201.2MB%2Fs",
+        "addedAt": "2025-10-09T12:37:01.089Z"
+      },
+      "metadata": {
+        "source": "amaoa"
+      }
+    },
+    {
+      "id": "gsw1fm5pq",
+      "type": "vless",
+      "name": "🇺🇸美国22 | ⬇️ 1.0MB/s",
+      "server": "91.124.127.32",
+      "port": 2096,
+      "protocol": "vless",
+      "settings": {
+        "id": "b65f4df7-f6af-42b2-877a-cef33f21675e",
+        "network": "ws",
+        "security": "tls",
+        "sni": "kejiland.freewarp.eu.org",
+        "fp": "",
+        "alpn": "",
+        "path": "/snippets",
+        "host": "kejiland.freewarp.eu.org",
+        "encryption": "none",
+        "flow": ""
+      },
+      "extra": {
+        "raw": "vless://b65f4df7-f6af-42b2-877a-cef33f21675e@91.124.127.32:2096?security=tls&type=ws&path=%2Fsnippets&host=kejiland.freewarp.eu.org&sni=kejiland.freewarp.eu.org#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD22%20%7C%20%E2%AC%87%EF%B8%8F%201.0MB%2Fs",
+        "addedAt": "2025-10-09T12:37:01.089Z"
+      },
+      "metadata": {
+        "source": "amaoa"
+      }
+    },
+    {
+      "id": "6tnny1xyb",
+      "type": "vless",
+      "name": "🇺🇸美国23 | ⬇️ 1.0MB/s",
+      "server": "216.24.57.32",
+      "port": 2096,
+      "protocol": "vless",
+      "settings": {
+        "id": "b65f4df7-f6af-42b2-877a-cef33f21675e",
+        "network": "ws",
+        "security": "tls",
+        "sni": "kejiland.freewarp.eu.org",
+        "fp": "chrome",
+        "alpn": "",
+        "path": "/snippets",
+        "host": "kejiland.freewarp.eu.org",
+        "encryption": "none",
+        "flow": ""
+      },
+      "extra": {
+        "raw": "vless://b65f4df7-f6af-42b2-877a-cef33f21675e@216.24.57.32:2096?security=tls&type=ws&path=%2Fsnippets&host=kejiland.freewarp.eu.org&sni=kejiland.freewarp.eu.org&fp=chrome#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD23%20%7C%20%E2%AC%87%EF%B8%8F%201.0MB%2Fs",
+        "addedAt": "2025-10-09T12:37:01.089Z"
+      },
+      "metadata": {
+        "source": "amaoa"
+      }
+    },
+    {
+      "id": "7ibvmzj8m",
+      "type": "vless",
+      "name": "🇺🇸美国24 | ⬇️ 1.1MB/s",
+      "server": "102.132.188.43",
+      "port": 2096,
+      "protocol": "vless",
+      "settings": {
+        "id": "01997b9d-a1f7-e188-981a-c665b723cfef",
+        "network": "ws",
+        "security": "tls",
+        "sni": "kejiland.freewarp.eu.org",
+        "fp": "",
+        "alpn": "",
+        "path": "/snippets&freecodes @节点狂魔 /",
+        "host": "kejiland.freewarp.eu.org",
+        "encryption": "none",
+        "flow": ""
+      },
+      "extra": {
+        "raw": "vless://01997b9d-a1f7-e188-981a-c665b723cfef@102.132.188.43:2096?security=tls&type=ws&path=%2Fsnippets%26freecodes%20%40%E8%8A%82%E7%82%B9%E7%8B%82%E9%AD%94%20%2F&host=kejiland.freewarp.eu.org&sni=kejiland.freewarp.eu.org#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD24%20%7C%20%E2%AC%87%EF%B8%8F%201.1MB%2Fs",
+        "addedAt": "2025-10-09T12:37:01.089Z"
+      },
+      "metadata": {
+        "source": "amaoa"
+      }
+    },
+    {
+      "id": "pbgpnh6xv",
+      "type": "vless",
+      "name": "🇺🇸美国25 | ⬇️ 1.3MB/s",
+      "server": "185.170.166.32",
+      "port": 2096,
+      "protocol": "vless",
+      "settings": {
+        "id": "b65f4df7-f6af-42b2-877a-cef33f21675e",
+        "network": "ws",
+        "security": "tls",
+        "sni": "kejiland.freewarp.eu.org",
+        "fp": "",
+        "alpn": "",
+        "path": "/snippets",
+        "host": "kejiland.freewarp.eu.org",
+        "encryption": "none",
+        "flow": ""
+      },
+      "extra": {
+        "raw": "vless://b65f4df7-f6af-42b2-877a-cef33f21675e@185.170.166.32:2096?security=tls&type=ws&path=%2Fsnippets&host=kejiland.freewarp.eu.org&sni=kejiland.freewarp.eu.org#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD25%20%7C%20%E2%AC%87%EF%B8%8F%201.3MB%2Fs",
+        "addedAt": "2025-10-09T12:37:01.089Z"
+      },
+      "metadata": {
+        "source": "amaoa"
+      }
+    },
+    {
+      "id": "w3bsgcnpx",
+      "type": "vless",
+      "name": "🇺🇸美国26 | ⬇️ 1.6MB/s",
+      "server": "170.114.46.44",
+      "port": 2096,
+      "protocol": "vless",
+      "settings": {
+        "id": "12345678-1234-1234-1234-123456789123",
+        "network": "ws",
+        "security": "tls",
+        "sni": "kejiland.freewarp.eu.org",
+        "fp": "",
+        "alpn": "",
+        "path": "/snippets",
+        "host": "kejiland.freewarp.eu.org",
+        "encryption": "none",
+        "flow": ""
+      },
+      "extra": {
+        "raw": "vless://12345678-1234-1234-1234-123456789123@170.114.46.44:2096?security=tls&type=ws&path=%2Fsnippets&host=kejiland.freewarp.eu.org&sni=kejiland.freewarp.eu.org#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD26%20%7C%20%E2%AC%87%EF%B8%8F%201.6MB%2Fs",
+        "addedAt": "2025-10-09T12:37:01.089Z"
+      },
+      "metadata": {
+        "source": "amaoa"
+      }
+    },
+    {
+      "id": "ixu88crbh",
+      "type": "vless",
+      "name": "🇺🇸美国27 | ⬇️ 1.7MB/s",
+      "server": "185.148.104.44",
+      "port": 2096,
+      "protocol": "vless",
+      "settings": {
+        "id": "12345678-1234-1234-1234-123456789123",
+        "network": "ws",
+        "security": "tls",
+        "sni": "kejiland.freewarp.eu.org",
+        "fp": "chrome",
+        "alpn": "",
+        "path": "/snippets&freecodes@节点狂魔/",
+        "host": "kejiland.freewarp.eu.org",
+        "encryption": "none",
+        "flow": ""
+      },
+      "extra": {
+        "raw": "vless://12345678-1234-1234-1234-123456789123@185.148.104.44:2096?security=tls&type=ws&path=%2Fsnippets%26freecodes%40%E8%8A%82%E7%82%B9%E7%8B%82%E9%AD%94%2F&host=kejiland.freewarp.eu.org&sni=kejiland.freewarp.eu.org&fp=chrome#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD27%20%7C%20%E2%AC%87%EF%B8%8F%201.7MB%2Fs",
+        "addedAt": "2025-10-09T12:37:01.089Z"
+      },
+      "metadata": {
+        "source": "amaoa"
+      }
+    },
+    {
+      "id": "yufxdci91",
+      "type": "vless",
+      "name": "🇫🇮芬兰2 | ⬇️ 1.0MB/s",
+      "server": "138.2.49.197",
+      "port": 587,
+      "protocol": "vless",
+      "settings": {
+        "id": "b65f4df7-f6af-42b2-877a-cef33f21675e",
+        "network": "ws",
+        "security": "tls",
+        "sni": "kejiland.freewarp.eu.org",
+        "fp": "",
+        "alpn": "",
+        "path": "/snippets/ip=proxyip.fxxk.dedyn.io:443",
+        "host": "kejiland.freewarp.eu.org",
+        "encryption": "none",
+        "flow": ""
+      },
+      "extra": {
+        "raw": "vless://b65f4df7-f6af-42b2-877a-cef33f21675e@138.2.49.197:587?security=tls&type=ws&path=%2Fsnippets%2Fip%3Dproxyip.fxxk.dedyn.io%3A443&host=kejiland.freewarp.eu.org&sni=kejiland.freewarp.eu.org#%F0%9F%87%AB%F0%9F%87%AE%E8%8A%AC%E5%85%B02%20%7C%20%E2%AC%87%EF%B8%8F%201.0MB%2Fs",
+        "addedAt": "2025-10-09T12:37:01.089Z"
+      },
+      "metadata": {
+        "source": "amaoa"
+      }
+    },
+    {
+      "id": "oua8jvpje",
+      "type": "vless",
+      "name": "🇺🇸美国28 | ⬇️ 1.0MB/s",
+      "server": "160.79.104.32",
+      "port": 2096,
+      "protocol": "vless",
+      "settings": {
+        "id": "b65f4df7-f6af-42b2-877a-cef33f21675e",
+        "network": "ws",
+        "security": "tls",
+        "sni": "kejiland.freewarp.eu.org",
+        "fp": "chrome",
+        "alpn": "",
+        "path": "/snippets",
+        "host": "kejiland.freewarp.eu.org",
+        "encryption": "none",
+        "flow": ""
+      },
+      "extra": {
+        "raw": "vless://b65f4df7-f6af-42b2-877a-cef33f21675e@160.79.104.32:2096?security=tls&type=ws&path=%2Fsnippets&host=kejiland.freewarp.eu.org&sni=kejiland.freewarp.eu.org&fp=chrome#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD28%20%7C%20%E2%AC%87%EF%B8%8F%201.0MB%2Fs",
+        "addedAt": "2025-10-09T12:37:01.089Z"
+      },
+      "metadata": {
+        "source": "amaoa"
+      }
+    },
+    {
+      "id": "q2r6eijlh",
+      "type": "vless",
+      "name": "🇺🇸美国29 | ⬇️ 1.2MB/s",
+      "server": "155.46.213.44",
+      "port": 2096,
+      "protocol": "vless",
+      "settings": {
+        "id": "12345678-1234-1234-1234-123456789123",
+        "network": "ws",
+        "security": "tls",
+        "sni": "kejiland.freewarp.eu.org",
+        "fp": "",
+        "alpn": "",
+        "path": "/snippets&freecodes@节点狂魔/?ed=2560",
+        "host": "kejiland.freewarp.eu.org",
+        "encryption": "none",
+        "flow": ""
+      },
+      "extra": {
+        "raw": "vless://12345678-1234-1234-1234-123456789123@155.46.213.44:2096?security=tls&type=ws&path=%2Fsnippets%26freecodes%40%E8%8A%82%E7%82%B9%E7%8B%82%E9%AD%94%2F%3Fed%3D2560&host=kejiland.freewarp.eu.org&sni=kejiland.freewarp.eu.org#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD29%20%7C%20%E2%AC%87%EF%B8%8F%201.2MB%2Fs",
+        "addedAt": "2025-10-09T12:37:01.089Z"
+      },
+      "metadata": {
+        "source": "amaoa"
+      }
+    },
+    {
+      "id": "lja3k9d5n",
+      "type": "vless",
+      "name": "🇺🇸美国30 | ⬇️ 1.2MB/s",
+      "server": "192.200.160.44",
+      "port": 2096,
+      "protocol": "vless",
+      "settings": {
+        "id": "12345678-1234-1234-1234-123456789123",
+        "network": "ws",
+        "security": "tls",
+        "sni": "kejiland.freewarp.eu.org",
+        "fp": "chrome",
+        "alpn": "",
+        "path": "/snippets",
+        "host": "kejiland.freewarp.eu.org",
+        "encryption": "none",
+        "flow": ""
+      },
+      "extra": {
+        "raw": "vless://12345678-1234-1234-1234-123456789123@192.200.160.44:2096?security=tls&type=ws&path=%2Fsnippets&host=kejiland.freewarp.eu.org&sni=kejiland.freewarp.eu.org&fp=chrome#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD30%20%7C%20%E2%AC%87%EF%B8%8F%201.2MB%2Fs",
+        "addedAt": "2025-10-09T12:37:01.089Z"
+      },
+      "metadata": {
+        "source": "amaoa"
+      }
+    },
+    {
+      "id": "seyanu0sa",
+      "type": "vless",
+      "name": "🇺🇸美国31 | ⬇️ 1.1MB/s",
+      "server": "45.142.120.44",
+      "port": 2096,
+      "protocol": "vless",
+      "settings": {
+        "id": "12345678-1234-1234-1234-123456789123",
+        "network": "ws",
+        "security": "tls",
+        "sni": "kejiland.freewarp.eu.org",
+        "fp": "chrome",
+        "alpn": "",
+        "path": "/snippets&freecodes@节点狂魔/",
+        "host": "kejiland.freewarp.eu.org",
+        "encryption": "none",
+        "flow": ""
+      },
+      "extra": {
+        "raw": "vless://12345678-1234-1234-1234-123456789123@45.142.120.44:2096?security=tls&type=ws&path=%2Fsnippets%26freecodes%40%E8%8A%82%E7%82%B9%E7%8B%82%E9%AD%94%2F&host=kejiland.freewarp.eu.org&sni=kejiland.freewarp.eu.org&fp=chrome#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD31%20%7C%20%E2%AC%87%EF%B8%8F%201.1MB%2Fs",
+        "addedAt": "2025-10-09T12:37:01.089Z"
+      },
+      "metadata": {
+        "source": "amaoa"
+      }
+    },
+    {
+      "id": "479ck8kqv",
+      "type": "vless",
+      "name": "🇬🇧英国3 | ⬇️ 1.1MB/s",
+      "server": "166.62.105.43",
+      "port": 2096,
+      "protocol": "vless",
+      "settings": {
+        "id": "01997b9d-a1f7-e188-981a-c665b723cfef",
+        "network": "ws",
+        "security": "tls",
+        "sni": "kejiland.freewarp.eu.org",
+        "fp": "chrome",
+        "alpn": "",
+        "path": "/snippets&freecodes@节点狂魔/",
+        "host": "kejiland.freewarp.eu.org",
+        "encryption": "none",
+        "flow": ""
+      },
+      "extra": {
+        "raw": "vless://01997b9d-a1f7-e188-981a-c665b723cfef@166.62.105.43:2096?security=tls&type=ws&path=%2Fsnippets%26freecodes%40%E8%8A%82%E7%82%B9%E7%8B%82%E9%AD%94%2F&host=kejiland.freewarp.eu.org&sni=kejiland.freewarp.eu.org&fp=chrome#%F0%9F%87%AC%F0%9F%87%A7%E8%8B%B1%E5%9B%BD3%20%7C%20%E2%AC%87%EF%B8%8F%201.1MB%2Fs",
+        "addedAt": "2025-10-09T12:37:01.089Z"
+      },
+      "metadata": {
+        "source": "amaoa"
+      }
+    },
+    {
+      "id": "1v21znap3",
+      "type": "ss",
+      "name": "🌀其他5-VN | ⬇️ 1.1MB/s",
+      "server": "103.186.154.199",
+      "port": 38388,
+      "protocol": "shadowsocks",
+      "settings": {
+        "method": "aes-256-cfb",
+        "password": "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
+      },
+      "extra": {
+        "raw": "ss://YWVzLTI1Ni1jZmI6WG44aktkbURNMDBJZU8lIyQjZkpBTXRzRUFFVU9wSC9ZV1l0WXFERm5UMFNW@103.186.154.199:38388#%F0%9F%8C%80%E5%85%B6%E4%BB%965-VN%20%7C%20%E2%AC%87%EF%B8%8F%201.1MB%2Fs",
+        "addedAt": "2025-10-09T12:37:01.089Z"
+      },
+      "metadata": {
+        "source": "amaoa"
+      }
+    },
+    {
+      "id": "niurtcf4j",
+      "type": "vless",
+      "name": "🇺🇸美国32 | ⬇️ 1.3MB/s",
+      "server": "185.7.240.44",
+      "port": 2096,
+      "protocol": "vless",
+      "settings": {
+        "id": "12345678-1234-1234-1234-123456789123",
+        "network": "ws",
+        "security": "tls",
+        "sni": "kejiland.freewarp.eu.org",
+        "fp": "chrome",
+        "alpn": "",
+        "path": "/snippets&freecodes@节点狂魔/",
+        "host": "kejiland.freewarp.eu.org",
+        "encryption": "none",
+        "flow": ""
+      },
+      "extra": {
+        "raw": "vless://12345678-1234-1234-1234-123456789123@185.7.240.44:2096?security=tls&type=ws&path=%2Fsnippets%26freecodes%40%E8%8A%82%E7%82%B9%E7%8B%82%E9%AD%94%2F&host=kejiland.freewarp.eu.org&sni=kejiland.freewarp.eu.org&fp=chrome#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD32%20%7C%20%E2%AC%87%EF%B8%8F%201.3MB%2Fs",
+        "addedAt": "2025-10-09T12:37:01.089Z"
+      },
+      "metadata": {
+        "source": "amaoa"
+      }
+    },
+    {
+      "id": "kicrx5g7g",
+      "type": "vless",
+      "name": "🇺🇸美国33 | ⬇️ 1.2MB/s",
+      "server": "192.0.54.32",
+      "port": 2096,
+      "protocol": "vless",
+      "settings": {
+        "id": "b65f4df7-f6af-42b2-877a-cef33f21675e",
+        "network": "ws",
+        "security": "tls",
+        "sni": "kejiland.freewarp.eu.org",
+        "fp": "chrome",
+        "alpn": "",
+        "path": "/snippets",
+        "host": "kejiland.freewarp.eu.org",
+        "encryption": "none",
+        "flow": ""
+      },
+      "extra": {
+        "raw": "vless://b65f4df7-f6af-42b2-877a-cef33f21675e@192.0.54.32:2096?security=tls&type=ws&path=%2Fsnippets&host=kejiland.freewarp.eu.org&sni=kejiland.freewarp.eu.org&fp=chrome#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD33%20%7C%20%E2%AC%87%EF%B8%8F%201.2MB%2Fs",
+        "addedAt": "2025-10-09T12:37:01.089Z"
+      },
+      "metadata": {
+        "source": "amaoa"
+      }
+    },
+    {
+      "id": "ajkz56k74",
+      "type": "vless",
+      "name": "🇺🇸美国34 | ⬇️ 1.1MB/s",
+      "server": "154.197.64.43",
+      "port": 2096,
+      "protocol": "vless",
+      "settings": {
+        "id": "01997b9d-a1f7-e188-981a-c665b723cfef",
+        "network": "ws",
+        "security": "tls",
+        "sni": "kejiland.freewarp.eu.org",
+        "fp": "chrome",
+        "alpn": "",
+        "path": "/snippets&freecodes",
+        "host": "kejiland.freewarp.eu.org",
+        "encryption": "none",
+        "flow": ""
+      },
+      "extra": {
+        "raw": "vless://01997b9d-a1f7-e188-981a-c665b723cfef@154.197.64.43:2096?security=tls&type=ws&path=%2Fsnippets%26freecodes&host=kejiland.freewarp.eu.org&sni=kejiland.freewarp.eu.org&fp=chrome#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD34%20%7C%20%E2%AC%87%EF%B8%8F%201.1MB%2Fs",
+        "addedAt": "2025-10-09T12:37:01.089Z"
+      },
+      "metadata": {
+        "source": "amaoa"
+      }
+    },
+    {
+      "id": "ftwpsan1a",
+      "type": "vless",
+      "name": "🇺🇸美国35 | ⬇️ 1.4MB/s",
+      "server": "188.164.159.43",
+      "port": 2096,
+      "protocol": "vless",
+      "settings": {
+        "id": "01997b9d-a1f7-e188-981a-c665b723cfef",
+        "network": "ws",
+        "security": "tls",
+        "sni": "kejiland.freewarp.eu.org",
+        "fp": "chrome",
+        "alpn": "",
+        "path": "/snippets&freecodes@节点狂魔/",
+        "host": "kejiland.freewarp.eu.org",
+        "encryption": "none",
+        "flow": ""
+      },
+      "extra": {
+        "raw": "vless://01997b9d-a1f7-e188-981a-c665b723cfef@188.164.159.43:2096?security=tls&type=ws&path=%2Fsnippets%26freecodes%40%E8%8A%82%E7%82%B9%E7%8B%82%E9%AD%94%2F&host=kejiland.freewarp.eu.org&sni=kejiland.freewarp.eu.org&fp=chrome#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD35%20%7C%20%E2%AC%87%EF%B8%8F%201.4MB%2Fs",
+        "addedAt": "2025-10-09T12:37:01.089Z"
+      },
+      "metadata": {
+        "source": "amaoa"
+      }
+    },
+    {
+      "id": "k1h95bxbd",
+      "type": "vless",
+      "name": "🇺🇸美国36 | ⬇️ 1.1MB/s",
+      "server": "159.246.55.43",
+      "port": 2096,
+      "protocol": "vless",
+      "settings": {
+        "id": "01997b9d-a1f7-e188-981a-c665b723cfef",
+        "network": "ws",
+        "security": "tls",
+        "sni": "kejiland.freewarp.eu.org",
+        "fp": "chrome",
+        "alpn": "",
+        "path": "/snippets&freecodes@节点狂魔/",
+        "host": "kejiland.freewarp.eu.org",
+        "encryption": "none",
+        "flow": ""
+      },
+      "extra": {
+        "raw": "vless://01997b9d-a1f7-e188-981a-c665b723cfef@159.246.55.43:2096?security=tls&type=ws&path=%2Fsnippets%26freecodes%40%E8%8A%82%E7%82%B9%E7%8B%82%E9%AD%94%2F&host=kejiland.freewarp.eu.org&sni=kejiland.freewarp.eu.org&fp=chrome#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD36%20%7C%20%E2%AC%87%EF%B8%8F%201.1MB%2Fs",
+        "addedAt": "2025-10-09T12:37:01.089Z"
+      },
+      "metadata": {
+        "source": "amaoa"
+      }
+    },
+    {
+      "id": "3bci8hr99",
+      "type": "vless",
+      "name": "🇺🇸美国37 | ⬇️ 1.5MB/s",
+      "server": "5.10.214.44",
+      "port": 2096,
+      "protocol": "vless",
+      "settings": {
+        "id": "12345678-1234-1234-1234-123456789123",
+        "network": "ws",
+        "security": "tls",
+        "sni": "kejiland.freewarp.eu.org",
+        "fp": "",
+        "alpn": "",
+        "path": "/snippets",
+        "host": "kejiland.freewarp.eu.org",
+        "encryption": "none",
+        "flow": ""
+      },
+      "extra": {
+        "raw": "vless://12345678-1234-1234-1234-123456789123@5.10.214.44:2096?security=tls&type=ws&path=%2Fsnippets&host=kejiland.freewarp.eu.org&sni=kejiland.freewarp.eu.org#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD37%20%7C%20%E2%AC%87%EF%B8%8F%201.5MB%2Fs",
+        "addedAt": "2025-10-09T12:37:01.090Z"
+      },
+      "metadata": {
+        "source": "amaoa"
+      }
+    },
+    {
+      "id": "mkzv839mz",
+      "type": "trojan",
+      "name": "🇺🇸美国38 | ⬇️ 2.9MB/s",
+      "server": "36.156.102.84",
+      "port": 1572,
+      "protocol": "trojan",
+      "settings": {
+        "password": "/253bc477d4e43c209f2d427272968280",
+        "sni": "www.nintendogames.net",
+        "allowInsecure": false
+      },
+      "extra": {
+        "raw": "trojan://253bc477d4e43c209f2d427272968280@36.156.102.84:1572?sni=www.nintendogames.net#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD38%20%7C%20%E2%AC%87%EF%B8%8F%202.9MB%2Fs",
+        "addedAt": "2025-10-09T12:37:01.090Z"
+      },
+      "metadata": {
+        "source": "amaoa"
+      }
+    },
+    {
+      "id": "zr3e8mf4k",
+      "type": "vless",
+      "name": "🇺🇸美国39 | ⬇️ 1.2MB/s",
+      "server": "193.233.132.44",
+      "port": 2096,
+      "protocol": "vless",
+      "settings": {
+        "id": "12345678-1234-1234-1234-123456789123",
+        "network": "ws",
+        "security": "tls",
+        "sni": "kejiland.freewarp.eu.org",
+        "fp": "chrome",
+        "alpn": "",
+        "path": "/snippets",
+        "host": "kejiland.freewarp.eu.org",
+        "encryption": "none",
+        "flow": ""
+      },
+      "extra": {
+        "raw": "vless://12345678-1234-1234-1234-123456789123@193.233.132.44:2096?security=tls&type=ws&path=%2Fsnippets&host=kejiland.freewarp.eu.org&sni=kejiland.freewarp.eu.org&fp=chrome#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD39%20%7C%20%E2%AC%87%EF%B8%8F%201.2MB%2Fs",
+        "addedAt": "2025-10-09T12:37:01.090Z"
+      },
+      "metadata": {
+        "source": "amaoa"
+      }
+    },
+    {
+      "id": "0amjszp4w",
+      "type": "vless",
+      "name": "🇺🇸美国40 | ⬇️ 1.2MB/s",
+      "server": "185.148.105.43",
+      "port": 2096,
+      "protocol": "vless",
+      "settings": {
+        "id": "01997b9d-a1f7-e188-981a-c665b723cfef",
+        "network": "ws",
+        "security": "tls",
+        "sni": "kejiland.freewarp.eu.org",
+        "fp": "chrome",
+        "alpn": "",
+        "path": "/snippets&freecodes@节点狂魔/",
+        "host": "kejiland.freewarp.eu.org",
+        "encryption": "none",
+        "flow": ""
+      },
+      "extra": {
+        "raw": "vless://01997b9d-a1f7-e188-981a-c665b723cfef@185.148.105.43:2096?security=tls&type=ws&path=%2Fsnippets%26freecodes%40%E8%8A%82%E7%82%B9%E7%8B%82%E9%AD%94%2F&host=kejiland.freewarp.eu.org&sni=kejiland.freewarp.eu.org&fp=chrome#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD40%20%7C%20%E2%AC%87%EF%B8%8F%201.2MB%2Fs",
+        "addedAt": "2025-10-09T12:37:01.090Z"
+      },
+      "metadata": {
+        "source": "amaoa"
+      }
+    },
+    {
+      "id": "n4yg85207",
+      "type": "vless",
+      "name": "🇺🇸美国41 | ⬇️ 1.1MB/s",
+      "server": "199.181.197.32",
+      "port": 2096,
+      "protocol": "vless",
+      "settings": {
+        "id": "b65f4df7-f6af-42b2-877a-cef33f21675e",
+        "network": "ws",
+        "security": "tls",
+        "sni": "kejiland.freewarp.eu.org",
+        "fp": "",
+        "alpn": "",
+        "path": "/snippets",
+        "host": "kejiland.freewarp.eu.org",
+        "encryption": "none",
+        "flow": ""
+      },
+      "extra": {
+        "raw": "vless://b65f4df7-f6af-42b2-877a-cef33f21675e@199.181.197.32:2096?security=tls&type=ws&path=%2Fsnippets&host=kejiland.freewarp.eu.org&sni=kejiland.freewarp.eu.org#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD41%20%7C%20%E2%AC%87%EF%B8%8F%201.1MB%2Fs",
+        "addedAt": "2025-10-09T12:37:01.090Z"
+      },
+      "metadata": {
+        "source": "amaoa"
+      }
+    },
+    {
+      "id": "uju8rmhxg",
+      "type": "vless",
+      "name": "🇺🇸美国42 | ⬇️ 1.3MB/s",
+      "server": "188.244.122.44",
+      "port": 2096,
+      "protocol": "vless",
+      "settings": {
+        "id": "12345678-1234-1234-1234-123456789123",
+        "network": "ws",
+        "security": "tls",
+        "sni": "kejiland.freewarp.eu.org",
+        "fp": "",
+        "alpn": "",
+        "path": "/snippets&freecodes @节点狂魔 /",
+        "host": "kejiland.freewarp.eu.org",
+        "encryption": "none",
+        "flow": ""
+      },
+      "extra": {
+        "raw": "vless://12345678-1234-1234-1234-123456789123@188.244.122.44:2096?security=tls&type=ws&path=%2Fsnippets%26freecodes%20%40%E8%8A%82%E7%82%B9%E7%8B%82%E9%AD%94%20%2F&host=kejiland.freewarp.eu.org&sni=kejiland.freewarp.eu.org#%F0%9F%87%BA%F0%9F%87%B8%E7%BE%8E%E5%9B%BD42%20%7C%20%E2%AC%87%EF%B8%8F%201.3MB%2Fs",
+        "addedAt": "2025-10-09T12:37:01.090Z"
       },
       "metadata": {
         "source": "amaoa"
       }
     }
   ],
-  "timestamp": 1759991253213,
-  "hash": "c716d802ba9b06c33b2cb5da9d1796bb"
+  "timestamp": 1760013421090,
+  "hash": "bef0f477fa92e09bbc63990639687e4e"
 }
