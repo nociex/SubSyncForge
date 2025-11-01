@@ -1,7 +1,7 @@
 {
   "nodes": [
     {
-      "id": "dfgjm19yx",
+      "id": "w07tpc60k",
       "type": "vmess",
       "name": "🇨🇦 _CA_加拿大",
       "server": "108.181.10.17",
@@ -20,14 +20,14 @@
       },
       "extra": {
         "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HqPCfh6YgX0NBX+WKoOaLv+WkpyIsImFkZCI6IjEwOC4xODEuMTAuMTciLCJwb3J0IjoiODAiLCJ0eXBlIjoibm9uZSIsImlkIjoiNDc0ZTg2ODAtNzAxZi0xMWVlLWI0MzYtMjA1YzZkNWY1ZDc4IiwiYWlkIjoiMCIsIm5ldCI6IndzIiwicGF0aCI6Ii8iLCJob3N0IjoiIiwidGxzIjoiIn0=",
-        "addedAt": "2025-11-01T06:24:35.945Z"
+        "addedAt": "2025-11-01T12:33:18.782Z"
       },
       "metadata": {
         "source": "v2ray"
       }
     },
     {
-      "id": "1o2vnrenn",
+      "id": "sm9sk8716",
       "type": "vmess",
       "name": "🇨🇳 _TW_台湾->🇺🇸_US_美国",
       "server": "107.167.182.230",
@@ -46,40 +46,42 @@
       },
       "extra": {
         "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HqPCfh7MgX1RXX+WPsOa5vi0+8J+HuvCfh7hfVVNf576O5Zu9IiwiYWRkIjoiMTA3LjE2Ny4xODIuMjMwIiwicG9ydCI6IjgwIiwidHlwZSI6Im5vbmUiLCJpZCI6ImVmY2I3ZDdjLWM1ODItNDZmNS1lZWZmLTBlNTUzMzQyNTI4ZCIsImFpZCI6IjAiLCJuZXQiOiJ3cyIsInBhdGgiOiIvdGdAaGthYTAiLCJob3N0IjoiIiwidGxzIjoiIn0=",
-        "addedAt": "2025-11-01T06:24:35.945Z"
+        "addedAt": "2025-11-01T12:33:18.782Z"
       },
       "metadata": {
         "source": "v2ray"
       }
     },
     {
-      "id": "8s3mxqqw8",
+      "id": "voqflmt2h",
       "type": "vmess",
-      "name": "🇨🇳 北京市 移动",
-      "server": "36.133.73.36",
-      "port": 11819,
+      "name": "🇨🇳 中国 V2CROSS.COM",
+      "server": "v9.heduian.link",
+      "port": 30809,
       "protocol": "vmess",
       "settings": {
-        "id": "de32752c-0661-467e-82d3-35bc740a787f",
-        "alterId": 0,
+        "id": "cbb3f877-d1fb-344c-87a9-d153bffd5484",
+        "alterId": 2,
         "security": "auto",
-        "network": "tcp",
-        "ws": false,
-        "wsPath": "/",
-        "wsHeaders": {},
+        "network": "ws",
+        "ws": true,
+        "wsPath": "/oooo",
+        "wsHeaders": {
+          "Host": "baidu.com"
+        },
         "tls": false,
-        "serverName": ""
+        "serverName": "baidu.com"
       },
       "extra": {
-        "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HqPCfh7Mg5YyX5Lqs5biCIOenu+WKqCIsImFkZCI6IjM2LjEzMy43My4zNiIsInBvcnQiOiIxMTgxOSIsInR5cGUiOiJub25lIiwiaWQiOiJkZTMyNzUyYy0wNjYxLTQ2N2UtODJkMy0zNWJjNzQwYTc4N2YiLCJhaWQiOiIwIiwibmV0IjoidGNwIiwicGF0aCI6Ii8iLCJob3N0IjoiIiwidGxzIjoiIn0=",
-        "addedAt": "2025-11-01T06:24:35.945Z"
+        "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HqPCfh7Mg5Lit5Zu9IFYyQ1JPU1MuQ09NIiwiYWRkIjoidjkuaGVkdWlhbi5saW5rIiwicG9ydCI6IjMwODA5IiwidHlwZSI6Im5vbmUiLCJpZCI6ImNiYjNmODc3LWQxZmItMzQ0Yy04N2E5LWQxNTNiZmZkNTQ4NCIsImFpZCI6IjIiLCJuZXQiOiJ3cyIsInBhdGgiOiIvb29vbyIsImhvc3QiOiJiYWlkdS5jb20iLCJ0bHMiOiIifQ==",
+        "addedAt": "2025-11-01T12:33:18.782Z"
       },
       "metadata": {
         "source": "v2ray"
       }
     },
     {
-      "id": "ncqjn82sr",
+      "id": "1981bwrub",
       "type": "vmess",
       "name": "🇩🇪 _US_美国->🇩🇪_DE_德国",
       "server": "flkf2.shabijichang.com",
@@ -100,14 +102,14 @@
       },
       "extra": {
         "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HqfCfh6ogX1VTX+e+juWbvS0+8J+HqfCfh6pfREVf5b635Zu9IiwiYWRkIjoiZmxrZjIuc2hhYmlqaWNoYW5nLmNvbSIsInBvcnQiOiI4MCIsInR5cGUiOiJub25lIiwiaWQiOiJjNDU4Njk1ZC02OTA4LTQ1YzMtOTUxMi1lMGM0NjQxODQ1NGMiLCJhaWQiOiIwIiwibmV0Ijoid3MiLCJwYXRoIjoiLyIsImhvc3QiOiJmbGtmMi5zaGFiaWppY2hhbmcuY29tIiwidGxzIjoiIn0=",
-        "addedAt": "2025-11-01T06:24:35.945Z"
+        "addedAt": "2025-11-01T12:33:18.782Z"
       },
       "metadata": {
         "source": "v2ray"
       }
     },
     {
-      "id": "eypug54s1",
+      "id": "3okwl52a0",
       "type": "vmess",
       "name": "🇬🇧 _US_美国->🇬🇧_GB_英国_1",
       "server": "mrb2.shabijichang.com",
@@ -128,14 +130,14 @@
       },
       "extra": {
         "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrPCfh6cgX1VTX+e+juWbvS0+8J+HrPCfh6dfR0Jf6Iux5Zu9XzEiLCJhZGQiOiJtcmIyLnNoYWJpamljaGFuZy5jb20iLCJwb3J0IjoiODAiLCJ0eXBlIjoibm9uZSIsImlkIjoiYzQ1ODY5NWQtNjkwOC00NWMzLTk1MTItZTBjNDY0MTg0NTRjIiwiYWlkIjoiMCIsIm5ldCI6IndzIiwicGF0aCI6Ii8iLCJob3N0IjoibXJiMi5zaGFiaWppY2hhbmcuY29tIiwidGxzIjoiIn0=",
-        "addedAt": "2025-11-01T06:24:35.945Z"
+        "addedAt": "2025-11-01T12:33:18.782Z"
       },
       "metadata": {
         "source": "v2ray"
       }
     },
     {
-      "id": "r4mxsdejf",
+      "id": "re4n7r3tx",
       "type": "vmess",
       "name": "🇬🇧 _US_美国->🇬🇧_GB_英国_2",
       "server": "ld2.shabijichang.com",
@@ -156,49 +158,21 @@
       },
       "extra": {
         "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrPCfh6cgX1VTX+e+juWbvS0+8J+HrPCfh6dfR0Jf6Iux5Zu9XzIiLCJhZGQiOiJsZDIuc2hhYmlqaWNoYW5nLmNvbSIsInBvcnQiOiI4MCIsInR5cGUiOiJub25lIiwiaWQiOiJjNDU4Njk1ZC02OTA4LTQ1YzMtOTUxMi1lMGM0NjQxODQ1NGMiLCJhaWQiOiIwIiwibmV0Ijoid3MiLCJwYXRoIjoiLyIsImhvc3QiOiJsZDIuc2hhYmlqaWNoYW5nLmNvbSIsInRscyI6IiJ9",
-        "addedAt": "2025-11-01T06:24:35.945Z"
+        "addedAt": "2025-11-01T12:33:18.782Z"
       },
       "metadata": {
         "source": "v2ray"
       }
     },
     {
-      "id": "x1ixtbhj0",
+      "id": "t9gkh9q8e",
       "type": "vmess",
       "name": "🇭🇰 香港 电讯盈科有限公司",
-      "server": "f0364aea-t13gg0-t1rksu-1ssud.hk3.p5pv.com",
+      "server": "5f0f42e9-sv4n40-t7udc0-1pqhp.hk3.p5pv.com",
       "port": 80,
       "protocol": "vmess",
       "settings": {
-        "id": "e6aa39b6-f0b5-11ef-bca1-f23c91cfbbc9",
-        "alterId": 2,
-        "security": "auto",
-        "network": "ws",
-        "ws": true,
-        "wsPath": "/",
-        "wsHeaders": {
-          "Host": "f0364aea-t13gg0-t1rksu-1ssud.hk3.p5pv.com"
-        },
-        "tls": false,
-        "serverName": "f0364aea-t13gg0-t1rksu-1ssud.hk3.p5pv.com"
-      },
-      "extra": {
-        "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrfCfh7Ag6aaZ5rivIOeUteiur+ebiOenkeaciemZkOWFrOWPuCIsImFkZCI6ImYwMzY0YWVhLXQxM2dnMC10MXJrc3UtMXNzdWQuaGszLnA1cHYuY29tIiwicG9ydCI6IjgwIiwidHlwZSI6Im5vbmUiLCJpZCI6ImU2YWEzOWI2LWYwYjUtMTFlZi1iY2ExLWYyM2M5MWNmYmJjOSIsImFpZCI6IjIiLCJuZXQiOiJ3cyIsInBhdGgiOiIvIiwiaG9zdCI6ImYwMzY0YWVhLXQxM2dnMC10MXJrc3UtMXNzdWQuaGszLnA1cHYuY29tIiwidGxzIjoiIn0=",
-        "addedAt": "2025-11-01T06:24:35.945Z"
-      },
-      "metadata": {
-        "source": "v2ray"
-      }
-    },
-    {
-      "id": "ck6iutmvt",
-      "type": "vmess",
-      "name": "🇭🇰 香港 电讯盈科有限公司",
-      "server": "25b98d06-sv0xs0-suzz2n-vmdo.hk3.p5pv.com",
-      "port": 80,
-      "protocol": "vmess",
-      "settings": {
-        "id": "24e32978-4858-11eb-8684-f23c913c8d2b",
+        "id": "b02327ac-a49a-11ef-a673-f23c913c8d2b",
         "alterId": 2,
         "security": "auto",
         "network": "ws",
@@ -211,22 +185,22 @@
         "serverName": "broadcastlv.chat.bilibili.com"
       },
       "extra": {
-        "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrfCfh7Ag6aaZ5rivIOeUteiur+ebiOenkeaciemZkOWFrOWPuCIsImFkZCI6IjI1Yjk4ZDA2LXN2MHhzMC1zdXp6Mm4tdm1kby5oazMucDVwdi5jb20iLCJwb3J0IjoiODAiLCJ0eXBlIjoibm9uZSIsImlkIjoiMjRlMzI5NzgtNDg1OC0xMWViLTg2ODQtZjIzYzkxM2M4ZDJiIiwiYWlkIjoiMiIsIm5ldCI6IndzIiwicGF0aCI6Ii8iLCJob3N0IjoiYnJvYWRjYXN0bHYuY2hhdC5iaWxpYmlsaS5jb20iLCJ0bHMiOiIifQ==",
-        "addedAt": "2025-11-01T06:24:35.945Z"
+        "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrfCfh7Ag6aaZ5rivIOeUteiur+ebiOenkeaciemZkOWFrOWPuCIsImFkZCI6IjVmMGY0MmU5LXN2NG40MC10N3VkYzAtMXBxaHAuaGszLnA1cHYuY29tIiwicG9ydCI6IjgwIiwidHlwZSI6Im5vbmUiLCJpZCI6ImIwMjMyN2FjLWE0OWEtMTFlZi1hNjczLWYyM2M5MTNjOGQyYiIsImFpZCI6IjIiLCJuZXQiOiJ3cyIsInBhdGgiOiIvIiwiaG9zdCI6ImJyb2FkY2FzdGx2LmNoYXQuYmlsaWJpbGkuY29tIiwidGxzIjoiIn0=",
+        "addedAt": "2025-11-01T12:33:18.782Z"
       },
       "metadata": {
         "source": "v2ray"
       }
     },
     {
-      "id": "1zf3qsipn",
+      "id": "toz4wjr1i",
       "type": "vmess",
       "name": "🇭🇰 香港 电讯盈科有限公司",
-      "server": "0971c36b-sv2sg0-t61ki5-1smhu.hk.p5pv.com",
+      "server": "228c7ba5-sz8sg0-szi8d6-1ro8s.hk.p5pv.com",
       "port": 80,
       "protocol": "vmess",
       "settings": {
-        "id": "62f2374c-891b-11ef-a3f6-f23c9164ca5d",
+        "id": "a18ef18e-293a-11ef-b76e-f23c91cfbbc9",
         "alterId": 2,
         "security": "auto",
         "network": "ws",
@@ -239,22 +213,22 @@
         "serverName": "broadcastlv.chat.bilibili.com"
       },
       "extra": {
-        "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrfCfh7Ag6aaZ5rivIOeUteiur+ebiOenkeaciemZkOWFrOWPuCIsImFkZCI6IjA5NzFjMzZiLXN2MnNnMC10NjFraTUtMXNtaHUuaGsucDVwdi5jb20iLCJwb3J0IjoiODAiLCJ0eXBlIjoibm9uZSIsImlkIjoiNjJmMjM3NGMtODkxYi0xMWVmLWEzZjYtZjIzYzkxNjRjYTVkIiwiYWlkIjoiMiIsIm5ldCI6IndzIiwicGF0aCI6Ii8iLCJob3N0IjoiYnJvYWRjYXN0bHYuY2hhdC5iaWxpYmlsaS5jb20iLCJ0bHMiOiIifQ==",
-        "addedAt": "2025-11-01T06:24:35.945Z"
+        "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrfCfh7Ag6aaZ5rivIOeUteiur+ebiOenkeaciemZkOWFrOWPuCIsImFkZCI6IjIyOGM3YmE1LXN6OHNnMC1zemk4ZDYtMXJvOHMuaGsucDVwdi5jb20iLCJwb3J0IjoiODAiLCJ0eXBlIjoibm9uZSIsImlkIjoiYTE4ZWYxOGUtMjkzYS0xMWVmLWI3NmUtZjIzYzkxY2ZiYmM5IiwiYWlkIjoiMiIsIm5ldCI6IndzIiwicGF0aCI6Ii8iLCJob3N0IjoiYnJvYWRjYXN0bHYuY2hhdC5iaWxpYmlsaS5jb20iLCJ0bHMiOiIifQ==",
+        "addedAt": "2025-11-01T12:33:18.782Z"
       },
       "metadata": {
         "source": "v2ray"
       }
     },
     {
-      "id": "hysduziut",
+      "id": "j94yhkwgj",
       "type": "vmess",
       "name": "🇭🇰 香港 电讯盈科有限公司",
-      "server": "12988683-sv2sg0-t2whio-1jcwu.hk3.p5pv.com",
+      "server": "c7f55f8c-sv2sg0-t15jkc-eyem.hk3.p5pv.com",
       "port": 80,
       "protocol": "vmess",
       "settings": {
-        "id": "f93486ce-cc84-11ed-9e98-f23c913c8d2b",
+        "id": "64617ed2-4823-11ef-9f2d-f23c9164ca5d",
         "alterId": 2,
         "security": "auto",
         "network": "ws",
@@ -267,50 +241,22 @@
         "serverName": "broadcastlv.chat.bilibili.com"
       },
       "extra": {
-        "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrfCfh7Ag6aaZ5rivIOeUteiur+ebiOenkeaciemZkOWFrOWPuCIsImFkZCI6IjEyOTg4NjgzLXN2MnNnMC10MndoaW8tMWpjd3UuaGszLnA1cHYuY29tIiwicG9ydCI6IjgwIiwidHlwZSI6Im5vbmUiLCJpZCI6ImY5MzQ4NmNlLWNjODQtMTFlZC05ZTk4LWYyM2M5MTNjOGQyYiIsImFpZCI6IjIiLCJuZXQiOiJ3cyIsInBhdGgiOiIvIiwiaG9zdCI6ImJyb2FkY2FzdGx2LmNoYXQuYmlsaWJpbGkuY29tIiwidGxzIjoiIn0=",
-        "addedAt": "2025-11-01T06:24:35.945Z"
+        "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrfCfh7Ag6aaZ5rivIOeUteiur+ebiOenkeaciemZkOWFrOWPuCIsImFkZCI6ImM3ZjU1ZjhjLXN2MnNnMC10MTVqa2MtZXllbS5oazMucDVwdi5jb20iLCJwb3J0IjoiODAiLCJ0eXBlIjoibm9uZSIsImlkIjoiNjQ2MTdlZDItNDgyMy0xMWVmLTlmMmQtZjIzYzkxNjRjYTVkIiwiYWlkIjoiMiIsIm5ldCI6IndzIiwicGF0aCI6Ii8iLCJob3N0IjoiYnJvYWRjYXN0bHYuY2hhdC5iaWxpYmlsaS5jb20iLCJ0bHMiOiIifQ==",
+        "addedAt": "2025-11-01T12:33:18.782Z"
       },
       "metadata": {
         "source": "v2ray"
       }
     },
     {
-      "id": "4wdco5wrz",
+      "id": "lnsxeug94",
       "type": "vmess",
       "name": "🇭🇰 香港 电讯盈科有限公司",
-      "server": "5d49c948-suvds0-tb6yrr-1tfcw.hk.p5pv.com",
+      "server": "6bbeaaf6-sv4n40-t8tsp0-1szmi.hk3.p5pv.com",
       "port": 80,
       "protocol": "vmess",
       "settings": {
-        "id": "1282cc1a-f426-11ef-9495-f23c91cfbbc9",
-        "alterId": 2,
-        "security": "auto",
-        "network": "ws",
-        "ws": true,
-        "wsPath": "/",
-        "wsHeaders": {
-          "Host": "5d49c948-suvds0-tb6yrr-1tfcw.hk.p5pv.com"
-        },
-        "tls": false,
-        "serverName": "5d49c948-suvds0-tb6yrr-1tfcw.hk.p5pv.com"
-      },
-      "extra": {
-        "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrfCfh7Ag6aaZ5rivIOeUteiur+ebiOenkeaciemZkOWFrOWPuCIsImFkZCI6IjVkNDljOTQ4LXN1dmRzMC10YjZ5cnItMXRmY3cuaGsucDVwdi5jb20iLCJwb3J0IjoiODAiLCJ0eXBlIjoibm9uZSIsImlkIjoiMTI4MmNjMWEtZjQyNi0xMWVmLTk0OTUtZjIzYzkxY2ZiYmM5IiwiYWlkIjoiMiIsIm5ldCI6IndzIiwicGF0aCI6Ii8iLCJob3N0IjoiNWQ0OWM5NDgtc3V2ZHMwLXRiNnlyci0xdGZjdy5oay5wNXB2LmNvbSIsInRscyI6IiJ9",
-        "addedAt": "2025-11-01T06:24:35.945Z"
-      },
-      "metadata": {
-        "source": "v2ray"
-      }
-    },
-    {
-      "id": "2jbhjmzwf",
-      "type": "vmess",
-      "name": "🇭🇰 香港 电讯盈科有限公司",
-      "server": "6a4f8b94-t13gg0-t6fl0c-1r7od.hk.p5pv.com",
-      "port": 80,
-      "protocol": "vmess",
-      "settings": {
-        "id": "6d56436c-150d-11f0-b0c8-f23c913c8d2b",
+        "id": "ba151628-b3a2-11ef-bdb9-f23c91cfbbc9",
         "alterId": 2,
         "security": "auto",
         "network": "ws",
@@ -323,22 +269,22 @@
         "serverName": "broadcastlv.chat.bilibili.com"
       },
       "extra": {
-        "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrfCfh7Ag6aaZ5rivIOeUteiur+ebiOenkeaciemZkOWFrOWPuCIsImFkZCI6IjZhNGY4Yjk0LXQxM2dnMC10NmZsMGMtMXI3b2QuaGsucDVwdi5jb20iLCJwb3J0IjoiODAiLCJ0eXBlIjoibm9uZSIsImlkIjoiNmQ1NjQzNmMtMTUwZC0xMWYwLWIwYzgtZjIzYzkxM2M4ZDJiIiwiYWlkIjoiMiIsIm5ldCI6IndzIiwicGF0aCI6Ii8iLCJob3N0IjoiYnJvYWRjYXN0bHYuY2hhdC5iaWxpYmlsaS5jb20iLCJ0bHMiOiIifQ==",
-        "addedAt": "2025-11-01T06:24:35.945Z"
+        "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrfCfh7Ag6aaZ5rivIOeUteiur+ebiOenkeaciemZkOWFrOWPuCIsImFkZCI6IjZiYmVhYWY2LXN2NG40MC10OHRzcDAtMXN6bWkuaGszLnA1cHYuY29tIiwicG9ydCI6IjgwIiwidHlwZSI6Im5vbmUiLCJpZCI6ImJhMTUxNjI4LWIzYTItMTFlZi1iZGI5LWYyM2M5MWNmYmJjOSIsImFpZCI6IjIiLCJuZXQiOiJ3cyIsInBhdGgiOiIvIiwiaG9zdCI6ImJyb2FkY2FzdGx2LmNoYXQuYmlsaWJpbGkuY29tIiwidGxzIjoiIn0=",
+        "addedAt": "2025-11-01T12:33:18.782Z"
       },
       "metadata": {
         "source": "v2ray"
       }
     },
     {
-      "id": "q505lljts",
+      "id": "3j950pn1v",
       "type": "vmess",
       "name": "🇭🇰 香港 电讯盈科有限公司",
-      "server": "7f346235-sv4n40-t76x2i-wj6v.hk3.p5pv.com",
+      "server": "417739a6-sv2sg0-tb36ag-1jfq7.hk.p5pv.com",
       "port": 80,
       "protocol": "vmess",
       "settings": {
-        "id": "847c03b2-0a9d-11eb-a8bf-f23c91cfbbc9",
+        "id": "baa46fd6-63c1-11ed-8ea9-f23c913c8d2b",
         "alterId": 2,
         "security": "auto",
         "network": "ws",
@@ -351,22 +297,22 @@
         "serverName": "broadcastlv.chat.bilibili.com"
       },
       "extra": {
-        "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrfCfh7Ag6aaZ5rivIOeUteiur+ebiOenkeaciemZkOWFrOWPuCIsImFkZCI6IjdmMzQ2MjM1LXN2NG40MC10NzZ4Mmktd2o2di5oazMucDVwdi5jb20iLCJwb3J0IjoiODAiLCJ0eXBlIjoibm9uZSIsImlkIjoiODQ3YzAzYjItMGE5ZC0xMWViLWE4YmYtZjIzYzkxY2ZiYmM5IiwiYWlkIjoiMiIsIm5ldCI6IndzIiwicGF0aCI6Ii8iLCJob3N0IjoiYnJvYWRjYXN0bHYuY2hhdC5iaWxpYmlsaS5jb20iLCJ0bHMiOiIifQ==",
-        "addedAt": "2025-11-01T06:24:35.945Z"
+        "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrfCfh7Ag6aaZ5rivIOeUteiur+ebiOenkeaciemZkOWFrOWPuCIsImFkZCI6IjQxNzczOWE2LXN2MnNnMC10YjM2YWctMWpmcTcuaGsucDVwdi5jb20iLCJwb3J0IjoiODAiLCJ0eXBlIjoibm9uZSIsImlkIjoiYmFhNDZmZDYtNjNjMS0xMWVkLThlYTktZjIzYzkxM2M4ZDJiIiwiYWlkIjoiMiIsIm5ldCI6IndzIiwicGF0aCI6Ii8iLCJob3N0IjoiYnJvYWRjYXN0bHYuY2hhdC5iaWxpYmlsaS5jb20iLCJ0bHMiOiIifQ==",
+        "addedAt": "2025-11-01T12:33:18.782Z"
       },
       "metadata": {
         "source": "v2ray"
       }
     },
     {
-      "id": "bnq84g66u",
+      "id": "kefijwi49",
       "type": "vmess",
       "name": "🇭🇰 香港 电讯盈科有限公司",
-      "server": "266007c7-sv4n40-syu0n5-1hd7v.hk3.p5pv.com",
+      "server": "6346963b-t15b40-taklwz-12bd.hk.p5pv.com",
       "port": 80,
       "protocol": "vmess",
       "settings": {
-        "id": "f73c64bc-9e8c-11ec-bd7c-f23c913c8d2b",
+        "id": "ea76ae7e-ea95-11ef-8b73-f23c91cfbbc9",
         "alterId": 2,
         "security": "auto",
         "network": "ws",
@@ -379,50 +325,22 @@
         "serverName": "broadcastlv.chat.bilibili.com"
       },
       "extra": {
-        "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrfCfh7Ag6aaZ5rivIOeUteiur+ebiOenkeaciemZkOWFrOWPuCIsImFkZCI6IjI2NjAwN2M3LXN2NG40MC1zeXUwbjUtMWhkN3YuaGszLnA1cHYuY29tIiwicG9ydCI6IjgwIiwidHlwZSI6Im5vbmUiLCJpZCI6ImY3M2M2NGJjLTllOGMtMTFlYy1iZDdjLWYyM2M5MTNjOGQyYiIsImFpZCI6IjIiLCJuZXQiOiJ3cyIsInBhdGgiOiIvIiwiaG9zdCI6ImJyb2FkY2FzdGx2LmNoYXQuYmlsaWJpbGkuY29tIiwidGxzIjoiIn0=",
-        "addedAt": "2025-11-01T06:24:35.945Z"
+        "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrfCfh7Ag6aaZ5rivIOeUteiur+ebiOenkeaciemZkOWFrOWPuCIsImFkZCI6IjYzNDY5NjNiLXQxNWI0MC10YWtsd3otMTJiZC5oay5wNXB2LmNvbSIsInBvcnQiOiI4MCIsInR5cGUiOiJub25lIiwiaWQiOiJlYTc2YWU3ZS1lYTk1LTExZWYtOGI3My1mMjNjOTFjZmJiYzkiLCJhaWQiOiIyIiwibmV0Ijoid3MiLCJwYXRoIjoiLyIsImhvc3QiOiJicm9hZGNhc3Rsdi5jaGF0LmJpbGliaWxpLmNvbSIsInRscyI6IiJ9",
+        "addedAt": "2025-11-01T12:33:18.782Z"
       },
       "metadata": {
         "source": "v2ray"
       }
     },
     {
-      "id": "n4jtfaigu",
+      "id": "mqjawrii7",
       "type": "vmess",
       "name": "🇭🇰 香港 电讯盈科有限公司",
-      "server": "b1d0b8c3-swkhs0-syfwbx-1k0yf.hk.p5pv.com",
+      "server": "1b6c49f6-sv2sg0-tcmken-19les.hk3.p5pv.com",
       "port": 80,
       "protocol": "vmess",
       "settings": {
-        "id": "9cc3c03e-21fd-11ee-a642-f23c91369f2d",
-        "alterId": 2,
-        "security": "auto",
-        "network": "ws",
-        "ws": true,
-        "wsPath": "/",
-        "wsHeaders": {
-          "Host": "b1d0b8c3-swkhs0-syfwbx-1k0yf.hk.p5pv.com"
-        },
-        "tls": false,
-        "serverName": "b1d0b8c3-swkhs0-syfwbx-1k0yf.hk.p5pv.com"
-      },
-      "extra": {
-        "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrfCfh7Ag6aaZ5rivIOeUteiur+ebiOenkeaciemZkOWFrOWPuCIsImFkZCI6ImIxZDBiOGMzLXN3a2hzMC1zeWZ3YngtMWsweWYuaGsucDVwdi5jb20iLCJwb3J0IjoiODAiLCJ0eXBlIjoibm9uZSIsImlkIjoiOWNjM2MwM2UtMjFmZC0xMWVlLWE2NDItZjIzYzkxMzY5ZjJkIiwiYWlkIjoiMiIsIm5ldCI6IndzIiwicGF0aCI6Ii8iLCJob3N0IjoiYjFkMGI4YzMtc3draHMwLXN5ZndieC0xazB5Zi5oay5wNXB2LmNvbSIsInRscyI6IiJ9",
-        "addedAt": "2025-11-01T06:24:35.945Z"
-      },
-      "metadata": {
-        "source": "v2ray"
-      }
-    },
-    {
-      "id": "xdmrvrcfx",
-      "type": "vmess",
-      "name": "🇭🇰 香港 电讯盈科有限公司",
-      "server": "c85c9054-t13gg0-t4ixjm-1hhyy.hk3.p5pv.com",
-      "port": 80,
-      "protocol": "vmess",
-      "settings": {
-        "id": "c594c7ec-8b10-11ef-a2b8-f23c9164ca5d",
+        "id": "d095ecc6-7b69-11eb-b77b-f23c913c8d2b",
         "alterId": 2,
         "security": "auto",
         "network": "ws",
@@ -435,22 +353,22 @@
         "serverName": "broadcastlv.chat.bilibili.com"
       },
       "extra": {
-        "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrfCfh7Ag6aaZ5rivIOeUteiur+ebiOenkeaciemZkOWFrOWPuCIsImFkZCI6ImM4NWM5MDU0LXQxM2dnMC10NGl4am0tMWhoeXkuaGszLnA1cHYuY29tIiwicG9ydCI6IjgwIiwidHlwZSI6Im5vbmUiLCJpZCI6ImM1OTRjN2VjLThiMTAtMTFlZi1hMmI4LWYyM2M5MTY0Y2E1ZCIsImFpZCI6IjIiLCJuZXQiOiJ3cyIsInBhdGgiOiIvIiwiaG9zdCI6ImJyb2FkY2FzdGx2LmNoYXQuYmlsaWJpbGkuY29tIiwidGxzIjoiIn0=",
-        "addedAt": "2025-11-01T06:24:35.945Z"
+        "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrfCfh7Ag6aaZ5rivIOeUteiur+ebiOenkeaciemZkOWFrOWPuCIsImFkZCI6IjFiNmM0OWY2LXN2MnNnMC10Y21rZW4tMTlsZXMuaGszLnA1cHYuY29tIiwicG9ydCI6IjgwIiwidHlwZSI6Im5vbmUiLCJpZCI6ImQwOTVlY2M2LTdiNjktMTFlYi1iNzdiLWYyM2M5MTNjOGQyYiIsImFpZCI6IjIiLCJuZXQiOiJ3cyIsInBhdGgiOiIvIiwiaG9zdCI6ImJyb2FkY2FzdGx2LmNoYXQuYmlsaWJpbGkuY29tIiwidGxzIjoiIn0=",
+        "addedAt": "2025-11-01T12:33:18.782Z"
       },
       "metadata": {
         "source": "v2ray"
       }
     },
     {
-      "id": "ratc47qhi",
+      "id": "qvh0al92z",
       "type": "vmess",
       "name": "🇭🇰 香港 电讯盈科有限公司",
-      "server": "cf6a54ef-sv2sg0-swxjgn-1la2q.hk.p5pv.com",
+      "server": "0613ae96-sv2sg0-svim0o-1slop.hk3.p5pv.com",
       "port": 80,
       "protocol": "vmess",
       "settings": {
-        "id": "431026c8-7397-11ed-a8bf-f23c91cfbbc9",
+        "id": "520b9126-9870-11ef-81b0-f23c9164ca5d",
         "alterId": 2,
         "security": "auto",
         "network": "ws",
@@ -463,22 +381,22 @@
         "serverName": "broadcastlv.chat.bilibili.com"
       },
       "extra": {
-        "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrfCfh7Ag6aaZ5rivIOeUteiur+ebiOenkeaciemZkOWFrOWPuCIsImFkZCI6ImNmNmE1NGVmLXN2MnNnMC1zd3hqZ24tMWxhMnEuaGsucDVwdi5jb20iLCJwb3J0IjoiODAiLCJ0eXBlIjoibm9uZSIsImlkIjoiNDMxMDI2YzgtNzM5Ny0xMWVkLWE4YmYtZjIzYzkxY2ZiYmM5IiwiYWlkIjoiMiIsIm5ldCI6IndzIiwicGF0aCI6Ii8iLCJob3N0IjoiYnJvYWRjYXN0bHYuY2hhdC5iaWxpYmlsaS5jb20iLCJ0bHMiOiIifQ==",
-        "addedAt": "2025-11-01T06:24:35.945Z"
+        "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrfCfh7Ag6aaZ5rivIOeUteiur+ebiOenkeaciemZkOWFrOWPuCIsImFkZCI6IjA2MTNhZTk2LXN2MnNnMC1zdmltMG8tMXNsb3AuaGszLnA1cHYuY29tIiwicG9ydCI6IjgwIiwidHlwZSI6Im5vbmUiLCJpZCI6IjUyMGI5MTI2LTk4NzAtMTFlZi04MWIwLWYyM2M5MTY0Y2E1ZCIsImFpZCI6IjIiLCJuZXQiOiJ3cyIsInBhdGgiOiIvIiwiaG9zdCI6ImJyb2FkY2FzdGx2LmNoYXQuYmlsaWJpbGkuY29tIiwidGxzIjoiIn0=",
+        "addedAt": "2025-11-01T12:33:18.782Z"
       },
       "metadata": {
         "source": "v2ray"
       }
     },
     {
-      "id": "2plzxek4f",
+      "id": "b1rpozief",
       "type": "vmess",
       "name": "🇭🇰 香港 电讯盈科有限公司",
-      "server": "c6008c16-sydb40-tgzvop-hns7.hk.p5pv.com",
+      "server": "a7cf5f1e-sva740-tc67m2-1tjc4.hk3.p5pv.com",
       "port": 80,
       "protocol": "vmess",
       "settings": {
-        "id": "6857f1bc-f27b-11ea-87ad-f23c913c8d2b",
+        "id": "fac704ae-0304-11f0-a2ef-f23c91cfbbc9",
         "alterId": 2,
         "security": "auto",
         "network": "ws",
@@ -491,550 +409,18 @@
         "serverName": "broadcastlv.chat.bilibili.com"
       },
       "extra": {
-        "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrfCfh7Ag6aaZ5rivIOeUteiur+ebiOenkeaciemZkOWFrOWPuCIsImFkZCI6ImM2MDA4YzE2LXN5ZGI0MC10Z3p2b3AtaG5zNy5oay5wNXB2LmNvbSIsInBvcnQiOiI4MCIsInR5cGUiOiJub25lIiwiaWQiOiI2ODU3ZjFiYy1mMjdiLTExZWEtODdhZC1mMjNjOTEzYzhkMmIiLCJhaWQiOiIyIiwibmV0Ijoid3MiLCJwYXRoIjoiLyIsImhvc3QiOiJicm9hZGNhc3Rsdi5jaGF0LmJpbGliaWxpLmNvbSIsInRscyI6IiJ9",
-        "addedAt": "2025-11-01T06:24:35.945Z"
+        "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrfCfh7Ag6aaZ5rivIOeUteiur+ebiOenkeaciemZkOWFrOWPuCIsImFkZCI6ImE3Y2Y1ZjFlLXN2YTc0MC10YzY3bTItMXRqYzQuaGszLnA1cHYuY29tIiwicG9ydCI6IjgwIiwidHlwZSI6Im5vbmUiLCJpZCI6ImZhYzcwNGFlLTAzMDQtMTFmMC1hMmVmLWYyM2M5MWNmYmJjOSIsImFpZCI6IjIiLCJuZXQiOiJ3cyIsInBhdGgiOiIvIiwiaG9zdCI6ImJyb2FkY2FzdGx2LmNoYXQuYmlsaWJpbGkuY29tIiwidGxzIjoiIn0=",
+        "addedAt": "2025-11-01T12:33:18.782Z"
       },
       "metadata": {
         "source": "v2ray"
       }
     },
     {
-      "id": "3f015fs1w",
+      "id": "nw9e4xd0t",
       "type": "vmess",
       "name": "🇭🇰 香港 电讯盈科有限公司",
-      "server": "1fee460c-sv6hs0-tbcla6-194tt.hk.p5pv.com",
-      "port": 80,
-      "protocol": "vmess",
-      "settings": {
-        "id": "602e99aa-718d-11eb-b77b-f23c913c8d2b",
-        "alterId": 2,
-        "security": "auto",
-        "network": "ws",
-        "ws": true,
-        "wsPath": "/",
-        "wsHeaders": {
-          "Host": "broadcastlv.chat.bilibili.com"
-        },
-        "tls": false,
-        "serverName": "broadcastlv.chat.bilibili.com"
-      },
-      "extra": {
-        "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrfCfh7Ag6aaZ5rivIOeUteiur+ebiOenkeaciemZkOWFrOWPuCIsImFkZCI6IjFmZWU0NjBjLXN2NmhzMC10YmNsYTYtMTk0dHQuaGsucDVwdi5jb20iLCJwb3J0IjoiODAiLCJ0eXBlIjoibm9uZSIsImlkIjoiNjAyZTk5YWEtNzE4ZC0xMWViLWI3N2ItZjIzYzkxM2M4ZDJiIiwiYWlkIjoiMiIsIm5ldCI6IndzIiwicGF0aCI6Ii8iLCJob3N0IjoiYnJvYWRjYXN0bHYuY2hhdC5iaWxpYmlsaS5jb20iLCJ0bHMiOiIifQ==",
-        "addedAt": "2025-11-01T06:24:35.945Z"
-      },
-      "metadata": {
-        "source": "v2ray"
-      }
-    },
-    {
-      "id": "fo3gu0woo",
-      "type": "vmess",
-      "name": "🇭🇰 香港 电讯盈科有限公司",
-      "server": "v10.heduian.link",
-      "port": 30807,
-      "protocol": "vmess",
-      "settings": {
-        "id": "cbb3f877-d1fb-344c-87a9-d153bffd5484",
-        "alterId": 2,
-        "security": "auto",
-        "network": "ws",
-        "ws": true,
-        "wsPath": "/oooo",
-        "wsHeaders": {
-          "Host": "baidu.com"
-        },
-        "tls": false,
-        "serverName": "baidu.com"
-      },
-      "extra": {
-        "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrfCfh7Ag6aaZ5rivIOeUteiur+ebiOenkeaciemZkOWFrOWPuCIsImFkZCI6InYxMC5oZWR1aWFuLmxpbmsiLCJwb3J0IjoiMzA4MDciLCJ0eXBlIjoibm9uZSIsImlkIjoiY2JiM2Y4NzctZDFmYi0zNDRjLTg3YTktZDE1M2JmZmQ1NDg0IiwiYWlkIjoiMiIsIm5ldCI6IndzIiwicGF0aCI6Ii9vb29vIiwiaG9zdCI6ImJhaWR1LmNvbSIsInRscyI6IiJ9",
-        "addedAt": "2025-11-01T06:24:35.945Z"
-      },
-      "metadata": {
-        "source": "v2ray"
-      }
-    },
-    {
-      "id": "i5uwr7ohe",
-      "type": "vmess",
-      "name": "🇭🇰 香港 电讯盈科有限公司",
-      "server": "49aa3fd4-sv2sg0-tbcla6-194tt.hk.p5pv.com",
-      "port": 80,
-      "protocol": "vmess",
-      "settings": {
-        "id": "602e99aa-718d-11eb-b77b-f23c913c8d2b",
-        "alterId": 2,
-        "security": "auto",
-        "network": "ws",
-        "ws": true,
-        "wsPath": "/",
-        "wsHeaders": {
-          "Host": "broadcastlv.chat.bilibili.com"
-        },
-        "tls": false,
-        "serverName": "broadcastlv.chat.bilibili.com"
-      },
-      "extra": {
-        "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrfCfh7Ag6aaZ5rivIOeUteiur+ebiOenkeaciemZkOWFrOWPuCIsImFkZCI6IjQ5YWEzZmQ0LXN2MnNnMC10YmNsYTYtMTk0dHQuaGsucDVwdi5jb20iLCJwb3J0IjoiODAiLCJ0eXBlIjoibm9uZSIsImlkIjoiNjAyZTk5YWEtNzE4ZC0xMWViLWI3N2ItZjIzYzkxM2M4ZDJiIiwiYWlkIjoiMiIsIm5ldCI6IndzIiwicGF0aCI6Ii8iLCJob3N0IjoiYnJvYWRjYXN0bHYuY2hhdC5iaWxpYmlsaS5jb20iLCJ0bHMiOiIifQ==",
-        "addedAt": "2025-11-01T06:24:35.945Z"
-      },
-      "metadata": {
-        "source": "v2ray"
-      }
-    },
-    {
-      "id": "xjf2bgpbn",
-      "type": "vmess",
-      "name": "🇭🇰 香港 电讯盈科有限公司",
-      "server": "4b87f477-t13gg0-t22v5r-1m0fq.hk.p5pv.com",
-      "port": 80,
-      "protocol": "vmess",
-      "settings": {
-        "id": "a698c4a6-c3c9-11ee-9693-f23c91cfbbc9",
-        "alterId": 2,
-        "security": "auto",
-        "network": "ws",
-        "ws": true,
-        "wsPath": "/",
-        "wsHeaders": {
-          "Host": "broadcastlv.chat.bilibili.com"
-        },
-        "tls": false,
-        "serverName": "broadcastlv.chat.bilibili.com"
-      },
-      "extra": {
-        "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrfCfh7Ag6aaZ5rivIOeUteiur+ebiOenkeaciemZkOWFrOWPuCIsImFkZCI6IjRiODdmNDc3LXQxM2dnMC10MjJ2NXItMW0wZnEuaGsucDVwdi5jb20iLCJwb3J0IjoiODAiLCJ0eXBlIjoibm9uZSIsImlkIjoiYTY5OGM0YTYtYzNjOS0xMWVlLTk2OTMtZjIzYzkxY2ZiYmM5IiwiYWlkIjoiMiIsIm5ldCI6IndzIiwicGF0aCI6Ii8iLCJob3N0IjoiYnJvYWRjYXN0bHYuY2hhdC5iaWxpYmlsaS5jb20iLCJ0bHMiOiIifQ==",
-        "addedAt": "2025-11-01T06:24:35.945Z"
-      },
-      "metadata": {
-        "source": "v2ray"
-      }
-    },
-    {
-      "id": "aens2xhmz",
-      "type": "vmess",
-      "name": "🇭🇰 香港 电讯盈科有限公司",
-      "server": "aeb50015-t02f40-t9byd7-1jfvb.hk3.p5pv.com",
-      "port": 80,
-      "protocol": "vmess",
-      "settings": {
-        "id": "06b2ac52-fcc6-11ec-bb74-f23c9164ca5d",
-        "alterId": 2,
-        "security": "auto",
-        "network": "ws",
-        "ws": true,
-        "wsPath": "/",
-        "wsHeaders": {
-          "Host": "aeb50015-t02f40-t9byd7-1jfvb.hk3.p5pv.com"
-        },
-        "tls": false,
-        "serverName": "aeb50015-t02f40-t9byd7-1jfvb.hk3.p5pv.com"
-      },
-      "extra": {
-        "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrfCfh7Ag6aaZ5rivIOeUteiur+ebiOenkeaciemZkOWFrOWPuCIsImFkZCI6ImFlYjUwMDE1LXQwMmY0MC10OWJ5ZDctMWpmdmIuaGszLnA1cHYuY29tIiwicG9ydCI6IjgwIiwidHlwZSI6Im5vbmUiLCJpZCI6IjA2YjJhYzUyLWZjYzYtMTFlYy1iYjc0LWYyM2M5MTY0Y2E1ZCIsImFpZCI6IjIiLCJuZXQiOiJ3cyIsInBhdGgiOiIvIiwiaG9zdCI6ImFlYjUwMDE1LXQwMmY0MC10OWJ5ZDctMWpmdmIuaGszLnA1cHYuY29tIiwidGxzIjoiIn0=",
-        "addedAt": "2025-11-01T06:24:35.945Z"
-      },
-      "metadata": {
-        "source": "v2ray"
-      }
-    },
-    {
-      "id": "918qsmycr",
-      "type": "vmess",
-      "name": "🇭🇰 香港 电讯盈科有限公司",
-      "server": "4a9b5eb9-sva740-sveyey-44k4.hk3.p5pv.com",
-      "port": 80,
-      "protocol": "vmess",
-      "settings": {
-        "id": "c5eb2c2c-bc1d-11ed-a8bf-f23c91cfbbc9",
-        "alterId": 2,
-        "security": "auto",
-        "network": "ws",
-        "ws": true,
-        "wsPath": "/",
-        "wsHeaders": {
-          "Host": "broadcastlv.chat.bilibili.com"
-        },
-        "tls": false,
-        "serverName": "broadcastlv.chat.bilibili.com"
-      },
-      "extra": {
-        "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrfCfh7Ag6aaZ5rivIOeUteiur+ebiOenkeaciemZkOWFrOWPuCIsImFkZCI6IjRhOWI1ZWI5LXN2YTc0MC1zdmV5ZXktNDRrNC5oazMucDVwdi5jb20iLCJwb3J0IjoiODAiLCJ0eXBlIjoibm9uZSIsImlkIjoiYzVlYjJjMmMtYmMxZC0xMWVkLWE4YmYtZjIzYzkxY2ZiYmM5IiwiYWlkIjoiMiIsIm5ldCI6IndzIiwicGF0aCI6Ii8iLCJob3N0IjoiYnJvYWRjYXN0bHYuY2hhdC5iaWxpYmlsaS5jb20iLCJ0bHMiOiIifQ==",
-        "addedAt": "2025-11-01T06:24:35.945Z"
-      },
-      "metadata": {
-        "source": "v2ray"
-      }
-    },
-    {
-      "id": "ntm64n8ih",
-      "type": "vmess",
-      "name": "🇭🇰 香港 电讯盈科有限公司",
-      "server": "df08b250-sv2sg0-t5wcb1-13x18.hk.p5pv.com",
-      "port": 80,
-      "protocol": "vmess",
-      "settings": {
-        "id": "e4499a62-0cfe-11eb-ad8c-f23c9164ca5d",
-        "alterId": 2,
-        "security": "auto",
-        "network": "ws",
-        "ws": true,
-        "wsPath": "/",
-        "wsHeaders": {
-          "Host": "df08b250-sv2sg0-t5wcb1-13x18.hk.p5pv.com"
-        },
-        "tls": false,
-        "serverName": "df08b250-sv2sg0-t5wcb1-13x18.hk.p5pv.com"
-      },
-      "extra": {
-        "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrfCfh7Ag6aaZ5rivIOeUteiur+ebiOenkeaciemZkOWFrOWPuCIsImFkZCI6ImRmMDhiMjUwLXN2MnNnMC10NXdjYjEtMTN4MTguaGsucDVwdi5jb20iLCJwb3J0IjoiODAiLCJ0eXBlIjoibm9uZSIsImlkIjoiZTQ0OTlhNjItMGNmZS0xMWViLWFkOGMtZjIzYzkxNjRjYTVkIiwiYWlkIjoiMiIsIm5ldCI6IndzIiwicGF0aCI6Ii8iLCJob3N0IjoiZGYwOGIyNTAtc3Yyc2cwLXQ1d2NiMS0xM3gxOC5oay5wNXB2LmNvbSIsInRscyI6IiJ9",
-        "addedAt": "2025-11-01T06:24:35.945Z"
-      },
-      "metadata": {
-        "source": "v2ray"
-      }
-    },
-    {
-      "id": "kglgebe8h",
-      "type": "vmess",
-      "name": "🇭🇰 香港 电讯盈科有限公司",
-      "server": "c25c61db-sv2sg0-tbpu76-1thmd.hk3.p5pv.com",
-      "port": 80,
-      "protocol": "vmess",
-      "settings": {
-        "id": "2d8c38cc-fc12-11ef-94aa-f23c913c8d2b",
-        "alterId": 2,
-        "security": "auto",
-        "network": "ws",
-        "ws": true,
-        "wsPath": "/",
-        "wsHeaders": {
-          "Host": "broadcastlv.chat.bilibili.com"
-        },
-        "tls": false,
-        "serverName": "broadcastlv.chat.bilibili.com"
-      },
-      "extra": {
-        "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrfCfh7Ag6aaZ5rivIOeUteiur+ebiOenkeaciemZkOWFrOWPuCIsImFkZCI6ImMyNWM2MWRiLXN2MnNnMC10YnB1NzYtMXRobWQuaGszLnA1cHYuY29tIiwicG9ydCI6IjgwIiwidHlwZSI6Im5vbmUiLCJpZCI6IjJkOGMzOGNjLWZjMTItMTFlZi05NGFhLWYyM2M5MTNjOGQyYiIsImFpZCI6IjIiLCJuZXQiOiJ3cyIsInBhdGgiOiIvIiwiaG9zdCI6ImJyb2FkY2FzdGx2LmNoYXQuYmlsaWJpbGkuY29tIiwidGxzIjoiIn0=",
-        "addedAt": "2025-11-01T06:24:35.945Z"
-      },
-      "metadata": {
-        "source": "v2ray"
-      }
-    },
-    {
-      "id": "k5ikg7ufo",
-      "type": "vmess",
-      "name": "🇭🇰 香港 电讯盈科有限公司",
-      "server": "4c2c02b9-sv2sg0-sv75lj-1swf9.hk3.p5pv.com",
-      "port": 80,
-      "protocol": "vmess",
-      "settings": {
-        "id": "2bb1edc8-fa5d-11ef-9dd9-f23c9164ca5d",
-        "alterId": 2,
-        "security": "auto",
-        "network": "ws",
-        "ws": true,
-        "wsPath": "/",
-        "wsHeaders": {
-          "Host": "broadcastlv.chat.bilibili.com"
-        },
-        "tls": false,
-        "serverName": "broadcastlv.chat.bilibili.com"
-      },
-      "extra": {
-        "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrfCfh7Ag6aaZ5rivIOeUteiur+ebiOenkeaciemZkOWFrOWPuCIsImFkZCI6IjRjMmMwMmI5LXN2MnNnMC1zdjc1bGotMXN3ZjkuaGszLnA1cHYuY29tIiwicG9ydCI6IjgwIiwidHlwZSI6Im5vbmUiLCJpZCI6IjJiYjFlZGM4LWZhNWQtMTFlZi05ZGQ5LWYyM2M5MTY0Y2E1ZCIsImFpZCI6IjIiLCJuZXQiOiJ3cyIsInBhdGgiOiIvIiwiaG9zdCI6ImJyb2FkY2FzdGx2LmNoYXQuYmlsaWJpbGkuY29tIiwidGxzIjoiIn0=",
-        "addedAt": "2025-11-01T06:24:35.945Z"
-      },
-      "metadata": {
-        "source": "v2ray"
-      }
-    },
-    {
-      "id": "w7tcqcfw8",
-      "type": "vmess",
-      "name": "🇭🇰 香港 电讯盈科有限公司",
-      "server": "0bdf3f30-sv8cg0-t9uin7-19ord.hk.p5pv.com",
-      "port": 80,
-      "protocol": "vmess",
-      "settings": {
-        "id": "dcdb1278-4b7d-11ed-bb74-f23c9164ca5d",
-        "alterId": 2,
-        "security": "auto",
-        "network": "ws",
-        "ws": true,
-        "wsPath": "/",
-        "wsHeaders": {
-          "Host": "broadcastlv.chat.bilibili.com"
-        },
-        "tls": false,
-        "serverName": "broadcastlv.chat.bilibili.com"
-      },
-      "extra": {
-        "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrfCfh7Ag6aaZ5rivIOeUteiur+ebiOenkeaciemZkOWFrOWPuCIsImFkZCI6IjBiZGYzZjMwLXN2OGNnMC10OXVpbjctMTlvcmQuaGsucDVwdi5jb20iLCJwb3J0IjoiODAiLCJ0eXBlIjoibm9uZSIsImlkIjoiZGNkYjEyNzgtNGI3ZC0xMWVkLWJiNzQtZjIzYzkxNjRjYTVkIiwiYWlkIjoiMiIsIm5ldCI6IndzIiwicGF0aCI6Ii8iLCJob3N0IjoiYnJvYWRjYXN0bHYuY2hhdC5iaWxpYmlsaS5jb20iLCJ0bHMiOiIifQ==",
-        "addedAt": "2025-11-01T06:24:35.945Z"
-      },
-      "metadata": {
-        "source": "v2ray"
-      }
-    },
-    {
-      "id": "zvfifrgga",
-      "type": "vmess",
-      "name": "🇭🇰 香港 电讯盈科有限公司",
-      "server": "a818614b-sv0xs0-t2p691-1s4hc.hk3.p5pv.com",
-      "port": 80,
-      "protocol": "vmess",
-      "settings": {
-        "id": "aafedc64-9c23-11ef-a79f-f23c91cfbbc9",
-        "alterId": 2,
-        "security": "auto",
-        "network": "ws",
-        "ws": true,
-        "wsPath": "/",
-        "wsHeaders": {
-          "Host": "broadcastlv.chat.bilibili.com"
-        },
-        "tls": false,
-        "serverName": "broadcastlv.chat.bilibili.com"
-      },
-      "extra": {
-        "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrfCfh7Ag6aaZ5rivIOeUteiur+ebiOenkeaciemZkOWFrOWPuCIsImFkZCI6ImE4MTg2MTRiLXN2MHhzMC10MnA2OTEtMXM0aGMuaGszLnA1cHYuY29tIiwicG9ydCI6IjgwIiwidHlwZSI6Im5vbmUiLCJpZCI6ImFhZmVkYzY0LTljMjMtMTFlZi1hNzlmLWYyM2M5MWNmYmJjOSIsImFpZCI6IjIiLCJuZXQiOiJ3cyIsInBhdGgiOiIvIiwiaG9zdCI6ImJyb2FkY2FzdGx2LmNoYXQuYmlsaWJpbGkuY29tIiwidGxzIjoiIn0=",
-        "addedAt": "2025-11-01T06:24:35.945Z"
-      },
-      "metadata": {
-        "source": "v2ray"
-      }
-    },
-    {
-      "id": "cic5iuj9v",
-      "type": "vmess",
-      "name": "🇭🇰 香港 电讯盈科有限公司",
-      "server": "cb0c61e4-t0fds0-tfi5fd-1imi4.hk.p5pv.com",
-      "port": 80,
-      "protocol": "vmess",
-      "settings": {
-        "id": "40fb1315-191a-11ed-b0ca-f23c91cfbbc9",
-        "alterId": 2,
-        "security": "auto",
-        "network": "ws",
-        "ws": true,
-        "wsPath": "/",
-        "wsHeaders": {
-          "Host": "broadcastlv.chat.bilibili.com"
-        },
-        "tls": false,
-        "serverName": "broadcastlv.chat.bilibili.com"
-      },
-      "extra": {
-        "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrfCfh7Ag6aaZ5rivIOeUteiur+ebiOenkeaciemZkOWFrOWPuCIsImFkZCI6ImNiMGM2MWU0LXQwZmRzMC10Zmk1ZmQtMWltaTQuaGsucDVwdi5jb20iLCJwb3J0IjoiODAiLCJ0eXBlIjoibm9uZSIsImlkIjoiNDBmYjEzMTUtMTkxYS0xMWVkLWIwY2EtZjIzYzkxY2ZiYmM5IiwiYWlkIjoiMiIsIm5ldCI6IndzIiwicGF0aCI6Ii8iLCJob3N0IjoiYnJvYWRjYXN0bHYuY2hhdC5iaWxpYmlsaS5jb20iLCJ0bHMiOiIifQ==",
-        "addedAt": "2025-11-01T06:24:35.945Z"
-      },
-      "metadata": {
-        "source": "v2ray"
-      }
-    },
-    {
-      "id": "idwp5qh92",
-      "type": "vmess",
-      "name": "🇭🇰 香港 电讯盈科有限公司",
-      "server": "1dc2849f-sv2sg0-tct1rd-1o0ch.hk.p5pv.com",
-      "port": 80,
-      "protocol": "vmess",
-      "settings": {
-        "id": "d49e545e-0daf-11ee-a91f-f23c913c8d2b",
-        "alterId": 2,
-        "security": "auto",
-        "network": "ws",
-        "ws": true,
-        "wsPath": "/",
-        "wsHeaders": {
-          "Host": "broadcastlv.chat.bilibili.com"
-        },
-        "tls": false,
-        "serverName": "broadcastlv.chat.bilibili.com"
-      },
-      "extra": {
-        "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrfCfh7Ag6aaZ5rivIOeUteiur+ebiOenkeaciemZkOWFrOWPuCIsImFkZCI6IjFkYzI4NDlmLXN2MnNnMC10Y3QxcmQtMW8wY2guaGsucDVwdi5jb20iLCJwb3J0IjoiODAiLCJ0eXBlIjoibm9uZSIsImlkIjoiZDQ5ZTU0NWUtMGRhZi0xMWVlLWE5MWYtZjIzYzkxM2M4ZDJiIiwiYWlkIjoiMiIsIm5ldCI6IndzIiwicGF0aCI6Ii8iLCJob3N0IjoiYnJvYWRjYXN0bHYuY2hhdC5iaWxpYmlsaS5jb20iLCJ0bHMiOiIifQ==",
-        "addedAt": "2025-11-01T06:24:35.945Z"
-      },
-      "metadata": {
-        "source": "v2ray"
-      }
-    },
-    {
-      "id": "t5mjonuj7",
-      "type": "vmess",
-      "name": "🇭🇰 香港 电讯盈科有限公司",
-      "server": "4fdb9910-sv0xs0-t2p691-1s4hc.hk.p5pv.com",
-      "port": 80,
-      "protocol": "vmess",
-      "settings": {
-        "id": "aafedc64-9c23-11ef-a79f-f23c91cfbbc9",
-        "alterId": 2,
-        "security": "auto",
-        "network": "ws",
-        "ws": true,
-        "wsPath": "/",
-        "wsHeaders": {
-          "Host": "broadcastlv.chat.bilibili.com"
-        },
-        "tls": false,
-        "serverName": "broadcastlv.chat.bilibili.com"
-      },
-      "extra": {
-        "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrfCfh7Ag6aaZ5rivIOeUteiur+ebiOenkeaciemZkOWFrOWPuCIsImFkZCI6IjRmZGI5OTEwLXN2MHhzMC10MnA2OTEtMXM0aGMuaGsucDVwdi5jb20iLCJwb3J0IjoiODAiLCJ0eXBlIjoibm9uZSIsImlkIjoiYWFmZWRjNjQtOWMyMy0xMWVmLWE3OWYtZjIzYzkxY2ZiYmM5IiwiYWlkIjoiMiIsIm5ldCI6IndzIiwicGF0aCI6Ii8iLCJob3N0IjoiYnJvYWRjYXN0bHYuY2hhdC5iaWxpYmlsaS5jb20iLCJ0bHMiOiIifQ==",
-        "addedAt": "2025-11-01T06:24:35.945Z"
-      },
-      "metadata": {
-        "source": "v2ray"
-      }
-    },
-    {
-      "id": "9w9u6mdll",
-      "type": "vmess",
-      "name": "🇭🇰 香港 电讯盈科有限公司",
-      "server": "51a08fff-sv4n40-sy1a0y-1iyov.hk3.p5pv.com",
-      "port": 80,
-      "protocol": "vmess",
-      "settings": {
-        "id": "33629870-e57e-11ec-bb74-f23c9164ca5d",
-        "alterId": 2,
-        "security": "auto",
-        "network": "ws",
-        "ws": true,
-        "wsPath": "/",
-        "wsHeaders": {
-          "Host": "broadcastlv.chat.bilibili.com"
-        },
-        "tls": false,
-        "serverName": "broadcastlv.chat.bilibili.com"
-      },
-      "extra": {
-        "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrfCfh7Ag6aaZ5rivIOeUteiur+ebiOenkeaciemZkOWFrOWPuCIsImFkZCI6IjUxYTA4ZmZmLXN2NG40MC1zeTFhMHktMWl5b3YuaGszLnA1cHYuY29tIiwicG9ydCI6IjgwIiwidHlwZSI6Im5vbmUiLCJpZCI6IjMzNjI5ODcwLWU1N2UtMTFlYy1iYjc0LWYyM2M5MTY0Y2E1ZCIsImFpZCI6IjIiLCJuZXQiOiJ3cyIsInBhdGgiOiIvIiwiaG9zdCI6ImJyb2FkY2FzdGx2LmNoYXQuYmlsaWJpbGkuY29tIiwidGxzIjoiIn0=",
-        "addedAt": "2025-11-01T06:24:35.945Z"
-      },
-      "metadata": {
-        "source": "v2ray"
-      }
-    },
-    {
-      "id": "mqyr4xccg",
-      "type": "vmess",
-      "name": "🇭🇰 香港 电讯盈科有限公司",
-      "server": "3e236b99-sucv40-sudq0l-1rz5s.hk.p5pv.com",
-      "port": 80,
-      "protocol": "vmess",
-      "settings": {
-        "id": "40e084d6-0316-11f0-90e2-f23c913c8d2b",
-        "alterId": 2,
-        "security": "auto",
-        "network": "ws",
-        "ws": true,
-        "wsPath": "/",
-        "wsHeaders": {
-          "Host": "broadcastlv.chat.bilibili.com"
-        },
-        "tls": false,
-        "serverName": "broadcastlv.chat.bilibili.com"
-      },
-      "extra": {
-        "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrfCfh7Ag6aaZ5rivIOeUteiur+ebiOenkeaciemZkOWFrOWPuCIsImFkZCI6IjNlMjM2Yjk5LXN1Y3Y0MC1zdWRxMGwtMXJ6NXMuaGsucDVwdi5jb20iLCJwb3J0IjoiODAiLCJ0eXBlIjoibm9uZSIsImlkIjoiNDBlMDg0ZDYtMDMxNi0xMWYwLTkwZTItZjIzYzkxM2M4ZDJiIiwiYWlkIjoiMiIsIm5ldCI6IndzIiwicGF0aCI6Ii8iLCJob3N0IjoiYnJvYWRjYXN0bHYuY2hhdC5iaWxpYmlsaS5jb20iLCJ0bHMiOiIifQ==",
-        "addedAt": "2025-11-01T06:24:35.945Z"
-      },
-      "metadata": {
-        "source": "v2ray"
-      }
-    },
-    {
-      "id": "ny7ssced0",
-      "type": "vmess",
-      "name": "🇭🇰 香港 电讯盈科有限公司",
-      "server": "b6335b34-sv8cg0-tbe46y-1la7v.hk.p5pv.com",
-      "port": 80,
-      "protocol": "vmess",
-      "settings": {
-        "id": "460749c2-bcef-11ee-89fc-f23c913c8d2b",
-        "alterId": 2,
-        "security": "auto",
-        "network": "ws",
-        "ws": true,
-        "wsPath": "/",
-        "wsHeaders": {
-          "Host": "broadcastlv.chat.bilibili.com"
-        },
-        "tls": false,
-        "serverName": "broadcastlv.chat.bilibili.com"
-      },
-      "extra": {
-        "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrfCfh7Ag6aaZ5rivIOeUteiur+ebiOenkeaciemZkOWFrOWPuCIsImFkZCI6ImI2MzM1YjM0LXN2OGNnMC10YmU0NnktMWxhN3YuaGsucDVwdi5jb20iLCJwb3J0IjoiODAiLCJ0eXBlIjoibm9uZSIsImlkIjoiNDYwNzQ5YzItYmNlZi0xMWVlLTg5ZmMtZjIzYzkxM2M4ZDJiIiwiYWlkIjoiMiIsIm5ldCI6IndzIiwicGF0aCI6Ii8iLCJob3N0IjoiYnJvYWRjYXN0bHYuY2hhdC5iaWxpYmlsaS5jb20iLCJ0bHMiOiIifQ==",
-        "addedAt": "2025-11-01T06:24:35.945Z"
-      },
-      "metadata": {
-        "source": "v2ray"
-      }
-    },
-    {
-      "id": "yob2vuffz",
-      "type": "vmess",
-      "name": "🇭🇰 香港 电讯盈科有限公司",
-      "server": "8058f442-sv6hs0-t2p691-1s4hc.hk.p5pv.com",
-      "port": 80,
-      "protocol": "vmess",
-      "settings": {
-        "id": "aafedc64-9c23-11ef-a79f-f23c91cfbbc9",
-        "alterId": 2,
-        "security": "auto",
-        "network": "ws",
-        "ws": true,
-        "wsPath": "/",
-        "wsHeaders": {
-          "Host": "broadcastlv.chat.bilibili.com"
-        },
-        "tls": false,
-        "serverName": "broadcastlv.chat.bilibili.com"
-      },
-      "extra": {
-        "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrfCfh7Ag6aaZ5rivIOeUteiur+ebiOenkeaciemZkOWFrOWPuCIsImFkZCI6IjgwNThmNDQyLXN2NmhzMC10MnA2OTEtMXM0aGMuaGsucDVwdi5jb20iLCJwb3J0IjoiODAiLCJ0eXBlIjoibm9uZSIsImlkIjoiYWFmZWRjNjQtOWMyMy0xMWVmLWE3OWYtZjIzYzkxY2ZiYmM5IiwiYWlkIjoiMiIsIm5ldCI6IndzIiwicGF0aCI6Ii8iLCJob3N0IjoiYnJvYWRjYXN0bHYuY2hhdC5iaWxpYmlsaS5jb20iLCJ0bHMiOiIifQ==",
-        "addedAt": "2025-11-01T06:24:35.945Z"
-      },
-      "metadata": {
-        "source": "v2ray"
-      }
-    },
-    {
-      "id": "6qe6syfwz",
-      "type": "vmess",
-      "name": "🇭🇰 香港 电讯盈科有限公司",
-      "server": "4b718efc-sv2sg0-t65a3e-tqgz.hk3.p5pv.com",
-      "port": 80,
-      "protocol": "vmess",
-      "settings": {
-        "id": "88da0d21-b25d-11ec-b9f7-f23c91cfbbc9",
-        "alterId": 2,
-        "security": "auto",
-        "network": "ws",
-        "ws": true,
-        "wsPath": "/",
-        "wsHeaders": {
-          "Host": "broadcastlv.chat.bilibili.com"
-        },
-        "tls": false,
-        "serverName": "broadcastlv.chat.bilibili.com"
-      },
-      "extra": {
-        "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrfCfh7Ag6aaZ5rivIOeUteiur+ebiOenkeaciemZkOWFrOWPuCIsImFkZCI6IjRiNzE4ZWZjLXN2MnNnMC10NjVhM2UtdHFnei5oazMucDVwdi5jb20iLCJwb3J0IjoiODAiLCJ0eXBlIjoibm9uZSIsImlkIjoiODhkYTBkMjEtYjI1ZC0xMWVjLWI5ZjctZjIzYzkxY2ZiYmM5IiwiYWlkIjoiMiIsIm5ldCI6IndzIiwicGF0aCI6Ii8iLCJob3N0IjoiYnJvYWRjYXN0bHYuY2hhdC5iaWxpYmlsaS5jb20iLCJ0bHMiOiIifQ==",
-        "addedAt": "2025-11-01T06:24:35.945Z"
-      },
-      "metadata": {
-        "source": "v2ray"
-      }
-    },
-    {
-      "id": "w4h5i2t11",
-      "type": "vmess",
-      "name": "🇭🇰 香港 电讯盈科有限公司",
-      "server": "dcf99c60-sv0xs0-tasors-1tdqt.hk.p5pv.com",
+      "server": "fdda39f3-sv4n40-tasors-1tdqt.hk3.p5pv.com",
       "port": 80,
       "protocol": "vmess",
       "settings": {
@@ -1051,155 +437,15 @@
         "serverName": "broadcastlv.chat.bilibili.com"
       },
       "extra": {
-        "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrfCfh7Ag6aaZ5rivIOeUteiur+ebiOenkeaciemZkOWFrOWPuCIsImFkZCI6ImRjZjk5YzYwLXN2MHhzMC10YXNvcnMtMXRkcXQuaGsucDVwdi5jb20iLCJwb3J0IjoiODAiLCJ0eXBlIjoibm9uZSIsImlkIjoiMTY3ZGI5N2MtZWUwMS0xMWVmLWI3MzctZjIzYzkxY2ZiYmM5IiwiYWlkIjoiMiIsIm5ldCI6IndzIiwicGF0aCI6Ii8iLCJob3N0IjoiYnJvYWRjYXN0bHYuY2hhdC5iaWxpYmlsaS5jb20iLCJ0bHMiOiIifQ==",
-        "addedAt": "2025-11-01T06:24:35.945Z"
+        "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrfCfh7Ag6aaZ5rivIOeUteiur+ebiOenkeaciemZkOWFrOWPuCIsImFkZCI6ImZkZGEzOWYzLXN2NG40MC10YXNvcnMtMXRkcXQuaGszLnA1cHYuY29tIiwicG9ydCI6IjgwIiwidHlwZSI6Im5vbmUiLCJpZCI6IjE2N2RiOTdjLWVlMDEtMTFlZi1iNzM3LWYyM2M5MWNmYmJjOSIsImFpZCI6IjIiLCJuZXQiOiJ3cyIsInBhdGgiOiIvIiwiaG9zdCI6ImJyb2FkY2FzdGx2LmNoYXQuYmlsaWJpbGkuY29tIiwidGxzIjoiIn0=",
+        "addedAt": "2025-11-01T12:33:18.782Z"
       },
       "metadata": {
         "source": "v2ray"
       }
     },
     {
-      "id": "o7663hghw",
-      "type": "vmess",
-      "name": "🇭🇰 香港 电讯盈科有限公司",
-      "server": "13e491cf-szv0g0-t167d0-ggww.hk.p5pv.com",
-      "port": 80,
-      "protocol": "vmess",
-      "settings": {
-        "id": "bcc58e88-e147-11ec-b286-f23c91cfbbc9",
-        "alterId": 2,
-        "security": "auto",
-        "network": "ws",
-        "ws": true,
-        "wsPath": "/",
-        "wsHeaders": {
-          "Host": "broadcastlv.chat.bilibili.com"
-        },
-        "tls": false,
-        "serverName": "broadcastlv.chat.bilibili.com"
-      },
-      "extra": {
-        "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrfCfh7Ag6aaZ5rivIOeUteiur+ebiOenkeaciemZkOWFrOWPuCIsImFkZCI6IjEzZTQ5MWNmLXN6djBnMC10MTY3ZDAtZ2d3dy5oay5wNXB2LmNvbSIsInBvcnQiOiI4MCIsInR5cGUiOiJub25lIiwiaWQiOiJiY2M1OGU4OC1lMTQ3LTExZWMtYjI4Ni1mMjNjOTFjZmJiYzkiLCJhaWQiOiIyIiwibmV0Ijoid3MiLCJwYXRoIjoiLyIsImhvc3QiOiJicm9hZGNhc3Rsdi5jaGF0LmJpbGliaWxpLmNvbSIsInRscyI6IiJ9",
-        "addedAt": "2025-11-01T06:24:35.945Z"
-      },
-      "metadata": {
-        "source": "v2ray"
-      }
-    },
-    {
-      "id": "c8m4hegll",
-      "type": "vmess",
-      "name": "🇭🇰 香港 电讯盈科有限公司",
-      "server": "5e4eabfc-sv2sg0-t2lc1c-1mim2.hk.p5pv.com",
-      "port": 80,
-      "protocol": "vmess",
-      "settings": {
-        "id": "6e3ee1de-381f-11ee-87f9-f23c91cfbbc9",
-        "alterId": 2,
-        "security": "auto",
-        "network": "ws",
-        "ws": true,
-        "wsPath": "/",
-        "wsHeaders": {
-          "Host": "broadcastlv.chat.bilibili.com"
-        },
-        "tls": false,
-        "serverName": "broadcastlv.chat.bilibili.com"
-      },
-      "extra": {
-        "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrfCfh7Ag6aaZ5rivIOeUteiur+ebiOenkeaciemZkOWFrOWPuCIsImFkZCI6IjVlNGVhYmZjLXN2MnNnMC10MmxjMWMtMW1pbTIuaGsucDVwdi5jb20iLCJwb3J0IjoiODAiLCJ0eXBlIjoibm9uZSIsImlkIjoiNmUzZWUxZGUtMzgxZi0xMWVlLTg3ZjktZjIzYzkxY2ZiYmM5IiwiYWlkIjoiMiIsIm5ldCI6IndzIiwicGF0aCI6Ii8iLCJob3N0IjoiYnJvYWRjYXN0bHYuY2hhdC5iaWxpYmlsaS5jb20iLCJ0bHMiOiIifQ==",
-        "addedAt": "2025-11-01T06:24:35.945Z"
-      },
-      "metadata": {
-        "source": "v2ray"
-      }
-    },
-    {
-      "id": "smkt29p1y",
-      "type": "vmess",
-      "name": "🇭🇰 香港 电讯盈科有限公司",
-      "server": "04165a49-sv2sg0-t5cryd-4w8.hk3.p5pv.com",
-      "port": 80,
-      "protocol": "vmess",
-      "settings": {
-        "id": "ba7a37e3-033a-e1ab-06f6-9027aa4630f5",
-        "alterId": 2,
-        "security": "auto",
-        "network": "ws",
-        "ws": true,
-        "wsPath": "/",
-        "wsHeaders": {
-          "Host": "broadcastlv.chat.bilibili.com"
-        },
-        "tls": false,
-        "serverName": "broadcastlv.chat.bilibili.com"
-      },
-      "extra": {
-        "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrfCfh7Ag6aaZ5rivIOeUteiur+ebiOenkeaciemZkOWFrOWPuCIsImFkZCI6IjA0MTY1YTQ5LXN2MnNnMC10NWNyeWQtNHc4LmhrMy5wNXB2LmNvbSIsInBvcnQiOiI4MCIsInR5cGUiOiJub25lIiwiaWQiOiJiYTdhMzdlMy0wMzNhLWUxYWItMDZmNi05MDI3YWE0NjMwZjUiLCJhaWQiOiIyIiwibmV0Ijoid3MiLCJwYXRoIjoiLyIsImhvc3QiOiJicm9hZGNhc3Rsdi5jaGF0LmJpbGliaWxpLmNvbSIsInRscyI6IiJ9",
-        "addedAt": "2025-11-01T06:24:35.945Z"
-      },
-      "metadata": {
-        "source": "v2ray"
-      }
-    },
-    {
-      "id": "x3yf7jzs6",
-      "type": "vmess",
-      "name": "🇭🇰 香港 电讯盈科有限公司",
-      "server": "c4d1a16b-szg740-t41p4y-1hpo0.hk.p5pv.com",
-      "port": 80,
-      "protocol": "vmess",
-      "settings": {
-        "id": "c3dc8d26-ab2b-11ec-a8bf-f23c91cfbbc9",
-        "alterId": 2,
-        "security": "auto",
-        "network": "ws",
-        "ws": true,
-        "wsPath": "/",
-        "wsHeaders": {
-          "Host": "broadcastlv.chat.bilibili.com"
-        },
-        "tls": false,
-        "serverName": "broadcastlv.chat.bilibili.com"
-      },
-      "extra": {
-        "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrfCfh7Ag6aaZ5rivIOeUteiur+ebiOenkeaciemZkOWFrOWPuCIsImFkZCI6ImM0ZDFhMTZiLXN6Zzc0MC10NDFwNHktMWhwbzAuaGsucDVwdi5jb20iLCJwb3J0IjoiODAiLCJ0eXBlIjoibm9uZSIsImlkIjoiYzNkYzhkMjYtYWIyYi0xMWVjLWE4YmYtZjIzYzkxY2ZiYmM5IiwiYWlkIjoiMiIsIm5ldCI6IndzIiwicGF0aCI6Ii8iLCJob3N0IjoiYnJvYWRjYXN0bHYuY2hhdC5iaWxpYmlsaS5jb20iLCJ0bHMiOiIifQ==",
-        "addedAt": "2025-11-01T06:24:35.945Z"
-      },
-      "metadata": {
-        "source": "v2ray"
-      }
-    },
-    {
-      "id": "n3ybe5s5c",
-      "type": "vmess",
-      "name": "🇭🇰 香港 电讯盈科有限公司",
-      "server": "dc4b7b6c-sv0xs0-syu0n5-1hd7v.hk.p5pv.com",
-      "port": 80,
-      "protocol": "vmess",
-      "settings": {
-        "id": "f73c64bc-9e8c-11ec-bd7c-f23c913c8d2b",
-        "alterId": 2,
-        "security": "auto",
-        "network": "ws",
-        "ws": true,
-        "wsPath": "/",
-        "wsHeaders": {
-          "Host": "broadcastlv.chat.bilibili.com"
-        },
-        "tls": false,
-        "serverName": "broadcastlv.chat.bilibili.com"
-      },
-      "extra": {
-        "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrfCfh7Ag6aaZ5rivIOeUteiur+ebiOenkeaciemZkOWFrOWPuCIsImFkZCI6ImRjNGI3YjZjLXN2MHhzMC1zeXUwbjUtMWhkN3YuaGsucDVwdi5jb20iLCJwb3J0IjoiODAiLCJ0eXBlIjoibm9uZSIsImlkIjoiZjczYzY0YmMtOWU4Yy0xMWVjLWJkN2MtZjIzYzkxM2M4ZDJiIiwiYWlkIjoiMiIsIm5ldCI6IndzIiwicGF0aCI6Ii8iLCJob3N0IjoiYnJvYWRjYXN0bHYuY2hhdC5iaWxpYmlsaS5jb20iLCJ0bHMiOiIifQ==",
-        "addedAt": "2025-11-01T06:24:35.945Z"
-      },
-      "metadata": {
-        "source": "v2ray"
-      }
-    },
-    {
-      "id": "b3vd3rieq",
+      "id": "adnips58k",
       "type": "vmess",
       "name": "🇭🇰 香港 电讯盈科有限公司",
       "server": "377dc0dd-sva740-tbrhck-1thqb.hk.p5pv.com",
@@ -1220,49 +466,21 @@
       },
       "extra": {
         "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrfCfh7Ag6aaZ5rivIOeUteiur+ebiOenkeaciemZkOWFrOWPuCIsImFkZCI6IjM3N2RjMGRkLXN2YTc0MC10YnJoY2stMXRocWIuaGsucDVwdi5jb20iLCJwb3J0IjoiODAiLCJ0eXBlIjoibm9uZSIsImlkIjoiNGY0YzY4NzYtZmNmNi0xMWVmLTk0YWEtZjIzYzkxM2M4ZDJiIiwiYWlkIjoiMiIsIm5ldCI6IndzIiwicGF0aCI6Ii8iLCJob3N0IjoiYnJvYWRjYXN0bHYuY2hhdC5iaWxpYmlsaS5jb20iLCJ0bHMiOiIifQ==",
-        "addedAt": "2025-11-01T06:24:35.945Z"
+        "addedAt": "2025-11-01T12:33:18.782Z"
       },
       "metadata": {
         "source": "v2ray"
       }
     },
     {
-      "id": "wdxs3fgkx",
+      "id": "jfol89doe",
       "type": "vmess",
       "name": "🇭🇰 香港 电讯盈科有限公司",
-      "server": "d514a957-sv2sg0-swfla6-1rdqg.hk.p5pv.com",
+      "server": "0bdf3f30-sv8cg0-t9uin7-19ord.hk.p5pv.com",
       "port": 80,
       "protocol": "vmess",
       "settings": {
-        "id": "2b57ec48-0da4-11ef-8f35-f23c913c8d2b",
-        "alterId": 2,
-        "security": "auto",
-        "network": "ws",
-        "ws": true,
-        "wsPath": "/",
-        "wsHeaders": {
-          "Host": "d514a957-sv2sg0-swfla6-1rdqg.hk.p5pv.com"
-        },
-        "tls": false,
-        "serverName": "d514a957-sv2sg0-swfla6-1rdqg.hk.p5pv.com"
-      },
-      "extra": {
-        "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrfCfh7Ag6aaZ5rivIOeUteiur+ebiOenkeaciemZkOWFrOWPuCIsImFkZCI6ImQ1MTRhOTU3LXN2MnNnMC1zd2ZsYTYtMXJkcWcuaGsucDVwdi5jb20iLCJwb3J0IjoiODAiLCJ0eXBlIjoibm9uZSIsImlkIjoiMmI1N2VjNDgtMGRhNC0xMWVmLThmMzUtZjIzYzkxM2M4ZDJiIiwiYWlkIjoiMiIsIm5ldCI6IndzIiwicGF0aCI6Ii8iLCJob3N0IjoiZDUxNGE5NTctc3Yyc2cwLXN3ZmxhNi0xcmRxZy5oay5wNXB2LmNvbSIsInRscyI6IiJ9",
-        "addedAt": "2025-11-01T06:24:35.946Z"
-      },
-      "metadata": {
-        "source": "v2ray"
-      }
-    },
-    {
-      "id": "7701plnfy",
-      "type": "vmess",
-      "name": "🇭🇰 香港 电讯盈科有限公司",
-      "server": "20b856dd-sv0xs0-sv75lj-1swf9.hk.p5pv.com",
-      "port": 80,
-      "protocol": "vmess",
-      "settings": {
-        "id": "2bb1edc8-fa5d-11ef-9dd9-f23c9164ca5d",
+        "id": "dcdb1278-4b7d-11ed-bb74-f23c9164ca5d",
         "alterId": 2,
         "security": "auto",
         "network": "ws",
@@ -1275,102 +493,18 @@
         "serverName": "broadcastlv.chat.bilibili.com"
       },
       "extra": {
-        "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrfCfh7Ag6aaZ5rivIOeUteiur+ebiOenkeaciemZkOWFrOWPuCIsImFkZCI6IjIwYjg1NmRkLXN2MHhzMC1zdjc1bGotMXN3ZjkuaGsucDVwdi5jb20iLCJwb3J0IjoiODAiLCJ0eXBlIjoibm9uZSIsImlkIjoiMmJiMWVkYzgtZmE1ZC0xMWVmLTlkZDktZjIzYzkxNjRjYTVkIiwiYWlkIjoiMiIsIm5ldCI6IndzIiwicGF0aCI6Ii8iLCJob3N0IjoiYnJvYWRjYXN0bHYuY2hhdC5iaWxpYmlsaS5jb20iLCJ0bHMiOiIifQ==",
-        "addedAt": "2025-11-01T06:24:35.946Z"
+        "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrfCfh7Ag6aaZ5rivIOeUteiur+ebiOenkeaciemZkOWFrOWPuCIsImFkZCI6IjBiZGYzZjMwLXN2OGNnMC10OXVpbjctMTlvcmQuaGsucDVwdi5jb20iLCJwb3J0IjoiODAiLCJ0eXBlIjoibm9uZSIsImlkIjoiZGNkYjEyNzgtNGI3ZC0xMWVkLWJiNzQtZjIzYzkxNjRjYTVkIiwiYWlkIjoiMiIsIm5ldCI6IndzIiwicGF0aCI6Ii8iLCJob3N0IjoiYnJvYWRjYXN0bHYuY2hhdC5iaWxpYmlsaS5jb20iLCJ0bHMiOiIifQ==",
+        "addedAt": "2025-11-01T12:33:18.782Z"
       },
       "metadata": {
         "source": "v2ray"
       }
     },
     {
-      "id": "r1w36iup3",
+      "id": "vdiwojflp",
       "type": "vmess",
       "name": "🇭🇰 香港 电讯盈科有限公司",
-      "server": "3f54bee7-sv4n40-tbpu76-1thmd.hk3.p5pv.com",
-      "port": 80,
-      "protocol": "vmess",
-      "settings": {
-        "id": "2d8c38cc-fc12-11ef-94aa-f23c913c8d2b",
-        "alterId": 2,
-        "security": "auto",
-        "network": "ws",
-        "ws": true,
-        "wsPath": "/",
-        "wsHeaders": {
-          "Host": "broadcastlv.chat.bilibili.com"
-        },
-        "tls": false,
-        "serverName": "broadcastlv.chat.bilibili.com"
-      },
-      "extra": {
-        "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrfCfh7Ag6aaZ5rivIOeUteiur+ebiOenkeaciemZkOWFrOWPuCIsImFkZCI6IjNmNTRiZWU3LXN2NG40MC10YnB1NzYtMXRobWQuaGszLnA1cHYuY29tIiwicG9ydCI6IjgwIiwidHlwZSI6Im5vbmUiLCJpZCI6IjJkOGMzOGNjLWZjMTItMTFlZi05NGFhLWYyM2M5MTNjOGQyYiIsImFpZCI6IjIiLCJuZXQiOiJ3cyIsInBhdGgiOiIvIiwiaG9zdCI6ImJyb2FkY2FzdGx2LmNoYXQuYmlsaWJpbGkuY29tIiwidGxzIjoiIn0=",
-        "addedAt": "2025-11-01T06:24:35.946Z"
-      },
-      "metadata": {
-        "source": "v2ray"
-      }
-    },
-    {
-      "id": "9mqrl5tr5",
-      "type": "vmess",
-      "name": "🇭🇰 香港 电讯盈科有限公司",
-      "server": "0a46ce00-sunz40-taz53d-1j0y6.hk.p5pv.com",
-      "port": 80,
-      "protocol": "vmess",
-      "settings": {
-        "id": "1cce7df2-251c-11ee-9409-f23c9164ca5d",
-        "alterId": 2,
-        "security": "auto",
-        "network": "ws",
-        "ws": true,
-        "wsPath": "/",
-        "wsHeaders": {
-          "Host": "0a46ce00-sunz40-taz53d-1j0y6.hk.p5pv.com"
-        },
-        "tls": false,
-        "serverName": "0a46ce00-sunz40-taz53d-1j0y6.hk.p5pv.com"
-      },
-      "extra": {
-        "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrfCfh7Ag6aaZ5rivIOeUteiur+ebiOenkeaciemZkOWFrOWPuCIsImFkZCI6IjBhNDZjZTAwLXN1bno0MC10YXo1M2QtMWoweTYuaGsucDVwdi5jb20iLCJwb3J0IjoiODAiLCJ0eXBlIjoibm9uZSIsImlkIjoiMWNjZTdkZjItMjUxYy0xMWVlLTk0MDktZjIzYzkxNjRjYTVkIiwiYWlkIjoiMiIsIm5ldCI6IndzIiwicGF0aCI6Ii8iLCJob3N0IjoiMGE0NmNlMDAtc3VuejQwLXRhejUzZC0xajB5Ni5oay5wNXB2LmNvbSIsInRscyI6IiJ9",
-        "addedAt": "2025-11-01T06:24:35.946Z"
-      },
-      "metadata": {
-        "source": "v2ray"
-      }
-    },
-    {
-      "id": "r594j71qr",
-      "type": "vmess",
-      "name": "🇭🇰 香港 电讯盈科有限公司",
-      "server": "dbacca25-sv2sg0-sv0wpw-17xo8.hk.p5pv.com",
-      "port": 80,
-      "protocol": "vmess",
-      "settings": {
-        "id": "b4e40aa2-74a1-11ed-b0b5-f23c9164ca5d",
-        "alterId": 2,
-        "security": "auto",
-        "network": "ws",
-        "ws": true,
-        "wsPath": "/",
-        "wsHeaders": {
-          "Host": "broadcastlv.chat.bilibili.com"
-        },
-        "tls": false,
-        "serverName": "broadcastlv.chat.bilibili.com"
-      },
-      "extra": {
-        "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrfCfh7Ag6aaZ5rivIOeUteiur+ebiOenkeaciemZkOWFrOWPuCIsImFkZCI6ImRiYWNjYTI1LXN2MnNnMC1zdjB3cHctMTd4bzguaGsucDVwdi5jb20iLCJwb3J0IjoiODAiLCJ0eXBlIjoibm9uZSIsImlkIjoiYjRlNDBhYTItNzRhMS0xMWVkLWIwYjUtZjIzYzkxNjRjYTVkIiwiYWlkIjoiMiIsIm5ldCI6IndzIiwicGF0aCI6Ii8iLCJob3N0IjoiYnJvYWRjYXN0bHYuY2hhdC5iaWxpYmlsaS5jb20iLCJ0bHMiOiIifQ==",
-        "addedAt": "2025-11-01T06:24:35.946Z"
-      },
-      "metadata": {
-        "source": "v2ray"
-      }
-    },
-    {
-      "id": "da2gdkmbi",
-      "type": "vmess",
-      "name": "🇭🇰 香港 电讯盈科有限公司",
-      "server": "77d7b6e4-sv2sg0-sw5wi7-ufc0.hk3.p5pv.com",
+      "server": "4f8acdc9-sv0xs0-sw5wi7-ufc0.hk3.p5pv.com",
       "port": 80,
       "protocol": "vmess",
       "settings": {
@@ -1387,43 +521,43 @@
         "serverName": "broadcastlv.chat.bilibili.com"
       },
       "extra": {
-        "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrfCfh7Ag6aaZ5rivIOeUteiur+ebiOenkeaciemZkOWFrOWPuCIsImFkZCI6Ijc3ZDdiNmU0LXN2MnNnMC1zdzV3aTctdWZjMC5oazMucDVwdi5jb20iLCJwb3J0IjoiODAiLCJ0eXBlIjoibm9uZSIsImlkIjoiMjIzMDg5ODgtODU0OC0xMWVhLWEyMmUtZjIzYzkxY2ZiYmM5IiwiYWlkIjoiMiIsIm5ldCI6IndzIiwicGF0aCI6Ii8iLCJob3N0IjoiYnJvYWRjYXN0bHYuY2hhdC5iaWxpYmlsaS5jb20iLCJ0bHMiOiIifQ==",
-        "addedAt": "2025-11-01T06:24:35.946Z"
+        "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrfCfh7Ag6aaZ5rivIOeUteiur+ebiOenkeaciemZkOWFrOWPuCIsImFkZCI6IjRmOGFjZGM5LXN2MHhzMC1zdzV3aTctdWZjMC5oazMucDVwdi5jb20iLCJwb3J0IjoiODAiLCJ0eXBlIjoibm9uZSIsImlkIjoiMjIzMDg5ODgtODU0OC0xMWVhLWEyMmUtZjIzYzkxY2ZiYmM5IiwiYWlkIjoiMiIsIm5ldCI6IndzIiwicGF0aCI6Ii8iLCJob3N0IjoiYnJvYWRjYXN0bHYuY2hhdC5iaWxpYmlsaS5jb20iLCJ0bHMiOiIifQ==",
+        "addedAt": "2025-11-01T12:33:18.782Z"
       },
       "metadata": {
         "source": "v2ray"
       }
     },
     {
-      "id": "67awy5psb",
+      "id": "mawszwjcb",
       "type": "vmess",
       "name": "🇭🇰 香港 电讯盈科有限公司",
-      "server": "5e392f9d-sv0xs0-svewl8-xu74.hk3.p5pv.com",
+      "server": "54d2d7fc-t3kcg0-tdnzz0-1qtp7.hk3.p5pv.com",
       "port": 80,
       "protocol": "vmess",
       "settings": {
-        "id": "715a2574-9c25-11eb-8673-f23c9164ca5d",
+        "id": "3653c708-df72-11ee-aec1-f23c9164ca5d",
         "alterId": 2,
         "security": "auto",
         "network": "ws",
         "ws": true,
         "wsPath": "/",
         "wsHeaders": {
-          "Host": "5e392f9d-sv0xs0-svewl8-xu74.hk3.p5pv.com"
+          "Host": "broadcastlv.chat.bilibili.com"
         },
         "tls": false,
-        "serverName": "5e392f9d-sv0xs0-svewl8-xu74.hk3.p5pv.com"
+        "serverName": "broadcastlv.chat.bilibili.com"
       },
       "extra": {
-        "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrfCfh7Ag6aaZ5rivIOeUteiur+ebiOenkeaciemZkOWFrOWPuCIsImFkZCI6IjVlMzkyZjlkLXN2MHhzMC1zdmV3bDgteHU3NC5oazMucDVwdi5jb20iLCJwb3J0IjoiODAiLCJ0eXBlIjoibm9uZSIsImlkIjoiNzE1YTI1NzQtOWMyNS0xMWViLTg2NzMtZjIzYzkxNjRjYTVkIiwiYWlkIjoiMiIsIm5ldCI6IndzIiwicGF0aCI6Ii8iLCJob3N0IjoiNWUzOTJmOWQtc3YweHMwLXN2ZXdsOC14dTc0LmhrMy5wNXB2LmNvbSIsInRscyI6IiJ9",
-        "addedAt": "2025-11-01T06:24:35.946Z"
+        "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrfCfh7Ag6aaZ5rivIOeUteiur+ebiOenkeaciemZkOWFrOWPuCIsImFkZCI6IjU0ZDJkN2ZjLXQza2NnMC10ZG56ejAtMXF0cDcuaGszLnA1cHYuY29tIiwicG9ydCI6IjgwIiwidHlwZSI6Im5vbmUiLCJpZCI6IjM2NTNjNzA4LWRmNzItMTFlZS1hZWMxLWYyM2M5MTY0Y2E1ZCIsImFpZCI6IjIiLCJuZXQiOiJ3cyIsInBhdGgiOiIvIiwiaG9zdCI6ImJyb2FkY2FzdGx2LmNoYXQuYmlsaWJpbGkuY29tIiwidGxzIjoiIn0=",
+        "addedAt": "2025-11-01T12:33:18.782Z"
       },
       "metadata": {
         "source": "v2ray"
       }
     },
     {
-      "id": "oarpg6q83",
+      "id": "rufrebej6",
       "type": "vmess",
       "name": "🇭🇰 香港 电讯盈科有限公司",
       "server": "eadf838f-sva740-sveyey-44k4.hk.p5pv.com",
@@ -1444,21 +578,21 @@
       },
       "extra": {
         "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrfCfh7Ag6aaZ5rivIOeUteiur+ebiOenkeaciemZkOWFrOWPuCIsImFkZCI6ImVhZGY4MzhmLXN2YTc0MC1zdmV5ZXktNDRrNC5oay5wNXB2LmNvbSIsInBvcnQiOiI4MCIsInR5cGUiOiJub25lIiwiaWQiOiJjNWViMmMyYy1iYzFkLTExZWQtYThiZi1mMjNjOTFjZmJiYzkiLCJhaWQiOiIyIiwibmV0Ijoid3MiLCJwYXRoIjoiLyIsImhvc3QiOiJicm9hZGNhc3Rsdi5jaGF0LmJpbGliaWxpLmNvbSIsInRscyI6IiJ9",
-        "addedAt": "2025-11-01T06:24:35.946Z"
+        "addedAt": "2025-11-01T12:33:18.782Z"
       },
       "metadata": {
         "source": "v2ray"
       }
     },
     {
-      "id": "8wzq5ix2k",
+      "id": "mq9d9ojiv",
       "type": "vmess",
       "name": "🇭🇰 香港 电讯盈科有限公司",
-      "server": "b2d5cb20-sv2sg0-t7qy26-14g76.hk3.p5pv.com",
+      "server": "272ffc58-sv2sg0-t4v3jz-1k8ga.hk3.p5pv.com",
       "port": 80,
       "protocol": "vmess",
       "settings": {
-        "id": "4729b4c8-1790-11eb-8684-f23c913c8d2b",
+        "id": "f860f2da-5035-11ed-bb74-f23c9164ca5d",
         "alterId": 2,
         "security": "auto",
         "network": "ws",
@@ -1471,22 +605,22 @@
         "serverName": "broadcastlv.chat.bilibili.com"
       },
       "extra": {
-        "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrfCfh7Ag6aaZ5rivIOeUteiur+ebiOenkeaciemZkOWFrOWPuCIsImFkZCI6ImIyZDVjYjIwLXN2MnNnMC10N3F5MjYtMTRnNzYuaGszLnA1cHYuY29tIiwicG9ydCI6IjgwIiwidHlwZSI6Im5vbmUiLCJpZCI6IjQ3MjliNGM4LTE3OTAtMTFlYi04Njg0LWYyM2M5MTNjOGQyYiIsImFpZCI6IjIiLCJuZXQiOiJ3cyIsInBhdGgiOiIvIiwiaG9zdCI6ImJyb2FkY2FzdGx2LmNoYXQuYmlsaWJpbGkuY29tIiwidGxzIjoiIn0=",
-        "addedAt": "2025-11-01T06:24:35.946Z"
+        "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrfCfh7Ag6aaZ5rivIOeUteiur+ebiOenkeaciemZkOWFrOWPuCIsImFkZCI6IjI3MmZmYzU4LXN2MnNnMC10NHYzanotMWs4Z2EuaGszLnA1cHYuY29tIiwicG9ydCI6IjgwIiwidHlwZSI6Im5vbmUiLCJpZCI6ImY4NjBmMmRhLTUwMzUtMTFlZC1iYjc0LWYyM2M5MTY0Y2E1ZCIsImFpZCI6IjIiLCJuZXQiOiJ3cyIsInBhdGgiOiIvIiwiaG9zdCI6ImJyb2FkY2FzdGx2LmNoYXQuYmlsaWJpbGkuY29tIiwidGxzIjoiIn0=",
+        "addedAt": "2025-11-01T12:33:18.782Z"
       },
       "metadata": {
         "source": "v2ray"
       }
     },
     {
-      "id": "4xn97hwwc",
+      "id": "zb1n8uum4",
       "type": "vmess",
       "name": "🇭🇰 香港 电讯盈科有限公司",
-      "server": "bd12944a-sv0xs0-t2lc1c-1mim2.hk.p5pv.com",
+      "server": "dd2d23c7-t049s0-t1p8ql-1t8q3.hk3.p5pv.com",
       "port": 80,
       "protocol": "vmess",
       "settings": {
-        "id": "6e3ee1de-381f-11ee-87f9-f23c91cfbbc9",
+        "id": "775baa4a-d75b-11ef-a11a-f23c913c8d2b",
         "alterId": 2,
         "security": "auto",
         "network": "ws",
@@ -1499,22 +633,22 @@
         "serverName": "broadcastlv.chat.bilibili.com"
       },
       "extra": {
-        "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrfCfh7Ag6aaZ5rivIOeUteiur+ebiOenkeaciemZkOWFrOWPuCIsImFkZCI6ImJkMTI5NDRhLXN2MHhzMC10MmxjMWMtMW1pbTIuaGsucDVwdi5jb20iLCJwb3J0IjoiODAiLCJ0eXBlIjoibm9uZSIsImlkIjoiNmUzZWUxZGUtMzgxZi0xMWVlLTg3ZjktZjIzYzkxY2ZiYmM5IiwiYWlkIjoiMiIsIm5ldCI6IndzIiwicGF0aCI6Ii8iLCJob3N0IjoiYnJvYWRjYXN0bHYuY2hhdC5iaWxpYmlsaS5jb20iLCJ0bHMiOiIifQ==",
-        "addedAt": "2025-11-01T06:24:35.946Z"
+        "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrfCfh7Ag6aaZ5rivIOeUteiur+ebiOenkeaciemZkOWFrOWPuCIsImFkZCI6ImRkMmQyM2M3LXQwNDlzMC10MXA4cWwtMXQ4cTMuaGszLnA1cHYuY29tIiwicG9ydCI6IjgwIiwidHlwZSI6Im5vbmUiLCJpZCI6Ijc3NWJhYTRhLWQ3NWItMTFlZi1hMTFhLWYyM2M5MTNjOGQyYiIsImFpZCI6IjIiLCJuZXQiOiJ3cyIsInBhdGgiOiIvIiwiaG9zdCI6ImJyb2FkY2FzdGx2LmNoYXQuYmlsaWJpbGkuY29tIiwidGxzIjoiIn0=",
+        "addedAt": "2025-11-01T12:33:18.782Z"
       },
       "metadata": {
         "source": "v2ray"
       }
     },
     {
-      "id": "w4uf6rby3",
+      "id": "a7ih7vkfv",
       "type": "vmess",
       "name": "🇭🇰 香港 电讯盈科有限公司",
-      "server": "532538de-sv0xs0-sylfil-1gcq2.hk.p5pv.com",
+      "server": "be4fe2f9-t3gn40-tdnzz0-1qtp7.hk3.p5pv.com",
       "port": 80,
       "protocol": "vmess",
       "settings": {
-        "id": "759bf004-6137-11ec-bd7c-f23c913c8d2b",
+        "id": "3653c708-df72-11ee-aec1-f23c9164ca5d",
         "alterId": 2,
         "security": "auto",
         "network": "ws",
@@ -1527,22 +661,22 @@
         "serverName": "broadcastlv.chat.bilibili.com"
       },
       "extra": {
-        "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrfCfh7Ag6aaZ5rivIOeUteiur+ebiOenkeaciemZkOWFrOWPuCIsImFkZCI6IjUzMjUzOGRlLXN2MHhzMC1zeWxmaWwtMWdjcTIuaGsucDVwdi5jb20iLCJwb3J0IjoiODAiLCJ0eXBlIjoibm9uZSIsImlkIjoiNzU5YmYwMDQtNjEzNy0xMWVjLWJkN2MtZjIzYzkxM2M4ZDJiIiwiYWlkIjoiMiIsIm5ldCI6IndzIiwicGF0aCI6Ii8iLCJob3N0IjoiYnJvYWRjYXN0bHYuY2hhdC5iaWxpYmlsaS5jb20iLCJ0bHMiOiIifQ==",
-        "addedAt": "2025-11-01T06:24:35.946Z"
+        "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrfCfh7Ag6aaZ5rivIOeUteiur+ebiOenkeaciemZkOWFrOWPuCIsImFkZCI6ImJlNGZlMmY5LXQzZ240MC10ZG56ejAtMXF0cDcuaGszLnA1cHYuY29tIiwicG9ydCI6IjgwIiwidHlwZSI6Im5vbmUiLCJpZCI6IjM2NTNjNzA4LWRmNzItMTFlZS1hZWMxLWYyM2M5MTY0Y2E1ZCIsImFpZCI6IjIiLCJuZXQiOiJ3cyIsInBhdGgiOiIvIiwiaG9zdCI6ImJyb2FkY2FzdGx2LmNoYXQuYmlsaWJpbGkuY29tIiwidGxzIjoiIn0=",
+        "addedAt": "2025-11-01T12:33:18.782Z"
       },
       "metadata": {
         "source": "v2ray"
       }
     },
     {
-      "id": "aik59f82z",
+      "id": "azlc1p4mt",
       "type": "vmess",
       "name": "🇭🇰 香港 电讯盈科有限公司",
-      "server": "eaf70f66-sv0xs0-t8ivpf-z65w.hk.p5pv.com",
+      "server": "2e617951-sv2sg0-taj9mo-1tco3.hk3.p5pv.com",
       "port": 80,
       "protocol": "vmess",
       "settings": {
-        "id": "a2313fba-74a6-11ed-a8bf-f23c91cfbbc9",
+        "id": "e29de954-ea01-11ef-a271-f23c91cfbbc9",
         "alterId": 2,
         "security": "auto",
         "network": "ws",
@@ -1555,43 +689,15 @@
         "serverName": "broadcastlv.chat.bilibili.com"
       },
       "extra": {
-        "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrfCfh7Ag6aaZ5rivIOeUteiur+ebiOenkeaciemZkOWFrOWPuCIsImFkZCI6ImVhZjcwZjY2LXN2MHhzMC10OGl2cGYtejY1dy5oay5wNXB2LmNvbSIsInBvcnQiOiI4MCIsInR5cGUiOiJub25lIiwiaWQiOiJhMjMxM2ZiYS03NGE2LTExZWQtYThiZi1mMjNjOTFjZmJiYzkiLCJhaWQiOiIyIiwibmV0Ijoid3MiLCJwYXRoIjoiLyIsImhvc3QiOiJicm9hZGNhc3Rsdi5jaGF0LmJpbGliaWxpLmNvbSIsInRscyI6IiJ9",
-        "addedAt": "2025-11-01T06:24:35.946Z"
+        "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrfCfh7Ag6aaZ5rivIOeUteiur+ebiOenkeaciemZkOWFrOWPuCIsImFkZCI6IjJlNjE3OTUxLXN2MnNnMC10YWo5bW8tMXRjbzMuaGszLnA1cHYuY29tIiwicG9ydCI6IjgwIiwidHlwZSI6Im5vbmUiLCJpZCI6ImUyOWRlOTU0LWVhMDEtMTFlZi1hMjcxLWYyM2M5MWNmYmJjOSIsImFpZCI6IjIiLCJuZXQiOiJ3cyIsInBhdGgiOiIvIiwiaG9zdCI6ImJyb2FkY2FzdGx2LmNoYXQuYmlsaWJpbGkuY29tIiwidGxzIjoiIn0=",
+        "addedAt": "2025-11-01T12:33:18.782Z"
       },
       "metadata": {
         "source": "v2ray"
       }
     },
     {
-      "id": "iy54jefsu",
-      "type": "vmess",
-      "name": "🇭🇰 香港 电讯盈科有限公司",
-      "server": "ab01eb81-sv2sg0-tcsjnd-1tff5.hk.p5pv.com",
-      "port": 80,
-      "protocol": "vmess",
-      "settings": {
-        "id": "dfb6b402-f422-11ef-80e5-f23c9164ca5d",
-        "alterId": 2,
-        "security": "auto",
-        "network": "ws",
-        "ws": true,
-        "wsPath": "/",
-        "wsHeaders": {
-          "Host": "broadcastlv.chat.bilibili.com"
-        },
-        "tls": false,
-        "serverName": "broadcastlv.chat.bilibili.com"
-      },
-      "extra": {
-        "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrfCfh7Ag6aaZ5rivIOeUteiur+ebiOenkeaciemZkOWFrOWPuCIsImFkZCI6ImFiMDFlYjgxLXN2MnNnMC10Y3NqbmQtMXRmZjUuaGsucDVwdi5jb20iLCJwb3J0IjoiODAiLCJ0eXBlIjoibm9uZSIsImlkIjoiZGZiNmI0MDItZjQyMi0xMWVmLTgwZTUtZjIzYzkxNjRjYTVkIiwiYWlkIjoiMiIsIm5ldCI6IndzIiwicGF0aCI6Ii8iLCJob3N0IjoiYnJvYWRjYXN0bHYuY2hhdC5iaWxpYmlsaS5jb20iLCJ0bHMiOiIifQ==",
-        "addedAt": "2025-11-01T06:24:35.946Z"
-      },
-      "metadata": {
-        "source": "v2ray"
-      }
-    },
-    {
-      "id": "e8rm9b1lt",
+      "id": "v8ngwkqhw",
       "type": "vmess",
       "name": "🇭🇰 香港 电讯盈科有限公司",
       "server": "09f05870-t35j40-tdnzz0-1qtp7.hk3.p5pv.com",
@@ -1612,14 +718,462 @@
       },
       "extra": {
         "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrfCfh7Ag6aaZ5rivIOeUteiur+ebiOenkeaciemZkOWFrOWPuCIsImFkZCI6IjA5ZjA1ODcwLXQzNWo0MC10ZG56ejAtMXF0cDcuaGszLnA1cHYuY29tIiwicG9ydCI6IjgwIiwidHlwZSI6Im5vbmUiLCJpZCI6IjM2NTNjNzA4LWRmNzItMTFlZS1hZWMxLWYyM2M5MTY0Y2E1ZCIsImFpZCI6IjIiLCJuZXQiOiJ3cyIsInBhdGgiOiIvIiwiaG9zdCI6ImJyb2FkY2FzdGx2LmNoYXQuYmlsaWJpbGkuY29tIiwidGxzIjoiIn0=",
-        "addedAt": "2025-11-01T06:24:35.946Z"
+        "addedAt": "2025-11-01T12:33:18.782Z"
       },
       "metadata": {
         "source": "v2ray"
       }
     },
     {
-      "id": "k0t1wqztd",
+      "id": "perus255f",
+      "type": "vmess",
+      "name": "🇭🇰 香港 电讯盈科有限公司",
+      "server": "38721ce7-t3rr40-tdnzz0-1qtp7.hk3.p5pv.com",
+      "port": 80,
+      "protocol": "vmess",
+      "settings": {
+        "id": "3653c708-df72-11ee-aec1-f23c9164ca5d",
+        "alterId": 2,
+        "security": "auto",
+        "network": "ws",
+        "ws": true,
+        "wsPath": "/",
+        "wsHeaders": {
+          "Host": "broadcastlv.chat.bilibili.com"
+        },
+        "tls": false,
+        "serverName": "broadcastlv.chat.bilibili.com"
+      },
+      "extra": {
+        "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrfCfh7Ag6aaZ5rivIOeUteiur+ebiOenkeaciemZkOWFrOWPuCIsImFkZCI6IjM4NzIxY2U3LXQzcnI0MC10ZG56ejAtMXF0cDcuaGszLnA1cHYuY29tIiwicG9ydCI6IjgwIiwidHlwZSI6Im5vbmUiLCJpZCI6IjM2NTNjNzA4LWRmNzItMTFlZS1hZWMxLWYyM2M5MTY0Y2E1ZCIsImFpZCI6IjIiLCJuZXQiOiJ3cyIsInBhdGgiOiIvIiwiaG9zdCI6ImJyb2FkY2FzdGx2LmNoYXQuYmlsaWJpbGkuY29tIiwidGxzIjoiIn0=",
+        "addedAt": "2025-11-01T12:33:18.782Z"
+      },
+      "metadata": {
+        "source": "v2ray"
+      }
+    },
+    {
+      "id": "bgao41baj",
+      "type": "vmess",
+      "name": "🇭🇰 香港 电讯盈科有限公司",
+      "server": "fa97199d-sv0xs0-t15jkc-eyem.hk.p5pv.com",
+      "port": 80,
+      "protocol": "vmess",
+      "settings": {
+        "id": "64617ed2-4823-11ef-9f2d-f23c9164ca5d",
+        "alterId": 2,
+        "security": "auto",
+        "network": "ws",
+        "ws": true,
+        "wsPath": "/",
+        "wsHeaders": {
+          "Host": "broadcastlv.chat.bilibili.com"
+        },
+        "tls": false,
+        "serverName": "broadcastlv.chat.bilibili.com"
+      },
+      "extra": {
+        "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrfCfh7Ag6aaZ5rivIOeUteiur+ebiOenkeaciemZkOWFrOWPuCIsImFkZCI6ImZhOTcxOTlkLXN2MHhzMC10MTVqa2MtZXllbS5oay5wNXB2LmNvbSIsInBvcnQiOiI4MCIsInR5cGUiOiJub25lIiwiaWQiOiI2NDYxN2VkMi00ODIzLTExZWYtOWYyZC1mMjNjOTE2NGNhNWQiLCJhaWQiOiIyIiwibmV0Ijoid3MiLCJwYXRoIjoiLyIsImhvc3QiOiJicm9hZGNhc3Rsdi5jaGF0LmJpbGliaWxpLmNvbSIsInRscyI6IiJ9",
+        "addedAt": "2025-11-01T12:33:18.782Z"
+      },
+      "metadata": {
+        "source": "v2ray"
+      }
+    },
+    {
+      "id": "zfy6wu5yg",
+      "type": "vmess",
+      "name": "🇭🇰 香港 电讯盈科有限公司",
+      "server": "3be014a6-sv0xs0-svpmdc-nx3b.hk3.p5pv.com",
+      "port": 80,
+      "protocol": "vmess",
+      "settings": {
+        "id": "32315324-cf6b-11ed-979b-f23c9164ca5d",
+        "alterId": 2,
+        "security": "auto",
+        "network": "ws",
+        "ws": true,
+        "wsPath": "/",
+        "wsHeaders": {
+          "Host": "broadcastlv.chat.bilibili.com"
+        },
+        "tls": false,
+        "serverName": "broadcastlv.chat.bilibili.com"
+      },
+      "extra": {
+        "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrfCfh7Ag6aaZ5rivIOeUteiur+ebiOenkeaciemZkOWFrOWPuCIsImFkZCI6IjNiZTAxNGE2LXN2MHhzMC1zdnBtZGMtbngzYi5oazMucDVwdi5jb20iLCJwb3J0IjoiODAiLCJ0eXBlIjoibm9uZSIsImlkIjoiMzIzMTUzMjQtY2Y2Yi0xMWVkLTk3OWItZjIzYzkxNjRjYTVkIiwiYWlkIjoiMiIsIm5ldCI6IndzIiwicGF0aCI6Ii8iLCJob3N0IjoiYnJvYWRjYXN0bHYuY2hhdC5iaWxpYmlsaS5jb20iLCJ0bHMiOiIifQ==",
+        "addedAt": "2025-11-01T12:33:18.782Z"
+      },
+      "metadata": {
+        "source": "v2ray"
+      }
+    },
+    {
+      "id": "nc089n6pb",
+      "type": "vmess",
+      "name": "🇭🇰 香港 电讯盈科有限公司",
+      "server": "12988683-sv2sg0-t2whio-1jcwu.hk3.p5pv.com",
+      "port": 80,
+      "protocol": "vmess",
+      "settings": {
+        "id": "f93486ce-cc84-11ed-9e98-f23c913c8d2b",
+        "alterId": 2,
+        "security": "auto",
+        "network": "ws",
+        "ws": true,
+        "wsPath": "/",
+        "wsHeaders": {
+          "Host": "broadcastlv.chat.bilibili.com"
+        },
+        "tls": false,
+        "serverName": "broadcastlv.chat.bilibili.com"
+      },
+      "extra": {
+        "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrfCfh7Ag6aaZ5rivIOeUteiur+ebiOenkeaciemZkOWFrOWPuCIsImFkZCI6IjEyOTg4NjgzLXN2MnNnMC10MndoaW8tMWpjd3UuaGszLnA1cHYuY29tIiwicG9ydCI6IjgwIiwidHlwZSI6Im5vbmUiLCJpZCI6ImY5MzQ4NmNlLWNjODQtMTFlZC05ZTk4LWYyM2M5MTNjOGQyYiIsImFpZCI6IjIiLCJuZXQiOiJ3cyIsInBhdGgiOiIvIiwiaG9zdCI6ImJyb2FkY2FzdGx2LmNoYXQuYmlsaWJpbGkuY29tIiwidGxzIjoiIn0=",
+        "addedAt": "2025-11-01T12:33:18.782Z"
+      },
+      "metadata": {
+        "source": "v2ray"
+      }
+    },
+    {
+      "id": "zmew2hkah",
+      "type": "vmess",
+      "name": "🇭🇰 香港 电讯盈科有限公司",
+      "server": "4fdb9910-sv0xs0-t2p691-1s4hc.hk.p5pv.com",
+      "port": 80,
+      "protocol": "vmess",
+      "settings": {
+        "id": "aafedc64-9c23-11ef-a79f-f23c91cfbbc9",
+        "alterId": 2,
+        "security": "auto",
+        "network": "ws",
+        "ws": true,
+        "wsPath": "/",
+        "wsHeaders": {
+          "Host": "broadcastlv.chat.bilibili.com"
+        },
+        "tls": false,
+        "serverName": "broadcastlv.chat.bilibili.com"
+      },
+      "extra": {
+        "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrfCfh7Ag6aaZ5rivIOeUteiur+ebiOenkeaciemZkOWFrOWPuCIsImFkZCI6IjRmZGI5OTEwLXN2MHhzMC10MnA2OTEtMXM0aGMuaGsucDVwdi5jb20iLCJwb3J0IjoiODAiLCJ0eXBlIjoibm9uZSIsImlkIjoiYWFmZWRjNjQtOWMyMy0xMWVmLWE3OWYtZjIzYzkxY2ZiYmM5IiwiYWlkIjoiMiIsIm5ldCI6IndzIiwicGF0aCI6Ii8iLCJob3N0IjoiYnJvYWRjYXN0bHYuY2hhdC5iaWxpYmlsaS5jb20iLCJ0bHMiOiIifQ==",
+        "addedAt": "2025-11-01T12:33:18.782Z"
+      },
+      "metadata": {
+        "source": "v2ray"
+      }
+    },
+    {
+      "id": "81j2w20or",
+      "type": "vmess",
+      "name": "🇭🇰 香港 电讯盈科有限公司",
+      "server": "8058f442-sv6hs0-t2p691-1s4hc.hk.p5pv.com",
+      "port": 80,
+      "protocol": "vmess",
+      "settings": {
+        "id": "aafedc64-9c23-11ef-a79f-f23c91cfbbc9",
+        "alterId": 2,
+        "security": "auto",
+        "network": "ws",
+        "ws": true,
+        "wsPath": "/",
+        "wsHeaders": {
+          "Host": "broadcastlv.chat.bilibili.com"
+        },
+        "tls": false,
+        "serverName": "broadcastlv.chat.bilibili.com"
+      },
+      "extra": {
+        "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrfCfh7Ag6aaZ5rivIOeUteiur+ebiOenkeaciemZkOWFrOWPuCIsImFkZCI6IjgwNThmNDQyLXN2NmhzMC10MnA2OTEtMXM0aGMuaGsucDVwdi5jb20iLCJwb3J0IjoiODAiLCJ0eXBlIjoibm9uZSIsImlkIjoiYWFmZWRjNjQtOWMyMy0xMWVmLWE3OWYtZjIzYzkxY2ZiYmM5IiwiYWlkIjoiMiIsIm5ldCI6IndzIiwicGF0aCI6Ii8iLCJob3N0IjoiYnJvYWRjYXN0bHYuY2hhdC5iaWxpYmlsaS5jb20iLCJ0bHMiOiIifQ==",
+        "addedAt": "2025-11-01T12:33:18.782Z"
+      },
+      "metadata": {
+        "source": "v2ray"
+      }
+    },
+    {
+      "id": "gqzojs6se",
+      "type": "vmess",
+      "name": "🇭🇰 香港 电讯盈科有限公司",
+      "server": "a58b4c29-sv4n40-syfj90-1r9dt.hk3.p5pv.com",
+      "port": 80,
+      "protocol": "vmess",
+      "settings": {
+        "id": "de003c72-0157-11ef-86da-f23c91cfbbc9",
+        "alterId": 2,
+        "security": "auto",
+        "network": "ws",
+        "ws": true,
+        "wsPath": "/",
+        "wsHeaders": {
+          "Host": "a58b4c29-sv4n40-syfj90-1r9dt.hk3.p5pv.com"
+        },
+        "tls": false,
+        "serverName": "a58b4c29-sv4n40-syfj90-1r9dt.hk3.p5pv.com"
+      },
+      "extra": {
+        "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrfCfh7Ag6aaZ5rivIOeUteiur+ebiOenkeaciemZkOWFrOWPuCIsImFkZCI6ImE1OGI0YzI5LXN2NG40MC1zeWZqOTAtMXI5ZHQuaGszLnA1cHYuY29tIiwicG9ydCI6IjgwIiwidHlwZSI6Im5vbmUiLCJpZCI6ImRlMDAzYzcyLTAxNTctMTFlZi04NmRhLWYyM2M5MWNmYmJjOSIsImFpZCI6IjIiLCJuZXQiOiJ3cyIsInBhdGgiOiIvIiwiaG9zdCI6ImE1OGI0YzI5LXN2NG40MC1zeWZqOTAtMXI5ZHQuaGszLnA1cHYuY29tIiwidGxzIjoiIn0=",
+        "addedAt": "2025-11-01T12:33:18.782Z"
+      },
+      "metadata": {
+        "source": "v2ray"
+      }
+    },
+    {
+      "id": "ss6dieu8z",
+      "type": "vmess",
+      "name": "🇭🇰 香港 电讯盈科有限公司",
+      "server": "9c12ce3d-sv2sg0-t65a3e-tqgz.hk.p5pv.com",
+      "port": 80,
+      "protocol": "vmess",
+      "settings": {
+        "id": "88da0d21-b25d-11ec-b9f7-f23c91cfbbc9",
+        "alterId": 2,
+        "security": "auto",
+        "network": "ws",
+        "ws": true,
+        "wsPath": "/",
+        "wsHeaders": {
+          "Host": "broadcastlv.chat.bilibili.com"
+        },
+        "tls": false,
+        "serverName": "broadcastlv.chat.bilibili.com"
+      },
+      "extra": {
+        "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrfCfh7Ag6aaZ5rivIOeUteiur+ebiOenkeaciemZkOWFrOWPuCIsImFkZCI6IjljMTJjZTNkLXN2MnNnMC10NjVhM2UtdHFnei5oay5wNXB2LmNvbSIsInBvcnQiOiI4MCIsInR5cGUiOiJub25lIiwiaWQiOiI4OGRhMGQyMS1iMjVkLTExZWMtYjlmNy1mMjNjOTFjZmJiYzkiLCJhaWQiOiIyIiwibmV0Ijoid3MiLCJwYXRoIjoiLyIsImhvc3QiOiJicm9hZGNhc3Rsdi5jaGF0LmJpbGliaWxpLmNvbSIsInRscyI6IiJ9",
+        "addedAt": "2025-11-01T12:33:18.782Z"
+      },
+      "metadata": {
+        "source": "v2ray"
+      }
+    },
+    {
+      "id": "emhjjxeg1",
+      "type": "vmess",
+      "name": "🇭🇰 香港 电讯盈科有限公司",
+      "server": "055dc4d8-sz8sg0-tfvcxz-1nq4g.hk.p5pv.com",
+      "port": 80,
+      "protocol": "vmess",
+      "settings": {
+        "id": "80aa5178-f936-11ed-8ce6-f23c91369f2d",
+        "alterId": 2,
+        "security": "auto",
+        "network": "ws",
+        "ws": true,
+        "wsPath": "/",
+        "wsHeaders": {
+          "Host": "broadcastlv.chat.bilibili.com"
+        },
+        "tls": false,
+        "serverName": "broadcastlv.chat.bilibili.com"
+      },
+      "extra": {
+        "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrfCfh7Ag6aaZ5rivIOeUteiur+ebiOenkeaciemZkOWFrOWPuCIsImFkZCI6IjA1NWRjNGQ4LXN6OHNnMC10ZnZjeHotMW5xNGcuaGsucDVwdi5jb20iLCJwb3J0IjoiODAiLCJ0eXBlIjoibm9uZSIsImlkIjoiODBhYTUxNzgtZjkzNi0xMWVkLThjZTYtZjIzYzkxMzY5ZjJkIiwiYWlkIjoiMiIsIm5ldCI6IndzIiwicGF0aCI6Ii8iLCJob3N0IjoiYnJvYWRjYXN0bHYuY2hhdC5iaWxpYmlsaS5jb20iLCJ0bHMiOiIifQ==",
+        "addedAt": "2025-11-01T12:33:18.782Z"
+      },
+      "metadata": {
+        "source": "v2ray"
+      }
+    },
+    {
+      "id": "y8u95arzk",
+      "type": "vmess",
+      "name": "🇭🇰 香港 电讯盈科有限公司",
+      "server": "8e42f8d1-sv0xs0-szxh9w-46gc.hk3.p5pv.com",
+      "port": 80,
+      "protocol": "vmess",
+      "settings": {
+        "id": "225d1cca-d744-11ef-b790-f23c91cfbbc9",
+        "alterId": 2,
+        "security": "auto",
+        "network": "ws",
+        "ws": true,
+        "wsPath": "/",
+        "wsHeaders": {
+          "Host": "8e42f8d1-sv0xs0-szxh9w-46gc.hk3.p5pv.com"
+        },
+        "tls": false,
+        "serverName": "8e42f8d1-sv0xs0-szxh9w-46gc.hk3.p5pv.com"
+      },
+      "extra": {
+        "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrfCfh7Ag6aaZ5rivIOeUteiur+ebiOenkeaciemZkOWFrOWPuCIsImFkZCI6IjhlNDJmOGQxLXN2MHhzMC1zenhoOXctNDZnYy5oazMucDVwdi5jb20iLCJwb3J0IjoiODAiLCJ0eXBlIjoibm9uZSIsImlkIjoiMjI1ZDFjY2EtZDc0NC0xMWVmLWI3OTAtZjIzYzkxY2ZiYmM5IiwiYWlkIjoiMiIsIm5ldCI6IndzIiwicGF0aCI6Ii8iLCJob3N0IjoiOGU0MmY4ZDEtc3YweHMwLXN6eGg5dy00NmdjLmhrMy5wNXB2LmNvbSIsInRscyI6IiJ9",
+        "addedAt": "2025-11-01T12:33:18.782Z"
+      },
+      "metadata": {
+        "source": "v2ray"
+      }
+    },
+    {
+      "id": "ktq6aprmc",
+      "type": "vmess",
+      "name": "🇭🇰 香港 电讯盈科有限公司",
+      "server": "5e4eabfc-sv2sg0-t2lc1c-1mim2.hk.p5pv.com",
+      "port": 80,
+      "protocol": "vmess",
+      "settings": {
+        "id": "6e3ee1de-381f-11ee-87f9-f23c91cfbbc9",
+        "alterId": 2,
+        "security": "auto",
+        "network": "ws",
+        "ws": true,
+        "wsPath": "/",
+        "wsHeaders": {
+          "Host": "broadcastlv.chat.bilibili.com"
+        },
+        "tls": false,
+        "serverName": "broadcastlv.chat.bilibili.com"
+      },
+      "extra": {
+        "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrfCfh7Ag6aaZ5rivIOeUteiur+ebiOenkeaciemZkOWFrOWPuCIsImFkZCI6IjVlNGVhYmZjLXN2MnNnMC10MmxjMWMtMW1pbTIuaGsucDVwdi5jb20iLCJwb3J0IjoiODAiLCJ0eXBlIjoibm9uZSIsImlkIjoiNmUzZWUxZGUtMzgxZi0xMWVlLTg3ZjktZjIzYzkxY2ZiYmM5IiwiYWlkIjoiMiIsIm5ldCI6IndzIiwicGF0aCI6Ii8iLCJob3N0IjoiYnJvYWRjYXN0bHYuY2hhdC5iaWxpYmlsaS5jb20iLCJ0bHMiOiIifQ==",
+        "addedAt": "2025-11-01T12:33:18.782Z"
+      },
+      "metadata": {
+        "source": "v2ray"
+      }
+    },
+    {
+      "id": "zrjjcvtx4",
+      "type": "vmess",
+      "name": "🇭🇰 香港 电讯盈科有限公司",
+      "server": "25b98d06-sv0xs0-suzz2n-vmdo.hk3.p5pv.com",
+      "port": 80,
+      "protocol": "vmess",
+      "settings": {
+        "id": "24e32978-4858-11eb-8684-f23c913c8d2b",
+        "alterId": 2,
+        "security": "auto",
+        "network": "ws",
+        "ws": true,
+        "wsPath": "/",
+        "wsHeaders": {
+          "Host": "broadcastlv.chat.bilibili.com"
+        },
+        "tls": false,
+        "serverName": "broadcastlv.chat.bilibili.com"
+      },
+      "extra": {
+        "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrfCfh7Ag6aaZ5rivIOeUteiur+ebiOenkeaciemZkOWFrOWPuCIsImFkZCI6IjI1Yjk4ZDA2LXN2MHhzMC1zdXp6Mm4tdm1kby5oazMucDVwdi5jb20iLCJwb3J0IjoiODAiLCJ0eXBlIjoibm9uZSIsImlkIjoiMjRlMzI5NzgtNDg1OC0xMWViLTg2ODQtZjIzYzkxM2M4ZDJiIiwiYWlkIjoiMiIsIm5ldCI6IndzIiwicGF0aCI6Ii8iLCJob3N0IjoiYnJvYWRjYXN0bHYuY2hhdC5iaWxpYmlsaS5jb20iLCJ0bHMiOiIifQ==",
+        "addedAt": "2025-11-01T12:33:18.782Z"
+      },
+      "metadata": {
+        "source": "v2ray"
+      }
+    },
+    {
+      "id": "r3zlri8uj",
+      "type": "vmess",
+      "name": "🇭🇰 香港 电讯盈科有限公司",
+      "server": "c5765779-sv2sg0-syu0n5-1hd7v.hk3.p5pv.com",
+      "port": 80,
+      "protocol": "vmess",
+      "settings": {
+        "id": "f73c64bc-9e8c-11ec-bd7c-f23c913c8d2b",
+        "alterId": 2,
+        "security": "auto",
+        "network": "ws",
+        "ws": true,
+        "wsPath": "/",
+        "wsHeaders": {
+          "Host": "broadcastlv.chat.bilibili.com"
+        },
+        "tls": false,
+        "serverName": "broadcastlv.chat.bilibili.com"
+      },
+      "extra": {
+        "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrfCfh7Ag6aaZ5rivIOeUteiur+ebiOenkeaciemZkOWFrOWPuCIsImFkZCI6ImM1NzY1Nzc5LXN2MnNnMC1zeXUwbjUtMWhkN3YuaGszLnA1cHYuY29tIiwicG9ydCI6IjgwIiwidHlwZSI6Im5vbmUiLCJpZCI6ImY3M2M2NGJjLTllOGMtMTFlYy1iZDdjLWYyM2M5MTNjOGQyYiIsImFpZCI6IjIiLCJuZXQiOiJ3cyIsInBhdGgiOiIvIiwiaG9zdCI6ImJyb2FkY2FzdGx2LmNoYXQuYmlsaWJpbGkuY29tIiwidGxzIjoiIn0=",
+        "addedAt": "2025-11-01T12:33:18.782Z"
+      },
+      "metadata": {
+        "source": "v2ray"
+      }
+    },
+    {
+      "id": "9uunsh2lj",
+      "type": "vmess",
+      "name": "🇭🇰 香港 电讯盈科有限公司",
+      "server": "61fc54d4-sv4n40-ta5i1s-1j61y.hk3.p5pv.com",
+      "port": 80,
+      "protocol": "vmess",
+      "settings": {
+        "id": "f13f964e-f06c-11ec-a858-f23c91cfbbc9",
+        "alterId": 2,
+        "security": "auto",
+        "network": "ws",
+        "ws": true,
+        "wsPath": "/",
+        "wsHeaders": {
+          "Host": "broadcastlv.chat.bilibili.com"
+        },
+        "tls": false,
+        "serverName": "broadcastlv.chat.bilibili.com"
+      },
+      "extra": {
+        "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrfCfh7Ag6aaZ5rivIOeUteiur+ebiOenkeaciemZkOWFrOWPuCIsImFkZCI6IjYxZmM1NGQ0LXN2NG40MC10YTVpMXMtMWo2MXkuaGszLnA1cHYuY29tIiwicG9ydCI6IjgwIiwidHlwZSI6Im5vbmUiLCJpZCI6ImYxM2Y5NjRlLWYwNmMtMTFlYy1hODU4LWYyM2M5MWNmYmJjOSIsImFpZCI6IjIiLCJuZXQiOiJ3cyIsInBhdGgiOiIvIiwiaG9zdCI6ImJyb2FkY2FzdGx2LmNoYXQuYmlsaWJpbGkuY29tIiwidGxzIjoiIn0=",
+        "addedAt": "2025-11-01T12:33:18.782Z"
+      },
+      "metadata": {
+        "source": "v2ray"
+      }
+    },
+    {
+      "id": "msara6m04",
+      "type": "vmess",
+      "name": "🇭🇰 香港 电讯盈科有限公司",
+      "server": "b8ffcda3-sv2sg0-sv37gm-81nv.hk3.p5pv.com",
+      "port": 80,
+      "protocol": "vmess",
+      "settings": {
+        "id": "47e91fb6-25b8-df52-bc18-3cdc8548192f",
+        "alterId": 2,
+        "security": "auto",
+        "network": "ws",
+        "ws": true,
+        "wsPath": "/",
+        "wsHeaders": {
+          "Host": "broadcastlv.chat.bilibili.com"
+        },
+        "tls": false,
+        "serverName": "broadcastlv.chat.bilibili.com"
+      },
+      "extra": {
+        "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrfCfh7Ag6aaZ5rivIOeUteiur+ebiOenkeaciemZkOWFrOWPuCIsImFkZCI6ImI4ZmZjZGEzLXN2MnNnMC1zdjM3Z20tODFudi5oazMucDVwdi5jb20iLCJwb3J0IjoiODAiLCJ0eXBlIjoibm9uZSIsImlkIjoiNDdlOTFmYjYtMjViOC1kZjUyLWJjMTgtM2NkYzg1NDgxOTJmIiwiYWlkIjoiMiIsIm5ldCI6IndzIiwicGF0aCI6Ii8iLCJob3N0IjoiYnJvYWRjYXN0bHYuY2hhdC5iaWxpYmlsaS5jb20iLCJ0bHMiOiIifQ==",
+        "addedAt": "2025-11-01T12:33:18.782Z"
+      },
+      "metadata": {
+        "source": "v2ray"
+      }
+    },
+    {
+      "id": "qvtc5jdzu",
+      "type": "vmess",
+      "name": "🇭🇰 香港 电讯盈科有限公司",
+      "server": "bcad1ab1-sv0xs0-t61ki5-1smhu.hk3.p5pv.com",
+      "port": 80,
+      "protocol": "vmess",
+      "settings": {
+        "id": "62f2374c-891b-11ef-a3f6-f23c9164ca5d",
+        "alterId": 2,
+        "security": "auto",
+        "network": "ws",
+        "ws": true,
+        "wsPath": "/",
+        "wsHeaders": {
+          "Host": "bcad1ab1-sv0xs0-t61ki5-1smhu.hk3.p5pv.com"
+        },
+        "tls": false,
+        "serverName": "bcad1ab1-sv0xs0-t61ki5-1smhu.hk3.p5pv.com"
+      },
+      "extra": {
+        "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrfCfh7Ag6aaZ5rivIOeUteiur+ebiOenkeaciemZkOWFrOWPuCIsImFkZCI6ImJjYWQxYWIxLXN2MHhzMC10NjFraTUtMXNtaHUuaGszLnA1cHYuY29tIiwicG9ydCI6IjgwIiwidHlwZSI6Im5vbmUiLCJpZCI6IjYyZjIzNzRjLTg5MWItMTFlZi1hM2Y2LWYyM2M5MTY0Y2E1ZCIsImFpZCI6IjIiLCJuZXQiOiJ3cyIsInBhdGgiOiIvIiwiaG9zdCI6ImJjYWQxYWIxLXN2MHhzMC10NjFraTUtMXNtaHUuaGszLnA1cHYuY29tIiwidGxzIjoiIn0=",
+        "addedAt": "2025-11-01T12:33:18.782Z"
+      },
+      "metadata": {
+        "source": "v2ray"
+      }
+    },
+    {
+      "id": "rixdfud07",
       "type": "vmess",
       "name": "🇭🇰 香港 电讯盈科有限公司",
       "server": "6d272cf7-t00kg0-t1bsla-tng5.hk.p5pv.com",
@@ -1640,21 +1194,21 @@
       },
       "extra": {
         "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrfCfh7Ag6aaZ5rivIOeUteiur+ebiOenkeaciemZkOWFrOWPuCIsImFkZCI6IjZkMjcyY2Y3LXQwMGtnMC10MWJzbGEtdG5nNS5oay5wNXB2LmNvbSIsInBvcnQiOiI4MCIsInR5cGUiOiJub25lIiwiaWQiOiIyZWM1ODg1OC05NzZiLTExZWEtODJlZi1mMjNjOTE2NGNhNWQiLCJhaWQiOiIyIiwibmV0Ijoid3MiLCJwYXRoIjoiLyIsImhvc3QiOiJicm9hZGNhc3Rsdi5jaGF0LmJpbGliaWxpLmNvbSIsInRscyI6IiJ9",
-        "addedAt": "2025-11-01T06:24:35.946Z"
+        "addedAt": "2025-11-01T12:33:18.782Z"
       },
       "metadata": {
         "source": "v2ray"
       }
     },
     {
-      "id": "3hs1ufwnz",
+      "id": "u0222zeb5",
       "type": "vmess",
       "name": "🇭🇰 香港 电讯盈科有限公司",
-      "server": "56ef1baf-sv6hs0-t09t13-z7a1.hk.p5pv.com",
+      "server": "8546e833-sv4n40-t4v3jz-1k8ga.hk3.p5pv.com",
       "port": 80,
       "protocol": "vmess",
       "settings": {
-        "id": "3bd247a8-993e-11ec-a8bf-f23c91cfbbc9",
+        "id": "f860f2da-5035-11ed-bb74-f23c9164ca5d",
         "alterId": 2,
         "security": "auto",
         "network": "ws",
@@ -1667,22 +1221,50 @@
         "serverName": "broadcastlv.chat.bilibili.com"
       },
       "extra": {
-        "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrfCfh7Ag6aaZ5rivIOeUteiur+ebiOenkeaciemZkOWFrOWPuCIsImFkZCI6IjU2ZWYxYmFmLXN2NmhzMC10MDl0MTMtejdhMS5oay5wNXB2LmNvbSIsInBvcnQiOiI4MCIsInR5cGUiOiJub25lIiwiaWQiOiIzYmQyNDdhOC05OTNlLTExZWMtYThiZi1mMjNjOTFjZmJiYzkiLCJhaWQiOiIyIiwibmV0Ijoid3MiLCJwYXRoIjoiLyIsImhvc3QiOiJicm9hZGNhc3Rsdi5jaGF0LmJpbGliaWxpLmNvbSIsInRscyI6IiJ9",
-        "addedAt": "2025-11-01T06:24:35.946Z"
+        "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrfCfh7Ag6aaZ5rivIOeUteiur+ebiOenkeaciemZkOWFrOWPuCIsImFkZCI6Ijg1NDZlODMzLXN2NG40MC10NHYzanotMWs4Z2EuaGszLnA1cHYuY29tIiwicG9ydCI6IjgwIiwidHlwZSI6Im5vbmUiLCJpZCI6ImY4NjBmMmRhLTUwMzUtMTFlZC1iYjc0LWYyM2M5MTY0Y2E1ZCIsImFpZCI6IjIiLCJuZXQiOiJ3cyIsInBhdGgiOiIvIiwiaG9zdCI6ImJyb2FkY2FzdGx2LmNoYXQuYmlsaWJpbGkuY29tIiwidGxzIjoiIn0=",
+        "addedAt": "2025-11-01T12:33:18.782Z"
       },
       "metadata": {
         "source": "v2ray"
       }
     },
     {
-      "id": "qrgfcbr2i",
+      "id": "kxlmv0qh2",
       "type": "vmess",
       "name": "🇭🇰 香港 电讯盈科有限公司",
-      "server": "de6cdf0e-sv2sg0-syfj90-1r9dt.hk3.p5pv.com",
+      "server": "b1d0b8c3-swkhs0-syfwbx-1k0yf.hk.p5pv.com",
       "port": 80,
       "protocol": "vmess",
       "settings": {
-        "id": "de003c72-0157-11ef-86da-f23c91cfbbc9",
+        "id": "9cc3c03e-21fd-11ee-a642-f23c91369f2d",
+        "alterId": 2,
+        "security": "auto",
+        "network": "ws",
+        "ws": true,
+        "wsPath": "/",
+        "wsHeaders": {
+          "Host": "b1d0b8c3-swkhs0-syfwbx-1k0yf.hk.p5pv.com"
+        },
+        "tls": false,
+        "serverName": "b1d0b8c3-swkhs0-syfwbx-1k0yf.hk.p5pv.com"
+      },
+      "extra": {
+        "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrfCfh7Ag6aaZ5rivIOeUteiur+ebiOenkeaciemZkOWFrOWPuCIsImFkZCI6ImIxZDBiOGMzLXN3a2hzMC1zeWZ3YngtMWsweWYuaGsucDVwdi5jb20iLCJwb3J0IjoiODAiLCJ0eXBlIjoibm9uZSIsImlkIjoiOWNjM2MwM2UtMjFmZC0xMWVlLWE2NDItZjIzYzkxMzY5ZjJkIiwiYWlkIjoiMiIsIm5ldCI6IndzIiwicGF0aCI6Ii8iLCJob3N0IjoiYjFkMGI4YzMtc3draHMwLXN5ZndieC0xazB5Zi5oay5wNXB2LmNvbSIsInRscyI6IiJ9",
+        "addedAt": "2025-11-01T12:33:18.782Z"
+      },
+      "metadata": {
+        "source": "v2ray"
+      }
+    },
+    {
+      "id": "2uvtge1zt",
+      "type": "vmess",
+      "name": "🇭🇰 香港 电讯盈科有限公司",
+      "server": "04165a49-sv2sg0-t5cryd-4w8.hk3.p5pv.com",
+      "port": 80,
+      "protocol": "vmess",
+      "settings": {
+        "id": "ba7a37e3-033a-e1ab-06f6-9027aa4630f5",
         "alterId": 2,
         "security": "auto",
         "network": "ws",
@@ -1695,22 +1277,22 @@
         "serverName": "broadcastlv.chat.bilibili.com"
       },
       "extra": {
-        "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrfCfh7Ag6aaZ5rivIOeUteiur+ebiOenkeaciemZkOWFrOWPuCIsImFkZCI6ImRlNmNkZjBlLXN2MnNnMC1zeWZqOTAtMXI5ZHQuaGszLnA1cHYuY29tIiwicG9ydCI6IjgwIiwidHlwZSI6Im5vbmUiLCJpZCI6ImRlMDAzYzcyLTAxNTctMTFlZi04NmRhLWYyM2M5MWNmYmJjOSIsImFpZCI6IjIiLCJuZXQiOiJ3cyIsInBhdGgiOiIvIiwiaG9zdCI6ImJyb2FkY2FzdGx2LmNoYXQuYmlsaWJpbGkuY29tIiwidGxzIjoiIn0=",
-        "addedAt": "2025-11-01T06:24:35.946Z"
+        "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrfCfh7Ag6aaZ5rivIOeUteiur+ebiOenkeaciemZkOWFrOWPuCIsImFkZCI6IjA0MTY1YTQ5LXN2MnNnMC10NWNyeWQtNHc4LmhrMy5wNXB2LmNvbSIsInBvcnQiOiI4MCIsInR5cGUiOiJub25lIiwiaWQiOiJiYTdhMzdlMy0wMzNhLWUxYWItMDZmNi05MDI3YWE0NjMwZjUiLCJhaWQiOiIyIiwibmV0Ijoid3MiLCJwYXRoIjoiLyIsImhvc3QiOiJicm9hZGNhc3Rsdi5jaGF0LmJpbGliaWxpLmNvbSIsInRscyI6IiJ9",
+        "addedAt": "2025-11-01T12:33:18.782Z"
       },
       "metadata": {
         "source": "v2ray"
       }
     },
     {
-      "id": "7eloyhw6i",
+      "id": "g6l96gbzf",
       "type": "vmess",
       "name": "🇭🇰 香港 电讯盈科有限公司",
-      "server": "30451d6f-sv2sg0-t8ivpf-z65w.hk3.p5pv.com",
+      "server": "71735d9f-sv2sg0-t71mow-4cl7.hk.p5pv.com",
       "port": 80,
       "protocol": "vmess",
       "settings": {
-        "id": "a2313fba-74a6-11ed-a8bf-f23c91cfbbc9",
+        "id": "7c129766-8656-11ea-8fc9-f23c913c8d2b",
         "alterId": 2,
         "security": "auto",
         "network": "ws",
@@ -1723,22 +1305,22 @@
         "serverName": "broadcastlv.chat.bilibili.com"
       },
       "extra": {
-        "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrfCfh7Ag6aaZ5rivIOeUteiur+ebiOenkeaciemZkOWFrOWPuCIsImFkZCI6IjMwNDUxZDZmLXN2MnNnMC10OGl2cGYtejY1dy5oazMucDVwdi5jb20iLCJwb3J0IjoiODAiLCJ0eXBlIjoibm9uZSIsImlkIjoiYTIzMTNmYmEtNzRhNi0xMWVkLWE4YmYtZjIzYzkxY2ZiYmM5IiwiYWlkIjoiMiIsIm5ldCI6IndzIiwicGF0aCI6Ii8iLCJob3N0IjoiYnJvYWRjYXN0bHYuY2hhdC5iaWxpYmlsaS5jb20iLCJ0bHMiOiIifQ==",
-        "addedAt": "2025-11-01T06:24:35.946Z"
+        "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrfCfh7Ag6aaZ5rivIOeUteiur+ebiOenkeaciemZkOWFrOWPuCIsImFkZCI6IjcxNzM1ZDlmLXN2MnNnMC10NzFtb3ctNGNsNy5oay5wNXB2LmNvbSIsInBvcnQiOiI4MCIsInR5cGUiOiJub25lIiwiaWQiOiI3YzEyOTc2Ni04NjU2LTExZWEtOGZjOS1mMjNjOTEzYzhkMmIiLCJhaWQiOiIyIiwibmV0Ijoid3MiLCJwYXRoIjoiLyIsImhvc3QiOiJicm9hZGNhc3Rsdi5jaGF0LmJpbGliaWxpLmNvbSIsInRscyI6IiJ9",
+        "addedAt": "2025-11-01T12:33:18.782Z"
       },
       "metadata": {
         "source": "v2ray"
       }
     },
     {
-      "id": "diks0zbwm",
+      "id": "jt0s87ttb",
       "type": "vmess",
       "name": "🇭🇰 香港 电讯盈科有限公司",
-      "server": "3aeac334-sv2sg0-t2nkut-jx5r.hk.p5pv.com",
+      "server": "76d9dbf9-sva740-szegoe-12hj8.hk3.p5pv.com",
       "port": 80,
       "protocol": "vmess",
       "settings": {
-        "id": "73bfcc1c-5814-5f2a-b43a-3ef6af011db8",
+        "id": "5acc7a7c-d7ea-11eb-8673-f23c9164ca5d",
         "alterId": 2,
         "security": "auto",
         "network": "ws",
@@ -1751,15 +1333,267 @@
         "serverName": "broadcastlv.chat.bilibili.com"
       },
       "extra": {
-        "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrfCfh7Ag6aaZ5rivIOeUteiur+ebiOenkeaciemZkOWFrOWPuCIsImFkZCI6IjNhZWFjMzM0LXN2MnNnMC10Mm5rdXQtang1ci5oay5wNXB2LmNvbSIsInBvcnQiOiI4MCIsInR5cGUiOiJub25lIiwiaWQiOiI3M2JmY2MxYy01ODE0LTVmMmEtYjQzYS0zZWY2YWYwMTFkYjgiLCJhaWQiOiIyIiwibmV0Ijoid3MiLCJwYXRoIjoiLyIsImhvc3QiOiJicm9hZGNhc3Rsdi5jaGF0LmJpbGliaWxpLmNvbSIsInRscyI6IiJ9",
-        "addedAt": "2025-11-01T06:24:35.946Z"
+        "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrfCfh7Ag6aaZ5rivIOeUteiur+ebiOenkeaciemZkOWFrOWPuCIsImFkZCI6Ijc2ZDlkYmY5LXN2YTc0MC1zemVnb2UtMTJoajguaGszLnA1cHYuY29tIiwicG9ydCI6IjgwIiwidHlwZSI6Im5vbmUiLCJpZCI6IjVhY2M3YTdjLWQ3ZWEtMTFlYi04NjczLWYyM2M5MTY0Y2E1ZCIsImFpZCI6IjIiLCJuZXQiOiJ3cyIsInBhdGgiOiIvIiwiaG9zdCI6ImJyb2FkY2FzdGx2LmNoYXQuYmlsaWJpbGkuY29tIiwidGxzIjoiIn0=",
+        "addedAt": "2025-11-01T12:33:18.782Z"
       },
       "metadata": {
         "source": "v2ray"
       }
     },
     {
-      "id": "xhu0qwlyg",
+      "id": "1hgfbvw3n",
+      "type": "vmess",
+      "name": "🇭🇰 香港 电讯盈科有限公司",
+      "server": "7bdf5f2f-sv2sg0-t2p691-1s4hc.hk3.p5pv.com",
+      "port": 80,
+      "protocol": "vmess",
+      "settings": {
+        "id": "aafedc64-9c23-11ef-a79f-f23c91cfbbc9",
+        "alterId": 2,
+        "security": "auto",
+        "network": "ws",
+        "ws": true,
+        "wsPath": "/",
+        "wsHeaders": {
+          "Host": "broadcastlv.chat.bilibili.com"
+        },
+        "tls": false,
+        "serverName": "broadcastlv.chat.bilibili.com"
+      },
+      "extra": {
+        "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrfCfh7Ag6aaZ5rivIOeUteiur+ebiOenkeaciemZkOWFrOWPuCIsImFkZCI6IjdiZGY1ZjJmLXN2MnNnMC10MnA2OTEtMXM0aGMuaGszLnA1cHYuY29tIiwicG9ydCI6IjgwIiwidHlwZSI6Im5vbmUiLCJpZCI6ImFhZmVkYzY0LTljMjMtMTFlZi1hNzlmLWYyM2M5MWNmYmJjOSIsImFpZCI6IjIiLCJuZXQiOiJ3cyIsInBhdGgiOiIvIiwiaG9zdCI6ImJyb2FkY2FzdGx2LmNoYXQuYmlsaWJpbGkuY29tIiwidGxzIjoiIn0=",
+        "addedAt": "2025-11-01T12:33:18.782Z"
+      },
+      "metadata": {
+        "source": "v2ray"
+      }
+    },
+    {
+      "id": "q9kufdfxd",
+      "type": "vmess",
+      "name": "🇭🇰 香港 电讯盈科有限公司",
+      "server": "4672ae04-sv2sg0-t2hqlr-1s3mx.hk.p5pv.com",
+      "port": 80,
+      "protocol": "vmess",
+      "settings": {
+        "id": "b58095f0-52dc-11ef-bc74-f23c91cfbbc9",
+        "alterId": 2,
+        "security": "auto",
+        "network": "ws",
+        "ws": true,
+        "wsPath": "/",
+        "wsHeaders": {
+          "Host": "broadcastlv.chat.bilibili.com"
+        },
+        "tls": false,
+        "serverName": "broadcastlv.chat.bilibili.com"
+      },
+      "extra": {
+        "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrfCfh7Ag6aaZ5rivIOeUteiur+ebiOenkeaciemZkOWFrOWPuCIsImFkZCI6IjQ2NzJhZTA0LXN2MnNnMC10MmhxbHItMXMzbXguaGsucDVwdi5jb20iLCJwb3J0IjoiODAiLCJ0eXBlIjoibm9uZSIsImlkIjoiYjU4MDk1ZjAtNTJkYy0xMWVmLWJjNzQtZjIzYzkxY2ZiYmM5IiwiYWlkIjoiMiIsIm5ldCI6IndzIiwicGF0aCI6Ii8iLCJob3N0IjoiYnJvYWRjYXN0bHYuY2hhdC5iaWxpYmlsaS5jb20iLCJ0bHMiOiIifQ==",
+        "addedAt": "2025-11-01T12:33:18.782Z"
+      },
+      "metadata": {
+        "source": "v2ray"
+      }
+    },
+    {
+      "id": "s7on5dlf8",
+      "type": "vmess",
+      "name": "🇭🇰 香港 电讯盈科有限公司",
+      "server": "34013157-sunz40-taz53d-1j0y6.hk3.p5pv.com",
+      "port": 80,
+      "protocol": "vmess",
+      "settings": {
+        "id": "1cce7df2-251c-11ee-9409-f23c9164ca5d",
+        "alterId": 2,
+        "security": "auto",
+        "network": "ws",
+        "ws": true,
+        "wsPath": "/",
+        "wsHeaders": {
+          "Host": "34013157-sunz40-taz53d-1j0y6.hk3.p5pv.com"
+        },
+        "tls": false,
+        "serverName": "34013157-sunz40-taz53d-1j0y6.hk3.p5pv.com"
+      },
+      "extra": {
+        "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrfCfh7Ag6aaZ5rivIOeUteiur+ebiOenkeaciemZkOWFrOWPuCIsImFkZCI6IjM0MDEzMTU3LXN1bno0MC10YXo1M2QtMWoweTYuaGszLnA1cHYuY29tIiwicG9ydCI6IjgwIiwidHlwZSI6Im5vbmUiLCJpZCI6IjFjY2U3ZGYyLTI1MWMtMTFlZS05NDA5LWYyM2M5MTY0Y2E1ZCIsImFpZCI6IjIiLCJuZXQiOiJ3cyIsInBhdGgiOiIvIiwiaG9zdCI6IjM0MDEzMTU3LXN1bno0MC10YXo1M2QtMWoweTYuaGszLnA1cHYuY29tIiwidGxzIjoiIn0=",
+        "addedAt": "2025-11-01T12:33:18.782Z"
+      },
+      "metadata": {
+        "source": "v2ray"
+      }
+    },
+    {
+      "id": "1qg9sb88i",
+      "type": "vmess",
+      "name": "🇭🇰 香港 电讯盈科有限公司",
+      "server": "3b06c9c0-sv2sg0-sypj6z-1rk9y.hk3.p5pv.com",
+      "port": 80,
+      "protocol": "vmess",
+      "settings": {
+        "id": "88f6e3c4-1d01-11ef-812c-f23c91cfbbc9",
+        "alterId": 2,
+        "security": "auto",
+        "network": "ws",
+        "ws": true,
+        "wsPath": "/",
+        "wsHeaders": {
+          "Host": "broadcastlv.chat.bilibili.com"
+        },
+        "tls": false,
+        "serverName": "broadcastlv.chat.bilibili.com"
+      },
+      "extra": {
+        "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrfCfh7Ag6aaZ5rivIOeUteiur+ebiOenkeaciemZkOWFrOWPuCIsImFkZCI6IjNiMDZjOWMwLXN2MnNnMC1zeXBqNnotMXJrOXkuaGszLnA1cHYuY29tIiwicG9ydCI6IjgwIiwidHlwZSI6Im5vbmUiLCJpZCI6Ijg4ZjZlM2M0LTFkMDEtMTFlZi04MTJjLWYyM2M5MWNmYmJjOSIsImFpZCI6IjIiLCJuZXQiOiJ3cyIsInBhdGgiOiIvIiwiaG9zdCI6ImJyb2FkY2FzdGx2LmNoYXQuYmlsaWJpbGkuY29tIiwidGxzIjoiIn0=",
+        "addedAt": "2025-11-01T12:33:18.782Z"
+      },
+      "metadata": {
+        "source": "v2ray"
+      }
+    },
+    {
+      "id": "czdwplnqi",
+      "type": "vmess",
+      "name": "🇭🇰 香港 电讯盈科有限公司",
+      "server": "8b31a356-sv2sg0-tb224g-1h0r9.hk3.p5pv.com",
+      "port": 80,
+      "protocol": "vmess",
+      "settings": {
+        "id": "9bfd0dde-957e-11ec-a8bf-f23c91cfbbc9",
+        "alterId": 2,
+        "security": "auto",
+        "network": "ws",
+        "ws": true,
+        "wsPath": "/",
+        "wsHeaders": {
+          "Host": "broadcastlv.chat.bilibili.com"
+        },
+        "tls": false,
+        "serverName": "broadcastlv.chat.bilibili.com"
+      },
+      "extra": {
+        "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrfCfh7Ag6aaZ5rivIOeUteiur+ebiOenkeaciemZkOWFrOWPuCIsImFkZCI6IjhiMzFhMzU2LXN2MnNnMC10YjIyNGctMWgwcjkuaGszLnA1cHYuY29tIiwicG9ydCI6IjgwIiwidHlwZSI6Im5vbmUiLCJpZCI6IjliZmQwZGRlLTk1N2UtMTFlYy1hOGJmLWYyM2M5MWNmYmJjOSIsImFpZCI6IjIiLCJuZXQiOiJ3cyIsInBhdGgiOiIvIiwiaG9zdCI6ImJyb2FkY2FzdGx2LmNoYXQuYmlsaWJpbGkuY29tIiwidGxzIjoiIn0=",
+        "addedAt": "2025-11-01T12:33:18.782Z"
+      },
+      "metadata": {
+        "source": "v2ray"
+      }
+    },
+    {
+      "id": "cewbne3nx",
+      "type": "vmess",
+      "name": "🇭🇰 香港 电讯盈科有限公司",
+      "server": "7239a836-sunz40-suqjqq-1pr35.hk.p5pv.com",
+      "port": 80,
+      "protocol": "vmess",
+      "settings": {
+        "id": "6b7c1278-ff9d-11ee-84ca-f23c913c8d2b",
+        "alterId": 2,
+        "security": "auto",
+        "network": "ws",
+        "ws": true,
+        "wsPath": "/",
+        "wsHeaders": {
+          "Host": "7239a836-sunz40-suqjqq-1pr35.hk.p5pv.com"
+        },
+        "tls": false,
+        "serverName": "7239a836-sunz40-suqjqq-1pr35.hk.p5pv.com"
+      },
+      "extra": {
+        "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrfCfh7Ag6aaZ5rivIOeUteiur+ebiOenkeaciemZkOWFrOWPuCIsImFkZCI6IjcyMzlhODM2LXN1bno0MC1zdXFqcXEtMXByMzUuaGsucDVwdi5jb20iLCJwb3J0IjoiODAiLCJ0eXBlIjoibm9uZSIsImlkIjoiNmI3YzEyNzgtZmY5ZC0xMWVlLTg0Y2EtZjIzYzkxM2M4ZDJiIiwiYWlkIjoiMiIsIm5ldCI6IndzIiwicGF0aCI6Ii8iLCJob3N0IjoiNzIzOWE4MzYtc3VuejQwLXN1cWpxcS0xcHIzNS5oay5wNXB2LmNvbSIsInRscyI6IiJ9",
+        "addedAt": "2025-11-01T12:33:18.782Z"
+      },
+      "metadata": {
+        "source": "v2ray"
+      }
+    },
+    {
+      "id": "eg586rs2r",
+      "type": "vmess",
+      "name": "🇭🇰 香港 电讯盈科有限公司",
+      "server": "0af112c9-sv2sg0-swbdgq-1iddy.hk3.p5pv.com",
+      "port": 80,
+      "protocol": "vmess",
+      "settings": {
+        "id": "e168c43e-c6d9-11ed-a8bf-f23c91cfbbc9",
+        "alterId": 2,
+        "security": "auto",
+        "network": "ws",
+        "ws": true,
+        "wsPath": "/",
+        "wsHeaders": {
+          "Host": "broadcastlv.chat.bilibili.com"
+        },
+        "tls": false,
+        "serverName": "broadcastlv.chat.bilibili.com"
+      },
+      "extra": {
+        "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrfCfh7Ag6aaZ5rivIOeUteiur+ebiOenkeaciemZkOWFrOWPuCIsImFkZCI6IjBhZjExMmM5LXN2MnNnMC1zd2JkZ3EtMWlkZHkuaGszLnA1cHYuY29tIiwicG9ydCI6IjgwIiwidHlwZSI6Im5vbmUiLCJpZCI6ImUxNjhjNDNlLWM2ZDktMTFlZC1hOGJmLWYyM2M5MWNmYmJjOSIsImFpZCI6IjIiLCJuZXQiOiJ3cyIsInBhdGgiOiIvIiwiaG9zdCI6ImJyb2FkY2FzdGx2LmNoYXQuYmlsaWJpbGkuY29tIiwidGxzIjoiIn0=",
+        "addedAt": "2025-11-01T12:33:18.782Z"
+      },
+      "metadata": {
+        "source": "v2ray"
+      }
+    },
+    {
+      "id": "m7azalcvk",
+      "type": "vmess",
+      "name": "🇭🇰 香港 电讯盈科有限公司",
+      "server": "93933a41-sv0xs0-t1jamc-1fvdh.hk3.p5pv.com",
+      "port": 80,
+      "protocol": "vmess",
+      "settings": {
+        "id": "9e1ddc04-073b-11ed-bd7c-f23c913c8d2b",
+        "alterId": 2,
+        "security": "auto",
+        "network": "ws",
+        "ws": true,
+        "wsPath": "/",
+        "wsHeaders": {
+          "Host": "broadcastlv.chat.bilibili.com"
+        },
+        "tls": false,
+        "serverName": "broadcastlv.chat.bilibili.com"
+      },
+      "extra": {
+        "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrfCfh7Ag6aaZ5rivIOeUteiur+ebiOenkeaciemZkOWFrOWPuCIsImFkZCI6IjkzOTMzYTQxLXN2MHhzMC10MWphbWMtMWZ2ZGguaGszLnA1cHYuY29tIiwicG9ydCI6IjgwIiwidHlwZSI6Im5vbmUiLCJpZCI6IjllMWRkYzA0LTA3M2ItMTFlZC1iZDdjLWYyM2M5MTNjOGQyYiIsImFpZCI6IjIiLCJuZXQiOiJ3cyIsInBhdGgiOiIvIiwiaG9zdCI6ImJyb2FkY2FzdGx2LmNoYXQuYmlsaWJpbGkuY29tIiwidGxzIjoiIn0=",
+        "addedAt": "2025-11-01T12:33:18.782Z"
+      },
+      "metadata": {
+        "source": "v2ray"
+      }
+    },
+    {
+      "id": "xx3cpq71w",
+      "type": "vmess",
+      "name": "🇭🇰 香港 电讯盈科有限公司",
+      "server": "580abbb4-suvds0-sv5llu-1ldl3.hk3.p5pv.com",
+      "port": 80,
+      "protocol": "vmess",
+      "settings": {
+        "id": "fd224a6c-addc-11ed-a8bf-f23c91cfbbc9",
+        "alterId": 2,
+        "security": "auto",
+        "network": "ws",
+        "ws": true,
+        "wsPath": "/",
+        "wsHeaders": {
+          "Host": "580abbb4-suvds0-sv5llu-1ldl3.hk3.p5pv.com"
+        },
+        "tls": false,
+        "serverName": "580abbb4-suvds0-sv5llu-1ldl3.hk3.p5pv.com"
+      },
+      "extra": {
+        "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrfCfh7Ag6aaZ5rivIOeUteiur+ebiOenkeaciemZkOWFrOWPuCIsImFkZCI6IjU4MGFiYmI0LXN1dmRzMC1zdjVsbHUtMWxkbDMuaGszLnA1cHYuY29tIiwicG9ydCI6IjgwIiwidHlwZSI6Im5vbmUiLCJpZCI6ImZkMjI0YTZjLWFkZGMtMTFlZC1hOGJmLWYyM2M5MWNmYmJjOSIsImFpZCI6IjIiLCJuZXQiOiJ3cyIsInBhdGgiOiIvIiwiaG9zdCI6IjU4MGFiYmI0LXN1dmRzMC1zdjVsbHUtMWxkbDMuaGszLnA1cHYuY29tIiwidGxzIjoiIn0=",
+        "addedAt": "2025-11-01T12:33:18.782Z"
+      },
+      "metadata": {
+        "source": "v2ray"
+      }
+    },
+    {
+      "id": "va5egqq8q",
       "type": "vmess",
       "name": "🇮🇳 _US_美国->🇮🇳_IN_印度_1",
       "server": "104.17.18.26",
@@ -1778,14 +1612,14 @@
       },
       "extra": {
         "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrvCfh7MgX1VTX+e+juWbvS0+8J+HrvCfh7NfSU5f5Y2w5bqmXzEiLCJhZGQiOiIxMDQuMTcuMTguMjYiLCJwb3J0IjoiODAiLCJ0eXBlIjoibm9uZSIsImlkIjoiNTE4MDQ0NGEtNDc1Ni00M2I0LTk2MGItNDllYjkwNTJlNGU4IiwiYWlkIjoiMCIsIm5ldCI6IndzIiwicGF0aCI6Ii8iLCJob3N0IjoiIiwidGxzIjoiIn0=",
-        "addedAt": "2025-11-01T06:24:35.946Z"
+        "addedAt": "2025-11-01T12:33:18.782Z"
       },
       "metadata": {
         "source": "v2ray"
       }
     },
     {
-      "id": "50ob17n9e",
+      "id": "e3cogx7ve",
       "type": "vmess",
       "name": "🇮🇳 _US_美国->🇮🇳_IN_印度_2",
       "server": "104.26.8.44",
@@ -1804,14 +1638,14 @@
       },
       "extra": {
         "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrvCfh7MgX1VTX+e+juWbvS0+8J+HrvCfh7NfSU5f5Y2w5bqmXzIiLCJhZGQiOiIxMDQuMjYuOC40NCIsInBvcnQiOiI4MCIsInR5cGUiOiJub25lIiwiaWQiOiI1MTgwNDQ0YS00NzU2LTQzYjQtOTYwYi00OWViOTA1MmU0ZTgiLCJhaWQiOiIwIiwibmV0Ijoid3MiLCJwYXRoIjoiLyIsImhvc3QiOiIiLCJ0bHMiOiIifQ==",
-        "addedAt": "2025-11-01T06:24:35.946Z"
+        "addedAt": "2025-11-01T12:33:18.782Z"
       },
       "metadata": {
         "source": "v2ray"
       }
     },
     {
-      "id": "wi4p8vd2m",
+      "id": "0p9qhjtpa",
       "type": "vmess",
       "name": "🇮🇳 _US_美国->🇮🇳_IN_印度_3",
       "server": "mm2.shabijichang.com",
@@ -1832,14 +1666,14 @@
       },
       "extra": {
         "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrvCfh7MgX1VTX+e+juWbvS0+8J+HrvCfh7NfSU5f5Y2w5bqmXzMiLCJhZGQiOiJtbTIuc2hhYmlqaWNoYW5nLmNvbSIsInBvcnQiOiI4MCIsInR5cGUiOiJub25lIiwiaWQiOiJjNDU4Njk1ZC02OTA4LTQ1YzMtOTUxMi1lMGM0NjQxODQ1NGMiLCJhaWQiOiIwIiwibmV0Ijoid3MiLCJwYXRoIjoiLyIsImhvc3QiOiJtbTIuc2hhYmlqaWNoYW5nLmNvbSIsInRscyI6IiJ9",
-        "addedAt": "2025-11-01T06:24:35.946Z"
+        "addedAt": "2025-11-01T12:33:18.782Z"
       },
       "metadata": {
         "source": "v2ray"
       }
     },
     {
-      "id": "adekxdl32",
+      "id": "9fd5orta6",
       "type": "vmess",
       "name": "🇮🇳 _US_美国->🇮🇳_IN_印度_4",
       "server": "mm3.shabijichang.com",
@@ -1860,14 +1694,14 @@
       },
       "extra": {
         "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HrvCfh7MgX1VTX+e+juWbvS0+8J+HrvCfh7NfSU5f5Y2w5bqmXzQiLCJhZGQiOiJtbTMuc2hhYmlqaWNoYW5nLmNvbSIsInBvcnQiOiI4MCIsInR5cGUiOiJub25lIiwiaWQiOiJjNDU4Njk1ZC02OTA4LTQ1YzMtOTUxMi1lMGM0NjQxODQ1NGMiLCJhaWQiOiIwIiwibmV0Ijoid3MiLCJwYXRoIjoiLyIsImhvc3QiOiJtbTMuc2hhYmlqaWNoYW5nLmNvbSIsInRscyI6IiJ9",
-        "addedAt": "2025-11-01T06:24:35.946Z"
+        "addedAt": "2025-11-01T12:33:18.782Z"
       },
       "metadata": {
         "source": "v2ray"
       }
     },
     {
-      "id": "i7o4ukeep",
+      "id": "3zq8d3iie",
       "type": "vmess",
       "name": "🇳🇱 _US_美国->🇳🇱_NL_荷兰",
       "server": "45.199.138.191",
@@ -1886,14 +1720,14 @@
       },
       "extra": {
         "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+Hs/Cfh7EgX1VTX+e+juWbvS0+8J+Hs/Cfh7FfTkxf6I235YWwIiwiYWRkIjoiNDUuMTk5LjEzOC4xOTEiLCJwb3J0IjoiMzAwMDAiLCJ0eXBlIjoibm9uZSIsImlkIjoiNDE4MDQ4YWYtYTI5My00Yjk5LTliMGMtOThjYTM1ODBkZDI0IiwiYWlkIjoiNjQiLCJuZXQiOiJ3cyIsInBhdGgiOiIvcGF0aC8xNjk2MjUxNTIyNDM4IiwiaG9zdCI6IiIsInRscyI6InRscyJ9",
-        "addedAt": "2025-11-01T06:24:35.946Z"
+        "addedAt": "2025-11-01T12:33:18.782Z"
       },
       "metadata": {
         "source": "v2ray"
       }
     },
     {
-      "id": "ywrc2tyei",
+      "id": "0wcxbd9wt",
       "type": "vmess",
       "name": "🇸🇦 _US_美国->🇸🇦_SA_沙特阿拉伯",
       "server": "jd3.shabijichang.com",
@@ -1914,14 +1748,14 @@
       },
       "extra": {
         "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HuPCfh6YgX1VTX+e+juWbvS0+8J+HuPCfh6ZfU0Ff5rKZ54m56Zi/5ouJ5LyvIiwiYWRkIjoiamQzLnNoYWJpamljaGFuZy5jb20iLCJwb3J0IjoiODAiLCJ0eXBlIjoibm9uZSIsImlkIjoiYzQ1ODY5NWQtNjkwOC00NWMzLTk1MTItZTBjNDY0MTg0NTRjIiwiYWlkIjoiMCIsIm5ldCI6IndzIiwicGF0aCI6Ii8iLCJob3N0IjoiamQzLnNoYWJpamljaGFuZy5jb20iLCJ0bHMiOiIifQ==",
-        "addedAt": "2025-11-01T06:24:35.946Z"
+        "addedAt": "2025-11-01T12:33:18.782Z"
       },
       "metadata": {
         "source": "v2ray"
       }
     },
     {
-      "id": "lqu3o5zmf",
+      "id": "neudodmzr",
       "type": "vmess",
       "name": "🇺🇸 _US_美国_1",
       "server": "206.168.190.219",
@@ -1940,14 +1774,14 @@
       },
       "extra": {
         "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HuvCfh7ggX1VTX+e+juWbvV8xIiwiYWRkIjoiMjA2LjE2OC4xOTAuMjE5IiwicG9ydCI6IjIwODIiLCJ0eXBlIjoibm9uZSIsImlkIjoiZTMxY2E3NTAtNzFmNy0xMWVlLWI5MjAtMTIzOWQwMjU1MjcyIiwiYWlkIjoiMCIsIm5ldCI6IndzIiwicGF0aCI6Ii92bXdzIiwiaG9zdCI6IiIsInRscyI6IiJ9",
-        "addedAt": "2025-11-01T06:24:35.946Z"
+        "addedAt": "2025-11-01T12:33:18.782Z"
       },
       "metadata": {
         "source": "v2ray"
       }
     },
     {
-      "id": "tzluu3i0e",
+      "id": "1r7exabjd",
       "type": "vmess",
       "name": "🇺🇸 _US_美国_2",
       "server": "wnd2.shabijichang.com",
@@ -1968,14 +1802,14 @@
       },
       "extra": {
         "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HuvCfh7ggX1VTX+e+juWbvV8yIiwiYWRkIjoid25kMi5zaGFiaWppY2hhbmcuY29tIiwicG9ydCI6IjgwIiwidHlwZSI6Im5vbmUiLCJpZCI6ImM0NTg2OTVkLTY5MDgtNDVjMy05NTEyLWUwYzQ2NDE4NDU0YyIsImFpZCI6IjAiLCJuZXQiOiJ3cyIsInBhdGgiOiIvIiwiaG9zdCI6InduZDIuc2hhYmlqaWNoYW5nLmNvbSIsInRscyI6IiJ9",
-        "addedAt": "2025-11-01T06:24:35.946Z"
+        "addedAt": "2025-11-01T12:33:18.782Z"
       },
       "metadata": {
         "source": "v2ray"
       }
     },
     {
-      "id": "h8dpvbz9w",
+      "id": "w3cxokp7x",
       "type": "vmess",
       "name": "🇺🇸 _US_美国_3",
       "server": "45.199.138.186",
@@ -1994,14 +1828,14 @@
       },
       "extra": {
         "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HuvCfh7ggX1VTX+e+juWbvV8zIiwiYWRkIjoiNDUuMTk5LjEzOC4xODYiLCJwb3J0IjoiMzAwMDAiLCJ0eXBlIjoibm9uZSIsImlkIjoiNGVjMGFlNjItZGUwOS00MDI5LTkwNGEtMDMxM2Q0NjI4ZWNmIiwiYWlkIjoiNjQiLCJuZXQiOiJ3cyIsInBhdGgiOiIvcGF0aC8xNjk2NjgyNzIwMTM4IiwiaG9zdCI6IiIsInRscyI6InRscyJ9",
-        "addedAt": "2025-11-01T06:24:35.946Z"
+        "addedAt": "2025-11-01T12:33:18.782Z"
       },
       "metadata": {
         "source": "v2ray"
       }
     },
     {
-      "id": "qenceli47",
+      "id": "pc6wnd18h",
       "type": "vmess",
       "name": "🇺🇸 _US_美国_4",
       "server": "wnd3.shabijichang.com",
@@ -2022,14 +1856,14 @@
       },
       "extra": {
         "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HuvCfh7ggX1VTX+e+juWbvV80IiwiYWRkIjoid25kMy5zaGFiaWppY2hhbmcuY29tIiwicG9ydCI6IjgwIiwidHlwZSI6Im5vbmUiLCJpZCI6ImM0NTg2OTVkLTY5MDgtNDVjMy05NTEyLWUwYzQ2NDE4NDU0YyIsImFpZCI6IjAiLCJuZXQiOiJ3cyIsInBhdGgiOiIvIiwiaG9zdCI6InduZDMuc2hhYmlqaWNoYW5nLmNvbSIsInRscyI6IiJ9",
-        "addedAt": "2025-11-01T06:24:35.946Z"
+        "addedAt": "2025-11-01T12:33:18.782Z"
       },
       "metadata": {
         "source": "v2ray"
       }
     },
     {
-      "id": "8r7m5i4m1",
+      "id": "kes87emui",
       "type": "vmess",
       "name": "🇺🇸 _US_美国_5",
       "server": "104.21.75.246",
@@ -2048,13 +1882,13 @@
       },
       "extra": {
         "raw": "vmess://eyJ2IjoiMiIsInBzIjoi8J+HuvCfh7ggX1VTX+e+juWbvV81IiwiYWRkIjoiMTA0LjIxLjc1LjI0NiIsInBvcnQiOiI4MCIsInR5cGUiOiJub25lIiwiaWQiOiJjNDU4Njk1ZC02OTA4LTQ1YzMtOTUxMi1lMGM0NjQxODQ1NGMiLCJhaWQiOiIwIiwibmV0Ijoid3MiLCJwYXRoIjoiLyIsImhvc3QiOiIiLCJ0bHMiOiIifQ==",
-        "addedAt": "2025-11-01T06:24:35.946Z"
+        "addedAt": "2025-11-01T12:33:18.782Z"
       },
       "metadata": {
         "source": "v2ray"
       }
     }
   ],
-  "timestamp": 1761978275946,
-  "hash": "022358a6c7f48698e25b396b52bc63bd"
+  "timestamp": 1762000398782,
+  "hash": "57b160d3736a15030a60f5314779586d"
 }
