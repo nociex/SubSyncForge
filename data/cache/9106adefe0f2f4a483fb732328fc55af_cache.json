@@ -1,7 +1,96 @@
 {
   "nodes": [
     {
-      "id": "ruequ2qrn",
+      "id": "stg5b1d1f",
+      "type": "vmess",
+      "name": "disney_HK-HysteriaNode-worker-general",
+      "server": "laravel.com",
+      "port": 443,
+      "protocol": "vmess",
+      "settings": {
+        "id": "4bf075f5-4d5e-4d39-f5ab-b32a86250f0e",
+        "alterId": 0,
+        "security": "auto",
+        "network": "ws",
+        "wsPath": "/hk.nbee.pp.ua/aa",
+        "wsHeaders": {},
+        "tls": true,
+        "serverName": "c.alalbb.top"
+      },
+      "extra": {
+        "raw": {
+          "name": "disney_HK-HysteriaNode-worker-general",
+          "server": "laravel.com",
+          "type": "vmess",
+          "country": "🇺🇸US",
+          "port": 443,
+          "uuid": "4bf075f5-4d5e-4d39-f5ab-b32a86250f0e",
+          "alterId": 0,
+          "cipher": "auto",
+          "network": "ws",
+          "servername": "c.alalbb.top",
+          "http-opts": {},
+          "h2-opts": {},
+          "tls": true,
+          "skip-cert-verify": true,
+          "ws-opts": {
+            "path": "/aa",
+            "headers": {
+              "HOST": "hk.nbee.pp.ua",
+              "Host": "c.alalbb.top"
+            }
+          },
+          "path": "/hk.nbee.pp.ua/aa"
+        },
+        "addedAt": "2025-11-16T12:32:40.755Z"
+      },
+      "metadata": {
+        "source": "alalbb"
+      }
+    },
+    {
+      "id": "1j2e8uqs0",
+      "type": "vmess",
+      "name": "BG_speednode_0001-speednodes",
+      "server": "de.monkeyisland.life",
+      "port": 8443,
+      "protocol": "vmess",
+      "settings": {
+        "id": "df5fc3f7-6b01-489a-a73c-e1297b14a3dd",
+        "alterId": 0,
+        "security": "auto",
+        "network": "tcp",
+        "wsPath": "",
+        "wsHeaders": {},
+        "tls": true,
+        "serverName": "de.monkeyisland.life"
+      },
+      "extra": {
+        "raw": {
+          "name": "BG_speednode_0001-speednodes",
+          "server": "de.monkeyisland.life",
+          "port": 8443,
+          "type": "vless",
+          "uuid": "df5fc3f7-6b01-489a-a73c-e1297b14a3dd",
+          "flow": "xtls-rprx-vision",
+          "tls": true,
+          "skip-cert-verify": false,
+          "client-fingerprint": "chrome",
+          "servername": "de.monkeyisland.life",
+          "reality-opts": {
+            "public-key": "aILMLxhAsgJvx7TY3EsxOdmIc1uB0V7aJVIXaKYPPk4",
+            "short-id": "05a8b9980e65114c"
+          },
+          "udp": true
+        },
+        "addedAt": "2025-11-16T12:32:40.755Z"
+      },
+      "metadata": {
+        "source": "alalbb"
+      }
+    },
+    {
+      "id": "x9ec3r2ho",
       "type": "vmess",
       "name": "GB_speednode_0002-speednodes",
       "server": "217.154.218.42",
@@ -37,54 +126,13 @@
           },
           "udp": true
         },
-        "addedAt": "2025-11-16T06:25:28.706Z"
-      },
-      "metadata": {
-        "source": "alalbb"
-      }
-    },
-    {
-      "id": "1grqxvo7j",
-      "type": "vmess",
-      "name": "BG_speednode_0001-speednodes",
-      "server": "de.monkeyisland.life",
-      "port": 8443,
-      "protocol": "vmess",
-      "settings": {
-        "id": "df5fc3f7-6b01-489a-a73c-e1297b14a3dd",
-        "alterId": 0,
-        "security": "auto",
-        "network": "tcp",
-        "wsPath": "",
-        "wsHeaders": {},
-        "tls": true,
-        "serverName": "de.monkeyisland.life"
-      },
-      "extra": {
-        "raw": {
-          "name": "BG_speednode_0001-speednodes",
-          "server": "de.monkeyisland.life",
-          "port": 8443,
-          "type": "vless",
-          "uuid": "df5fc3f7-6b01-489a-a73c-e1297b14a3dd",
-          "flow": "xtls-rprx-vision",
-          "tls": true,
-          "skip-cert-verify": false,
-          "client-fingerprint": "chrome",
-          "servername": "de.monkeyisland.life",
-          "reality-opts": {
-            "public-key": "aILMLxhAsgJvx7TY3EsxOdmIc1uB0V7aJVIXaKYPPk4",
-            "short-id": "05a8b9980e65114c"
-          },
-          "udp": true
-        },
-        "addedAt": "2025-11-16T06:25:28.706Z"
+        "addedAt": "2025-11-16T12:32:40.755Z"
       },
       "metadata": {
         "source": "alalbb"
       }
     }
   ],
-  "timestamp": 1763274328706,
-  "hash": "6b566d0323097d7e91b6df54a3d508c4"
+  "timestamp": 1763296360755,
+  "hash": "474ae2efa6eba8be658f9020ff1e5b42"
 }
