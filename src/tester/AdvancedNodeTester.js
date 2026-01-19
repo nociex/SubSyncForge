@@ -2,19 +2,25 @@ import { ProxyCoreManager } from '../core/ProxyCoreManager.js';
 import { NodeTester } from './NodeTester.js';
 import { IPLocator } from '../utils/proxy/IPLocator.js';
 import { logger } from '../utils/index.js';
+import fs from 'fs';
+import path from 'path';
+import { ensureDirectoryExists } from '../core/utils/FileSystem.js';
 
 const defaultLogger = logger?.defaultLogger || console;
 
 export class AdvancedNodeTester extends NodeTester {
   constructor(options = {}) {
     super(options);
-    
+
+    this.rootDir = options.rootDir || process.cwd();
+    this.dataDir = options.dataDir || 'data';
+
     this.useCoreTest = options.useCoreTest !== false; // 默认启用核心测试
     this.coreType = options.coreType || 'mihomo'; // 'mihomo' | 'v2ray'
     this.fallbackToBasic = options.fallbackToBasic !== false; // 失败时回退到基本测试
     this.autoRename = options.autoRename !== false; // 默认启用自动重命名
     this.maxLatency = options.maxLatency || 3000; // 最大延迟限制，默认3秒
-    
+
     // 初始化代理核心管理器
     this.coreManager = new ProxyCoreManager({
       coreType: this.coreType,
@@ -22,14 +28,14 @@ export class AdvancedNodeTester extends NodeTester {
       testUrl: this.testUrl,
       logger: this.logger
     });
-    
+
     // 初始化IP定位器
     this.ipLocator = new IPLocator({
       rootDir: options.rootDir || process.cwd(),
       dataDir: options.dataDir || 'data',
       logger: this.logger
     });
-    
+
     this.logger.info(`高级节点测试器已初始化，核心类型: ${this.coreType}，自动重命名: ${this.autoRename}，延迟限制: ${this.maxLatency}ms`);
   }
 
@@ -40,7 +46,7 @@ export class AdvancedNodeTester extends NodeTester {
    */
   async testNodes(nodes) {
     this.logger.info(`开始高级测试 ${nodes.length} 个节点，并发数 ${this.concurrency}...`);
-    
+
     // 检查核心是否可用
     let coreAvailable = false;
     if (this.useCoreTest) {
@@ -71,17 +77,17 @@ export class AdvancedNodeTester extends NodeTester {
 
     for (let i = 0; i < batches.length; i++) {
       this.logger.info(`测试批次 ${i + 1}/${batches.length} (${batches[i].length} 个节点)...`);
-      
+
       const batchPromises = batches[i].map(async (node) => {
         const startTime = Date.now();
         let result = null;
-        
+
         // 首先尝试使用代理核心测试
         if (coreAvailable && this.isSupportedByCore(node)) {
           try {
             this.logger.debug(`使用 ${this.coreType} 核心测试节点: ${node.name}`);
             const coreResult = await this.coreManager.testNode(node);
-            
+
             result = {
               node,
               status: coreResult.status ? 'up' : 'down',
@@ -92,13 +98,13 @@ export class AdvancedNodeTester extends NodeTester {
               needsLocationCorrection: false,
               actualLocation: null
             };
-            
+
             // 如果核心测试成功且启用了地区验证，获取位置信息
             if (result.status === 'up' && this.verifyLocation) {
               try {
                 const locationInfo = await this.ipLocator.locate(node.server);
                 result.locationInfo = locationInfo;
-                
+
                 // 检查地区匹配
                 if (locationInfo && this.checkLocationMismatch(node, locationInfo)) {
                   result.needsLocationCorrection = true;
@@ -112,10 +118,10 @@ export class AdvancedNodeTester extends NodeTester {
                 this.logger.warn(`获取节点 ${node.name} 位置信息失败: ${locErr.message}`);
               }
             }
-            
+
           } catch (coreError) {
             this.logger.warn(`${this.coreType} 核心测试失败: ${node.name}, ${coreError.message}`);
-            
+
             // 如果启用了回退，使用基本测试
             if (this.fallbackToBasic) {
               result = await this.runBasicTest(node, startTime);
@@ -138,39 +144,39 @@ export class AdvancedNodeTester extends NodeTester {
           result = await this.runBasicTest(node, startTime);
           result.testMethod = 'basic';
         }
-        
+
         return result;
       });
-      
+
       const batchResults = await Promise.all(batchPromises);
       results.push(...batchResults);
     }
-    
+
     // 获取成功的节点进行重命名
     const successfulResults = results.filter(r => r.status === 'up');
     this.logger.info(`测试完成: ${successfulResults.length}/${results.length} 个节点可用`);
-    
+
     // 如果启用自动重命名，对成功的节点进行重命名
     if (this.autoRename && successfulResults.length > 0) {
       this.logger.info(`开始对 ${successfulResults.length} 个可用节点进行自动重命名...`);
       const renamedNodes = this.correctNodeLocations(
-        successfulResults.map(r => r.node), 
+        successfulResults.map(r => r.node),
         successfulResults
       );
-      
+
       // 更新结果中的节点信息
       successfulResults.forEach((result, index) => {
         if (renamedNodes[index]) {
           result.node = renamedNodes[index];
         }
       });
-      
+
       this.logger.info(`节点重命名完成`);
     }
-    
+
     // 保存测试结果
     this.saveTestResults(results);
-    
+
     return results;
   }
 
@@ -183,7 +189,7 @@ export class AdvancedNodeTester extends NodeTester {
   correctNodeLocations(nodes, testResults) {
     this.logger.info(`开始修正节点地区信息...`);
     let corrected = 0;
-    
+
     // 为地区代码创建emoji映射
     const countryToEmoji = {
       'CN': '🇨🇳',
@@ -232,48 +238,48 @@ export class AdvancedNodeTester extends NodeTester {
       'LT': '🇱🇹',
       'EE': '🇪🇪'
     };
-    
+
     const correctedNodes = nodes.map(node => {
       // 查找对应的测试结果
       const testResult = testResults.find(r => r.node === node || r.node.server === node.server);
-      
+
       // 如果测试成功且需要修正地区
       if (testResult && testResult.status === 'up' && testResult.needsLocationCorrection && testResult.actualLocation) {
         const country = testResult.actualLocation.country;
         const countryName = testResult.actualLocation.countryName;
         const emoji = countryToEmoji[country] || '🌀';
-        
+
         // 创建新的节点名称（加上地区前缀）
         let newName = node.name || '';
-        
+
         // 移除现有的emoji和地区信息
         newName = newName.replace(/[\p{Emoji_Presentation}\p{Emoji}\uFE0F]/gu, '').trim();
         newName = newName.replace(/^[\u{1F1E6}-\u{1F1FF}]+\s*/u, '').trim();
-        
+
         // 添加正确的地区前缀
         newName = `${emoji} ${countryName} | ${newName}`;
-        
+
         // 复制节点对象并更新名称
         const correctedNode = { ...node, name: newName };
-        
+
         // 保存原始名称到extra字段
         if (!correctedNode.extra) correctedNode.extra = {};
         correctedNode.extra.originalName = node.name;
-        
+
         // 保存地区信息
         correctedNode.country = country;
         correctedNode.countryName = countryName;
         correctedNode.locationInfo = testResult.locationInfo;
-        
+
         this.logger.debug(`修正节点地区: "${node.name}" -> "${newName}"`);
         corrected++;
-        
+
         return correctedNode;
       }
-      
+
       return node;
     });
-    
+
     this.logger.info(`节点地区修正完成，共修正 ${corrected} 个节点`);
     return correctedNodes;
   }
@@ -302,7 +308,7 @@ export class AdvancedNodeTester extends NodeTester {
     try {
       const result = await this.checker.checkConnectivity(node, this.timeout, this.testUrl);
       const latency = Date.now() - startTime;
-      
+
       let locationInfo = null;
       if (result.status && this.verifyLocation) {
         try {
@@ -372,7 +378,7 @@ export class AdvancedNodeTester extends NodeTester {
    */
   isSupportedByCore(node) {
     const nodeType = node.type?.toLowerCase();
-    
+
     if (this.coreType === 'mihomo') {
       // 支持的协议类型，包括协议名称的不同变体
       const supportedTypes = ['ss', 'vmess', 'trojan', 'vless', 'hy2', 'hysteria2', 'tuic', 'ssr'];
@@ -380,7 +386,7 @@ export class AdvancedNodeTester extends NodeTester {
     } else if (this.coreType === 'v2ray') {
       return ['vmess', 'vless', 'trojan', 'shadowsocks'].includes(nodeType);
     }
-    
+
     return false;
   }
 
@@ -392,7 +398,7 @@ export class AdvancedNodeTester extends NodeTester {
    */
   checkLocationMismatch(node, locationInfo) {
     if (!locationInfo || !locationInfo.country) return false;
-    
+
     const countryCodeCorrections = {
       '🇭🇰': ['HK', '香港'],
       '🇨🇳': ['CN', '中国'],
@@ -403,11 +409,11 @@ export class AdvancedNodeTester extends NodeTester {
       '🇬🇧': ['GB', 'UK', '英国'],
       '🇹🇼': ['TW', '台湾']
     };
-    
+
     const nodeName = node.name || '';
     const actualCountry = locationInfo.country;
     const actualCountryName = locationInfo.countryName;
-    
+
     // 检查名称是否已经包含正确的地区信息
     for (const [emoji, codes] of Object.entries(countryCodeCorrections)) {
       if (codes.includes(actualCountry) || codes.includes(actualCountryName)) {
@@ -416,7 +422,7 @@ export class AdvancedNodeTester extends NodeTester {
         }
       }
     }
-    
+
     return true; // 不匹配，需要修正
   }
 
@@ -427,15 +433,15 @@ export class AdvancedNodeTester extends NodeTester {
    * @returns {Promise<Array<Object>>} - 测试结果
    */
   async testNodesByType(nodes, nodeType) {
-    const filteredNodes = nodes.filter(node => 
+    const filteredNodes = nodes.filter(node =>
       node.type?.toLowerCase() === nodeType.toLowerCase()
     );
-    
+
     if (filteredNodes.length === 0) {
       this.logger.warn(`没有找到类型为 ${nodeType} 的节点`);
       return [];
     }
-    
+
     this.logger.info(`开始测试 ${filteredNodes.length} 个 ${nodeType} 类型节点`);
     return this.testNodes(filteredNodes);
   }
@@ -449,26 +455,26 @@ export class AdvancedNodeTester extends NodeTester {
     const total = results.length;
     const successful = results.filter(r => r.status === 'up').length;
     const failed = total - successful;
-    
+
     const methodStats = {};
     results.forEach(r => {
       const method = r.testMethod || 'unknown';
       methodStats[method] = (methodStats[method] || 0) + 1;
     });
-    
+
     const typeStats = {};
     results.forEach(r => {
       const type = r.node.type || 'unknown';
       typeStats[type] = (typeStats[type] || 0) + 1;
     });
-    
-    const avgLatency = successful > 0 
+
+    const avgLatency = successful > 0
       ? results
-          .filter(r => r.status === 'up' && r.latency)
-          .reduce((sum, r) => sum + r.latency, 0) / 
-        results.filter(r => r.status === 'up' && r.latency).length
+        .filter(r => r.status === 'up' && r.latency)
+        .reduce((sum, r) => sum + r.latency, 0) /
+      results.filter(r => r.status === 'up' && r.latency).length
       : 0;
-    
+
     return {
       total,
       successful,
@@ -482,6 +488,46 @@ export class AdvancedNodeTester extends NodeTester {
   }
 
   /**
+   * 保存测试结果到文件
+   * @param {Array} results 测试结果
+   */
+  saveTestResults(results) {
+    try {
+      const resultDir = path.join(this.rootDir, this.dataDir, 'test_results');
+      ensureDirectoryExists(resultDir);
+
+      const timestamp = new Date().toISOString().replace(/:/g, '-').replace(/\..+/, '');
+      const resultPath = path.join(resultDir, `test_${timestamp}.json`);
+
+      // 统计信息
+      const stats = {
+        totalNodes: results.length,
+        validNodes: results.filter(n => n.node && (n.node.valid || n.status === 'up')).length,
+        invalidNodes: results.filter(n => !n.node || (!n.node.valid && n.status !== 'up')).length,
+        avgLatency: results.filter(n => n.status === 'up' && n.latency).reduce((sum, n) => sum + n.latency, 0) /
+          (results.filter(n => n.status === 'up' && n.latency).length || 1)
+      };
+
+      // 保存结果
+      const data = {
+        timestamp: new Date().toISOString(),
+        stats: stats,
+        results: results
+      };
+
+      fs.writeFileSync(resultPath, JSON.stringify(data, null, 2));
+      this.logger.info(`测试结果已保存到: ${resultPath}`);
+
+      // 保存最新测试结果的副本
+      const latestPath = path.join(resultDir, 'latest_test.json');
+      fs.writeFileSync(latestPath, JSON.stringify(data, null, 2));
+      this.logger.info(`最新测试结果已保存到: ${latestPath}`);
+    } catch (error) {
+      this.logger.error(`保存测试结果失败: ${error.message}`);
+    }
+  }
+
+  /**
    * 设置代理核心类型
    * @param {string} coreType - 核心类型 ('mihomo' | 'v2ray')
    */
@@ -489,7 +535,7 @@ export class AdvancedNodeTester extends NodeTester {
     if (!['mihomo', 'v2ray'].includes(coreType)) {
       throw new Error(`不支持的核心类型: ${coreType}`);
     }
-    
+
     this.coreType = coreType;
     this.coreManager = new ProxyCoreManager({
       coreType: this.coreType,
@@ -497,7 +543,7 @@ export class AdvancedNodeTester extends NodeTester {
       testUrl: this.testUrl,
       logger: this.logger
     });
-    
+
     this.logger.info(`已切换到 ${coreType} 核心`);
   }
 }
