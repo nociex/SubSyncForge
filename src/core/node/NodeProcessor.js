@@ -303,6 +303,15 @@ export class NodeProcessor {
       this.logger.debug('节点无效: 节点对象为空');
       return false;
     }
+
+    const sanitizeRequiredString = (value) => {
+      if (typeof value !== 'string') return '';
+      return value
+        .replace(/[\u0000-\u001F\u007F-\u009F]/g, '')
+        .replace(/[\uFFFD\uFFFE\uFFFF]/g, '')
+        .replace(/[\u200B-\u200D\uFEFF]/g, '')
+        .trim();
+    };
     
     // 基本属性检查
     if (!node.type) {
@@ -341,12 +350,15 @@ export class NodeProcessor {
     
     // 特定类型的额外检查
     if (node.type === 'ss' || node.type === 'shadowsocks') {
-      if (!node.settings || !node.settings.method || !node.settings.password) {
+      const method = sanitizeRequiredString(node.settings?.method || '');
+      const password = sanitizeRequiredString(node.settings?.password || '');
+      if (!node.settings || !method || !password) {
         this.logger.debug(`SS节点无效: 缺少method或password`, {name: node.name, server: node.server});
         return false;
       }
     } else if (node.type === 'vmess') {
-      if (!node.settings || !node.settings.id) {
+      const id = sanitizeRequiredString(node.settings?.id || '');
+      if (!node.settings || !id) {
         this.logger.debug(`Vmess节点无效: 缺少id`, {name: node.name, server: node.server});
         return false;
       }
@@ -358,12 +370,14 @@ export class NodeProcessor {
         }
       }
     } else if (node.type === 'trojan') {
-      if (!node.settings || !node.settings.password) {
+      const password = sanitizeRequiredString(node.settings?.password || '');
+      if (!node.settings || !password) {
         this.logger.debug(`Trojan节点无效: 缺少password`, {name: node.name, server: node.server});
         return false;
       }
     } else if (node.type === 'vless') {
-      if (!node.settings || !node.settings.id) {
+      const id = sanitizeRequiredString(node.settings?.id || '');
+      if (!node.settings || !id) {
         this.logger.debug(`VLESS节点无效: 缺少id`, {name: node.name, server: node.server});
         return false;
       }
