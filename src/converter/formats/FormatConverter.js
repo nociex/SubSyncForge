@@ -809,7 +809,7 @@ export class FormatConverter {
     for (const [tag, members] of Object.entries(groupMembers)) {
       const group = groupOutboundMap.get(tag);
       if (group) {
-        group.outbounds = members;
+        group.outbounds = members.length > 0 ? members : ['DIRECT'];
       }
     }
 
