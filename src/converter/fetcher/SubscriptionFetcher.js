@@ -138,6 +138,14 @@ export class SubscriptionFetcher {
     if (data.length === 0) {
       throw new Error('服务器返回了空内容');
     }
+
+    const trimmedLower = data.trimStart().toLowerCase();
+    if (contentType.includes('text/html') ||
+        trimmedLower.startsWith('<!doctype html') ||
+        trimmedLower.startsWith('<html') ||
+        (trimmedLower.includes('<script') && trimmedLower.includes('</html'))) {
+      throw new Error('订阅返回HTML页面，可能需要鉴权或订阅已失效');
+    }
     
     // 尝试检测内容格式
     if (data.length < 1000) {
