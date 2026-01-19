@@ -88,7 +88,7 @@ export class ProxyCoreManager {
       },
       mmdb: {
         name: 'Country.mmdb',
-        url: 'https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/Country.mmdb'
+        url: 'https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/country.mmdb'
       }
     };
   }

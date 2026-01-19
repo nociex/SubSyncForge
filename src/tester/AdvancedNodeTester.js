@@ -12,6 +12,7 @@ import { ConfigGenerator } from '../core/output/ConfigGenerator.js';
 import fetch from 'node-fetch';
 import { spawn } from 'child_process';
 import http from 'http';
+import yaml from 'js-yaml';
 
 const defaultLogger = logger?.defaultLogger || console;
 
@@ -628,27 +629,30 @@ export class AdvancedNodeTester extends NodeTester {
       // 3. Generate Config
       this.logger.info('Generating test config via Subconverter...');
       const uriList = this.configGenerator.generateTextContent('', nodes);
-      let convertedConfig = '';
+      let convertedConfig = {};
       try {
-        convertedConfig = await this.subconverter.convertContent(uriList, 'clash');
+        const yamlStr = await this.subconverter.convertContent(uriList, 'clash');
+        convertedConfig = yaml.load(yamlStr);
       } catch (e) {
         this.logger.warn(`Subconverter error: ${e.message}. Trying local generation.`);
-        convertedConfig = this.configGenerator.generateClashContent('proxies: []', nodes);
+        const localYaml = this.configGenerator.generateClashContent('proxies: []', nodes);
+        convertedConfig = yaml.load(localYaml);
       }
 
-      const template = `
-port: ${this.mixedPort}
-socks-port: ${this.mixedPort + 1}
-allow-lan: false
-mode: rule
-log-level: info
-external-controller: 127.0.0.1:${this.controllerPort}
-secret: "${this.secret}"
+      const mergedConfig = {
+        ...convertedConfig,
+        port: this.mixedPort,
+        'socks-port': this.mixedPort + 1,
+        'allow-lan': false,
+        mode: 'rule',
+        'log-level': 'info',
+        'external-controller': `127.0.0.1:${this.controllerPort}`,
+        secret: this.secret
+      };
 
-${convertedConfig}
-`;
       configPath = path.join(tempDir, `batch-test-${Date.now()}.yaml`);
-      await fs.promises.writeFile(configPath, template);
+      await fs.promises.writeFile(configPath, yaml.dump(mergedConfig));
+
 
       // 4. Start Core
       this.logger.info(`Starting Mihomo on port ${this.controllerPort}...`);
