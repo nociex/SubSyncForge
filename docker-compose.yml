@@ -9,4 +9,6 @@ services:
       - ./.git:/app/.git
     environment:
       - TZ=Asia/Shanghai
-    network_mode: host
+    ports:
+      - "3000:3000"
+    network_mode: bridge

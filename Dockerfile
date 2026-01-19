@@ -21,4 +21,4 @@ RUN pnpm install --frozen-lockfile
 COPY . .
 
 # Default command
-CMD ["npm", "run", "sync"]
+CMD ["node", "src/server/server.js"]
