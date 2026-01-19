@@ -39,16 +39,24 @@ const runCommand = (binPath, args, label, cwd = process.cwd()) => new Promise((r
   });
 });
 
-export async function validateConfigs({ rootDir = process.cwd() } = {}) {
+export async function validateConfigs({ rootDir = process.cwd(), only = null } = {}) {
   const outputDir = path.join(rootDir, 'output');
   const mihomoPath = path.join(outputDir, 'mihomo.yaml');
   const singboxPath = path.join(outputDir, 'singbox.json');
 
   console.log('🔍 开始配置校验...');
 
-  // 这里的 -d . 告诉 mihomo 在当前目录（即 coreDir）查找资源文件
-  await validateCore(mihomoPath, 'mihomo', ['-t', '-f', mihomoPath, '-d', '.'], 'Mihomo');
-  await validateCore(singboxPath, 'singbox', ['check', '-c', singboxPath, '-D', '.'], 'sing-box');
+  const tasks = [];
+
+  if (!only || only === 'mihomo') {
+    tasks.push(validateCore(mihomoPath, 'mihomo', ['-t', '-f', mihomoPath, '-d', '.'], 'Mihomo'));
+  }
+
+  if (!only || only === 'singbox') {
+    tasks.push(validateCore(singboxPath, 'singbox', ['check', '-c', singboxPath, '-D', '.'], 'sing-box'));
+  }
+
+  await Promise.all(tasks);
 }
 
 /**
@@ -73,7 +81,17 @@ async function validateCore(configPath, coreType, args, label) {
 const invokedAsScript = path.basename(process.argv[1] || '') === 'validate-configs.js';
 
 if (invokedAsScript) {
-  validateConfigs()
+  const args = process.argv.slice(2);
+  let only = null;
+
+  // 简单的参数解析
+  args.forEach(arg => {
+    if (arg.startsWith('--core=')) {
+      only = arg.split('=')[1];
+    }
+  });
+
+  validateConfigs({ only })
     .then(() => {
       console.log('🎉 配置校验完成');
       process.exit(0);
