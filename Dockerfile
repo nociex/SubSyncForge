@@ -14,6 +14,9 @@ WORKDIR /app
 # Copy package files
 COPY package.json pnpm-lock.yaml ./
 
+# Set registry to mirror
+RUN pnpm config set registry https://registry.npmmirror.com
+
 # Install dependencies
 RUN pnpm install --frozen-lockfile
 
