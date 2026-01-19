@@ -654,7 +654,7 @@ ${convertedConfig}
       this.logger.info(`Starting Mihomo on port ${this.controllerPort}...`);
       process = spawn(coreBin, ['-d', this.coreManager.coreDir, '-f', configPath], {
         cwd: this.coreManager.coreDir,
-        stdio: 'ignore'
+        stdio: 'inherit'
       });
 
       // Wait for API
