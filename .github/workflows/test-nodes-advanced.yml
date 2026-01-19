@@ -73,7 +73,7 @@ jobs:
           chmod 755 .cores
           
       - name: 缓存代理核心
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: |
             .cores
@@ -173,7 +173,7 @@ jobs:
           
       - name: 上传测试报告
         if: always()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: test-reports-${{ matrix.core_type }}-${{ github.run_number }}
           path: test-reports/
