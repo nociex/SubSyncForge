@@ -350,6 +350,17 @@ export class NodeProcessor {
         this.logger.debug(`Vmess节点无效: 缺少id`, {name: node.name, server: node.server});
         return false;
       }
+      if (node.settings?.network === 'ws') {
+        const wsHeaders = node.settings?.wsHeaders;
+        if (typeof wsHeaders === 'string' || wsHeaders === null) {
+          this.logger.debug(`Vmess节点无效: ws-opts headers 非法`, {name: node.name, server: node.server});
+          return false;
+        }
+        if (wsHeaders && (Array.isArray(wsHeaders) || typeof wsHeaders !== 'object' || !wsHeaders.Host)) {
+          this.logger.debug(`Vmess节点无效: ws-opts headers 缺少 Host`, {name: node.name, server: node.server});
+          return false;
+        }
+      }
     } else if (node.type === 'trojan') {
       if (!node.settings || !node.settings.password) {
         this.logger.debug(`Trojan节点无效: 缺少password`, {name: node.name, server: node.server});
@@ -359,6 +370,17 @@ export class NodeProcessor {
       if (!node.settings || !node.settings.id) {
         this.logger.debug(`VLESS节点无效: 缺少id`, {name: node.name, server: node.server});
         return false;
+      }
+      if (node.settings?.network === 'ws') {
+        const wsHeaders = node.settings?.wsHeaders;
+        if (typeof wsHeaders === 'string' || wsHeaders === null) {
+          this.logger.debug(`VLESS节点无效: ws-opts headers 非法`, {name: node.name, server: node.server});
+          return false;
+        }
+        if (wsHeaders && (Array.isArray(wsHeaders) || typeof wsHeaders !== 'object' || !wsHeaders.Host)) {
+          this.logger.debug(`VLESS节点无效: ws-opts headers 缺少 Host`, {name: node.name, server: node.server});
+          return false;
+        }
       }
     }
     
