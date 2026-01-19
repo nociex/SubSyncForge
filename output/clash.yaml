@@ -14,11 +14,8 @@ proxy-groups:
       - ♻️ 自动选择
       - DIRECT
       - 🇭🇰 香港节点
-      - 🇨🇳 台湾节点
       - 🇸🇬 新加坡节点
-      - 🇯🇵 日本节点
       - 🇺🇸 美国节点
-      - 🌍 其他节点
 
   - name: ♻️ 自动选择
     type: url-test
@@ -27,9 +24,7 @@ proxy-groups:
     tolerance: 50
     proxies:
       - 🇭🇰 香港节点
-      - 🇨🇳 台湾节点
       - 🇸🇬 新加坡节点
-      - 🇯🇵 日本节点
       - 🇺🇸 美国节点
 
   - name: 🇭🇰 香港节点
@@ -40,14 +35,6 @@ proxy-groups:
     use:
       - HK
 
-  - name: 🇨🇳 台湾节点
-    type: url-test
-    url: http://www.gstatic.com/generate_204
-    interval: 300
-    tolerance: 50
-    use:
-      - TW
-
   - name: 🇸🇬 新加坡节点
     type: url-test
     url: http://www.gstatic.com/generate_204
@@ -56,14 +43,6 @@ proxy-groups:
     use:
       - SG
 
-  - name: 🇯🇵 日本节点
-    type: url-test
-    url: http://www.gstatic.com/generate_204
-    interval: 300
-    tolerance: 50
-    use:
-      - JP
-
   - name: 🇺🇸 美国节点
     type: url-test
     url: http://www.gstatic.com/generate_204
@@ -71,14 +50,6 @@ proxy-groups:
     tolerance: 50
     use:
       - US
-
-  - name: 🌍 其他节点
-    type: url-test
-    url: http://www.gstatic.com/generate_204
-    interval: 300
-    tolerance: 50
-    use:
-      - Others
 
   - name: 🎯 全球直连
     type: select
@@ -145,7 +116,7 @@ proxy-groups:
 proxy-providers:
   HK:
     type: http
-    url: https://raw.githubusercontent.com/nociex/SubSyncForge/output/HK.txt
+    url: https://raw.githubusercontent.com/nociex/SubSyncForge/main/output/hk.txt
     interval: 3600
     path: ./providers/hk.yaml
     health-check:
@@ -155,7 +126,7 @@ proxy-providers:
 
   TW:
     type: http
-    url: https://raw.githubusercontent.com/nociex/SubSyncForge/output/TW.txt
+    url: https://raw.githubusercontent.com/nociex/SubSyncForge/main/output/tw.txt
     interval: 3600
     path: ./providers/tw.yaml
     health-check:
@@ -165,7 +136,7 @@ proxy-providers:
 
   SG:
     type: http
-    url: https://raw.githubusercontent.com/nociex/SubSyncForge/output/SG.txt
+    url: https://raw.githubusercontent.com/nociex/SubSyncForge/main/output/sg.txt
     interval: 3600
     path: ./providers/sg.yaml
     health-check:
@@ -175,7 +146,7 @@ proxy-providers:
 
   JP:
     type: http
-    url: https://raw.githubusercontent.com/nociex/SubSyncForge/output/JP.txt
+    url: https://raw.githubusercontent.com/nociex/SubSyncForge/main/output/jp.txt
     interval: 3600
     path: ./providers/jp.yaml
     health-check:
@@ -185,7 +156,7 @@ proxy-providers:
 
   US:
     type: http
-    url: https://raw.githubusercontent.com/nociex/SubSyncForge/output/US.txt
+    url: https://raw.githubusercontent.com/nociex/SubSyncForge/main/output/us.txt
     interval: 3600
     path: ./providers/us.yaml
     health-check:
@@ -195,7 +166,7 @@ proxy-providers:
 
   Others:
     type: http
-    url: https://raw.githubusercontent.com/nociex/SubSyncForge/output/Others.txt
+    url: https://raw.githubusercontent.com/nociex/SubSyncForge/main/output/others.txt
     interval: 3600
     path: ./providers/others.yaml
     health-check:
@@ -205,7 +176,7 @@ proxy-providers:
 
   OpenAI:
     type: http
-    url: https://raw.githubusercontent.com/nociex/SubSyncForge/output/OpenAI.txt
+    url: https://raw.githubusercontent.com/nociex/SubSyncForge/main/output/openai.txt
     interval: 3600
     path: ./providers/openai.yaml
     health-check:
@@ -215,7 +186,7 @@ proxy-providers:
 
   Netflix:
     type: http
-    url: https://raw.githubusercontent.com/nociex/SubSyncForge/output/Netflix.txt
+    url: https://raw.githubusercontent.com/nociex/SubSyncForge/main/output/netflix.txt
     interval: 3600
     path: ./providers/netflix.yaml
     health-check:
@@ -225,7 +196,7 @@ proxy-providers:
 
   Disney+:
     type: http
-    url: https://raw.githubusercontent.com/nociex/SubSyncForge/output/Disney+.txt
+    url: https://raw.githubusercontent.com/nociex/SubSyncForge/main/output/disney.txt
     interval: 3600
     path: ./providers/disney.yaml
     health-check:
@@ -234,6 +205,15 @@ proxy-providers:
       url: http://www.gstatic.com/generate_204
 
 rules:
+  # 美团 API 直连（确保 IP 定位准确）
+  - DOMAIN-SUFFIX,dianping.com,🎯 全球直连
+  - DOMAIN-SUFFIX,maoyan.com,🎯 全球直连
+  - DOMAIN-SUFFIX,meituan.com,🎯 全球直连
+  - DOMAIN-SUFFIX,meituan.net,🎯 全球直连
+  - DOMAIN-SUFFIX,mtyun.com,🎯 全球直连
+  - DOMAIN-SUFFIX,neixin.cn,🎯 全球直连
+  - DOMAIN-SUFFIX,sankuai.com,🎯 全球直连
+  # OpenAI
   - DOMAIN-SUFFIX,openai.com,🤖 OpenAI
   - DOMAIN-SUFFIX,ai.com,🤖 OpenAI
   - DOMAIN-SUFFIX,netflix.com,🎬 Netflix
