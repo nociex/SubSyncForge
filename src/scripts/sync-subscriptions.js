@@ -12,26 +12,26 @@ import { SyncManager } from '../core/SyncManager.js';
  */
 async function main() {
   console.log('开始同步订阅...');
-  
+
   try {
     // 确定工作目录
     let rootDir = process.cwd();
-    
+
     // 如果在GitHub Actions环境中运行，可能会有特定的工作目录设置
     if (process.env.GITHUB_WORKSPACE) {
       rootDir = process.env.GITHUB_WORKSPACE;
       console.log(`检测到GitHub Actions环境，工作目录设置为: ${rootDir}`);
     }
-    
+
     // 配置路径
     const configPath = path.join(rootDir, 'config/custom.yaml');
-    
+
     // 检查配置文件是否存在
     if (!fs.existsSync(configPath)) {
       console.error(`配置文件不存在: ${configPath}`);
       process.exit(1);
     }
-    
+
     // 创建同步管理器
     const syncManager = new SyncManager({
       rootDir: rootDir,
@@ -39,13 +39,13 @@ async function main() {
       logLevel: 'info',
       maxExecutionTime: 5 * 60 * 60 * 1000 // 5小时
     });
-    
+
     // 初始化
     await syncManager.initialize();
-    
+
     // 启动同步
     const result = await syncManager.start();
-    
+
     // 修复：确保result包含所有必要的属性
     const formattedResult = {
       success: true,
@@ -53,10 +53,12 @@ async function main() {
       validNodesCount: result.validNodes || 0,
       generatedFilesCount: Array.isArray(result.outputs) ? result.outputs.length : (result.outputs || 0)
     };
-    
+
     if (formattedResult.success) {
       console.log(`同步成功，共处理了 ${formattedResult.allNodesCount} 个节点，最终有效节点 ${formattedResult.validNodesCount} 个`);
       console.log(`生成了 ${formattedResult.generatedFilesCount} 个配置文件`);
+      // 显式退出，防止因未关闭的句柄导致进程挂起
+      process.exit(0);
     } else {
       console.error(`同步失败: ${formattedResult.error || '未知错误'}`);
       process.exit(1);
