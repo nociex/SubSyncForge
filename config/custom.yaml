@@ -9,90 +9,104 @@ subscriptions:
     url: "https://zh.jikun.fun/share/col/%E6%B1%9F%E6%B1%9F%E5%85%AC%E7%9B%8A?token=1yGRuU-x6r_zEz28cE_pE"
     type: "url"
     enabled: true
-    timeout: 15000  # 减少超时时间到15秒
-    maxRetries: 1   # 减少重试次数
+    timeout: 15000
+    maxRetries: 1
 
-  - name: "loc" 
-    url: "https://kkb.9901158.xyz/loc.yaml"
+  - name: "nodesfree"
+    url: "https://nodesfree.github.io/clashnode/clash.yaml"
     type: "url"
     enabled: true
     timeout: 15000
     maxRetries: 1
 
-  - name: "alalbb"
-    url: "https://c.alalbb.top/clash"
-    type: "url"
-    enabled: true
-    timeout: 15000
-    maxRetries: 1
-
-  - name: "zu"
-    url: "https://hssq.cc/5dccpz"
-    type: "url"
-    enabled: true
-    timeout: 15000
-    maxRetries: 1
-
-  - name: "ss"
-    url: "https://mxlsub.me/newfull"
-    type: "url"
-    enabled: true
-    timeout: 15000
-    maxRetries: 1
-
-  - name: "pianyi"
-    url: "https://pianyi.sub.sub.subsub123456789.com/answer/land?token=d427a3103269fd0778efdff19d087d12"
-    type: "url"
-    enabled: true
-    timeout: 15000
-    maxRetries: 1
-
-  - name: "edgesub"
-    url: "http://sub2.127665.xyz/s/37442697d1092ed5ececa7609f851afe"
-    type: "url"
-    enabled: true
-    timeout: 15000
-    maxRetries: 1
-
-  - name: "miaopu"
-    url: "https://sub.miaopu.cf/lsub/SWl6knyYIxEPTLmH?clash=1&extend=1"
-    type: "url"
-    enabled: false  # 暂时禁用经常失败的订阅源
-    timeout: 15000
-    maxRetries: 1
-
-  - name: "sub2"
-    url: "http://sub2.127665.xyz/s/37442697d1092ed5ececa7609f851afe"
+  - name: "free"
+    url: "https://proxy.v2gh.com/https://raw.githubusercontent.com/Pawdroid/Free-servers/main/sub"
     type: "url"
     enabled: true
     timeout: 15000
     maxRetries: 1
 
   - name: "amaoa"
-    url: "https://sub.amaoa.xyz/storage?filename=base64.txt&token=sub_ruruo"
+    url: "https://blue2sea.com/clash/54e970b014f53d042de7bbc1d011cc0c"
     type: "url"
     enabled: true
     timeout: 15000
     maxRetries: 1
 
-  - name: "v2ray"
-    url: "https://raw.githubusercontent.com/a2470982985/getNode/main/v2ray.txt"
+  - name: "auto"
+    url: "https://raw.githubusercontent.com/chengaopan/AutoMergePublicNodes/master/list.txt"
     type: "url"
     enabled: true
     timeout: 15000
     maxRetries: 1
 
-  - name: "hxapi"
-    url: "https://api-hx.02000.net/api/v1/client/subscribe?token=647da51d982c8c972577c18208d94e59"
+  - name: "airport"
+    url: "https://raw.githubusercontent.com/dongchengjie/airport/refs/heads/main/subs/merged/tested_within.yaml"
+    type: "url"
+    enabled: true
+    timeout: 15000
+    maxRetries: 1
+
+  - name: "freennode"
+    url: "https://raw.githubusercontent.com/free-nodes/v2rayfree/main/v20260119.txt"
+    type: "url"
+    enabled: true
+    timeout: 15000
+    maxRetries: 1
+
+  - name: "alalbb"
+    url: "https://raw.githubusercontent.com/free-nodes/clashfree/main/clash20260119.yml"
+    type: "url"
+    enabled: true
+    timeout: 15000
+    maxRetries: 1
+
+  - name: "zu"
+    url: "https://raw.githubusercontent.com/chengaopan/AutoMergePublicNodes/master/list.txt"
+    type: "url"
+    enabled: true
+    timeout: 15000
+    maxRetries: 1
+
+  - name: "ss"
+    url: "https://raw.githubusercontent.com/xyfqzy/free-nodes/main/nodes/v2ray.txt"
+    type: "url"
+    enabled: true
+    timeout: 15000
+    maxRetries: 1
+
+  - name: "pianyi"
+    url: "https://free.cndyw.ggff.net/sub"
+    type: "url"
+    enabled: true
+    timeout: 15000
+    maxRetries: 1
+
+  - name: "edgesub"
+    url: "https://raw.githubusercontent.com/littlepig-s/edgesub/main/demo.txt"
+    type: "url"
+    enabled: true
+    timeout: 15000
+    maxRetries: 1
+
+  - name: "miaopu"
+    url: "https://raw.githubusercontent.com/kismetpro/NodeSuber/main/out/All_Configs_Sub.txt"
+    type: "url"
+    enabled: true
+    timeout: 15000
+    maxRetries: 1
+
+  - name: "sub2"
+    url: "https://raw.githubusercontent.com/WLget/V2Ray_configs_64/master/ConfigSub_list.txt"
     type: "url"
     enabled: true
     timeout: 15000
     maxRetries: 1
 
   - name: "xship"
-    url: "https://xship.top/v1/subscribe?starlink=free"
+    url: "https://mu40zG.mcsslk.xyz/742a40491d5bddcaf7051eb41d19cb2f"
     type: "url"
-    enabled: false  # 暂时禁用经常超时的订阅源
+    enabled: true
     timeout: 15000
     maxRetries: 1
     
@@ -131,7 +145,7 @@ output:
     - name: "mihomo"
       template: "templates/mihomo.yaml"
       path: "mihomo.yaml"
-      enabled: false
+      enabled: true
     
     # Surge 配置
     - name: "surge"
@@ -143,7 +157,7 @@ output:
     - name: "singbox"
       template: "templates/singbox.json"
       path: "singbox.json"
-      enabled: false
+      enabled: true
     
     # V2Ray 配置 (选择第一个节点作为默认)
     - name: "v2ray"
@@ -231,10 +245,10 @@ testing:
   enabled: true
   
   # 测试并发数（同时测试多少个节点）
-  concurrency: 25  
+  concurrency: 50  
   
   # 测试超时时间（毫秒）
-  timeout: 8000  
+  timeout: 5000  
   
   # 测试URL
   test_url: "http://latency-test.skk.moe/endpoint"
@@ -246,7 +260,7 @@ testing:
   sort_by_latency: true
   
   # 保留延迟低于此值的节点（毫秒，0表示不限制）
-  max_latency: 5000  
+  max_latency: 3000  
   
   # 保留最大节点数量（0表示不限制）
   max_nodes: 0
@@ -272,14 +286,7 @@ testing:
   # 是否自动重命名
   autoRename: true
   
-  # IP地址定位相关配置
-  ip_location:
-    # 定位服务API URL (使用{ip}作为占位符)
-    api_url: "https://ipinfo.io/{ip}/json"
-    # API密钥 (可选)
-    api_key: ""
-    # 缓存时间(毫秒), 默认7天
-    cache_time: 604800000
+  # IP地址定位相关配置 (已移除，使用 AdvancedNodeTester 内置逻辑)
 
 # 高级设置
 advanced:
