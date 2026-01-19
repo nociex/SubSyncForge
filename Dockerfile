@@ -1,4 +1,4 @@
-FROM node:20-alpine
+FROM m.daocloud.io/docker.io/library/node:20-alpine
 
 # Install git and other essential tools
 RUN apk add --no-cache git openssh ca-certificates tzdata
