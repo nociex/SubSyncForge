@@ -467,7 +467,8 @@ export class AdvancedNodeTester extends NodeTester {
 
     if (this.coreType === 'mihomo') {
       // 支持的协议类型，包括协议名称的不同变体
-      const supportedTypes = ['ss', 'vmess', 'trojan', 'vless', 'hy2', 'hysteria2', 'tuic', 'ssr'];
+      // 移除 'ssr' 防止 mihomo 核心崩溃，强制回退到基本测试
+      const supportedTypes = ['ss', 'vmess', 'trojan', 'vless', 'hy2', 'hysteria2', 'tuic'];
       return supportedTypes.includes(nodeType);
     } else if (this.coreType === 'v2ray') {
       return ['vmess', 'vless', 'trojan', 'shadowsocks'].includes(nodeType);

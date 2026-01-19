@@ -15,17 +15,23 @@ const fileExists = async (filePath) => {
 };
 
 const runCommand = (binPath, args, label) => new Promise((resolve, reject) => {
-  const proc = spawn(binPath, args, { stdio: ['ignore', 'ignore', 'pipe'] });
-  let stderr = '';
-  proc.stderr.on('data', (data) => {
-    stderr += data.toString();
+  const proc = spawn(binPath, args, { stdio: ['ignore', 'pipe', 'pipe'] });
+  let output = '';
+
+  proc.stdout.on('data', (data) => {
+    output += data.toString();
   });
+
+  proc.stderr.on('data', (data) => {
+    output += data.toString();
+  });
+
   proc.on('error', reject);
   proc.on('exit', (code) => {
     if (code === 0) {
       resolve();
     } else {
-      reject(new Error(`${label} 校验失败 (code=${code}): ${stderr.trim() || 'no stderr'}`));
+      reject(new Error(`${label} 校验失败 (code=${code}): ${output.trim() || 'no output'}`));
     }
   });
 });
