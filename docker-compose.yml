@@ -1,0 +1,12 @@
+version: '3'
+services:
+  subsync:
+    build: .
+    container_name: subsyncforge
+    volumes:
+      - ./output:/app/output
+      - ./data:/app/data
+      - ./.git:/app/.git
+    environment:
+      - TZ=Asia/Shanghai
+    network_mode: host
