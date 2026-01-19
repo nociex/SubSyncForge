@@ -12,4 +12,16 @@ services:
       - TZ=Asia/Shanghai
     ports:
       - "23000:3000"
+    links:
+      - subconverter
+    network_mode: bridge
+
+  subconverter:
+    image: tindy2013/subconverter:latest
+    container_name: subconverter
+    restart: always
+    ports:
+      - "25500:25500"
+    environment:
+      - TZ=Asia/Shanghai
     network_mode: bridge
