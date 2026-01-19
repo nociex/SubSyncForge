@@ -35,11 +35,11 @@ export function saveJsonFile(filePath, data, pretty = true) {
   try {
     const dirPath = path.dirname(filePath);
     ensureDirectoryExists(dirPath);
-    
-    const content = pretty 
-      ? JSON.stringify(data, null, 2) 
+
+    const content = pretty
+      ? JSON.stringify(data, null, 2)
       : JSON.stringify(data);
-    
+
     fs.writeFileSync(filePath, content, 'utf-8');
     return true;
   } catch (error) {
@@ -55,13 +55,14 @@ export function saveJsonFile(filePath, data, pretty = true) {
  * @param {string} hash 内容哈希值
  * @returns {boolean} 是否保存成功
  */
-export function saveCacheData(cachePath, nodes, hash) {
+export function saveCacheData(cachePath, nodes, hash, metadata = {}) {
   const cacheData = {
     nodes: nodes,
     timestamp: Date.now(),
-    hash: hash
+    hash: hash,
+    ...metadata
   };
-  
+
   return saveJsonFile(cachePath, cacheData);
 }
 
@@ -76,7 +77,7 @@ export function readJsonFile(filePath, defaultValue = null) {
     if (!fs.existsSync(filePath)) {
       return defaultValue;
     }
-    
+
     const content = fs.readFileSync(filePath, 'utf-8');
     return JSON.parse(content);
   } catch (error) {
@@ -114,12 +115,12 @@ export function clearDirectory(dirPath, keepDir = true) {
     if (!fs.existsSync(dirPath)) {
       return true;
     }
-    
+
     const files = fs.readdirSync(dirPath);
-    
+
     for (const file of files) {
       const curPath = path.join(dirPath, file);
-      
+
       if (fs.lstatSync(curPath).isDirectory()) {
         // 递归清空子目录
         clearDirectory(curPath, false);
@@ -128,11 +129,11 @@ export function clearDirectory(dirPath, keepDir = true) {
         fs.unlinkSync(curPath);
       }
     }
-    
+
     if (!keepDir) {
       fs.rmdirSync(dirPath);
     }
-    
+
     return true;
   } catch (error) {
     console.error(`清空目录失败: ${dirPath}, 错误: ${error.message}`);
@@ -150,7 +151,7 @@ export function saveTextFile(filePath, content) {
   try {
     const dirPath = path.dirname(filePath);
     ensureDirectoryExists(dirPath);
-    
+
     fs.writeFileSync(filePath, content, 'utf-8');
     return true;
   } catch (error) {
@@ -170,7 +171,7 @@ export function loadTextFile(filePath, defaultValue = '') {
     if (!fs.existsSync(filePath)) {
       return defaultValue;
     }
-    
+
     return fs.readFileSync(filePath, 'utf-8');
   } catch (error) {
     console.error(`加载文本文件失败: ${filePath}, 错误: ${error.message}`);
