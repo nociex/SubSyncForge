@@ -245,7 +245,10 @@ export class FormatConverter {
             lines.push(`    ${key}:`);
             const addObj = (obj, indent) => {
               for (const [k, v] of Object.entries(obj)) {
-                if (v === undefined || v === null) continue;
+                if (v === undefined || v === null || v === '') continue;
+                if (k === 'headers' && (v === null || Array.isArray(v) || typeof v !== 'object')) {
+                  continue;
+                }
                 if (typeof v === 'object' && !Array.isArray(v)) {
                   lines.push(`${indent}  ${k}:`);
                   addObj(v, indent + '  ');

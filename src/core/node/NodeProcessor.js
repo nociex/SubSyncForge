@@ -352,12 +352,8 @@ export class NodeProcessor {
       }
       if (node.settings?.network === 'ws') {
         const wsHeaders = node.settings?.wsHeaders;
-        if (typeof wsHeaders === 'string' || wsHeaders === null) {
+        if (wsHeaders !== undefined && (wsHeaders === null || Array.isArray(wsHeaders) || typeof wsHeaders !== 'object')) {
           this.logger.debug(`Vmess节点无效: ws-opts headers 非法`, {name: node.name, server: node.server});
-          return false;
-        }
-        if (wsHeaders && (Array.isArray(wsHeaders) || typeof wsHeaders !== 'object' || !wsHeaders.Host)) {
-          this.logger.debug(`Vmess节点无效: ws-opts headers 缺少 Host`, {name: node.name, server: node.server});
           return false;
         }
       }
@@ -373,12 +369,8 @@ export class NodeProcessor {
       }
       if (node.settings?.network === 'ws') {
         const wsHeaders = node.settings?.wsHeaders;
-        if (typeof wsHeaders === 'string' || wsHeaders === null) {
+        if (wsHeaders !== undefined && (wsHeaders === null || Array.isArray(wsHeaders) || typeof wsHeaders !== 'object')) {
           this.logger.debug(`VLESS节点无效: ws-opts headers 非法`, {name: node.name, server: node.server});
-          return false;
-        }
-        if (wsHeaders && (Array.isArray(wsHeaders) || typeof wsHeaders !== 'object' || !wsHeaders.Host)) {
-          this.logger.debug(`VLESS节点无效: ws-opts headers 缺少 Host`, {name: node.name, server: node.server});
           return false;
         }
       }
