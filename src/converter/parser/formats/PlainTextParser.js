@@ -12,17 +12,17 @@ export class PlainTextParser {
     try {
       // 按行分割输入
       const lines = raw.split(/[\r\n]+/).filter(line => line.trim());
-      
+
       // 解析每一行，提取节点信息
       const nodes = [];
-      
+
       for (const line of lines) {
         const node = this.parseLine(line);
         if (node) {
           nodes.push(node);
         }
       }
-      
+
       return nodes;
     } catch (error) {
       console.error('Plain text parsing error:', error);
@@ -58,7 +58,7 @@ export class PlainTextParser {
     } else if (line.startsWith('vless://')) {
       return this.parseVless(line);
     }
-    
+
     return null;
   }
 
@@ -70,34 +70,56 @@ export class PlainTextParser {
   parseVmess(uri) {
     try {
       // vmess://后面是Base64编码的JSON
-      const base64Json = uri.replace('vmess://', '');
+      let base64Json = uri.replace('vmess://', '');
+
+      // 预处理Base64字符串: 移除空白字符，处理URL-safe字符
+      base64Json = base64Json.replace(/\s/g, '').replace(/-/g, '+').replace(/_/g, '/');
+
       let jsonStr;
-      
+
       try {
-        // 浏览器环境
+        // 尝试解码
         if (typeof window !== 'undefined' && window.atob) {
           jsonStr = window.atob(base64Json);
-        } 
-        // Node.js环境
-        else if (typeof Buffer !== 'undefined') {
+        } else if (typeof Buffer !== 'undefined') {
           jsonStr = Buffer.from(base64Json, 'base64').toString('utf-8');
         } else {
           throw new Error('No Base64 decode method available');
         }
       } catch (e) {
-        // 对于无法解码的情况，尝试去除填充字符再解码
-        const cleanedBase64 = base64Json.replace(/=/g, '');
-        if (typeof window !== 'undefined' && window.atob) {
-          jsonStr = window.atob(cleanedBase64);
-        } else if (typeof Buffer !== 'undefined') {
-          jsonStr = Buffer.from(cleanedBase64, 'base64').toString('utf-8');
-        } else {
-          throw new Error('No Base64 decode method available');
+        // 第一次解码失败，尝试补充padding再次解码
+        try {
+          const padded = base64Json.padEnd(base64Json.length + (4 - base64Json.length % 4) % 4, '=');
+          if (typeof window !== 'undefined' && window.atob) {
+            jsonStr = window.atob(padded);
+          } else if (typeof Buffer !== 'undefined') {
+            jsonStr = Buffer.from(padded, 'base64').toString('utf-8');
+          }
+        } catch (e2) {
+          // 如果还是失败，尝试简单的容错处理（比如去除可能的等号再试）
+          const cleaned = base64Json.replace(/=/g, '');
+          if (typeof window !== 'undefined' && window.atob) {
+            jsonStr = window.atob(cleaned);
+          } else if (typeof Buffer !== 'undefined') {
+            jsonStr = Buffer.from(cleaned, 'base64').toString('utf-8');
+          }
         }
       }
-      
+
+      if (!jsonStr) {
+        throw new Error('Base64 decode failed');
+      }
+
+      // 尝试清理JSON字符串，提取有效的JSON部分 (从第一个 { 到最后一个 })
+      const firstBrace = jsonStr.indexOf('{');
+      const lastBrace = jsonStr.lastIndexOf('}');
+
+      if (firstBrace !== -1 && lastBrace !== -1 && lastBrace > firstBrace) {
+        jsonStr = jsonStr.substring(firstBrace, lastBrace + 1);
+      }
+
       const data = JSON.parse(jsonStr);
-      
+
       return {
         type: 'vmess',
         name: data.ps || data.name || '',
@@ -119,7 +141,8 @@ export class PlainTextParser {
         }
       };
     } catch (error) {
-      console.error('Failed to parse Vmess URI:', error);
+      // 仅在开发环境或详细日志模式下打印完整错误，避免日志刷屏
+      // console.error('Failed to parse Vmess URI:', error.message);
       return null;
     }
   }
@@ -134,7 +157,7 @@ export class PlainTextParser {
       // ss://BASE64(method:password)@server:port#name
       // 或者 ss://BASE64(method:password@server:port)#name
       let url;
-      
+
       try {
         // 标准格式
         url = new URL(uri);
@@ -142,7 +165,7 @@ export class PlainTextParser {
         // 可能是旧格式，尝试提取和解码
         const match = uri.match(/^ss:\/\/([^#]+)(#(.*))?$/);
         if (!match) return null;
-        
+
         let decoded;
         try {
           if (typeof window !== 'undefined' && window.atob) {
@@ -159,7 +182,7 @@ export class PlainTextParser {
             decoded = Buffer.from(cleanedBase64, 'base64').toString('utf-8');
           }
         }
-        
+
         // 从解码后的字符串创建伪URL
         if (decoded.includes('@')) {
           url = new URL('ss://' + 'user:pass@example.com');
@@ -174,14 +197,14 @@ export class PlainTextParser {
           return null;
         }
       }
-      
+
       // 提取名称
       const name = decodeURIComponent(url.hash.substring(1) || '');
-      
+
       // 提取服务器和端口
       const server = url.hostname;
       const port = url.port;
-      
+
       // 提取方法和密码
       let method, password;
       try {
@@ -206,7 +229,7 @@ export class PlainTextParser {
               decodedUserInfo = Buffer.from(cleanedBase64, 'base64').toString('utf-8');
             }
           }
-          
+
           [method, password] = decodedUserInfo.split(':');
         }
       } catch (e) {
@@ -214,7 +237,7 @@ export class PlainTextParser {
         method = url.searchParams.get('method') || 'aes-256-gcm';
         password = url.password;
       }
-      
+
       return {
         type: 'ss',
         name: name,
@@ -244,7 +267,7 @@ export class PlainTextParser {
     try {
       // ssr://BASE64(server:port:protocol:method:obfs:BASE64(password)/?obfsparam=BASE64(obfsparam)&protoparam=BASE64(protoparam)&remarks=BASE64(remarks))
       const base64Str = uri.replace('ssr://', '');
-      
+
       let decoded;
       try {
         if (typeof window !== 'undefined' && window.atob) {
@@ -261,20 +284,20 @@ export class PlainTextParser {
           decoded = Buffer.from(cleanedBase64, 'base64').toString('utf-8');
         }
       }
-      
+
       // 分割主要部分和参数部分
       const [mainPart, paramsPart] = decoded.split('/?');
-      
+
       // 解析主要部分
       const mainParts = mainPart.split(':');
       if (mainParts.length < 6) return null;
-      
+
       const server = mainParts[0];
       const port = parseInt(mainParts[1]);
       const protocol = mainParts[2];
       const method = mainParts[3];
       const obfs = mainParts[4];
-      
+
       // 解码密码
       let password;
       try {
@@ -292,15 +315,15 @@ export class PlainTextParser {
           password = Buffer.from(cleanedBase64, 'base64').toString('utf-8');
         }
       }
-      
+
       // 解析参数部分
       let obfsparam = '';
       let protoparam = '';
       let remarks = '';
-      
+
       if (paramsPart) {
         const params = new URLSearchParams(paramsPart);
-        
+
         // 解码参数
         const decodeParam = (param) => {
           if (!param) return '';
@@ -322,12 +345,12 @@ export class PlainTextParser {
             return '';
           }
         };
-        
+
         obfsparam = decodeParam(params.get('obfsparam'));
         protoparam = decodeParam(params.get('protoparam'));
         remarks = decodeParam(params.get('remarks'));
       }
-      
+
       return {
         type: 'ssr',
         name: remarks,
@@ -361,22 +384,22 @@ export class PlainTextParser {
     try {
       // trojan://password@server:port?allowInsecure=1&sni=sni#name
       const url = new URL(uri);
-      
+
       // 提取名称
       const name = decodeURIComponent(url.hash.substring(1) || '');
-      
+
       // 提取服务器和端口
       const server = url.hostname;
       const port = url.port || '443';
-      
+
       // 提取密码
       const password = url.username;
-      
+
       // 提取SNI和其他参数
       const params = url.searchParams;
       const sni = params.get('sni') || params.get('peer') || '';
       const allowInsecure = params.get('allowInsecure') === '1' || params.get('tls-verification') === 'false';
-      
+
       return {
         type: 'trojan',
         name: name,
@@ -407,18 +430,18 @@ export class PlainTextParser {
     try {
       // http://username:password@server:port#name
       const url = new URL(uri);
-      
+
       // 提取名称
       const name = decodeURIComponent(url.hash.substring(1) || '');
-      
+
       // 提取服务器和端口
       const server = url.hostname;
       const port = url.port || (url.protocol === 'https:' ? '443' : '80');
-      
+
       // 提取用户名和密码
       const username = url.username;
       const password = url.password;
-      
+
       return {
         type: url.protocol === 'https:' ? 'https' : 'http',
         name: name,
@@ -451,7 +474,7 @@ export class PlainTextParser {
       if (!uri.startsWith('socks://') && !uri.startsWith('socks5://') && !uri.startsWith('sock://')) {
         throw new Error('Invalid SOCKS protocol prefix (must start with sock://, socks:// or socks5://)');
       }
-      
+
       // 检查是否有明显的base64编码内容
       if (uri.includes('dW5kZWZpbmVk') || uri.match(/[A-Za-z0-9+/=]{20,}/)) {
         throw new Error('Invalid SOCKS URL - appears to contain encoded data');
@@ -459,23 +482,23 @@ export class PlainTextParser {
 
       // socks://username:password@server:port#name
       const url = new URL(uri);
-      
+
       // 验证服务器和端口
       if (!url.hostname || !url.port) {
         throw new Error('Missing server or port in SOCKS URL');
       }
-      
+
       // 提取名称
       const name = decodeURIComponent(url.hash.substring(1) || '');
-      
+
       // 提取服务器和端口
       const server = url.hostname;
       const port = url.port || '1080';
-      
+
       // 提取用户名和密码
       const username = url.username;
       const password = url.password;
-      
+
       return {
         type: 'socks',
         name: name,
@@ -505,14 +528,14 @@ export class PlainTextParser {
     try {
       // hysteria://host:port?auth=x&peer=sni&insecure=1&upmbps=100&downmbps=100#remarks
       const url = new URL(uri);
-      
+
       // 提取名称
       const name = decodeURIComponent(url.hash.substring(1) || '');
-      
+
       // 提取服务器和端口
       const server = url.hostname;
       const port = url.port || 443;
-      
+
       // 提取参数
       const auth = url.searchParams.get('auth') || '';
       const peer = url.searchParams.get('peer') || '';
@@ -521,7 +544,7 @@ export class PlainTextParser {
       const downmbps = url.searchParams.get('downmbps') || '50';
       const obfs = url.searchParams.get('obfs') || '';
       const protocol = url.searchParams.get('protocol') || 'udp';
-      
+
       return {
         type: 'hysteria',
         name: name || `Hysteria ${server}:${port}`,
@@ -556,23 +579,23 @@ export class PlainTextParser {
     try {
       // hysteria2://auth@host:port?sni=x&insecure=1&obfs=salamander&obfs-password=x#remarks
       const url = new URL(uri);
-      
+
       // 提取名称
       const name = decodeURIComponent(url.hash.substring(1) || '');
-      
+
       // 提取服务器和端口
       const server = url.hostname;
       const port = url.port || 443;
-      
+
       // 提取认证信息
       const auth = url.username;
-      
+
       // 提取参数
       const sni = url.searchParams.get('sni') || '';
       const insecure = url.searchParams.get('insecure') === '1';
       const obfs = url.searchParams.get('obfs') || '';
       const obfsPassword = url.searchParams.get('obfs-password') || '';
-      
+
       return {
         type: 'hysteria2',
         name: name || `Hysteria2 ${server}:${port}`,
@@ -605,14 +628,14 @@ export class PlainTextParser {
     try {
       // tuic://uuid:password@host:port?congestion_control=cubic&alpn=h3&udp_relay_mode=native&sni=example.com#remarks
       const url = new URL(uri);
-      
+
       // 提取名称
       const name = decodeURIComponent(url.hash.substring(1) || '');
-      
+
       // 提取服务器和端口
       const server = url.hostname;
       const port = url.port || 443;
-      
+
       // 提取UUID和密码
       let uuid = '', password = '';
       if (url.username) {
@@ -621,13 +644,13 @@ export class PlainTextParser {
           password = url.password;
         }
       }
-      
+
       // 提取参数
       const congestionControl = url.searchParams.get('congestion_control') || 'cubic';
       const alpn = url.searchParams.get('alpn') || 'h3';
       const udpRelayMode = url.searchParams.get('udp_relay_mode') || 'native';
       const sni = url.searchParams.get('sni') || '';
-      
+
       return {
         type: 'tuic',
         name: name || `TUIC ${server}:${port}`,
@@ -661,17 +684,17 @@ export class PlainTextParser {
     try {
       // vless://uuid@host:port?encryption=none&security=tls&sni=example.com&type=tcp#remarks
       const url = new URL(uri);
-      
+
       // 提取名称
       const name = decodeURIComponent(url.hash.substring(1) || '');
-      
+
       // 提取服务器和端口
       const server = url.hostname;
       const port = url.port || 443;
-      
+
       // 提取UUID
       const uuid = url.username;
-      
+
       // 提取参数
       const encryption = url.searchParams.get('encryption') || 'none';
       const security = url.searchParams.get('security') || '';
@@ -679,7 +702,7 @@ export class PlainTextParser {
       const type = url.searchParams.get('type') || 'tcp';
       const path = url.searchParams.get('path') || '';
       const flow = url.searchParams.get('flow') || '';
-      
+
       return {
         type: 'vless',
         name: name || `VLESS ${server}:${port}`,
