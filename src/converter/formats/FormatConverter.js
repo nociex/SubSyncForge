@@ -242,6 +242,19 @@ export class FormatConverter {
 
           if (typeof value === 'object') {
             // 处理嵌套对象 (如 ws-opts)
+            const hasRenderableEntries = (obj) => {
+              for (const [, v] of Object.entries(obj)) {
+                if (v === undefined || v === null || v === '') continue;
+                if (typeof v === 'object' && !Array.isArray(v)) {
+                  if (hasRenderableEntries(v)) return true;
+                  continue;
+                }
+                return true;
+              }
+              return false;
+            };
+            if (!hasRenderableEntries(value)) continue;
+
             lines.push(`    ${key}:`);
             const addObj = (obj, indent) => {
               for (const [k, v] of Object.entries(obj)) {
@@ -250,6 +263,8 @@ export class FormatConverter {
                   continue;
                 }
                 if (typeof v === 'object' && !Array.isArray(v)) {
+                  const hasChildren = hasRenderableEntries(v);
+                  if (!hasChildren) continue;
                   lines.push(`${indent}  ${k}:`);
                   addObj(v, indent + '  ');
                 } else {

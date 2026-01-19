@@ -701,16 +701,35 @@ export class SubscriptionConverter {
     // 转为YAML块风格，避免生成单行映射导致解析失败
     const lines = [`  - name: ${JSON.stringify(clashNode.name)}`];
 
+    const hasRenderableEntries = (value) => {
+      if (!value || typeof value !== 'object') return false;
+      for (const [, v] of Object.entries(value)) {
+        if (v === undefined || v === null || v === '') continue;
+        if (typeof v === 'object' && !Array.isArray(v)) {
+          if (hasRenderableEntries(v)) return true;
+          continue;
+        }
+        if (Array.isArray(v)) {
+          if (v.length > 0) return true;
+          continue;
+        }
+        return true;
+      }
+      return false;
+    };
+
     const addObjectLines = (obj, indent, skipName = false) => {
       for (const [key, value] of Object.entries(obj)) {
         if (value === undefined || value === null || value === '' || (skipName && key === 'name')) continue;
 
         if (Array.isArray(value)) {
+          if (value.length === 0) continue;
           lines.push(`${indent}${key}: ${JSON.stringify(value)}`);
           continue;
         }
 
         if (typeof value === 'object') {
+          if (!hasRenderableEntries(value)) continue;
           lines.push(`${indent}${key}:`);
           addObjectLines(value, `${indent}  `, false);
           continue;
