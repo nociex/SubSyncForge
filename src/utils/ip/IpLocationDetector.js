@@ -21,26 +21,27 @@ export class IpLocationDetector {
     this.cacheTtl = options.cacheTtl || 86400; // 默认缓存1天
     this.apiTimeout = options.apiTimeout || 5000; // 默认API超时5秒
     this.apiRetries = options.apiRetries || 3; // 默认重试3次
-    
+
     // 缓存已查询过的IP地址 (所有地区，不仅仅是中国IP)
     this.ipCache = new Map();
-    
+
     // API健康状态跟踪
     this.apiHealthStatus = {
+      'meituan': { healthy: true, failCount: 0, lastFailTime: 0 },  // 美团API（首选）
       'ip-api.com': { healthy: true, failCount: 0, lastFailTime: 0 },
       'ipwhois.app': { healthy: true, failCount: 0, lastFailTime: 0 },
       'ip.cn': { healthy: true, failCount: 0, lastFailTime: 0 },
       '36ip.cn': { healthy: true, failCount: 0, lastFailTime: 0 },
       'vore.top': { healthy: true, failCount: 0, lastFailTime: 0 }
     };
-    
+
     // API频率限制跟踪
     this.apiRateLimits = {
       'ip-api.com': { limit: 150, window: 60000, count: 0, resetTime: Date.now() }, // 每分钟150次
       'ip.cn': { limit: 500, window: 86400000, count: 0, resetTime: Date.now() },  // 每天500次
       '36ip.cn': { limit: 50, window: 60000, count: 0, resetTime: Date.now() }     // 每分钟50次
     };
-    
+
     // 加载缓存
     this._loadCache();
   }
@@ -52,7 +53,7 @@ export class IpLocationDetector {
    */
   async detectLocation(ip) {
     if (!ip) return null;
-    
+
     // 检查缓存 - 不论哪个国家/地区的IP都会被缓存
     if (this.ipCache.has(ip)) {
       const cachedData = this.ipCache.get(ip);
@@ -64,29 +65,29 @@ export class IpLocationDetector {
         this.logger.debug(`缓存已过期: ${ip}, 重新查询`);
       }
     }
-    
+
     // 尝试使用多个API源
     for (let i = 0; i < this.apiRetries; i++) {
       try {
         // 选择一个健康的API源
         const location = await this._queryHealthyApi(ip);
-        
+
         if (location) {
           // 缓存结果 - 所有地区的IP都会被缓存，不仅仅是中国IP
           this.ipCache.set(ip, {
             location,
             timestamp: Date.now()
           });
-          
+
           // 异步保存缓存
           this._saveCache().catch(err => {
             this.logger.warn(`保存IP缓存失败: ${err.message}`);
           });
-          
+
           return location;
         }
       } catch (error) {
-        this.logger.warn(`检测IP位置失败(尝试 ${i+1}/${this.apiRetries}): ${error.message}`);
+        this.logger.warn(`检测IP位置失败(尝试 ${i + 1}/${this.apiRetries}): ${error.message}`);
         // 最后一次尝试失败，返回null
         if (i === this.apiRetries - 1) {
           return null;
@@ -95,10 +96,10 @@ export class IpLocationDetector {
         await new Promise(resolve => setTimeout(resolve, 1000));
       }
     }
-    
+
     return null;
   }
-  
+
   /**
    * 快速获取IP地理位置（优先使用缓存，无需联网）
    * @param {string} ip IP地址
@@ -106,13 +107,13 @@ export class IpLocationDetector {
    */
   getLocationFromCache(ip) {
     if (!ip || !this.ipCache.has(ip)) return null;
-    
+
     const cachedData = this.ipCache.get(ip);
     // 检查缓存是否过期
     if (Date.now() - cachedData.timestamp < this.cacheTtl * 1000) {
       return cachedData.location;
     }
-    
+
     return null;
   }
 
@@ -123,20 +124,20 @@ export class IpLocationDetector {
    */
   getBatchLocationsFromCache(ips) {
     if (!Array.isArray(ips) || ips.length === 0) return {};
-    
+
     const results = {};
     const now = Date.now();
-    
+
     for (const ip of ips) {
       if (!ip || !this.ipCache.has(ip)) continue;
-      
+
       const cachedData = this.ipCache.get(ip);
       // 检查缓存是否过期
       if (now - cachedData.timestamp < this.cacheTtl * 1000) {
         results[ip] = cachedData.location;
       }
     }
-    
+
     return results;
   }
 
@@ -147,19 +148,19 @@ export class IpLocationDetector {
    */
   getIpsByCountry(countryCode) {
     if (!countryCode) return [];
-    
+
     const ips = [];
     const now = Date.now();
-    
+
     for (const [ip, data] of this.ipCache.entries()) {
       // 检查缓存是否过期
       if (now - data.timestamp >= this.cacheTtl * 1000) continue;
-      
+
       if (data.location && data.location.country === countryCode) {
         ips.push(ip);
       }
     }
-    
+
     return ips;
   }
 
@@ -171,10 +172,10 @@ export class IpLocationDetector {
    */
   isIpInCountry(ip, countryCode) {
     if (!ip || !countryCode) return null;
-    
+
     const location = this.getLocationFromCache(ip);
     if (!location) return null;
-    
+
     return location.country === countryCode;
   }
 
@@ -186,7 +187,7 @@ export class IpLocationDetector {
   analyzeIpType(ip) {
     const location = this.getLocationFromCache(ip);
     if (!location) return null;
-    
+
     const result = {
       ip,
       country: location.country,
@@ -196,39 +197,39 @@ export class IpLocationDetector {
       isp: location.isp,
       type: 'unknown'
     };
-    
+
     // 基于ISP信息进行分类
     const ispLower = (location.isp || '').toLowerCase();
-    
-    if (ispLower.includes('cloud') || 
-        ispLower.includes('aws') || 
-        ispLower.includes('azure') || 
-        ispLower.includes('google') ||
-        ispLower.includes('alibaba') ||
-        ispLower.includes('tencent')) {
+
+    if (ispLower.includes('cloud') ||
+      ispLower.includes('aws') ||
+      ispLower.includes('azure') ||
+      ispLower.includes('google') ||
+      ispLower.includes('alibaba') ||
+      ispLower.includes('tencent')) {
       result.type = 'cloud';
-    } else if (ispLower.includes('mobile') || 
-               ispLower.includes('wireless') ||
-               ispLower.includes('cellular')) {
+    } else if (ispLower.includes('mobile') ||
+      ispLower.includes('wireless') ||
+      ispLower.includes('cellular')) {
       result.type = 'mobile';
-    } else if (ispLower.includes('edu') || 
-               ispLower.includes('university') || 
-               ispLower.includes('school')) {
+    } else if (ispLower.includes('edu') ||
+      ispLower.includes('university') ||
+      ispLower.includes('school')) {
       result.type = 'education';
-    } else if (ispLower.includes('telecom') || 
-               ispLower.includes('unicom') || 
-               ispLower.includes('mobile') ||
-               ispLower.includes('comcast') ||
-               ispLower.includes('verizon')) {
+    } else if (ispLower.includes('telecom') ||
+      ispLower.includes('unicom') ||
+      ispLower.includes('mobile') ||
+      ispLower.includes('comcast') ||
+      ispLower.includes('verizon')) {
       result.type = 'isp';
-    } else if (ispLower.includes('datacenter') || 
-               ispLower.includes('hosting')) {
+    } else if (ispLower.includes('datacenter') ||
+      ispLower.includes('hosting')) {
       result.type = 'datacenter';
     }
-    
+
     return result;
   }
-  
+
   /**
    * 获取IP地址属于哪个洲
    * @param {string} ip IP地址
@@ -237,10 +238,10 @@ export class IpLocationDetector {
   getContinentForIp(ip) {
     const location = this.getLocationFromCache(ip);
     if (!location) return null;
-    
+
     // 根据国家代码确定大洲
     const country = location.country;
-    
+
     // 亚洲国家
     const asiaCountries = ['CN', 'JP', 'KR', 'IN', 'SG', 'TH', 'VN', 'MY', 'ID', 'PH', 'HK', 'TW'];
     // 北美洲国家
@@ -253,14 +254,14 @@ export class IpLocationDetector {
     const southAmericaCountries = ['BR', 'AR', 'CL', 'CO', 'PE', 'VE'];
     // 非洲国家
     const africaCountries = ['ZA', 'EG', 'NG', 'KE', 'MA'];
-    
+
     if (asiaCountries.includes(country)) return '亚洲';
     if (northAmericaCountries.includes(country)) return '北美洲';
     if (europeCountries.includes(country)) return '欧洲';
     if (oceaniaCountries.includes(country)) return '大洋洲';
     if (southAmericaCountries.includes(country)) return '南美洲';
     if (africaCountries.includes(country)) return '非洲';
-    
+
     return '未知';
   }
 
@@ -273,32 +274,32 @@ export class IpLocationDetector {
   async _queryHealthyApi(ip) {
     // 更新API速率限制
     this._updateApiRateLimits();
-    
+
     // 获取健康的且未超过速率限制的API
     const availableApis = Object.entries(this.apiHealthStatus)
       .filter(([name, status]) => {
         // API必须健康
         if (!status.healthy) return false;
-        
+
         // 检查是否有速率限制
         const rateLimit = this.apiRateLimits[name];
         if (rateLimit) {
           // 如果已达到速率限制，返回false
           if (rateLimit.count >= rateLimit.limit) return false;
         }
-        
+
         return true;
       })
       .map(([name]) => name);
-    
+
     // 如果没有可用的API，尝试重置状态
     if (availableApis.length === 0) {
       this.logger.warn('没有可用的API源，尝试重置状态');
-      
+
       // 重置已经超过30分钟的API健康状态
       const now = Date.now();
       const thirtyMinutes = 30 * 60 * 1000;
-      
+
       Object.keys(this.apiHealthStatus).forEach(name => {
         const status = this.apiHealthStatus[name];
         if (!status.healthy && (now - status.lastFailTime > thirtyMinutes)) {
@@ -307,12 +308,12 @@ export class IpLocationDetector {
           this.logger.info(`API源 ${name} 已过30分钟，重置健康状态`);
         }
       });
-      
+
       // 再次获取可用API
       const resetApis = Object.entries(this.apiHealthStatus)
         .filter(([, status]) => status.healthy)
         .map(([name]) => name);
-      
+
       if (resetApis.length === 0) {
         this.logger.warn('重置后仍无可用API，尝试使用任意API');
         // 如果还是没有，随机选择一个API
@@ -320,31 +321,31 @@ export class IpLocationDetector {
         const randomApi = allApis[Math.floor(Math.random() * allApis.length)];
         return await this._queryApiByName(randomApi, ip);
       }
-      
+
       // 使用重置后的可用API列表
       const randomResetApi = resetApis[Math.floor(Math.random() * resetApis.length)];
       return await this._queryApiByName(randomResetApi, ip);
     }
-    
+
     // 随机选择一个可用的API
     const randomAvailableApi = availableApis[Math.floor(Math.random() * availableApis.length)];
     this.logger.debug(`使用API源 ${randomAvailableApi} 检测IP: ${ip}`);
-    
+
     // 增加该API的请求计数
     if (this.apiRateLimits[randomAvailableApi]) {
       this.apiRateLimits[randomAvailableApi].count++;
     }
-    
+
     return await this._queryApiByName(randomAvailableApi, ip);
   }
-  
+
   /**
    * 更新API速率限制状态
    * @private
    */
   _updateApiRateLimits() {
     const now = Date.now();
-    
+
     Object.entries(this.apiRateLimits).forEach(([name, limit]) => {
       // 如果已经过了窗口期，重置计数
       if (now - limit.resetTime >= limit.window) {
@@ -354,7 +355,7 @@ export class IpLocationDetector {
       }
     });
   }
-  
+
   /**
    * 根据API名称查询
    * @param {string} apiName API名称
@@ -365,8 +366,11 @@ export class IpLocationDetector {
   async _queryApiByName(apiName, ip) {
     try {
       let result;
-      
+
       switch (apiName) {
+        case 'meituan':
+          result = await this._queryMeiTuan(ip);
+          break;
         case 'ip-api.com':
           result = await this._queryIpApi(ip);
           break;
@@ -385,10 +389,10 @@ export class IpLocationDetector {
         default:
           throw new Error(`未知的API源: ${apiName}`);
       }
-      
+
       // 成功后更新API状态
       this._updateApiHealthStatus(apiName, true);
-      
+
       return result;
     } catch (error) {
       // 更新API健康状态
@@ -396,7 +400,7 @@ export class IpLocationDetector {
       throw error;
     }
   }
-  
+
   /**
    * 更新API健康状态
    * @param {string} apiName API名称
@@ -405,11 +409,11 @@ export class IpLocationDetector {
    */
   _updateApiHealthStatus(apiName, success) {
     if (!this.apiHealthStatus[apiName]) return;
-    
+
     if (!success) {
       this.apiHealthStatus[apiName].failCount++;
       this.apiHealthStatus[apiName].lastFailTime = Date.now();
-      
+
       // 如果连续失败超过3次，标记为不健康
       if (this.apiHealthStatus[apiName].failCount >= 3) {
         this.apiHealthStatus[apiName].healthy = false;
@@ -418,26 +422,95 @@ export class IpLocationDetector {
     } else {
       // 成功恢复后重置失败计数
       this.apiHealthStatus[apiName].failCount = 0;
-      
+
       // 如果之前不健康，现在恢复
       if (!this.apiHealthStatus[apiName].healthy) {
         this.apiHealthStatus[apiName].healthy = true;
         this.logger.info(`API源 ${apiName} 已恢复健康状态`);
       }
     }
-    
+
     // 如果API不健康但已经过了30分钟，尝试重新标记为健康
     const now = Date.now();
     const thirtyMinutes = 30 * 60 * 1000;
-    
-    if (!this.apiHealthStatus[apiName].healthy && 
-        (now - this.apiHealthStatus[apiName].lastFailTime > thirtyMinutes)) {
+
+    if (!this.apiHealthStatus[apiName].healthy &&
+      (now - this.apiHealthStatus[apiName].lastFailTime > thirtyMinutes)) {
       this.apiHealthStatus[apiName].healthy = true;
       this.apiHealthStatus[apiName].failCount = 0;
       this.logger.info(`API源 ${apiName} 已过30分钟，重新标记为健康状态`);
     }
   }
-  
+
+  /**
+   * 查询美团 IP 定位 API（首选）
+   * @param {string} ip IP 地址
+   * @returns {Promise<Object|null>} 位置信息
+   * @private
+   */
+  async _queryMeiTuan(ip) {
+    try {
+      // 第一步：获取经纬度和基础地理信息
+      const ipUrl = `https://apimobile.meituan.com/locate/v2/ip/loc?rgeo=true&ip=${encodeURIComponent(ip)}`;
+      const ipResponse = await fetch(ipUrl, {
+        headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36' },
+        timeout: this.apiTimeout
+      });
+
+      if (!ipResponse.ok) {
+        throw new Error(`HTTP error: ${ipResponse.status}`);
+      }
+
+      const ipData = await ipResponse.json();
+
+      if (!ipData || !ipData.data || !ipData.data.lat) {
+        throw new Error('API返回错误: 无法获取位置信息');
+      }
+
+      const { lat, lng, rgeo } = ipData.data;
+
+      // 构建基础位置信息
+      const location = {
+        country: rgeo?.country === '中国' ? 'CN' : '',
+        country_name: rgeo?.country || '',
+        region: rgeo?.province || '',
+        city: rgeo?.city || '',
+        district: rgeo?.district || '',
+        lat,
+        lng,
+        source: 'meituan'
+      };
+
+      // 第二步（可选）：获取更详细的城市信息
+      try {
+        const cityUrl = `https://apimobile.meituan.com/group/v1/city/latlng/${lat},${lng}?tag=0`;
+        const cityResponse = await fetch(cityUrl, {
+          headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36' },
+          timeout: this.apiTimeout
+        });
+
+        if (cityResponse.ok) {
+          const cityData = await cityResponse.json();
+          if (cityData && cityData.data) {
+            location.detail = cityData.data.detail || '';
+            location.openCityName = cityData.data.openCityName || '';
+            if (cityData.data.district) {
+              location.district = cityData.data.district;
+            }
+          }
+        }
+      } catch (cityError) {
+        // 城市详情获取失败不影响基础位置信息
+        this.logger.debug(`美团城市详情获取失败: ${cityError.message}`);
+      }
+
+      return location;
+    } catch (error) {
+      this.logger.warn(`美团API查询失败: ${error.message}`);
+      throw error;
+    }
+  }
+
   /**
    * 查询ip-api.com
    * @param {string} ip IP地址
@@ -450,17 +523,17 @@ export class IpLocationDetector {
         headers: { 'User-Agent': 'SubSyncForge/1.0' },
         timeout: this.apiTimeout
       });
-      
+
       if (!response.ok) {
         throw new Error(`HTTP error: ${response.status}`);
       }
-      
+
       const data = await response.json();
-      
+
       if (data.status !== 'success') {
         throw new Error(`API返回错误: ${data.message || 'Unknown error'}`);
       }
-      
+
       // 返回标准格式的位置信息
       return {
         country: data.countryCode,
@@ -488,17 +561,17 @@ export class IpLocationDetector {
         headers: { 'User-Agent': 'SubSyncForge/1.0' },
         timeout: this.apiTimeout
       });
-      
+
       if (!response.ok) {
         throw new Error(`HTTP error: ${response.status}`);
       }
-      
+
       const data = await response.json();
-      
+
       if (!data.success) {
         throw new Error('API查询失败');
       }
-      
+
       // 返回标准格式的位置信息
       return {
         country: data.country_code,
@@ -513,7 +586,7 @@ export class IpLocationDetector {
       throw error;
     }
   }
-  
+
   /**
    * 查询IP.CN
    * @param {string} ip IP地址
@@ -523,26 +596,26 @@ export class IpLocationDetector {
   async _queryIpCn(ip) {
     try {
       const response = await fetch(`https://www.ip.cn/api/index?ip=${ip}&type=0`, {
-        headers: { 
+        headers: {
           'User-Agent': 'SubSyncForge/1.0',
           'Referer': 'https://www.ip.cn/'
         },
         timeout: this.apiTimeout
       });
-      
+
       if (!response.ok) {
         throw new Error(`HTTP error: ${response.status}`);
       }
-      
+
       const data = await response.json();
-      
+
       if (!data.address) {
         throw new Error('API返回错误: 无地址信息');
       }
-      
+
       // 解析地址信息，通常格式为 "中国 广东 广州"
       const addressParts = data.address.split(' ').filter(Boolean);
-      
+
       // 返回标准格式的位置信息
       return {
         country: addressParts[0] === '中国' ? 'CN' : '',
@@ -557,7 +630,7 @@ export class IpLocationDetector {
       throw error;
     }
   }
-  
+
   /**
    * 查询36IP.CN
    * @param {string} ip IP地址
@@ -570,13 +643,13 @@ export class IpLocationDetector {
         headers: { 'User-Agent': 'SubSyncForge/1.0' },
         timeout: this.apiTimeout
       });
-      
+
       if (!response.ok) {
         throw new Error(`HTTP error: ${response.status}`);
       }
-      
+
       const data = await response.json();
-      
+
       // 返回标准格式的位置信息
       return {
         country: data.area?.split(' ')[0] === '中国' ? 'CN' : '',
@@ -591,7 +664,7 @@ export class IpLocationDetector {
       throw error;
     }
   }
-  
+
   /**
    * 查询api.vore.top
    * @param {string} ip IP地址
@@ -604,17 +677,17 @@ export class IpLocationDetector {
         headers: { 'User-Agent': 'SubSyncForge/1.0' },
         timeout: this.apiTimeout
       });
-      
+
       if (!response.ok) {
         throw new Error(`HTTP error: ${response.status}`);
       }
-      
+
       const data = await response.json();
-      
+
       if (data.code !== 200) {
         throw new Error(`API返回错误: ${data.msg}`);
       }
-      
+
       // 返回标准格式的位置信息
       return {
         country: data.ipinfo.cnip ? 'CN' : '', // 如果是中国IP则标记为CN
@@ -629,7 +702,7 @@ export class IpLocationDetector {
       throw error;
     }
   }
-  
+
   /**
    * 获取国家名称
    * @param {string} countryCode 国家代码
@@ -654,10 +727,10 @@ export class IpLocationDetector {
       'RU': '俄罗斯'
       // 可以根据需要添加更多国家
     };
-    
+
     return countryMap[countryCode] || countryCode;
   }
-  
+
   /**
    * 加载IP缓存
    * @private
@@ -666,31 +739,31 @@ export class IpLocationDetector {
     try {
       const cacheDir = path.join(this.rootDir, this.dataDir, 'cache');
       const cachePath = path.join(cacheDir, 'ip_location_cache.json');
-      
+
       if (!fs.existsSync(cachePath)) {
         return;
       }
-      
+
       const cacheData = JSON.parse(fs.readFileSync(cachePath, 'utf-8'));
-      
+
       if (!cacheData || !cacheData.entries) {
         return;
       }
-      
+
       // 转换为Map
       for (const [ip, data] of Object.entries(cacheData.entries)) {
         this.ipCache.set(ip, data);
       }
-      
+
       this.logger.info(`已加载 ${this.ipCache.size} 条IP缓存记录`);
-      
+
       // 输出缓存的国家/地区分布情况
       this._logCacheCountryDistribution();
     } catch (error) {
       this.logger.warn(`加载IP缓存失败: ${error.message}`);
     }
   }
-  
+
   /**
    * 保存IP缓存
    * @private
@@ -698,47 +771,47 @@ export class IpLocationDetector {
   async _saveCache() {
     try {
       const cacheDir = path.join(this.rootDir, this.dataDir, 'cache');
-      
+
       if (!fs.existsSync(cacheDir)) {
         fs.mkdirSync(cacheDir, { recursive: true });
       }
-      
+
       const cachePath = path.join(cacheDir, 'ip_location_cache.json');
-      
+
       // 转换Map为对象
       const entries = {};
       for (const [ip, data] of this.ipCache.entries()) {
         entries[ip] = data;
       }
-      
+
       const cacheData = {
         timestamp: Date.now(),
         entries
       };
-      
+
       fs.writeFileSync(cachePath, JSON.stringify(cacheData, null, 2));
-      
+
       this.logger.debug(`已保存 ${this.ipCache.size} 条IP缓存记录`);
     } catch (error) {
       this.logger.warn(`保存IP缓存失败: ${error.message}`);
       throw error;
     }
   }
-  
+
   /**
    * 清除IP缓存
    */
   clearCache() {
     this.ipCache.clear();
-    
+
     try {
       const cacheDir = path.join(this.rootDir, this.dataDir, 'cache');
       const cachePath = path.join(cacheDir, 'ip_location_cache.json');
-      
+
       if (fs.existsSync(cachePath)) {
         fs.unlinkSync(cachePath);
       }
-      
+
       this.logger.info('已清除IP缓存');
     } catch (error) {
       this.logger.warn(`清除IP缓存文件失败: ${error.message}`);
@@ -772,7 +845,7 @@ export class IpLocationDetector {
         const countryName = this._getCountryName(country);
         return `${countryName}(${country}): ${count}`;
       });
-    
+
     if (unknownCount > 0) {
       statsEntries.push(`未知: ${unknownCount}`);
     }

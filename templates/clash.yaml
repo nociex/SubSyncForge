@@ -205,6 +205,15 @@ proxy-providers:
       url: http://www.gstatic.com/generate_204
 
 rules:
+  # 美团 API 直连（确保 IP 定位准确）
+  - DOMAIN-SUFFIX,dianping.com,🎯 全球直连
+  - DOMAIN-SUFFIX,maoyan.com,🎯 全球直连
+  - DOMAIN-SUFFIX,meituan.com,🎯 全球直连
+  - DOMAIN-SUFFIX,meituan.net,🎯 全球直连
+  - DOMAIN-SUFFIX,mtyun.com,🎯 全球直连
+  - DOMAIN-SUFFIX,neixin.cn,🎯 全球直连
+  - DOMAIN-SUFFIX,sankuai.com,🎯 全球直连
+  # OpenAI
   - DOMAIN-SUFFIX,openai.com,🤖 OpenAI
   - DOMAIN-SUFFIX,ai.com,🤖 OpenAI
   - DOMAIN-SUFFIX,netflix.com,🎬 Netflix
