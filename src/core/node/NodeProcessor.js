@@ -29,7 +29,8 @@ export class NodeProcessor {
     this.logger.info(`开始处理节点，原始数量: ${nodes.length}`);
     
     // 移除不支持的协议
-    let validNodes = nodes.filter(node => node?.type?.toLowerCase() !== 'ssr');
+    const unsupportedTypes = new Set(['ssr', 'socks', 'socks5']);
+    let validNodes = nodes.filter(node => !unsupportedTypes.has(node?.type?.toLowerCase()));
 
     // 过滤掉无效节点
     validNodes = validNodes.filter(node => this.isValidNode(node));
