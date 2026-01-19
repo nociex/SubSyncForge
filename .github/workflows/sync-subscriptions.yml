@@ -176,9 +176,6 @@ jobs:
           
           # 检查是否有变更
           if [[ -n $(git status -s data/ output/) ]]; then
-            # 添加所有变更
-            git add data/ output/
-            
             # 使用同步脚本输出的统计信息
             NODES_COUNT="${{ steps.sync-subscriptions.outputs.total_nodes || '0' }}"
             VALID_NODES="${{ steps.sync-subscriptions.outputs.valid_nodes || '0' }}"
@@ -187,9 +184,14 @@ jobs:
             NODES_COUNT="${NODES_COUNT:-0}"
             VALID_NODES="${VALID_NODES:-0}"
             
+            # 先同步远端，避免 push 冲突（自动暂存/恢复本地改动）
+            git pull --rebase --autostash
+            
+            # 添加所有变更
+            git add data/ output/
+            
             # 提交并推送变更
             git commit -m "更新订阅数据: ${VALID_NODES}/${NODES_COUNT} 个有效节点 - $(date +'%Y-%m-%d %H:%M:%S')"
-            git pull --rebase
             git push
             echo "已提交并推送更新"
           else
