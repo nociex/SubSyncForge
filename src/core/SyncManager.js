@@ -285,11 +285,9 @@ export class SyncManager {
     // 使用高级节点测试器进行测试，自动包含IP定位和重命名功能
     const testResults = await this.nodeTester.testNodes(nodes);
     
-    // 处理测试结果，确保正确设置valid属性
     const allTestedNodes = testResults.map(result => {
-      const node = { ...result.node };
+      const node = result.node;
       
-      // 设置节点的有效性和延迟信息
       if (result.status === 'up') {
         node.valid = true;
         node.latency = result.latency || null;
@@ -300,7 +298,6 @@ export class SyncManager {
         node.error = result.error || 'Connection failed';
       }
       
-      // 保留其他测试信息
       if (result.locationInfo) {
         node.locationInfo = result.locationInfo;
       }
