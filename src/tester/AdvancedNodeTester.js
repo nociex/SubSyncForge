@@ -168,6 +168,9 @@ export class AdvancedNodeTester extends NodeTester {
       this.logger.info(`节点重命名完成`);
     }
     
+    // 保存测试结果
+    this.saveTestResults(results);
+    
     return results;
   }
 

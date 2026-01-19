@@ -14,11 +14,8 @@ proxy-groups:
       - ♻️ 自动选择
       - DIRECT
       - 🇭🇰 香港节点
-      - 🇨🇳 台湾节点
       - 🇸🇬 新加坡节点
-      - 🇯🇵 日本节点
       - 🇺🇸 美国节点
-      - 🌍 其他节点
 
   - name: ♻️ 自动选择
     type: url-test
@@ -27,9 +24,7 @@ proxy-groups:
     tolerance: 50
     proxies:
       - 🇭🇰 香港节点
-      - 🇨🇳 台湾节点
       - 🇸🇬 新加坡节点
-      - 🇯🇵 日本节点
       - 🇺🇸 美国节点
 
   - name: 🇭🇰 香港节点
@@ -40,14 +35,6 @@ proxy-groups:
     use:
       - HK
 
-  - name: 🇨🇳 台湾节点
-    type: url-test
-    url: http://www.gstatic.com/generate_204
-    interval: 300
-    tolerance: 50
-    use:
-      - TW
-
   - name: 🇸🇬 新加坡节点
     type: url-test
     url: http://www.gstatic.com/generate_204
@@ -56,14 +43,6 @@ proxy-groups:
     use:
       - SG
 
-  - name: 🇯🇵 日本节点
-    type: url-test
-    url: http://www.gstatic.com/generate_204
-    interval: 300
-    tolerance: 50
-    use:
-      - JP
-
   - name: 🇺🇸 美国节点
     type: url-test
     url: http://www.gstatic.com/generate_204
@@ -71,14 +50,6 @@ proxy-groups:
     tolerance: 50
     use:
       - US
-
-  - name: 🌍 其他节点
-    type: url-test
-    url: http://www.gstatic.com/generate_204
-    interval: 300
-    tolerance: 50
-    use:
-      - Others
 
   - name: 🎯 全球直连
     type: select
