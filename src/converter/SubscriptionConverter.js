@@ -564,7 +564,7 @@ export class SubscriptionConverter {
     }
 
     // 清理节点名称中的无效字符
-    const cleanedNodeName = (node.name || 'Unnamed Node').replace(/\\uFFFD/g, '');
+    const cleanedNodeName = (node.name || 'Unnamed Node').replace(/\uFFFD/g, '');
 
     // 确保所有必需的属性都存在
     const requiredProps = ['type', 'server', 'port'];
@@ -675,7 +675,53 @@ export class SubscriptionConverter {
       clashNode.tags = node.extra.tags.map(tag => `"${tag}"`);
     }
 
-    return JSON.stringify(clashNode);
+    // 清理字符串字段中的不可见字符和替换字符
+    const sanitizeString = (value) => {
+      if (typeof value !== 'string') return value;
+      return value
+        .replace(/[\u0000-\u001F\u007F-\u009F]/g, '')
+        .replace(/[\uFFFD\uFFFE\uFFFF]/g, '')
+        .replace(/[\u200B-\u200D\uFEFF]/g, '');
+    };
+
+    const sanitizeDeep = (value) => {
+      if (Array.isArray(value)) return value.map(sanitizeDeep);
+      if (value && typeof value === 'object') {
+        const result = {};
+        for (const [key, val] of Object.entries(value)) {
+          result[key] = sanitizeDeep(val);
+        }
+        return result;
+      }
+      return sanitizeString(value);
+    };
+
+    clashNode = sanitizeDeep(clashNode);
+
+    // 转为YAML块风格，避免生成单行映射导致解析失败
+    const lines = [`  - name: ${JSON.stringify(clashNode.name)}`];
+
+    const addObjectLines = (obj, indent, skipName = false) => {
+      for (const [key, value] of Object.entries(obj)) {
+        if (value === undefined || value === null || value === '' || (skipName && key === 'name')) continue;
+
+        if (Array.isArray(value)) {
+          lines.push(`${indent}${key}: ${JSON.stringify(value)}`);
+          continue;
+        }
+
+        if (typeof value === 'object') {
+          lines.push(`${indent}${key}:`);
+          addObjectLines(value, `${indent}  `, false);
+          continue;
+        }
+
+        lines.push(`${indent}${key}: ${JSON.stringify(value)}`);
+      }
+    };
+
+    addObjectLines(clashNode, '    ', true);
+    return lines.join('\n');
   }
 
   /**
@@ -690,7 +736,7 @@ export class SubscriptionConverter {
     }
 
     // 清理节点名称中的无效字符
-    const cleanedNodeName = (node.name || 'Unnamed Node').replace(/\\uFFFD/g, '');
+    const cleanedNodeName = (node.name || 'Unnamed Node').replace(/\uFFFD/g, '');
 
     // 确保所有必需的属性都存在
     const requiredProps = ['type', 'server', 'port'];

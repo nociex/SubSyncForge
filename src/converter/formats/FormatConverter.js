@@ -23,6 +23,26 @@ export class FormatConverter {
     this.outputDir = options.outputDir || './output';
   }
 
+  _sanitizeString(value) {
+    if (typeof value !== 'string') return value;
+    return value
+      .replace(/[\u0000-\u001F\u007F-\u009F]/g, '')
+      .replace(/[\uFFFD\uFFFE\uFFFF]/g, '')
+      .replace(/[\u200B-\u200D\uFEFF]/g, '');
+  }
+
+  _sanitizeObjectStrings(value) {
+    if (Array.isArray(value)) return value.map(item => this._sanitizeObjectStrings(item));
+    if (value && typeof value === 'object') {
+      const result = {};
+      for (const [key, val] of Object.entries(value)) {
+        result[key] = this._sanitizeObjectStrings(val);
+      }
+      return result;
+    }
+    return this._sanitizeString(value);
+  }
+
   /**
    * 转换节点到指定格式
    * @param {Array} nodes 节点数组
@@ -269,15 +289,18 @@ export class FormatConverter {
       port: parseInt(node.port) || 443
     };
 
+    let result = base;
+
     switch (node.type) {
       case 'ss':
-        return {
+        result = {
           ...base,
           cipher: node.settings?.method || 'aes-256-gcm',
           password: node.settings?.password
         };
+        break;
       case 'vmess':
-        return {
+        result = {
           ...base,
           uuid: node.settings?.id,
           alterId: parseInt(node.settings?.alterId) || 0,
@@ -286,16 +309,18 @@ export class FormatConverter {
           ...(node.settings?.tls && { tls: true }),
           ...(node.settings?.wsPath && { 'ws-opts': { path: node.settings.wsPath, headers: node.settings.wsHeaders } })
         };
+        break;
       case 'trojan':
-        return {
+        result = {
           ...base,
           password: node.settings?.password,
           ...(node.settings?.sni && { sni: node.settings.sni }),
           ...(node.settings?.allowInsecure && { 'skip-cert-verify': true })
         };
+        break;
       case 'hysteria':
       case 'hysteria2':
-        return {
+        result = {
           ...base,
           type: 'hysteria2',
           password: node.settings?.auth || node.settings?.password,
@@ -303,8 +328,9 @@ export class FormatConverter {
           ...(node.settings?.alpn && { alpn: node.settings.alpn }),
           'skip-cert-verify': node.settings?.insecure || false
         };
+        break;
       case 'vless':
-        return {
+        result = {
           ...base,
           uuid: node.settings?.id,
           flow: node.settings?.flow || '',
@@ -312,9 +338,12 @@ export class FormatConverter {
           ...(node.settings?.tls && { tls: true }),
           ...(node.settings?.sni && { servername: node.settings.sni })
         };
+        break;
       default:
-        return base;
+        result = base;
     }
+
+    return this._sanitizeObjectStrings(result);
   }
 
   /**
