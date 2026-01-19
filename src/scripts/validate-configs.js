@@ -14,8 +14,11 @@ const fileExists = async (filePath) => {
   }
 };
 
-const runCommand = (binPath, args, label) => new Promise((resolve, reject) => {
-  const proc = spawn(binPath, args, { stdio: ['ignore', 'pipe', 'pipe'] });
+const runCommand = (binPath, args, label, cwd = process.cwd()) => new Promise((resolve, reject) => {
+  const proc = spawn(binPath, args, {
+    stdio: ['ignore', 'pipe', 'pipe'],
+    cwd: cwd
+  });
   let output = '';
 
   proc.stdout.on('data', (data) => {
@@ -43,8 +46,9 @@ export async function validateConfigs({ rootDir = process.cwd() } = {}) {
 
   console.log('🔍 开始配置校验...');
 
-  await validateCore(mihomoPath, 'mihomo', ['-t', '-f', mihomoPath], 'Mihomo');
-  await validateCore(singboxPath, 'singbox', ['check', '-c', singboxPath], 'sing-box');
+  // 这里的 -d . 告诉 mihomo 在当前目录（即 coreDir）查找资源文件
+  await validateCore(mihomoPath, 'mihomo', ['-t', '-f', mihomoPath, '-d', '.'], 'Mihomo');
+  await validateCore(singboxPath, 'singbox', ['check', '-c', singboxPath, '-D', '.'], 'sing-box');
 }
 
 /**
@@ -58,7 +62,8 @@ async function validateCore(configPath, coreType, args, label) {
   if (await fileExists(configPath)) {
     const coreManager = new ProxyCoreManager({ coreType });
     const corePath = await coreManager.installCore();
-    await runCommand(corePath, args, label);
+    // 传递 coreDir 作为 cwd，以便 core 能找到同一目录下的资源文件
+    await runCommand(corePath, args, label, coreManager.coreDir);
     console.log(`✅ ${label} 配置校验通过`);
   } else {
     console.log(`⏭️  未找到 ${configPath}，跳过 ${label} 校验`);
