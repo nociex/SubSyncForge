@@ -732,13 +732,13 @@ export class AdvancedNodeTester extends NodeTester {
               result.latency = d.delay;
               result.error = null;
             } else {
-              this.logger.debug(`Node ${name} test failed: Invalid delay ${d.delay}`);
+              this.logger.warn(`Node ${name} test failed: Invalid delay ${d.delay}`);
             }
           } else {
             // 503 usually means timeout in Mihomo API
             const statusText = delayRes.statusText;
             result.error = `HTTP ${delayRes.status}: ${statusText}`;
-            this.logger.debug(`Node ${name} test failed: ${result.error}`);
+            this.logger.warn(`Node ${name} test failed: ${result.error}`);
           }
 
           // Find original node
