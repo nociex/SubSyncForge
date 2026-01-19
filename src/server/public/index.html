@@ -70,6 +70,7 @@
             font-size: 1.5rem;
             font-weight: 700;
             background: linear-gradient(to right, #fff, #a1a1aa);
+            background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             letter-spacing: -0.02em;
@@ -523,13 +524,14 @@
         // Advanced Log Formatting
         function formatLogMessage(msg) {
             // Convert ANSI codes
+            // We use \u001b to match the ESC character safely
             let formatted = msg
-                .replace(/\\x1B\\[31m/g, '<span class="ansi-red">')
-                    .replace(/\\x1B\\[32m/g, '<span class="ansi-green">')
-                        .replace(/\\x1B\\[33m/g, '<span class="ansi-yellow">')
-                            .replace(/\\x1B\\[34m/g, '<span class="ansi-blue">')
-                                .replace(/\\x1B\\[36m/g, '<span class="ansi-cyan">')
-                                    .replace(/\\x1B\\[0m/g, '</span>');
+                .replace(/\u001b\[31m/g, '<span class="ansi-red">')
+                .replace(/\u001b\[32m/g, '<span class="ansi-green">')
+                .replace(/\u001b\[33m/g, '<span class="ansi-yellow">')
+                .replace(/\u001b\[34m/g, '<span class="ansi-blue">')
+                .replace(/\u001b\[36m/g, '<span class="ansi-cyan">')
+                .replace(/\u001b\[0m/g, '</span>');
 
             // Add Tags for keywords
             if (msg.match(/error|fail/i)) formatted = `<span class="tag tag-error">ERR</span> ${formatted}`;
