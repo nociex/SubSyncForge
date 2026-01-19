@@ -209,20 +209,39 @@ export class FormatConverter {
       }
     }).filter(Boolean);
 
-    // 生成 proxies YAML 内容
-    const proxiesYaml = clashNodes.map(n => {
-      const lines = ['  - ' + Object.entries(n).map(([k, v]) => {
-        if (v === null || v === undefined) return null;
-        if (typeof v === 'object') {
-          return `${k}: ${JSON.stringify(v)}`;
+    // 生成 proxies YAML 内容 (Block Style)
+    // 这种格式更稳定，兼容性更好
+    let proxiesYaml = '';
+
+    if (clashNodes.length > 0) {
+      proxiesYaml = clashNodes.map(node => {
+        const lines = [`  - name: ${JSON.stringify(node.name)}`];
+
+        for (const [key, value] of Object.entries(node)) {
+          if (key === 'name' || value === undefined || value === null || value === '') continue;
+
+          if (typeof value === 'object') {
+            // 处理嵌套对象 (如 ws-opts)
+            lines.push(`    ${key}:`);
+            const addObj = (obj, indent) => {
+              for (const [k, v] of Object.entries(obj)) {
+                if (v === undefined || v === null) continue;
+                if (typeof v === 'object' && !Array.isArray(v)) {
+                  lines.push(`${indent}  ${k}:`);
+                  addObj(v, indent + '  ');
+                } else {
+                  lines.push(`${indent}  ${k}: ${JSON.stringify(v)}`);
+                }
+              }
+            };
+            addObj(value, '    ');
+          } else {
+            lines.push(`    ${key}: ${JSON.stringify(value)}`);
+          }
         }
-        if (typeof v === 'string' && (v.includes(':') || v.includes('#') || v.includes('"'))) {
-          return `${k}: "${v.replace(/"/g, '\\"')}"`;
-        }
-        return `${k}: ${v}`;
-      }).filter(Boolean).join(', ')];
-      return lines.join('\n');
-    }).join('\n');
+        return lines.join('\n');
+      }).join('\n');
+    }
 
     // 替换 proxies 部分
     if (result.includes('proxies:')) {
