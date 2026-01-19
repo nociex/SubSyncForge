@@ -221,19 +221,18 @@ export class AdvancedNodeTester extends NodeTester {
    */
   renameAndCorrectNodes(nodes, testResults) {
     this.logger.info(`开始标准化节点名称...`);
-    // 实例化 NodeAnalyzer
     const analyzer = new NodeAnalyzer();
     let corrected = 0;
 
+    const hasNonAscii = (str) => /[^\x00-\x7F]/.test(str) && !/[\u4e00-\u9fff\u3400-\u4dbf]/.test(str);
+    const cleanName = (str) => str.replace(/[^\x00-\x7F\u4e00-\u9fff\u3400-\u4dbf]/g, '').trim();
+
     const renamedNodes = nodes.map((node, index) => {
-      // 查找对应的测试结果
       const testResult = testResults.find(r => r.node === node || r.node.server === node.server);
 
-      // 仅处理测试成功的节点
       if (testResult && testResult.status === 'up') {
         const resultAnalysis = testResult.node.analysis || {};
 
-        // 1. 如果有实际IP位置信息，优先使用
         if (testResult.actualLocation) {
           resultAnalysis.countryCode = testResult.actualLocation.country;
           resultAnalysis.country = testResult.actualLocation.countryName;
@@ -241,11 +240,9 @@ export class AdvancedNodeTester extends NodeTester {
           resultAnalysis.countryCode = testResult.locationInfo.country;
           resultAnalysis.country = testResult.locationInfo.countryName;
         } else if (!resultAnalysis.countryCode && node.country) {
-          // 如果没有位置信息，尝试使用节点原有的
           resultAnalysis.countryCode = node.country;
         }
 
-        // 2. 确保有analysis对象以便generateName使用
         if (!node.analysis) {
           node.analysis = {
             ...resultAnalysis,
@@ -253,29 +250,31 @@ export class AdvancedNodeTester extends NodeTester {
             nodeType: node.type && ['vmess', 'vless', 'ss', 'trojan', 'hysteria2', 'tuic'].includes(node.type.toLowerCase()) ? 'normal' : 'other',
             tags: []
           };
-          // 尝试补充更多信息
           const tempAnalysis = analyzer.analyze(node);
           if (!node.analysis.countryCode) node.analysis.countryCode = tempAnalysis.countryCode;
           if (!node.analysis.protocol) node.analysis.protocol = tempAnalysis.protocol;
         } else {
-          // 更新现有的analysis
           if (resultAnalysis.countryCode) node.analysis.countryCode = resultAnalysis.countryCode;
           if (resultAnalysis.country) node.analysis.country = resultAnalysis.country;
         }
 
-        // 3. 生成新名称
         const newName = analyzer.generateName(node.analysis, {}, index);
 
-        // 如果名称改变了 (或者强制重命名)
         if (newName !== node.name) {
           corrected++;
-
           const renamedNode = { ...node, name: newName };
           if (!renamedNode.extra) renamedNode.extra = {};
           renamedNode.extra.originalName = node.name;
-
           return renamedNode;
         }
+      } else if (node.name && hasNonAscii(node.name)) {
+        corrected++;
+        const cleaned = cleanName(node.name);
+        const fallbackName = cleaned || `Node-${node.type || 'Unknown'}-${(index + 1).toString().padStart(3, '0')}`;
+        const renamedNode = { ...node, name: fallbackName };
+        if (!renamedNode.extra) renamedNode.extra = {};
+        renamedNode.extra.originalName = node.name;
+        return renamedNode;
       }
       return node;
     });
