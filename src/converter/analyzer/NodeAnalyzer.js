@@ -14,7 +14,7 @@ export class NodeAnalyzer {
       '🇨🇱': 'CL', '🇿🇦': 'ZA', '🇦🇪': 'AE', '🇮🇱': 'IL', '🇨🇭': 'CH', '🇸🇪': 'SE',
       '🇳🇴': 'NO', '🇫🇮': 'FI', '🇩🇰': 'DK', '🇵🇱': 'PL', '🇭🇺': 'HU', '🇨🇿': 'CZ',
       '🇦🇹': 'AT', '🇮🇪': 'IE', '🇵🇹': 'PT', '🇬🇷': 'GR', '🇪🇸': 'ES', '🇧🇪': 'BE',
-      '🇱🇺': 'LU', '🇮🇸': 'IS', '🇲🇴': 'MO', '🇨🇳': 'CN',
+      '🇱🇺': 'LU', '🇮🇸': 'IS', '🇲🇴': 'MO', '🇨🇳': 'CN', '🇷🇴': 'RO', '🇧🇬': 'BG',
 
       // 中文地名到代码映射
       '美国': 'US', '香港': 'HK', '台湾': 'TW', '日本': 'JP', '新加坡': 'SG', '韩国': 'KR',
@@ -25,6 +25,7 @@ export class NodeAnalyzer {
       '瑞士': 'CH', '瑞典': 'SE', '挪威': 'NO', '芬兰': 'FI', '丹麦': 'DK', '波兰': 'PL',
       '匈牙利': 'HU', '捷克': 'CZ', '奥地利': 'AT', '爱尔兰': 'IE', '葡萄牙': 'PT', '希腊': 'GR',
       '西班牙': 'ES', '比利时': 'BE', '卢森堡': 'LU', '冰岛': 'IS', '澳门': 'MO', '中国': 'CN',
+      '罗马尼亚': 'RO', '保加利亚': 'BG',
 
       // 英文地名到代码映射
       'United States': 'US', 'USA': 'US', 'America': 'US',
@@ -73,6 +74,8 @@ export class NodeAnalyzer {
       'Iceland': 'IS',
       'Macao': 'MO', 'Macau': 'MO',
       'China': 'CN',
+      'Romania': 'RO',
+      'Bulgaria': 'BG',
 
       // 代码映射
       'US': 'US', 'HK': 'HK', 'TW': 'TW', 'JP': 'JP', 'SG': 'SG', 'KR': 'KR',
@@ -82,7 +85,7 @@ export class NodeAnalyzer {
       'CL': 'CL', 'ZA': 'ZA', 'AE': 'AE', 'IL': 'IL', 'CH': 'CH', 'SE': 'SE',
       'NO': 'NO', 'FI': 'FI', 'DK': 'DK', 'PL': 'PL', 'HU': 'HU', 'CZ': 'CZ',
       'AT': 'AT', 'IE': 'IE', 'PT': 'PT', 'GR': 'GR', 'ES': 'ES', 'BE': 'BE',
-      'LU': 'LU', 'IS': 'IS', 'MO': 'MO', 'CN': 'CN'
+      'LU': 'LU', 'IS': 'IS', 'MO': 'MO', 'CN': 'CN', 'RO': 'RO', 'BG': 'BG'
     };
 
     // 协议名称映射
@@ -183,7 +186,8 @@ export class NodeAnalyzer {
       'TW': 'https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/lige47/taiwan.png',
       'JP': 'https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/lige47/Japan.png',
       'SG': 'https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/lige47/singapore(1).png',
-      'KR': 'https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/lige47/Korea.png'
+      'KR': 'https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/lige47/Korea.png',
+      'RO': 'https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/lige47/Romania.png'
     };
 
     // 特殊标签图标映射
@@ -409,6 +413,8 @@ export class NodeAnalyzer {
           case 'IS': result.country = '冰岛'; break;
           case 'MO': result.country = '澳门'; break;
           case 'CN': result.country = '中国'; break;
+          case 'RO': result.country = '罗马尼亚'; break;
+          case 'BG': result.country = '保加利亚'; break;
           default: result.country = countryKey;
         }
 
