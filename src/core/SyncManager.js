@@ -308,17 +308,9 @@ export class SyncManager {
       return node;
     });
 
-    // 如果启用了自动重命名，AdvancedNodeTester 已在测试完成后处理了重命名
-    // 这里不再重复处理，避免双重重命名导致的不一致问题
     const validNodes = allTestedNodes.filter(node => node.valid === true);
-    this.logger.info(`有效节点: ${validNodes.length} 个`);
+    this.logger.info(`测试完成: ${validNodes.length}/${nodes.length} 个节点可用`);
     
-    // 筛选成功的节点
-    const finalValidNodes = allTestedNodes.filter(node => node.valid === true);
-    
-    this.logger.info(`测试完成: ${finalValidNodes.length}/${nodes.length} 个节点可用`);
-    
-    // 显示测试统计信息
     const stats = this.nodeTester.getTestStatistics(testResults);
     this.logger.info(`测试统计: 成功率 ${stats.successRate}, 平均延迟 ${stats.averageLatency}ms`);
     

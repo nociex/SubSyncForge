@@ -43,24 +43,25 @@ export async function validateConfigs({ rootDir = process.cwd() } = {}) {
 
   console.log('🔍 开始配置校验...');
 
-  // mihomo 校验
-  if (await fileExists(mihomoPath)) {
-    const coreManager = new ProxyCoreManager({ coreType: 'mihomo' });
-    const corePath = await coreManager.installCore();
-    await runCommand(corePath, ['-t', '-f', mihomoPath], 'Mihomo');
-    console.log('✅ Mihomo 配置校验通过');
-  } else {
-    console.log(`⏭️  未找到 ${mihomoPath}，跳过 Mihomo 校验`);
-  }
+  await validateCore(mihomoPath, 'mihomo', ['-t', '-f', mihomoPath], 'Mihomo');
+  await validateCore(singboxPath, 'singbox', ['check', '-c', singboxPath], 'sing-box');
+}
 
-  // sing-box 校验
-  if (await fileExists(singboxPath)) {
-    const coreManager = new ProxyCoreManager({ coreType: 'singbox' });
+/**
+ * 通用核心校验函数
+ * @param {string} configPath 配置文件路径
+ * @param {string} coreType 核心类型
+ * @param {Array} args 校验参数
+ * @param {string} label 显示标签
+ */
+async function validateCore(configPath, coreType, args, label) {
+  if (await fileExists(configPath)) {
+    const coreManager = new ProxyCoreManager({ coreType });
     const corePath = await coreManager.installCore();
-    await runCommand(corePath, ['check', '-c', singboxPath], 'sing-box');
-    console.log('✅ sing-box 配置校验通过');
+    await runCommand(corePath, args, label);
+    console.log(`✅ ${label} 配置校验通过`);
   } else {
-    console.log(`⏭️  未找到 ${singboxPath}，跳过 sing-box 校验`);
+    console.log(`⏭️  未找到 ${configPath}，跳过 ${label} 校验`);
   }
 }
 
