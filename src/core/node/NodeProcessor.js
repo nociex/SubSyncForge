@@ -356,6 +356,13 @@ export class NodeProcessor {
         this.logger.debug(`SS节点无效: 缺少method或password`, {name: node.name, server: node.server});
         return false;
       }
+    } else if (node.type === 'ssr') {
+      const method = sanitizeRequiredString(node.settings?.method || '');
+      const password = sanitizeRequiredString(node.settings?.password || '');
+      if (!node.settings || !method || !password) {
+        this.logger.debug(`SSR节点无效: 缺少method或password`, {name: node.name, server: node.server});
+        return false;
+      }
     } else if (node.type === 'vmess') {
       const id = sanitizeRequiredString(node.settings?.id || '');
       if (!node.settings || !id) {

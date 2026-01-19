@@ -17,7 +17,7 @@ export class AdvancedNodeTester extends NodeTester {
     this.dataDir = options.dataDir || 'data';
 
     this.useCoreTest = options.useCoreTest !== false; // 默认启用核心测试
-    this.coreType = options.coreType || 'mihomo'; // 'mihomo' | 'v2ray'
+    this.coreType = options.coreType || 'mihomo'; // 'mihomo' | 'v2ray' | 'singbox'
     this.fallbackToBasic = options.fallbackToBasic !== false; // 失败时回退到基本测试
     this.autoRename = options.autoRename !== false; // 默认启用自动重命名
     this.maxLatency = options.maxLatency || 3000; // 最大延迟限制，默认3秒
@@ -471,6 +471,8 @@ export class AdvancedNodeTester extends NodeTester {
       return supportedTypes.includes(nodeType);
     } else if (this.coreType === 'v2ray') {
       return ['vmess', 'vless', 'trojan', 'shadowsocks'].includes(nodeType);
+    } else if (this.coreType === 'singbox') {
+      return ['ss', 'shadowsocks', 'vmess', 'vless', 'trojan', 'hysteria2', 'tuic'].includes(nodeType);
     }
 
     return false;
@@ -618,7 +620,7 @@ export class AdvancedNodeTester extends NodeTester {
    * @param {string} coreType - 核心类型 ('mihomo' | 'v2ray')
    */
   async setCoreType(coreType) {
-    if (!['mihomo', 'v2ray'].includes(coreType)) {
+    if (!['mihomo', 'v2ray', 'singbox'].includes(coreType)) {
       throw new Error(`不支持的核心类型: ${coreType}`);
     }
 

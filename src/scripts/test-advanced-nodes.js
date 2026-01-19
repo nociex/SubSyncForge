@@ -135,7 +135,7 @@ async function runTest() {
 
 // 处理命令行参数
 const args = process.argv.slice(2);
-const coreType = args.includes('--v2ray') ? 'v2ray' : 'mihomo';
+const coreType = args.includes('--singbox') ? 'singbox' : (args.includes('--v2ray') ? 'v2ray' : 'mihomo');
 const noCore = args.includes('--no-core');
 const verbose = args.includes('--verbose');
 
@@ -146,6 +146,7 @@ if (args.includes('--help')) {
 选项:
   --mihomo     使用 mihomo 核心 (默认)
   --v2ray      使用 v2ray 核心
+  --singbox    使用 sing-box 核心
   --no-core    禁用核心测试，仅使用基本连接测试
   --verbose    显示详细日志
   --help       显示此帮助信息
@@ -153,6 +154,7 @@ if (args.includes('--help')) {
 示例:
   node test-advanced-nodes.js                # 使用 mihomo 核心
   node test-advanced-nodes.js --v2ray        # 使用 v2ray 核心
+  node test-advanced-nodes.js --singbox      # 使用 sing-box 核心
   node test-advanced-nodes.js --no-core      # 仅基本测试
   node test-advanced-nodes.js --verbose      # 详细模式
 `);

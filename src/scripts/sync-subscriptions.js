@@ -6,6 +6,7 @@
 import fs from 'fs';
 import path from 'path';
 import { SyncManager } from '../core/SyncManager.js';
+import { validateConfigs } from './validate-configs.js';
 
 /**
  * 主函数
@@ -57,6 +58,13 @@ async function main() {
     if (formattedResult.success) {
       console.log(`同步成功，共处理了 ${formattedResult.allNodesCount} 个节点，最终有效节点 ${formattedResult.validNodesCount} 个`);
       console.log(`生成了 ${formattedResult.generatedFilesCount} 个配置文件`);
+
+      if (!process.env.SKIP_CONFIG_VALIDATION) {
+        await validateConfigs({ rootDir });
+      } else {
+        console.log('已跳过配置校验 (SKIP_CONFIG_VALIDATION=1)');
+      }
+
       // 显式退出，防止因未关闭的句柄导致进程挂起
       process.exit(0);
     } else {

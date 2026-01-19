@@ -17,7 +17,7 @@ const defaultLogger = logger?.defaultLogger || console;
 export class ProxyCoreManager {
   constructor(options = {}) {
     this.logger = options.logger || defaultLogger.child({ component: 'ProxyCoreManager' });
-    this.coreType = options.coreType || 'mihomo'; // 'mihomo' | 'v2ray'
+    this.coreType = options.coreType || 'mihomo'; // 'mihomo' | 'v2ray' | 'singbox'
     this.coreDir = options.coreDir || path.join(process.cwd(), '.cores');
     this.configDir = options.configDir || path.join(this.coreDir, 'configs');
     this.timeout = options.timeout || 10000;
@@ -61,6 +61,18 @@ export class ProxyCoreManager {
           'windows-32': 'v2ray-windows-32.zip',
           'windows-arm32-v7a': 'v2ray-windows-arm32-v7a.zip'
         }
+      },
+      singbox: {
+        version: 'v1.8.8',
+        releases: {
+          'linux-amd64': 'sing-box-1.8.8-linux-amd64.tar.gz',
+          'linux-arm64': 'sing-box-1.8.8-linux-arm64.tar.gz',
+          'linux-armv7': 'sing-box-1.8.8-linux-armv7.tar.gz',
+          'darwin-amd64': 'sing-box-1.8.8-darwin-amd64.tar.gz',
+          'darwin-arm64': 'sing-box-1.8.8-darwin-arm64.tar.gz',
+          'windows-amd64': 'sing-box-1.8.8-windows-amd64.zip',
+          'windows-arm64': 'sing-box-1.8.8-windows-arm64.zip'
+        }
       }
     };
   }
@@ -92,7 +104,8 @@ export class ProxyCoreManager {
       // 不同核心对 ARM 包的命名规则不同，这里做一次映射
       const coreSuffixMap = {
         mihomo: { armv7: 'armv7', armv6: 'armv6', armv5: 'armv5' },
-        v2ray: { armv7: 'arm32-v7a', armv6: 'arm32-v6', armv5: 'arm32-v5' }
+        v2ray: { armv7: 'arm32-v7a', armv6: 'arm32-v6', armv5: 'arm32-v5' },
+        singbox: { armv7: 'armv7', armv6: 'armv6', armv5: 'armv5' }
       };
       archType = coreSuffixMap[this.coreType]?.[armSuffix] || armSuffix;
     } else {
@@ -177,6 +190,7 @@ export class ProxyCoreManager {
     const ext = os.platform() === 'win32' ? '.exe' : '';
     if (this.coreType === 'mihomo') return `mihomo${ext}`;
     if (this.coreType === 'v2ray') return `v2ray${ext}`;
+    if (this.coreType === 'singbox') return `sing-box${ext}`;
     return `${this.coreType}${ext}`;
   }
 
@@ -189,6 +203,8 @@ export class ProxyCoreManager {
       return `https://github.com/MetaCubeX/mihomo/releases/download/${version}/${fileName}`;
     } else if (this.coreType === 'v2ray') {
       return `https://github.com/v2fly/v2ray-core/releases/download/${version}/${fileName}`;
+    } else if (this.coreType === 'singbox') {
+      return `https://github.com/SagerNet/sing-box/releases/download/${version}/${fileName}`;
     }
     throw new Error(`未知的核心类型: ${this.coreType}`);
   }
@@ -223,7 +239,35 @@ export class ProxyCoreManager {
    * 解压核心文件
    */
   async extractCore(archivePath, outputPath) {
-    if (archivePath.endsWith('.gz')) {
+    const findExecutable = async (dir) => {
+      const entries = await fs.readdir(dir, { withFileTypes: true });
+      for (const entry of entries) {
+        const fullPath = path.join(dir, entry.name);
+        if (entry.isDirectory()) {
+          const nested = await findExecutable(fullPath);
+          if (nested) return nested;
+        } else if (entry.name === this.getCoreExecutableName() || entry.name.startsWith('sing-box')) {
+          return fullPath;
+        }
+      }
+      return null;
+    };
+
+    if (archivePath.endsWith('.tar.gz')) {
+      await new Promise((resolve, reject) => {
+        const tarProcess = spawn('tar', ['-xzf', archivePath, '-C', this.coreDir], { stdio: 'ignore' });
+        tarProcess.on('error', reject);
+        tarProcess.on('exit', (code) => {
+          if (code === 0) resolve();
+          else reject(new Error(`tar 解压失败，退出码: ${code}`));
+        });
+      });
+
+      const executablePath = await findExecutable(this.coreDir);
+      if (executablePath) {
+        await fs.rename(executablePath, outputPath);
+      }
+    } else if (archivePath.endsWith('.gz')) {
       // 处理gzip文件 (mihomo)
       const readStream = createReadStream(archivePath);
       const writeStream = createWriteStream(outputPath);
@@ -262,6 +306,8 @@ export class ProxyCoreManager {
       config = this.generateMihomoConfig(node, mixedPort);
     } else if (this.coreType === 'v2ray') {
       config = this.generateV2rayConfig(node);
+    } else if (this.coreType === 'singbox') {
+      config = this.generateSingboxConfig(node, mixedPort);
     } else {
       throw new Error(`未支持的核心类型: ${this.coreType}`);
     }
@@ -315,6 +361,37 @@ export class ProxyCoreManager {
             "type": "field",
             "outboundTag": "proxy",
             "domain": ["geosite:geolocation-!cn"]
+          }
+        ]
+      }
+    };
+  }
+
+  /**
+   * 生成SingBox配置
+   */
+  generateSingboxConfig(node, mixedPort) {
+    const outbound = this.convertNodeToSingboxOutbound(node);
+
+    return {
+      log: { level: 'error' },
+      inbounds: [
+        {
+          type: 'mixed',
+          tag: 'mixed-in',
+          listen: '127.0.0.1',
+          listen_port: mixedPort || 0
+        }
+      ],
+      outbounds: [
+        outbound,
+        { type: 'direct', tag: 'direct' }
+      ],
+      route: {
+        rules: [
+          {
+            inbound: ['mixed-in'],
+            outbound: outbound.tag
           }
         ]
       }
@@ -589,6 +666,113 @@ export class ProxyCoreManager {
   }
 
   /**
+   * 转换节点为SingBox出站配置
+   */
+  convertNodeToSingboxOutbound(node) {
+    const base = {
+      tag: 'proxy',
+      type: node.type?.toLowerCase(),
+      server: node.server,
+      server_port: parseInt(node.port)
+    };
+
+    switch (node.type?.toLowerCase()) {
+      case 'vmess': {
+        const outbound = {
+          ...base,
+          type: 'vmess',
+          uuid: node.settings?.id || node.uuid || node.id,
+          security: node.settings?.security || node.cipher || 'auto',
+          alter_id: parseInt(node.settings?.alterId || node.alterId || node.aid || 0)
+        };
+
+        if ((node.settings?.network || node.network) === 'ws') {
+          outbound.transport = {
+            type: 'ws',
+            path: node.settings?.wsPath || node.settings?.path || node.wsPath || '/',
+            headers: {}
+          };
+          const host = node.settings?.wsHeaders?.Host || node.settings?.host || node.host;
+          if (host) outbound.transport.headers.Host = host;
+        }
+
+        if (node.settings?.tls || node.tls) {
+          outbound.tls = {
+            enabled: true,
+            server_name: node.settings?.serverName || node.settings?.sni || node.server,
+            insecure: node.settings?.allowInsecure || false
+          };
+        }
+        return outbound;
+      }
+      case 'vless': {
+        const outbound = {
+          ...base,
+          type: 'vless',
+          uuid: node.settings?.id || node.uuid || node.id
+        };
+
+        if ((node.settings?.network || node.network) === 'ws') {
+          outbound.transport = {
+            type: 'ws',
+            path: node.settings?.path || node.settings?.wsPath || '/',
+            headers: {}
+          };
+          const host = node.settings?.host || node.settings?.wsHeaders?.Host || node.host;
+          if (host) outbound.transport.headers.Host = host;
+        }
+
+        if (node.settings?.tls || node.settings?.security === 'tls') {
+          outbound.tls = {
+            enabled: true,
+            server_name: node.settings?.sni || node.server,
+            insecure: node.settings?.allowInsecure || false
+          };
+        }
+
+        if (node.settings?.flow) {
+          outbound.flow = node.settings.flow;
+        }
+        return outbound;
+      }
+      case 'ss':
+      case 'shadowsocks':
+        return {
+          ...base,
+          type: 'shadowsocks',
+          method: node.settings?.method || node.method,
+          password: node.settings?.password || node.password
+        };
+      case 'trojan':
+        return {
+          ...base,
+          type: 'trojan',
+          password: node.settings?.password || node.password,
+          tls: {
+            enabled: true,
+            server_name: node.settings?.sni || node.server,
+            insecure: node.settings?.allowInsecure || false
+          }
+        };
+      case 'hysteria2':
+        return {
+          ...base,
+          type: 'hysteria2',
+          password: node.settings?.auth || node.settings?.password
+        };
+      case 'tuic':
+        return {
+          ...base,
+          type: 'tuic',
+          uuid: node.settings?.uuid || node.uuid,
+          password: node.settings?.password || node.password
+        };
+      default:
+        throw new Error(`SingBox 不支持的节点类型: ${node.type}`);
+    }
+  }
+
+  /**
    * 测试单个节点连接
    */
   async testNode(node, configName = null) {
@@ -638,7 +822,7 @@ export class ProxyCoreManager {
       // 启动核心进程，捕获 stderr 以便调试
       try {
         let args = [];
-        if (this.coreType === 'v2ray') {
+        if (this.coreType === 'v2ray' || this.coreType === 'singbox') {
           args = ['run', '-c', configPath];
         } else {
           args = ['-f', configPath];
