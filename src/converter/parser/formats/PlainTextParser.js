@@ -3,6 +3,14 @@
  * 用于解析纯文本格式的订阅内容
  */
 export class PlainTextParser {
+  _safeDecodeURIComponent(value) {
+    if (!value) return '';
+    try {
+      return decodeURIComponent(value);
+    } catch {
+      return value;
+    }
+  }
   /**
    * 解析纯文本格式的数据
    * @param {string} raw 原始文本
@@ -199,7 +207,7 @@ export class PlainTextParser {
       }
 
       // 提取名称
-      const name = decodeURIComponent(url.hash.substring(1) || '');
+      const name = this._safeDecodeURIComponent(url.hash.substring(1) || '');
 
       // 提取服务器和端口
       const server = url.hostname;
@@ -386,7 +394,7 @@ export class PlainTextParser {
       const url = new URL(uri);
 
       // 提取名称
-      const name = decodeURIComponent(url.hash.substring(1) || '');
+      const name = this._safeDecodeURIComponent(url.hash.substring(1) || '');
 
       // 提取服务器和端口
       const server = url.hostname;
@@ -432,7 +440,7 @@ export class PlainTextParser {
       const url = new URL(uri);
 
       // 提取名称
-      const name = decodeURIComponent(url.hash.substring(1) || '');
+      const name = this._safeDecodeURIComponent(url.hash.substring(1) || '');
 
       // 提取服务器和端口
       const server = url.hostname;
@@ -489,7 +497,7 @@ export class PlainTextParser {
       }
 
       // 提取名称
-      const name = decodeURIComponent(url.hash.substring(1) || '');
+      const name = this._safeDecodeURIComponent(url.hash.substring(1) || '');
 
       // 提取服务器和端口
       const server = url.hostname;
@@ -530,7 +538,7 @@ export class PlainTextParser {
       const url = new URL(uri);
 
       // 提取名称
-      const name = decodeURIComponent(url.hash.substring(1) || '');
+      const name = this._safeDecodeURIComponent(url.hash.substring(1) || '');
 
       // 提取服务器和端口
       const server = url.hostname;
@@ -581,7 +589,7 @@ export class PlainTextParser {
       const url = new URL(uri);
 
       // 提取名称
-      const name = decodeURIComponent(url.hash.substring(1) || '');
+      const name = this._safeDecodeURIComponent(url.hash.substring(1) || '');
 
       // 提取服务器和端口
       const server = url.hostname;
@@ -630,7 +638,7 @@ export class PlainTextParser {
       const url = new URL(uri);
 
       // 提取名称
-      const name = decodeURIComponent(url.hash.substring(1) || '');
+      const name = this._safeDecodeURIComponent(url.hash.substring(1) || '');
 
       // 提取服务器和端口
       const server = url.hostname;
@@ -686,7 +694,7 @@ export class PlainTextParser {
       const url = new URL(uri);
 
       // 提取名称
-      const name = decodeURIComponent(url.hash.substring(1) || '');
+      const name = this._safeDecodeURIComponent(url.hash.substring(1) || '');
 
       // 提取服务器和端口
       const server = url.hostname;

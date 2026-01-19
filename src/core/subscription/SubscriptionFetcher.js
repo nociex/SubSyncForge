@@ -154,6 +154,15 @@ export class SubscriptionFetcher {
           throw new Error('订阅内容为空');
         }
 
+        const contentType = response.headers.get('content-type') || '';
+        const trimmedLower = content.trimStart().toLowerCase();
+        if (contentType.includes('text/html') ||
+            trimmedLower.startsWith('<!doctype html') ||
+            trimmedLower.startsWith('<html') ||
+            (trimmedLower.includes('<script') && trimmedLower.includes('</html'))) {
+          throw new Error('订阅返回HTML页面，可能需要鉴权或订阅已失效');
+        }
+
         this.logger.info(`成功获取订阅内容，长度: ${content.length}`);
 
         // 计算内容哈希

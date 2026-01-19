@@ -153,8 +153,15 @@ export class SubscriptionParser {
   detectFormat(raw) {
     this.logger.log(`检测订阅格式...`);
 
-    // 首先检查是否是纯文本URI格式（vmess://, ss://等）
-    // 这样的格式更好识别，应该优先检查
+    const trimmedLower = raw.trimStart().toLowerCase();
+    if (trimmedLower.startsWith('<!doctype html') ||
+        trimmedLower.startsWith('<html') ||
+        (trimmedLower.includes('<head') && trimmedLower.includes('<body')) ||
+        (trimmedLower.includes('<script') && trimmedLower.includes('</html'))) {
+      this.logger.warn(`检测到 HTML 页面，订阅可能需要鉴权或已失效`);
+      throw new Error('订阅返回HTML页面，可能需要鉴权或订阅已失效');
+    }
+
     const protocolUrls = (raw.match(/(vmess|ss|ssr|trojan|hysteria2|hysteria|vless|socks|tuic|anytls):\/\/[^\s]+/g) || []);
     if (protocolUrls.length > 0) {
       this.logger.log(`检测到纯文本格式 (含有 ${protocolUrls.length} 个协议URI链接)`);
