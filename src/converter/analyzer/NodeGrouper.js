@@ -46,7 +46,7 @@ export class NodeGrouper {
     // 使用用户提供的默认分组或根据模式选择
     this.defaultGroups = options.defaultGroups ||
       (this.groupingMode === 'basic' ? this.basicGroups :
-       this.groupingMode === 'advanced' ? this.advancedGroups : []);
+        this.groupingMode === 'advanced' ? this.advancedGroups : []);
 
     this.customGroups = options.customGroups || [];
   }
@@ -432,7 +432,7 @@ export class NodeGrouper {
 
     // 创建区域节点组
     const regionGroups = {};
-    
+
     // 获取所有国家/地区
     const countries = new Set();
     for (const node of nodes) {
@@ -453,7 +453,7 @@ export class NodeGrouper {
 
         // 根据国家代码设置 emoji
         switch (countryCode) {
-          case 'US': emoji = '🇺🇲'; break;
+          case 'US': emoji = '🇺🇸'; break;
           case 'HK': emoji = '🇭🇰'; break;
           case 'TW': emoji = '🇹🇼'; break;
           case 'JP': emoji = '🇯🇵'; break;
@@ -595,10 +595,10 @@ export class NodeGrouper {
         result.push(customGroups[key]);
       }
     }
-    
+
     return result;
   }
-  
+
   /**
    * 创建特殊标签分组（如Netflix、Disney+、OpenAI等）
    * @param {Array} nodes 节点数组
@@ -617,16 +617,16 @@ export class NodeGrouper {
       { tag: '游戏', name: '🎮 游戏节点', icon: '🎮' },
       { tag: 'TikTok', name: '📱 TikTok节点', icon: '📱' }
     ];
-    
+
     // 为每个特殊标签创建分组
     for (const { tag, name, icon } of specialTags) {
       // 找出包含该标签的所有节点
-      const taggedNodes = nodes.filter(node => 
-        node.analysis && 
-        node.analysis.tags && 
+      const taggedNodes = nodes.filter(node =>
+        node.analysis &&
+        node.analysis.tags &&
         node.analysis.tags.includes(tag)
       );
-      
+
       // 如果找到了包含该标签的节点，创建对应的分组
       if (taggedNodes.length > 0) {
         const tagGroup = {
@@ -637,7 +637,7 @@ export class NodeGrouper {
           interval: 300,
           tolerance: 150
         };
-        
+
         // 将分组添加到结果和映射
         groupMap.set(name, tagGroup);
         result.push(tagGroup);

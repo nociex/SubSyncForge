@@ -20,13 +20,13 @@ proxy-groups:
     type: select
     proxies:
       - ♻️ 自动选择
+      - DIRECT
       - 🇭🇰 香港节点
       - 🇨🇳 台湾节点
       - 🇸🇬 新加坡节点
       - 🇯🇵 日本节点
       - 🇺🇸 美国节点
       - 🌍 其他节点
-      - 🎯 全球直连
 
   - name: ♻️ 自动选择
     type: url-test
@@ -39,19 +39,6 @@ proxy-groups:
       - 🇸🇬 新加坡节点
       - 🇯🇵 日本节点
       - 🇺🇸 美国节点
-      - 🌍 其他节点
-
-  - name: 🛫 节点切换
-    type: select
-    proxies:
-      - 🚀 节点选择
-      - 🇭🇰 香港节点
-      - 🇨🇳 台湾节点
-      - 🇸🇬 新加坡节点
-      - 🇯🇵 日本节点
-      - 🇺🇸 美国节点
-      - 🌍 其他节点
-      - 🎯 全球直连
 
   - name: 🇭🇰 香港节点
     type: url-test
@@ -94,36 +81,37 @@ proxy-groups:
       - US
 
   - name: 🌍 其他节点
+    type: url-test
+    url: http://www.gstatic.com/generate_204
+    interval: 300
+    tolerance: 50
+    use:
+      - Others
+
+  - name: 🎯 全球直连
+    type: select
+    proxies:
+      - DIRECT
+      - 🚀 节点选择
+
+  - name: 🛑 全球拦截
+    type: select
+    proxies:
+      - REJECT
+      - DIRECT
+
+  - name: 🍎 苹果服务
     type: select
     proxies:
       - 🚀 节点选择
       - 🎯 全球直连
-    use:
-      - Others  
-
-  - name: 📲 电报消息
-    type: select
-    proxies:
-      - 🚀 节点选择
       - 🇭🇰 香港节点
       - 🇨🇳 台湾节点
       - 🇸🇬 新加坡节点
       - 🇯🇵 日本节点
       - 🇺🇸 美国节点
-      - 🌍 其他节点
 
-  - name: 📹 油管视频
-    type: select
-    proxies:
-      - 🚀 节点选择
-      - 🇭🇰 香港节点
-      - 🇨🇳 台湾节点
-      - 🇸🇬 新加坡节点
-      - 🇯🇵 日本节点
-      - 🇺🇸 美国节点
-      - 🌍 其他节点
-
-  - name: 🎥 奈飞视频
+  - name: 🎬 Netflix
     type: select
     proxies:
       - 🚀 节点选择
@@ -136,7 +124,7 @@ proxy-groups:
     use:
       - Netflix
 
-  - name: 🎬 迪士尼+
+  - name: 🎬 Disney+
     type: select
     proxies:
       - 🚀 节点选择
@@ -149,92 +137,18 @@ proxy-groups:
     use:
       - Disney+
 
-  - name: 🧬 OpenAi
+  - name: 🤖 OpenAI
     type: select
     proxies:
       - 🚀 节点选择
+      - 🇭🇰 香港节点
+      - 🇨🇳 台湾节点
       - 🇸🇬 新加坡节点
       - 🇯🇵 日本节点
       - 🇺🇸 美国节点
       - 🌍 其他节点
     use:
       - OpenAI
-
-  - name: Ⓜ️ 微软服务
-    type: select
-    proxies:
-      - 🚀 节点选择
-      - 🇭🇰 香港节点
-      - 🇨🇳 台湾节点
-      - 🇸🇬 新加坡节点
-      - 🇯🇵 日本节点
-      - 🇺🇸 美国节点
-      - 🌍 其他节点
-      - 🎯 全球直连
-
-  - name: 📢 谷歌FCM
-    type: select
-    proxies:
-      - 🚀 节点选择
-      - 🇭🇰 香港节点
-      - 🇨🇳 台湾节点
-      - 🇸🇬 新加坡节点
-      - 🇯🇵 日本节点
-      - 🇺🇸 美国节点
-      - 🌍 其他节点
-
-  - name: 🍎 苹果服务
-    type: select
-    proxies:
-      - 🚀 节点选择
-      - 🎯 全球直连
-      - 🇭🇰 香港节点
-      - 🇨🇳 台湾节点
-      - 🇸🇬 新加坡节点
-      - 🇯🇵 日本节点
-      - 🇺🇸 美国节点
-      - 🌍 其他节点
-
-  - name: 🎮 游戏平台
-    type: select
-    proxies:
-      - 🚀 节点选择
-      - 🎯 全球直连
-      - 🇭🇰 香港节点
-      - 🇨🇳 台湾节点
-      - 🇸🇬 新加坡节点
-      - 🇯🇵 日本节点
-      - 🇺🇸 美国节点
-
-  - name: 🕋 自建节点
-    type: select
-    proxies:
-      - 🚀 节点选择
-      - 🎯 全球直连
-
-  - name: 🎯 全球直连
-    type: select
-    proxies:
-      - DIRECT
-      - 🚀 节点选择
-
-  - name: 🛑 广告拦截
-    type: select
-    proxies:
-      - REJECT
-      - DIRECT
-
-  - name: 🛑 全球拦截
-    type: select
-    proxies:
-      - REJECT
-      - DIRECT
-
-  - name: 🌀 漏网之鱼
-    type: select
-    proxies:
-      - 🚀 节点选择
-      - 🎯 全球直连
 
 proxy-providers:
   HK:
@@ -420,20 +334,20 @@ rule-providers:
     interval: 86400
 
 rules:
-  - DOMAIN-SUFFIX,openai.com,🧬 OpenAi
-  - DOMAIN-SUFFIX,ai.com,🧬 OpenAi
-  - DOMAIN-SUFFIX,netflix.com,🎬 奈飞视频
-  - DOMAIN-SUFFIX,netflix.net,🎬 奈飞视频
-  - DOMAIN-SUFFIX,nflxext.com,🎬 奈飞视频
-  - DOMAIN-SUFFIX,nflximg.com,🎬 奈飞视频
-  - DOMAIN-SUFFIX,nflximg.net,🎬 奈飞视频
-  - DOMAIN-SUFFIX,nflxso.net,🎬 奈飞视频
-  - DOMAIN-SUFFIX,nflxvideo.net,� 奈飞视频
-  - DOMAIN-SUFFIX,disneyplus.com,🎬 迪士尼+
-  - DOMAIN-SUFFIX,disney-plus.net,🎬 迪士尼+
-  - DOMAIN-SUFFIX,disneystreaming.com,🎬 迪士尼+
-  - DOMAIN-SUFFIX,dssott.com,🎬 迪士尼+
-  - DOMAIN-SUFFIX,bamgrid.com,🎬 迪士尼+
+  - DOMAIN-SUFFIX,openai.com,🤖 OpenAI
+  - DOMAIN-SUFFIX,ai.com,🤖 OpenAI
+  - DOMAIN-SUFFIX,netflix.com,🎬 Netflix
+  - DOMAIN-SUFFIX,netflix.net,🎬 Netflix
+  - DOMAIN-SUFFIX,nflxext.com,🎬 Netflix
+  - DOMAIN-SUFFIX,nflximg.com,🎬 Netflix
+  - DOMAIN-SUFFIX,nflximg.net,🎬 Netflix
+  - DOMAIN-SUFFIX,nflxso.net,🎬 Netflix
+  - DOMAIN-SUFFIX,nflxvideo.net,🎬 Netflix
+  - DOMAIN-SUFFIX,disneyplus.com,🎬 Disney+
+  - DOMAIN-SUFFIX,disney-plus.net,🎬 Disney+
+  - DOMAIN-SUFFIX,disneystreaming.com,🎬 Disney+
+  - DOMAIN-SUFFIX,dssott.com,🎬 Disney+
+  - DOMAIN-SUFFIX,bamgrid.com,🎬 Disney+
   - RULE-SET,private,🎯 全球直连
   - RULE-SET,reject,🛑 全球拦截
   - RULE-SET,icloud,🍎 苹果服务
@@ -442,6 +356,6 @@ rules:
   - RULE-SET,direct,🎯 全球直连
   - RULE-SET,lancidr,🎯 全球直连
   - RULE-SET,cncidr,🎯 全球直连
-  - RULE-SET,telegramcidr,🎬 电报消息
+  - RULE-SET,telegramcidr,🚀 节点选择
   - GEOIP,CN,🎯 全球直连
-  - MATCH,🌀 漏网之鱼
+  - MATCH,🚀 节点选择

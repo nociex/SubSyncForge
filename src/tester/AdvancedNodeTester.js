@@ -1,6 +1,7 @@
 import { ProxyCoreManager } from '../core/ProxyCoreManager.js';
 import { NodeTester } from './NodeTester.js';
 import { IPLocator } from '../utils/proxy/IPLocator.js';
+import { NodeAnalyzer } from '../converter/analyzer/NodeAnalyzer.js';
 import { logger } from '../utils/index.js';
 import fs from 'fs';
 import path from 'path';
@@ -20,6 +21,8 @@ export class AdvancedNodeTester extends NodeTester {
     this.fallbackToBasic = options.fallbackToBasic !== false; // 失败时回退到基本测试
     this.autoRename = options.autoRename !== false; // 默认启用自动重命名
     this.maxLatency = options.maxLatency || 3000; // 最大延迟限制，默认3秒
+    this.coreFailureCount = 0;
+    this.maxCoreFailures = options.maxCoreFailures || 3;
 
     // 初始化代理核心管理器
     this.coreManager = new ProxyCoreManager({
@@ -87,6 +90,24 @@ export class AdvancedNodeTester extends NodeTester {
           try {
             this.logger.debug(`使用 ${this.coreType} 核心测试节点: ${node.name}`);
             const coreResult = await this.coreManager.testNode(node);
+            if (!coreResult.status) {
+              const errorMessage = coreResult.error || '';
+              if (
+                errorMessage.includes('核心异常退出') ||
+                errorMessage.includes('Core exited') ||
+                errorMessage.includes('启动失败') ||
+                errorMessage.includes('启动异常')
+              ) {
+                this.coreFailureCount += 1;
+                if (this.coreFailureCount >= this.maxCoreFailures) {
+                  this.logger.warn(`核心连续失败已达阈值(${this.maxCoreFailures})，禁用核心测试并回退到基本测试`);
+                  this.useCoreTest = false;
+                  coreAvailable = false;
+                }
+              }
+            } else {
+              this.coreFailureCount = 0;
+            }
 
             if (!coreResult.status && this.fallbackToBasic) {
               this.logger.warn(`${this.coreType} 核心测试失败，回退到基本测试: ${node.name}`);
@@ -165,7 +186,7 @@ export class AdvancedNodeTester extends NodeTester {
     // 如果启用自动重命名，对成功的节点进行重命名
     if (this.autoRename && successfulResults.length > 0) {
       this.logger.info(`开始对 ${successfulResults.length} 个可用节点进行自动重命名...`);
-      const renamedNodes = this.correctNodeLocations(
+      const renamedNodes = this.renameAndCorrectNodes(
         successfulResults.map(r => r.node),
         successfulResults
       );
@@ -187,107 +208,166 @@ export class AdvancedNodeTester extends NodeTester {
   }
 
   /**
-   * 根据测试结果修正节点名称中的地区信息
+   * 对节点进行统一重命名和地区修正
    * @param {Array<Object>} nodes - 需要修正的节点数组
    * @param {Array<Object>} testResults - 测试结果数组
    * @returns {Array<Object>} - 修正后的节点数组
    */
-  correctNodeLocations(nodes, testResults) {
-    this.logger.info(`开始修正节点地区信息...`);
+  /**
+   * 对节点进行统一重命名和地区修正
+   * @param {Array<Object>} nodes - 需要修正的节点数组
+   * @param {Array<Object>} testResults - 测试结果数组
+   * @returns {Array<Object>} - 修正后的节点数组
+   */
+  renameAndCorrectNodes(nodes, testResults) {
+    this.logger.info(`开始标准化节点名称...`);
+    // 实例化 NodeAnalyzer
+    const analyzer = new NodeAnalyzer();
     let corrected = 0;
 
-    // 为地区代码创建emoji映射
-    const countryToEmoji = {
-      'CN': '🇨🇳',
-      'HK': '🇭🇰',
-      'TW': '🇹🇼',
-      'JP': '🇯🇵',
-      'US': '🇺🇸',
-      'KR': '🇰🇷',
-      'SG': '🇸🇬',
-      'GB': '🇬🇧',
-      'UK': '🇬🇧',
-      'DE': '🇩🇪',
-      'FR': '🇫🇷',
-      'CA': '🇨🇦',
-      'AU': '🇦🇺',
-      'RU': '🇷🇺',
-      'IN': '🇮🇳',
-      'NL': '🇳🇱',
-      'BR': '🇧🇷',
-      'IT': '🇮🇹',
-      'TR': '🇹🇷',
-      'TH': '🇹🇭',
-      'VN': '🇻🇳',
-      'ID': '🇮🇩',
-      'MY': '🇲🇾',
-      'PH': '🇵🇭',
-      'AE': '🇦🇪',
-      'FI': '🇫🇮',
-      'SE': '🇸🇪',
-      'NO': '🇳🇴',
-      'DK': '🇩🇰',
-      'CH': '🇨🇭',
-      'AT': '🇦🇹',
-      'BE': '🇧🇪',
-      'IE': '🇮🇪',
-      'PT': '🇵🇹',
-      'ES': '🇪🇸',
-      'PL': '🇵🇱',
-      'CZ': '🇨🇿',
-      'HU': '🇭🇺',
-      'RO': '🇷🇴',
-      'BG': '🇧🇬',
-      'GR': '🇬🇷',
-      'HR': '🇭🇷',
-      'LV': '🇱🇻',
-      'LT': '🇱🇹',
-      'EE': '🇪🇪'
-    };
-
-    const correctedNodes = nodes.map(node => {
+    const renamedNodes = nodes.map((node, index) => {
       // 查找对应的测试结果
       const testResult = testResults.find(r => r.node === node || r.node.server === node.server);
 
-      // 如果测试成功且需要修正地区
-      if (testResult && testResult.status === 'up' && testResult.needsLocationCorrection && testResult.actualLocation) {
-        const country = testResult.actualLocation.country;
-        const countryName = testResult.actualLocation.countryName;
-        const emoji = countryToEmoji[country] || '🌀';
+      // 仅处理测试成功的节点
+      if (testResult && testResult.status === 'up') {
+        const resultAnalysis = testResult.node.analysis || {};
 
-        // 创建新的节点名称（加上地区前缀）
-        let newName = node.name || '';
+        // 1. 如果有实际IP位置信息，优先使用
+        if (testResult.actualLocation) {
+          resultAnalysis.countryCode = testResult.actualLocation.country;
+          resultAnalysis.country = testResult.actualLocation.countryName;
+        } else if (testResult.locationInfo) {
+          resultAnalysis.countryCode = testResult.locationInfo.country;
+          resultAnalysis.country = testResult.locationInfo.countryName;
+        } else if (!resultAnalysis.countryCode && node.country) {
+          // 如果没有位置信息，尝试使用节点原有的
+          resultAnalysis.countryCode = node.country;
+        }
 
-        // 移除现有的emoji和地区信息
-        newName = newName.replace(/[\p{Emoji_Presentation}\p{Emoji}\uFE0F]/gu, '').trim();
-        newName = newName.replace(/^[\u{1F1E6}-\u{1F1FF}]+\s*/u, '').trim();
+        // 2. 确保有analysis对象以便generateName使用
+        if (!node.analysis) {
+          node.analysis = {
+            ...resultAnalysis,
+            protocol: node.type,
+            nodeType: node.type && ['vmess', 'vless', 'ss', 'trojan', 'hysteria2', 'tuic'].includes(node.type.toLowerCase()) ? 'normal' : 'other',
+            tags: []
+          };
+          // 尝试补充更多信息
+          const tempAnalysis = analyzer.analyze(node);
+          if (!node.analysis.countryCode) node.analysis.countryCode = tempAnalysis.countryCode;
+          if (!node.analysis.protocol) node.analysis.protocol = tempAnalysis.protocol;
+        } else {
+          // 更新现有的analysis
+          if (resultAnalysis.countryCode) node.analysis.countryCode = resultAnalysis.countryCode;
+          if (resultAnalysis.country) node.analysis.country = resultAnalysis.country;
+        }
 
-        // 添加正确的地区前缀
-        newName = `${emoji} ${countryName} | ${newName}`;
+        // 3. 生成新名称
+        const newName = analyzer.generateName(node.analysis, {}, index);
 
-        // 复制节点对象并更新名称
-        const correctedNode = { ...node, name: newName };
+        // 如果名称改变了 (或者强制重命名)
+        if (newName !== node.name) {
+          corrected++;
 
-        // 保存原始名称到extra字段
-        if (!correctedNode.extra) correctedNode.extra = {};
-        correctedNode.extra.originalName = node.name;
+          const renamedNode = { ...node, name: newName };
+          if (!renamedNode.extra) renamedNode.extra = {};
+          renamedNode.extra.originalName = node.name;
 
-        // 保存地区信息
-        correctedNode.country = country;
-        correctedNode.countryName = countryName;
-        correctedNode.locationInfo = testResult.locationInfo;
-
-        this.logger.debug(`修正节点地区: "${node.name}" -> "${newName}"`);
-        corrected++;
-
-        return correctedNode;
+          return renamedNode;
+        }
       }
-
       return node;
     });
 
-    this.logger.info(`节点地区修正完成，共修正 ${corrected} 个节点`);
-    return correctedNodes;
+    this.logger.info(`节点标准化重命名完成，共修改 ${corrected} 个节点`);
+    return renamedNodes;
+  }
+
+  __deprecated_renameAndCorrectNodes(nodes, testResults) {
+    this.logger.info(`开始标准化节点名称...`);
+    let corrected = 0;
+
+    const renamedNodes = nodes.map((node, index) => {
+      // 查找对应的测试结果
+      const testResult = testResults.find(r => r.node === node || r.node.server === node.server);
+
+      // 仅处理测试成功的节点
+      if (testResult && testResult.status === 'up') {
+        const resultAnalysis = testResult.node.analysis || {};
+
+        // 1. 如果有实际IP位置信息，优先使用
+        if (testResult.actualLocation) {
+          resultAnalysis.countryCode = testResult.actualLocation.country;
+          resultAnalysis.country = testResult.actualLocation.countryName;
+        } else if (testResult.locationInfo) {
+          resultAnalysis.countryCode = testResult.locationInfo.country;
+          resultAnalysis.country = testResult.locationInfo.countryName;
+        } else if (!resultAnalysis.countryCode && node.country) {
+          // 如果没有位置信息，尝试使用节点原有的
+          resultAnalysis.countryCode = node.country;
+        }
+
+        // 2. 确保有analysis对象以便generateName使用
+        if (!node.analysis) {
+          // 这里我们构造一个临时的analysis对象，融合测试结果
+          node.analysis = {
+            ...resultAnalysis,
+            protocol: node.type,
+            nodeType: node.type && ['vmess', 'vless', 'ss', 'trojan'].includes(node.type.toLowerCase()) ? 'normal' : 'other',
+            tags: []
+          };
+        } else {
+          // 更新现有的analysis
+          if (resultAnalysis.countryCode) node.analysis.countryCode = resultAnalysis.countryCode;
+          if (resultAnalysis.country) node.analysis.country = resultAnalysis.country;
+        }
+
+        // 3. 生成新名称
+        // 需要实例化 NodeAnalyzer 来调用 generateName, 或者如果它是静态方法
+        // 由于 AdvancedNodeTester 没有直接持有 NodeAnalyzer 实例 (除了在 import 中?)
+        // 我们假设 NodeAnalyzer 已经被 import 并且我们需要在这里使用它
+        // 注意：AdvancedNodeTester 构造函数里没初始化 analyzer，这里可能需要调整
+        // 为了方便，我们在 NodeFilter/Manager 中通常有 analyzer。
+        // 这里我们可以简单地引入 NodeAnalyzer 并使用它
+
+        // 修正：我们需要先确保引入了 NodeAnalyzer
+        // 在文件头部已经有了: import { NodeAnalyzer } from '../converter/analyzer/NodeAnalyzer.js'; (如果没引需要加)
+        // 检查源代码发现 AdvancedNodeTester 并没有 import NodeAnalyzer。
+        // 我们需要一种方式来调用 generateName。
+        // 或者，我们可以把 generateName 的逻辑简单内联，或者在此处创建一个 analyzer 实例。
+
+        // 由于我们不能轻易修改 import (因为 replace_file_content 只能改一块)，
+        // 我们假设 `this.ipLocator` 或其他地方能提供辅助，或者我们手动实现一个简单的格式化。
+        // 但为了代码复用，最好是能用到 NodeAnalyzer.generateName。
+
+        // 观察原代码，AdvancedNodeTester 并没有 analyzer。
+        // 这是一个问题。我需要先修改 import，或者在 constructor 里加，或者...
+        // 既然我只能改这块，我先尝试用一个简化的逻辑，或者假设我们能访问到 analyzer。
+
+        // 这里的策略是：直接实现格式化逻辑，或者在下一步添加 import。
+        // 考虑到 NodeAnalyzer.js 刚刚被我改过，逻辑比较复杂，重复一遍不好。
+
+        // 让我们看看是否可以通过 options 传入 analyzer，或者默认创建一个。
+        // 但这里是 replace_content。
+
+        // 暂时方案：我将在 renameAndCorrectNodes 内部实例化 NodeAnalyzer。
+        // 这需要 `import { NodeAnalyzer } from '../converter/analyzer/NodeAnalyzer.js';`
+        // 我需要检查文件头。 Step 16 显示只 import 了 ProxyCoreManager, NodeTester, IPLocator, logger, fs, path, ensureDirectoryExists.
+        // 所以我必须添加 import。
+
+        // 由于工具限制，我不能同时改头部和中间。
+        // 我会先取消这次操作，分为两步：
+        // 1. 添加 Import 和 Constructor 初始化 (或者直接在方法里 new)
+        // 2. 替换 renameAndCorrectNodes 方法
+
+        // 既然我已经写到了这里，我先中断这次 tool call，去添加 import。
+        return node;
+      }
+      return node;
+    });
+
+    return renamedNodes;
   }
 
   /**

@@ -15,7 +15,7 @@ export class NodeAnalyzer {
       '🇳🇴': 'NO', '🇫🇮': 'FI', '🇩🇰': 'DK', '🇵🇱': 'PL', '🇭🇺': 'HU', '🇨🇿': 'CZ',
       '🇦🇹': 'AT', '🇮🇪': 'IE', '🇵🇹': 'PT', '🇬🇷': 'GR', '🇪🇸': 'ES', '🇧🇪': 'BE',
       '🇱🇺': 'LU', '🇮🇸': 'IS', '🇲🇴': 'MO', '🇨🇳': 'CN',
-      
+
       // 中文地名到代码映射
       '美国': 'US', '香港': 'HK', '台湾': 'TW', '日本': 'JP', '新加坡': 'SG', '韩国': 'KR',
       '英国': 'UK', '德国': 'DE', '法国': 'FR', '印度': 'IN', '俄罗斯': 'RU', '加拿大': 'CA',
@@ -25,7 +25,7 @@ export class NodeAnalyzer {
       '瑞士': 'CH', '瑞典': 'SE', '挪威': 'NO', '芬兰': 'FI', '丹麦': 'DK', '波兰': 'PL',
       '匈牙利': 'HU', '捷克': 'CZ', '奥地利': 'AT', '爱尔兰': 'IE', '葡萄牙': 'PT', '希腊': 'GR',
       '西班牙': 'ES', '比利时': 'BE', '卢森堡': 'LU', '冰岛': 'IS', '澳门': 'MO', '中国': 'CN',
-      
+
       // 英文地名到代码映射
       'United States': 'US', 'USA': 'US', 'America': 'US',
       'Hong Kong': 'HK', 'HongKong': 'HK',
@@ -73,7 +73,7 @@ export class NodeAnalyzer {
       'Iceland': 'IS',
       'Macao': 'MO', 'Macau': 'MO',
       'China': 'CN',
-      
+
       // 代码映射
       'US': 'US', 'HK': 'HK', 'TW': 'TW', 'JP': 'JP', 'SG': 'SG', 'KR': 'KR',
       'UK': 'UK', 'DE': 'DE', 'FR': 'FR', 'IN': 'IN', 'RU': 'RU', 'CA': 'CA',
@@ -277,7 +277,7 @@ export class NodeAnalyzer {
         const escaped = key.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
         return escaped;
       });
-    
+
     // 使用单词边界或特殊字符边界来确保精确匹配
     return new RegExp(`(?:^|[\\s\\-_（）()\\[\\]【】])((${patterns.join('|')}))(?=[\\s\\-_（）()\\[\\]【】]|$)`, 'i');
   }
@@ -345,7 +345,7 @@ export class NodeAnalyzer {
     else if (node.country && node.countryName) {
       result.countryCode = node.country;
       result.country = node.countryName;
-      
+
       // 添加国家/地区图标
       if (this.countryIconMap[result.countryCode]) {
         result.icons.push({
@@ -538,10 +538,17 @@ export class NodeAnalyzer {
    * @param {number} index 节点索引（用于生成顺序编号）
    * @returns {string} 生成的节点名称
    */
+  /**
+   * 根据分析结果生成节点名称
+   * @param {Object} analysis 分析结果
+   * @param {Object} options 选项
+   * @param {number} index 节点索引（用于生成顺序编号）
+   * @returns {string} 生成的节点名称
+   */
   generateName(analysis, options = {}, index = null) {
     // 默认配置
     const config = {
-      format: options.format || '{country}-{protocol}-{number}',
+      format: options.format || '{flag} {country} {number} | {protocol}',
       includeCountry: options.includeCountry !== false,
       includeProtocol: options.includeProtocol !== false,
       includeNumber: options.includeNumber !== false,
@@ -550,39 +557,76 @@ export class NodeAnalyzer {
       ...options
     };
 
+    // 协议简写映射
+    const protocolShorthand = {
+      'Hysteria2': 'Hy2',
+      'Hysteria': 'Hy',
+      'Shadowsocks': 'SS',
+      'ShadowsocksR': 'SSR',
+      'VMess': 'VMess',
+      'VLESS': 'VLESS',
+      'Trojan': 'Trojan',
+      'WireGuard': 'WG',
+      'Reality': 'Reality',
+      'TUIC': 'TUIC',
+      'SOCKS5': 'S5',
+      'HTTP': 'HTTP'
+    };
+
     // 特殊处理CDN节点
     if (analysis.nodeType === 'cdn') {
       const protocol = analysis.protocol || 'Unknown';
       const number = index !== null ? (index + 1).toString().padStart(2, '0') : '01';
-      return `cdn-${protocol}-${number}`;
+      return `CDN ${protocol} ${number}`;
     }
 
     // 特殊处理运营商节点
     if (analysis.nodeType === 'isp') {
       const protocol = analysis.protocol || 'Unknown';
       const number = index !== null ? (index + 1).toString().padStart(2, '0') : '01';
-      return `others-${protocol}-${number}`;
+      return `ISP ${protocol} ${number}`;
     }
 
     // 获取国家/地区代码或名称
     let country = '';
+    let flag = '';
+
     if (config.includeCountry) {
       if (analysis.countryCode) {
-        // 优先使用国家代码
         country = analysis.countryCode;
+        // 尝试获取对应的emoji flag
+        const codeToFlag = {
+          'US': '🇺🇸', 'HK': '🇭🇰', 'TW': '🇹🇼', 'JP': '🇯🇵', 'SG': '🇸🇬', 'KR': '🇰🇷',
+          'UK': '🇬🇧', 'DE': '🇩🇪', 'FR': '🇫🇷', 'IN': '🇮🇳', 'RU': '🇷🇺', 'CA': '🇨🇦',
+          'AU': '🇦🇺', 'IT': '🇮🇹', 'BR': '🇧🇷', 'NL': '🇳🇱', 'TR': '🇹🇷', 'ID': '🇮🇩',
+          'VN': '🇻🇳', 'TH': '🇹🇭', 'PH': '🇵🇭', 'MY': '🇲🇾', 'CN': '🇨🇳', 'AR': '🇦🇷',
+          'MX': '🇲🇽', 'ZA': '🇿🇦', 'AE': '🇦🇪', 'IL': '🇮🇱', 'CH': '🇨🇭', 'SE': '🇸🇪',
+          'NO': '🇳🇴', 'FI': '🇫🇮', 'DK': '🇩🇰', 'PL': '🇵🇱', 'HU': '🇭🇺', 'CZ': '🇨🇿',
+          'AT': '🇦🇹', 'IE': '🇮🇪', 'PT': '🇵🇹', 'ES': '🇪🇸', 'BE': '🇧🇪'
+        };
+        flag = codeToFlag[country] || '🏳️';
       } else if (analysis.country) {
-        // 如果没有国家代码，则使用国家名称
         country = analysis.country;
+        flag = '🏳️';
       } else {
-        // 如果都没有，则使用"Unknown"
-        country = 'Unknown';
+        country = 'UNK';
+        flag = '❓';
       }
     }
 
     // 获取协议
     let protocol = '';
     if (config.includeProtocol) {
-      protocol = analysis.protocol || 'Unknown';
+      const fullProtocol = analysis.protocol || 'Unknown';
+      // 尝试直接匹配或不区分大小写匹配
+      const key = Object.keys(protocolShorthand).find(k => k.toLowerCase() === fullProtocol.toLowerCase());
+      // 如果找到匹配的Key则用Shorthand，否则格式化为首字母大写或原样
+      if (key) {
+        protocol = protocolShorthand[key];
+      } else {
+        // 简单的首字母大写处理
+        protocol = fullProtocol.charAt(0).toUpperCase() + fullProtocol.slice(1);
+      }
     }
 
     // 生成编号（从1开始，保证两位数）
@@ -595,45 +639,38 @@ export class NodeAnalyzer {
     let tags = '';
     if (config.includeTags && analysis.tags && analysis.tags.length > 0) {
       // 过滤掉国家和协议标签，避免重复
-      const filteredTags = analysis.tags.filter(tag => 
-        tag !== analysis.country && 
+      const filteredTags = analysis.tags.filter(tag =>
+        tag !== analysis.country &&
         tag !== analysis.protocol &&
         tag !== analysis.countryCode
       );
-      
+
       // 限制标签数量
       const limitedTags = filteredTags.slice(0, config.tagLimit);
       if (limitedTags.length > 0) {
-        tags = limitedTags.join('-');
+        tags = limitedTags.join(' ');
       }
     }
 
     // 如果有format模板，使用模板替换
     if (config.format && typeof config.format === 'string') {
       let name = config.format;
-      
+
       // 替换占位符
       name = name.replace(/\{country\}/g, country);
+      name = name.replace(/\{flag\}/g, flag);
       name = name.replace(/\{protocol\}/g, protocol);
       name = name.replace(/\{number\}/g, number);
       name = name.replace(/\{tags\}/g, tags);
-      
-      // 清理多余的分隔符
-      name = name.replace(/[-_]{2,}/g, '-'); // 多个分隔符合并为一个
-      name = name.replace(/^[-_]+|[-_]+$/g, ''); // 去掉开头和结尾的分隔符
-      name = name.replace(/[-_]$/, ''); // 去掉末尾的分隔符
-      
-      return name || 'Unknown-Node';
+
+      // 清理多余的分隔符和空格
+      name = name.replace(/\s+/g, ' ').trim();
+
+      return name || 'Unknown Node';
     }
 
-    // 如果没有format模板，按照默认格式组合
-    const parts = [];
-    if (country) parts.push(country);
-    if (protocol) parts.push(protocol);
-    if (number) parts.push(number);
-    if (tags) parts.push(tags);
-    
-    return parts.length > 0 ? parts.join('-') : 'Unknown-Node';
+    // 默认回退格式
+    return `${flag} ${country} ${number} | ${protocol}`.trim();
   }
 }
 
