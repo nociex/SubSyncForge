@@ -126,6 +126,7 @@ jobs:
       
       # 运行同步订阅脚本
       - name: Sync subscriptions
+        id: sync-subscriptions
         env:
           GITHUB_WORKSPACE: ${{ github.workspace }}
           ROOT_DIR: ${{ github.workspace }}
@@ -152,7 +153,20 @@ jobs:
           echo "仓库名称: $REPO_NAME"
           
           # 使用新的入口脚本
-          node dist/sync-subscriptions.js
+          node dist/sync-subscriptions.js | tee sync.log
+          
+          # 从输出中提取节点统计
+          SUMMARY_LINE=$(grep -Eo "同步成功，共处理了 [0-9]+ 个节点，最终有效节点 [0-9]+ 个" sync.log | tail -n 1 || true)
+          if [[ -n "$SUMMARY_LINE" ]]; then
+            TOTAL_NODES=$(echo "$SUMMARY_LINE" | grep -Eo "共处理了 [0-9]+ 个节点" | grep -Eo "[0-9]+")
+            VALID_NODES=$(echo "$SUMMARY_LINE" | grep -Eo "最终有效节点 [0-9]+ 个" | grep -Eo "[0-9]+")
+          else
+            TOTAL_NODES="0"
+            VALID_NODES="0"
+          fi
+          
+          echo "total_nodes=$TOTAL_NODES" >> "$GITHUB_OUTPUT"
+          echo "valid_nodes=$VALID_NODES" >> "$GITHUB_OUTPUT"
       
       # 提交更改
       - name: Commit changes
@@ -165,23 +179,9 @@ jobs:
             # 添加所有变更
             git add data/ output/
             
-            # 获取节点数量信息用于提交信息 - 改进解析逻辑
-            # 如果无法从latest_test.json获取数据，则查找最新的测试结果文件
-            if [[ -f "data/test_results/latest_test.json" ]]; then
-              NODES_COUNT=$(grep -o '"totalNodes":[0-9]*' data/test_results/latest_test.json 2>/dev/null | grep -o '[0-9]*' || echo "0")
-              VALID_NODES=$(grep -o '"validNodes":[0-9]*' data/test_results/latest_test.json 2>/dev/null | grep -o '[0-9]*' || echo "0")
-            else
-              # 找到最新的测试结果文件
-              LATEST_TEST_FILE=$(ls -t data/test_results/test_*.json 2>/dev/null | head -1)
-              if [[ -n "$LATEST_TEST_FILE" ]]; then
-                NODES_COUNT=$(grep -o '"totalNodes":[0-9]*' "$LATEST_TEST_FILE" 2>/dev/null | grep -o '[0-9]*' || echo "0")
-                VALID_NODES=$(grep -o '"validNodes":[0-9]*' "$LATEST_TEST_FILE" 2>/dev/null | grep -o '[0-9]*' || echo "0")
-              else
-                # 如果找不到任何测试结果文件，则设置为0
-                NODES_COUNT="0"
-                VALID_NODES="0"
-              fi
-            fi
+            # 使用同步脚本输出的统计信息
+            NODES_COUNT="${{ steps.sync-subscriptions.outputs.total_nodes || '0' }}"
+            VALID_NODES="${{ steps.sync-subscriptions.outputs.valid_nodes || '0' }}"
             
             # 确保变量不为空
             NODES_COUNT="${NODES_COUNT:-0}"
