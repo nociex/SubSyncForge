@@ -15,7 +15,7 @@ import http from 'http';
 
 const defaultLogger = logger?.defaultLogger || console;
 
-const defaultLogger = logger?.defaultLogger || console;
+
 
 export class AdvancedNodeTester extends NodeTester {
   constructor(options = {}) {
