@@ -239,7 +239,7 @@ proxy-groups:
 proxy-providers:
   HK:
     type: http
-    url: https://your-server/output/HK.txt
+    url: https://raw.githubusercontent.com/nociex/SubSyncForge/main/output/hk.txt
     interval: 3600
     path: ./providers/hk.yaml
     health-check:
@@ -249,7 +249,7 @@ proxy-providers:
 
   TW:
     type: http
-    url: https://your-server/output/TW.txt
+    url: https://raw.githubusercontent.com/nociex/SubSyncForge/main/output/tw.txt
     interval: 3600
     path: ./providers/tw.yaml
     health-check:
@@ -259,7 +259,7 @@ proxy-providers:
 
   SG:
     type: http
-    url: https://your-server/output/SG.txt
+    url: https://raw.githubusercontent.com/nociex/SubSyncForge/main/output/sg.txt
     interval: 3600
     path: ./providers/sg.yaml
     health-check:
@@ -269,7 +269,7 @@ proxy-providers:
 
   JP:
     type: http
-    url: https://your-server/output/JP.txt
+    url: https://raw.githubusercontent.com/nociex/SubSyncForge/main/output/jp.txt
     interval: 3600
     path: ./providers/jp.yaml
     health-check:
@@ -279,7 +279,7 @@ proxy-providers:
 
   US:
     type: http
-    url: https://your-server/output/US.txt
+    url: https://raw.githubusercontent.com/nociex/SubSyncForge/main/output/us.txt
     interval: 3600
     path: ./providers/us.yaml
     health-check:
@@ -289,7 +289,7 @@ proxy-providers:
 
   Others:
     type: http
-    url: https://your-server/output/Others.txt
+    url: https://raw.githubusercontent.com/nociex/SubSyncForge/main/output/others.txt
     interval: 3600
     path: ./providers/others.yaml
     health-check:
@@ -299,7 +299,7 @@ proxy-providers:
 
   OpenAI:
     type: http
-    url: https://your-server/output/OpenAI.txt
+    url: https://raw.githubusercontent.com/nociex/SubSyncForge/main/output/openai.txt
     interval: 3600
     path: ./providers/openai.yaml
     health-check:
@@ -309,7 +309,7 @@ proxy-providers:
 
   Netflix:
     type: http
-    url: https://your-server/output/Netflix.txt
+    url: https://raw.githubusercontent.com/nociex/SubSyncForge/main/output/netflix.txt
     interval: 3600
     path: ./providers/netflix.yaml
     health-check:
@@ -319,7 +319,7 @@ proxy-providers:
 
   Disney+:
     type: http
-    url: https://your-server/output/Disney+.txt
+    url: https://raw.githubusercontent.com/nociex/SubSyncForge/main/output/disney.txt
     interval: 3600
     path: ./providers/disney.yaml
     health-check:
