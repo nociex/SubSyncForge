@@ -336,6 +336,17 @@ export class FormatConverter {
           ...(node.settings?.allowInsecure && { 'skip-cert-verify': true })
         };
         break;
+      case 'ssr':
+        result = {
+          ...base,
+          cipher: node.settings?.method || 'aes-256-gcm',
+          password: node.settings?.password,
+          ...(node.settings?.obfs && { obfs: node.settings.obfs }),
+          ...(node.settings?.protocol && { protocol: node.settings.protocol }),
+          ...(node.settings?.obfsParam && { obfsParam: node.settings.obfsParam }),
+          ...(node.settings?.protocolParam && { protocolParam: node.settings.protocolParam })
+        };
+        break;
       case 'hysteria':
       case 'hysteria2':
         result = {

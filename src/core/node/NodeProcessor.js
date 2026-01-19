@@ -28,8 +28,11 @@ export class NodeProcessor {
 
     this.logger.info(`开始处理节点，原始数量: ${nodes.length}`);
     
+    // 移除不支持的协议
+    let validNodes = nodes.filter(node => node?.type?.toLowerCase() !== 'ssr');
+
     // 过滤掉无效节点
-    let validNodes = nodes.filter(node => this.isValidNode(node));
+    validNodes = validNodes.filter(node => this.isValidNode(node));
     this.logger.info(`过滤无效节点后数量: ${validNodes.length}`);
     
     // 过滤掉包含无关信息的节点
