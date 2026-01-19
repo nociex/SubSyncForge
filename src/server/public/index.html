@@ -6,23 +6,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SubSyncForge Dashboard</title>
     <script src="/socket.io/socket.io.js"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
     <style>
         :root {
-            --bg-primary: #1a1b1e;
-            --bg-secondary: #25262b;
-            --bg-tertiary: #2c2e33;
-            --text-primary: #c1c2c5;
-            --text-secondary: #909296;
-            --accent-blue: #228be6;
-            --accent-blue-hover: #1c7ed6;
-            --accent-green: #40c057;
-            --accent-green-hover: #37b24d;
-            --accent-red: #fa5252;
-            --accent-red-hover: #f03e3e;
-            --accent-yellow: #fab005;
-            --accent-yellow-hover: #f59f00;
-            --border-color: #373a40;
-            --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            --bg-dark: #0f1115;
+            --bg-card: rgba(30, 33, 40, 0.7);
+            --bg-card-hover: rgba(30, 33, 40, 0.9);
+            --text-primary: #ffffff;
+            --text-secondary: #a1a1aa;
+            --primary-gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+            --success-gradient: linear-gradient(135deg, #22c55e 0%, #10b981 100%);
+            --warning-gradient: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            --danger-gradient: linear-gradient(135deg, #ef4444 0%, #b91c1c 100%);
+            --glass-border: 1px solid rgba(255, 255, 255, 0.08);
+            --shadow-lg: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+            --font-main: 'Outfit', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
         }
 
         * {
@@ -32,352 +33,572 @@
         }
 
         body {
-            font-family: var(--font-family);
-            background-color: var(--bg-primary);
+            font-family: var(--font-main);
+            background-color: var(--bg-dark);
+            background-image:
+                radial-gradient(circle at 15% 50%, rgba(99, 102, 241, 0.08) 0%, transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(168, 85, 247, 0.08) 0%, transparent 25%);
             color: var(--text-primary);
-            line-height: 1.6;
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
+            overflow: hidden;
         }
 
+        /* Glassmorphism Header */
         header {
-            background-color: var(--bg-secondary);
-            border-bottom: 1px solid var(--border-color);
-            padding: 1rem 2rem;
+            background: rgba(15, 17, 21, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: var(--glass-border);
+            padding: 1.25rem 3rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
         }
 
         h1 {
             font-size: 1.5rem;
             font-weight: 700;
-            color: #fff;
+            background: linear-gradient(to right, #fff, #a1a1aa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.02em;
         }
 
         .status-badge {
-            display: inline-flex;
-            align-items: center;
-            padding: 0.25rem 0.75rem;
-            border-radius: 999px;
-            font-size: 0.875rem;
-            font-weight: 500;
-            background-color: var(--bg-tertiary);
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            background: rgba(255, 255, 255, 0.05);
+            border: var(--glass-border);
             color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: var(--text-secondary);
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
         }
 
         .status-badge.running {
-            background-color: rgba(64, 192, 87, 0.2);
-            color: var(--accent-green);
+            background: rgba(34, 197, 94, 0.1);
+            border-color: rgba(34, 197, 94, 0.2);
+            color: #4ade80;
         }
 
+        .status-badge.running .status-dot {
+            background-color: #4ade80;
+            box-shadow: 0 0 15px rgba(74, 222, 128, 0.5);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.4);
+            }
+
+            70% {
+                box-shadow: 0 0 0 6px rgba(74, 222, 128, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(74, 222, 128, 0);
+            }
+        }
+
+        /* Main Layout */
         .container {
             flex: 1;
-            display: flex;
-            flex-direction: column;
-            padding: 2rem;
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            /* Sidebar + Log Area */
             gap: 2rem;
-            max-width: 1400px;
+            padding: 2rem 3rem;
+            overflow: hidden;
+            max-width: 1800px;
             margin: 0 auto;
             width: 100%;
         }
 
-        .controls {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
+        /* Controls Panel */
+        .panel {
+            background: var(--bg-card);
+            border: var(--glass-border);
+            border-radius: 16px;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            box-shadow: var(--shadow-lg);
+            height: fit-content;
         }
 
-        .card {
-            background-color: var(--bg-secondary);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 1.5rem;
+        .panel-header {
+            margin-bottom: 0.5rem;
         }
 
+        .panel-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 0.5rem;
+        }
+
+        .panel-subtitle {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* Buttons */
         .btn {
-            display: inline-flex;
+            position: relative;
+            width: 100%;
+            padding: 1rem;
+            border: none;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            font-family: var(--font-main);
+            color: white;
+            cursor: pointer;
+            overflow: hidden;
+            transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s;
+            display: flex;
             align-items: center;
             justify-content: center;
-            width: 100%;
-            padding: 0.75rem 1rem;
-            border: none;
-            border-radius: 4px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s;
-            color: #fff;
-            gap: 0.5rem;
+            gap: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            filter: brightness(1.1);
+        }
+
+        .btn:active:not(:disabled) {
+            transform: translateY(0);
         }
 
         .btn:disabled {
-            opacity: 0.6;
+            opacity: 0.5;
             cursor: not-allowed;
-            filter: grayscale(100%);
+            transform: none !important;
         }
 
         .btn-primary {
-            background-color: var(--accent-blue);
-        }
-
-        .btn-primary:hover:not(:disabled) {
-            background-color: var(--accent-blue-hover);
+            background: var(--primary-gradient);
+            box-shadow: 0 4px 20px rgba(99, 102, 241, 0.4);
         }
 
         .btn-success {
-            background-color: var(--accent-green);
-        }
-
-        .btn-success:hover:not(:disabled) {
-            background-color: var(--accent-green-hover);
+            background: var(--success-gradient);
+            box-shadow: 0 4px 20px rgba(34, 197, 94, 0.4);
         }
 
         .btn-warning {
-            background-color: var(--accent-yellow);
-            color: #000;
-        }
-
-        .btn-warning:hover:not(:disabled) {
-            background-color: var(--accent-yellow-hover);
+            background: var(--warning-gradient);
+            box-shadow: 0 4px 20px rgba(245, 158, 11, 0.4);
         }
 
         .btn-danger {
-            background-color: var(--accent-red);
+            background: var(--danger-gradient);
+            box-shadow: 0 4px 20px rgba(239, 68, 68, 0.4);
         }
 
-        .btn-danger:hover:not(:disabled) {
-            background-color: var(--accent-red-hover);
-        }
-
-        .log-container {
-            flex: 1;
-            background-color: #0d1117;
-            /* GitHub Dark terminal bg */
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            overflow: hidden;
+        .btn-group {
             display: flex;
             flex-direction: column;
-            min-height: 400px;
+            gap: 1rem;
+        }
+
+        .separator {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            margin: 0.5rem 0;
+        }
+
+        /* Log Viewer */
+        .log-wrapper {
+            background: #090a0c;
+            border: var(--glass-border);
+            border-radius: 16px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
         }
 
         .log-header {
-            padding: 0.75rem 1rem;
-            background-color: var(--bg-tertiary);
-            border-bottom: 1px solid var(--border-color);
-            font-size: 0.875rem;
-            font-family: monospace;
+            background: rgba(255, 255, 255, 0.03);
+            border-bottom: var(--glass-border);
+            padding: 1rem 1.5rem;
             display: flex;
             justify-content: space-between;
+            align-items: center;
+        }
+
+        .terminal-dots {
+            display: flex;
+            gap: 8px;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            opacity: 0.8;
+        }
+
+        .dot-red {
+            background: #ff5f56;
+        }
+
+        .dot-yellow {
+            background: #ffbd2e;
+        }
+
+        .dot-green {
+            background: #27c93f;
+        }
+
+        .log-meta {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            background: rgba(255, 255, 255, 0.05);
+            padding: 0.25rem 0.75rem;
+            border-radius: 6px;
         }
 
         #logs {
             flex: 1;
-            padding: 1rem;
+            padding: 1.5rem;
             overflow-y: auto;
-            font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+            font-family: var(--font-mono);
             font-size: 0.9rem;
-            white-space: pre-wrap;
-            color: #e6edf3;
+            line-height: 1.7;
+            color: #d1d5db;
         }
 
-        /* Basic ANSI colors simulation */
-        .ansi-red {
-            color: #ff7b72;
+        /* Custom Scrollbar */
+        #logs::-webkit-scrollbar {
+            width: 10px;
         }
 
-        .ansi-green {
-            color: #3fb950;
+        #logs::-webkit-scrollbar-track {
+            background: transparent;
         }
 
-        .ansi-yellow {
-            color: #d29922;
+        #logs::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            border: 2px solid #090a0c;
         }
 
-        .ansi-blue {
-            color: #58a6ff;
-        }
-
-        .ansi-magenta {
-            color: #bc8cff;
-        }
-
-        .ansi-cyan {
-            color: #39c5cf;
-        }
-
-        .ansi-dim {
-            opacity: 0.6;
+        #logs::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.2);
         }
 
         .log-entry {
-            margin-bottom: 2px;
+            margin-bottom: 4px;
+            border-radius: 4px;
+            transition: background 0.2s;
+        }
+
+        .log-entry:hover {
+            background: rgba(255, 255, 255, 0.03);
         }
 
         .timestamp {
-            color: var(--text-secondary);
-            margin-right: 0.5rem;
+            color: #52525b;
+            margin-right: 1rem;
+            user-select: none;
+        }
+
+        /* Syntax Highlighting */
+        .ansi-red {
+            color: #f87171;
+        }
+
+        .ansi-green {
+            color: #4ade80;
+        }
+
+        .ansi-yellow {
+            color: #fbbf24;
+        }
+
+        .ansi-blue {
+            color: #60a5fa;
+        }
+
+        .ansi-magenta {
+            color: #c084fc;
+        }
+
+        .ansi-cyan {
+            color: #22d3ee;
+        }
+
+        .tag {
+            padding: 2px 6px;
+            border-radius: 4px;
             font-size: 0.8em;
-            opacity: 0.7;
+            font-weight: 600;
+            margin-right: 6px;
+            text-transform: uppercase;
+        }
+
+        .tag-info {
+            background: rgba(96, 165, 250, 0.15);
+            color: #60a5fa;
+        }
+
+        .tag-success {
+            background: rgba(74, 222, 128, 0.15);
+            color: #4ade80;
+        }
+
+        .tag-warn {
+            background: rgba(251, 191, 36, 0.15);
+            color: #fbbf24;
+        }
+
+        .tag-error {
+            background: rgba(248, 113, 113, 0.15);
+            color: #f87171;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .container {
+                grid-template-columns: 1fr;
+                padding: 1.5rem;
+            }
+
+            .log-wrapper {
+                height: 600px;
+            }
         }
     </style>
 </head>
 
 <body>
     <header>
-        <h1>SubSyncForge Dashboard</h1>
-        <div id="status" class="status-badge">Ready</div>
+        <div class="brand">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round" style="color: #6366f1">
+                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+            </svg>
+            <h1>SubSyncForge</h1>
+        </div>
+        <div id="status" class="status-badge">
+            <span class="status-dot"></span>
+            <span id="statusText">System Ready</span>
+        </div>
     </header>
 
     <div class="container">
-        <div class="controls">
-            <button id="startBtn" class="btn btn-primary">
-                <span>🔄 Start Sync Task</span>
-            </button>
-            <button id="validateMihomoBtn" class="btn btn-success">
-                <span>✅ Validate Mihomo</span>
-            </button>
-            <button id="validateSingboxBtn" class="btn btn-warning">
-                <span>📦 Validate Singbox</span>
-            </button>
-            <button id="stopBtn" class="btn btn-danger" disabled>
-                <span>⏹ Stop Tasks</span>
-            </button>
-        </div>
+        <!-- Sidebar Controls -->
+        <aside class="panel">
+            <div class="panel-header">
+                <div class="panel-title">Control Center</div>
+                <div class="panel-subtitle">Manage subscription tasks</div>
+            </div>
 
-        <div class="log-container">
+            <div class="btn-group">
+                <button id="startBtn" class="btn btn-primary">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M23 4v6h-6"></path>
+                        <path d="M1 20v-6h6"></path>
+                        <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+                    </svg>
+                    Run Full Sync
+                </button>
+            </div>
+
+            <div class="separator"></div>
+
+            <div class="panel-header">
+                <div class="panel-title">Validation</div>
+                <div class="panel-subtitle">Test configuration functionality</div>
+            </div>
+
+            <div class="btn-group">
+                <button id="validateMihomoBtn" class="btn btn-success">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="9 11 12 14 22 4"></polyline>
+                        <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+                    </svg>
+                    Mihomo Check
+                </button>
+                <button id="validateSingboxBtn" class="btn btn-warning">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path
+                            d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z">
+                        </path>
+                        <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                        <line x1="12" y1="22.08" x2="12" y2="12"></line>
+                    </svg>
+                    SingBox Check
+                </button>
+            </div>
+
+            <div class="separator" style="margin-top: auto;"></div>
+
+            <button id="stopBtn" class="btn btn-danger" disabled>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                </svg>
+                Terminate Process
+            </button>
+        </aside>
+
+        <!-- Main Log Area -->
+        <main class="log-wrapper">
             <div class="log-header">
-                <span>Live Logs</span>
-                <span id="logCount">0 lines</span>
+                <div class="terminal-dots">
+                    <div class="dot dot-red"></div>
+                    <div class="dot dot-yellow"></div>
+                    <div class="dot dot-green"></div>
+                </div>
+                <div id="logCount" class="log-meta">0 lines captured</div>
             </div>
             <div id="logs"></div>
-        </div>
+        </main>
     </div>
 
     <script>
         const socket = io();
         const startBtn = document.getElementById('startBtn');
-        const stopBtn = document.getElementById('stopBtn');
         const validateMihomoBtn = document.getElementById('validateMihomoBtn');
         const validateSingboxBtn = document.getElementById('validateSingboxBtn');
+        const stopBtn = document.getElementById('stopBtn');
         const statusBadge = document.getElementById('status');
+        const statusText = document.getElementById('statusText');
         const logsDiv = document.getElementById('logs');
         const logCountSpan = document.getElementById('logCount');
 
         let isRunning = false;
         let lineCount = 0;
 
-        // --- UI Updates ---
-
+        // UI State Management
         function updateState(running) {
             isRunning = running;
-            startBtn.disabled = running;
-            validateMihomoBtn.disabled = running;
-            validateSingboxBtn.disabled = running;
+
+            // Toggle Buttons
+            [startBtn, validateMihomoBtn, validateSingboxBtn].forEach(btn => {
+                btn.disabled = running;
+            });
             stopBtn.disabled = !running;
 
+            // Update Status Badge
             if (running) {
-                statusBadge.textContent = 'Running...';
+                statusText.textContent = 'Processing Task...';
                 statusBadge.classList.add('running');
             } else {
-                statusBadge.textContent = 'Idle';
+                statusText.textContent = 'System Ready';
                 statusBadge.classList.remove('running');
             }
+        }
+
+        // Advanced Log Formatting
+        function formatLogMessage(msg) {
+            // Convert ANSI codes
+            let formatted = msg
+                .replace(/\\x1B\\[31m/g, '<span class="ansi-red">')
+                    .replace(/\\x1B\\[32m/g, '<span class="ansi-green">')
+                        .replace(/\\x1B\\[33m/g, '<span class="ansi-yellow">')
+                            .replace(/\\x1B\\[34m/g, '<span class="ansi-blue">')
+                                .replace(/\\x1B\\[36m/g, '<span class="ansi-cyan">')
+                                    .replace(/\\x1B\\[0m/g, '</span>');
+
+            // Add Tags for keywords
+            if (msg.match(/error|fail/i)) formatted = `<span class="tag tag-error">ERR</span> ${formatted}`;
+            else if (msg.match(/warn/i)) formatted = `<span class="tag tag-warn">WARN</span> ${formatted}`;
+            else if (msg.match(/success|completed/i)) formatted = `<span class="tag tag-success">OK</span> ${formatted}`;
+            else formatted = `<span class="tag tag-info">INFO</span> ${formatted}`;
+
+            return formatted;
         }
 
         function appendLog(entry) {
             const div = document.createElement('div');
             div.className = 'log-entry';
 
-            // Format timestamp
-            const time = new Date(entry.timestamp).toLocaleTimeString();
+            const time = new Date(entry.timestamp).toLocaleTimeString('en-US', { hour12: false });
 
-            // Basic color processing
-            let message = entry.message
-                .replace(/\\x1B\\[31m/g, '<span class="ansi-red">')
-                    .replace(/\\x1B\\[32m/g, '<span class="ansi-green">')
-                        .replace(/\\x1B\\[33m/g, '<span class="ansi-yellow">')
-                            .replace(/\\x1B\\[34m/g, '<span class="ansi-blue">')
-                                .replace(/\\x1B\\[36m/g, '<span class="ansi-cyan">')
-                                    .replace(/\\x1B\\[0m/g, '</span>')
-                                        // Handle basic console.log styles if any or specific keywords
-                                        .replace(/error/gi, '<span class="ansi-red">ERROR</span>')
-                                        .replace(/warn/gi, '<span class="ansi-yellow">WARN</span>')
-                                        .replace(/info/gi, '<span class="ansi-blue">INFO</span>')
-                                        .replace(/success/gi, '<span class="ansi-green">SUCCESS</span>');
+            div.innerHTML = `<span class="timestamp">${time}</span>${formatLogMessage(entry.message)}`;
 
-            div.innerHTML = `<span class="timestamp">[${time}]</span> ${message}`;
             logsDiv.appendChild(div);
 
-            // Auto scroll
-            logsDiv.scrollTop = logsDiv.scrollHeight;
+            // Smart Auto-scroll (only if user hasn't scrolled up significantly)
+            const isScrolledToBottom = logsDiv.scrollHeight - logsDiv.clientHeight <= logsDiv.scrollTop + 50;
+            if (isScrolledToBottom) {
+                logsDiv.scrollTop = logsDiv.scrollHeight;
+            }
 
             lineCount++;
-            logCountSpan.textContent = `${lineCount} lines`;
+            logCountSpan.textContent = `${lineCount} lines captured`;
         }
 
-        // --- API Calls ---
-
-        async function startTask() {
+        // API Interactions
+        async function apiCall(endpoint) {
             try {
-                const res = await fetch('/api/start', { method: 'POST' });
+                const res = await fetch(endpoint, { method: 'POST' });
                 const data = await res.json();
-                if (!data.success) alert(data.error);
+                if (!data.success) {
+                    // Simple toast or log error could go here
+                    console.error('API Error:', data.error);
+                }
             } catch (e) {
-                alert('Request failed');
+                console.error('Network Error');
             }
         }
 
-        async function startValidation(core) {
-            try {
-                const res = await fetch(`/api/validate/${core}`, { method: 'POST' });
-                const data = await res.json();
-                if (!data.success) alert(data.error);
-            } catch (e) {
-                alert('Request failed');
-            }
-        }
+        startBtn.onclick = () => apiCall('/api/start');
+        validateMihomoBtn.onclick = () => apiCall('/api/validate/mihomo');
+        validateSingboxBtn.onclick = () => apiCall('/api/validate/singbox');
+        stopBtn.onclick = () => apiCall('/api/stop');
 
-        async function stopTask() {
-            try {
-                await fetch('/api/stop', { method: 'POST' });
-            } catch (e) {
-                alert('Request failed');
-            }
-        }
-
-        // --- Event Listeners ---
-
-        startBtn.onclick = startTask;
-        validateMihomoBtn.onclick = () => startValidation('mihomo');
-        validateSingboxBtn.onclick = () => startValidation('singbox');
-        stopBtn.onclick = stopTask;
-
-        // --- Socket Events ---
-
+        // Socket Events
         socket.on('connect', () => {
             fetch('/api/status')
                 .then(res => res.json())
                 .then(data => {
                     updateState(data.isRunning);
+                    logsDiv.innerHTML = ''; // Re-render logic to avoid duplicates if needed
+                    lineCount = 0;
                     data.logs.forEach(appendLog);
+                    // Force scroll to bottom on initial load
+                    logsDiv.scrollTop = logsDiv.scrollHeight;
                 });
         });
 
-        socket.on('status', (data) => {
-            updateState(data.isRunning);
-        });
-
-        socket.on('log', (entry) => {
-            appendLog(entry);
-        });
-
+        socket.on('status', data => updateState(data.isRunning));
+        socket.on('log', appendLog);
         socket.on('clear_logs', () => {
             logsDiv.innerHTML = '';
             lineCount = 0;
-            logCountSpan.textContent = '0 lines';
+            logCountSpan.textContent = '0 lines captured';
         });
 
     </script>
