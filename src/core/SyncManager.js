@@ -319,7 +319,6 @@ export class SyncManager {
       // 对有效节点进行分析和重命名
       const { nodes: analyzedValidNodes } = nodeManager.processNodes(validNodes);
       const renamedValidNodes = nodeManager.renameNodes(analyzedValidNodes, {
-        format: '{country}-{protocol}-{number}',
         includeCountry: true,
         includeProtocol: true,
         includeNumber: true,
