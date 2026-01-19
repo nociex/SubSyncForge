@@ -51,12 +51,12 @@ async function main() {
       success: true,
       allNodesCount: result.totalNodes || 0,
       validNodesCount: result.validNodes || 0,
-      generatedFiles: Array.isArray(result.outputs) ? result.outputs : [result.outputs || 0]
+      generatedFilesCount: Array.isArray(result.outputs) ? result.outputs.length : (result.outputs || 0)
     };
     
     if (formattedResult.success) {
       console.log(`同步成功，共处理了 ${formattedResult.allNodesCount} 个节点，最终有效节点 ${formattedResult.validNodesCount} 个`);
-      console.log(`生成了 ${formattedResult.generatedFiles.length} 个配置文件`);
+      console.log(`生成了 ${formattedResult.generatedFilesCount} 个配置文件`);
     } else {
       console.error(`同步失败: ${formattedResult.error || '未知错误'}`);
       process.exit(1);
