@@ -88,16 +88,22 @@ export class AdvancedNodeTester extends NodeTester {
             this.logger.debug(`使用 ${this.coreType} 核心测试节点: ${node.name}`);
             const coreResult = await this.coreManager.testNode(node);
 
-            result = {
-              node,
-              status: coreResult.status ? 'up' : 'down',
-              latency: coreResult.latency,
-              error: coreResult.error,
-              testMethod: `${this.coreType}-core`,
-              locationInfo: null,
-              needsLocationCorrection: false,
-              actualLocation: null
-            };
+            if (!coreResult.status && this.fallbackToBasic) {
+              this.logger.warn(`${this.coreType} 核心测试失败，回退到基本测试: ${node.name}`);
+              result = await this.runBasicTest(node, startTime);
+              result.testMethod = 'basic';
+            } else {
+              result = {
+                node,
+                status: coreResult.status ? 'up' : 'down',
+                latency: coreResult.latency,
+                error: coreResult.error,
+                testMethod: `${this.coreType}-core`,
+                locationInfo: null,
+                needsLocationCorrection: false,
+                actualLocation: null
+              };
+            }
 
             // 如果核心测试成功且启用了地区验证，获取位置信息
             if (result.status === 'up' && this.verifyLocation) {
