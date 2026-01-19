@@ -57,15 +57,21 @@ jobs:
       - name: 检出代码
         uses: actions/checkout@v4
         
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+          run_install: false
+
       - name: 设置 Node.js
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: 'npm'
+          cache: 'pnpm'
           
       - name: 安装依赖
         run: |
-          npm ci
+          pnpm install
           
       - name: 创建核心缓存目录
         run: |
@@ -95,7 +101,7 @@ jobs:
           
       - name: 构建项目
         run: |
-          npm run build
+          pnpm run build
           
       - name: 准备测试数据
         run: |
