@@ -12,6 +12,27 @@ SubSyncForge 是一个面向自托管场景的代理订阅处理工具，可以�
 
 > 📌 功能与实现状态会在 `docs/DEVELOPMENT.md`、`docs/ARCHITECTURE.md` 中持续更新，建议在使用前阅读。
 
+## 订阅链接
+
+根据你使用的客户端选择对应格式：
+
+| 客户端 | 订阅链接 |
+|--------|----------|
+| **Mihomo / Clash Meta** | `https://raw.githubusercontent.com/nociex/SubSyncForge/main/output/mihomo.yaml` |
+| **Clash** | `https://raw.githubusercontent.com/nociex/SubSyncForge/main/output/clash.yaml` |
+| **Sing-box** | `https://raw.githubusercontent.com/nociex/SubSyncForge/main/output/singbox.json` |
+| **V2Ray** | `https://raw.githubusercontent.com/nociex/SubSyncForge/main/output/v2ray.json` |
+| **Surge** | `https://raw.githubusercontent.com/nociex/SubSyncForge/main/output/surge.conf` |
+| **通用 URI 列表** | `https://raw.githubusercontent.com/nociex/SubSyncForge/main/output/all.txt` |
+
+**按地区订阅**：
+
+- 香港: `.../output/hk.txt` | 美国: `.../output/us.txt` | 新加坡: `.../output/sg.txt`
+
+**分流规则**：
+
+- 美团直连: `https://raw.githubusercontent.com/nociex/SubSyncForge/main/output/meituan-direct.list`
+
 ## 文档索引
 
 | 文档 | 内容概要 |
@@ -28,6 +49,7 @@ SubSyncForge 是一个面向自托管场景的代理订阅处理工具，可以�
 ## 快速开始（本地运行）
 
 1. **获取代码并安装依赖**
+
    ```bash
    git clone https://github.com/nociex/SubSyncForge.git
    cd SubSyncForge
@@ -39,15 +61,19 @@ SubSyncForge 是一个面向自托管场景的代理订阅处理工具，可以�
    - 更新 `config/custom.yaml`，设置输出目录、测试参数、模板绑定等（详见下文配置概览）。
 
 3. **验证拨测环境（可选但推荐）**
+
    ```bash
    pnpm run test:nodes:mihomo   # 或者 pnpm run test:nodes:v2ray / :basic
    ```
+
    首次运行会自动下载核心到 `.cores/`，请确保具备网络与写入权限。
 
 4. **执行一次完整同步**
+
    ```bash
    pnpm run sync
    ```
+
    生成的配置位于 `output/`，日志及拨测数据写入 `data/`。
 
 ## 配置概览
