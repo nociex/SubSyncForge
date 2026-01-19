@@ -6,6 +6,14 @@ import { logger } from '../utils/index.js';
 import fs from 'fs';
 import path from 'path';
 import { ensureDirectoryExists } from '../core/utils/FileSystem.js';
+import { PortFinder } from '../core/utils/PortFinder.js';
+import { SubconverterClient } from '../core/utils/SubconverterClient.js';
+import { ConfigGenerator } from '../core/output/ConfigGenerator.js';
+import fetch from 'node-fetch';
+import { spawn } from 'child_process';
+import http from 'http';
+
+const defaultLogger = logger?.defaultLogger || console;
 
 const defaultLogger = logger?.defaultLogger || console;
 
@@ -32,6 +40,13 @@ export class AdvancedNodeTester extends NodeTester {
       logger: this.logger
     });
 
+    // Subconverter setup
+    this.subconverter = new SubconverterClient();
+    this.configGenerator = new ConfigGenerator({ logger: this.logger });
+    this.controllerPort = 0;
+    this.mixedPort = 0;
+    this.secret = 'subsync-test';
+
     // 初始化IP定位器
     this.ipLocator = new IPLocator({
       rootDir: options.rootDir || process.cwd(),
@@ -50,18 +65,19 @@ export class AdvancedNodeTester extends NodeTester {
   async testNodes(nodes) {
     this.logger.info(`开始高级测试 ${nodes.length} 个节点，并发数 ${this.concurrency}...`);
 
-    // 检查核心是否可用
-    const coreAvailable = await this.ensureCoreAvailable();
+    let results = [];
 
-    const results = [];
-    const batches = this.createBatches(nodes, this.concurrency);
-
-    for (let i = 0; i < batches.length; i++) {
-      this.logger.info(`测试批次 ${i + 1}/${batches.length} (${batches[i].length} 个节点)...`);
-
-      const batchPromises = batches[i].map(node => this.testSingleNode(node, coreAvailable, this.useCoreTest && coreAvailable));
-      const batchResults = await Promise.all(batchPromises);
-      results.push(...batchResults);
+    // Decide whether to use Batch Mode (Active Testing) or Legacy Loop
+    // For now, always use Batch Mode if core type is 'mihomo' and we are enabled
+    if (this.useCoreTest && this.coreType === 'mihomo') {
+      try {
+        results = await this.testNodesBatch(nodes);
+      } catch (e) {
+        this.logger.error(`Batch testing failed: ${e.message}. Fallback to legacy mode.`);
+        results = await this.testNodesLegacy(nodes);
+      }
+    } else {
+      results = await this.testNodesLegacy(nodes);
     }
 
     // 获取成功的节点进行重命名
@@ -89,6 +105,23 @@ export class AdvancedNodeTester extends NodeTester {
     // 保存测试结果
     this.saveTestResults(results);
 
+    return results;
+  }
+
+  async testNodesLegacy(nodes) {
+    // 检查核心是否可用
+    const coreAvailable = await this.ensureCoreAvailable();
+
+    const results = [];
+    const batches = this.createBatches(nodes, this.concurrency);
+
+    for (let i = 0; i < batches.length; i++) {
+      this.logger.info(`Legacy测试批次 ${i + 1}/${batches.length} (${batches[i].length} 个节点)...`);
+
+      const batchPromises = batches[i].map(node => this.testSingleNode(node, coreAvailable, this.useCoreTest && coreAvailable));
+      const batchResults = await Promise.all(batchPromises);
+      results.push(...batchResults);
+    }
     return results;
   }
 
@@ -246,78 +279,78 @@ export class AdvancedNodeTester extends NodeTester {
     }
   }
 
-/**
- * 对节点进行统一重命名和地区修正
- * @param {Array<Object>} nodes - 需要修正的节点数组
- * @param {Array<Object>} testResults - 测试结果数组
- * @returns {Array<Object>} - 修正后的节点数组
- */
-renameAndCorrectNodes(nodes, testResults) {
-  this.logger.info(`开始标准化节点名称...`);
-  const analyzer = new NodeAnalyzer();
-  let corrected = 0;
+  /**
+   * 对节点进行统一重命名和地区修正
+   * @param {Array<Object>} nodes - 需要修正的节点数组
+   * @param {Array<Object>} testResults - 测试结果数组
+   * @returns {Array<Object>} - 修正后的节点数组
+   */
+  renameAndCorrectNodes(nodes, testResults) {
+    this.logger.info(`开始标准化节点名称...`);
+    const analyzer = new NodeAnalyzer();
+    let corrected = 0;
 
-  const renamedNodes = nodes.map((node, index) => {
-    const testResult = testResults.find(r => r.node === node || r.node.server === node.server);
+    const renamedNodes = nodes.map((node, index) => {
+      const testResult = testResults.find(r => r.node === node || r.node.server === node.server);
 
-    if (testResult && testResult.status === 'up') {
-      const resultAnalysis = testResult.node.analysis || {};
+      if (testResult && testResult.status === 'up') {
+        const resultAnalysis = testResult.node.analysis || {};
 
-      if (testResult.actualLocation) {
-        resultAnalysis.countryCode = testResult.actualLocation.country;
-        resultAnalysis.country = testResult.actualLocation.countryName;
-      } else if (testResult.locationInfo) {
-        resultAnalysis.countryCode = testResult.locationInfo.country;
-        resultAnalysis.country = testResult.locationInfo.countryName;
-      } else if (!resultAnalysis.countryCode && node.country) {
-        resultAnalysis.countryCode = node.country;
+        if (testResult.actualLocation) {
+          resultAnalysis.countryCode = testResult.actualLocation.country;
+          resultAnalysis.country = testResult.actualLocation.countryName;
+        } else if (testResult.locationInfo) {
+          resultAnalysis.countryCode = testResult.locationInfo.country;
+          resultAnalysis.country = testResult.locationInfo.countryName;
+        } else if (!resultAnalysis.countryCode && node.country) {
+          resultAnalysis.countryCode = node.country;
+        }
+
+        if (!node.analysis) {
+          node.analysis = {
+            ...resultAnalysis,
+            protocol: node.type,
+            nodeType: node.type && ['vmess', 'vless', 'ss', 'trojan', 'hysteria2', 'tuic'].includes(node.type.toLowerCase()) ? 'normal' : 'other',
+            tags: []
+          };
+          const tempAnalysis = analyzer.analyze(node);
+          if (!node.analysis.countryCode) node.analysis.countryCode = tempAnalysis.countryCode;
+          if (!node.analysis.protocol) node.analysis.protocol = tempAnalysis.protocol;
+        } else {
+          if (resultAnalysis.countryCode) node.analysis.countryCode = resultAnalysis.countryCode;
+          if (resultAnalysis.country) node.analysis.country = resultAnalysis.country;
+        }
+
+        const newName = analyzer.generateName(node.analysis, {}, index);
+
+        if (newName !== node.name) {
+          corrected++;
+          const renamedNode = { ...node, name: newName };
+          if (!renamedNode.extra) renamedNode.extra = {};
+          renamedNode.extra.originalName = node.name;
+          return renamedNode;
+        }
       }
+      return node;
+    });
 
-      if (!node.analysis) {
-        node.analysis = {
-          ...resultAnalysis,
-          protocol: node.type,
-          nodeType: node.type && ['vmess', 'vless', 'ss', 'trojan', 'hysteria2', 'tuic'].includes(node.type.toLowerCase()) ? 'normal' : 'other',
-          tags: []
-        };
-        const tempAnalysis = analyzer.analyze(node);
-        if (!node.analysis.countryCode) node.analysis.countryCode = tempAnalysis.countryCode;
-        if (!node.analysis.protocol) node.analysis.protocol = tempAnalysis.protocol;
-      } else {
-        if (resultAnalysis.countryCode) node.analysis.countryCode = resultAnalysis.countryCode;
-        if (resultAnalysis.country) node.analysis.country = resultAnalysis.country;
-      }
-
-      const newName = analyzer.generateName(node.analysis, {}, index);
-
-      if (newName !== node.name) {
-        corrected++;
-        const renamedNode = { ...node, name: newName };
-        if (!renamedNode.extra) renamedNode.extra = {};
-        renamedNode.extra.originalName = node.name;
-        return renamedNode;
-      }
-    }
-    return node;
-  });
-
-  this.logger.info(`节点标准化重命名完成，共修改 ${corrected} 个节点`);
-  return renamedNodes;
-}
-
-/**
- * 创建测试批次
- * @param {Array} nodes - 节点数组
- * @param {number} batchSize - 批次大小
- * @returns {Array} - 批次数组
- */
-createBatches(nodes, batchSize) {
-  const batches = [];
-  for (let i = 0; i < nodes.length; i += batchSize) {
-    batches.push(nodes.slice(i, i + batchSize));
+    this.logger.info(`节点标准化重命名完成，共修改 ${corrected} 个节点`);
+    return renamedNodes;
   }
-  return batches;
-}
+
+  /**
+   * 创建测试批次
+   * @param {Array} nodes - 节点数组
+   * @param {number} batchSize - 批次大小
+   * @returns {Array} - 批次数组
+   */
+  createBatches(nodes, batchSize) {
+    const batches = [];
+    for (let i = 0; i < nodes.length; i += batchSize) {
+      batches.push(nodes.slice(i, i + batchSize));
+    }
+    return batches;
+  }
 
   /**
    * 执行基本连接测试（原有逻辑）
@@ -326,129 +359,129 @@ createBatches(nodes, batchSize) {
    * @returns {Promise<Object>} - 测试结果
    */
   async runBasicTest(node, startTime) {
-  try {
-    const result = await this.checker.checkConnectivity(node, this.timeout, this.testUrl);
-    const latency = Date.now() - startTime;
+    try {
+      const result = await this.checker.checkConnectivity(node, this.timeout, this.testUrl);
+      const latency = Date.now() - startTime;
 
-    let locationInfo = null;
-    if (result.status && this.verifyLocation) {
-      try {
-        locationInfo = await this.ipLocator.locate(node.server);
-      } catch (locErr) {
-        this.logger.warn(`获取节点 ${node.name} 位置信息失败: ${locErr.message}`);
+      let locationInfo = null;
+      if (result.status && this.verifyLocation) {
+        try {
+          locationInfo = await this.ipLocator.locate(node.server);
+        } catch (locErr) {
+          this.logger.warn(`获取节点 ${node.name} 位置信息失败: ${locErr.message}`);
+        }
       }
-    }
 
-    let finalStatus = 'down';
-    let finalLatency = null;
-    let finalError = result.error || null;
+      let finalStatus = 'down';
+      let finalLatency = null;
+      let finalError = result.error || null;
 
-    if (result.status) {
-      // 使用配置的最大延迟限制，而不是硬编码1000ms
-      const maxLatency = this.maxLatency || 3000; // 默认3秒
-      if (latency < maxLatency) {
-        finalStatus = 'up';
-        finalLatency = latency;
-      } else {
-        finalStatus = 'down';
-        finalLatency = null;
-        finalError = `延迟过高 (${latency}ms，限制${maxLatency}ms)`;
+      if (result.status) {
+        // 使用配置的最大延迟限制，而不是硬编码1000ms
+        const maxLatency = this.maxLatency || 3000; // 默认3秒
+        if (latency < maxLatency) {
+          finalStatus = 'up';
+          finalLatency = latency;
+        } else {
+          finalStatus = 'down';
+          finalLatency = null;
+          finalError = `延迟过高 (${latency}ms，限制${maxLatency}ms)`;
+        }
       }
-    }
 
-    const testResult = {
-      node,
-      status: finalStatus,
-      latency: finalLatency,
-      error: finalError,
-      locationInfo: locationInfo,
-      needsLocationCorrection: false,
-      actualLocation: null
-    };
+      const testResult = {
+        node,
+        status: finalStatus,
+        latency: finalLatency,
+        error: finalError,
+        locationInfo: locationInfo,
+        needsLocationCorrection: false,
+        actualLocation: null
+      };
 
-    // 检查地区匹配
-    if (locationInfo && this.checkLocationMismatch(node, locationInfo)) {
-      testResult.needsLocationCorrection = true;
-      testResult.actualLocation = {
-        country: locationInfo.country,
-        countryName: locationInfo.countryName,
-        city: locationInfo.city
+      // 检查地区匹配
+      if (locationInfo && this.checkLocationMismatch(node, locationInfo)) {
+        testResult.needsLocationCorrection = true;
+        testResult.actualLocation = {
+          country: locationInfo.country,
+          countryName: locationInfo.countryName,
+          city: locationInfo.city
+        };
+      }
+
+      return testResult;
+
+    } catch (error) {
+      const latency = Date.now() - startTime;
+      return {
+        node,
+        status: 'down',
+        latency: null,
+        error: error.message,
+        locationInfo: null,
+        needsLocationCorrection: false,
+        actualLocation: null
       };
     }
+  }
 
-    return testResult;
+  /**
+   * 检查节点类型是否被代理核心支持
+   * @param {Object} node - 节点配置
+   * @returns {boolean} - 是否支持
+   */
+  isSupportedByCore(node) {
+    const nodeType = node.type?.toLowerCase();
 
-  } catch (error) {
-    const latency = Date.now() - startTime;
-    return {
-      node,
-      status: 'down',
-      latency: null,
-      error: error.message,
-      locationInfo: null,
-      needsLocationCorrection: false,
-      actualLocation: null
+    if (this.coreType === 'mihomo') {
+      // 支持的协议类型，包括协议名称的不同变体
+      // 移除 'ssr' 防止 mihomo 核心崩溃，强制回退到基本测试
+      const supportedTypes = ['ss', 'vmess', 'trojan', 'vless', 'hy2', 'hysteria2', 'tuic'];
+      return supportedTypes.includes(nodeType);
+    } else if (this.coreType === 'v2ray') {
+      return ['vmess', 'vless', 'trojan', 'shadowsocks'].includes(nodeType);
+    } else if (this.coreType === 'singbox') {
+      return ['ss', 'shadowsocks', 'vmess', 'vless', 'trojan', 'hysteria2', 'tuic'].includes(nodeType);
+    }
+
+    return false;
+  }
+
+  /**
+   * 检查节点名称与实际位置是否匹配
+   * @param {Object} node - 节点配置
+   * @param {Object} locationInfo - 位置信息
+   * @returns {boolean} - 是否不匹配
+   */
+  checkLocationMismatch(node, locationInfo) {
+    if (!locationInfo || !locationInfo.country) return false;
+
+    const countryCodeCorrections = {
+      '🇭🇰': ['HK', '香港'],
+      '🇨🇳': ['CN', '中国'],
+      '🇺🇸': ['US', '美国'],
+      '🇯🇵': ['JP', '日本'],
+      '🇸🇬': ['SG', '新加坡'],
+      '🇰🇷': ['KR', '韩国'],
+      '🇬🇧': ['GB', 'UK', '英国'],
+      '🇹🇼': ['TW', '台湾']
     };
-  }
-}
 
-/**
- * 检查节点类型是否被代理核心支持
- * @param {Object} node - 节点配置
- * @returns {boolean} - 是否支持
- */
-isSupportedByCore(node) {
-  const nodeType = node.type?.toLowerCase();
+    const nodeName = node.name || '';
+    const actualCountry = locationInfo.country;
+    const actualCountryName = locationInfo.countryName;
 
-  if (this.coreType === 'mihomo') {
-    // 支持的协议类型，包括协议名称的不同变体
-    // 移除 'ssr' 防止 mihomo 核心崩溃，强制回退到基本测试
-    const supportedTypes = ['ss', 'vmess', 'trojan', 'vless', 'hy2', 'hysteria2', 'tuic'];
-    return supportedTypes.includes(nodeType);
-  } else if (this.coreType === 'v2ray') {
-    return ['vmess', 'vless', 'trojan', 'shadowsocks'].includes(nodeType);
-  } else if (this.coreType === 'singbox') {
-    return ['ss', 'shadowsocks', 'vmess', 'vless', 'trojan', 'hysteria2', 'tuic'].includes(nodeType);
-  }
-
-  return false;
-}
-
-/**
- * 检查节点名称与实际位置是否匹配
- * @param {Object} node - 节点配置
- * @param {Object} locationInfo - 位置信息
- * @returns {boolean} - 是否不匹配
- */
-checkLocationMismatch(node, locationInfo) {
-  if (!locationInfo || !locationInfo.country) return false;
-
-  const countryCodeCorrections = {
-    '🇭🇰': ['HK', '香港'],
-    '🇨🇳': ['CN', '中国'],
-    '🇺🇸': ['US', '美国'],
-    '🇯🇵': ['JP', '日本'],
-    '🇸🇬': ['SG', '新加坡'],
-    '🇰🇷': ['KR', '韩国'],
-    '🇬🇧': ['GB', 'UK', '英国'],
-    '🇹🇼': ['TW', '台湾']
-  };
-
-  const nodeName = node.name || '';
-  const actualCountry = locationInfo.country;
-  const actualCountryName = locationInfo.countryName;
-
-  // 检查名称是否已经包含正确的地区信息
-  for (const [emoji, codes] of Object.entries(countryCodeCorrections)) {
-    if (codes.includes(actualCountry) || codes.includes(actualCountryName)) {
-      if (nodeName.includes(emoji) || codes.some(code => nodeName.includes(code))) {
-        return false; // 匹配，无需修正
+    // 检查名称是否已经包含正确的地区信息
+    for (const [emoji, codes] of Object.entries(countryCodeCorrections)) {
+      if (codes.includes(actualCountry) || codes.includes(actualCountryName)) {
+        if (nodeName.includes(emoji) || codes.some(code => nodeName.includes(code))) {
+          return false; // 匹配，无需修正
+        }
       }
     }
-  }
 
-  return true; // 不匹配，需要修正
-}
+    return true; // 不匹配，需要修正
+  }
 
   /**
    * 批量测试特定类型的节点
@@ -457,119 +490,276 @@ checkLocationMismatch(node, locationInfo) {
    * @returns {Promise<Array<Object>>} - 测试结果
    */
   async testNodesByType(nodes, nodeType) {
-  const filteredNodes = nodes.filter(node =>
-    node.type?.toLowerCase() === nodeType.toLowerCase()
-  );
+    const filteredNodes = nodes.filter(node =>
+      node.type?.toLowerCase() === nodeType.toLowerCase()
+    );
 
-  if (filteredNodes.length === 0) {
-    this.logger.warn(`没有找到类型为 ${nodeType} 的节点`);
-    return [];
+    if (filteredNodes.length === 0) {
+      this.logger.warn(`没有找到类型为 ${nodeType} 的节点`);
+      return [];
+    }
+
+    this.logger.info(`开始测试 ${filteredNodes.length} 个 ${nodeType} 类型节点`);
+    return this.testNodes(filteredNodes);
   }
 
-  this.logger.info(`开始测试 ${filteredNodes.length} 个 ${nodeType} 类型节点`);
-  return this.testNodes(filteredNodes);
-}
+  /**
+   * 获取测试统计信息
+   * @param {Array<Object>} results - 测试结果
+   * @returns {Object} - 统计信息
+   */
+  getTestStatistics(results) {
+    const total = results.length;
+    const successful = results.filter(r => r.status === 'up').length;
+    const failed = total - successful;
 
-/**
- * 获取测试统计信息
- * @param {Array<Object>} results - 测试结果
- * @returns {Object} - 统计信息
- */
-getTestStatistics(results) {
-  const total = results.length;
-  const successful = results.filter(r => r.status === 'up').length;
-  const failed = total - successful;
+    const methodStats = {};
+    results.forEach(r => {
+      const method = r.testMethod || 'unknown';
+      methodStats[method] = (methodStats[method] || 0) + 1;
+    });
 
-  const methodStats = {};
-  results.forEach(r => {
-    const method = r.testMethod || 'unknown';
-    methodStats[method] = (methodStats[method] || 0) + 1;
-  });
+    const typeStats = {};
+    results.forEach(r => {
+      const type = r.node.type || 'unknown';
+      typeStats[type] = (typeStats[type] || 0) + 1;
+    });
 
-  const typeStats = {};
-  results.forEach(r => {
-    const type = r.node.type || 'unknown';
-    typeStats[type] = (typeStats[type] || 0) + 1;
-  });
+    const avgLatency = successful > 0
+      ? results
+        .filter(r => r.status === 'up' && r.latency)
+        .reduce((sum, r) => sum + r.latency, 0) /
+      results.filter(r => r.status === 'up' && r.latency).length
+      : 0;
 
-  const avgLatency = successful > 0
-    ? results
-      .filter(r => r.status === 'up' && r.latency)
-      .reduce((sum, r) => sum + r.latency, 0) /
-    results.filter(r => r.status === 'up' && r.latency).length
-    : 0;
-
-  return {
-    total,
-    successful,
-    failed,
-    successRate: (successful / total * 100).toFixed(2) + '%',
-    averageLatency: Math.round(avgLatency),
-    methodStatistics: methodStats,
-    typeStatistics: typeStats,
-    needLocationCorrection: results.filter(r => r.needsLocationCorrection).length
-  };
-}
-
-/**
- * 保存测试结果到文件
- * @param {Array} results 测试结果
- */
-saveTestResults(results) {
-  try {
-    const resultDir = path.join(this.rootDir, this.dataDir, 'test_results');
-    ensureDirectoryExists(resultDir);
-
-    const timestamp = new Date().toISOString().replace(/:/g, '-').replace(/\..+/, '');
-    const resultPath = path.join(resultDir, `test_${timestamp}.json`);
-
-    // 统计信息
-    const stats = {
-      totalNodes: results.length,
-      validNodes: results.filter(n => n.node && (n.node.valid || n.status === 'up')).length,
-      invalidNodes: results.filter(n => !n.node || (!n.node.valid && n.status !== 'up')).length,
-      avgLatency: results.filter(n => n.status === 'up' && n.latency).reduce((sum, n) => sum + n.latency, 0) /
-        (results.filter(n => n.status === 'up' && n.latency).length || 1)
+    return {
+      total,
+      successful,
+      failed,
+      successRate: (successful / total * 100).toFixed(2) + '%',
+      averageLatency: Math.round(avgLatency),
+      methodStatistics: methodStats,
+      typeStatistics: typeStats,
+      needLocationCorrection: results.filter(r => r.needsLocationCorrection).length
     };
-
-    // 保存结果
-    const data = {
-      timestamp: new Date().toISOString(),
-      stats: stats,
-      results: results
-    };
-
-    fs.writeFileSync(resultPath, JSON.stringify(data, null, 2));
-    this.logger.info(`测试结果已保存到: ${resultPath}`);
-
-    // 保存最新测试结果的副本
-    const latestPath = path.join(resultDir, 'latest_test.json');
-    fs.writeFileSync(latestPath, JSON.stringify(data, null, 2));
-    this.logger.info(`最新测试结果已保存到: ${latestPath}`);
-  } catch (error) {
-    this.logger.error(`保存测试结果失败: ${error.message}`);
   }
-}
+
+  /**
+   * 保存测试结果到文件
+   * @param {Array} results 测试结果
+   */
+  saveTestResults(results) {
+    try {
+      const resultDir = path.join(this.rootDir, this.dataDir, 'test_results');
+      ensureDirectoryExists(resultDir);
+
+      const timestamp = new Date().toISOString().replace(/:/g, '-').replace(/\..+/, '');
+      const resultPath = path.join(resultDir, `test_${timestamp}.json`);
+
+      // 统计信息
+      const stats = {
+        totalNodes: results.length,
+        validNodes: results.filter(n => n.node && (n.node.valid || n.status === 'up')).length,
+        invalidNodes: results.filter(n => !n.node || (!n.node.valid && n.status !== 'up')).length,
+        avgLatency: results.filter(n => n.status === 'up' && n.latency).reduce((sum, n) => sum + n.latency, 0) /
+          (results.filter(n => n.status === 'up' && n.latency).length || 1)
+      };
+
+      // 保存结果
+      const data = {
+        timestamp: new Date().toISOString(),
+        stats: stats,
+        results: results
+      };
+
+      fs.writeFileSync(resultPath, JSON.stringify(data, null, 2));
+      this.logger.info(`测试结果已保存到: ${resultPath}`);
+
+      // 保存最新测试结果的副本
+      const latestPath = path.join(resultDir, 'latest_test.json');
+      fs.writeFileSync(latestPath, JSON.stringify(data, null, 2));
+      this.logger.info(`最新测试结果已保存到: ${latestPath}`);
+    } catch (error) {
+      this.logger.error(`保存测试结果失败: ${error.message}`);
+    }
+  }
 
   /**
    * 设置代理核心类型
    * @param {string} coreType - 核心类型 ('mihomo' | 'v2ray')
    */
   async setCoreType(coreType) {
-  if (!['mihomo', 'v2ray', 'singbox'].includes(coreType)) {
-    throw new Error(`不支持的核心类型: ${coreType}`);
+    if (!['mihomo', 'v2ray', 'singbox'].includes(coreType)) {
+      throw new Error(`不支持的核心类型: ${coreType}`);
+    }
+
+    this.coreType = coreType;
+    this.coreManager = new ProxyCoreManager({
+      coreType: this.coreType,
+      timeout: this.timeout,
+      testUrl: this.testUrl,
+      logger: this.logger
+    });
+
+    this.logger.info(`已切换到 ${coreType} 核心`);
   }
 
-  this.coreType = coreType;
-  this.coreManager = new ProxyCoreManager({
-    coreType: this.coreType,
-    timeout: this.timeout,
-    testUrl: this.testUrl,
-    logger: this.logger
-  });
+  // --- Batch Testing Methods ---
 
-  this.logger.info(`已切换到 ${coreType} 核心`);
-}
+  async testNodesBatch(nodes) {
+    if (!nodes || nodes.length === 0) return [];
+
+    this.logger.info(`Init Active Testing (Mihomo API) for ${nodes.length} nodes...`);
+    const tempDir = path.join(this.rootDir, 'temp', 'testing');
+    await fs.promises.mkdir(tempDir, { recursive: true });
+
+    let process = null;
+    let configPath = '';
+
+    try {
+      // 1. Prepare Ports
+      this.controllerPort = await PortFinder.findFreePort(15000);
+      this.mixedPort = await PortFinder.findFreePort(this.controllerPort + 1);
+
+      // 2. Install Core
+      const coreBin = await this.coreManager.installCore();
+
+      // 3. Generate Config
+      this.logger.info('Generating test config via Subconverter...');
+      const uriList = this.configGenerator.generateTextContent('', nodes);
+      let convertedConfig = '';
+      try {
+        convertedConfig = await this.subconverter.convertContent(uriList, 'clash');
+      } catch (e) {
+        this.logger.warn(`Subconverter error: ${e.message}. Trying local generation.`);
+        convertedConfig = this.configGenerator.generateClashContent('proxies: []', nodes);
+      }
+
+      const template = `
+port: ${this.mixedPort}
+socks-port: ${this.mixedPort + 1}
+allow-lan: false
+mode: rule
+log-level: info
+external-controller: 127.0.0.1:${this.controllerPort}
+secret: "${this.secret}"
+
+${convertedConfig}
+`;
+      configPath = path.join(tempDir, `batch-test-${Date.now()}.yaml`);
+      await fs.promises.writeFile(configPath, template);
+
+      // 4. Start Core
+      this.logger.info(`Starting Mihomo on port ${this.controllerPort}...`);
+      process = spawn(coreBin, ['-d', this.coreManager.coreDir, '-f', configPath], {
+        cwd: this.coreManager.coreDir,
+        stdio: 'ignore'
+      });
+
+      // Wait for API
+      let attempts = 0;
+      let ready = false;
+      while (attempts < 20) {
+        try {
+          const res = await fetch(`http://127.0.0.1:${this.controllerPort}/version`, {
+            headers: { 'Authorization': `Bearer ${this.secret}` }
+          });
+          if (res.ok) { ready = true; break; }
+        } catch (e) { }
+        await new Promise(r => setTimeout(r, 500));
+        attempts++;
+      }
+      if (!ready) throw new Error('Mihomo API failed to start');
+
+      // 5. Run Tests
+      const results = await this.performBatchTests(nodes);
+      return results;
+
+    } finally {
+      if (process) process.kill();
+      // Optional: cleanup temp file
+    }
+  }
+
+  async performBatchTests(nodes) {
+    const apiBase = `http://127.0.0.1:${this.controllerPort}`;
+    const headers = { 'Authorization': `Bearer ${this.secret}` };
+
+    // Get proxies list from API
+    const res = await fetch(`${apiBase}/proxies`, { headers });
+    const data = await res.json();
+    const proxies = data.proxies;
+
+    const results = [];
+    const nodeNames = Object.keys(proxies).filter(name =>
+      !['DIRECT', 'REJECT', 'GLOBAL', 'Pass', 'Fail'].includes(name)
+    );
+
+    this.logger.info(`Core loaded ${nodeNames.length} nodes. Testing...`);
+
+    // We need to map back to original nodes. 
+    // Name matching is tricky due to escaping. 
+    // We'll trust that we can fuzzy match or exact match.
+
+    // Batch loop
+    let completed = 0;
+    const batchSize = this.concurrency || 50;
+
+    for (let i = 0; i < nodeNames.length; i += batchSize) {
+      const batch = nodeNames.slice(i, i + batchSize);
+      const batchPromises = batch.map(async (name) => {
+        // Test
+        try {
+          const testUrl = 'http://www.gstatic.com/generate_204';
+          const delayRes = await fetch(`${apiBase}/proxies/${encodeURIComponent(name)}/delay?timeout=${this.maxLatency}&url=${testUrl}`, {
+            headers
+          });
+
+          let result = {
+            status: 'down',
+            latency: 0,
+            error: 'Timeout'
+          };
+
+          if (delayRes.ok) {
+            const d = await delayRes.json();
+            if (d.delay > 0) {
+              result.status = 'up';
+              result.latency = d.delay;
+              result.error = null;
+            }
+          }
+
+          // Find original node
+          // loose match: name in core might be escaped
+          const originalNode = nodes.find(n => n.name === name || n.name.replace(/"/g, '') === name);
+
+          if (originalNode) {
+            results.push({
+              node: originalNode,
+              ...result,
+              testMethod: 'mihomo-api',
+              locationInfo: null, // Can fetch later
+              needsLocationCorrection: false
+            });
+            // Enrich location if up
+            if (result.status === 'up' && this.verifyLocation) {
+              const r = results[results.length - 1];
+              await this.enrichLocationInfo(r);
+            }
+          }
+        } catch (e) { }
+      });
+
+      await Promise.all(batchPromises);
+      completed += batch.length;
+      if (completed % 100 === 0 || completed === nodeNames.length) {
+        this.logger.info(`Progress: ${completed}/${nodeNames.length}`);
+      }
+    }
+
+    return results;
+  }
 }
 
 export default AdvancedNodeTester; 
