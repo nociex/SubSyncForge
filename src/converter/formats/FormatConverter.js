@@ -616,7 +616,209 @@ export class FormatConverter {
       result = result.replace(pattern, replacement);
     }
 
-    return result;
+    let config;
+    try {
+      config = JSON.parse(result);
+    } catch (error) {
+      this.logger.error(`SingBox模板JSON解析失败: ${error.message}`);
+      return result;
+    }
+
+    const normalizeTag = (name, fallback) => {
+      const base = (typeof name === 'string' && name.trim()) ? name.trim() : fallback;
+      return base || 'node';
+    };
+
+    const usedTags = new Set();
+    const ensureUniqueTag = (tag) => {
+      let finalTag = tag;
+      let counter = 1;
+      while (usedTags.has(finalTag)) {
+        finalTag = `${tag}-${counter++}`;
+      }
+      usedTags.add(finalTag);
+      return finalTag;
+    };
+
+    const getRegionKey = (node) => {
+      const code = (node.analysis?.countryCode || node.region || '').toUpperCase();
+      if (['HK', 'TW', 'SG', 'JP', 'US'].includes(code)) return code;
+      const country = (node.analysis?.country || '').toUpperCase();
+      if (country.includes('HONG KONG') || country.includes('HK')) return 'HK';
+      if (country.includes('TAIWAN') || country.includes('TW')) return 'TW';
+      if (country.includes('SINGAPORE') || country.includes('SG')) return 'SG';
+      if (country.includes('JAPAN') || country.includes('JP')) return 'JP';
+      if (country.includes('UNITED STATES') || country.includes('US')) return 'US';
+      const name = (node.name || '').toUpperCase();
+      if (name.includes('HK') || name.includes('香港')) return 'HK';
+      if (name.includes('TW') || name.includes('台湾')) return 'TW';
+      if (name.includes('SG') || name.includes('新加坡')) return 'SG';
+      if (name.includes('JP') || name.includes('日本')) return 'JP';
+      if (name.includes('US') || name.includes('美国')) return 'US';
+      return 'OTHERS';
+    };
+
+    const buildOutbound = (node) => {
+      const type = (node.type || '').toLowerCase();
+      const tag = ensureUniqueTag(normalizeTag(node.name, `${type}-${node.server}-${node.port}`));
+      const base = {
+        tag,
+        type,
+        server: node.server,
+        server_port: parseInt(node.port, 10)
+      };
+
+      switch (type) {
+        case 'ss':
+        case 'shadowsocks':
+          return {
+            ...base,
+            type: 'shadowsocks',
+            method: node.settings?.method || node.method,
+            password: node.settings?.password || node.password
+          };
+        case 'vmess': {
+          const outbound = {
+            ...base,
+            type: 'vmess',
+            uuid: node.settings?.id || node.uuid || node.id,
+            security: node.settings?.security || node.cipher || 'auto',
+            alter_id: parseInt(node.settings?.alterId || node.alterId || node.aid || 0, 10)
+          };
+          const network = node.settings?.network || node.network;
+          if (network === 'ws') {
+            outbound.transport = {
+              type: 'ws',
+              path: node.settings?.wsPath || node.settings?.path || node.wsPath || '/',
+              headers: {}
+            };
+            const host = node.settings?.wsHeaders?.Host || node.settings?.host || node.host;
+            if (host) outbound.transport.headers.Host = host;
+          }
+          if (node.settings?.tls || node.tls) {
+            outbound.tls = {
+              enabled: true,
+              server_name: node.settings?.serverName || node.settings?.sni || node.server,
+              insecure: node.settings?.allowInsecure || false
+            };
+          }
+          return outbound;
+        }
+        case 'trojan':
+          return {
+            ...base,
+            type: 'trojan',
+            password: node.settings?.password || node.password,
+            tls: {
+              enabled: true,
+              server_name: node.settings?.sni || node.server,
+              insecure: node.settings?.allowInsecure || false
+            }
+          };
+        case 'vless': {
+          const outbound = {
+            ...base,
+            type: 'vless',
+            uuid: node.settings?.id || node.uuid || node.id
+          };
+          const network = node.settings?.network || node.network;
+          if (network === 'ws') {
+            outbound.transport = {
+              type: 'ws',
+              path: node.settings?.path || node.settings?.wsPath || '/',
+              headers: {}
+            };
+            const host = node.settings?.host || node.settings?.wsHeaders?.Host || node.host;
+            if (host) outbound.transport.headers.Host = host;
+          }
+          if (node.settings?.tls || node.settings?.security === 'tls') {
+            outbound.tls = {
+              enabled: true,
+              server_name: node.settings?.sni || node.server,
+              insecure: node.settings?.allowInsecure || false
+            };
+          }
+          if (node.settings?.flow) {
+            outbound.flow = node.settings.flow;
+          }
+          return outbound;
+        }
+        case 'hysteria2':
+          return {
+            ...base,
+            type: 'hysteria2',
+            password: node.settings?.auth || node.settings?.password
+          };
+        case 'tuic':
+          return {
+            ...base,
+            type: 'tuic',
+            uuid: node.settings?.uuid || node.uuid,
+            password: node.settings?.password || node.password
+          };
+        default:
+          return null;
+      }
+    };
+
+    config.outbounds = Array.isArray(config.outbounds) ? config.outbounds : [];
+    delete config.providers;
+    for (const outbound of config.outbounds) {
+      if (outbound && typeof outbound === 'object' && outbound.providers) {
+        delete outbound.providers;
+      }
+    }
+
+    const groupTags = {
+      HK: 'hk-group',
+      TW: 'tw-group',
+      SG: 'sg-group',
+      JP: 'jp-group',
+      US: 'us-group',
+      OTHERS: 'others-group'
+    };
+
+    const groupOutboundMap = new Map();
+    for (const outbound of config.outbounds) {
+      if (outbound && typeof outbound === 'object' && typeof outbound.tag === 'string') {
+        groupOutboundMap.set(outbound.tag, outbound);
+      }
+    }
+
+    const nodeOutbounds = [];
+    const groupMembers = {
+      'hk-group': [],
+      'tw-group': [],
+      'sg-group': [],
+      'jp-group': [],
+      'us-group': [],
+      'others-group': []
+    };
+
+    for (const node of nodes) {
+      const outbound = buildOutbound(node);
+      if (!outbound) continue;
+      nodeOutbounds.push(outbound);
+      const regionKey = getRegionKey(node);
+      const groupTag = groupTags[regionKey] || 'others-group';
+      if (groupMembers[groupTag]) {
+        groupMembers[groupTag].push(outbound.tag);
+      }
+    }
+
+    for (const [tag, members] of Object.entries(groupMembers)) {
+      const group = groupOutboundMap.get(tag);
+      if (group) {
+        group.outbounds = members;
+      }
+    }
+
+    config.outbounds = [
+      ...config.outbounds,
+      ...nodeOutbounds
+    ];
+
+    return JSON.stringify(config, null, 2);
   }
 
   /**

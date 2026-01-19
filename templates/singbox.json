@@ -119,38 +119,32 @@
     {
       "type": "selector",
       "tag": "hk-group",
-      "outbounds": [],
-      "providers": ["hk"]
+      "outbounds": []
     },
     {
       "type": "selector",
       "tag": "tw-group",
-      "outbounds": [],
-      "providers": ["tw"]
+      "outbounds": []
     },
     {
       "type": "selector",
       "tag": "sg-group",
-      "outbounds": [],
-      "providers": ["sg"]
+      "outbounds": []
     },
     {
       "type": "selector",
       "tag": "jp-group",
-      "outbounds": [],
-      "providers": ["jp"]
+      "outbounds": []
     },
     {
       "type": "selector",
       "tag": "us-group",
-      "outbounds": [],
-      "providers": ["us"]
+      "outbounds": []
     },
     {
       "type": "selector",
       "tag": "others-group",
-      "outbounds": [],
-      "providers": ["others"]
+      "outbounds": []
     },
     {
       "type": "direct",
@@ -165,53 +159,6 @@
       "tag": "dns-out"
     }
   ],
-  "providers": {
-    "hk": {
-      "url": "https://raw.githubusercontent.com/nociex/SubSyncForge/output/HK.txt",
-      "interval": "1h",
-      "download_detour": "direct"
-    },
-    "tw": {
-      "url": "https://raw.githubusercontent.com/nociex/SubSyncForge/output/TW.txt",
-      "interval": "1h",
-      "download_detour": "direct"
-    },
-    "sg": {
-      "url": "https://raw.githubusercontent.com/nociex/SubSyncForge/output/SG.txt",
-      "interval": "1h",
-      "download_detour": "direct"
-    },
-    "jp": {
-      "url": "https://raw.githubusercontent.com/nociex/SubSyncForge/output/JP.txt",
-      "interval": "1h",
-      "download_detour": "direct"
-    },
-    "us": {
-      "url": "https://raw.githubusercontent.com/nociex/SubSyncForge/output/US.txt",
-      "interval": "1h",
-      "download_detour": "direct"
-    },
-    "others": {
-      "url": "https://raw.githubusercontent.com/nociex/SubSyncForge/output/Others.txt",
-      "interval": "1h",
-      "download_detour": "direct"
-    },
-    "netflix": {
-      "url": "https://raw.githubusercontent.com/nociex/SubSyncForge/output/Netflix.txt",
-      "interval": "1h",
-      "download_detour": "direct"
-    },
-    "openai": {
-      "url": "https://raw.githubusercontent.com/nociex/SubSyncForge/output/OpenAI.txt",
-      "interval": "1h",
-      "download_detour": "direct"
-    },
-    "disney": {
-      "url": "https://raw.githubusercontent.com/nociex/SubSyncForge/output/Disney+.txt",
-      "interval": "1h",
-      "download_detour": "direct"
-    }
-  },
   "route": {
     "rules": [
       {
