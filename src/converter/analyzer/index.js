@@ -22,7 +22,11 @@ export class NodeManager {
    */
   processNodes(nodes) {
     // 0. 过滤示例节点
-    const filteredNodes = this.filter.applyFilter(nodes, 'notExample', true);
+    // 0. 过滤示例节点和垃圾节点
+    let filteredNodes = this.filter.applyFilter(nodes, 'notExample', true);
+
+    // 过滤垃圾节点
+    filteredNodes = filteredNodes.filter(node => !this.filter.getFilter('isSpam')(node));
 
     // 1. 分析节点
     const analyzedNodes = filteredNodes.map(node => {

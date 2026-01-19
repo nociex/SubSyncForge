@@ -75,6 +75,34 @@ export class NodeFilter {
 
         // 如果value为true，则过滤掉示例节点；如果为false，则保留示例节点
         return value ? !isExample : isExample;
+      },
+
+      // 垃圾广告过滤 (Spam Filter)
+      isSpam: (node, value = true) => {
+        if (!node.name) return false;
+
+        const name = node.name.toLowerCase();
+        const spamKeywords = [
+          't.me/', 'telegram.me', 'join', 'chat', // Telegram相关
+          '官网', '频道', '群组', '加群', '免费', '公益', 'vpn', // 推广词
+          'http://', 'https://', 'www.', '.com', '.xyz', '.top', // 网址
+          '👉', '🔥', '🆔', // 特殊符号组合 (需谨慎)
+          '@farah_vpn', '@moftconfig' // 特定已知垃圾源
+        ];
+
+        // 检查是否包含垃圾关键词
+        // 如果是网址类节点，也视为 Spam (通常是推广链接而非节点)
+        const isSpamNode = spamKeywords.some(keyword => name.includes(keyword.toLowerCase()));
+
+        // 此外，检查通过 @ 引用用户名的模式 (如 @Username)
+        // 只有当名称中包含 @ 且不包含标准分隔符 " | " 时，才进一步检查
+        // 且要求用户名长度较长，或者位置非常靠前/靠后，才判定为广告
+        if (name.includes(' | ')) return isSpamNode;
+
+        const userMentionPattern = /@[a-zA-Z0-9_]{5,}/; // 至少5个字符
+        const hasUserMention = userMentionPattern.test(name);
+
+        return isSpamNode || (hasUserMention && name.length > 20); // 结合长度判断
       }
     };
   }
