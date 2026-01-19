@@ -189,6 +189,7 @@ jobs:
             
             # 提交并推送变更
             git commit -m "更新订阅数据: ${VALID_NODES}/${NODES_COUNT} 个有效节点 - $(date +'%Y-%m-%d %H:%M:%S')"
+            git pull --rebase
             git push
             echo "已提交并推送更新"
           else
