@@ -401,6 +401,28 @@
                 height: 600px;
             }
         }
+
+        .log-options {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .checkbox-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .checkbox-wrapper input {
+            accent-color: var(--accent-blue);
+            width: 14px;
+            height: 14px;
+        }
     </style>
 </head>
 
@@ -494,7 +516,13 @@
                     <div class="dot dot-yellow"></div>
                     <div class="dot dot-green"></div>
                 </div>
-                <div id="logCount" class="log-meta">0 lines captured</div>
+                <div class="log-options">
+                    <label class="checkbox-wrapper">
+                        <input type="checkbox" id="autoScroll" checked>
+                        <span>Auto-scroll</span>
+                    </label>
+                    <div id="logCount" class="log-meta">0 lines captured</div>
+                </div>
             </div>
             <div id="logs"></div>
         </main>
@@ -511,6 +539,7 @@
         const statusText = document.getElementById('statusText');
         const logsDiv = document.getElementById('logs');
         const logCountSpan = document.getElementById('logCount');
+        const autoScrollCheckbox = document.getElementById('autoScroll');
 
         let isRunning = false;
         let lineCount = 0;
@@ -567,9 +596,8 @@
 
             logsDiv.appendChild(div);
 
-            // Smart Auto-scroll (only if user hasn't scrolled up significantly)
-            const isScrolledToBottom = logsDiv.scrollHeight - logsDiv.clientHeight <= logsDiv.scrollTop + 50;
-            if (isScrolledToBottom) {
+            // Auto-scroll logic based on checkbox
+            if (autoScrollCheckbox.checked) {
                 logsDiv.scrollTop = logsDiv.scrollHeight;
             }
 
