@@ -12,21 +12,21 @@ export class Base64Parser {
     try {
       // 清理输入，去除可能的换行和空格
       const cleanedRaw = raw.replace(/[\r\n\s]/g, '');
-      
+
       // 解码Base64数据
       let decoded;
       try {
         decoded = this.decodeBase64(cleanedRaw);
       } catch (error) {
         console.error('首次Base64解码失败，尝试修复格式:', error);
-        
+
         // 尝试修复Base64字符串（去除填充字符再尝试）
         const withoutPadding = cleanedRaw.replace(/=/g, '');
         try {
           decoded = this.decodeBase64(withoutPadding);
         } catch (paddingError) {
           console.error('去除填充后解码仍然失败:', paddingError);
-          
+
           // 再尝试添加正确的填充
           const missingPadding = 4 - (withoutPadding.length % 4);
           if (missingPadding < 4) {
@@ -37,7 +37,7 @@ export class Base64Parser {
           }
         }
       }
-      
+
       // 检查解码后的内容是什么格式
       if (this.isJsonFormat(decoded)) {
         console.log('检测到Base64编码的JSON内容');
@@ -47,10 +47,10 @@ export class Base64Parser {
         // 这种情况应该由SubscriptionParser来处理，返回空数组
         return [];
       }
-      
+
       // 尝试按行分割，每行是一个节点
       const lines = decoded.split(/[\r\n]+/).filter(line => line.trim());
-      
+
       // 解析每个节点
       const nodes = [];
       for (const line of lines) {
@@ -59,7 +59,7 @@ export class Base64Parser {
           nodes.push(node);
         }
       }
-      
+
       return nodes;
     } catch (error) {
       console.error('Base64 parsing error:', error);
@@ -74,7 +74,7 @@ export class Base64Parser {
     try {
       const trimmed = content.trim();
       if ((trimmed.startsWith('{') && trimmed.endsWith('}')) ||
-          (trimmed.startsWith('[') && trimmed.endsWith(']'))) {
+        (trimmed.startsWith('[') && trimmed.endsWith(']'))) {
         JSON.parse(trimmed);
         return true;
       }
@@ -88,10 +88,10 @@ export class Base64Parser {
    * 检测内容是否为YAML/Clash格式
    */
   isYamlFormat(content) {
-    return content.includes('proxies:') || 
-           content.includes('Proxy:') || 
-           content.includes('proxy-groups:') || 
-           content.includes('rules:');
+    return content.includes('proxies:') ||
+      content.includes('Proxy:') ||
+      content.includes('proxy-groups:') ||
+      content.includes('rules:');
   }
 
   /**
@@ -100,7 +100,7 @@ export class Base64Parser {
   parseJsonContent(content) {
     try {
       const data = JSON.parse(content);
-      
+
       // 处理各种JSON格式
       if (Array.isArray(data)) {
         // 直接是节点数组
@@ -182,7 +182,7 @@ export class Base64Parser {
           }
         };
       }
-      
+
       // 无法识别的格式
       return null;
     } catch (error) {
@@ -196,13 +196,13 @@ export class Base64Parser {
    */
   mapProtocolType(type) {
     if (!type) return 'unknown';
-    
+
     type = type.toLowerCase();
-    
+
     if (type === 'shadowsocks') return 'ss';
     if (type === 'shadowsocksr') return 'ssr';
     if (type === 'socks5') return 'socks';
-    
+
     return type; // vmess, trojan, hysteria2, vless等保持原样
   }
 
@@ -236,7 +236,7 @@ export class Base64Parser {
    */
   parseNode(line) {
     if (!line) return null;
-    
+
     // 根据协议前缀来选择解析方法
     if (line.startsWith('vmess://')) {
       return this.parseVmess(line);
@@ -256,6 +256,8 @@ export class Base64Parser {
       return this.parseSocks(line);
     } else if (line.startsWith('tuic://')) {
       return this.parseTuic(line);
+    } else if (line.startsWith('anytls://')) {
+      return this.parseHysteria2(line);
     } else {
       console.warn(`Unsupported protocol: ${line.substring(0, 20)}...`);
       return null;
@@ -272,7 +274,7 @@ export class Base64Parser {
       // vmess://后面是Base64编码的JSON配置
       const base64Config = line.substring(8);
       let configStr;
-      
+
       try {
         configStr = this.decodeBase64(base64Config);
       } catch (error) {
@@ -292,9 +294,9 @@ export class Base64Parser {
           }
         }
       }
-      
+
       const config = JSON.parse(configStr);
-      
+
       return {
         type: 'vmess',
         name: config.ps || config.remarks || config.name || `VMess ${config.add || config.addr || config.host}:${config.port}`,
@@ -332,16 +334,16 @@ export class Base64Parser {
       // ss://后面是Base64编码的用户信息，然后是@，然后是服务器信息
       // 例如: ss://BASE64(method:password)@server:port#name
       // 或者 ss://BASE64(method:password@server:port)#name
-      
+
       let server, port, method, password, name = '';
-      
+
       // 处理SIP002格式
       if (line.includes('@')) {
         const url = new URL(line);
         name = decodeURIComponent(url.hash.substring(1) || '');
         server = url.hostname;
         port = url.port;
-        
+
         // 处理用户信息部分
         try {
           if (url.username.includes(':')) {
@@ -357,12 +359,12 @@ export class Base64Parser {
           method = url.searchParams.get('method') || 'aes-256-gcm';
           password = url.password || url.searchParams.get('password') || '';
         }
-      } 
+      }
       // 处理旧格式 ss://BASE64(method:password@server:port)
       else {
         const base64Part = line.split('#')[0].substring(5);
         name = line.includes('#') ? decodeURIComponent(line.split('#')[1] || '') : '';
-        
+
         let decodedData;
         try {
           decodedData = this.decodeBase64(base64Part);
@@ -377,17 +379,17 @@ export class Base64Parser {
             throw new Error('无法解码SS配置');
           }
         }
-        
+
         // 解析格式为 method:password@server:port
         const atSplit = decodedData.split('@');
         if (atSplit.length !== 2) {
           throw new Error('无效的SS URL格式');
         }
-        
+
         [method, password] = atSplit[0].split(':');
         [server, port] = atSplit[1].split(':');
       }
-      
+
       return {
         type: 'ss',
         name: name || `SS ${server}:${port}`,
@@ -418,7 +420,7 @@ export class Base64Parser {
       // ssr://后面是Base64编码的所有配置
       const base64Config = line.substring(6);
       let config;
-      
+
       try {
         config = this.decodeBase64(base64Config);
       } catch (e) {
@@ -432,18 +434,18 @@ export class Base64Parser {
           throw new Error('无法解码SSR配置');
         }
       }
-      
+
       // 从配置字符串中提取各部分
       // 格式: server:port:protocol:method:obfs:base64pass/?params
       const mainParts = config.split('/?');
       const baseParts = mainParts[0].split(':');
       const paramsPart = mainParts.length > 1 ? mainParts[1] : '';
-      
+
       // 确保有足够的部分
       if (baseParts.length < 6) {
         throw new Error('SSR配置格式不完整');
       }
-      
+
       // 解析参数
       const params = {};
       if (paramsPart) {
@@ -454,7 +456,7 @@ export class Base64Parser {
           }
         });
       }
-      
+
       // 解码remarks
       let remarks = '';
       if (params.remarks) {
@@ -470,7 +472,7 @@ export class Base64Parser {
           }
         }
       }
-      
+
       // 解码密码
       let password;
       try {
@@ -486,7 +488,7 @@ export class Base64Parser {
           password = ''; // 无法解码时使用空密码
         }
       }
-      
+
       // 解码obfs参数
       let obfsParam = '';
       if (params.obfsparam) {
@@ -502,7 +504,7 @@ export class Base64Parser {
           }
         }
       }
-      
+
       // 解码协议参数
       let protocolParam = '';
       if (params.protoparam) {
@@ -518,7 +520,7 @@ export class Base64Parser {
           }
         }
       }
-      
+
       return {
         type: 'ssr',
         name: remarks || `SSR ${baseParts[0]}:${baseParts[1]}`,
@@ -609,17 +611,17 @@ export class Base64Parser {
     try {
       // hysteria2://auth@server:port?params#name
       const url = new URL(line);
-      
+
       // 提取认证信息（在用户名部分）
       const auth = url.username;
-      
+
       // 提取服务器和端口
       const server = url.hostname;
       const port = url.port || 443;
-      
+
       // 提取名称
       const name = decodeURIComponent(url.hash.substring(1) || '');
-      
+
       // 提取参数
       const sni = url.searchParams.get('sni') || server;
       const insecure = url.searchParams.get('insecure') === '1';
@@ -627,7 +629,7 @@ export class Base64Parser {
       const obfsPassword = url.searchParams.get('obfs-password') || '';
       const uploadBandwidth = url.searchParams.get('up') || '';
       const downloadBandwidth = url.searchParams.get('down') || '';
-      
+
       return {
         type: 'hysteria2',
         name: name || `Hysteria2 ${server}:${port}`,
@@ -662,17 +664,17 @@ export class Base64Parser {
     try {
       // vless://uuid@server:port?params#name
       const url = new URL(line);
-      
+
       // 提取UUID（在用户名部分）
       const id = url.username;
-      
+
       // 提取服务器和端口
       const server = url.hostname;
       const port = url.port || 443;
-      
+
       // 提取名称
       const name = decodeURIComponent(url.hash.substring(1) || '');
-      
+
       // 提取参数
       const type = url.searchParams.get('type') || 'tcp';
       const security = url.searchParams.get('security') || 'none';
@@ -683,7 +685,7 @@ export class Base64Parser {
       const host = url.searchParams.get('host') || '';
       const encryption = url.searchParams.get('encryption') || 'none';
       const flow = url.searchParams.get('flow') || '';
-      
+
       return {
         type: 'vless',
         name: name || `VLESS ${server}:${port}`,
@@ -722,14 +724,14 @@ export class Base64Parser {
       // socks://[用户名:密码@]host:port#备注
       // 例如: socks://username:password@server:port#name
       const url = new URL(line);
-      
+
       // 提取名称
       const name = decodeURIComponent(url.hash.substring(1) || '');
-      
+
       // 提取服务器和端口
       const server = url.hostname;
       const port = url.port || 1080;
-      
+
       // 提取用户名和密码（如果有）
       let username = '', password = '';
       if (url.username) {
@@ -738,7 +740,7 @@ export class Base64Parser {
           password = decodeURIComponent(url.password);
         }
       }
-      
+
       return {
         type: 'socks',
         name: name || `Socks5 ${server}:${port}`,
@@ -769,14 +771,14 @@ export class Base64Parser {
     try {
       // tuic://uuid:password@host:port?params#name
       const url = new URL(line);
-      
+
       // 提取名称
       const name = decodeURIComponent(url.hash.substring(1) || '');
-      
+
       // 提取服务器和端口
       const server = url.hostname;
       const port = url.port || 443;
-      
+
       // 提取UUID和密码
       let uuid = '', password = '';
       if (url.username) {
@@ -785,13 +787,13 @@ export class Base64Parser {
           password = decodeURIComponent(url.password);
         }
       }
-      
+
       // 提取参数
       const congestionControl = url.searchParams.get('congestion_control') || 'cubic';
       const alpn = url.searchParams.get('alpn') || 'h3';
       const udpRelayMode = url.searchParams.get('udp_relay_mode') || 'native';
       const sni = url.searchParams.get('sni') || '';
-      
+
       return {
         type: 'tuic',
         name: name || `TUIC ${server}:${port}`,
@@ -825,14 +827,14 @@ export class Base64Parser {
     try {
       // hysteria://host:port?auth=x&peer=sni&insecure=1&upmbps=100&downmbps=100#remarks
       const url = new URL(line);
-      
+
       // 提取名称
       const name = decodeURIComponent(url.hash.substring(1) || '');
-      
+
       // 提取服务器和端口
       const server = url.hostname;
       const port = url.port || 443;
-      
+
       // 提取参数
       const auth = url.searchParams.get('auth') || '';
       const peer = url.searchParams.get('peer') || '';
@@ -841,7 +843,7 @@ export class Base64Parser {
       const downmbps = url.searchParams.get('downmbps') || '50';
       const obfs = url.searchParams.get('obfs') || '';
       const protocol = url.searchParams.get('protocol') || 'udp';
-      
+
       return {
         type: 'hysteria',
         name: name || `Hysteria ${server}:${port}`,
