@@ -21,20 +21,25 @@ export class SubconverterClient {
         const port = await PortFinder.findFreePort(20000);
 
         // 2. Start a temporary HTTP server
+        // Serve as Base64 encoded subscription to ensure compatibility
+        const base64Content = Buffer.from(content).toString('base64');
+
         const server = http.createServer((req, res) => {
-            res.writeHead(200, { 'Content-Type': 'text/plain' });
-            res.end(content);
+            res.writeHead(200, { 'Content-Type': 'text/plain; charset=utf-8' });
+            res.end(base64Content);
         });
 
         return new Promise((resolve, reject) => {
             server.listen(port, '0.0.0.0', async () => {
                 try {
                     // 3. Construct the URL that subconverter will call back to us
-                    const fileUrl = `http://${this.selfHostname}:${port}/nodes.txt`;
+                    // Add timestamp to prevent caching
+                    const timestamp = Date.now();
+                    const fileUrl = `http://${this.selfHostname}:${port}/nodes_${timestamp}.txt`;
                     const encodedUrl = encodeURIComponent(fileUrl);
 
                     // 4. Construct Subconverter API URL
-                    // scv=true ensures we get pure config (no verification/grouping if not asked)
+                    // scv=true ensures we get pure config
                     let apiUrl = `${this.baseUrl}/sub?target=${target}&url=${encodedUrl}&scv=true`;
 
                     // Append output options
@@ -45,13 +50,15 @@ export class SubconverterClient {
                     // 5. Fetch from Subconverter
                     const res = await fetch(apiUrl);
                     if (!res.ok) {
-                        throw new Error(`Subconverter failed: ${res.status} ${res.statusText}`);
+                        const errText = await res.text();
+                        // Try to get error details
+                        throw new Error(`Subconverter failed: ${res.status} ${res.statusText} - ${errText.substring(0, 100)}`);
                     }
 
                     const result = await res.text();
                     resolve(result);
                 } catch (err) {
-                    // Check if it's a networking error (e.g. subconverter not reachable)
+                    // Check if it's a networking error
                     if (err.code === 'ECONNREFUSED') {
                         reject(new Error(`Could not connect to Subconverter at ${this.baseUrl}. Is the service running?`));
                     } else {
