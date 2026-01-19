@@ -12,9 +12,8 @@ services:
       - TZ=Asia/Shanghai
     ports:
       - "23000:3000"
-    links:
-      - subconverter
-    network_mode: bridge
+    networks:
+      - subsync-net
 
   subconverter:
     image: tindy2013/subconverter:latest
@@ -24,4 +23,9 @@ services:
       - "25500:25500"
     environment:
       - TZ=Asia/Shanghai
-    network_mode: bridge
+    networks:
+      - subsync-net
+
+networks:
+  subsync-net:
+    driver: bridge
