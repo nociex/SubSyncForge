@@ -129,6 +129,8 @@
             flex: 1;
             display: grid;
             grid-template-columns: 320px 1fr;
+            grid-template-rows: minmax(0, 1fr);
+            /* Crucial: constrain row height to container */
             /* Sidebar + Log Area */
             gap: 2rem;
             padding: 2rem 3rem;
