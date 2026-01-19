@@ -74,9 +74,8 @@ export class AdvancedNodeTester extends NodeTester {
       try {
         results = await this.testNodesBatch(nodes);
       } catch (e) {
-        this.logger.error(`Batch testing failed: ${e.message}. Legacy fallback is disabled.`);
-        // results = await this.testNodesLegacy(nodes);
-        results = [];
+        this.logger.error(`Batch testing failed: ${e.message}. Falling back to individual testing.`);
+        results = await super.testNodes(nodes);
       }
     } else {
       results = await this.testNodesLegacy(nodes);
