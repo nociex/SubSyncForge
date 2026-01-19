@@ -4,6 +4,10 @@ on:
   schedule:
     - cron: '0 */6 * * *'  # 每6小时运行一次
   workflow_dispatch:        # 支持手动触发
+
+concurrency:
+  group: sync-subscriptions
+  cancel-in-progress: true
   
 jobs:
   sync:
@@ -14,9 +18,14 @@ jobs:
     timeout-minutes: 330
     
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0    # 获取完整历史记录
+
+      - name: Sync with remote
+        run: |
+          git fetch origin "${GITHUB_REF_NAME}"
+          git checkout -B "${GITHUB_REF_NAME}" "origin/${GITHUB_REF_NAME}"
       
       # 先设置pnpm
       - name: Setup pnpm
@@ -27,14 +36,14 @@ jobs:
       
       # 然后设置Node.js
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: '18'
           cache: 'pnpm'    # 启用Node模块缓存
       
       # 添加缓存恢复步骤
       - name: Cache node modules
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: node_modules
           key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
