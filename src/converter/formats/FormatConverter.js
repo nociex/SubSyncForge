@@ -12,14 +12,14 @@ export class FormatConverter {
     this.logger = options.logger || console;
     this.githubUser = options.githubUser || '';
     this.repoName = options.repoName || 'SubSyncForge';
-    
+
     // 基于 githubUser 设置默认的 baseUrl
     if (this.githubUser) {
       this.baseUrl = options.baseUrl || `https://raw.githubusercontent.com/${this.githubUser}/${this.repoName}`;
     } else {
       this.baseUrl = options.baseUrl || 'https://your-server';
     }
-    
+
     this.outputDir = options.outputDir || './output';
   }
 
@@ -40,7 +40,7 @@ export class FormatConverter {
 
     // 获取模板
     const template = await this.getTemplate(format, templatePath);
-    
+
     // 根据格式调用不同的转换方法
     switch (format.toLowerCase()) {
       case 'mihomo':
@@ -72,17 +72,17 @@ export class FormatConverter {
   async getTemplate(format, templatePath) {
     // 确保format是有效的字符串
     format = format || 'text';
-    
+
     // 如果已经传入了模板内容而不是路径，直接使用
     if (templatePath && typeof templatePath === 'string' && !templatePath.includes('/') && !templatePath.includes('\\')) {
       return templatePath;
     }
-    
+
     // 如果已经缓存了模板，直接返回
     if (this.templates[format]) {
       return this.templates[format];
     }
-    
+
     // 如果提供了模板路径，使用提供的路径
     if (templatePath && fs.existsSync(templatePath)) {
       try {
@@ -95,7 +95,7 @@ export class FormatConverter {
         return '# 空的配置文件 - 自动生成';
       }
     }
-    
+
     // 否则使用默认模板
     const extensions = {
       mihomo: 'yaml',
@@ -108,10 +108,10 @@ export class FormatConverter {
       plain: 'txt',
       other_nodes: 'txt'  // 增加对other_nodes格式的支持
     };
-    
+
     const ext = extensions[format.toLowerCase()] || 'txt';
     const defaultPath = path.join(this.templatesDir, `${format.toLowerCase()}.${ext}`);
-    
+
     try {
       if (fs.existsSync(defaultPath)) {
         const template = fs.readFileSync(defaultPath, 'utf8');
@@ -145,21 +145,21 @@ export class FormatConverter {
       if (node.extra?.raw && typeof node.extra.raw === 'string' && node.extra.raw.trim().length > 0) {
         return node.extra.raw;
       }
-      
+
       // 尝试构造URI
       if (node.type === 'vmess' && node.settings?.id) {
-        const vmessInfo = { 
-          v: "2", 
-          ps: node.name, 
-          add: node.server, 
-          port: parseInt(node.port) || 443, 
-          id: node.settings.id, 
-          aid: parseInt(node.settings.alterId) || 0, 
-          net: node.settings.network || "tcp", 
-          type: "none", 
-          host: (node.settings.wsHeaders && node.settings.wsHeaders.Host) || "", 
-          path: node.settings.wsPath || "/", 
-          tls: node.settings.tls ? "tls" : "none" 
+        const vmessInfo = {
+          v: "2",
+          ps: node.name,
+          add: node.server,
+          port: parseInt(node.port) || 443,
+          id: node.settings.id,
+          aid: parseInt(node.settings.alterId) || 0,
+          net: node.settings.network || "tcp",
+          type: "none",
+          host: (node.settings.wsHeaders && node.settings.wsHeaders.Host) || "",
+          path: node.settings.wsPath || "/",
+          tls: node.settings.tls ? "tls" : "none"
         };
         return `vmess://${Buffer.from(JSON.stringify(vmessInfo)).toString('base64')}`;
       } else if (node.type === 'ss' && node.settings?.method && node.settings?.password) {
@@ -169,13 +169,13 @@ export class FormatConverter {
       } else if (node.type === 'trojan' && node.settings?.password) {
         return `trojan://${node.settings.password}@${node.server}:${parseInt(node.port) || 443}?sni=${node.settings.sni || ''}&allowInsecure=${node.settings.allowInsecure ? '1' : '0'}#${encodeURIComponent(node.name || 'Node')}`;
       }
-      
+
       return node.uri || '';
     }).filter(Boolean);
-    
+
     // 生成节点列表
     const nodesList = nodeUris.join('\n');
-    
+
     // 设置名称和更新时间
     const name = options.name || 'Nodes';
     const updateTime = new Date().toISOString();
@@ -198,81 +198,104 @@ export class FormatConverter {
    */
   convertToMihomo(nodes, template, options = {}) {
     let result = template;
-    const baseUrl = options.baseUrl || this.baseUrl;
-    const outputDir = options.outputDir || this.outputDir;
-    const githubUser = options.githubUser || this.githubUser;
-    const repoName = options.repoName || this.repoName;
-    
-    // 三种路径模式
-    const replacements = [];
-    
-    // 1. HTTP服务器模式
-    if (baseUrl.startsWith('http')) {
-      replacements.push(
-        { pattern: /https:\/\/your-server\/output\/HK\.txt/g, replacement: `${baseUrl}/output/HK.txt` },
-        { pattern: /https:\/\/your-server\/output\/TW\.txt/g, replacement: `${baseUrl}/output/TW.txt` },
-        { pattern: /https:\/\/your-server\/output\/SG\.txt/g, replacement: `${baseUrl}/output/SG.txt` },
-        { pattern: /https:\/\/your-server\/output\/JP\.txt/g, replacement: `${baseUrl}/output/JP.txt` },
-        { pattern: /https:\/\/your-server\/output\/US\.txt/g, replacement: `${baseUrl}/output/US.txt` },
-        { pattern: /https:\/\/your-server\/output\/Others\.txt/g, replacement: `${baseUrl}/output/Others.txt` },
-        { pattern: /https:\/\/your-server\/output\/OpenAI\.txt/g, replacement: `${baseUrl}/output/OpenAI.txt` },
-        { pattern: /https:\/\/your-server\/output\/Netflix\.txt/g, replacement: `${baseUrl}/output/Netflix.txt` },
-        { pattern: /https:\/\/your-server\/output\/Disney\+\.txt/g, replacement: `${baseUrl}/output/Disney+.txt` }
-      );
-    } 
-    // 2. GitHub Raw模式
-    else if (options.useGithub && githubUser) {
-      replacements.push(
-        { pattern: /https:\/\/your-server\/output\/HK\.txt/g, 
-          replacement: `https://raw.githubusercontent.com/${githubUser}/${repoName}/output/HK.txt` },
-        { pattern: /https:\/\/your-server\/output\/TW\.txt/g, 
-          replacement: `https://raw.githubusercontent.com/${githubUser}/${repoName}/output/TW.txt` },
-        { pattern: /https:\/\/your-server\/output\/SG\.txt/g, 
-          replacement: `https://raw.githubusercontent.com/${githubUser}/${repoName}/output/SG.txt` },
-        { pattern: /https:\/\/your-server\/output\/JP\.txt/g, 
-          replacement: `https://raw.githubusercontent.com/${githubUser}/${repoName}/output/JP.txt` },
-        { pattern: /https:\/\/your-server\/output\/US\.txt/g, 
-          replacement: `https://raw.githubusercontent.com/${githubUser}/${repoName}/output/US.txt` },
-        { pattern: /https:\/\/your-server\/output\/Others\.txt/g, 
-          replacement: `https://raw.githubusercontent.com/${githubUser}/${repoName}/output/Others.txt` },
-        { pattern: /https:\/\/your-server\/output\/OpenAI\.txt/g, 
-          replacement: `https://raw.githubusercontent.com/${githubUser}/${repoName}/output/OpenAI.txt` },
-        { pattern: /https:\/\/your-server\/output\/Netflix\.txt/g, 
-          replacement: `https://raw.githubusercontent.com/${githubUser}/${repoName}/output/Netflix.txt` },
-        { pattern: /https:\/\/your-server\/output\/Disney\+\.txt/g, 
-          replacement: `https://raw.githubusercontent.com/${githubUser}/${repoName}/output/Disney+.txt` }
-      );
-    } 
-    // 3. 本地文件模式
-    else {
-      replacements.push(
-        { pattern: /https:\/\/your-server\/output\/HK\.txt/g, 
-          replacement: `${outputDir}/HK.txt` },
-        { pattern: /https:\/\/your-server\/output\/TW\.txt/g, 
-          replacement: `${outputDir}/TW.txt` },
-        { pattern: /https:\/\/your-server\/output\/SG\.txt/g, 
-          replacement: `${outputDir}/SG.txt` },
-        { pattern: /https:\/\/your-server\/output\/JP\.txt/g, 
-          replacement: `${outputDir}/JP.txt` },
-        { pattern: /https:\/\/your-server\/output\/US\.txt/g, 
-          replacement: `${outputDir}/US.txt` },
-        { pattern: /https:\/\/your-server\/output\/Others\.txt/g, 
-          replacement: `${outputDir}/Others.txt` },
-        { pattern: /https:\/\/your-server\/output\/OpenAI\.txt/g, 
-          replacement: `${outputDir}/OpenAI.txt` },
-        { pattern: /https:\/\/your-server\/output\/Netflix\.txt/g, 
-          replacement: `${outputDir}/Netflix.txt` },
-        { pattern: /https:\/\/your-server\/output\/Disney\+\.txt/g, 
-          replacement: `${outputDir}/Disney+.txt` }
-      );
+
+    // 将节点转换为 Clash YAML 格式
+    const clashNodes = nodes.map(node => {
+      try {
+        return this.formatNodeForClash(node);
+      } catch (e) {
+        this.logger.warn(`节点转换失败: ${node.name} - ${e.message}`);
+        return null;
+      }
+    }).filter(Boolean);
+
+    // 生成 proxies YAML 内容
+    const proxiesYaml = clashNodes.map(n => {
+      const lines = ['  - ' + Object.entries(n).map(([k, v]) => {
+        if (v === null || v === undefined) return null;
+        if (typeof v === 'object') {
+          return `${k}: ${JSON.stringify(v)}`;
+        }
+        if (typeof v === 'string' && (v.includes(':') || v.includes('#') || v.includes('"'))) {
+          return `${k}: "${v.replace(/"/g, '\\"')}"`;
+        }
+        return `${k}: ${v}`;
+      }).filter(Boolean).join(', ')];
+      return lines.join('\n');
+    }).join('\n');
+
+    // 替换 proxies 部分
+    if (result.includes('proxies:')) {
+      // 查找 proxies: ~ 或 proxies: [] 或 proxies:\n  - ... 模式
+      result = result.replace(/proxies:\s*(?:~|\[\]|(?:\n\s+-[^\n]+)+)?/m, `proxies:\n${proxiesYaml}`);
+    } else {
+      // 在文件开头添加 proxies
+      result = `proxies:\n${proxiesYaml}\n\n${result}`;
     }
-    
-    // 应用替换
-    for (const { pattern, replacement } of replacements) {
-      result = result.replace(pattern, replacement);
-    }
-    
+
+    this.logger.info(`Mihomo配置生成完成，共 ${clashNodes.length} 个节点`);
     return result;
+  }
+
+  /**
+   * 将节点格式化为 Clash 格式对象
+   * @param {Object} node 节点对象
+   * @returns {Object} Clash 格式的节点
+   */
+  formatNodeForClash(node) {
+    const base = {
+      name: node.name,
+      type: node.type,
+      server: node.server,
+      port: parseInt(node.port) || 443
+    };
+
+    switch (node.type) {
+      case 'ss':
+        return {
+          ...base,
+          cipher: node.settings?.method || 'aes-256-gcm',
+          password: node.settings?.password
+        };
+      case 'vmess':
+        return {
+          ...base,
+          uuid: node.settings?.id,
+          alterId: parseInt(node.settings?.alterId) || 0,
+          cipher: node.settings?.security || 'auto',
+          ...(node.settings?.network && { network: node.settings.network }),
+          ...(node.settings?.tls && { tls: true }),
+          ...(node.settings?.wsPath && { 'ws-opts': { path: node.settings.wsPath, headers: node.settings.wsHeaders } })
+        };
+      case 'trojan':
+        return {
+          ...base,
+          password: node.settings?.password,
+          ...(node.settings?.sni && { sni: node.settings.sni }),
+          ...(node.settings?.allowInsecure && { 'skip-cert-verify': true })
+        };
+      case 'hysteria':
+      case 'hysteria2':
+        return {
+          ...base,
+          type: 'hysteria2',
+          password: node.settings?.auth || node.settings?.password,
+          ...(node.settings?.sni && { sni: node.settings.sni }),
+          ...(node.settings?.alpn && { alpn: node.settings.alpn }),
+          'skip-cert-verify': node.settings?.insecure || false
+        };
+      case 'vless':
+        return {
+          ...base,
+          uuid: node.settings?.id,
+          flow: node.settings?.flow || '',
+          ...(node.settings?.network && { network: node.settings.network }),
+          ...(node.settings?.tls && { tls: true }),
+          ...(node.settings?.sni && { servername: node.settings.sni })
+        };
+      default:
+        return base;
+    }
   }
 
   /**
@@ -288,10 +311,10 @@ export class FormatConverter {
     const outputDir = options.outputDir || this.outputDir;
     const githubUser = options.githubUser || this.githubUser;
     const repoName = options.repoName || this.repoName;
-    
+
     // 三种路径模式
     const replacements = [];
-    
+
     // 1. HTTP服务器模式
     if (baseUrl.startsWith('http')) {
       replacements.push(
@@ -305,59 +328,95 @@ export class FormatConverter {
         { pattern: /https:\/\/your-server\/output\/Netflix\.txt/g, replacement: `${baseUrl}/output/Netflix.txt` },
         { pattern: /https:\/\/your-server\/output\/Disney\+\.txt/g, replacement: `${baseUrl}/output/Disney+.txt` }
       );
-    } 
+    }
     // 2. GitHub Raw模式
     else if (options.useGithub && githubUser) {
       replacements.push(
-        { pattern: /https:\/\/your-server\/output\/HK\.txt/g, 
-          replacement: `https://raw.githubusercontent.com/${githubUser}/${repoName}/output/HK.txt` },
-        { pattern: /https:\/\/your-server\/output\/TW\.txt/g, 
-          replacement: `https://raw.githubusercontent.com/${githubUser}/${repoName}/output/TW.txt` },
-        { pattern: /https:\/\/your-server\/output\/SG\.txt/g, 
-          replacement: `https://raw.githubusercontent.com/${githubUser}/${repoName}/output/SG.txt` },
-        { pattern: /https:\/\/your-server\/output\/JP\.txt/g, 
-          replacement: `https://raw.githubusercontent.com/${githubUser}/${repoName}/output/JP.txt` },
-        { pattern: /https:\/\/your-server\/output\/US\.txt/g, 
-          replacement: `https://raw.githubusercontent.com/${githubUser}/${repoName}/output/US.txt` },
-        { pattern: /https:\/\/your-server\/output\/Others\.txt/g, 
-          replacement: `https://raw.githubusercontent.com/${githubUser}/${repoName}/output/Others.txt` },
-        { pattern: /https:\/\/your-server\/output\/OpenAI\.txt/g, 
-          replacement: `https://raw.githubusercontent.com/${githubUser}/${repoName}/output/OpenAI.txt` },
-        { pattern: /https:\/\/your-server\/output\/Netflix\.txt/g, 
-          replacement: `https://raw.githubusercontent.com/${githubUser}/${repoName}/output/Netflix.txt` },
-        { pattern: /https:\/\/your-server\/output\/Disney\+\.txt/g, 
-          replacement: `https://raw.githubusercontent.com/${githubUser}/${repoName}/output/Disney+.txt` }
+        {
+          pattern: /https:\/\/your-server\/output\/HK\.txt/g,
+          replacement: `https://raw.githubusercontent.com/${githubUser}/${repoName}/output/HK.txt`
+        },
+        {
+          pattern: /https:\/\/your-server\/output\/TW\.txt/g,
+          replacement: `https://raw.githubusercontent.com/${githubUser}/${repoName}/output/TW.txt`
+        },
+        {
+          pattern: /https:\/\/your-server\/output\/SG\.txt/g,
+          replacement: `https://raw.githubusercontent.com/${githubUser}/${repoName}/output/SG.txt`
+        },
+        {
+          pattern: /https:\/\/your-server\/output\/JP\.txt/g,
+          replacement: `https://raw.githubusercontent.com/${githubUser}/${repoName}/output/JP.txt`
+        },
+        {
+          pattern: /https:\/\/your-server\/output\/US\.txt/g,
+          replacement: `https://raw.githubusercontent.com/${githubUser}/${repoName}/output/US.txt`
+        },
+        {
+          pattern: /https:\/\/your-server\/output\/Others\.txt/g,
+          replacement: `https://raw.githubusercontent.com/${githubUser}/${repoName}/output/Others.txt`
+        },
+        {
+          pattern: /https:\/\/your-server\/output\/OpenAI\.txt/g,
+          replacement: `https://raw.githubusercontent.com/${githubUser}/${repoName}/output/OpenAI.txt`
+        },
+        {
+          pattern: /https:\/\/your-server\/output\/Netflix\.txt/g,
+          replacement: `https://raw.githubusercontent.com/${githubUser}/${repoName}/output/Netflix.txt`
+        },
+        {
+          pattern: /https:\/\/your-server\/output\/Disney\+\.txt/g,
+          replacement: `https://raw.githubusercontent.com/${githubUser}/${repoName}/output/Disney+.txt`
+        }
       );
-    } 
+    }
     // 3. 本地文件模式
     else {
       replacements.push(
-        { pattern: /https:\/\/your-server\/output\/HK\.txt/g, 
-          replacement: `${outputDir}/HK.txt` },
-        { pattern: /https:\/\/your-server\/output\/TW\.txt/g, 
-          replacement: `${outputDir}/TW.txt` },
-        { pattern: /https:\/\/your-server\/output\/SG\.txt/g, 
-          replacement: `${outputDir}/SG.txt` },
-        { pattern: /https:\/\/your-server\/output\/JP\.txt/g, 
-          replacement: `${outputDir}/JP.txt` },
-        { pattern: /https:\/\/your-server\/output\/US\.txt/g, 
-          replacement: `${outputDir}/US.txt` },
-        { pattern: /https:\/\/your-server\/output\/Others\.txt/g, 
-          replacement: `${outputDir}/Others.txt` },
-        { pattern: /https:\/\/your-server\/output\/OpenAI\.txt/g, 
-          replacement: `${outputDir}/OpenAI.txt` },
-        { pattern: /https:\/\/your-server\/output\/Netflix\.txt/g, 
-          replacement: `${outputDir}/Netflix.txt` },
-        { pattern: /https:\/\/your-server\/output\/Disney\+\.txt/g, 
-          replacement: `${outputDir}/Disney+.txt` }
+        {
+          pattern: /https:\/\/your-server\/output\/HK\.txt/g,
+          replacement: `${outputDir}/HK.txt`
+        },
+        {
+          pattern: /https:\/\/your-server\/output\/TW\.txt/g,
+          replacement: `${outputDir}/TW.txt`
+        },
+        {
+          pattern: /https:\/\/your-server\/output\/SG\.txt/g,
+          replacement: `${outputDir}/SG.txt`
+        },
+        {
+          pattern: /https:\/\/your-server\/output\/JP\.txt/g,
+          replacement: `${outputDir}/JP.txt`
+        },
+        {
+          pattern: /https:\/\/your-server\/output\/US\.txt/g,
+          replacement: `${outputDir}/US.txt`
+        },
+        {
+          pattern: /https:\/\/your-server\/output\/Others\.txt/g,
+          replacement: `${outputDir}/Others.txt`
+        },
+        {
+          pattern: /https:\/\/your-server\/output\/OpenAI\.txt/g,
+          replacement: `${outputDir}/OpenAI.txt`
+        },
+        {
+          pattern: /https:\/\/your-server\/output\/Netflix\.txt/g,
+          replacement: `${outputDir}/Netflix.txt`
+        },
+        {
+          pattern: /https:\/\/your-server\/output\/Disney\+\.txt/g,
+          replacement: `${outputDir}/Disney+.txt`
+        }
       );
     }
-    
+
     // 应用替换
     for (const { pattern, replacement } of replacements) {
       result = result.replace(pattern, replacement);
     }
-    
+
     return result;
   }
 
@@ -374,10 +433,10 @@ export class FormatConverter {
     const outputDir = options.outputDir || this.outputDir;
     const githubUser = options.githubUser || this.githubUser;
     const repoName = options.repoName || this.repoName;
-    
+
     // 三种路径模式
     const replacements = [];
-    
+
     // 1. HTTP服务器模式
     if (baseUrl.startsWith('http')) {
       replacements.push(
@@ -391,59 +450,95 @@ export class FormatConverter {
         { pattern: /https:\/\/your-server\/output\/Netflix\.txt/g, replacement: `${baseUrl}/output/Netflix.txt` },
         { pattern: /https:\/\/your-server\/output\/Disney\+\.txt/g, replacement: `${baseUrl}/output/Disney+.txt` }
       );
-    } 
+    }
     // 2. GitHub Raw模式
     else if (options.useGithub && githubUser) {
       replacements.push(
-        { pattern: /https:\/\/your-server\/output\/HK\.txt/g, 
-          replacement: `https://raw.githubusercontent.com/${githubUser}/${repoName}/output/HK.txt` },
-        { pattern: /https:\/\/your-server\/output\/TW\.txt/g, 
-          replacement: `https://raw.githubusercontent.com/${githubUser}/${repoName}/output/TW.txt` },
-        { pattern: /https:\/\/your-server\/output\/SG\.txt/g, 
-          replacement: `https://raw.githubusercontent.com/${githubUser}/${repoName}/output/SG.txt` },
-        { pattern: /https:\/\/your-server\/output\/JP\.txt/g, 
-          replacement: `https://raw.githubusercontent.com/${githubUser}/${repoName}/output/JP.txt` },
-        { pattern: /https:\/\/your-server\/output\/US\.txt/g, 
-          replacement: `https://raw.githubusercontent.com/${githubUser}/${repoName}/output/US.txt` },
-        { pattern: /https:\/\/your-server\/output\/Others\.txt/g, 
-          replacement: `https://raw.githubusercontent.com/${githubUser}/${repoName}/output/Others.txt` },
-        { pattern: /https:\/\/your-server\/output\/OpenAI\.txt/g, 
-          replacement: `https://raw.githubusercontent.com/${githubUser}/${repoName}/output/OpenAI.txt` },
-        { pattern: /https:\/\/your-server\/output\/Netflix\.txt/g, 
-          replacement: `https://raw.githubusercontent.com/${githubUser}/${repoName}/output/Netflix.txt` },
-        { pattern: /https:\/\/your-server\/output\/Disney\+\.txt/g, 
-          replacement: `https://raw.githubusercontent.com/${githubUser}/${repoName}/output/Disney+.txt` }
+        {
+          pattern: /https:\/\/your-server\/output\/HK\.txt/g,
+          replacement: `https://raw.githubusercontent.com/${githubUser}/${repoName}/output/HK.txt`
+        },
+        {
+          pattern: /https:\/\/your-server\/output\/TW\.txt/g,
+          replacement: `https://raw.githubusercontent.com/${githubUser}/${repoName}/output/TW.txt`
+        },
+        {
+          pattern: /https:\/\/your-server\/output\/SG\.txt/g,
+          replacement: `https://raw.githubusercontent.com/${githubUser}/${repoName}/output/SG.txt`
+        },
+        {
+          pattern: /https:\/\/your-server\/output\/JP\.txt/g,
+          replacement: `https://raw.githubusercontent.com/${githubUser}/${repoName}/output/JP.txt`
+        },
+        {
+          pattern: /https:\/\/your-server\/output\/US\.txt/g,
+          replacement: `https://raw.githubusercontent.com/${githubUser}/${repoName}/output/US.txt`
+        },
+        {
+          pattern: /https:\/\/your-server\/output\/Others\.txt/g,
+          replacement: `https://raw.githubusercontent.com/${githubUser}/${repoName}/output/Others.txt`
+        },
+        {
+          pattern: /https:\/\/your-server\/output\/OpenAI\.txt/g,
+          replacement: `https://raw.githubusercontent.com/${githubUser}/${repoName}/output/OpenAI.txt`
+        },
+        {
+          pattern: /https:\/\/your-server\/output\/Netflix\.txt/g,
+          replacement: `https://raw.githubusercontent.com/${githubUser}/${repoName}/output/Netflix.txt`
+        },
+        {
+          pattern: /https:\/\/your-server\/output\/Disney\+\.txt/g,
+          replacement: `https://raw.githubusercontent.com/${githubUser}/${repoName}/output/Disney+.txt`
+        }
       );
-    } 
+    }
     // 3. 本地文件模式
     else {
       replacements.push(
-        { pattern: /https:\/\/your-server\/output\/HK\.txt/g, 
-          replacement: `${outputDir}/HK.txt` },
-        { pattern: /https:\/\/your-server\/output\/TW\.txt/g, 
-          replacement: `${outputDir}/TW.txt` },
-        { pattern: /https:\/\/your-server\/output\/SG\.txt/g, 
-          replacement: `${outputDir}/SG.txt` },
-        { pattern: /https:\/\/your-server\/output\/JP\.txt/g, 
-          replacement: `${outputDir}/JP.txt` },
-        { pattern: /https:\/\/your-server\/output\/US\.txt/g, 
-          replacement: `${outputDir}/US.txt` },
-        { pattern: /https:\/\/your-server\/output\/Others\.txt/g, 
-          replacement: `${outputDir}/Others.txt` },
-        { pattern: /https:\/\/your-server\/output\/OpenAI\.txt/g, 
-          replacement: `${outputDir}/OpenAI.txt` },
-        { pattern: /https:\/\/your-server\/output\/Netflix\.txt/g, 
-          replacement: `${outputDir}/Netflix.txt` },
-        { pattern: /https:\/\/your-server\/output\/Disney\+\.txt/g, 
-          replacement: `${outputDir}/Disney+.txt` }
+        {
+          pattern: /https:\/\/your-server\/output\/HK\.txt/g,
+          replacement: `${outputDir}/HK.txt`
+        },
+        {
+          pattern: /https:\/\/your-server\/output\/TW\.txt/g,
+          replacement: `${outputDir}/TW.txt`
+        },
+        {
+          pattern: /https:\/\/your-server\/output\/SG\.txt/g,
+          replacement: `${outputDir}/SG.txt`
+        },
+        {
+          pattern: /https:\/\/your-server\/output\/JP\.txt/g,
+          replacement: `${outputDir}/JP.txt`
+        },
+        {
+          pattern: /https:\/\/your-server\/output\/US\.txt/g,
+          replacement: `${outputDir}/US.txt`
+        },
+        {
+          pattern: /https:\/\/your-server\/output\/Others\.txt/g,
+          replacement: `${outputDir}/Others.txt`
+        },
+        {
+          pattern: /https:\/\/your-server\/output\/OpenAI\.txt/g,
+          replacement: `${outputDir}/OpenAI.txt`
+        },
+        {
+          pattern: /https:\/\/your-server\/output\/Netflix\.txt/g,
+          replacement: `${outputDir}/Netflix.txt`
+        },
+        {
+          pattern: /https:\/\/your-server\/output\/Disney\+\.txt/g,
+          replacement: `${outputDir}/Disney+.txt`
+        }
       );
     }
-    
+
     // 应用替换
     for (const { pattern, replacement } of replacements) {
       result = result.replace(pattern, replacement);
     }
-    
+
     return result;
   }
 
@@ -458,16 +553,16 @@ export class FormatConverter {
     // 对于V2Ray，如果options中指定了use_first_node，则只使用第一个节点
     if (options.use_first_node && nodes.length > 0) {
       const node = nodes[0];
-      
+
       // 将第一个节点的配置替换到模板中
       let result = template;
-      
+
       // 基本节点信息替换
       if (node.name) result = result.replace(/{{nodeName}}/g, node.name);
       if (node.server) result = result.replace(/{{nodeServer}}/g, node.server);
       if (node.port) result = result.replace(/{{nodePort}}/g, node.port);
       if (node.uuid) result = result.replace(/{{nodeId}}/g, node.uuid);
-      
+
       return result;
     } else {
       // 分组订阅模式，与其他格式类似，替换URL
@@ -476,10 +571,10 @@ export class FormatConverter {
       const outputDir = options.outputDir || this.outputDir;
       const githubUser = options.githubUser || this.githubUser;
       const repoName = options.repoName || this.repoName;
-      
+
       // 三种路径模式
       const replacements = [];
-      
+
       // 1. HTTP服务器模式
       if (baseUrl.startsWith('http')) {
         replacements.push(
@@ -493,59 +588,95 @@ export class FormatConverter {
           { pattern: /https:\/\/your-server\/output\/Netflix\.txt/g, replacement: `${baseUrl}/output/Netflix.txt` },
           { pattern: /https:\/\/your-server\/output\/Disney\+\.txt/g, replacement: `${baseUrl}/output/Disney+.txt` }
         );
-      } 
+      }
       // 2. GitHub Raw模式
       else if (options.useGithub && githubUser) {
         replacements.push(
-          { pattern: /https:\/\/your-server\/output\/HK\.txt/g, 
-            replacement: `https://raw.githubusercontent.com/${githubUser}/${repoName}/output/HK.txt` },
-          { pattern: /https:\/\/your-server\/output\/TW\.txt/g, 
-            replacement: `https://raw.githubusercontent.com/${githubUser}/${repoName}/output/TW.txt` },
-          { pattern: /https:\/\/your-server\/output\/SG\.txt/g, 
-            replacement: `https://raw.githubusercontent.com/${githubUser}/${repoName}/output/SG.txt` },
-          { pattern: /https:\/\/your-server\/output\/JP\.txt/g, 
-            replacement: `https://raw.githubusercontent.com/${githubUser}/${repoName}/output/JP.txt` },
-          { pattern: /https:\/\/your-server\/output\/US\.txt/g, 
-            replacement: `https://raw.githubusercontent.com/${githubUser}/${repoName}/output/US.txt` },
-          { pattern: /https:\/\/your-server\/output\/Others\.txt/g, 
-            replacement: `https://raw.githubusercontent.com/${githubUser}/${repoName}/output/Others.txt` },
-          { pattern: /https:\/\/your-server\/output\/OpenAI\.txt/g, 
-            replacement: `https://raw.githubusercontent.com/${githubUser}/${repoName}/output/OpenAI.txt` },
-          { pattern: /https:\/\/your-server\/output\/Netflix\.txt/g, 
-            replacement: `https://raw.githubusercontent.com/${githubUser}/${repoName}/output/Netflix.txt` },
-          { pattern: /https:\/\/your-server\/output\/Disney\+\.txt/g, 
-            replacement: `https://raw.githubusercontent.com/${githubUser}/${repoName}/output/Disney+.txt` }
+          {
+            pattern: /https:\/\/your-server\/output\/HK\.txt/g,
+            replacement: `https://raw.githubusercontent.com/${githubUser}/${repoName}/output/HK.txt`
+          },
+          {
+            pattern: /https:\/\/your-server\/output\/TW\.txt/g,
+            replacement: `https://raw.githubusercontent.com/${githubUser}/${repoName}/output/TW.txt`
+          },
+          {
+            pattern: /https:\/\/your-server\/output\/SG\.txt/g,
+            replacement: `https://raw.githubusercontent.com/${githubUser}/${repoName}/output/SG.txt`
+          },
+          {
+            pattern: /https:\/\/your-server\/output\/JP\.txt/g,
+            replacement: `https://raw.githubusercontent.com/${githubUser}/${repoName}/output/JP.txt`
+          },
+          {
+            pattern: /https:\/\/your-server\/output\/US\.txt/g,
+            replacement: `https://raw.githubusercontent.com/${githubUser}/${repoName}/output/US.txt`
+          },
+          {
+            pattern: /https:\/\/your-server\/output\/Others\.txt/g,
+            replacement: `https://raw.githubusercontent.com/${githubUser}/${repoName}/output/Others.txt`
+          },
+          {
+            pattern: /https:\/\/your-server\/output\/OpenAI\.txt/g,
+            replacement: `https://raw.githubusercontent.com/${githubUser}/${repoName}/output/OpenAI.txt`
+          },
+          {
+            pattern: /https:\/\/your-server\/output\/Netflix\.txt/g,
+            replacement: `https://raw.githubusercontent.com/${githubUser}/${repoName}/output/Netflix.txt`
+          },
+          {
+            pattern: /https:\/\/your-server\/output\/Disney\+\.txt/g,
+            replacement: `https://raw.githubusercontent.com/${githubUser}/${repoName}/output/Disney+.txt`
+          }
         );
-      } 
+      }
       // 3. 本地文件模式
       else {
         replacements.push(
-          { pattern: /https:\/\/your-server\/output\/HK\.txt/g, 
-            replacement: `${outputDir}/HK.txt` },
-          { pattern: /https:\/\/your-server\/output\/TW\.txt/g, 
-            replacement: `${outputDir}/TW.txt` },
-          { pattern: /https:\/\/your-server\/output\/SG\.txt/g, 
-            replacement: `${outputDir}/SG.txt` },
-          { pattern: /https:\/\/your-server\/output\/JP\.txt/g, 
-            replacement: `${outputDir}/JP.txt` },
-          { pattern: /https:\/\/your-server\/output\/US\.txt/g, 
-            replacement: `${outputDir}/US.txt` },
-          { pattern: /https:\/\/your-server\/output\/Others\.txt/g, 
-            replacement: `${outputDir}/Others.txt` },
-          { pattern: /https:\/\/your-server\/output\/OpenAI\.txt/g, 
-            replacement: `${outputDir}/OpenAI.txt` },
-          { pattern: /https:\/\/your-server\/output\/Netflix\.txt/g, 
-            replacement: `${outputDir}/Netflix.txt` },
-          { pattern: /https:\/\/your-server\/output\/Disney\+\.txt/g, 
-            replacement: `${outputDir}/Disney+.txt` }
+          {
+            pattern: /https:\/\/your-server\/output\/HK\.txt/g,
+            replacement: `${outputDir}/HK.txt`
+          },
+          {
+            pattern: /https:\/\/your-server\/output\/TW\.txt/g,
+            replacement: `${outputDir}/TW.txt`
+          },
+          {
+            pattern: /https:\/\/your-server\/output\/SG\.txt/g,
+            replacement: `${outputDir}/SG.txt`
+          },
+          {
+            pattern: /https:\/\/your-server\/output\/JP\.txt/g,
+            replacement: `${outputDir}/JP.txt`
+          },
+          {
+            pattern: /https:\/\/your-server\/output\/US\.txt/g,
+            replacement: `${outputDir}/US.txt`
+          },
+          {
+            pattern: /https:\/\/your-server\/output\/Others\.txt/g,
+            replacement: `${outputDir}/Others.txt`
+          },
+          {
+            pattern: /https:\/\/your-server\/output\/OpenAI\.txt/g,
+            replacement: `${outputDir}/OpenAI.txt`
+          },
+          {
+            pattern: /https:\/\/your-server\/output\/Netflix\.txt/g,
+            replacement: `${outputDir}/Netflix.txt`
+          },
+          {
+            pattern: /https:\/\/your-server\/output\/Disney\+\.txt/g,
+            replacement: `${outputDir}/Disney+.txt`
+          }
         );
       }
-      
+
       // 应用替换
       for (const { pattern, replacement } of replacements) {
         result = result.replace(pattern, replacement);
       }
-      
+
       return result;
     }
   }
