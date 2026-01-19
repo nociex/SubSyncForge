@@ -58,7 +58,9 @@ export async function validateConfigs({ rootDir = process.cwd() } = {}) {
   }
 }
 
-if (import.meta.url === `file://${process.argv[1]}`) {
+const invokedAsScript = path.basename(process.argv[1] || '') === 'validate-configs.js';
+
+if (invokedAsScript) {
   validateConfigs()
     .then(() => {
       console.log('🎉 配置校验完成');
