@@ -22,14 +22,14 @@ export class ProxyCoreManager {
     this.configDir = options.configDir || path.join(this.coreDir, 'configs');
     this.timeout = options.timeout || 10000;
     this.testUrl = options.testUrl || 'http://www.google.com/generate_204';
-    
+
     // 缓存已解析 / 安装完成的核心路径，防止在批量节点测试时重复执行 installCore。
     /** @type {string|null} */
     this.cachedCorePath = null;
-    
+
     // 初始化基础连接检查器，供 runCoreTest 使用
     this.checker = new ProxyChecker({ logger: this.logger });
-    
+
     // 核心版本信息
     this.coreVersions = {
       mihomo: {
@@ -91,8 +91,8 @@ export class ProxyCoreManager {
 
       // 不同核心对 ARM 包的命名规则不同，这里做一次映射
       const coreSuffixMap = {
-        mihomo: { armv7: 'armv7',      armv6: 'armv6',      armv5: 'armv5' },
-        v2ray:  { armv7: 'arm32-v7a', armv6: 'arm32-v6', armv5: 'arm32-v5' }
+        mihomo: { armv7: 'armv7', armv6: 'armv6', armv5: 'armv5' },
+        v2ray: { armv7: 'arm32-v7a', armv6: 'arm32-v6', armv5: 'arm32-v5' }
       };
       archType = coreSuffixMap[this.coreType]?.[armSuffix] || armSuffix;
     } else {
@@ -118,18 +118,18 @@ export class ProxyCoreManager {
     }
     const platform = this.getPlatform();
     const coreInfo = this.coreVersions[this.coreType];
-    
+
     if (!coreInfo || !coreInfo.releases[platform]) {
       throw new Error(`不支持的平台: ${platform} (${this.coreType})`);
     }
-    
+
     // 创建核心目录
     await fs.mkdir(this.coreDir, { recursive: true });
     await fs.mkdir(this.configDir, { recursive: true });
-    
+
     const fileName = coreInfo.releases[platform];
     const corePath = path.join(this.coreDir, this.getCoreExecutableName());
-    
+
     // 检查核心是否已存在且可执行
     try {
       await fs.access(corePath, fsConstants.F_OK | fsConstants.X_OK);
@@ -139,31 +139,31 @@ export class ProxyCoreManager {
     } catch {
       // 核心不存在，需要下载
     }
-    
+
     this.logger.info(`开始下载 ${this.coreType} 核心 (${platform})...`);
-    
+
     const downloadUrl = this.getDownloadUrl(fileName);
     const tempFile = path.join(this.coreDir, fileName);
-    
+
     try {
       // 下载文件
       await this.downloadFile(downloadUrl, tempFile);
-      
+
       // 解压文件
       await this.extractCore(tempFile, corePath);
-      
+
       // 设置执行权限 (Unix系统)
       if (os.platform() !== 'win32') {
         await fs.chmod(corePath, 0o755);
       }
-      
+
       // 清理临时文件
       await fs.unlink(tempFile);
-      
+
       this.logger.info(`${this.coreType} 核心安装完成: ${corePath}`);
       this.cachedCorePath = corePath;
       return corePath;
-      
+
     } catch (error) {
       this.logger.error(`安装 ${this.coreType} 核心失败: ${error.message}`);
       throw error;
@@ -205,12 +205,12 @@ export class ProxyCoreManager {
             .then(resolve)
             .catch(reject);
         }
-        
+
         if (response.statusCode !== 200) {
           reject(new Error(`下载失败: HTTP ${response.statusCode}`));
           return;
         }
-        
+
         const fileStream = createWriteStream(outputPath);
         pipeline(response, fileStream)
           .then(resolve)
@@ -228,22 +228,22 @@ export class ProxyCoreManager {
       const readStream = createReadStream(archivePath);
       const writeStream = createWriteStream(outputPath);
       const gunzip = createGunzip();
-      
+
       await pipeline(readStream, gunzip, writeStream);
     } else if (archivePath.endsWith('.zip')) {
       // 处理zip文件 (v2ray)
       const extractStream = Extract({ path: this.coreDir });
       const readStream = createReadStream(archivePath);
-      
+
       await pipeline(readStream, extractStream);
-      
+
       // 查找可执行文件并移动到正确位置
       const files = await fs.readdir(this.coreDir);
-      const executable = files.find(f => 
+      const executable = files.find(f =>
         f.includes(this.getCoreExecutableName().replace('.exe', '')) ||
         (f.includes('v2ray') && !f.includes('.'))
       );
-      
+
       if (executable) {
         const srcPath = path.join(this.coreDir, executable);
         await fs.rename(srcPath, outputPath);
@@ -256,7 +256,7 @@ export class ProxyCoreManager {
    */
   async generateConfig(node, configName = 'test-config', mixedPort = 0) {
     const configPath = path.join(this.configDir, `${configName}.json`);
-    
+
     let config;
     if (this.coreType === 'mihomo') {
       config = this.generateMihomoConfig(node, mixedPort);
@@ -265,10 +265,10 @@ export class ProxyCoreManager {
     } else {
       throw new Error(`未支持的核心类型: ${this.coreType}`);
     }
-    
+
     await fs.writeFile(configPath, JSON.stringify(config, null, 2));
     this.logger.debug(`生成配置文件: ${configPath}`);
-    
+
     return configPath;
   }
 
@@ -278,7 +278,7 @@ export class ProxyCoreManager {
   generateMihomoConfig(node, mixedPort) {
     let mixedPortValue = mixedPort || 0;
     const proxy = this.convertNodeToMihomoProxy(node);
-    
+
     return {
       "mixed-port": mixedPortValue,
       "allow-lan": false,
@@ -304,7 +304,7 @@ export class ProxyCoreManager {
    */
   generateV2rayConfig(node) {
     const outbound = this.convertNodeToV2rayOutbound(node);
-    
+
     return {
       "log": { "loglevel": "none" },
       "inbounds": [],
@@ -332,7 +332,7 @@ export class ProxyCoreManager {
     };
 
     const nodeType = node.type?.toLowerCase();
-    
+
     switch (nodeType) {
       case 'ss':
         return {
@@ -341,7 +341,7 @@ export class ProxyCoreManager {
           cipher: node.settings?.method || node.cipher || node.method || 'aes-256-gcm',
           password: node.settings?.password || node.password
         };
-      
+
       case 'vmess':
         const vmessConfig = {
           ...base,
@@ -352,27 +352,27 @@ export class ProxyCoreManager {
           tls: (node.settings?.tls || node.tls) === true || (node.settings?.tls || node.tls) === 'tls',
           network: node.settings?.network || node.network || 'tcp'
         };
-        
+
         // 处理WebSocket设置
         if (vmessConfig.network === 'ws') {
           vmessConfig['ws-opts'] = {
             path: node.settings?.wsPath || node.settings?.path || node.wsPath || '/',
             headers: {}
           };
-          
+
           if (node.settings?.wsHeaders?.Host || node.settings?.host || node.host) {
             vmessConfig['ws-opts'].headers.Host = node.settings?.wsHeaders?.Host || node.settings?.host || node.host;
           }
         }
-        
+
         // 处理TLS设置
         if (vmessConfig.tls) {
           vmessConfig.servername = node.settings?.serverName || node.settings?.sni || node.serverName || node.sni || node.server;
           vmessConfig['skip-cert-verify'] = node.settings?.allowInsecure || node.allowInsecure || false;
         }
-        
+
         return vmessConfig;
-      
+
       case 'vless':
         const vlessConfig = {
           ...base,
@@ -382,36 +382,36 @@ export class ProxyCoreManager {
           tls: (node.settings?.security || node.security) === 'tls' || (node.settings?.tls || node.tls) === true,
           network: node.settings?.network || node.network || 'tcp'
         };
-        
+
         // 处理WebSocket设置
         if (vlessConfig.network === 'ws') {
           vlessConfig['ws-opts'] = {
             path: node.settings?.path || node.path || '/',
             headers: {}
           };
-          
+
           if (node.settings?.host || node.host) {
             vlessConfig['ws-opts'].headers.Host = node.settings?.host || node.host;
           }
         }
-        
+
         // 处理TLS设置
         if (vlessConfig.tls) {
           vlessConfig.servername = node.settings?.sni || node.sni || node.server;
           vlessConfig['skip-cert-verify'] = node.settings?.allowInsecure || node.allowInsecure || false;
-          
+
           if (node.settings?.fp || node.fp) {
             vlessConfig['client-fingerprint'] = node.settings?.fp || node.fp;
           }
-          
+
           if (node.settings?.alpn || node.alpn) {
             const alpn = node.settings?.alpn || node.alpn;
             vlessConfig.alpn = Array.isArray(alpn) ? alpn : alpn.split(',');
           }
         }
-        
+
         return vlessConfig;
-      
+
       case 'trojan':
         return {
           ...base,
@@ -420,7 +420,7 @@ export class ProxyCoreManager {
           sni: node.settings?.sni || node.sni || node.server,
           'skip-cert-verify': node.settings?.allowInsecure || node.allowInsecure || false
         };
-      
+
       case 'hysteria2':
         const hysteria2Config = {
           ...base,
@@ -428,28 +428,28 @@ export class ProxyCoreManager {
           password: node.settings?.auth || node.auth || node.password,
           'skip-cert-verify': node.settings?.insecure || node.insecure || false
         };
-        
+
         if (node.settings?.sni || node.sni) {
           hysteria2Config.sni = node.settings?.sni || node.sni;
         }
-        
+
         if (node.settings?.obfs || node.obfs) {
           hysteria2Config.obfs = node.settings?.obfs || node.obfs;
           if (node.settings?.obfsPassword || node.obfsPassword) {
             hysteria2Config['obfs-password'] = node.settings?.obfsPassword || node.obfsPassword;
           }
         }
-        
+
         if (node.settings?.uploadBandwidth || node.uploadBandwidth) {
           hysteria2Config.up = node.settings?.uploadBandwidth || node.uploadBandwidth;
         }
-        
+
         if (node.settings?.downloadBandwidth || node.downloadBandwidth) {
           hysteria2Config.down = node.settings?.downloadBandwidth || node.downloadBandwidth;
         }
-        
+
         return hysteria2Config;
-      
+
       case 'tuic':
         const tuicConfig = {
           ...base,
@@ -460,20 +460,20 @@ export class ProxyCoreManager {
           'udp-relay-mode': node.settings?.udpRelayMode || node.udpRelayMode || 'native',
           'reduce-rtt': true
         };
-        
+
         if (node.settings?.sni || node.sni) {
           tuicConfig.sni = node.settings?.sni || node.sni;
         }
-        
+
         if (node.settings?.alpn || node.alpn) {
           const alpn = node.settings?.alpn || node.alpn;
           tuicConfig.alpn = Array.isArray(alpn) ? alpn : alpn.split(',');
         }
-        
+
         tuicConfig['skip-cert-verify'] = node.settings?.allowInsecure || node.allowInsecure || false;
-        
+
         return tuicConfig;
-      
+
       case 'ssr':
         return {
           ...base,
@@ -485,55 +485,55 @@ export class ProxyCoreManager {
           'obfs-param': node.settings?.obfsParam || node.obfsParam || '',
           'protocol-param': node.settings?.protocolParam || node.protocolParam || ''
         };
-      
+
       case 'http':
       case 'https':
         const httpConfig = {
           ...base,
           type: 'http'
         };
-        
+
         if (node.settings?.username || node.username) {
           httpConfig.username = node.settings?.username || node.username;
         }
-        
+
         if (node.settings?.password || node.password) {
           httpConfig.password = node.settings?.password || node.password;
         }
-        
+
         if (nodeType === 'https' || node.settings?.tls || node.tls) {
           httpConfig.tls = true;
           httpConfig['skip-cert-verify'] = node.settings?.allowInsecure || node.allowInsecure || false;
         }
-        
+
         return httpConfig;
-      
+
       case 'socks5':
       case 'socks':
         const socksConfig = {
           ...base,
           type: 'socks5'
         };
-        
+
         if (node.settings?.username || node.username) {
           socksConfig.username = node.settings?.username || node.username;
         }
-        
+
         if (node.settings?.password || node.password) {
           socksConfig.password = node.settings?.password || node.password;
         }
-        
+
         if (node.settings?.tls || node.tls) {
           socksConfig.tls = true;
           socksConfig['skip-cert-verify'] = node.settings?.allowInsecure || node.allowInsecure || false;
         }
-        
+
         return socksConfig;
-      
+
       default:
         // 对于不支持的类型，尝试兼容转换或者记录警告但不抛出错误
         this.logger.warn(`尝试转换不完全支持的节点类型: ${node.type}，将使用基本配置`);
-        
+
         // 返回一个基本的配置，让用户知道这个节点存在但可能无法正常工作
         return {
           ...base,
@@ -570,7 +570,7 @@ export class ProxyCoreManager {
           }]
         };
         break;
-      
+
       case 'trojan':
         base.settings = {
           servers: [{
@@ -580,7 +580,7 @@ export class ProxyCoreManager {
           }]
         };
         break;
-      
+
       default:
         throw new Error(`V2ray 不支持的节点类型: ${node.type}`);
     }
@@ -595,24 +595,24 @@ export class ProxyCoreManager {
     try {
       // 获取（或安装）核心，可避免重复 install 调用
       const corePath = this.cachedCorePath || await this.installCore();
-      
+
       // 为每个节点分配一个可用端口，用于本地 mixed 代理端口
       const localPort = await this.getFreePort();
-      
+
       // 生成配置
       const testConfigName = configName || `test-${Date.now()}`;
       const configPath = await this.generateConfig(node, testConfigName, localPort);
-      
+
       // 执行连接测试
       const result = await this.runCoreTest(corePath, configPath, localPort);
-      
+
       // 清理临时配置
       if (!configName) {
-        await fs.unlink(configPath).catch(() => {});
+        await fs.unlink(configPath).catch(() => { });
       }
-      
+
       return result;
-      
+
     } catch (error) {
       this.logger.error(`测试节点 ${node.name} 失败: ${error.message}`);
       return {
@@ -626,52 +626,143 @@ export class ProxyCoreManager {
   /**
    * 运行核心测试
    */
+  /**
+   * 运行核心测试
+   */
   async runCoreTest(corePath, configPath, localPort) {
     return new Promise((resolve) => {
       const startTime = Date.now();
+      let isReady = false;
+      let coreProcess = null;
 
-      const args = ['-f', configPath]; // 不使用 -t，直接启动核心
-      const child = spawn(corePath, args, { stdio: ['ignore', 'ignore', 'ignore'], detached: false });
+      // 启动核心进程，捕获 stderr 以便调试
+      try {
+        let args = [];
+        if (this.coreType === 'v2ray') {
+          args = ['run', '-c', configPath];
+        } else {
+          args = ['-f', configPath];
+        }
+        // 允许捕获 stderr
+        coreProcess = spawn(corePath, args, { stdio: ['ignore', 'ignore', 'pipe'], detached: false });
 
-      // 当超时或测试结束后统一调用此函数清理
+        // 收集错误日志
+        let errorLogs = '';
+        if (coreProcess.stderr) {
+          coreProcess.stderr.on('data', (data) => {
+            errorLogs += data.toString();
+          });
+        }
+
+        coreProcess.on('error', (err) => {
+          this.logger.error(`启动核心失败: ${err.message}`);
+          finalize({ status: false, latency: null, error: `启动失败: ${err.message}` });
+        });
+
+        coreProcess.on('exit', (code, signal) => {
+          if (!isReady) { // 如果还没测试就退出了
+            const msg = `核心异常退出 (code=${code}, signal=${signal})。日志: ${errorLogs.slice(0, 200)}...`;
+            this.logger.error(msg);
+            finalize({ status: false, latency: null, error: msg });
+          }
+        });
+
+      } catch (err) {
+        finalize({ status: false, latency: null, error: `启动异常: ${err.message}` });
+        return;
+      }
+
+      // 资源清理和结果返回函数
       const finalize = (result) => {
+        isReady = true; // 标记已完成，避免 exit 事件重复处理
         clearTimeout(timeoutId);
-        if (!child.killed) {
-          try { child.kill('SIGTERM'); } catch {}
+
+        // 停止端口检查轮询
+        if (checkInterval) clearInterval(checkInterval);
+
+        if (coreProcess && !coreProcess.killed) {
+          try { coreProcess.kill('SIGTERM'); } catch { }
         }
         resolve(result);
       };
 
       // 全局超时
       const timeoutId = setTimeout(() => {
-        finalize({ status: false, latency: null, error: 'Test timeout' });
+        finalize({ status: false, latency: null, error: 'Test timeout (global limit)' });
       }, this.timeout);
 
-      // 等待核心就绪一小段时间，然后通过本地代理端口发起请求
-      setTimeout(async () => {
-        try {
-          // 创建指向本地代理端口的虚拟节点进行测试
-          // 这是标准的代理测试方法：通过本地代理端口访问外部资源
-          const fakeNode = {
-            name: 'local-proxy',
-            type: 'http',
-            server: '127.0.0.1',
-            port: localPort
-          };
+      // 轮询检查端口是否就绪
+      // 相比固定的 setTimeout，轮询更可靠且更快
+      let checkCount = 0;
+      const maxChecks = 20; // 最多检查20次
+      const checkDelay = 100; // 每次间隔100ms
 
-          this.logger.debug(`通过本地代理端口 127.0.0.1:${localPort} 测试节点连通性`);
-          const checkResult = await this.checker.checkConnectivity(fakeNode, this.timeout / 2, this.testUrl);
-          const latency = Date.now() - startTime;
+      const checkPortAndTest = async () => {
+        checkCount++;
 
-          if (checkResult.status) {
-            finalize({ status: true, latency, error: null });
-          } else {
-            finalize({ status: false, latency: null, error: checkResult.error || 'Unknown error' });
+        // 检查端口是否被监听
+        const isPortListening = await this.checkPortListening(localPort);
+
+        if (isPortListening) {
+          clearInterval(checkInterval);
+          this.logger.debug(`核心端口 ${localPort} 已就绪 (尝试 ${checkCount} 次)`);
+
+          try {
+            // 端口就绪后，等待一小会儿确保服务完全可用
+            await new Promise(r => setTimeout(r, 200));
+
+            // 创建指向本地代理端口的虚拟节点进行测试
+            const fakeNode = {
+              name: 'local-proxy',
+              type: 'http',
+              server: '127.0.0.1',
+              port: localPort
+            };
+
+            this.logger.debug(`通过本地代理端口 127.0.0.1:${localPort} 测试节点连通性`);
+            const checkResult = await this.checker.checkConnectivity(fakeNode, this.timeout / 2, this.testUrl);
+            const latency = Date.now() - startTime;
+
+            if (checkResult.status) {
+              finalize({ status: true, latency, error: null });
+            } else {
+              finalize({ status: false, latency: null, error: checkResult.error || 'Connectivity check failed' });
+            }
+          } catch (err) {
+            finalize({ status: false, latency: null, error: err.message });
           }
-        } catch (err) {
-          finalize({ status: false, latency: null, error: err.message });
+        } else if (checkCount >= maxChecks) {
+          clearInterval(checkInterval);
+          finalize({ status: false, latency: null, error: `核心启动超时，端口 ${localPort} 未就绪` });
         }
-      }, 1500); // 给核心约 1.5s 的启动时间
+      };
+
+      const checkInterval = setInterval(checkPortAndTest, checkDelay);
+    });
+  }
+
+  /**
+   * 检查端口是否被监听
+   */
+  async checkPortListening(port) {
+    return new Promise((resolve) => {
+      const client = new net.Socket();
+      client.setTimeout(200); // 快速超时
+
+      client.connect({ port, host: '127.0.0.1' }, () => {
+        client.destroy();
+        resolve(true); // 连接成功，说明端口被监听
+      });
+
+      client.on('error', () => {
+        client.destroy();
+        resolve(false); // 连接失败
+      });
+
+      client.on('timeout', () => {
+        client.destroy();
+        resolve(false);
+      });
     });
   }
 
@@ -719,10 +810,10 @@ export class ProxyCoreManager {
         await fs.access(this.cachedCorePath, fsConstants.F_OK | fsConstants.X_OK);
         return true;
       }
-      
+
       // 否则检查核心是否已安装
       const corePath = path.join(this.coreDir, this.getCoreExecutableName());
-      
+
       try {
         await fs.access(corePath, fsConstants.F_OK | fsConstants.X_OK);
         this.cachedCorePath = corePath;
