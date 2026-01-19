@@ -34,5 +34,17 @@ export default {
     'yaml',
     'node-fetch',
     'https-proxy-agent'
-  ]
+  ],
+  onwarn(warning, warn) {
+    // Ignore circular dependencies
+    if (warning.code === 'CIRCULAR_DEPENDENCY') return;
+
+    // Ignore eval warning in bluebird
+    if (warning.code === 'EVAL' && warning.id && warning.id.includes('bluebird')) return;
+
+    // Ignore unused external imports (like execSync from child_process)
+    if (warning.code === 'UNUSED_EXTERNAL_IMPORT') return;
+
+    warn(warning);
+  }
 };

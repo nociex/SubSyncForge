@@ -1,7 +1,7 @@
 import fs from 'fs/promises';
 import { constants as fsConstants } from 'fs';
 import path from 'path';
-import { execSync, spawn } from 'child_process';
+import { spawn } from 'child_process';
 import os from 'os';
 import https from 'https';
 import { pipeline } from 'stream/promises';
