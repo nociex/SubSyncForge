@@ -308,41 +308,10 @@ export class SyncManager {
       return node;
     });
 
-    // 如果启用了自动重命名，对所有测试成功的节点进行统一重命名
+    // 如果启用了自动重命名，AdvancedNodeTester 已在测试完成后处理了重命名
+    // 这里不再重复处理，避免双重重命名导致的不一致问题
     const validNodes = allTestedNodes.filter(node => node.valid === true);
-    if (this.config.testing?.autoRename !== false && validNodes.length > 0) {
-      this.logger.info(`开始对 ${validNodes.length} 个有效节点进行统一重命名...`);
-      
-      // 创建节点管理器进行重命名
-      const nodeManager = new NodeManager();
-      
-      // 对有效节点进行分析和重命名
-      const { nodes: analyzedValidNodes } = nodeManager.processNodes(validNodes);
-      const renamedValidNodes = nodeManager.renameNodes(analyzedValidNodes, {
-        includeCountry: true,
-        includeProtocol: true,
-        includeNumber: true,
-        includeTags: false
-      });
-      
-      // 更新allTestedNodes中的有效节点
-      let validIndex = 0;
-      for (let i = 0; i < allTestedNodes.length; i++) {
-        if (allTestedNodes[i].valid === true) {
-          // 保留原始测试信息，只更新名称和分析信息
-          allTestedNodes[i] = {
-            ...allTestedNodes[i],
-            ...renamedValidNodes[validIndex],
-            valid: true,  // 确保保持有效状态
-            latency: allTestedNodes[i].latency,  // 保留延迟信息
-            locationInfo: allTestedNodes[i].locationInfo  // 保留定位信息
-          };
-          validIndex++;
-        }
-      }
-      
-      this.logger.info(`节点重命名完成，${validNodes.length} 个节点已使用统一命名格式`);
-    }
+    this.logger.info(`有效节点: ${validNodes.length} 个`);
     
     // 筛选成功的节点
     const finalValidNodes = allTestedNodes.filter(node => node.valid === true);
