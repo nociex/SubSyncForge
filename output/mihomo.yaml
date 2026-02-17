@@ -14,7 +14,7 @@ geox-url:
   mmdb: "https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/country.mmdb"
 
 proxies:
-  - name: "CDN VMess 01"
+  - name: "CDN VMess 02"
     type: "vmess"
     server: "172.64.149.182"
     port: 8080
@@ -23,12 +23,24 @@ proxies:
     cipher: "auto"
     network: "ws"
     ws-opts:
-      path: "/nasnet/cdn?ed=2560"
+      path: "/nasnet/cdn"
       headers:
         Host: "nasnet-5712964102.sharghdaily.co"
-  - name: "CDN VMess 02"
+  - name: "CDN VMess 01"
     type: "vmess"
-    server: "c7.620720.xyz"
+    server: "172.67.204.84"
+    port: 8080
+    uuid: "nasnet"
+    alterId: 0
+    cipher: "auto"
+    network: "ws"
+    ws-opts:
+      path: "/nasnet/cdn"
+      headers:
+        Host: "nasnet-511952424.mcitel.co"
+  - name: "CDN VMess 03"
+    type: "vmess"
+    server: "t1.620720.xyz"
     port: 8443
     uuid: "516d8a7a-3f0b-41d3-bad0-246116381516"
     alterId: 0
@@ -38,25 +50,7 @@ proxies:
     ws-opts:
       path: "/"
       headers:
-        Host: "c7.620720.xyz"
-  - name: "🇪🇸 ES 02 | SS"
-    type: "ss"
-    server: "5.188.181.201"
-    port: 9014
-    cipher: "aes-256-cfb"
-    password: "KnJGad3FqTvjqbaX"
-  - name: "CDN VMess 04"
-    type: "vmess"
-    server: "mmkio.tc6.ccwu.cc"
-    port: 80
-    uuid: "1798b14b-aee0-4008-ba9a-2e53877761b4"
-    alterId: 0
-    cipher: "auto"
-    network: "ws"
-    ws-opts:
-      path: "/kFK9O5cl8ZycyrxcJWNVFC21"
-      headers:
-        Host: "mmkio.tc6.ccwu.cc"
+        Host: "t1.620720.xyz"
   - name: "🇺🇸 US 01 | SS"
     type: "ss"
     server: "174.35.123.165"
@@ -69,51 +63,51 @@ proxies:
     port: 443
     cipher: "aes-128-gcm"
     password: "shadowsocks"
-  - name: "🇺🇸 US 02 | SS"
+  - name: "🇺🇸 US 25 | SS"
     type: "ss"
     server: "64.176.215.70"
     port: 443
     cipher: "aes-256-gcm"
     password: "hbhO0xomsJzhO24F"
-  - name: "🏳️ 其他 03 | SS"
-    type: "ss"
-    server: "series-a2.samanehha.co"
-    port: 443
-    cipher: "chacha20-ietf-poly1305"
-    password: "W74XFALLLuw6m5IA"
-  - name: "🇫🇮 FI 03 | SS"
+  - name: "🇫🇮 FI 02 | SS"
     type: "ss"
     server: "178.17.61.67"
     port: 5790
     cipher: "chacha20-ietf-poly1305"
     password: "qS3skwmolrQ70q842irQD0"
-  - name: "CDN Shadowsocks 04"
+  - name: "CDN Shadowsocks 05"
     type: "ss"
-    server: "103.186.154.224"
+    server: "103.186.155.69"
     port: 38388
     cipher: "aes-256-cfb"
     password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
-  - name: "CDN Shadowsocks 05"
+  - name: "CDN Shadowsocks 03"
     type: "ss"
-    server: "103.186.154.142"
+    server: "103.186.154.13"
+    port: 38388
+    cipher: "aes-256-cfb"
+    password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
+  - name: "CDN Shadowsocks 04"
+    type: "ss"
+    server: "103.186.154.215"
     port: 38388
     cipher: "aes-256-cfb"
     password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
   - name: "CDN Shadowsocks 06"
     type: "ss"
-    server: "103.186.154.158"
+    server: "103.186.155.10"
     port: 38388
     cipher: "aes-256-cfb"
     password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
   - name: "CDN Shadowsocks 07"
     type: "ss"
-    server: "103.186.154.166"
+    server: "103.186.155.43"
     port: 38388
     cipher: "aes-256-cfb"
     password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
   - name: "CDN Shadowsocks 08"
     type: "ss"
-    server: "103.186.154.77"
+    server: "103.186.155.240"
     port: 38388
     cipher: "aes-256-cfb"
     password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
@@ -125,176 +119,145 @@ proxies:
     password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
   - name: "CDN Shadowsocks 10"
     type: "ss"
-    server: "103.186.154.13"
+    server: "103.186.155.141"
     port: 38388
     cipher: "aes-256-cfb"
     password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
   - name: "CDN Shadowsocks 11"
     type: "ss"
-    server: "103.186.155.240"
+    server: "103.186.155.5"
     port: 38388
     cipher: "aes-256-cfb"
     password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
   - name: "CDN Shadowsocks 12"
     type: "ss"
-    server: "103.186.155.43"
+    server: "103.186.154.19"
     port: 38388
     cipher: "aes-256-cfb"
     password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
   - name: "CDN Shadowsocks 13"
     type: "ss"
-    server: "103.186.154.216"
+    server: "103.186.154.153"
     port: 38388
     cipher: "aes-256-cfb"
     password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
   - name: "CDN Shadowsocks 14"
     type: "ss"
-    server: "103.186.154.47"
+    server: "103.186.155.107"
+    port: 38388
+    cipher: "aes-256-cfb"
+    password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
+  - name: "CDN Shadowsocks 16"
+    type: "ss"
+    server: "103.186.154.166"
     port: 38388
     cipher: "aes-256-cfb"
     password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
   - name: "CDN Shadowsocks 15"
     type: "ss"
-    server: "103.186.155.5"
+    server: "103.186.155.134"
     port: 38388
     cipher: "aes-256-cfb"
     password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
   - name: "CDN Shadowsocks 17"
     type: "ss"
-    server: "103.186.154.219"
+    server: "103.186.155.150"
     port: 38388
     cipher: "aes-256-cfb"
     password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
   - name: "CDN Shadowsocks 18"
     type: "ss"
-    server: "103.186.155.134"
+    server: "103.186.154.167"
     port: 38388
     cipher: "aes-256-cfb"
     password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
   - name: "CDN Shadowsocks 19"
     type: "ss"
-    server: "103.186.155.141"
+    server: "103.186.154.216"
     port: 38388
     cipher: "aes-256-cfb"
     password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
   - name: "CDN Shadowsocks 20"
     type: "ss"
-    server: "103.186.155.150"
-    port: 38388
-    cipher: "aes-256-cfb"
-    password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
-  - name: "CDN Shadowsocks 21"
-    type: "ss"
-    server: "103.186.154.215"
+    server: "103.186.154.47"
     port: 38388
     cipher: "aes-256-cfb"
     password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
   - name: "CDN Shadowsocks 22"
     type: "ss"
-    server: "103.186.154.19"
+    server: "103.186.154.77"
     port: 38388
     cipher: "aes-256-cfb"
     password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
   - name: "CDN Shadowsocks 23"
     type: "ss"
-    server: "103.186.154.167"
-    port: 38388
-    cipher: "aes-256-cfb"
-    password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
-  - name: "CDN Shadowsocks 24"
-    type: "ss"
-    server: "103.186.155.10"
-    port: 38388
-    cipher: "aes-256-cfb"
-    password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
-  - name: "CDN Shadowsocks 25"
-    type: "ss"
-    server: "103.186.154.153"
+    server: "103.186.154.80"
     port: 38388
     cipher: "aes-256-cfb"
     password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
   - name: "CDN Shadowsocks 26"
     type: "ss"
-    server: "103.186.154.80"
+    server: "103.186.154.142"
     port: 38388
     cipher: "aes-256-cfb"
     password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
   - name: "CDN Shadowsocks 27"
     type: "ss"
-    server: "103.186.155.69"
+    server: "103.186.154.224"
     port: 38388
     cipher: "aes-256-cfb"
     password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
   - name: "CDN Shadowsocks 28"
     type: "ss"
-    server: "103.186.155.107"
+    server: "103.186.154.158"
     port: 38388
     cipher: "aes-256-cfb"
     password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
-  - name: "🇵🇹 PT 29 | SS"
-    type: "ss"
-    server: "185.231.233.112"
-    port: 989
-    cipher: "aes-256-cfb"
-    password: "f8f7aCzcPKbsF8p3"
-  - name: "🇻🇳 VN 03 | SS"
+  - name: "🇻🇳 VN 02 | SS"
     type: "ss"
     server: "103.186.155.15"
     port: 38388
     cipher: "aes-256-cfb"
     password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
-  - name: "🇻🇳 VN 05 | SS"
+  - name: "🇻🇳 VN 04 | SS"
     type: "ss"
     server: "103.186.155.106"
     port: 38388
     cipher: "aes-256-cfb"
     password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
-  - name: "🇻🇳 VN 04 | SS"
+  - name: "🇻🇳 VN 03 | SS"
     type: "ss"
     server: "103.186.154.239"
     port: 38388
     cipher: "aes-256-cfb"
     password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
-  - name: "🇯🇵 JP 31 | Trojan"
+  - name: "🇯🇵 JP 29 | Trojan"
     type: "trojan"
     server: "160.16.144.208"
     port: 3423
     password: "9372cb81c7b0ad903f91f2f8a4d3f02b"
     sni: "www.nintendogames.net"
     skip-cert-verify: true
-  - name: "🇯🇵 JP 16 | Trojan"
+  - name: "🇯🇵 JP 21 | Trojan"
     type: "trojan"
     server: "153.121.39.240"
     port: 3901
     password: "9372cb81c7b0ad903f91f2f8a4d3f02b"
     sni: "www.nintendogames.net"
     skip-cert-verify: true
-  - name: "🏳️ 其他 32 | Trojan"
+  - name: "🏳️ 其他 24 | Trojan"
     type: "trojan"
     server: "qfdfsg.wsone.icu"
     port: 443
     password: "M7v%w11Se*"
     sni: "qfdfsg.wsone.icu"
     skip-cert-verify: true
-  - name: "ISP Trojan 05"
-    type: "trojan"
-    server: "220.130.58.136"
-    port: 31102
-    password: "/4250b3bb-d1ae-4e77-bf71-4069e0d2c383"
-    sni: "green2.cdntencentmusic.com"
-  - name: "🏳️ 其他 06 | Trojan"
+  - name: "🏳️ 其他 05 | Trojan"
     type: "trojan"
     server: "hyfuuf6.wsone.icu"
     port: 443
     password: "M7v%w11Se*"
     sni: "hyfuuf6.wsone.icu"
-    skip-cert-verify: true
-  - name: "ISP Trojan 30"
-    type: "trojan"
-    server: "220.130.58.136"
-    port: 31101
-    password: "b2e15b49-6606-4c62-baff-7015390b3c6a"
-    sni: "green2.cdntencentmusic.com"
     skip-cert-verify: true
 
 proxy-groups:
