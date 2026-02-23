@@ -14,119 +14,6 @@ geox-url:
   mmdb: "https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/country.mmdb"
 
 proxies:
-  - name: "CDN VMess 06"
-    type: "vmess"
-    server: "104.19.173.68"
-    port: 8080
-    uuid: "e8b1500b-e9e8-5492-8312-f4eadf7d0767"
-    alterId: 0
-    cipher: "auto"
-    network: "ws"
-    ws-opts:
-      path: "/NASNET/cdn"
-      headers:
-        Host: "nasnet-571299667.rahavard365.co"
-  - name: "CDN VMess 01"
-    type: "vmess"
-    server: "dffgg.2no.ccwu.cc"
-    port: 443
-    uuid: "2215657e-2af4-405f-b770-4e61b298d5b8"
-    alterId: 0
-    cipher: "auto"
-    network: "ws"
-    tls: true
-    ws-opts:
-      path: "/PGsqb2SHJfbCLo"
-      headers:
-        Host: "dffgg.2no.ccwu.cc"
-  - name: "CDN VMess 02"
-    type: "vmess"
-    server: "yhj.huangshang2026.indevs.in"
-    port: 443
-    uuid: "721d3fd0-e9f1-40c3-92cd-d4405a4319d6"
-    alterId: 0
-    cipher: "auto"
-    network: "ws"
-    tls: true
-    ws-opts:
-      path: "/LDTpW8UIEnTAiN9LMya"
-      headers:
-        Host: "yhj.huangshang2026.indevs.in"
-  - name: "CDN VMess 03"
-    type: "vmess"
-    server: "bgn.1dd.ccwu.cc"
-    port: 443
-    uuid: "4e45c1b4-9107-45dd-9995-cdf7cbb44d9d"
-    alterId: 0
-    cipher: "auto"
-    network: "ws"
-    tls: true
-    ws-opts:
-      path: "/iSRWSKUJKNuXvVzsYHmsMrnO"
-      headers:
-        Host: "bgn.1dd.ccwu.cc"
-  - name: "CDN VMess 04"
-    type: "vmess"
-    server: "jki.huangdi.indevs.in"
-    port: 443
-    uuid: "721d3fd0-e9f1-40c3-92cd-d4405a4319d6"
-    alterId: 0
-    cipher: "auto"
-    network: "ws"
-    tls: true
-    ws-opts:
-      path: "/LDTpW8UIEnTAiN9LMya"
-      headers:
-        Host: "jki.huangdi.indevs.in"
-  - name: "CDN VMess 05"
-    type: "vmess"
-    server: "t1.620720.xyz"
-    port: 8443
-    uuid: "516d8a7a-3f0b-41d3-bad0-246116381516"
-    alterId: 0
-    cipher: "auto"
-    network: "ws"
-    tls: true
-    ws-opts:
-      path: "/"
-      headers:
-        Host: "t1.620720.xyz"
-  - name: "🏳️ 其他 13 | VMess"
-    type: "vmess"
-    server: "n1749032906.kzxds.cn"
-    port: 443
-    uuid: "c3337e26-c0e0-4625-ad62-bfa8d19991a4"
-    alterId: 0
-    cipher: "auto"
-    network: "ws"
-    tls: true
-  - name: "🏳️ 其他 15 | VMess"
-    type: "vmess"
-    server: "n1761296897.lie5d.cyou"
-    port: 443
-    uuid: "5ecc3086-93cf-42e3-956b-f2180e042537"
-    alterId: 0
-    cipher: "auto"
-    network: "ws"
-    tls: true
-  - name: "🏳️ 其他 16 | VMess"
-    type: "vmess"
-    server: "n1752248951.lie5d.cyou"
-    port: 443
-    uuid: "bf2ce3c2-339f-4926-b92d-b7d83af1b3b6"
-    alterId: 0
-    cipher: "auto"
-    network: "ws"
-    tls: true
-  - name: "🏳️ 其他 19 | VMess"
-    type: "vmess"
-    server: "n1752833184.lie5d.cyou"
-    port: 443
-    uuid: "6c7d09e3-9cfa-41c8-8194-e81eb21bfb88"
-    alterId: 0
-    cipher: "auto"
-    network: "ws"
-    tls: true
   - name: "🇺🇸 US 01 | SS"
     type: "ss"
     server: "37.19.198.236"
@@ -139,25 +26,31 @@ proxies:
     port: 443
     cipher: "chacha20-ietf-poly1305"
     password: "hbGrpfvNrJsUmKmPbR3iY2"
-  - name: "🏳️ 其他 03 | SS"
+  - name: "🏳️ 其他 02 | SS"
     type: "ss"
     server: "admin.c2.havij.co"
     port: 443
     cipher: "chacha20-ietf-poly1305"
     password: "kaQH3hGdcP80XEDI"
+  - name: "CDN Shadowsocks 04"
+    type: "ss"
+    server: "103.186.155.41"
+    port: 38388
+    cipher: "aes-256-cfb"
+    password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
   - name: "CDN Shadowsocks 05"
     type: "ss"
     server: "103.186.154.176"
     port: 38388
     cipher: "aes-256-cfb"
     password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
-  - name: "CDN Shadowsocks 04"
+  - name: "CDN Shadowsocks 06"
     type: "ss"
-    server: "103.186.154.174"
+    server: "103.186.154.252"
     port: 38388
     cipher: "aes-256-cfb"
     password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
-  - name: "CDN Shadowsocks 06"
+  - name: "CDN Shadowsocks 07"
     type: "ss"
     server: "103.186.154.60"
     port: 38388
@@ -165,55 +58,43 @@ proxies:
     password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
   - name: "CDN Shadowsocks 08"
     type: "ss"
-    server: "103.186.154.252"
+    server: "103.186.154.174"
     port: 38388
     cipher: "aes-256-cfb"
     password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
   - name: "CDN Shadowsocks 09"
     type: "ss"
-    server: "103.186.155.41"
+    server: "103.186.155.115"
     port: 38388
     cipher: "aes-256-cfb"
     password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
   - name: "CDN Shadowsocks 10"
     type: "ss"
-    server: "103.186.155.115"
-    port: 38388
-    cipher: "aes-256-cfb"
-    password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
-  - name: "CDN Shadowsocks 11"
-    type: "ss"
     server: "103.186.155.140"
     port: 38388
     cipher: "aes-256-cfb"
     password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
-  - name: "CDN Shadowsocks 12"
+  - name: "CDN Shadowsocks 13"
     type: "ss"
     server: "103.186.155.33"
     port: 38388
     cipher: "aes-256-cfb"
     password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
-  - name: "🇵🇹 PT 14 | SS"
+  - name: "🇹🇼 TW 03 | SS"
     type: "ss"
-    server: "185.231.233.112"
-    port: 989
+    server: "185.189.160.105"
+    port: 41632
     cipher: "aes-256-cfb"
-    password: "f8f7aCzcPKbsF8p3"
-  - name: "🏳️ GB 02 | SS"
-    type: "ss"
-    server: "51.105.48.144"
-    port: 443
-    cipher: "chacha20-ietf-poly1305"
-    password: "kaQH3hGdcP80XEDI"
+    password: "qwerREWQ@@"
   - name: "🇻🇳 VN 02 | SS"
     type: "ss"
-    server: "103.186.155.15"
+    server: "103.186.154.239"
     port: 38388
     cipher: "aes-256-cfb"
     password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
   - name: "🇻🇳 VN 03 | SS"
     type: "ss"
-    server: "103.186.154.239"
+    server: "103.186.155.15"
     port: 38388
     cipher: "aes-256-cfb"
     password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
@@ -223,12 +104,36 @@ proxies:
     port: 38388
     cipher: "aes-256-cfb"
     password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
-  - name: "🇹🇼 TW 07 | SS"
-    type: "ss"
-    server: "185.189.160.105"
-    port: 41632
-    cipher: "aes-256-cfb"
-    password: "qwerREWQ@@"
+  - name: "CDN VMess 01"
+    type: "vmess"
+    server: "turk1.net.net"
+    port: 80
+    uuid: "43dcdce1-3cea-4193-bc8d-90b92071d779"
+    alterId: 0
+    cipher: "auto"
+    network: "ws"
+    ws-opts:
+      path: "/?BIA_TELEGRAM@AZARBAYJAB1_AZARBAYJAB1_AZARBAYJAB1_AZARBAYJAB1/?de=2560"
+      headers:
+        Host: "tr1-smart.adelping.com."
+  - name: "🏳️ 其他 12 | VMess"
+    type: "vmess"
+    server: "n1752248951.lie5d.cyou"
+    port: 443
+    uuid: "bf2ce3c2-339f-4926-b92d-b7d83af1b3b6"
+    alterId: 0
+    cipher: "auto"
+    network: "ws"
+    tls: true
+  - name: "🏳️ 其他 14 | VMess"
+    type: "vmess"
+    server: "n1761296897.lie5d.cyou"
+    port: 443
+    uuid: "5ecc3086-93cf-42e3-956b-f2180e042537"
+    alterId: 0
+    cipher: "auto"
+    network: "ws"
+    tls: true
   - name: "🏳️ 其他 05 | Trojan"
     type: "trojan"
     server: "hyfuuf6.wsone.icu"
@@ -236,12 +141,19 @@ proxies:
     password: "M7v%w11Se*"
     sni: "hyfuuf6.wsone.icu"
     skip-cert-verify: true
-  - name: "🏳️ 其他 17 | Trojan"
+  - name: "🏳️ 其他 11 | Trojan"
     type: "trojan"
     server: "free-de-2.undef.network"
     port: 443
     password: "pYIoKUPGpWeTYXEx3HjR7s97B"
     sni: "free-de-2.undef.network"
+    skip-cert-verify: true
+  - name: "ISP Trojan 03"
+    type: "trojan"
+    server: "green2.cdntencentmusic.com"
+    port: 31101
+    password: "/bef1e608-83df-4935-8169-8a345f5643e9"
+    sni: "green2.cdntencentmusic.com"
     skip-cert-verify: true
 
 proxy-groups:
