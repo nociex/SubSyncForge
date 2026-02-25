@@ -155,16 +155,15 @@
       "type": "selector",
       "tag": "others-group",
       "outbounds": [
-        "CDN VMess 03",
         "CDN VMess 01",
         "CDN VMess 02",
-        "CDN VMess 04",
+        "CDN VMess 03",
         "🇻🇳 VN 02 | SS",
-        "🇻🇳 VN 04 | SS",
         "🇻🇳 VN 03 | SS",
-        "ISP Trojan 05",
-        "ISP Trojan 06",
-        "🏳️ 其他 05 | Trojan"
+        "🇻🇳 VN 04 | SS",
+        "ISP Trojan 04",
+        "🏳️ 其他 05 | Trojan",
+        "ISP Trojan 05"
       ]
     },
     {
@@ -180,80 +179,51 @@
       "tag": "dns-out"
     },
     {
-      "tag": "CDN VMess 03",
-      "type": "vmess",
-      "server": "104.21.75.43",
-      "server_port": 80,
-      "uuid": "1798b14b-aee0-4008-ba9a-2e53877761b4",
-      "security": "auto",
-      "alter_id": 0,
-      "transport": {
-        "type": "ws",
-        "path": "/kFK9O5cl8ZycyrxcJWNVFC21",
-        "headers": {
-          "Host": "bbnj.wc9.ccwu.cc"
-        }
-      }
-    },
-    {
       "tag": "CDN VMess 01",
       "type": "vmess",
-      "server": "nnh.1x0.indevs.in",
-      "server_port": 443,
-      "uuid": "4e45c1b4-9107-45dd-9995-cdf7cbb44d9d",
+      "server": "104.26.14.137",
+      "server_port": 80,
+      "uuid": "43dcdce1-3cea-4193-bc8d-90b92071d779",
       "security": "auto",
       "alter_id": 0,
       "transport": {
         "type": "ws",
-        "path": "/iSRWSKUJKNuXvVzsYHmsMrnO",
+        "path": "/",
         "headers": {
-          "Host": "nnh.1x0.indevs.in"
+          "Host": "tr1-smart.adelping.com."
         }
-      },
-      "tls": {
-        "enabled": true,
-        "server_name": "nnh.1x0.indevs.in",
-        "insecure": false
       }
     },
     {
       "tag": "CDN VMess 02",
       "type": "vmess",
-      "server": "u9.89060004.xyz",
-      "server_port": 443,
-      "uuid": "4c205c81-5694-43fe-a287-af563a2ebc05",
+      "server": "104.26.15.137",
+      "server_port": 80,
+      "uuid": "43dcdce1-3cea-4193-bc8d-90b92071d779",
       "security": "auto",
       "alter_id": 0,
       "transport": {
         "type": "ws",
-        "path": "/djA07iUsSp0K2Fo4gds7cXpDB5nO5",
-        "headers": {}
-      },
-      "tls": {
-        "enabled": true,
-        "server_name": "u9.89060004.xyz",
-        "insecure": false
+        "path": "/",
+        "headers": {
+          "Host": "tr1-smart.adelping.com."
+        }
       }
     },
     {
-      "tag": "CDN VMess 04",
+      "tag": "CDN VMess 03",
       "type": "vmess",
-      "server": "njmk.dddc.de5.net",
-      "server_port": 443,
-      "uuid": "34778794-72e8-4862-b1e7-6e6c3ba894be",
+      "server": "turk1.net.net",
+      "server_port": 80,
+      "uuid": "43dcdce1-3cea-4193-bc8d-90b92071d779",
       "security": "auto",
       "alter_id": 0,
       "transport": {
         "type": "ws",
-        "path": "/qlWiWOdPkCVqBXYWmzP5D1vsO",
+        "path": "/?de=2560",
         "headers": {
-          "Host": "njmk.dddc.de5.net"
+          "Host": "tr1-smart.adelping.com."
         }
-      },
-      "tls": {
-        "enabled": true,
-        "server_name": "njmk.dddc.de5.net",
-        "insecure": false
       }
     },
     {
@@ -266,6 +236,14 @@
     },
     {
       "tag": "🇻🇳 VN 02 | SS",
+      "type": "shadowsocks",
+      "server": "103.186.154.239",
+      "server_port": 38388,
+      "method": "aes-256-cfb",
+      "password": "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
+    },
+    {
+      "tag": "🇻🇳 VN 03 | SS",
       "type": "shadowsocks",
       "server": "103.186.155.15",
       "server_port": 38388,
@@ -281,34 +259,14 @@
       "password": "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
     },
     {
-      "tag": "🇻🇳 VN 03 | SS",
-      "type": "shadowsocks",
-      "server": "103.186.154.239",
-      "server_port": 38388,
-      "method": "aes-256-cfb",
-      "password": "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
-    },
-    {
-      "tag": "ISP Trojan 05",
+      "tag": "ISP Trojan 04",
       "type": "trojan",
-      "server": "220.130.58.136",
-      "server_port": 31101,
-      "password": "/04e5b584-1850-483d-a844-9ad624a4ca8e",
+      "server": "60.250.152.209",
+      "server_port": 3462,
+      "password": "/736cd94d-7b94-3e44-8106-3419f64eaf09",
       "tls": {
         "enabled": true,
-        "server_name": "220.130.58.136",
-        "insecure": true
-      }
-    },
-    {
-      "tag": "ISP Trojan 06",
-      "type": "trojan",
-      "server": "220.130.58.136",
-      "server_port": 35501,
-      "password": "/a1a00c82-5356-4a49-8944-1cd0f94168bb",
-      "tls": {
-        "enabled": true,
-        "server_name": "220.130.58.136",
+        "server_name": "45.32.28.232",
         "insecure": false
       }
     },
@@ -322,6 +280,18 @@
         "enabled": true,
         "server_name": "hyfuuf6.wsone.icu",
         "insecure": true
+      }
+    },
+    {
+      "tag": "ISP Trojan 05",
+      "type": "trojan",
+      "server": "green2.cdntencentmusic.com",
+      "server_port": 31101,
+      "password": "/26635779-8ce6-4c07-ae5d-f3769ec95ddd",
+      "tls": {
+        "enabled": true,
+        "server_name": "green2.cdntencentmusic.com",
+        "insecure": false
       }
     }
   ],
