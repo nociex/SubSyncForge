@@ -14,9 +14,21 @@ geox-url:
   mmdb: "https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/country.mmdb"
 
 proxies:
-  - name: "CDN VMess 03"
+  - name: "CDN VMess 05"
     type: "vmess"
-    server: "188.114.96.3"
+    server: "104.21.7.101"
+    port: 80
+    uuid: "4e45c1b4-9107-45dd-9995-cdf7cbb44d9d"
+    alterId: 0
+    cipher: "auto"
+    network: "ws"
+    ws-opts:
+      path: "/iSRWSKUJKNuXvVzsYHmsMrnO"
+      headers:
+        Host: "gbnh.0nn.ccwu.cc"
+  - name: "CDN VMess 04"
+    type: "vmess"
+    server: "sy4.620720.xyz"
     port: 443
     uuid: "516d8a7a-3f0b-41d3-bad0-246116381516"
     alterId: 0
@@ -27,31 +39,22 @@ proxies:
       path: "/"
       headers:
         Host: "sy4.620720.xyz"
-  - name: "CDN VMess 01"
+  - name: "CDN VMess 06"
     type: "vmess"
-    server: "c7.620720.xyz"
-    port: 8443
-    uuid: "516d8a7a-3f0b-41d3-bad0-246116381516"
+    server: "hjk.6no.ccwu.cc"
+    port: 443
+    uuid: "5f6c3f92-7220-4275-b34d-57c04db3f967"
     alterId: 0
     cipher: "auto"
     network: "ws"
     tls: true
     ws-opts:
-      path: "/"
+      path: "/KnuT4XBUucXkOSONBms"
       headers:
-        Host: "c7.620720.xyz"
-  - name: "CDN VMess 10"
+        Host: "hjk.6no.ccwu.cc"
+  - name: "CDN VMess 08"
     type: "vmess"
-    server: "sy4.620720.xyz"
-    port: 443
-    uuid: "516d8a7a-3f0b-41d3-bad0-246116381516"
-    alterId: 0
-    cipher: "auto"
-    network: "ws"
-    tls: true
-  - name: "CDN VMess 11"
-    type: "vmess"
-    server: "t1.620720.xyz"
+    server: "c7.620720.xyz"
     port: 8443
     uuid: "516d8a7a-3f0b-41d3-bad0-246116381516"
     alterId: 0
@@ -64,27 +67,21 @@ proxies:
     port: 443
     cipher: "aes-128-gcm"
     password: "shadowsocks"
-  - name: "🏳️ 其他 04 | SS"
-    type: "ss"
-    server: "ss.031.node-for-bigairport.win"
-    port: 36885
-    cipher: "aes-256-gcm"
-    password: "c69374da-2208-4cbd-b81e-cdf88b5e7f53"
-  - name: "🇵🇹 PT 09 | SS"
-    type: "ss"
-    server: "185.231.233.112"
-    port: 989
-    cipher: "aes-256-cfb"
-    password: "f8f7aCzcPKbsF8p3"
   - name: "🇻🇳 VN 01 | SS"
     type: "ss"
-    server: "103.186.155.149"
+    server: "103.186.155.64"
     port: 38388
     cipher: "aes-256-cfb"
     password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
   - name: "🇻🇳 VN 02 | SS"
     type: "ss"
-    server: "103.186.155.15"
+    server: "103.186.154.235"
+    port: 38388
+    cipher: "aes-256-cfb"
+    password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
+  - name: "🇻🇳 VN 03 | SS"
+    type: "ss"
+    server: "103.186.155.67"
     port: 38388
     cipher: "aes-256-cfb"
     password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
@@ -96,31 +93,25 @@ proxies:
     password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
   - name: "🇻🇳 VN 02 | SS"
     type: "ss"
-    server: "103.186.155.67"
-    port: 38388
-    cipher: "aes-256-cfb"
-    password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
-  - name: "🇻🇳 VN 03 | SS"
-    type: "ss"
-    server: "103.186.155.68"
+    server: "103.186.155.15"
     port: 38388
     cipher: "aes-256-cfb"
     password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
   - name: "🇻🇳 VN 04 | SS"
     type: "ss"
-    server: "103.186.154.235"
+    server: "103.186.155.85"
     port: 38388
     cipher: "aes-256-cfb"
     password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
   - name: "🇻🇳 VN 05 | SS"
     type: "ss"
-    server: "103.186.154.243"
+    server: "103.186.155.68"
     port: 38388
     cipher: "aes-256-cfb"
     password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
   - name: "🇻🇳 VN 06 | SS"
     type: "ss"
-    server: "103.186.155.64"
+    server: "103.186.154.243"
     port: 38388
     cipher: "aes-256-cfb"
     password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
@@ -130,24 +121,18 @@ proxies:
     port: 38388
     cipher: "aes-256-cfb"
     password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
-  - name: "🇻🇳 VN 08 | SS"
-    type: "ss"
-    server: "103.186.155.85"
-    port: 38388
-    cipher: "aes-256-cfb"
-    password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
   - name: "🇻🇳 VN 04 | SS"
     type: "ss"
     server: "103.186.155.106"
     port: 38388
     cipher: "aes-256-cfb"
     password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
-  - name: "ISP Trojan 05"
-    type: "trojan"
-    server: "green2.cdntencentmusic.com"
-    port: 35501
-    password: "/04e5b584-1850-483d-a844-9ad624a4ca8e"
-    sni: "green2.cdntencentmusic.com"
+  - name: "🇻🇳 VN 09 | SS"
+    type: "ss"
+    server: "103.186.155.149"
+    port: 38388
+    cipher: "aes-256-cfb"
+    password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
 
 proxy-groups:
   - name: 🚀 节点选择
