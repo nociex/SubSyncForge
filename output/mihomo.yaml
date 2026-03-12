@@ -20,14 +20,18 @@ proxies:
     port: 443
     cipher: "aes-128-gcm"
     password: "shadowsocks"
-  - name: "🇺🇸 US 02 | VMess"
-    type: "vmess"
-    server: "pub.ap20260228.com"
-    port: 64014
-    uuid: "a739e782-1682-38a5-9153-aad09d779ae9"
-    alterId: 0
-    cipher: "auto"
-    network: "tcp"
+  - name: "🏳️ 其他 01 | SS"
+    type: "ss"
+    server: "admin.c1.havij.co"
+    port: 443
+    cipher: "chacha20-ietf-poly1305"
+    password: "1kVr0KATIJI7mwOF"
+  - name: "🇻🇳 VN 02 | SS"
+    type: "ss"
+    server: "103.186.155.204"
+    port: 38388
+    cipher: "aes-256-cfb"
+    password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
   - name: "🇻🇳 VN 02 | SS"
     type: "ss"
     server: "103.186.155.15"
@@ -36,19 +40,7 @@ proxies:
     password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
   - name: "🇻🇳 VN 03 | SS"
     type: "ss"
-    server: "103.186.155.204"
-    port: 38388
-    cipher: "aes-256-cfb"
-    password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
-  - name: "🇻🇳 VN 04 | SS"
-    type: "ss"
-    server: "103.186.155.60"
-    port: 38388
-    cipher: "aes-256-cfb"
-    password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
-  - name: "🇻🇳 VN 05 | SS"
-    type: "ss"
-    server: "103.186.154.185"
+    server: "103.186.155.53"
     port: 38388
     cipher: "aes-256-cfb"
     password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
@@ -58,9 +50,15 @@ proxies:
     port: 38388
     cipher: "aes-256-cfb"
     password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
+  - name: "🇻🇳 VN 05 | SS"
+    type: "ss"
+    server: "103.186.154.185"
+    port: 38388
+    cipher: "aes-256-cfb"
+    password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
   - name: "🇻🇳 VN 06 | SS"
     type: "ss"
-    server: "103.186.155.53"
+    server: "103.186.155.60"
     port: 38388
     cipher: "aes-256-cfb"
     password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
@@ -76,51 +74,21 @@ proxies:
     port: 38388
     cipher: "aes-256-cfb"
     password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
-  - name: "🏳️ 其他 01 | VMess"
+  - name: "CDN VMess 04"
     type: "vmess"
-    server: "pub.ap20260228.com"
-    port: 64013
-    uuid: "a739e782-1682-38a5-9153-aad09d779ae9"
-    alterId: 0
-    cipher: "auto"
-    network: "tcp"
-  - name: "CDN VMess 01"
-    type: "vmess"
-    server: "hwtqcp.uhomdex.shop"
+    server: "zzrt.uhomdex.shop"
     port: 8443
-    uuid: "b6182347-f6df-47e3-9ac8-d40a792f319e"
+    uuid: "0b4c4ed4-deed-4bda-ae3d-6c8ccd1d1199"
     alterId: 0
     cipher: "auto"
     network: "ws"
     tls: true
-    ws-opts:
-      path: "/"
-      headers:
-        Host: "hwtqcp.uhomdex.shop"
-  - name: "🇨🇳 CN 08 | VMess"
-    type: "vmess"
-    server: "pub.ap20260228.com"
-    port: 64018
-    uuid: "a739e782-1682-38a5-9153-aad09d779ae9"
-    alterId: 0
-    cipher: "auto"
-    network: "tcp"
-  - name: "🇸🇬 SG 09 | VMess"
-    type: "vmess"
-    server: "pub.ap20260228.com"
-    port: 64021
-    uuid: "a739e782-1682-38a5-9153-aad09d779ae9"
-    alterId: 0
-    cipher: "auto"
-    network: "tcp"
-  - name: "🇫🇷 FR 10 | VMess"
-    type: "vmess"
-    server: "pub.ap20260228.com"
-    port: 64092
-    uuid: "a739e782-1682-38a5-9153-aad09d779ae9"
-    alterId: 0
-    cipher: "auto"
-    network: "tcp"
+  - name: "ISP Trojan 01"
+    type: "trojan"
+    server: "tw05.stimaysmhy8.com"
+    port: 31500
+    password: "/d5fa43f9-1ace-4b8f-b865-627e67b1fe37"
+    sni: "jsygouer.weixin-baidu-qq.com"
   - name: "🏳️ 其他 05 | Trojan"
     type: "trojan"
     server: "hyfuuf6.wsone.icu"
