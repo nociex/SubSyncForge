@@ -26,36 +26,158 @@ proxies:
     port: 443
     cipher: "chacha20-ietf-poly1305"
     password: "hbGrpfvNrJsUmKmPbR3iY2"
-  - name: "🏳️ 其他 02 | SS"
+  - name: "🏳️ 其他 03 | SS"
     type: "ss"
     server: "admin.c1.webramz.co"
     port: 443
     cipher: "chacha20-ietf-poly1305"
     password: "W74XFALLLuw6m5IA"
-  - name: "🏳️ 其他 03 | SS"
+  - name: "🏳️ 其他 04 | SS"
+    type: "ss"
+    server: "admin.c1.havij.co"
+    port: 443
+    cipher: "chacha20-ietf-poly1305"
+    password: "1kVr0KATIJI7mwOF"
+  - name: "🏳️ 其他 05 | SS"
     type: "ss"
     server: "series-a2.samanehha.co"
     port: 443
     cipher: "chacha20-ietf-poly1305"
     password: "W74XFALLLuw6m5IA"
-  - name: "🏳️ 其他 04 | SS"
-    type: "ss"
-    server: "switcher-nick-croquet.freesocks.work"
-    port: 443
-    cipher: "chacha20-ietf-poly1305"
-    password: "wwzVn2ZnHfqYa6l8EWh3eY"
-  - name: "🏳️ LT 26 | SS"
+  - name: "🏳️ LT 23 | SS"
     type: "ss"
     server: "195.66.25.220"
     port: 8388
     cipher: "chacha20-ietf-poly1305"
     password: "yhrHMDgZ2egKftvrecvkpUPqpUTyac7q"
-  - name: "🇳🇱 NL 05 | SS"
+  - name: "🏳️ 其他 27 | SS"
     type: "ss"
     server: "switcher-nick-croquet.freesocks.work"
     port: 443
     cipher: "chacha20-ietf-poly1305"
     password: "9tqhMdIrTkgQ46PvhyAtMH"
+  - name: "🇪🇸 ES 02 | SS"
+    type: "ss"
+    server: "5.188.181.201"
+    port: 9027
+    cipher: "aes-256-cfb"
+    password: "EXN3S3eQpjE7EJu8"
+  - name: "ISP VMess 01"
+    type: "vmess"
+    server: "cn02.365cloud5878.com"
+    port: 6033
+    uuid: "9f1ecfca-13a9-488d-ac84-aaeb73a8d574"
+    alterId: 0
+    cipher: "auto"
+    network: "tcp"
+    ws-opts:
+      path: "/"
+      headers:
+        Host: "cn02.365cloud5878.com"
+  - name: "ISP VMess 02"
+    type: "vmess"
+    server: "cn02.365cloud5878.com"
+    port: 6049
+    uuid: "9f1ecfca-13a9-488d-ac84-aaeb73a8d574"
+    alterId: 0
+    cipher: "auto"
+    network: "tcp"
+    ws-opts:
+      path: "/"
+      headers:
+        Host: "cn02.365cloud5878.com"
+  - name: "ISP VMess 05"
+    type: "vmess"
+    server: "cn02.365cloud5878.com"
+    port: 6005
+    uuid: "9f1ecfca-13a9-488d-ac84-aaeb73a8d574"
+    alterId: 0
+    cipher: "auto"
+    network: "tcp"
+    ws-opts:
+      path: "/"
+      headers:
+        Host: "cn02.365cloud5878.com"
+  - name: "ISP VMess 06"
+    type: "vmess"
+    server: "cn02.365cloud5878.com"
+    port: 6040
+    uuid: "9f1ecfca-13a9-488d-ac84-aaeb73a8d574"
+    alterId: 0
+    cipher: "auto"
+    network: "tcp"
+    ws-opts:
+      path: "/"
+      headers:
+        Host: "cn02.365cloud5878.com"
+  - name: "ISP VMess 07"
+    type: "vmess"
+    server: "cn02.365cloud5878.com"
+    port: 6009
+    uuid: "9f1ecfca-13a9-488d-ac84-aaeb73a8d574"
+    alterId: 0
+    cipher: "auto"
+    network: "tcp"
+    ws-opts:
+      path: "/"
+      headers:
+        Host: "cn02.365cloud5878.com"
+  - name: "ISP VMess 08"
+    type: "vmess"
+    server: "cn02.365cloud5878.com"
+    port: 6019
+    uuid: "9f1ecfca-13a9-488d-ac84-aaeb73a8d574"
+    alterId: 0
+    cipher: "auto"
+    network: "tcp"
+  - name: "ISP VMess 09"
+    type: "vmess"
+    server: "cn02.365cloud5878.com"
+    port: 6031
+    uuid: "9f1ecfca-13a9-488d-ac84-aaeb73a8d574"
+    alterId: 0
+    cipher: "auto"
+    network: "tcp"
+    ws-opts:
+      path: "/"
+      headers:
+        Host: "cn02.365cloud5878.com"
+  - name: "ISP VMess 10"
+    type: "vmess"
+    server: "cn02.365cloud5878.com"
+    port: 6021
+    uuid: "9f1ecfca-13a9-488d-ac84-aaeb73a8d574"
+    alterId: 0
+    cipher: "auto"
+    network: "tcp"
+    ws-opts:
+      path: "/"
+      headers:
+        Host: "cn02.365cloud5878.com"
+  - name: "ISP VMess 11"
+    type: "vmess"
+    server: "cn02.365cloud5878.com"
+    port: 6003
+    uuid: "9f1ecfca-13a9-488d-ac84-aaeb73a8d574"
+    alterId: 0
+    cipher: "auto"
+    network: "tcp"
+    ws-opts:
+      path: "/"
+      headers:
+        Host: "cn02.365cloud5878.com"
+  - name: "ISP VMess 12"
+    type: "vmess"
+    server: "cn02.365cloud5878.com"
+    port: 6046
+    uuid: "9f1ecfca-13a9-488d-ac84-aaeb73a8d574"
+    alterId: 0
+    cipher: "auto"
+    network: "tcp"
+    ws-opts:
+      path: "/"
+      headers:
+        Host: "cn02.365cloud5878.com"
   - name: "🇰🇷 KR 06 | SS"
     type: "ss"
     server: "141.164.45.187"
@@ -76,19 +198,13 @@ proxies:
     password: "XKFKl2rULjIp74"
   - name: "🇻🇳 VN 09 | SS"
     type: "ss"
-    server: "103.186.154.206"
+    server: "103.186.155.10"
     port: 38388
     cipher: "aes-256-cfb"
     password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
   - name: "🇻🇳 VN 10 | SS"
     type: "ss"
-    server: "103.186.155.10"
-    port: 38388
-    cipher: "aes-256-cfb"
-    password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
-  - name: "🇻🇳 VN 02 | SS"
-    type: "ss"
-    server: "103.186.155.15"
+    server: "103.186.155.123"
     port: 38388
     cipher: "aes-256-cfb"
     password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
@@ -100,19 +216,13 @@ proxies:
     password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
   - name: "🇻🇳 VN 12 | SS"
     type: "ss"
-    server: "103.186.155.222"
+    server: "103.186.154.153"
     port: 38388
     cipher: "aes-256-cfb"
     password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
   - name: "🇻🇳 VN 13 | SS"
     type: "ss"
-    server: "103.186.154.60"
-    port: 38388
-    cipher: "aes-256-cfb"
-    password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
-  - name: "🇻🇳 VN 03 | SS"
-    type: "ss"
-    server: "103.186.154.239"
+    server: "103.186.154.73"
     port: 38388
     cipher: "aes-256-cfb"
     password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
@@ -124,25 +234,55 @@ proxies:
     password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
   - name: "🇻🇳 VN 15 | SS"
     type: "ss"
-    server: "103.186.155.123"
+    server: "103.186.154.60"
     port: 38388
     cipher: "aes-256-cfb"
     password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
   - name: "🇻🇳 VN 16 | SS"
     type: "ss"
-    server: "103.186.154.189"
+    server: "103.186.154.144"
+    port: 38388
+    cipher: "aes-256-cfb"
+    password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
+  - name: "🇻🇳 VN 02 | SS"
+    type: "ss"
+    server: "103.186.154.239"
     port: 38388
     cipher: "aes-256-cfb"
     password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
   - name: "🇻🇳 VN 17 | SS"
     type: "ss"
-    server: "103.186.154.73"
+    server: "103.186.154.161"
+    port: 38388
+    cipher: "aes-256-cfb"
+    password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
+  - name: "🇻🇳 VN 19 | SS"
+    type: "ss"
+    server: "103.186.155.222"
     port: 38388
     cipher: "aes-256-cfb"
     password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
   - name: "🇻🇳 VN 18 | SS"
     type: "ss"
-    server: "103.186.154.228"
+    server: "103.186.154.189"
+    port: 38388
+    cipher: "aes-256-cfb"
+    password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
+  - name: "🇻🇳 VN 20 | SS"
+    type: "ss"
+    server: "103.186.154.169"
+    port: 38388
+    cipher: "aes-256-cfb"
+    password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
+  - name: "🇻🇳 VN 21 | SS"
+    type: "ss"
+    server: "103.186.154.206"
+    port: 38388
+    cipher: "aes-256-cfb"
+    password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
+  - name: "🇻🇳 VN 22 | SS"
+    type: "ss"
+    server: "103.186.154.208"
     port: 38388
     cipher: "aes-256-cfb"
     password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
@@ -152,49 +292,37 @@ proxies:
     port: 38388
     cipher: "aes-256-cfb"
     password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
-  - name: "🇻🇳 VN 19 | SS"
+  - name: "🇻🇳 VN 24 | SS"
     type: "ss"
     server: "103.186.155.56"
     port: 38388
     cipher: "aes-256-cfb"
     password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
-  - name: "🇻🇳 VN 20 | SS"
+  - name: "🇻🇳 VN 03 | SS"
     type: "ss"
-    server: "103.186.154.208"
-    port: 38388
-    cipher: "aes-256-cfb"
-    password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
-  - name: "🇻🇳 VN 21 | SS"
-    type: "ss"
-    server: "103.186.154.144"
-    port: 38388
-    cipher: "aes-256-cfb"
-    password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
-  - name: "🇻🇳 VN 22 | SS"
-    type: "ss"
-    server: "103.186.154.161"
-    port: 38388
-    cipher: "aes-256-cfb"
-    password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
-  - name: "🇻🇳 VN 23 | SS"
-    type: "ss"
-    server: "103.186.154.168"
-    port: 38388
-    cipher: "aes-256-cfb"
-    password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
-  - name: "🇻🇳 VN 24 | SS"
-    type: "ss"
-    server: "103.186.154.169"
+    server: "103.186.155.15"
     port: 38388
     cipher: "aes-256-cfb"
     password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
   - name: "🇻🇳 VN 25 | SS"
     type: "ss"
-    server: "103.186.154.153"
+    server: "103.186.154.168"
     port: 38388
     cipher: "aes-256-cfb"
     password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
-  - name: "🇸🇬 SG 07 | VMess"
+  - name: "🇻🇳 VN 26 | SS"
+    type: "ss"
+    server: "103.186.154.228"
+    port: 38388
+    cipher: "aes-256-cfb"
+    password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
+  - name: "🇳🇱 NL 28 | SS"
+    type: "ss"
+    server: "switcher-nick-croquet.freesocks.work"
+    port: 443
+    cipher: "chacha20-ietf-poly1305"
+    password: "wwzVn2ZnHfqYa6l8EWh3eY"
+  - name: "🇸🇬 SG 04 | VMess"
     type: "vmess"
     server: "82.21.80.224"
     port: 17310
@@ -205,78 +333,6 @@ proxies:
     tls: true
     ws-opts:
       path: "/"
-  - name: "ISP VMess 01"
-    type: "vmess"
-    server: "cn02.365cloud5878.com"
-    port: 6012
-    uuid: "9f1ecfca-13a9-488d-ac84-aaeb73a8d574"
-    alterId: 0
-    cipher: "auto"
-    network: "tcp"
-  - name: "ISP VMess 02"
-    type: "vmess"
-    server: "cn02.365cloud5878.com"
-    port: 6047
-    uuid: "9f1ecfca-13a9-488d-ac84-aaeb73a8d574"
-    alterId: 0
-    cipher: "auto"
-    network: "tcp"
-  - name: "ISP VMess 03"
-    type: "vmess"
-    server: "cn02.365cloud5878.com"
-    port: 6022
-    uuid: "9f1ecfca-13a9-488d-ac84-aaeb73a8d574"
-    alterId: 0
-    cipher: "auto"
-    network: "tcp"
-  - name: "ISP VMess 04"
-    type: "vmess"
-    server: "cn02.365cloud5878.com"
-    port: 6046
-    uuid: "9f1ecfca-13a9-488d-ac84-aaeb73a8d574"
-    alterId: 0
-    cipher: "auto"
-    network: "tcp"
-  - name: "ISP VMess 05"
-    type: "vmess"
-    server: "cn02.365cloud5878.com"
-    port: 6040
-    uuid: "9f1ecfca-13a9-488d-ac84-aaeb73a8d574"
-    alterId: 0
-    cipher: "auto"
-    network: "tcp"
-  - name: "ISP VMess 06"
-    type: "vmess"
-    server: "cn02.365cloud5878.com"
-    port: 6007
-    uuid: "9f1ecfca-13a9-488d-ac84-aaeb73a8d574"
-    alterId: 0
-    cipher: "auto"
-    network: "tcp"
-  - name: "ISP VMess 08"
-    type: "vmess"
-    server: "cn02.365cloud5878.com"
-    port: 6018
-    uuid: "9f1ecfca-13a9-488d-ac84-aaeb73a8d574"
-    alterId: 0
-    cipher: "auto"
-    network: "tcp"
-  - name: "ISP VMess 09"
-    type: "vmess"
-    server: "cn02.365cloud5878.com"
-    port: 6049
-    uuid: "9f1ecfca-13a9-488d-ac84-aaeb73a8d574"
-    alterId: 0
-    cipher: "auto"
-    network: "tcp"
-  - name: "ISP VMess 10"
-    type: "vmess"
-    server: "cn02.365cloud5878.com"
-    port: 6039
-    uuid: "9f1ecfca-13a9-488d-ac84-aaeb73a8d574"
-    alterId: 0
-    cipher: "auto"
-    network: "tcp"
 
 proxy-groups:
   - name: 🚀 节点选择
