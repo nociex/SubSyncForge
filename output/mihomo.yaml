@@ -20,31 +20,37 @@ proxies:
     port: 443
     cipher: "aes-128-gcm"
     password: "shadowsocks"
-  - name: "🇯🇵 JP 01 | SS"
-    type: "ss"
-    server: "185.141.219.24"
-    port: 30312
-    cipher: "aes-256-gcm"
-    password: "99394cfebe6c0906"
-  - name: "🏳️ 其他 02 | SS"
+  - name: "🏳️ 其他 01 | SS"
     type: "ss"
     server: "tinkered-pennies-puppies.freesocks.work"
     port: 443
     cipher: "chacha20-ietf-poly1305"
     password: "hbGrpfvNrJsUmKmPbR3iY2"
-  - name: "🏳️ 其他 01 | SS"
+  - name: "🏳️ 其他 03 | SS"
     type: "ss"
-    server: "series-a2.samanehha.co"
+    server: "admin.c1.webramz.co"
     port: 443
     cipher: "chacha20-ietf-poly1305"
     password: "W74XFALLLuw6m5IA"
-  - name: "🏳️ 其他 04 | SS"
+  - name: "🏳️ LT 13 | SS"
     type: "ss"
-    server: "series-a1.samanehha.co"
+    server: "195.66.25.220"
+    port: 8388
+    cipher: "chacha20-ietf-poly1305"
+    password: "yhrHMDgZ2egKftvrecvkpUPqpUTyac7q"
+  - name: "🇪🇸 ES 02 | SS"
+    type: "ss"
+    server: "5.188.181.201"
+    port: 9014
+    cipher: "aes-256-cfb"
+    password: "KnJGad3FqTvjqbaX"
+  - name: "🏳️ GB 02 | SS"
+    type: "ss"
+    server: "20.90.104.203"
     port: 443
     cipher: "chacha20-ietf-poly1305"
     password: "W74XFALLLuw6m5IA"
-  - name: "🇻🇳 VN 03 | SS"
+  - name: "🇻🇳 VN 04 | SS"
     type: "ss"
     server: "103.186.155.218"
     port: 38388
@@ -56,15 +62,9 @@ proxies:
     port: 38388
     cipher: "aes-256-cfb"
     password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
-  - name: "🇻🇳 VN 07 | SS"
+  - name: "🇻🇳 VN 06 | SS"
     type: "ss"
-    server: "103.186.155.130"
-    port: 38388
-    cipher: "aes-256-cfb"
-    password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
-  - name: "🇻🇳 VN 02 | SS"
-    type: "ss"
-    server: "103.186.155.15"
+    server: "103.186.154.196"
     port: 38388
     cipher: "aes-256-cfb"
     password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
@@ -76,7 +76,13 @@ proxies:
     password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
   - name: "🇻🇳 VN 04 | SS"
     type: "ss"
-    server: "103.186.155.106"
+    server: "103.186.155.15"
+    port: 38388
+    cipher: "aes-256-cfb"
+    password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
+  - name: "🇻🇳 VN 07 | SS"
+    type: "ss"
+    server: "103.186.155.130"
     port: 38388
     cipher: "aes-256-cfb"
     password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
@@ -94,48 +100,28 @@ proxies:
     password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
   - name: "🇻🇳 VN 10 | SS"
     type: "ss"
-    server: "103.186.154.196"
+    server: "103.186.155.33"
     port: 38388
     cipher: "aes-256-cfb"
     password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
   - name: "🇻🇳 VN 11 | SS"
     type: "ss"
-    server: "103.186.155.33"
-    port: 38388
-    cipher: "aes-256-cfb"
-    password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
-  - name: "🇻🇳 VN 12 | SS"
-    type: "ss"
     server: "103.186.155.146"
     port: 38388
     cipher: "aes-256-cfb"
     password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
-  - name: "🇻🇳 VN 14 | SS"
+  - name: "🇻🇳 VN 05 | SS"
     type: "ss"
-    server: "103.186.154.163"
+    server: "103.186.155.106"
     port: 38388
     cipher: "aes-256-cfb"
     password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
-  - name: "🏳️ 其他 06 | Trojan"
-    type: "trojan"
-    server: "nl-4.tr202513.com"
-    port: 443
-    password: "s7R5MgmN6UrFWjxwYh"
-    sni: "nl-4.tr202513.com"
-    skip-cert-verify: true
-  - name: "🏳️ 其他 13 | Trojan"
+  - name: "🏳️ 其他 12 | Trojan"
     type: "trojan"
     server: "just-alpaca.rooster465.autos"
     port: 443
     password: "IL37892054"
     sni: "just-alpaca.rooster465.autos"
-    skip-cert-verify: true
-  - name: "🏳️ 其他 05 | Trojan"
-    type: "trojan"
-    server: "hyfuuf6.wsone.icu"
-    port: 443
-    password: "M7v%w11Se*"
-    sni: "hyfuuf6.wsone.icu"
     skip-cert-verify: true
 
 proxy-groups:
