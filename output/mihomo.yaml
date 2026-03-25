@@ -14,453 +14,61 @@ geox-url:
   mmdb: "https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/country.mmdb"
 
 proxies:
-  - name: "CDN VMess 02"
-    type: "vmess"
-    server: "sy4.620720.xyz"
-    port: 443
-    uuid: "516d8a7a-3f0b-41d3-bad0-246116381516"
-    alterId: 0
-    cipher: "auto"
-    network: "ws"
-    tls: true
-    ws-opts:
-      path: "/"
-      headers:
-        Host: "sy4.620720.xyz"
-  - name: "🏳️ 其他 62 | VMess"
-    type: "vmess"
-    server: "2bb9ebed-t70f40-t7hsj2-1gevg.hkt.gotochinatown.net"
-    port: 80
-    uuid: "f02ee2b4-d760-11ec-bd7c-f23c913c8d2b"
-    alterId: 2
-    cipher: "auto"
-    network: "ws"
-  - name: "CDN VMess 67"
-    type: "vmess"
-    server: "c7.620720.xyz"
-    port: 8443
-    uuid: "516d8a7a-3f0b-41d3-bad0-246116381516"
-    alterId: 0
-    cipher: "auto"
-    network: "ws"
-    tls: true
-  - name: "🏳️ 其他 65 | VMess"
-    type: "vmess"
-    server: "e8faf291-tbdts0-tcdmjc-1gevg.hkt.gotochinatown.net"
-    port: 80
-    uuid: "f02ee2b4-d760-11ec-bd7c-f23c913c8d2b"
-    alterId: 2
-    cipher: "auto"
-    network: "ws"
-  - name: "🏳️ 其他 68 | VMess"
-    type: "vmess"
-    server: "v4.hdacd.com"
-    port: 30804
-    uuid: "cbb3f877-d1fb-344c-87a9-d153bffd5484"
-    alterId: 2
-    cipher: "auto"
-    network: "tcp"
-  - name: "CDN VMess 69"
-    type: "vmess"
-    server: "t1.620720.xyz"
-    port: 8443
-    uuid: "516d8a7a-3f0b-41d3-bad0-246116381516"
-    alterId: 0
-    cipher: "auto"
-    network: "ws"
-    tls: true
-  - name: "🏳️ 其他 66 | VMess"
-    type: "vmess"
-    server: "927d9757-t6r5s0-t7hsj2-1gevg.hkt.gotochinatown.net"
-    port: 80
-    uuid: "f02ee2b4-d760-11ec-bd7c-f23c913c8d2b"
-    alterId: 2
-    cipher: "auto"
-    network: "ws"
-  - name: "🏳️ 其他 40 | Trojan"
-    type: "trojan"
-    server: "healthy-ewe.rooster465.autos"
-    port: 443
-    password: "IL37892054"
-    sni: "healthy-ewe.rooster465.autos"
-    skip-cert-verify: true
-  - name: "🏳️ 其他 41 | Trojan"
-    type: "trojan"
-    server: "alert-sunbird.crayfish192.xyz"
-    port: 443
-    password: "WF42809561"
-    sni: "alert-sunbird.crayfish192.xyz"
-    skip-cert-verify: true
-  - name: "🏳️ 其他 42 | Trojan"
-    type: "trojan"
-    server: "nice-elephant.rooster465.autos"
-    port: 443
-    password: "WF42809561"
-    sni: "nice-elephant.rooster465.autos"
-    skip-cert-verify: true
-  - name: "🏳️ 其他 43 | Trojan"
-    type: "trojan"
-    server: "sharp-dogfish.rooster465.autos"
-    port: 443
-    password: "WF42809561"
-    sni: "sharp-dogfish.rooster465.autos"
-    skip-cert-verify: true
-  - name: "🏳️ 其他 45 | Trojan"
-    type: "trojan"
-    server: "live-drake.rooster465.autos"
-    port: 443
-    password: "WF42809561"
-    sni: "live-drake.rooster465.autos"
-    skip-cert-verify: true
-  - name: "🏳️ 其他 46 | Trojan"
-    type: "trojan"
-    server: "aware-corgi.rooster465.autos"
-    port: 443
-    password: "WF42809561"
-    sni: "aware-corgi.rooster465.autos"
-    skip-cert-verify: true
-  - name: "🏳️ 其他 47 | Trojan"
-    type: "trojan"
-    server: "exciting-turtle.rooster465.autos"
-    port: 443
-    password: "WF42809561"
-    sni: "exciting-turtle.rooster465.autos"
-    skip-cert-verify: true
-  - name: "🏳️ 其他 48 | Trojan"
-    type: "trojan"
-    server: "game-ant.rooster465.autos"
-    port: 443
-    password: "WF42809561"
-    sni: "game-ant.rooster465.autos"
-    skip-cert-verify: true
-  - name: "🏳️ 其他 49 | Trojan"
-    type: "trojan"
-    server: "vast-werewolf.rooster465.autos"
-    port: 443
-    password: "WF42809561"
-    sni: "vast-werewolf.rooster465.autos"
-    skip-cert-verify: true
-  - name: "🏳️ 其他 50 | Trojan"
-    type: "trojan"
-    server: "intense-monarch.rooster465.autos"
-    port: 443
-    password: "WF42809561"
-    sni: "intense-monarch.rooster465.autos"
-    skip-cert-verify: true
-  - name: "🏳️ 其他 51 | Trojan"
-    type: "trojan"
-    server: "intimate-adder.rooster465.autos"
-    port: 443
-    password: "WF42809561"
-    sni: "intimate-adder.rooster465.autos"
-    skip-cert-verify: true
-  - name: "🏳️ 其他 52 | Trojan"
-    type: "trojan"
-    server: "climbing-sawfly.rooster465.autos"
-    port: 443
-    password: "WF42809561"
-    sni: "climbing-sawfly.rooster465.autos"
-    skip-cert-verify: true
-  - name: "🏳️ 其他 53 | Trojan"
-    type: "trojan"
-    server: "needed-haddock.rooster465.autos"
-    port: 443
-    password: "WF42809561"
-    sni: "needed-haddock.rooster465.autos"
-    skip-cert-verify: true
-  - name: "🏳️ 其他 54 | Trojan"
-    type: "trojan"
-    server: "allowed-hermit.rooster465.autos"
-    port: 443
-    password: "WF42809561"
-    sni: "allowed-hermit.rooster465.autos"
-    skip-cert-verify: true
-  - name: "🏳️ 其他 04 | Trojan"
-    type: "trojan"
-    server: "sharp-feline.rooster465.autos"
-    port: 443
-    password: "WF42809561"
-    sni: "sharp-feline.rooster465.autos"
-    skip-cert-verify: true
-  - name: "🏳️ 其他 55 | Trojan"
-    type: "trojan"
-    server: "lenient-penguin.rooster465.autos"
-    port: 443
-    password: "WF42809561"
-    sni: "lenient-penguin.rooster465.autos"
-    skip-cert-verify: true
-  - name: "🏳️ 其他 56 | Trojan"
-    type: "trojan"
-    server: "sterling-fowl.rooster465.autos"
-    port: 443
-    password: "WF42809561"
-    sni: "sterling-fowl.rooster465.autos"
-    skip-cert-verify: true
-  - name: "🏳️ 其他 57 | Trojan"
-    type: "trojan"
-    server: "amused-peacock.rooster465.autos"
-    port: 443
-    password: "WF42809561"
-    sni: "amused-peacock.rooster465.autos"
-    skip-cert-verify: true
-  - name: "🏳️ 其他 05 | Trojan"
-    type: "trojan"
-    server: "prepared-hawk.rooster465.autos"
-    port: 443
-    password: "WF42809561"
-    sni: "prepared-hawk.rooster465.autos"
-    skip-cert-verify: true
-  - name: "🏳️ 其他 06 | Trojan"
-    type: "trojan"
-    server: "optimal-penguin.rooster465.autos"
-    port: 443
-    password: "WF42809561"
-    sni: "optimal-penguin.rooster465.autos"
-    skip-cert-verify: true
-  - name: "🏳️ 其他 58 | Trojan"
-    type: "trojan"
-    server: "ready-lion.rooster465.autos"
-    port: 443
-    password: "WF42809561"
-    sni: "ready-lion.rooster465.autos"
-    skip-cert-verify: true
-  - name: "🏳️ 其他 59 | Trojan"
-    type: "trojan"
-    server: "powerful-squid.rooster465.autos"
-    port: 443
-    password: "WF42809561"
-    sni: "powerful-squid.rooster465.autos"
-    skip-cert-verify: true
-  - name: "🏳️ 其他 60 | Trojan"
-    type: "trojan"
-    server: "positive-bear.rooster465.autos"
-    port: 443
-    password: "IL37892054"
-    sni: "positive-bear.rooster465.autos"
-    skip-cert-verify: true
-  - name: "🏳️ 其他 12 | Trojan"
-    type: "trojan"
-    server: "hopeful-burro.rooster465.autos"
-    port: 443
-    password: "WF42809561"
-    sni: "hopeful-burro.rooster465.autos"
-    skip-cert-verify: true
-  - name: "🏳️ 其他 13 | Trojan"
-    type: "trojan"
-    server: "moved-bluegill.rooster465.autos"
-    port: 443
-    password: "WF42809561"
-    sni: "moved-bluegill.rooster465.autos"
-    skip-cert-verify: true
-  - name: "🏳️ 其他 15 | Trojan"
-    type: "trojan"
-    server: "evolving-platypus.rooster465.autos"
-    port: 443
-    password: "WF42809561"
-    sni: "evolving-platypus.rooster465.autos"
-    skip-cert-verify: true
-  - name: "🏳️ 其他 21 | Trojan"
-    type: "trojan"
-    server: "brief-glider.rooster465.autos"
-    port: 443
-    password: "WF42809561"
-    sni: "brief-glider.rooster465.autos"
-    skip-cert-verify: true
-  - name: "🏳️ 其他 25 | Trojan"
-    type: "trojan"
-    server: "saving-octopus.rooster465.autos"
-    port: 443
-    password: "WF42809561"
-    sni: "saving-octopus.rooster465.autos"
-    skip-cert-verify: true
-  - name: "🏳️ 其他 22 | Trojan"
-    type: "trojan"
-    server: "darling-mongrel.rooster465.autos"
-    port: 443
-    password: "WF42809561"
-    sni: "darling-mongrel.rooster465.autos"
-    skip-cert-verify: true
-  - name: "🏳️ 其他 23 | Trojan"
-    type: "trojan"
-    server: "dynamic-tiger.crayfish192.xyz"
-    port: 443
-    password: "WF42809561"
-    sni: "dynamic-tiger.crayfish192.xyz"
-    skip-cert-verify: true
-  - name: "🏳️ 其他 26 | Trojan"
-    type: "trojan"
-    server: "enormous-whippet.rooster465.autos"
-    port: 443
-    password: "WF42809561"
-    sni: "enormous-whippet.rooster465.autos"
-    skip-cert-verify: true
-  - name: "🏳️ 其他 28 | Trojan"
-    type: "trojan"
-    server: "valued-mullet.rooster465.autos"
-    port: 443
-    password: "WF42809561"
-    sni: "valued-mullet.rooster465.autos"
-    skip-cert-verify: true
-  - name: "🏳️ 其他 29 | Trojan"
-    type: "trojan"
-    server: "grown-goldfish.rooster465.autos"
-    port: 443
-    password: "WF42809561"
-    sni: "grown-goldfish.rooster465.autos"
-    skip-cert-verify: true
-  - name: "🏳️ 其他 30 | Trojan"
-    type: "trojan"
-    server: "saving-anemone.rooster465.autos"
-    port: 443
-    password: "WF42809561"
-    sni: "saving-anemone.rooster465.autos"
-    skip-cert-verify: true
-  - name: "🏳️ 其他 31 | Trojan"
-    type: "trojan"
-    server: "eternal-serval.rooster465.autos"
-    port: 443
-    password: "WF42809561"
-    sni: "eternal-serval.rooster465.autos"
-    skip-cert-verify: true
-  - name: "🏳️ 其他 32 | Trojan"
-    type: "trojan"
-    server: "diverse-thrush.rooster465.autos"
-    port: 443
-    password: "WF42809561"
-    sni: "diverse-thrush.rooster465.autos"
-    skip-cert-verify: true
-  - name: "🏳️ 其他 61 | Trojan"
-    type: "trojan"
-    server: "outgoing-cockatoo.rooster465.autos"
-    port: 443
-    password: "WF42809561"
-    sni: "outgoing-cockatoo.rooster465.autos"
-    skip-cert-verify: true
-  - name: "🏳️ 其他 63 | Trojan"
-    type: "trojan"
-    server: "top-goshawk.rooster465.autos"
-    port: 443
-    password: "WF42809561"
-    sni: "top-goshawk.rooster465.autos"
-    skip-cert-verify: true
-  - name: "🏳️ 其他 64 | Trojan"
-    type: "trojan"
-    server: "funky-platypus.rooster465.autos"
-    port: 443
-    password: "WF42809561"
-    sni: "funky-platypus.rooster465.autos"
-    skip-cert-verify: true
-  - name: "🏳️ 其他 33 | Trojan"
-    type: "trojan"
-    server: "optimal-dane.rooster465.autos"
-    port: 443
-    password: "WF42809561"
-    sni: "optimal-dane.rooster465.autos"
-    skip-cert-verify: true
-  - name: "🏳️ 其他 34 | Trojan"
-    type: "trojan"
-    server: "still-mastodon.rooster465.autos"
-    port: 443
-    password: "WF42809561"
-    sni: "still-mastodon.rooster465.autos"
-    skip-cert-verify: true
-  - name: "🏳️ 其他 35 | Trojan"
-    type: "trojan"
-    server: "definite-jennet.rooster465.autos"
-    port: 443
-    password: "WF42809561"
-    sni: "definite-jennet.rooster465.autos"
-    skip-cert-verify: true
-  - name: "🏳️ 其他 36 | Trojan"
-    type: "trojan"
-    server: "sterling-dinosaur.rooster465.autos"
-    port: 443
-    password: "WF42809561"
-    sni: "sterling-dinosaur.rooster465.autos"
-    skip-cert-verify: true
-  - name: "🏳️ 其他 37 | Trojan"
-    type: "trojan"
-    server: "premium-lab.rooster465.autos"
-    port: 443
-    password: "WF42809561"
-    sni: "premium-lab.rooster465.autos"
-    skip-cert-verify: true
-  - name: "🏳️ 其他 38 | Trojan"
-    type: "trojan"
-    server: "awake-shiner.rooster465.autos"
-    port: 443
-    password: "WF42809561"
-    sni: "awake-shiner.rooster465.autos"
-    skip-cert-verify: true
-  - name: "🏳️ 其他 39 | Trojan"
-    type: "trojan"
-    server: "prompt-duckling.rooster465.autos"
-    port: 443
-    password: "WF42809561"
-    sni: "prompt-duckling.rooster465.autos"
-    skip-cert-verify: true
-  - name: "🇯🇵 JP 44 | Trojan"
-    type: "trojan"
-    server: "sharp-dogfish.rooster465.autos"
-    port: 443
-    password: "IL37892054"
-    sni: "sharp-dogfish.rooster465.autos"
-    skip-cert-verify: true
   - name: "🇺🇸 US 01 | SS"
     type: "ss"
     server: "37.19.198.236"
     port: 443
     cipher: "aes-128-gcm"
     password: "shadowsocks"
-  - name: "🇭🇰 HK 01 | SS"
-    type: "ss"
-    server: "103.141.221.124"
-    port: 8388
-    cipher: "chacha20-ietf"
-    password: "asd123456"
-  - name: "🇸🇪 SE 02 | SS"
+  - name: "🇸🇪 SE 01 | SS"
     type: "ss"
     server: "16.171.110.163"
     port: 443
     cipher: "aes-256-cfb"
     password: "amazonskr05"
-  - name: "🏳️ HR 03 | SS"
+  - name: "🏳️ HR 02 | SS"
     type: "ss"
     server: "46.183.184.60"
     port: 989
     cipher: "aes-256-cfb"
     password: "f8f7aCzcPKbsF8p3"
-  - name: "🇻🇳 VN 07 | SS"
+  - name: "🇰🇷 KR 07 | SS"
     type: "ss"
-    server: "103.186.155.82"
-    port: 38388
-    cipher: "aes-256-cfb"
-    password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
-  - name: "🇻🇳 VN 09 | SS"
-    type: "ss"
-    server: "103.186.155.205"
-    port: 38388
-    cipher: "aes-256-cfb"
-    password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
-  - name: "🇻🇳 VN 10 | SS"
-    type: "ss"
-    server: "103.186.155.134"
-    port: 38388
-    cipher: "aes-256-cfb"
-    password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
-  - name: "🇻🇳 VN 11 | SS"
-    type: "ss"
-    server: "103.186.154.191"
-    port: 38388
-    cipher: "aes-256-cfb"
-    password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
+    server: "141.164.45.187"
+    port: 5498
+    cipher: "aes-256-gcm"
+    password: "lGqs95QkFHo2NV"
   - name: "🇻🇳 VN 14 | SS"
+    type: "ss"
+    server: "103.186.155.19"
+    port: 38388
+    cipher: "aes-256-cfb"
+    password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
+  - name: "🇻🇳 VN 15 | SS"
+    type: "ss"
+    server: "103.186.154.206"
+    port: 38388
+    cipher: "aes-256-cfb"
+    password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
+  - name: "🇻🇳 VN 16 | SS"
     type: "ss"
     server: "103.186.155.61"
     port: 38388
     cipher: "aes-256-cfb"
     password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
+  - name: "🇻🇳 VN 17 | SS"
+    type: "ss"
+    server: "103.186.155.150"
+    port: 38388
+    cipher: "aes-256-cfb"
+    password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
   - name: "🇻🇳 VN 02 | SS"
+    type: "ss"
+    server: "103.186.155.15"
+    port: 38388
+    cipher: "aes-256-cfb"
+    password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
+  - name: "🇻🇳 VN 03 | SS"
     type: "ss"
     server: "103.186.154.239"
     port: 38388
@@ -472,60 +80,404 @@ proxies:
     port: 38388
     cipher: "aes-256-cfb"
     password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
-  - name: "🇻🇳 VN 16 | SS"
-    type: "ss"
-    server: "103.186.155.222"
-    port: 38388
-    cipher: "aes-256-cfb"
-    password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
-  - name: "🇻🇳 VN 03 | SS"
-    type: "ss"
-    server: "103.186.155.15"
-    port: 38388
-    cipher: "aes-256-cfb"
-    password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
-  - name: "🇻🇳 VN 17 | SS"
-    type: "ss"
-    server: "103.186.155.150"
-    port: 38388
-    cipher: "aes-256-cfb"
-    password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
-  - name: "🇻🇳 VN 18 | SS"
-    type: "ss"
-    server: "103.186.154.28"
-    port: 38388
-    cipher: "aes-256-cfb"
-    password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
   - name: "🇻🇳 VN 19 | SS"
     type: "ss"
-    server: "103.186.154.153"
+    server: "103.186.154.191"
     port: 38388
     cipher: "aes-256-cfb"
     password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
   - name: "🇻🇳 VN 20 | SS"
     type: "ss"
-    server: "103.186.154.206"
+    server: "103.186.155.222"
     port: 38388
     cipher: "aes-256-cfb"
     password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
-  - name: "🇻🇳 VN 24 | SS"
+  - name: "🇻🇳 VN 22 | SS"
     type: "ss"
-    server: "103.186.155.19"
+    server: "103.186.155.205"
     port: 38388
     cipher: "aes-256-cfb"
     password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
-  - name: "🇻🇳 VN 27 | SS"
+  - name: "🇻🇳 VN 25 | SS"
+    type: "ss"
+    server: "103.186.154.28"
+    port: 38388
+    cipher: "aes-256-cfb"
+    password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
+  - name: "🇻🇳 VN 26 | SS"
+    type: "ss"
+    server: "103.186.155.82"
+    port: 38388
+    cipher: "aes-256-cfb"
+    password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
+  - name: "🇻🇳 VN 29 | SS"
+    type: "ss"
+    server: "103.186.155.134"
+    port: 38388
+    cipher: "aes-256-cfb"
+    password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
+  - name: "🇻🇳 VN 31 | SS"
+    type: "ss"
+    server: "103.186.154.153"
+    port: 38388
+    cipher: "aes-256-cfb"
+    password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
+  - name: "🇻🇳 VN 38 | SS"
     type: "ss"
     server: "103.186.154.220"
     port: 38388
     cipher: "aes-256-cfb"
     password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
-  - name: "🇰🇷 KR 08 | SS"
-    type: "ss"
-    server: "141.164.45.187"
-    port: 5498
-    cipher: "aes-256-gcm"
-    password: "lGqs95QkFHo2NV"
+  - name: "🏳️ 其他 39 | Trojan"
+    type: "trojan"
+    server: "healthy-ewe.rooster465.autos"
+    port: 443
+    password: "IL37892054"
+    sni: "healthy-ewe.rooster465.autos"
+    skip-cert-verify: true
+  - name: "🏳️ 其他 40 | Trojan"
+    type: "trojan"
+    server: "alert-sunbird.crayfish192.xyz"
+    port: 443
+    password: "WF42809561"
+    sni: "alert-sunbird.crayfish192.xyz"
+    skip-cert-verify: true
+  - name: "🏳️ 其他 03 | Trojan"
+    type: "trojan"
+    server: "dynamic-tiger.crayfish192.xyz"
+    port: 443
+    password: "WF42809561"
+    sni: "dynamic-tiger.crayfish192.xyz"
+    skip-cert-verify: true
+  - name: "🏳️ 其他 04 | Trojan"
+    type: "trojan"
+    server: "saving-anemone.rooster465.autos"
+    port: 443
+    password: "WF42809561"
+    sni: "saving-anemone.rooster465.autos"
+    skip-cert-verify: true
+  - name: "🏳️ 其他 05 | Trojan"
+    type: "trojan"
+    server: "sterling-dinosaur.rooster465.autos"
+    port: 443
+    password: "WF42809561"
+    sni: "sterling-dinosaur.rooster465.autos"
+    skip-cert-verify: true
+  - name: "🏳️ 其他 06 | Trojan"
+    type: "trojan"
+    server: "still-mastodon.rooster465.autos"
+    port: 443
+    password: "WF42809561"
+    sni: "still-mastodon.rooster465.autos"
+    skip-cert-verify: true
+  - name: "🏳️ 其他 08 | Trojan"
+    type: "trojan"
+    server: "optimal-dane.rooster465.autos"
+    port: 443
+    password: "WF42809561"
+    sni: "optimal-dane.rooster465.autos"
+    skip-cert-verify: true
+  - name: "🏳️ 其他 41 | Trojan"
+    type: "trojan"
+    server: "funky-platypus.rooster465.autos"
+    port: 443
+    password: "WF42809561"
+    sni: "funky-platypus.rooster465.autos"
+    skip-cert-verify: true
+  - name: "🏳️ 其他 09 | Trojan"
+    type: "trojan"
+    server: "grown-goldfish.rooster465.autos"
+    port: 443
+    password: "WF42809561"
+    sni: "grown-goldfish.rooster465.autos"
+    skip-cert-verify: true
+  - name: "🏳️ 其他 42 | Trojan"
+    type: "trojan"
+    server: "top-goshawk.rooster465.autos"
+    port: 443
+    password: "WF42809561"
+    sni: "top-goshawk.rooster465.autos"
+    skip-cert-verify: true
+  - name: "🏳️ 其他 10 | Trojan"
+    type: "trojan"
+    server: "prompt-duckling.rooster465.autos"
+    port: 443
+    password: "WF42809561"
+    sni: "prompt-duckling.rooster465.autos"
+    skip-cert-verify: true
+  - name: "🏳️ 其他 11 | Trojan"
+    type: "trojan"
+    server: "eternal-serval.rooster465.autos"
+    port: 443
+    password: "WF42809561"
+    sni: "eternal-serval.rooster465.autos"
+    skip-cert-verify: true
+  - name: "🏳️ 其他 43 | Trojan"
+    type: "trojan"
+    server: "vast-werewolf.rooster465.autos"
+    port: 443
+    password: "WF42809561"
+    sni: "vast-werewolf.rooster465.autos"
+    skip-cert-verify: true
+  - name: "🏳️ 其他 44 | Trojan"
+    type: "trojan"
+    server: "exciting-turtle.rooster465.autos"
+    port: 443
+    password: "WF42809561"
+    sni: "exciting-turtle.rooster465.autos"
+    skip-cert-verify: true
+  - name: "🏳️ 其他 45 | Trojan"
+    type: "trojan"
+    server: "live-drake.rooster465.autos"
+    port: 443
+    password: "WF42809561"
+    sni: "live-drake.rooster465.autos"
+    skip-cert-verify: true
+  - name: "🏳️ 其他 46 | Trojan"
+    type: "trojan"
+    server: "game-ant.rooster465.autos"
+    port: 443
+    password: "WF42809561"
+    sni: "game-ant.rooster465.autos"
+    skip-cert-verify: true
+  - name: "🏳️ 其他 47 | Trojan"
+    type: "trojan"
+    server: "sharp-dogfish.rooster465.autos"
+    port: 443
+    password: "WF42809561"
+    sni: "sharp-dogfish.rooster465.autos"
+    skip-cert-verify: true
+  - name: "🏳️ 其他 48 | Trojan"
+    type: "trojan"
+    server: "nice-elephant.rooster465.autos"
+    port: 443
+    password: "WF42809561"
+    sni: "nice-elephant.rooster465.autos"
+    skip-cert-verify: true
+  - name: "🏳️ 其他 49 | Trojan"
+    type: "trojan"
+    server: "aware-corgi.rooster465.autos"
+    port: 443
+    password: "WF42809561"
+    sni: "aware-corgi.rooster465.autos"
+    skip-cert-verify: true
+  - name: "🏳️ 其他 50 | Trojan"
+    type: "trojan"
+    server: "needed-haddock.rooster465.autos"
+    port: 443
+    password: "WF42809561"
+    sni: "needed-haddock.rooster465.autos"
+    skip-cert-verify: true
+  - name: "🏳️ 其他 51 | Trojan"
+    type: "trojan"
+    server: "allowed-hermit.rooster465.autos"
+    port: 443
+    password: "WF42809561"
+    sni: "allowed-hermit.rooster465.autos"
+    skip-cert-verify: true
+  - name: "🏳️ 其他 52 | Trojan"
+    type: "trojan"
+    server: "intimate-adder.rooster465.autos"
+    port: 443
+    password: "WF42809561"
+    sni: "intimate-adder.rooster465.autos"
+    skip-cert-verify: true
+  - name: "🏳️ 其他 53 | Trojan"
+    type: "trojan"
+    server: "intense-monarch.rooster465.autos"
+    port: 443
+    password: "WF42809561"
+    sni: "intense-monarch.rooster465.autos"
+    skip-cert-verify: true
+  - name: "🏳️ 其他 55 | Trojan"
+    type: "trojan"
+    server: "lenient-penguin.rooster465.autos"
+    port: 443
+    password: "WF42809561"
+    sni: "lenient-penguin.rooster465.autos"
+    skip-cert-verify: true
+  - name: "🏳️ 其他 56 | Trojan"
+    type: "trojan"
+    server: "climbing-sawfly.rooster465.autos"
+    port: 443
+    password: "WF42809561"
+    sni: "climbing-sawfly.rooster465.autos"
+    skip-cert-verify: true
+  - name: "🏳️ 其他 57 | Trojan"
+    type: "trojan"
+    server: "outgoing-cockatoo.rooster465.autos"
+    port: 443
+    password: "WF42809561"
+    sni: "outgoing-cockatoo.rooster465.autos"
+    skip-cert-verify: true
+  - name: "🏳️ 其他 12 | Trojan"
+    type: "trojan"
+    server: "darling-mongrel.rooster465.autos"
+    port: 443
+    password: "WF42809561"
+    sni: "darling-mongrel.rooster465.autos"
+    skip-cert-verify: true
+  - name: "🏳️ 其他 13 | Trojan"
+    type: "trojan"
+    server: "optimal-penguin.rooster465.autos"
+    port: 443
+    password: "WF42809561"
+    sni: "optimal-penguin.rooster465.autos"
+    skip-cert-verify: true
+  - name: "🏳️ 其他 18 | Trojan"
+    type: "trojan"
+    server: "enormous-whippet.rooster465.autos"
+    port: 443
+    password: "WF42809561"
+    sni: "enormous-whippet.rooster465.autos"
+    skip-cert-verify: true
+  - name: "🏳️ 其他 21 | Trojan"
+    type: "trojan"
+    server: "evolving-platypus.rooster465.autos"
+    port: 443
+    password: "WF42809561"
+    sni: "evolving-platypus.rooster465.autos"
+    skip-cert-verify: true
+  - name: "🏳️ 其他 23 | Trojan"
+    type: "trojan"
+    server: "saving-octopus.rooster465.autos"
+    port: 443
+    password: "WF42809561"
+    sni: "saving-octopus.rooster465.autos"
+    skip-cert-verify: true
+  - name: "🏳️ 其他 24 | Trojan"
+    type: "trojan"
+    server: "hopeful-burro.rooster465.autos"
+    port: 443
+    password: "WF42809561"
+    sni: "hopeful-burro.rooster465.autos"
+    skip-cert-verify: true
+  - name: "🏳️ 其他 58 | Trojan"
+    type: "trojan"
+    server: "sterling-fowl.rooster465.autos"
+    port: 443
+    password: "WF42809561"
+    sni: "sterling-fowl.rooster465.autos"
+    skip-cert-verify: true
+  - name: "🏳️ 其他 27 | Trojan"
+    type: "trojan"
+    server: "valued-mullet.rooster465.autos"
+    port: 443
+    password: "WF42809561"
+    sni: "valued-mullet.rooster465.autos"
+    skip-cert-verify: true
+  - name: "🏳️ 其他 28 | Trojan"
+    type: "trojan"
+    server: "prepared-hawk.rooster465.autos"
+    port: 443
+    password: "WF42809561"
+    sni: "prepared-hawk.rooster465.autos"
+    skip-cert-verify: true
+  - name: "🏳️ 其他 30 | Trojan"
+    type: "trojan"
+    server: "brief-glider.rooster465.autos"
+    port: 443
+    password: "WF42809561"
+    sni: "brief-glider.rooster465.autos"
+    skip-cert-verify: true
+  - name: "🏳️ 其他 59 | Trojan"
+    type: "trojan"
+    server: "amused-peacock.rooster465.autos"
+    port: 443
+    password: "WF42809561"
+    sni: "amused-peacock.rooster465.autos"
+    skip-cert-verify: true
+  - name: "🏳️ 其他 32 | Trojan"
+    type: "trojan"
+    server: "premium-lab.rooster465.autos"
+    port: 443
+    password: "WF42809561"
+    sni: "premium-lab.rooster465.autos"
+    skip-cert-verify: true
+  - name: "🏳️ 其他 33 | Trojan"
+    type: "trojan"
+    server: "awake-shiner.rooster465.autos"
+    port: 443
+    password: "WF42809561"
+    sni: "awake-shiner.rooster465.autos"
+    skip-cert-verify: true
+  - name: "🏳️ 其他 60 | Trojan"
+    type: "trojan"
+    server: "positive-bear.rooster465.autos"
+    port: 443
+    password: "IL37892054"
+    sni: "positive-bear.rooster465.autos"
+    skip-cert-verify: true
+  - name: "🏳️ 其他 34 | Trojan"
+    type: "trojan"
+    server: "definite-jennet.rooster465.autos"
+    port: 443
+    password: "WF42809561"
+    sni: "definite-jennet.rooster465.autos"
+    skip-cert-verify: true
+  - name: "🏳️ 其他 35 | Trojan"
+    type: "trojan"
+    server: "sharp-feline.rooster465.autos"
+    port: 443
+    password: "WF42809561"
+    sni: "sharp-feline.rooster465.autos"
+    skip-cert-verify: true
+  - name: "🏳️ 其他 36 | Trojan"
+    type: "trojan"
+    server: "diverse-thrush.rooster465.autos"
+    port: 443
+    password: "WF42809561"
+    sni: "diverse-thrush.rooster465.autos"
+    skip-cert-verify: true
+  - name: "🏳️ 其他 37 | Trojan"
+    type: "trojan"
+    server: "moved-bluegill.rooster465.autos"
+    port: 443
+    password: "WF42809561"
+    sni: "moved-bluegill.rooster465.autos"
+    skip-cert-verify: true
+  - name: "🏳️ 其他 61 | Trojan"
+    type: "trojan"
+    server: "powerful-squid.rooster465.autos"
+    port: 443
+    password: "WF42809561"
+    sni: "powerful-squid.rooster465.autos"
+    skip-cert-verify: true
+  - name: "🏳️ 其他 62 | Trojan"
+    type: "trojan"
+    server: "ready-lion.rooster465.autos"
+    port: 443
+    password: "WF42809561"
+    sni: "ready-lion.rooster465.autos"
+    skip-cert-verify: true
+  - name: "🇯🇵 JP 54 | Trojan"
+    type: "trojan"
+    server: "sharp-dogfish.rooster465.autos"
+    port: 443
+    password: "IL37892054"
+    sni: "sharp-dogfish.rooster465.autos"
+    skip-cert-verify: true
+  - name: "🏳️ 其他 63 | VMess"
+    type: "vmess"
+    server: "v4.hdacd.com"
+    port: 30804
+    uuid: "cbb3f877-d1fb-344c-87a9-d153bffd5484"
+    alterId: 2
+    cipher: "auto"
+    network: "tcp"
+  - name: "CDN VMess 01"
+    type: "vmess"
+    server: "t1.620720.xyz"
+    port: 8443
+    uuid: "516d8a7a-3f0b-41d3-bad0-246116381516"
+    alterId: 0
+    cipher: "auto"
+    network: "ws"
+    tls: true
+    ws-opts:
+      path: "/"
+      headers:
+        Host: "t1.620720.xyz"
 
 proxy-groups:
   - name: 🚀 节点选择
