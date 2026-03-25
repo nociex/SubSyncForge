@@ -120,7 +120,7 @@
       "type": "selector",
       "tag": "hk-group",
       "outbounds": [
-        "🇭🇰 HK 02 | Trojan"
+        "DIRECT"
       ]
     },
     {
@@ -141,7 +141,7 @@
       "type": "selector",
       "tag": "jp-group",
       "outbounds": [
-        "🇯🇵 JP 45 | Trojan"
+        "DIRECT"
       ]
     },
     {
@@ -155,74 +155,35 @@
       "type": "selector",
       "tag": "others-group",
       "outbounds": [
-        "🏳️ HR 01 | SS",
-        "🇸🇪 SE 02 | SS",
+        "CDN VMess 01",
+        "🇪🇸 ES 02 | SS",
+        "🏳️ 其他 02 | SS",
+        "🏳️ 其他 03 | SS",
+        "🏳️ 其他 01 | SS",
+        "🏳️ 其他 02 | SS-1",
+        "🏳️ 其他 03 | SS-1",
+        "🇵🇹 PT 04 | SS",
+        "🏳️ 其他 05 | SS",
+        "🏳️ 其他 07 | SS",
+        "🏳️ 其他 08 | SS",
+        "🏳️ 其他 09 | SS",
         "🏳️ 其他 10 | SS",
-        "🇰🇷 KR 03 | SS",
+        "🏳️ 其他 11 | SS",
         "🇻🇳 VN 14 | SS",
-        "🇻🇳 VN 02 | SS",
         "🇻🇳 VN 15 | SS",
-        "🇻🇳 VN 16 | SS",
-        "🇻🇳 VN 17 | SS",
-        "🇻🇳 VN 20 | SS",
-        "🇻🇳 VN 21 | SS",
-        "🇻🇳 VN 22 | SS",
         "🇻🇳 VN 03 | SS",
-        "🇻🇳 VN 23 | SS",
-        "🇻🇳 VN 24 | SS",
         "🇻🇳 VN 04 | SS",
-        "🇻🇳 VN 31 | SS",
-        "🇻🇳 VN 37 | SS",
-        "🇻🇳 VN 38 | SS",
-        "🏳️ 其他 39 | Trojan",
-        "🏳️ 其他 40 | Trojan",
-        "🏳️ 其他 04 | Trojan",
-        "🏳️ 其他 05 | Trojan",
+        "🇻🇳 VN 16 | SS",
+        "🇻🇳 VN 05 | SS",
+        "🇻🇳 VN 17 | SS",
+        "🇻🇳 VN 18 | SS",
         "🏳️ 其他 06 | Trojan",
-        "🏳️ 其他 07 | Trojan",
-        "🏳️ 其他 41 | Trojan",
-        "🏳️ 其他 42 | Trojan",
-        "🏳️ 其他 43 | Trojan",
-        "🏳️ 其他 44 | Trojan",
-        "🏳️ 其他 46 | Trojan",
-        "🏳️ 其他 08 | Trojan",
-        "🏳️ 其他 47 | Trojan",
-        "🏳️ 其他 48 | Trojan",
-        "🏳️ 其他 49 | Trojan",
-        "🏳️ 其他 50 | Trojan",
-        "🏳️ 其他 51 | Trojan",
-        "🏳️ 其他 52 | Trojan",
-        "🏳️ 其他 54 | Trojan",
-        "🏳️ 其他 09 | Trojan",
-        "🏳️ 其他 53 | Trojan",
-        "🏳️ 其他 55 | Trojan",
-        "🏳️ 其他 11 | Trojan",
         "🏳️ 其他 12 | Trojan",
-        "🏳️ 其他 56 | Trojan",
-        "🏳️ 其他 57 | Trojan",
-        "🏳️ 其他 58 | Trojan",
         "🏳️ 其他 13 | Trojan",
-        "🏳️ 其他 18 | Trojan",
         "🏳️ 其他 19 | Trojan",
-        "🏳️ 其他 25 | Trojan",
-        "🏳️ 其他 26 | Trojan",
-        "🏳️ 其他 27 | Trojan",
-        "🏳️ 其他 28 | Trojan",
-        "🏳️ 其他 29 | Trojan",
-        "🏳️ 其他 59 | Trojan",
-        "🏳️ 其他 30 | Trojan",
-        "🏳️ 其他 60 | Trojan",
-        "🏳️ 其他 32 | Trojan",
-        "🏳️ 其他 61 | Trojan",
-        "🏳️ 其他 62 | Trojan",
-        "🏳️ 其他 63 | Trojan",
-        "🏳️ 其他 33 | Trojan",
-        "🏳️ 其他 34 | Trojan",
-        "🏳️ 其他 35 | Trojan",
-        "🏳️ 其他 36 | Trojan",
-        "🏳️ 其他 05 | Trojan-1",
-        "CDN VMess 03",
-        "CDN VMess 64"
+        "🏳️ 其他 20 | Trojan",
+        "🏳️ 其他 21 | Trojan",
+        "🏳️ 其他 22 | Trojan"
       ]
     },
     {
@@ -238,6 +199,35 @@
       "tag": "dns-out"
     },
     {
+      "tag": "CDN VMess 01",
+      "type": "vmess",
+      "server": "c7.620720.xyz",
+      "server_port": 8443,
+      "uuid": "516d8a7a-3f0b-41d3-bad0-246116381516",
+      "security": "auto",
+      "alter_id": 0,
+      "transport": {
+        "type": "ws",
+        "path": "/",
+        "headers": {
+          "Host": "c7.620720.xyz"
+        }
+      },
+      "tls": {
+        "enabled": true,
+        "server_name": "c7.620720.xyz",
+        "insecure": false
+      }
+    },
+    {
+      "tag": "🇪🇸 ES 02 | SS",
+      "type": "shadowsocks",
+      "server": "5.188.181.201",
+      "server_port": 9014,
+      "method": "aes-256-cfb",
+      "password": "KnJGad3FqTvjqbaX"
+    },
+    {
       "tag": "🇺🇸 US 01 | SS",
       "type": "shadowsocks",
       "server": "37.19.198.236",
@@ -246,49 +236,105 @@
       "password": "shadowsocks"
     },
     {
-      "tag": "🏳️ HR 01 | SS",
+      "tag": "🏳️ 其他 02 | SS",
       "type": "shadowsocks",
-      "server": "46.183.184.60",
-      "server_port": 989,
-      "method": "aes-256-cfb",
-      "password": "f8f7aCzcPKbsF8p3"
-    },
-    {
-      "tag": "🇸🇪 SE 02 | SS",
-      "type": "shadowsocks",
-      "server": "16.171.110.163",
-      "server_port": 443,
-      "method": "aes-256-cfb",
-      "password": "amazonskr05"
-    },
-    {
-      "tag": "🏳️ 其他 10 | SS",
-      "type": "shadowsocks",
-      "server": "series-a2.samanehha.co",
+      "server": "admin.c1.webramz.co",
       "server_port": 443,
       "method": "chacha20-ietf-poly1305",
       "password": "W74XFALLLuw6m5IA"
     },
     {
-      "tag": "🇰🇷 KR 03 | SS",
+      "tag": "🏳️ 其他 03 | SS",
       "type": "shadowsocks",
-      "server": "141.164.45.187",
-      "server_port": 5498,
-      "method": "aes-256-gcm",
-      "password": "lGqs95QkFHo2NV"
+      "server": "admin.c1.havij.co",
+      "server_port": 443,
+      "method": "chacha20-ietf-poly1305",
+      "password": "1kVr0KATIJI7mwOF"
+    },
+    {
+      "tag": "🏳️ 其他 01 | SS",
+      "type": "shadowsocks",
+      "server": "series-a1.samanehha.co",
+      "server_port": 443,
+      "method": "chacha20-ietf-poly1305",
+      "password": "W74XFALLLuw6m5IA"
+    },
+    {
+      "tag": "🏳️ 其他 02 | SS-1",
+      "type": "shadowsocks",
+      "server": "r3mrcg001142988.cybervena.com",
+      "server_port": 50099,
+      "method": "chacha20-ietf-poly1305",
+      "password": "7e731ec3-f8e1-43f6-92cf-3978d14705c4"
+    },
+    {
+      "tag": "🏳️ 其他 03 | SS-1",
+      "type": "shadowsocks",
+      "server": "nbmrcg003466pb9.cybervena.com",
+      "server_port": 50099,
+      "method": "chacha20-ietf-poly1305",
+      "password": "7e731ec3-f8e1-43f6-92cf-3978d14705c4"
+    },
+    {
+      "tag": "🇵🇹 PT 04 | SS",
+      "type": "shadowsocks",
+      "server": "185.231.233.112",
+      "server_port": 989,
+      "method": "aes-256-cfb",
+      "password": "f8f7aCzcPKbsF8p3"
+    },
+    {
+      "tag": "🏳️ 其他 05 | SS",
+      "type": "shadowsocks",
+      "server": "nbmrcg003507ck6.cybervena.com",
+      "server_port": 50099,
+      "method": "chacha20-ietf-poly1305",
+      "password": "7e731ec3-f8e1-43f6-92cf-3978d14705c4"
+    },
+    {
+      "tag": "🏳️ 其他 07 | SS",
+      "type": "shadowsocks",
+      "server": "r3mrcg0011606bh.cybervena.com",
+      "server_port": 50099,
+      "method": "chacha20-ietf-poly1305",
+      "password": "7e731ec3-f8e1-43f6-92cf-3978d14705c4"
+    },
+    {
+      "tag": "🏳️ 其他 08 | SS",
+      "type": "shadowsocks",
+      "server": "n8mrcg004697zw5.cybervena.com",
+      "server_port": 50099,
+      "method": "chacha20-ietf-poly1305",
+      "password": "7e731ec3-f8e1-43f6-92cf-3978d14705c4"
+    },
+    {
+      "tag": "🏳️ 其他 09 | SS",
+      "type": "shadowsocks",
+      "server": "r3mrcg001296egb.cybervena.com",
+      "server_port": 50099,
+      "method": "chacha20-ietf-poly1305",
+      "password": "7e731ec3-f8e1-43f6-92cf-3978d14705c4"
+    },
+    {
+      "tag": "🏳️ 其他 10 | SS",
+      "type": "shadowsocks",
+      "server": "n8mrcg005938lsz.cybervena.com",
+      "server_port": 50099,
+      "method": "chacha20-ietf-poly1305",
+      "password": "7e731ec3-f8e1-43f6-92cf-3978d14705c4"
+    },
+    {
+      "tag": "🏳️ 其他 11 | SS",
+      "type": "shadowsocks",
+      "server": "namrcg001662wgh.cybervena.com",
+      "server_port": 50099,
+      "method": "chacha20-ietf-poly1305",
+      "password": "7e731ec3-f8e1-43f6-92cf-3978d14705c4"
     },
     {
       "tag": "🇻🇳 VN 14 | SS",
       "type": "shadowsocks",
-      "server": "103.186.155.222",
-      "server_port": 38388,
-      "method": "aes-256-cfb",
-      "password": "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
-    },
-    {
-      "tag": "🇻🇳 VN 02 | SS",
-      "type": "shadowsocks",
-      "server": "103.186.155.15",
+      "server": "103.186.154.196",
       "server_port": 38388,
       "method": "aes-256-cfb",
       "password": "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
@@ -296,47 +342,7 @@
     {
       "tag": "🇻🇳 VN 15 | SS",
       "type": "shadowsocks",
-      "server": "103.186.155.82",
-      "server_port": 38388,
-      "method": "aes-256-cfb",
-      "password": "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
-    },
-    {
-      "tag": "🇻🇳 VN 16 | SS",
-      "type": "shadowsocks",
-      "server": "103.186.155.19",
-      "server_port": 38388,
-      "method": "aes-256-cfb",
-      "password": "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
-    },
-    {
-      "tag": "🇻🇳 VN 17 | SS",
-      "type": "shadowsocks",
-      "server": "103.186.155.205",
-      "server_port": 38388,
-      "method": "aes-256-cfb",
-      "password": "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
-    },
-    {
-      "tag": "🇻🇳 VN 20 | SS",
-      "type": "shadowsocks",
-      "server": "103.186.154.206",
-      "server_port": 38388,
-      "method": "aes-256-cfb",
-      "password": "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
-    },
-    {
-      "tag": "🇻🇳 VN 21 | SS",
-      "type": "shadowsocks",
-      "server": "103.186.154.28",
-      "server_port": 38388,
-      "method": "aes-256-cfb",
-      "password": "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
-    },
-    {
-      "tag": "🇻🇳 VN 22 | SS",
-      "type": "shadowsocks",
-      "server": "103.186.154.191",
+      "server": "103.186.154.183",
       "server_port": 38388,
       "method": "aes-256-cfb",
       "password": "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
@@ -350,23 +356,23 @@
       "password": "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
     },
     {
-      "tag": "🇻🇳 VN 23 | SS",
-      "type": "shadowsocks",
-      "server": "103.186.154.220",
-      "server_port": 38388,
-      "method": "aes-256-cfb",
-      "password": "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
-    },
-    {
-      "tag": "🇻🇳 VN 24 | SS",
-      "type": "shadowsocks",
-      "server": "103.186.155.150",
-      "server_port": 38388,
-      "method": "aes-256-cfb",
-      "password": "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
-    },
-    {
       "tag": "🇻🇳 VN 04 | SS",
+      "type": "shadowsocks",
+      "server": "103.186.155.15",
+      "server_port": 38388,
+      "method": "aes-256-cfb",
+      "password": "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
+    },
+    {
+      "tag": "🇻🇳 VN 16 | SS",
+      "type": "shadowsocks",
+      "server": "103.186.155.54",
+      "server_port": 38388,
+      "method": "aes-256-cfb",
+      "password": "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
+    },
+    {
+      "tag": "🇻🇳 VN 05 | SS",
       "type": "shadowsocks",
       "server": "103.186.155.106",
       "server_port": 38388,
@@ -374,343 +380,23 @@
       "password": "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
     },
     {
-      "tag": "🇻🇳 VN 31 | SS",
+      "tag": "🇻🇳 VN 17 | SS",
       "type": "shadowsocks",
-      "server": "103.186.154.153",
+      "server": "103.186.154.205",
       "server_port": 38388,
       "method": "aes-256-cfb",
       "password": "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
     },
     {
-      "tag": "🇻🇳 VN 37 | SS",
+      "tag": "🇻🇳 VN 18 | SS",
       "type": "shadowsocks",
-      "server": "103.186.155.61",
+      "server": "103.186.155.33",
       "server_port": 38388,
       "method": "aes-256-cfb",
       "password": "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
-    },
-    {
-      "tag": "🇻🇳 VN 38 | SS",
-      "type": "shadowsocks",
-      "server": "103.186.155.134",
-      "server_port": 38388,
-      "method": "aes-256-cfb",
-      "password": "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
-    },
-    {
-      "tag": "🏳️ 其他 39 | Trojan",
-      "type": "trojan",
-      "server": "healthy-ewe.rooster465.autos",
-      "server_port": 443,
-      "password": "IL37892054",
-      "tls": {
-        "enabled": true,
-        "server_name": "healthy-ewe.rooster465.autos",
-        "insecure": true
-      }
-    },
-    {
-      "tag": "🏳️ 其他 40 | Trojan",
-      "type": "trojan",
-      "server": "alert-sunbird.crayfish192.xyz",
-      "server_port": 443,
-      "password": "WF42809561",
-      "tls": {
-        "enabled": true,
-        "server_name": "alert-sunbird.crayfish192.xyz",
-        "insecure": true
-      }
-    },
-    {
-      "tag": "🏳️ 其他 04 | Trojan",
-      "type": "trojan",
-      "server": "grown-goldfish.rooster465.autos",
-      "server_port": 443,
-      "password": "WF42809561",
-      "tls": {
-        "enabled": true,
-        "server_name": "grown-goldfish.rooster465.autos",
-        "insecure": true
-      }
-    },
-    {
-      "tag": "🏳️ 其他 05 | Trojan",
-      "type": "trojan",
-      "server": "saving-anemone.rooster465.autos",
-      "server_port": 443,
-      "password": "WF42809561",
-      "tls": {
-        "enabled": true,
-        "server_name": "saving-anemone.rooster465.autos",
-        "insecure": true
-      }
     },
     {
       "tag": "🏳️ 其他 06 | Trojan",
-      "type": "trojan",
-      "server": "still-mastodon.rooster465.autos",
-      "server_port": 443,
-      "password": "WF42809561",
-      "tls": {
-        "enabled": true,
-        "server_name": "still-mastodon.rooster465.autos",
-        "insecure": true
-      }
-    },
-    {
-      "tag": "🏳️ 其他 07 | Trojan",
-      "type": "trojan",
-      "server": "prompt-duckling.rooster465.autos",
-      "server_port": 443,
-      "password": "WF42809561",
-      "tls": {
-        "enabled": true,
-        "server_name": "prompt-duckling.rooster465.autos",
-        "insecure": true
-      }
-    },
-    {
-      "tag": "🏳️ 其他 41 | Trojan",
-      "type": "trojan",
-      "server": "game-ant.rooster465.autos",
-      "server_port": 443,
-      "password": "WF42809561",
-      "tls": {
-        "enabled": true,
-        "server_name": "game-ant.rooster465.autos",
-        "insecure": true
-      }
-    },
-    {
-      "tag": "🏳️ 其他 42 | Trojan",
-      "type": "trojan",
-      "server": "allowed-hermit.rooster465.autos",
-      "server_port": 443,
-      "password": "WF42809561",
-      "tls": {
-        "enabled": true,
-        "server_name": "allowed-hermit.rooster465.autos",
-        "insecure": true
-      }
-    },
-    {
-      "tag": "🏳️ 其他 43 | Trojan",
-      "type": "trojan",
-      "server": "live-drake.rooster465.autos",
-      "server_port": 443,
-      "password": "WF42809561",
-      "tls": {
-        "enabled": true,
-        "server_name": "live-drake.rooster465.autos",
-        "insecure": true
-      }
-    },
-    {
-      "tag": "🏳️ 其他 44 | Trojan",
-      "type": "trojan",
-      "server": "sharp-dogfish.rooster465.autos",
-      "server_port": 443,
-      "password": "WF42809561",
-      "tls": {
-        "enabled": true,
-        "server_name": "sharp-dogfish.rooster465.autos",
-        "insecure": true
-      }
-    },
-    {
-      "tag": "🏳️ 其他 46 | Trojan",
-      "type": "trojan",
-      "server": "aware-corgi.rooster465.autos",
-      "server_port": 443,
-      "password": "WF42809561",
-      "tls": {
-        "enabled": true,
-        "server_name": "aware-corgi.rooster465.autos",
-        "insecure": true
-      }
-    },
-    {
-      "tag": "🏳️ 其他 08 | Trojan",
-      "type": "trojan",
-      "server": "dynamic-tiger.crayfish192.xyz",
-      "server_port": 443,
-      "password": "WF42809561",
-      "tls": {
-        "enabled": true,
-        "server_name": "dynamic-tiger.crayfish192.xyz",
-        "insecure": true
-      }
-    },
-    {
-      "tag": "🏳️ 其他 47 | Trojan",
-      "type": "trojan",
-      "server": "brief-glider.rooster465.autos",
-      "server_port": 443,
-      "password": "WF42809561",
-      "tls": {
-        "enabled": true,
-        "server_name": "brief-glider.rooster465.autos",
-        "insecure": true
-      }
-    },
-    {
-      "tag": "🏳️ 其他 48 | Trojan",
-      "type": "trojan",
-      "server": "nice-elephant.rooster465.autos",
-      "server_port": 443,
-      "password": "WF42809561",
-      "tls": {
-        "enabled": true,
-        "server_name": "nice-elephant.rooster465.autos",
-        "insecure": true
-      }
-    },
-    {
-      "tag": "🏳️ 其他 49 | Trojan",
-      "type": "trojan",
-      "server": "intimate-adder.rooster465.autos",
-      "server_port": 443,
-      "password": "WF42809561",
-      "tls": {
-        "enabled": true,
-        "server_name": "intimate-adder.rooster465.autos",
-        "insecure": true
-      }
-    },
-    {
-      "tag": "🏳️ 其他 50 | Trojan",
-      "type": "trojan",
-      "server": "needed-haddock.rooster465.autos",
-      "server_port": 443,
-      "password": "WF42809561",
-      "tls": {
-        "enabled": true,
-        "server_name": "needed-haddock.rooster465.autos",
-        "insecure": true
-      }
-    },
-    {
-      "tag": "🏳️ 其他 51 | Trojan",
-      "type": "trojan",
-      "server": "lenient-penguin.rooster465.autos",
-      "server_port": 443,
-      "password": "WF42809561",
-      "tls": {
-        "enabled": true,
-        "server_name": "lenient-penguin.rooster465.autos",
-        "insecure": true
-      }
-    },
-    {
-      "tag": "🏳️ 其他 52 | Trojan",
-      "type": "trojan",
-      "server": "exciting-turtle.rooster465.autos",
-      "server_port": 443,
-      "password": "WF42809561",
-      "tls": {
-        "enabled": true,
-        "server_name": "exciting-turtle.rooster465.autos",
-        "insecure": true
-      }
-    },
-    {
-      "tag": "🏳️ 其他 54 | Trojan",
-      "type": "trojan",
-      "server": "intense-monarch.rooster465.autos",
-      "server_port": 443,
-      "password": "WF42809561",
-      "tls": {
-        "enabled": true,
-        "server_name": "intense-monarch.rooster465.autos",
-        "insecure": true
-      }
-    },
-    {
-      "tag": "🏳️ 其他 09 | Trojan",
-      "type": "trojan",
-      "server": "saving-octopus.rooster465.autos",
-      "server_port": 443,
-      "password": "WF42809561",
-      "tls": {
-        "enabled": true,
-        "server_name": "saving-octopus.rooster465.autos",
-        "insecure": true
-      }
-    },
-    {
-      "tag": "🏳️ 其他 53 | Trojan",
-      "type": "trojan",
-      "server": "climbing-sawfly.rooster465.autos",
-      "server_port": 443,
-      "password": "WF42809561",
-      "tls": {
-        "enabled": true,
-        "server_name": "climbing-sawfly.rooster465.autos",
-        "insecure": true
-      }
-    },
-    {
-      "tag": "🏳️ 其他 55 | Trojan",
-      "type": "trojan",
-      "server": "vast-werewolf.rooster465.autos",
-      "server_port": 443,
-      "password": "WF42809561",
-      "tls": {
-        "enabled": true,
-        "server_name": "vast-werewolf.rooster465.autos",
-        "insecure": true
-      }
-    },
-    {
-      "tag": "🏳️ 其他 11 | Trojan",
-      "type": "trojan",
-      "server": "eternal-serval.rooster465.autos",
-      "server_port": 443,
-      "password": "WF42809561",
-      "tls": {
-        "enabled": true,
-        "server_name": "eternal-serval.rooster465.autos",
-        "insecure": true
-      }
-    },
-    {
-      "tag": "🏳️ 其他 12 | Trojan",
-      "type": "trojan",
-      "server": "sharp-feline.rooster465.autos",
-      "server_port": 443,
-      "password": "WF42809561",
-      "tls": {
-        "enabled": true,
-        "server_name": "sharp-feline.rooster465.autos",
-        "insecure": true
-      }
-    },
-    {
-      "tag": "🏳️ 其他 56 | Trojan",
-      "type": "trojan",
-      "server": "funky-platypus.rooster465.autos",
-      "server_port": 443,
-      "password": "WF42809561",
-      "tls": {
-        "enabled": true,
-        "server_name": "funky-platypus.rooster465.autos",
-        "insecure": true
-      }
-    },
-    {
-      "tag": "🏳️ 其他 57 | Trojan",
-      "type": "trojan",
-      "server": "top-goshawk.rooster465.autos",
-      "server_port": 443,
-      "password": "WF42809561",
-      "tls": {
-        "enabled": true,
-        "server_name": "top-goshawk.rooster465.autos",
-        "insecure": true
-      }
-    },
-    {
-      "tag": "🏳️ 其他 58 | Trojan",
       "type": "trojan",
       "server": "outgoing-cockatoo.rooster465.autos",
       "server_port": 443,
@@ -722,139 +408,31 @@
       }
     },
     {
-      "tag": "🏳️ 其他 13 | Trojan",
+      "tag": "🏳️ 其他 12 | Trojan",
       "type": "trojan",
-      "server": "optimal-dane.rooster465.autos",
+      "server": "funky-platypus.rooster465.autos",
       "server_port": 443,
       "password": "WF42809561",
       "tls": {
         "enabled": true,
-        "server_name": "optimal-dane.rooster465.autos",
+        "server_name": "funky-platypus.rooster465.autos",
         "insecure": true
       }
     },
     {
-      "tag": "🏳️ 其他 18 | Trojan",
+      "tag": "🏳️ 其他 13 | Trojan",
       "type": "trojan",
-      "server": "hopeful-burro.rooster465.autos",
+      "server": "top-goshawk.rooster465.autos",
       "server_port": 443,
       "password": "WF42809561",
       "tls": {
         "enabled": true,
-        "server_name": "hopeful-burro.rooster465.autos",
+        "server_name": "top-goshawk.rooster465.autos",
         "insecure": true
       }
     },
     {
       "tag": "🏳️ 其他 19 | Trojan",
-      "type": "trojan",
-      "server": "sterling-dinosaur.rooster465.autos",
-      "server_port": 443,
-      "password": "WF42809561",
-      "tls": {
-        "enabled": true,
-        "server_name": "sterling-dinosaur.rooster465.autos",
-        "insecure": true
-      }
-    },
-    {
-      "tag": "🏳️ 其他 25 | Trojan",
-      "type": "trojan",
-      "server": "enormous-whippet.rooster465.autos",
-      "server_port": 443,
-      "password": "WF42809561",
-      "tls": {
-        "enabled": true,
-        "server_name": "enormous-whippet.rooster465.autos",
-        "insecure": true
-      }
-    },
-    {
-      "tag": "🏳️ 其他 26 | Trojan",
-      "type": "trojan",
-      "server": "awake-shiner.rooster465.autos",
-      "server_port": 443,
-      "password": "WF42809561",
-      "tls": {
-        "enabled": true,
-        "server_name": "awake-shiner.rooster465.autos",
-        "insecure": true
-      }
-    },
-    {
-      "tag": "🏳️ 其他 27 | Trojan",
-      "type": "trojan",
-      "server": "valued-mullet.rooster465.autos",
-      "server_port": 443,
-      "password": "WF42809561",
-      "tls": {
-        "enabled": true,
-        "server_name": "valued-mullet.rooster465.autos",
-        "insecure": true
-      }
-    },
-    {
-      "tag": "🏳️ 其他 28 | Trojan",
-      "type": "trojan",
-      "server": "diverse-thrush.rooster465.autos",
-      "server_port": 443,
-      "password": "WF42809561",
-      "tls": {
-        "enabled": true,
-        "server_name": "diverse-thrush.rooster465.autos",
-        "insecure": true
-      }
-    },
-    {
-      "tag": "🏳️ 其他 29 | Trojan",
-      "type": "trojan",
-      "server": "moved-bluegill.rooster465.autos",
-      "server_port": 443,
-      "password": "WF42809561",
-      "tls": {
-        "enabled": true,
-        "server_name": "moved-bluegill.rooster465.autos",
-        "insecure": true
-      }
-    },
-    {
-      "tag": "🏳️ 其他 59 | Trojan",
-      "type": "trojan",
-      "server": "positive-bear.rooster465.autos",
-      "server_port": 443,
-      "password": "IL37892054",
-      "tls": {
-        "enabled": true,
-        "server_name": "positive-bear.rooster465.autos",
-        "insecure": true
-      }
-    },
-    {
-      "tag": "🏳️ 其他 30 | Trojan",
-      "type": "trojan",
-      "server": "optimal-penguin.rooster465.autos",
-      "server_port": 443,
-      "password": "WF42809561",
-      "tls": {
-        "enabled": true,
-        "server_name": "optimal-penguin.rooster465.autos",
-        "insecure": true
-      }
-    },
-    {
-      "tag": "🏳️ 其他 60 | Trojan",
-      "type": "trojan",
-      "server": "powerful-squid.rooster465.autos",
-      "server_port": 443,
-      "password": "WF42809561",
-      "tls": {
-        "enabled": true,
-        "server_name": "powerful-squid.rooster465.autos",
-        "insecure": true
-      }
-    },
-    {
-      "tag": "🏳️ 其他 32 | Trojan",
       "type": "trojan",
       "server": "premium-lab.rooster465.autos",
       "server_port": 443,
@@ -866,163 +444,39 @@
       }
     },
     {
-      "tag": "🏳️ 其他 61 | Trojan",
+      "tag": "🏳️ 其他 20 | Trojan",
       "type": "trojan",
-      "server": "amused-peacock.rooster465.autos",
+      "server": "model-stingray.crayfish192.xyz",
       "server_port": 443,
       "password": "WF42809561",
       "tls": {
         "enabled": true,
-        "server_name": "amused-peacock.rooster465.autos",
+        "server_name": "model-stingray.crayfish192.xyz",
         "insecure": true
       }
     },
     {
-      "tag": "🏳️ 其他 62 | Trojan",
+      "tag": "🏳️ 其他 21 | Trojan",
       "type": "trojan",
-      "server": "sterling-fowl.rooster465.autos",
+      "server": "touching-pigeon.rooster465.autos",
       "server_port": 443,
       "password": "WF42809561",
       "tls": {
         "enabled": true,
-        "server_name": "sterling-fowl.rooster465.autos",
+        "server_name": "touching-pigeon.rooster465.autos",
         "insecure": true
       }
     },
     {
-      "tag": "🏳️ 其他 63 | Trojan",
+      "tag": "🏳️ 其他 22 | Trojan",
       "type": "trojan",
-      "server": "ready-lion.rooster465.autos",
+      "server": "evolving-kangaroo.rooster465.autos",
       "server_port": 443,
       "password": "WF42809561",
       "tls": {
         "enabled": true,
-        "server_name": "ready-lion.rooster465.autos",
+        "server_name": "evolving-kangaroo.rooster465.autos",
         "insecure": true
-      }
-    },
-    {
-      "tag": "🏳️ 其他 33 | Trojan",
-      "type": "trojan",
-      "server": "definite-jennet.rooster465.autos",
-      "server_port": 443,
-      "password": "WF42809561",
-      "tls": {
-        "enabled": true,
-        "server_name": "definite-jennet.rooster465.autos",
-        "insecure": true
-      }
-    },
-    {
-      "tag": "🏳️ 其他 34 | Trojan",
-      "type": "trojan",
-      "server": "evolving-platypus.rooster465.autos",
-      "server_port": 443,
-      "password": "WF42809561",
-      "tls": {
-        "enabled": true,
-        "server_name": "evolving-platypus.rooster465.autos",
-        "insecure": true
-      }
-    },
-    {
-      "tag": "🏳️ 其他 35 | Trojan",
-      "type": "trojan",
-      "server": "darling-mongrel.rooster465.autos",
-      "server_port": 443,
-      "password": "WF42809561",
-      "tls": {
-        "enabled": true,
-        "server_name": "darling-mongrel.rooster465.autos",
-        "insecure": true
-      }
-    },
-    {
-      "tag": "🏳️ 其他 36 | Trojan",
-      "type": "trojan",
-      "server": "prepared-hawk.rooster465.autos",
-      "server_port": 443,
-      "password": "WF42809561",
-      "tls": {
-        "enabled": true,
-        "server_name": "prepared-hawk.rooster465.autos",
-        "insecure": true
-      }
-    },
-    {
-      "tag": "🏳️ 其他 05 | Trojan-1",
-      "type": "trojan",
-      "server": "hyfuuf6.wsone.icu",
-      "server_port": 443,
-      "password": "M7v%w11Se*",
-      "tls": {
-        "enabled": true,
-        "server_name": "hyfuuf6.wsone.icu",
-        "insecure": true
-      }
-    },
-    {
-      "tag": "🇯🇵 JP 45 | Trojan",
-      "type": "trojan",
-      "server": "sharp-dogfish.rooster465.autos",
-      "server_port": 443,
-      "password": "IL37892054",
-      "tls": {
-        "enabled": true,
-        "server_name": "sharp-dogfish.rooster465.autos",
-        "insecure": true
-      }
-    },
-    {
-      "tag": "🇭🇰 HK 02 | Trojan",
-      "type": "trojan",
-      "server": "58.152.25.253",
-      "server_port": 443,
-      "password": "/BxceQaOe",
-      "tls": {
-        "enabled": true,
-        "server_name": "58.152.25.253",
-        "insecure": false
-      }
-    },
-    {
-      "tag": "CDN VMess 03",
-      "type": "vmess",
-      "server": "cf.090227.xyz",
-      "server_port": 443,
-      "uuid": "290cc691-3ac6-4387-98a1-25c8eb8ca2ea",
-      "security": "auto",
-      "alter_id": 0,
-      "transport": {
-        "type": "ws",
-        "path": "/",
-        "headers": {
-          "Host": "sgal.dagrate.eu.org"
-        }
-      },
-      "tls": {
-        "enabled": true,
-        "server_name": "sgal.dagrate.eu.org",
-        "insecure": false
-      }
-    },
-    {
-      "tag": "CDN VMess 64",
-      "type": "vmess",
-      "server": "c7.620720.xyz",
-      "server_port": 8443,
-      "uuid": "516d8a7a-3f0b-41d3-bad0-246116381516",
-      "security": "auto",
-      "alter_id": 0,
-      "transport": {
-        "type": "ws",
-        "path": "/",
-        "headers": {}
-      },
-      "tls": {
-        "enabled": true,
-        "server_name": "c7.620720.xyz",
-        "insecure": false
       }
     }
   ],
