@@ -156,34 +156,33 @@
       "tag": "others-group",
       "outbounds": [
         "CDN VMess 01",
-        "CDN VMess 02",
-        "CDN VMess 04",
-        "CDN VMess 22",
+        "CDN VMess 03",
+        "🇪🇸 ES 02 | SS",
+        "🏳️ 其他 04 | SS",
         "🏳️ 其他 01 | SS",
         "🏳️ 其他 02 | SS",
-        "🏳️ 其他 03 | SS",
-        "🏳️ 其他 06 | SS",
+        "🏳️ 其他 05 | SS",
         "🏳️ 其他 07 | SS",
         "🏳️ 其他 08 | SS",
         "🏳️ 其他 10 | SS",
-        "🏳️ 其他 11 | SS",
-        "🏳️ 其他 20 | SS",
-        "🇻🇳 VN 14 | SS",
-        "🇻🇳 VN 02 | SS",
+        "🏳️ 其他 13 | SS",
+        "🏳️ 其他 14 | SS",
+        "🏳️ 其他 17 | SS",
+        "🇻🇳 VN 09 | SS",
+        "🇻🇳 VN 15 | SS",
         "🇻🇳 VN 03 | SS",
-        "🇻🇳 VN 17 | SS",
+        "🇻🇳 VN 05 | SS",
+        "🇻🇳 VN 04 | SS",
+        "🇻🇳 VN 16 | SS",
         "🇻🇳 VN 18 | SS",
         "🇻🇳 VN 19 | SS",
-        "🇻🇳 VN 04 | SS",
-        "🇻🇳 VN 21 | SS",
+        "🏳️ 其他 03 | Trojan",
         "🏳️ 其他 04 | Trojan",
-        "🏳️ 其他 05 | Trojan",
-        "🏳️ 其他 09 | Trojan",
+        "🏳️ 其他 06 | Trojan",
+        "🏳️ 其他 11 | Trojan",
         "🏳️ 其他 12 | Trojan",
-        "🏳️ 其他 13 | Trojan",
-        "🏳️ 其他 15 | Trojan",
-        "🏳️ 其他 16 | Trojan",
-        "🏳️ 其他 05 | Trojan-1"
+        "🏳️ 其他 20 | Trojan",
+        "🏳️ 其他 21 | Trojan"
       ]
     },
     {
@@ -209,7 +208,9 @@
       "transport": {
         "type": "ws",
         "path": "/",
-        "headers": {}
+        "headers": {
+          "Host": "sy4.620720.xyz"
+        }
       },
       "tls": {
         "enabled": true,
@@ -218,7 +219,7 @@
       }
     },
     {
-      "tag": "CDN VMess 02",
+      "tag": "CDN VMess 03",
       "type": "vmess",
       "server": "c7.620720.xyz",
       "server_port": 8443,
@@ -239,44 +240,12 @@
       }
     },
     {
-      "tag": "CDN VMess 04",
-      "type": "vmess",
-      "server": "cf.090227.xyz",
-      "server_port": 443,
-      "uuid": "290cc691-3ac6-4387-98a1-25c8eb8ca2ea",
-      "security": "auto",
-      "alter_id": 0,
-      "transport": {
-        "type": "ws",
-        "path": "/",
-        "headers": {
-          "Host": "sgal.dagrate.eu.org"
-        }
-      },
-      "tls": {
-        "enabled": true,
-        "server_name": "sgal.dagrate.eu.org",
-        "insecure": false
-      }
-    },
-    {
-      "tag": "CDN VMess 22",
-      "type": "vmess",
-      "server": "t1.620720.xyz",
-      "server_port": 8443,
-      "uuid": "516d8a7a-3f0b-41d3-bad0-246116381516",
-      "security": "auto",
-      "alter_id": 0,
-      "transport": {
-        "type": "ws",
-        "path": "/",
-        "headers": {}
-      },
-      "tls": {
-        "enabled": true,
-        "server_name": "t1.620720.xyz",
-        "insecure": false
-      }
+      "tag": "🇪🇸 ES 02 | SS",
+      "type": "shadowsocks",
+      "server": "5.188.181.201",
+      "server_port": 9014,
+      "method": "aes-256-cfb",
+      "password": "KnJGad3FqTvjqbaX"
     },
     {
       "tag": "🇺🇸 US 01 | SS",
@@ -285,6 +254,14 @@
       "server_port": 443,
       "method": "aes-128-gcm",
       "password": "shadowsocks"
+    },
+    {
+      "tag": "🏳️ 其他 04 | SS",
+      "type": "shadowsocks",
+      "server": "series-a2.samanehha.co",
+      "server_port": 443,
+      "method": "chacha20-ietf-poly1305",
+      "password": "W74XFALLLuw6m5IA"
     },
     {
       "tag": "🏳️ 其他 01 | SS",
@@ -303,47 +280,7 @@
       "password": "W74XFALLLuw6m5IA"
     },
     {
-      "tag": "🏳️ 其他 03 | SS",
-      "type": "shadowsocks",
-      "server": "series-a2.samanehha.co",
-      "server_port": 443,
-      "method": "chacha20-ietf-poly1305",
-      "password": "W74XFALLLuw6m5IA"
-    },
-    {
-      "tag": "🏳️ 其他 06 | SS",
-      "type": "shadowsocks",
-      "server": "nbmrcg003466pb9.cybervena.com",
-      "server_port": 50099,
-      "method": "chacha20-ietf-poly1305",
-      "password": "7e731ec3-f8e1-43f6-92cf-3978d14705c4"
-    },
-    {
-      "tag": "🏳️ 其他 07 | SS",
-      "type": "shadowsocks",
-      "server": "n8mrcg005938lsz.cybervena.com",
-      "server_port": 50099,
-      "method": "chacha20-ietf-poly1305",
-      "password": "7e731ec3-f8e1-43f6-92cf-3978d14705c4"
-    },
-    {
-      "tag": "🏳️ 其他 08 | SS",
-      "type": "shadowsocks",
-      "server": "nbmrcg003507ck6.cybervena.com",
-      "server_port": 50099,
-      "method": "chacha20-ietf-poly1305",
-      "password": "7e731ec3-f8e1-43f6-92cf-3978d14705c4"
-    },
-    {
-      "tag": "🏳️ 其他 10 | SS",
-      "type": "shadowsocks",
-      "server": "r3mrcg001142988.cybervena.com",
-      "server_port": 50099,
-      "method": "chacha20-ietf-poly1305",
-      "password": "7e731ec3-f8e1-43f6-92cf-3978d14705c4"
-    },
-    {
-      "tag": "🏳️ 其他 11 | SS",
+      "tag": "🏳️ 其他 05 | SS",
       "type": "shadowsocks",
       "server": "namrcg001662wgh.cybervena.com",
       "server_port": 50099,
@@ -351,7 +288,7 @@
       "password": "7e731ec3-f8e1-43f6-92cf-3978d14705c4"
     },
     {
-      "tag": "🏳️ 其他 20 | SS",
+      "tag": "🏳️ 其他 07 | SS",
       "type": "shadowsocks",
       "server": "r3mrcg0011606bh.cybervena.com",
       "server_port": 50099,
@@ -359,17 +296,57 @@
       "password": "7e731ec3-f8e1-43f6-92cf-3978d14705c4"
     },
     {
-      "tag": "🇻🇳 VN 14 | SS",
+      "tag": "🏳️ 其他 08 | SS",
       "type": "shadowsocks",
-      "server": "103.186.154.196",
+      "server": "n8mrcg005938lsz.cybervena.com",
+      "server_port": 50099,
+      "method": "chacha20-ietf-poly1305",
+      "password": "7e731ec3-f8e1-43f6-92cf-3978d14705c4"
+    },
+    {
+      "tag": "🏳️ 其他 10 | SS",
+      "type": "shadowsocks",
+      "server": "r3mrcg001296egb.cybervena.com",
+      "server_port": 50099,
+      "method": "chacha20-ietf-poly1305",
+      "password": "7e731ec3-f8e1-43f6-92cf-3978d14705c4"
+    },
+    {
+      "tag": "🏳️ 其他 13 | SS",
+      "type": "shadowsocks",
+      "server": "r3mrcg001142988.cybervena.com",
+      "server_port": 50099,
+      "method": "chacha20-ietf-poly1305",
+      "password": "7e731ec3-f8e1-43f6-92cf-3978d14705c4"
+    },
+    {
+      "tag": "🏳️ 其他 14 | SS",
+      "type": "shadowsocks",
+      "server": "nbmrcg003466pb9.cybervena.com",
+      "server_port": 50099,
+      "method": "chacha20-ietf-poly1305",
+      "password": "7e731ec3-f8e1-43f6-92cf-3978d14705c4"
+    },
+    {
+      "tag": "🏳️ 其他 17 | SS",
+      "type": "shadowsocks",
+      "server": "nbmrcg003507ck6.cybervena.com",
+      "server_port": 50099,
+      "method": "chacha20-ietf-poly1305",
+      "password": "7e731ec3-f8e1-43f6-92cf-3978d14705c4"
+    },
+    {
+      "tag": "🇻🇳 VN 09 | SS",
+      "type": "shadowsocks",
+      "server": "103.186.154.183",
       "server_port": 38388,
       "method": "aes-256-cfb",
       "password": "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
     },
     {
-      "tag": "🇻🇳 VN 02 | SS",
+      "tag": "🇻🇳 VN 15 | SS",
       "type": "shadowsocks",
-      "server": "103.186.155.15",
+      "server": "103.186.154.196",
       "server_port": 38388,
       "method": "aes-256-cfb",
       "password": "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
@@ -383,31 +360,7 @@
       "password": "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
     },
     {
-      "tag": "🇻🇳 VN 17 | SS",
-      "type": "shadowsocks",
-      "server": "103.186.155.33",
-      "server_port": 38388,
-      "method": "aes-256-cfb",
-      "password": "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
-    },
-    {
-      "tag": "🇻🇳 VN 18 | SS",
-      "type": "shadowsocks",
-      "server": "103.186.154.205",
-      "server_port": 38388,
-      "method": "aes-256-cfb",
-      "password": "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
-    },
-    {
-      "tag": "🇻🇳 VN 19 | SS",
-      "type": "shadowsocks",
-      "server": "103.186.154.183",
-      "server_port": 38388,
-      "method": "aes-256-cfb",
-      "password": "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
-    },
-    {
-      "tag": "🇻🇳 VN 04 | SS",
+      "tag": "🇻🇳 VN 05 | SS",
       "type": "shadowsocks",
       "server": "103.186.155.106",
       "server_port": 38388,
@@ -415,7 +368,23 @@
       "password": "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
     },
     {
-      "tag": "🇻🇳 VN 21 | SS",
+      "tag": "🇻🇳 VN 04 | SS",
+      "type": "shadowsocks",
+      "server": "103.186.155.15",
+      "server_port": 38388,
+      "method": "aes-256-cfb",
+      "password": "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
+    },
+    {
+      "tag": "🇻🇳 VN 16 | SS",
+      "type": "shadowsocks",
+      "server": "103.186.154.205",
+      "server_port": 38388,
+      "method": "aes-256-cfb",
+      "password": "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
+    },
+    {
+      "tag": "🇻🇳 VN 18 | SS",
       "type": "shadowsocks",
       "server": "103.186.155.54",
       "server_port": 38388,
@@ -423,19 +392,15 @@
       "password": "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
     },
     {
-      "tag": "🏳️ 其他 04 | Trojan",
-      "type": "trojan",
-      "server": "model-stingray.crayfish192.xyz",
-      "server_port": 443,
-      "password": "WF42809561",
-      "tls": {
-        "enabled": true,
-        "server_name": "model-stingray.crayfish192.xyz",
-        "insecure": true
-      }
+      "tag": "🇻🇳 VN 19 | SS",
+      "type": "shadowsocks",
+      "server": "103.186.155.33",
+      "server_port": 38388,
+      "method": "aes-256-cfb",
+      "password": "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
     },
     {
-      "tag": "🏳️ 其他 05 | Trojan",
+      "tag": "🏳️ 其他 03 | Trojan",
       "type": "trojan",
       "server": "outgoing-cockatoo.rooster465.autos",
       "server_port": 443,
@@ -447,31 +412,7 @@
       }
     },
     {
-      "tag": "🏳️ 其他 09 | Trojan",
-      "type": "trojan",
-      "server": "funky-platypus.rooster465.autos",
-      "server_port": 443,
-      "password": "WF42809561",
-      "tls": {
-        "enabled": true,
-        "server_name": "funky-platypus.rooster465.autos",
-        "insecure": true
-      }
-    },
-    {
-      "tag": "🏳️ 其他 12 | Trojan",
-      "type": "trojan",
-      "server": "touching-pigeon.rooster465.autos",
-      "server_port": 443,
-      "password": "WF42809561",
-      "tls": {
-        "enabled": true,
-        "server_name": "touching-pigeon.rooster465.autos",
-        "insecure": true
-      }
-    },
-    {
-      "tag": "🏳️ 其他 13 | Trojan",
+      "tag": "🏳️ 其他 04 | Trojan",
       "type": "trojan",
       "server": "top-goshawk.rooster465.autos",
       "server_port": 443,
@@ -483,7 +424,19 @@
       }
     },
     {
-      "tag": "🏳️ 其他 15 | Trojan",
+      "tag": "🏳️ 其他 06 | Trojan",
+      "type": "trojan",
+      "server": "funky-platypus.rooster465.autos",
+      "server_port": 443,
+      "password": "WF42809561",
+      "tls": {
+        "enabled": true,
+        "server_name": "funky-platypus.rooster465.autos",
+        "insecure": true
+      }
+    },
+    {
+      "tag": "🏳️ 其他 11 | Trojan",
       "type": "trojan",
       "server": "evolving-kangaroo.rooster465.autos",
       "server_port": 443,
@@ -495,7 +448,7 @@
       }
     },
     {
-      "tag": "🏳️ 其他 16 | Trojan",
+      "tag": "🏳️ 其他 12 | Trojan",
       "type": "trojan",
       "server": "premium-lab.rooster465.autos",
       "server_port": 443,
@@ -507,14 +460,26 @@
       }
     },
     {
-      "tag": "🏳️ 其他 05 | Trojan-1",
+      "tag": "🏳️ 其他 20 | Trojan",
       "type": "trojan",
-      "server": "hyfuuf6.wsone.icu",
+      "server": "touching-pigeon.rooster465.autos",
       "server_port": 443,
-      "password": "M7v%w11Se*",
+      "password": "WF42809561",
       "tls": {
         "enabled": true,
-        "server_name": "hyfuuf6.wsone.icu",
+        "server_name": "touching-pigeon.rooster465.autos",
+        "insecure": true
+      }
+    },
+    {
+      "tag": "🏳️ 其他 21 | Trojan",
+      "type": "trojan",
+      "server": "model-stingray.crayfish192.xyz",
+      "server_port": 443,
+      "password": "WF42809561",
+      "tls": {
+        "enabled": true,
+        "server_name": "model-stingray.crayfish192.xyz",
         "insecure": true
       }
     }
