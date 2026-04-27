@@ -14,13 +14,13 @@ geox-url:
   mmdb: "https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/country.mmdb"
 
 proxies:
-  - name: "🇺🇸 US 02 | SS"
+  - name: "🇺🇸 US 01 | SS"
     type: "ss"
     server: "198.12.144.16"
     port: 443
     cipher: "none"
     password: "14b02e2a-8930-4afb-8412-ea4a4954ca5b"
-  - name: "🇺🇸 US 01 | SS"
+  - name: "🇺🇸 US 02 | SS"
     type: "ss"
     server: "199.181.197.38"
     port: 443
@@ -32,7 +32,7 @@ proxies:
     port: 443
     cipher: "aes-128-gcm"
     password: "shadowsocks"
-  - name: "🇺🇸 US 38 | VMess"
+  - name: "🇺🇸 US 37 | VMess"
     type: "vmess"
     server: "104.168.1.102"
     port: 8222
@@ -40,7 +40,7 @@ proxies:
     alterId: 0
     cipher: "auto"
     network: "ws"
-  - name: "🇺🇸 US 39 | VMess"
+  - name: "🇺🇸 US 38 | VMess"
     type: "vmess"
     server: "82.198.246.233"
     port: 180
@@ -48,25 +48,9 @@ proxies:
     alterId: 0
     cipher: "auto"
     network: "tcp"
-  - name: "🇺🇸 US 40 | VMess"
-    type: "vmess"
-    server: "82.198.246.250"
-    port: 180
-    uuid: "d13fc2f5-3e05-4795-81eb-44143a09e552"
-    alterId: 0
-    cipher: "auto"
-    network: "tcp"
-  - name: "🇺🇸 US 41 | VMess"
+  - name: "🇺🇸 US 54 | VMess"
     type: "vmess"
     server: "82.198.246.37"
-    port: 180
-    uuid: "d13fc2f5-3e05-4795-81eb-44143a09e552"
-    alterId: 0
-    cipher: "auto"
-    network: "tcp"
-  - name: "🇺🇸 US 42 | VMess"
-    type: "vmess"
-    server: "82.198.246.97"
     port: 180
     uuid: "d13fc2f5-3e05-4795-81eb-44143a09e552"
     alterId: 0
@@ -78,197 +62,51 @@ proxies:
     port: 443
     cipher: "none"
     password: "3e96ef7d-8637-42c2-ac73-75182196e755"
-  - name: "🏳️ EC 04 | SS"
+  - name: "🏳️ EC 05 | SS"
     type: "ss"
     server: "185.47.253.227"
     port: 990
     cipher: "chacha20-ietf-poly1305"
     password: "ARgvGZywA+gacgGV26Bvmu05+wZmRW/j+AdU+Z8Bt44="
-  - name: "🇹🇷 TR 05 | SS"
+  - name: "🏳️ GB 04 | SS"
+    type: "ss"
+    server: "51.132.238.109"
+    port: 443
+    cipher: "chacha20-ietf-poly1305"
+    password: "W74XFALLLuw6m5IA"
+  - name: "🇳🇱 NL 06 | SS"
+    type: "ss"
+    server: "195.93.253.240"
+    port: 14130
+    cipher: "chacha20-ietf-poly1305"
+    password: "EIFM79AsbXQQryKyZ5O7La"
+  - name: "🇹🇷 TR 07 | SS"
     type: "ss"
     server: "185.39.204.196"
     port: 7918
     cipher: "aes-256-gcm"
     password: "HGlzsKUqaTiC0PSLHn6jT83OZvGiLnpI"
-  - name: "🏳️ 其他 50 | Trojan"
-    type: "trojan"
-    server: "amanm.wsone.icu"
-    port: 443
-    password: "M7v%w11Se*"
-    sni: "amanm.wsone.icu"
-    skip-cert-verify: true
-  - name: "🏳️ 其他 05 | Trojan"
-    type: "trojan"
-    server: "hyfuuf6.wsone.icu"
-    port: 443
-    password: "M7v%w11Se*"
-    sni: "hyfuuf6.wsone.icu"
-    skip-cert-verify: true
-  - name: "🇷🇺 RU 06 | SS"
+  - name: "🇻🇳 VN 40 | SS"
     type: "ss"
-    server: "195.58.49.26"
-    port: 40210
-    cipher: "aes-256-gcm"
-    password: "3150466568eda87b"
-  - name: "🇻🇳 VN 02 | SS"
-    type: "ss"
-    server: "103.186.154.239"
-    port: 38388
-    cipher: "aes-256-cfb"
-    password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
-  - name: "🇻🇳 VN 07 | SS"
-    type: "ss"
-    server: "103.186.155.65"
-    port: 38388
-    cipher: "aes-256-cfb"
-    password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
-  - name: "🇻🇳 VN 08 | SS"
-    type: "ss"
-    server: "103.186.155.48"
-    port: 38388
-    cipher: "aes-256-cfb"
-    password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
-  - name: "🇻🇳 VN 43 | SS"
-    type: "ss"
-    server: "103.186.155.143"
+    server: "103.186.154.180"
     port: 38388
     cipher: "aes-256-cfb"
     password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
   - name: "🇻🇳 VN 09 | SS"
     type: "ss"
-    server: "103.186.155.237"
+    server: "103.186.155.107"
     port: 38388
     cipher: "aes-256-cfb"
     password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
   - name: "🇻🇳 VN 10 | SS"
     type: "ss"
-    server: "103.186.155.34"
+    server: "103.186.154.206"
     port: 38388
     cipher: "aes-256-cfb"
     password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
   - name: "🇻🇳 VN 11 | SS"
     type: "ss"
-    server: "103.186.154.216"
-    port: 38388
-    cipher: "aes-256-cfb"
-    password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
-  - name: "🇻🇳 VN 44 | SS"
-    type: "ss"
-    server: "103.186.155.232"
-    port: 38388
-    cipher: "aes-256-cfb"
-    password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
-  - name: "🇻🇳 VN 12 | SS"
-    type: "ss"
-    server: "103.186.154.233"
-    port: 38388
-    cipher: "aes-256-cfb"
-    password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
-  - name: "🇻🇳 VN 45 | SS"
-    type: "ss"
-    server: "103.186.155.222"
-    port: 38388
-    cipher: "aes-256-cfb"
-    password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
-  - name: "🇻🇳 VN 13 | SS"
-    type: "ss"
-    server: "103.186.154.28"
-    port: 38388
-    cipher: "aes-256-cfb"
-    password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
-  - name: "🇻🇳 VN 14 | SS"
-    type: "ss"
-    server: "103.186.155.107"
-    port: 38388
-    cipher: "aes-256-cfb"
-    password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
-  - name: "🇻🇳 VN 15 | SS"
-    type: "ss"
-    server: "103.186.155.123"
-    port: 38388
-    cipher: "aes-256-cfb"
-    password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
-  - name: "🇻🇳 VN 16 | SS"
-    type: "ss"
-    server: "103.186.155.146"
-    port: 38388
-    cipher: "aes-256-cfb"
-    password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
-  - name: "🇻🇳 VN 17 | SS"
-    type: "ss"
-    server: "103.186.155.118"
-    port: 38388
-    cipher: "aes-256-cfb"
-    password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
-  - name: "🇻🇳 VN 18 | SS"
-    type: "ss"
-    server: "103.186.155.235"
-    port: 38388
-    cipher: "aes-256-cfb"
-    password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
-  - name: "🇻🇳 VN 19 | SS"
-    type: "ss"
-    server: "103.186.155.203"
-    port: 38388
-    cipher: "aes-256-cfb"
-    password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
-  - name: "🇻🇳 VN 03 | SS"
-    type: "ss"
-    server: "103.186.155.15"
-    port: 38388
-    cipher: "aes-256-cfb"
-    password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
-  - name: "🇻🇳 VN 20 | SS"
-    type: "ss"
-    server: "103.186.154.206"
-    port: 38388
-    cipher: "aes-256-cfb"
-    password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
-  - name: "🇻🇳 VN 21 | SS"
-    type: "ss"
-    server: "103.186.155.134"
-    port: 38388
-    cipher: "aes-256-cfb"
-    password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
-  - name: "🇻🇳 VN 22 | SS"
-    type: "ss"
-    server: "103.186.154.236"
-    port: 38388
-    cipher: "aes-256-cfb"
-    password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
-  - name: "🇻🇳 VN 23 | SS"
-    type: "ss"
-    server: "103.186.155.80"
-    port: 38388
-    cipher: "aes-256-cfb"
-    password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
-  - name: "🇻🇳 VN 24 | SS"
-    type: "ss"
-    server: "103.186.155.45"
-    port: 38388
-    cipher: "aes-256-cfb"
-    password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
-  - name: "🇻🇳 VN 25 | SS"
-    type: "ss"
-    server: "103.186.154.193"
-    port: 38388
-    cipher: "aes-256-cfb"
-    password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
-  - name: "🇻🇳 VN 26 | SS"
-    type: "ss"
-    server: "103.186.155.240"
-    port: 38388
-    cipher: "aes-256-cfb"
-    password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
-  - name: "🇻🇳 VN 27 | SS"
-    type: "ss"
-    server: "103.186.155.215"
-    port: 38388
-    cipher: "aes-256-cfb"
-    password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
-  - name: "🇻🇳 VN 28 | SS"
-    type: "ss"
-    server: "103.186.155.202"
+    server: "103.186.154.205"
     port: 38388
     cipher: "aes-256-cfb"
     password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
@@ -278,117 +116,217 @@ proxies:
     port: 38388
     cipher: "aes-256-cfb"
     password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
-  - name: "🇻🇳 VN 29 | SS"
+  - name: "🇻🇳 VN 13 | SS"
     type: "ss"
-    server: "103.186.154.205"
+    server: "103.186.155.235"
     port: 38388
     cipher: "aes-256-cfb"
     password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
-  - name: "🇻🇳 VN 46 | SS"
+  - name: "🇻🇳 VN 12 | SS"
     type: "ss"
-    server: "103.186.154.39"
+    server: "103.186.155.34"
     port: 38388
     cipher: "aes-256-cfb"
     password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
-  - name: "🇻🇳 VN 30 | SS"
+  - name: "🇻🇳 VN 41 | SS"
     type: "ss"
-    server: "103.186.154.180"
+    server: "103.186.155.232"
     port: 38388
     cipher: "aes-256-cfb"
     password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
-  - name: "🇻🇳 VN 31 | SS"
+  - name: "🇻🇳 VN 14 | SS"
     type: "ss"
-    server: "103.186.155.82"
+    server: "103.186.154.236"
     port: 38388
     cipher: "aes-256-cfb"
     password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
-  - name: "🇻🇳 VN 32 | SS"
+  - name: "🇻🇳 VN 15 | SS"
     type: "ss"
-    server: "103.186.154.11"
+    server: "103.186.155.118"
     port: 38388
     cipher: "aes-256-cfb"
     password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
-  - name: "🇻🇳 VN 33 | SS"
-    type: "ss"
-    server: "103.186.155.12"
-    port: 38388
-    cipher: "aes-256-cfb"
-    password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
-  - name: "🇻🇳 VN 47 | SS"
-    type: "ss"
-    server: "103.186.155.77"
-    port: 38388
-    cipher: "aes-256-cfb"
-    password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
-  - name: "🇻🇳 VN 34 | SS"
-    type: "ss"
-    server: "103.186.155.113"
-    port: 38388
-    cipher: "aes-256-cfb"
-    password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
-  - name: "🇻🇳 VN 48 | SS"
+  - name: "🇻🇳 VN 42 | SS"
     type: "ss"
     server: "103.186.154.79"
     port: 38388
     cipher: "aes-256-cfb"
     password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
-  - name: "🇻🇳 VN 49 | SS"
+  - name: "🇻🇳 VN 43 | SS"
     type: "ss"
     server: "103.186.154.65"
     port: 38388
     cipher: "aes-256-cfb"
     password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
-  - name: "🇻🇳 VN 35 | SS"
+  - name: "🇻🇳 VN 16 | SS"
+    type: "ss"
+    server: "103.186.155.203"
+    port: 38388
+    cipher: "aes-256-cfb"
+    password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
+  - name: "🇻🇳 VN 17 | SS"
+    type: "ss"
+    server: "103.186.154.193"
+    port: 38388
+    cipher: "aes-256-cfb"
+    password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
+  - name: "🇻🇳 VN 18 | SS"
+    type: "ss"
+    server: "103.186.154.11"
+    port: 38388
+    cipher: "aes-256-cfb"
+    password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
+  - name: "🇻🇳 VN 19 | SS"
+    type: "ss"
+    server: "103.186.155.113"
+    port: 38388
+    cipher: "aes-256-cfb"
+    password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
+  - name: "🇻🇳 VN 21 | SS"
+    type: "ss"
+    server: "103.186.155.45"
+    port: 38388
+    cipher: "aes-256-cfb"
+    password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
+  - name: "🇻🇳 VN 20 | SS"
+    type: "ss"
+    server: "103.186.154.28"
+    port: 38388
+    cipher: "aes-256-cfb"
+    password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
+  - name: "🇻🇳 VN 22 | SS"
+    type: "ss"
+    server: "103.186.155.134"
+    port: 38388
+    cipher: "aes-256-cfb"
+    password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
+  - name: "🇻🇳 VN 23 | SS"
+    type: "ss"
+    server: "103.186.155.215"
+    port: 38388
+    cipher: "aes-256-cfb"
+    password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
+  - name: "🇻🇳 VN 24 | SS"
+    type: "ss"
+    server: "103.186.155.146"
+    port: 38388
+    cipher: "aes-256-cfb"
+    password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
+  - name: "🇻🇳 VN 44 | SS"
+    type: "ss"
+    server: "103.186.154.39"
+    port: 38388
+    cipher: "aes-256-cfb"
+    password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
+  - name: "🇻🇳 VN 25 | SS"
+    type: "ss"
+    server: "103.186.155.48"
+    port: 38388
+    cipher: "aes-256-cfb"
+    password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
+  - name: "🇻🇳 VN 27 | SS"
+    type: "ss"
+    server: "103.186.154.233"
+    port: 38388
+    cipher: "aes-256-cfb"
+    password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
+  - name: "🇻🇳 VN 26 | SS"
+    type: "ss"
+    server: "103.186.155.12"
+    port: 38388
+    cipher: "aes-256-cfb"
+    password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
+  - name: "🇻🇳 VN 02 | SS"
+    type: "ss"
+    server: "103.186.154.239"
+    port: 38388
+    cipher: "aes-256-cfb"
+    password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
+  - name: "🇻🇳 VN 28 | SS"
+    type: "ss"
+    server: "103.186.155.202"
+    port: 38388
+    cipher: "aes-256-cfb"
+    password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
+  - name: "🇻🇳 VN 46 | SS"
+    type: "ss"
+    server: "103.186.155.222"
+    port: 38388
+    cipher: "aes-256-cfb"
+    password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
+  - name: "🇻🇳 VN 29 | SS"
+    type: "ss"
+    server: "103.186.155.123"
+    port: 38388
+    cipher: "aes-256-cfb"
+    password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
+  - name: "🇻🇳 VN 47 | SS"
+    type: "ss"
+    server: "103.186.155.143"
+    port: 38388
+    cipher: "aes-256-cfb"
+    password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
+  - name: "🇻🇳 VN 30 | SS"
+    type: "ss"
+    server: "103.186.155.240"
+    port: 38388
+    cipher: "aes-256-cfb"
+    password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
+  - name: "🇻🇳 VN 48 | SS"
+    type: "ss"
+    server: "103.186.155.77"
+    port: 38388
+    cipher: "aes-256-cfb"
+    password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
+  - name: "🇻🇳 VN 31 | SS"
     type: "ss"
     server: "103.186.154.77"
     port: 38388
     cipher: "aes-256-cfb"
     password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
-  - name: "🇰🇷 KR 36 | SS"
+  - name: "🇻🇳 VN 32 | SS"
+    type: "ss"
+    server: "103.186.155.237"
+    port: 38388
+    cipher: "aes-256-cfb"
+    password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
+  - name: "🇻🇳 VN 33 | SS"
+    type: "ss"
+    server: "103.186.155.80"
+    port: 38388
+    cipher: "aes-256-cfb"
+    password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
+  - name: "🇻🇳 VN 34 | SS"
+    type: "ss"
+    server: "103.186.155.82"
+    port: 38388
+    cipher: "aes-256-cfb"
+    password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
+  - name: "🇻🇳 VN 35 | SS"
+    type: "ss"
+    server: "103.186.155.65"
+    port: 38388
+    cipher: "aes-256-cfb"
+    password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
+  - name: "🇻🇳 VN 03 | SS"
+    type: "ss"
+    server: "103.186.155.15"
+    port: 38388
+    cipher: "aes-256-cfb"
+    password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
+  - name: "🇻🇳 VN 36 | SS"
+    type: "ss"
+    server: "103.186.154.216"
+    port: 38388
+    cipher: "aes-256-cfb"
+    password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
+  - name: "🇰🇷 KR 08 | SS"
     type: "ss"
     server: "211.178.105.134"
     port: 6123
     cipher: "aes-256-cfb"
     password: "qwerREWQ@@"
-  - name: "🇳🇱 NL 37 | SS"
-    type: "ss"
-    server: "195.93.253.240"
-    port: 14130
-    cipher: "chacha20-ietf-poly1305"
-    password: "EIFM79AsbXQQryKyZ5O7La"
-  - name: "🏳️ 其他 51 | VMess"
-    type: "vmess"
-    server: "vm51544542.dns8656815.com"
-    port: 7754
-    uuid: "7cd96dbe-ecec-4937-9e05-87ab70af2f30"
-    alterId: 0
-    cipher: "auto"
-    network: "tcp"
-  - name: "🏳️ 其他 52 | VMess"
-    type: "vmess"
-    server: "v6.hdacd.com"
-    port: 30806
-    uuid: "cbb3f877-d1fb-344c-87a9-d153bffd5484"
-    alterId: 2
-    cipher: "auto"
-    network: "tcp"
-  - name: "🏳️ 其他 57 | VMess"
-    type: "vmess"
-    server: "v8.hdacd.com"
-    port: 30808
-    uuid: "cbb3f877-d1fb-344c-87a9-d153bffd5484"
-    alterId: 2
-    cipher: "auto"
-    network: "tcp"
-  - name: "🏳️ 其他 53 | VMess"
-    type: "vmess"
-    server: "v36.hdacd.com"
-    port: 30836
-    uuid: "cbb3f877-d1fb-344c-87a9-d153bffd5484"
-    alterId: 2
-    cipher: "auto"
-    network: "tcp"
-  - name: "🏳️ 其他 54 | VMess"
+  - name: "🏳️ 其他 39 | VMess"
     type: "vmess"
     server: "node-us.connectsuite.org"
     port: 2053
@@ -397,7 +335,23 @@ proxies:
     cipher: "auto"
     network: "tcp"
     tls: true
-  - name: "🏳️ 其他 55 | VMess"
+  - name: "🏳️ 其他 49 | VMess"
+    type: "vmess"
+    server: "v36.hdacd.com"
+    port: 30836
+    uuid: "cbb3f877-d1fb-344c-87a9-d153bffd5484"
+    alterId: 2
+    cipher: "auto"
+    network: "tcp"
+  - name: "🏳️ 其他 50 | VMess"
+    type: "vmess"
+    server: "v8.hdacd.com"
+    port: 30808
+    uuid: "cbb3f877-d1fb-344c-87a9-d153bffd5484"
+    alterId: 2
+    cipher: "auto"
+    network: "tcp"
+  - name: "🏳️ 其他 51 | VMess"
     type: "vmess"
     server: "v35.hdacd.com"
     port: 30835
@@ -405,7 +359,7 @@ proxies:
     alterId: 2
     cipher: "auto"
     network: "tcp"
-  - name: "🏳️ 其他 56 | VMess"
+  - name: "🏳️ 其他 52 | VMess"
     type: "vmess"
     server: "v4.hdacd.com"
     port: 30804
@@ -413,18 +367,21 @@ proxies:
     alterId: 2
     cipher: "auto"
     network: "tcp"
-  - name: "🇩🇪 DE 01 | Trojan"
+  - name: "🏳️ 其他 53 | VMess"
+    type: "vmess"
+    server: "v24.hdacd.com"
+    port: 30824
+    uuid: "cbb3f877-d1fb-344c-87a9-d153bffd5484"
+    alterId: 2
+    cipher: "auto"
+    network: "tcp"
+  - name: "🇩🇪 DE 45 | Trojan"
     type: "trojan"
     server: "82.26.155.20"
     port: 10369
-    password: "/n5ix4FcMQYENMQPL+YKbvyJ8nZ84+bNTsj"
+    password: "n5ix4FcMQYENMQPL+YKbvyJ8nZ84+bNTsj"
     sni: "fra35.chasem2026sud.com"
-  - name: "🇩🇪 DE 02 | Trojan"
-    type: "trojan"
-    server: "82.26.155.105"
-    port: 10369
-    password: "/n5ix4FcMQYENMQPL+YKbvyJ8nZ84+bNTsj"
-    sni: "fra32.chasem2026sud.com"
+    skip-cert-verify: true
 
 proxy-groups:
   - name: 🚀 节点选择
