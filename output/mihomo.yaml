@@ -14,26 +14,12 @@ geox-url:
   mmdb: "https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/country.mmdb"
 
 proxies:
-  - name: "CDN VLESS 01"
-    type: "vless"
-    server: "104.20.6.134"
-    port: 443
-    uuid: "d37a75db-76b6-4db8-b213-0d5b044d138d"
-    network: "ws"
-    servername: "hio-awx.pages.dev"
-  - name: "🏳️ GB 03 | VLESS"
-    type: "vless"
-    server: "57.129.137.65"
-    port: 8443
-    uuid: "6202b230-417c-4d8e-b624-0f71afa9c75d"
-    network: "ws"
-    servername: "sni.111000.v6.navy"
-  - name: "🇺🇸 US 01 | SS"
-    type: "ss"
-    server: "37.19.198.236"
-    port: 443
-    cipher: "aes-128-gcm"
-    password: "shadowsocks"
+  - name: "CDN Trojan 01"
+    type: "trojan"
+    server: "104.20.5.134"
+    port: 2096
+    password: "/8r<[9'l6hAO#8ZQi"
+    sni: "Koma-YT.PAGeS.Dev"
   - name: "🇺🇸 US 04 | VMess"
     type: "vmess"
     server: "82.198.246.37"
@@ -42,25 +28,30 @@ proxies:
     alterId: 0
     cipher: "auto"
     network: "tcp"
+  - name: "🇺🇸 US 01 | SS"
+    type: "ss"
+    server: "37.19.198.236"
+    port: 443
+    cipher: "aes-128-gcm"
+    password: "shadowsocks"
+  - name: "🇺🇸 US 02 | Trojan"
+    type: "trojan"
+    server: "74.50.11.24"
+    port: 443
+    password: "/8r<[9'l6hAO#8ZQi"
+    sni: "Koma-YT.PAGeS.Dev"
+  - name: "🇺🇸 US 03 | SS"
+    type: "ss"
+    server: "100.27.193.207"
+    port: 443
+    cipher: "aes-256-cfb"
+    password: "amazonskr05"
   - name: "🇩🇪 DE 01 | SS"
     type: "ss"
     server: "185.216.177.197"
     port: 443
     cipher: "none"
     password: "59fc5f8c-5697-4eb8-acf2-8ae363f203a2"
-  - name: "🏳️ 其他 02 | SS"
-    type: "ss"
-    server: "ss.045.node-for-bigairport.win"
-    port: 19000
-    cipher: "chacha20-ietf-poly1305"
-    password: "792e0bdb-01db-450c-94c4-925151eb396e"
-  - name: "CDN Trojan 02"
-    type: "trojan"
-    server: "bestcf.030101.xyz"
-    port: 443
-    password: "/6202b230-417c-4d8e-b624-0f71afa9c75d"
-    sni: "sni.111000.dynv6.net"
-    skip-cert-verify: true
 
 proxy-groups:
   - name: 🚀 节点选择

@@ -148,19 +148,18 @@
       "type": "selector",
       "tag": "us-group",
       "outbounds": [
+        "🇺🇸 US 04 | VMess",
         "🇺🇸 US 01 | SS",
-        "🇺🇸 US 04 | VMess"
+        "🇺🇸 US 02 | Trojan",
+        "🇺🇸 US 03 | SS"
       ]
     },
     {
       "type": "selector",
       "tag": "others-group",
       "outbounds": [
-        "CDN VLESS 01",
-        "🏳️ GB 03 | VLESS",
-        "🇩🇪 DE 01 | SS",
-        "🏳️ 其他 02 | SS",
-        "CDN Trojan 02"
+        "CDN Trojan 01",
+        "🇩🇪 DE 01 | SS"
       ]
     },
     {
@@ -176,50 +175,16 @@
       "tag": "dns-out"
     },
     {
-      "tag": "CDN VLESS 01",
-      "type": "vless",
-      "server": "104.20.6.134",
-      "server_port": 443,
-      "uuid": "d37a75db-76b6-4db8-b213-0d5b044d138d",
-      "transport": {
-        "type": "ws",
-        "path": "/",
-        "headers": {
-          "Host": "hio-awx.pages.dev"
-        }
-      },
+      "tag": "CDN Trojan 01",
+      "type": "trojan",
+      "server": "104.20.5.134",
+      "server_port": 2096,
+      "password": "/8r<[9'l6hAO#8ZQi",
       "tls": {
         "enabled": true,
-        "server_name": "hio-awx.pages.dev",
+        "server_name": "Koma-YT.PAGeS.Dev",
         "insecure": false
       }
-    },
-    {
-      "tag": "🏳️ GB 03 | VLESS",
-      "type": "vless",
-      "server": "57.129.137.65",
-      "server_port": 8443,
-      "uuid": "6202b230-417c-4d8e-b624-0f71afa9c75d",
-      "transport": {
-        "type": "ws",
-        "path": "/",
-        "headers": {
-          "Host": "sni.111000.v6.navy"
-        }
-      },
-      "tls": {
-        "enabled": true,
-        "server_name": "sni.111000.v6.navy",
-        "insecure": false
-      }
-    },
-    {
-      "tag": "🇺🇸 US 01 | SS",
-      "type": "shadowsocks",
-      "server": "37.19.198.236",
-      "server_port": 443,
-      "method": "aes-128-gcm",
-      "password": "shadowsocks"
     },
     {
       "tag": "🇺🇸 US 04 | VMess",
@@ -231,32 +196,40 @@
       "alter_id": 0
     },
     {
+      "tag": "🇺🇸 US 01 | SS",
+      "type": "shadowsocks",
+      "server": "37.19.198.236",
+      "server_port": 443,
+      "method": "aes-128-gcm",
+      "password": "shadowsocks"
+    },
+    {
+      "tag": "🇺🇸 US 02 | Trojan",
+      "type": "trojan",
+      "server": "74.50.11.24",
+      "server_port": 443,
+      "password": "/8r<[9'l6hAO#8ZQi",
+      "tls": {
+        "enabled": true,
+        "server_name": "Koma-YT.PAGeS.Dev",
+        "insecure": false
+      }
+    },
+    {
+      "tag": "🇺🇸 US 03 | SS",
+      "type": "shadowsocks",
+      "server": "100.27.193.207",
+      "server_port": 443,
+      "method": "aes-256-cfb",
+      "password": "amazonskr05"
+    },
+    {
       "tag": "🇩🇪 DE 01 | SS",
       "type": "shadowsocks",
       "server": "185.216.177.197",
       "server_port": 443,
       "method": "none",
       "password": "59fc5f8c-5697-4eb8-acf2-8ae363f203a2"
-    },
-    {
-      "tag": "🏳️ 其他 02 | SS",
-      "type": "shadowsocks",
-      "server": "ss.045.node-for-bigairport.win",
-      "server_port": 19000,
-      "method": "chacha20-ietf-poly1305",
-      "password": "792e0bdb-01db-450c-94c4-925151eb396e"
-    },
-    {
-      "tag": "CDN Trojan 02",
-      "type": "trojan",
-      "server": "bestcf.030101.xyz",
-      "server_port": 443,
-      "password": "/6202b230-417c-4d8e-b624-0f71afa9c75d",
-      "tls": {
-        "enabled": true,
-        "server_name": "sni.111000.dynv6.net",
-        "insecure": true
-      }
     }
   ],
   "route": {
