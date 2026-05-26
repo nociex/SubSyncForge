@@ -157,8 +157,6 @@
       "type": "selector",
       "tag": "others-group",
       "outbounds": [
-        "CDN VLESS 01",
-        "CDN VLESS 02",
         "🇩🇪 DE 02 | SS",
         "🇫🇮 FI 03 | SS",
         "🏳️ PY 04 | SS",
@@ -178,39 +176,6 @@
     {
       "type": "dns",
       "tag": "dns-out"
-    },
-    {
-      "tag": "CDN VLESS 01",
-      "type": "vless",
-      "server": "104.20.6.134",
-      "server_port": 80,
-      "uuid": "388a6c57-87e7-420b-afe2-b3eb670fd7da",
-      "transport": {
-        "type": "ws",
-        "path": "/ @ProxyVPN11",
-        "headers": {
-          "Host": "vip.yaml7.ggff.net"
-        }
-      }
-    },
-    {
-      "tag": "CDN VLESS 02",
-      "type": "vless",
-      "server": "104.20.6.134",
-      "server_port": 2096,
-      "uuid": "6202b230-417c-4d8e-b624-0f71afa9c75d",
-      "transport": {
-        "type": "ws",
-        "path": "/",
-        "headers": {
-          "Host": "sni.111000.indevs.in"
-        }
-      },
-      "tls": {
-        "enabled": true,
-        "server_name": "sni.111000.indevs.in",
-        "insecure": false
-      }
     },
     {
       "tag": "🇺🇸 US 01 | SS",
