@@ -14,39 +14,88 @@ geox-url:
   mmdb: "https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/country.mmdb"
 
 proxies:
-  - name: "🇺🇸 US 01 | SS"
-    type: "ss"
-    server: "100.27.193.207"
+  - name: "CDN VLESS 04"
+    type: "vless"
+    server: "104.26.7.205"
+    port: 2096
+    uuid: "6202b230-417c-4d8e-b624-0f71afa9c75d"
+    network: "ws"
+    servername: "sni.111000.indevs.in"
+  - name: "CDN VLESS 01"
+    type: "vless"
+    server: "104.20.6.134"
     port: 443
-    cipher: "aes-256-cfb"
-    password: "amazonskr05"
+    uuid: "6202b230-417c-4d8e-b624-0f71afa9c75d"
+    network: "ws"
+    servername: "sni.111000.v6.navy"
+  - name: "CDN VLESS 06"
+    type: "vless"
+    server: "104.19.35.169"
+    port: 443
+    uuid: "6202b230-417c-4d8e-b624-0f71afa9c75d"
+    network: "ws"
+    servername: "sni.latonyamadeline.ndjp.net"
+  - name: "CDN VLESS 07"
+    type: "vless"
+    server: "162.159.14.88"
+    port: 80
+    uuid: "55cb8179-ce11-4ec8-a03c-333f797265f9"
+    network: "ws"
+    servername: "162.159.14.88"
+  - name: "CDN VLESS 03"
+    type: "vless"
+    server: "creativecommons.org"
+    port: 2052
+    uuid: "d342d11e-d424-4583-b36e-524ab1f0afa4"
+    network: "ws"
+    servername: "creativecommons.org"
+  - name: "CDN Trojan 02"
+    type: "trojan"
+    server: "104.20.6.134"
+    port: 443
+    password: "/humanity"
+    sni: "www.calmloud.com"
+  - name: "CDN Trojan 05"
+    type: "trojan"
+    server: "v1.dabache.top"
+    port: 443
+    password: "/humanity"
+    sni: "www.multiplydose.com"
+    skip-cert-verify: true
+  - name: "🏳️ 其他 04 | Trojan"
+    type: "trojan"
+    server: "tttyder.wsone.icu"
+    port: 443
+    password: "M7v%w11Se*"
+    sni: "tttyder.wsone.icu"
+    skip-cert-verify: true
+  - name: "🏳️ 其他 05 | Trojan"
+    type: "trojan"
+    server: "hyfuuf6.wsone.icu"
+    port: 443
+    password: "M7v%w11Se*"
+    sni: "hyfuuf6.wsone.icu"
+    skip-cert-verify: true
+  - name: "🇮🇳 IN 05 | Trojan"
+    type: "trojan"
+    server: "34.131.228.210"
+    port: 443
+    password: "M7v%w11Se*"
+    sni: "hyfuuf6.wsone.icu"
+    skip-cert-verify: true
   - name: "🇺🇸 US 01 | SS"
     type: "ss"
     server: "37.19.198.236"
     port: 443
     cipher: "aes-128-gcm"
     password: "shadowsocks"
-  - name: "🇺🇸 US 06 | VMess"
-    type: "vmess"
-    server: "82.198.246.37"
-    port: 180
-    uuid: "d13fc2f5-3e05-4795-81eb-44143a09e552"
-    alterId: 0
-    cipher: "auto"
-    network: "tcp"
-  - name: "🇩🇪 DE 02 | SS"
+  - name: "🇩🇪 DE 01 | SS"
     type: "ss"
     server: "185.216.177.197"
     port: 443
     cipher: "none"
     password: "59fc5f8c-5697-4eb8-acf2-8ae363f203a2"
-  - name: "🇫🇮 FI 03 | SS"
-    type: "ss"
-    server: "109.107.182.229"
-    port: 51544
-    cipher: "chacha20-ietf-poly1305"
-    password: "rgb8YGYlxYN7jvDGxA14K9"
-  - name: "🏳️ PY 04 | SS"
+  - name: "🏳️ PY 02 | SS"
     type: "ss"
     server: "38.165.233.93"
     port: 989
@@ -54,13 +103,13 @@ proxies:
     password: "f8f7aCzcPKbsF8p3"
   - name: "🇻🇳 VN 02 | SS"
     type: "ss"
-    server: "103.186.154.239"
+    server: "103.186.155.15"
     port: 38388
     cipher: "aes-256-cfb"
     password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
   - name: "🇻🇳 VN 03 | SS"
     type: "ss"
-    server: "103.186.155.15"
+    server: "103.186.154.239"
     port: 38388
     cipher: "aes-256-cfb"
     password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
