@@ -16,36 +16,22 @@ geox-url:
 proxies:
   - name: "🇺🇸 US 01 | SS"
     type: "ss"
-    server: "100.27.193.207"
-    port: 443
-    cipher: "aes-256-cfb"
-    password: "amazonskr05"
-  - name: "🇺🇸 US 01 | SS"
-    type: "ss"
     server: "37.19.198.236"
     port: 443
     cipher: "aes-128-gcm"
     password: "shadowsocks"
-  - name: "🇺🇸 US 05 | VMess"
-    type: "vmess"
-    server: "82.198.246.37"
-    port: 180
-    uuid: "d13fc2f5-3e05-4795-81eb-44143a09e552"
-    alterId: 0
-    cipher: "auto"
-    network: "tcp"
-  - name: "🇩🇪 DE 02 | SS"
+  - name: "🇺🇸 US 03 | SS"
+    type: "ss"
+    server: "100.27.193.207"
+    port: 443
+    cipher: "aes-256-cfb"
+    password: "amazonskr05"
+  - name: "🇩🇪 DE 01 | SS"
     type: "ss"
     server: "185.216.177.197"
     port: 443
     cipher: "none"
     password: "59fc5f8c-5697-4eb8-acf2-8ae363f203a2"
-  - name: "ISP Shadowsocks 03"
-    type: "ss"
-    server: "r3mrcg007117fb8.cybervena.com"
-    port: 50099
-    cipher: "chacha20-ietf-poly1305"
-    password: "7e731ec3-f8e1-43f6-92cf-3978d14705c4"
 
 proxy-groups:
   - name: 🚀 节点选择

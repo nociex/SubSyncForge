@@ -149,16 +149,14 @@
       "tag": "us-group",
       "outbounds": [
         "🇺🇸 US 01 | SS",
-        "🇺🇸 US 01 | SS-1",
-        "🇺🇸 US 05 | VMess"
+        "🇺🇸 US 03 | SS"
       ]
     },
     {
       "type": "selector",
       "tag": "others-group",
       "outbounds": [
-        "🇩🇪 DE 02 | SS",
-        "ISP Shadowsocks 03"
+        "🇩🇪 DE 01 | SS"
       ]
     },
     {
@@ -176,43 +174,26 @@
     {
       "tag": "🇺🇸 US 01 | SS",
       "type": "shadowsocks",
-      "server": "100.27.193.207",
-      "server_port": 443,
-      "method": "aes-256-cfb",
-      "password": "amazonskr05"
-    },
-    {
-      "tag": "🇺🇸 US 01 | SS-1",
-      "type": "shadowsocks",
       "server": "37.19.198.236",
       "server_port": 443,
       "method": "aes-128-gcm",
       "password": "shadowsocks"
     },
     {
-      "tag": "🇺🇸 US 05 | VMess",
-      "type": "vmess",
-      "server": "82.198.246.37",
-      "server_port": 180,
-      "uuid": "d13fc2f5-3e05-4795-81eb-44143a09e552",
-      "security": "auto",
-      "alter_id": 0
+      "tag": "🇺🇸 US 03 | SS",
+      "type": "shadowsocks",
+      "server": "100.27.193.207",
+      "server_port": 443,
+      "method": "aes-256-cfb",
+      "password": "amazonskr05"
     },
     {
-      "tag": "🇩🇪 DE 02 | SS",
+      "tag": "🇩🇪 DE 01 | SS",
       "type": "shadowsocks",
       "server": "185.216.177.197",
       "server_port": 443,
       "method": "none",
       "password": "59fc5f8c-5697-4eb8-acf2-8ae363f203a2"
-    },
-    {
-      "tag": "ISP Shadowsocks 03",
-      "type": "shadowsocks",
-      "server": "r3mrcg007117fb8.cybervena.com",
-      "server_port": 50099,
-      "method": "chacha20-ietf-poly1305",
-      "password": "7e731ec3-f8e1-43f6-92cf-3978d14705c4"
     }
   ],
   "route": {
