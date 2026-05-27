@@ -14,30 +14,156 @@ geox-url:
   mmdb: "https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/country.mmdb"
 
 proxies:
-  - name: "🇺🇸 US 01 | SS"
+  - name: "CDN VLESS 04"
+    type: "vless"
+    server: "104.18.12.229"
+    port: 2052
+    uuid: "cdec8542-a21f-4377-9da3-ea60bb6d3a30"
+    network: "ws"
+    servername: "104.18.12.229"
+  - name: "CDN VLESS 01"
+    type: "vless"
+    server: "104.20.5.134"
+    port: 2052
+    uuid: "d342d11e-d424-4583-b36e-524ab1f0afa4"
+    network: "ws"
+    servername: "104.20.5.134"
+  - name: "🇪🇸 ES 08 | SS"
     type: "ss"
-    server: "100.27.193.207"
+    server: "145.249.109.13"
+    port: 4917
+    cipher: "chacha20-ietf-poly1305"
+    password: "7DoWqLxD5CMubpT1tzIyWX"
+  - name: "🏳️ 其他 17 | VMess"
+    type: "vmess"
+    server: "ro.connfull.org"
+    port: 2053
+    uuid: "9a6be41d-511a-4800-b828-368ca32dd56d"
+    alterId: 0
+    cipher: "auto"
+    network: "tcp"
+    tls: true
+  - name: "🏳️ 其他 13 | VMess"
+    type: "vmess"
+    server: "in.connfull.org"
+    port: 2053
+    uuid: "f074d083-cb28-45c2-8a3c-e5ebbc041b5c"
+    alterId: 0
+    cipher: "auto"
+    network: "tcp"
+    tls: true
+  - name: "🇨🇦 CA 01 | SS"
+    type: "ss"
+    server: "15.222.60.36"
     port: 443
     cipher: "aes-256-cfb"
     password: "amazonskr05"
+  - name: "🇨🇦 CA 03 | SS"
+    type: "ss"
+    server: "35.183.129.131"
+    port: 443
+    cipher: "aes-256-cfb"
+    password: "amazonskr05"
+  - name: "🇨🇦 CA 04 | SS"
+    type: "ss"
+    server: "15.157.68.13"
+    port: 443
+    cipher: "aes-256-cfb"
+    password: "amazonskr05"
+  - name: "🇺🇸 US 02 | SS"
+    type: "ss"
+    server: "79.141.163.21"
+    port: 4668
+    cipher: "chacha20-ietf-poly1305"
+    password: "4LwjNxZEaMDsT26xKjcNmo"
   - name: "🇺🇸 US 01 | SS"
     type: "ss"
     server: "37.19.198.236"
     port: 443
     cipher: "aes-128-gcm"
     password: "shadowsocks"
-  - name: "🇩🇪 DE 02 | SS"
+  - name: "🇺🇸 US 05 | SS"
     type: "ss"
-    server: "185.216.177.197"
+    server: "13.218.172.80"
     port: 443
-    cipher: "none"
-    password: "59fc5f8c-5697-4eb8-acf2-8ae363f203a2"
-  - name: "ISP Shadowsocks 03"
+    cipher: "aes-256-cfb"
+    password: "amazonskr05"
+  - name: "ISP Shadowsocks 02"
+    type: "ss"
+    server: "nbmrcg0034686rw.cybervena.com"
+    port: 50099
+    cipher: "chacha20-ietf-poly1305"
+    password: "7e731ec3-f8e1-43f6-92cf-3978d14705c47"
+  - name: "🏳️ SI 07 | SS"
+    type: "ss"
+    server: "45.83.130.97"
+    port: 53292
+    cipher: "chacha20-ietf-poly1305"
+    password: "hfSE3thwAQqvSIac5xLpUD"
+  - name: "ISP Shadowsocks 15"
     type: "ss"
     server: "r3mrcg001286ek2.cybervena.com"
     port: 50099
     cipher: "chacha20-ietf-poly1305"
     password: "7e731ec3-f8e1-43f6-92cf-3978d14705c4"
+  - name: "🇳🇱 NL 06 | SS"
+    type: "ss"
+    server: "108.181.126.122"
+    port: 8388
+    cipher: "chacha20-ietf-poly1305"
+    password: "CJmTCCx7Ltud"
+  - name: "🇷🇺 RU 09 | SS"
+    type: "ss"
+    server: "93.183.94.163"
+    port: 32609
+    cipher: "chacha20-ietf-poly1305"
+    password: "ay6MpbV7ee6sNC9SRQry7V"
+  - name: "🇸🇬 SG 10 | SS"
+    type: "ss"
+    server: "47.82.148.244"
+    port: 39715
+    cipher: "aes-256-gcm"
+    password: "IYgdNNDTvWPtQ2XtycquZONq2iEz4ZtEIIpHayAPUAMS"
+  - name: "🏳️ GB 12 | SS"
+    type: "ss"
+    server: "89.185.84.34"
+    port: 31348
+    cipher: "chacha20-ietf-poly1305"
+    password: "AQGAAMQLZoxMT4EUxNPuFwKImsAviZTHTEMmHFlRrDKJpMnS"
+  - name: "🇩🇪 DE 14 | SS"
+    type: "ss"
+    server: "57.129.121.230"
+    port: 10443
+    cipher: "chacha20-ietf-poly1305"
+    password: "uROuEqsL8IUMMVb4wDwnGU"
+  - name: "CDN Trojan 03"
+    type: "trojan"
+    server: "v1.dabache.top"
+    port: 443
+    password: "/humanity"
+    sni: "www.multiplydose.com"
+  - name: "CDN Trojan 05"
+    type: "trojan"
+    server: "cloudflare-ip.mofashi.ltd"
+    port: 443
+    password: "/2399fe0a-b359-40a9-a3f0-b70c3c177a01"
+    sni: "aa.beijng.dpdns.org"
+  - name: "🇹🇷 TR 16 | SS"
+    type: "ss"
+    server: "62.60.233.226"
+    port: 62763
+    cipher: "chacha20-ietf-poly1305"
+    password: "ER2xCcJkmR1pftmN300CNJ"
+  - name: "🇯🇵 JP 06 | VMess"
+    type: "vmess"
+    server: "103.127.243.59"
+    port: 56738
+    uuid: "5f49c80e-7770-4bd1-9c86-43c2068a3a26"
+    alterId: 0
+    cipher: "auto"
+    network: "tcp"
+    ws-opts:
+      path: "/ABCDE"
 
 proxy-groups:
   - name: 🚀 节点选择
