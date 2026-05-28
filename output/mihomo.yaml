@@ -20,75 +20,98 @@ proxies:
     port: 443
     cipher: "aes-128-gcm"
     password: "shadowsocks"
-  - name: "🇺🇸 US 01 | SS"
+  - name: "🇪🇸 ES 01 | SS"
     type: "ss"
-    server: "79.141.163.21"
-    port: 4668
+    server: "145.249.109.15"
+    port: 51758
     cipher: "chacha20-ietf-poly1305"
-    password: "4LwjNxZEaMDsT26xKjcNmo"
-  - name: "🇨🇦 CA 02 | SS"
+    password: "faGRw26yLKAPjpLvY7FMq7"
+  - name: "🏳️ SI 02 | SS"
     type: "ss"
-    server: "15.222.60.36"
+    server: "45.83.130.96"
+    port: 51847
+    cipher: "chacha20-ietf-poly1305"
+    password: "2C6POFLguZNPEuNh27rRju"
+  - name: "🇸🇪 SE 04 | SS"
+    type: "ss"
+    server: "78.40.116.149"
+    port: 33292
+    cipher: "chacha20-ietf-poly1305"
+    password: "IeOS3A4HfwVt1Itk0n3K3H"
+  - name: "🇸🇪 SE 06 | SS"
+    type: "ss"
+    server: "45.91.171.108"
+    port: 158
+    cipher: "chacha20-ietf-poly1305"
+    password: "-jd43ayn1mxzQ4t6dEI7OQ"
+  - name: "🏳️ UA 08 | SS"
+    type: "ss"
+    server: "130.0.233.100"
+    port: 33610
+    cipher: "chacha20-ietf-poly1305"
+    password: "GnzWRAJLiobpt0BiiEPLST"
+  - name: "🏳️ LT 09 | SS"
+    type: "ss"
+    server: "80.208.229.172"
     port: 443
-    cipher: "aes-256-cfb"
-    password: "amazonskr05"
-  - name: "🏳️ SI 03 | SS"
-    type: "ss"
-    server: "45.83.130.97"
-    port: 53292
     cipher: "chacha20-ietf-poly1305"
-    password: "hfSE3thwAQqvSIac5xLpUD"
-  - name: "🏳️ 其他 07 | SS"
+    password: "4LuSQluWs3meAy5vOo7ikZ"
+  - name: "🇫🇮 FI 12 | SS"
     type: "ss"
-    server: "r3mrcg007117fb8.cybervena.com"
-    port: 50099
+    server: "109.107.182.229"
+    port: 51544
     cipher: "chacha20-ietf-poly1305"
-    password: "7e731ec3-f8e1-43f6-92cf-3978d14705c4"
-  - name: "🇫🇮 FI 08 | SS"
+    password: "pMZgtJEakEyHUSpe8a16ec"
+  - name: "🇫🇮 FI 13 | SS"
     type: "ss"
     server: "195.133.2.2"
     port: 34898
     cipher: "chacha20-ietf-poly1305"
     password: "sbJZP5jEcWVgNfVG6sH76z"
-  - name: "🇸🇪 SE 12 | SS"
+  - name: "🇸🇪 SE 14 | SS"
     type: "ss"
-    server: "78.40.117.161"
-    port: 34633
+    server: "45.91.171.108"
+    port: 157
     cipher: "chacha20-ietf-poly1305"
-    password: "CZjvepQLlrEC9sVxkFfnlK"
-  - name: "🇪🇸 ES 04 | SS"
+    password: "-jd43ayn1mxzQ4t6dEI7OQ"
+  - name: "🇹🇷 TR 03 | SS"
     type: "ss"
-    server: "145.249.109.13"
-    port: 4917
+    server: "5.230.184.16"
+    port: 443
     cipher: "chacha20-ietf-poly1305"
-    password: "7DoWqLxD5CMubpT1tzIyWX"
-  - name: "🏳️ 其他 09 | VMess"
+    password: "453u6Gcei04NyXbrWLKa0M"
+  - name: "🇷🇺 RU 05 | SS"
+    type: "ss"
+    server: "84.54.44.54"
+    port: 11270
+    cipher: "chacha20-ietf-poly1305"
+    password: "hcxv0CvT14Zki4b1p1J9nE"
+  - name: "🇷🇺 RU 07 | SS"
+    type: "ss"
+    server: "45.93.201.73"
+    port: 8388
+    cipher: "chacha20-ietf-poly1305"
+    password: "--U6itO-CXQ6wjd8JMQfog"
+  - name: "🇷🇺 RU 10 | SS"
+    type: "ss"
+    server: "5.42.104.94"
+    port: 2060
+    cipher: "chacha20-ietf-poly1305"
+    password: "UAnLGpxm0a48ANms_Da3Tg"
+  - name: "🇨🇦 CA 15 | SS"
+    type: "ss"
+    server: "35.183.129.131"
+    port: 443
+    cipher: "aes-256-cfb"
+    password: "amazonskr05"
+  - name: "🇳🇱 NL 16 | VMess"
     type: "vmess"
-    server: "in.connfull.org"
-    port: 2053
-    uuid: "f074d083-cb28-45c2-8a3c-e5ebbc041b5c"
+    server: "162.217.249.74"
+    port: 45705
+    uuid: "5678b00f-9ed6-4982-9f8a-1a7306e25126"
     alterId: 0
     cipher: "auto"
     network: "tcp"
-    tls: true
-  - name: "🇹🇷 TR 05 | SS"
-    type: "ss"
-    server: "62.60.233.226"
-    port: 62763
-    cipher: "chacha20-ietf-poly1305"
-    password: "ER2xCcJkmR1pftmN300CNJ"
-  - name: "🇷🇺 RU 06 | SS"
-    type: "ss"
-    server: "93.183.94.163"
-    port: 32609
-    cipher: "chacha20-ietf-poly1305"
-    password: "ay6MpbV7ee6sNC9SRQry7V"
-  - name: "🇩🇪 DE 11 | SS"
-    type: "ss"
-    server: "57.129.121.230"
-    port: 10443
-    cipher: "chacha20-ietf-poly1305"
-    password: "uROuEqsL8IUMMVb4wDwnGU"
 
 proxy-groups:
   - name: 🚀 节点选择
