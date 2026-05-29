@@ -20,36 +20,51 @@ proxies:
     port: 443
     cipher: "aes-128-gcm"
     password: "shadowsocks"
-  - name: "🇹🇷 TR 01 | SS"
+  - name: "🇩🇪 DE 01 | SS"
     type: "ss"
-    server: "5.230.184.16"
+    server: "18.195.213.130"
     port: 443
-    cipher: "chacha20-ietf-poly1305"
-    password: "453u6Gcei04NyXbrWLKa0M"
-  - name: "🏳️ LT 02 | SS"
+    cipher: "aes-256-cfb"
+    password: "amazonskr05"
+  - name: "🇩🇪 DE 02 | SS"
+    type: "ss"
+    server: "63.180.239.185"
+    port: 443
+    cipher: "aes-256-cfb"
+    password: "amazonskr05"
+  - name: "🏳️ LT 03 | SS"
     type: "ss"
     server: "80.208.229.172"
     port: 443
     cipher: "chacha20-ietf-poly1305"
     password: "4LuSQluWs3meAy5vOo7ikZ"
-  - name: "🇸🇪 SE 03 | SS"
-    type: "ss"
-    server: "45.91.171.108"
-    port: 157
-    cipher: "chacha20-ietf-poly1305"
-    password: "-jd43ayn1mxzQ4t6dEI7OQ"
-  - name: "🇸🇪 SE 04 | SS"
+  - name: "🇸🇪 SE 06 | SS"
     type: "ss"
     server: "45.91.171.108"
     port: 158
     cipher: "chacha20-ietf-poly1305"
     password: "-jd43ayn1mxzQ4t6dEI7OQ"
-  - name: "🏳️ 其他 06 | SS"
+  - name: "🏳️ 其他 08 | SS"
     type: "ss"
     server: "vip9.myspacex.shop"
     port: 80
     cipher: "chacha20-ietf-poly1305"
     password: "YuRt6AX9P4NiutTwoDMvDTrxIjo_lsGr"
+  - name: "🇹🇼 TW 05 | Trojan"
+    type: "trojan"
+    server: "211.76.176.98"
+    port: 19128
+    password: "gcuCpQfaiVeDBdWG"
+    sni: "yazhou10.dynu.net"
+    skip-cert-verify: true
+  - name: "🇳🇱 NL 07 | VMess"
+    type: "vmess"
+    server: "162.217.249.74"
+    port: 45705
+    uuid: "5678b00f-9ed6-4982-9f8a-1a7306e25126"
+    alterId: 0
+    cipher: "auto"
+    network: "tcp"
 
 proxy-groups:
   - name: 🚀 节点选择
