@@ -14,38 +14,58 @@ geox-url:
   mmdb: "https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/country.mmdb"
 
 proxies:
+  - name: "🇨🇦 CA 01 | SS"
+    type: "ss"
+    server: "15.223.186.62"
+    port: 443
+    cipher: "aes-256-cfb"
+    password: "amazonskr05"
+  - name: "🇨🇦 CA 02 | SS"
+    type: "ss"
+    server: "35.182.57.53"
+    port: 443
+    cipher: "aes-256-cfb"
+    password: "amazonskr05"
   - name: "🇺🇸 US 01 | SS"
     type: "ss"
     server: "37.19.198.236"
     port: 443
     cipher: "aes-128-gcm"
     password: "shadowsocks"
-  - name: "🇩🇪 DE 01 | SS"
+  - name: "🇫🇷 FR 03 | SS"
     type: "ss"
-    server: "63.180.239.185"
+    server: "163.5.192.18"
     port: 443
-    cipher: "aes-256-cfb"
-    password: "amazonskr05"
-  - name: "🇸🇪 SE 04 | SS"
-    type: "ss"
-    server: "45.91.171.108"
-    port: 158
     cipher: "chacha20-ietf-poly1305"
-    password: "-jd43ayn1mxzQ4t6dEI7OQ"
-  - name: "🇫🇷 FR 02 | Trojan"
-    type: "trojan"
-    server: "217.69.2.107"
+    password: "Sj2yu7qKPprUmPJoOCgN6q"
+  - name: "🇫🇮 FI 06 | SS"
+    type: "ss"
+    server: "109.107.182.229"
+    port: 51544
+    cipher: "chacha20-ietf-poly1305"
+    password: "MZeSTvpl2uoey1R0frhPyJ"
+  - name: "🇫🇮 FI 07 | SS"
+    type: "ss"
+    server: "195.133.2.2"
+    port: 34898
+    cipher: "chacha20-ietf-poly1305"
+    password: "v2LIewZzNUsIrqODr22FVc"
+  - name: "🏳️ GB 04 | VMess"
+    type: "vmess"
+    server: "94.237.60.189"
     port: 443
-    password: "YGWIMlg.W1wRWQkRDcKfjZY7sng09aC=Yh"
-    sni: "www.weavenet.click"
-    skip-cert-verify: true
-  - name: "CDN Trojan 03"
-    type: "trojan"
-    server: "172.232.194.147"
-    port: 443
-    password: "G2qM_GHnAEpbuIp1mcZh3mGvVn3+rHrwNe"
-    sni: "172.232.194.147"
-    skip-cert-verify: true
+    uuid: "33453d72-e5a3-4e58-b66b-079c11dc7a18"
+    alterId: 0
+    cipher: "auto"
+    network: "tcp"
+  - name: "🏳️ 其他 08 | VMess"
+    type: "vmess"
+    server: "v6.hdacd.com"
+    port: 30806
+    uuid: "cbb3f877-d1fb-344c-87a9-d153bffd5484"
+    alterId: 2
+    cipher: "auto"
+    network: "tcp"
 
 proxy-groups:
   - name: 🚀 节点选择
