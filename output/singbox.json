@@ -127,7 +127,7 @@
       "type": "selector",
       "tag": "tw-group",
       "outbounds": [
-        "🇹🇼 TW 05 | Trojan"
+        "DIRECT"
       ]
     },
     {
@@ -155,12 +155,13 @@
       "type": "selector",
       "tag": "others-group",
       "outbounds": [
-        "🇩🇪 DE 01 | SS",
+        "🇨🇦 CA 01 | SS",
         "🇩🇪 DE 02 | SS",
+        "🇩🇪 DE 07 | SS",
+        "🇩🇪 DE 08 | SS",
         "🏳️ LT 03 | SS",
-        "🇸🇪 SE 06 | SS",
-        "🏳️ 其他 08 | SS",
-        "🇳🇱 NL 07 | VMess"
+        "🇸🇪 SE 04 | SS",
+        "🏳️ 其他 06 | SS"
       ]
     },
     {
@@ -176,6 +177,14 @@
       "tag": "dns-out"
     },
     {
+      "tag": "🇨🇦 CA 01 | SS",
+      "type": "shadowsocks",
+      "server": "35.183.129.131",
+      "server_port": 443,
+      "method": "aes-256-cfb",
+      "password": "amazonskr05"
+    },
+    {
       "tag": "🇺🇸 US 01 | SS",
       "type": "shadowsocks",
       "server": "37.19.198.236",
@@ -184,17 +193,25 @@
       "password": "shadowsocks"
     },
     {
-      "tag": "🇩🇪 DE 01 | SS",
+      "tag": "🇩🇪 DE 02 | SS",
       "type": "shadowsocks",
-      "server": "18.195.213.130",
+      "server": "63.180.239.185",
       "server_port": 443,
       "method": "aes-256-cfb",
       "password": "amazonskr05"
     },
     {
-      "tag": "🇩🇪 DE 02 | SS",
+      "tag": "🇩🇪 DE 07 | SS",
       "type": "shadowsocks",
-      "server": "63.180.239.185",
+      "server": "vip9.myspacex.shop",
+      "server_port": 80,
+      "method": "chacha20-ietf-poly1305",
+      "password": "YuRt6AX9P4NiutTwoDMvDTrxIjo_lsGr"
+    },
+    {
+      "tag": "🇩🇪 DE 08 | SS",
+      "type": "shadowsocks",
+      "server": "18.195.213.130",
       "server_port": 443,
       "method": "aes-256-cfb",
       "password": "amazonskr05"
@@ -208,7 +225,7 @@
       "password": "4LuSQluWs3meAy5vOo7ikZ"
     },
     {
-      "tag": "🇸🇪 SE 06 | SS",
+      "tag": "🇸🇪 SE 04 | SS",
       "type": "shadowsocks",
       "server": "45.91.171.108",
       "server_port": 158,
@@ -216,33 +233,12 @@
       "password": "-jd43ayn1mxzQ4t6dEI7OQ"
     },
     {
-      "tag": "🏳️ 其他 08 | SS",
+      "tag": "🏳️ 其他 06 | SS",
       "type": "shadowsocks",
       "server": "vip9.myspacex.shop",
-      "server_port": 80,
+      "server_port": 443,
       "method": "chacha20-ietf-poly1305",
       "password": "YuRt6AX9P4NiutTwoDMvDTrxIjo_lsGr"
-    },
-    {
-      "tag": "🇹🇼 TW 05 | Trojan",
-      "type": "trojan",
-      "server": "211.76.176.98",
-      "server_port": 19128,
-      "password": "gcuCpQfaiVeDBdWG",
-      "tls": {
-        "enabled": true,
-        "server_name": "yazhou10.dynu.net",
-        "insecure": true
-      }
-    },
-    {
-      "tag": "🇳🇱 NL 07 | VMess",
-      "type": "vmess",
-      "server": "162.217.249.74",
-      "server_port": 45705,
-      "uuid": "5678b00f-9ed6-4982-9f8a-1a7306e25126",
-      "security": "auto",
-      "alter_id": 0
     }
   ],
   "route": {
