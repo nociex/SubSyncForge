@@ -155,13 +155,10 @@
       "type": "selector",
       "tag": "others-group",
       "outbounds": [
-        "🇨🇦 CA 01 | SS",
-        "🇩🇪 DE 02 | SS",
-        "🇩🇪 DE 07 | SS",
-        "🇩🇪 DE 08 | SS",
-        "🏳️ LT 03 | SS",
+        "🇩🇪 DE 01 | SS",
         "🇸🇪 SE 04 | SS",
-        "🏳️ 其他 06 | SS"
+        "🇫🇷 FR 02 | Trojan",
+        "CDN Trojan 03"
       ]
     },
     {
@@ -177,14 +174,6 @@
       "tag": "dns-out"
     },
     {
-      "tag": "🇨🇦 CA 01 | SS",
-      "type": "shadowsocks",
-      "server": "35.183.129.131",
-      "server_port": 443,
-      "method": "aes-256-cfb",
-      "password": "amazonskr05"
-    },
-    {
       "tag": "🇺🇸 US 01 | SS",
       "type": "shadowsocks",
       "server": "37.19.198.236",
@@ -193,36 +182,12 @@
       "password": "shadowsocks"
     },
     {
-      "tag": "🇩🇪 DE 02 | SS",
+      "tag": "🇩🇪 DE 01 | SS",
       "type": "shadowsocks",
       "server": "63.180.239.185",
       "server_port": 443,
       "method": "aes-256-cfb",
       "password": "amazonskr05"
-    },
-    {
-      "tag": "🇩🇪 DE 07 | SS",
-      "type": "shadowsocks",
-      "server": "vip9.myspacex.shop",
-      "server_port": 80,
-      "method": "chacha20-ietf-poly1305",
-      "password": "YuRt6AX9P4NiutTwoDMvDTrxIjo_lsGr"
-    },
-    {
-      "tag": "🇩🇪 DE 08 | SS",
-      "type": "shadowsocks",
-      "server": "18.195.213.130",
-      "server_port": 443,
-      "method": "aes-256-cfb",
-      "password": "amazonskr05"
-    },
-    {
-      "tag": "🏳️ LT 03 | SS",
-      "type": "shadowsocks",
-      "server": "80.208.229.172",
-      "server_port": 443,
-      "method": "chacha20-ietf-poly1305",
-      "password": "4LuSQluWs3meAy5vOo7ikZ"
     },
     {
       "tag": "🇸🇪 SE 04 | SS",
@@ -233,12 +198,28 @@
       "password": "-jd43ayn1mxzQ4t6dEI7OQ"
     },
     {
-      "tag": "🏳️ 其他 06 | SS",
-      "type": "shadowsocks",
-      "server": "vip9.myspacex.shop",
+      "tag": "🇫🇷 FR 02 | Trojan",
+      "type": "trojan",
+      "server": "217.69.2.107",
       "server_port": 443,
-      "method": "chacha20-ietf-poly1305",
-      "password": "YuRt6AX9P4NiutTwoDMvDTrxIjo_lsGr"
+      "password": "YGWIMlg.W1wRWQkRDcKfjZY7sng09aC=Yh",
+      "tls": {
+        "enabled": true,
+        "server_name": "www.weavenet.click",
+        "insecure": true
+      }
+    },
+    {
+      "tag": "CDN Trojan 03",
+      "type": "trojan",
+      "server": "172.232.194.147",
+      "server_port": 443,
+      "password": "G2qM_GHnAEpbuIp1mcZh3mGvVn3+rHrwNe",
+      "tls": {
+        "enabled": true,
+        "server_name": "172.232.194.147",
+        "insecure": true
+      }
     }
   ],
   "route": {
