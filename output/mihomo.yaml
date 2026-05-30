@@ -14,43 +14,45 @@ geox-url:
   mmdb: "https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/country.mmdb"
 
 proxies:
-  - name: "🇨🇦 CA 01 | SS"
-    type: "ss"
-    server: "15.223.186.62"
-    port: 443
-    cipher: "aes-256-cfb"
-    password: "amazonskr05"
-  - name: "🇨🇦 CA 02 | SS"
-    type: "ss"
-    server: "35.182.57.53"
-    port: 443
-    cipher: "aes-256-cfb"
-    password: "amazonskr05"
   - name: "🇺🇸 US 01 | SS"
     type: "ss"
     server: "37.19.198.236"
     port: 443
     cipher: "aes-128-gcm"
     password: "shadowsocks"
-  - name: "🇫🇷 FR 03 | SS"
-    type: "ss"
-    server: "163.5.192.18"
-    port: 443
-    cipher: "chacha20-ietf-poly1305"
-    password: "Sj2yu7qKPprUmPJoOCgN6q"
-  - name: "🇫🇮 FI 06 | SS"
+  - name: "🇺🇸 US 08 | VMess"
+    type: "vmess"
+    server: "82.198.246.37"
+    port: 180
+    uuid: "d13fc2f5-3e05-4795-81eb-44143a09e552"
+    alterId: 0
+    cipher: "auto"
+    network: "tcp"
+  - name: "🇫🇮 FI 02 | SS"
     type: "ss"
     server: "109.107.182.229"
     port: 51544
     cipher: "chacha20-ietf-poly1305"
     password: "MZeSTvpl2uoey1R0frhPyJ"
-  - name: "🇫🇮 FI 07 | SS"
+  - name: "🏳️ 其他 04 | SS"
     type: "ss"
-    server: "195.133.2.2"
-    port: 34898
+    server: "r3mrcg001286ek2.cybervena.com"
+    port: 50099
     cipher: "chacha20-ietf-poly1305"
-    password: "v2LIewZzNUsIrqODr22FVc"
-  - name: "🏳️ GB 04 | VMess"
+    password: "7e731ec3-f8e1-43f6-92cf-3978d14705c4"
+  - name: "🇨🇦 CA 03 | SS"
+    type: "ss"
+    server: "15.223.186.62"
+    port: 443
+    cipher: "aes-256-cfb"
+    password: "amazonskr05"
+  - name: "🇨🇦 CA 07 | SS"
+    type: "ss"
+    server: "35.182.57.53"
+    port: 443
+    cipher: "aes-256-cfb"
+    password: "amazonskr05"
+  - name: "🏳️ GB 01 | VMess"
     type: "vmess"
     server: "94.237.60.189"
     port: 443
@@ -58,14 +60,21 @@ proxies:
     alterId: 0
     cipher: "auto"
     network: "tcp"
-  - name: "🏳️ 其他 08 | VMess"
+  - name: "🏳️ 其他 09 | VMess"
     type: "vmess"
-    server: "v6.hdacd.com"
-    port: 30806
+    server: "v29.hdacd.com"
+    port: 30829
     uuid: "cbb3f877-d1fb-344c-87a9-d153bffd5484"
     alterId: 2
     cipher: "auto"
     network: "tcp"
+  - name: "🇫🇷 FR 06 | Trojan"
+    type: "trojan"
+    server: "217.69.2.107"
+    port: 443
+    password: "YGWIMlg.W1wRWQkRDcKfjZY7sng09aC=Yh"
+    sni: "www.weavenet.click"
+    skip-cert-verify: true
 
 proxy-groups:
   - name: 🚀 节点选择
