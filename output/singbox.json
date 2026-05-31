@@ -148,25 +148,18 @@
       "type": "selector",
       "tag": "us-group",
       "outbounds": [
-        "🇺🇸 US 01 | SS",
-        "🇺🇸 US 06 | VMess"
+        "🇺🇸 US 01 | SS"
       ]
     },
     {
       "type": "selector",
       "tag": "others-group",
       "outbounds": [
-        "🏳️ GB 02 | VLESS",
-        "🇳🇱 NL 05 | VLESS",
-        "🇷🇺 RU 07 | VLESS",
-        "CDN Trojan 04",
         "CDN Trojan 01",
-        "CDN Trojan 06",
+        "CDN Trojan 02",
         "CDN Trojan 03",
-        "CDN Trojan 03-1",
-        "CDN Trojan 04-1",
-        "🇨🇦 CA 01 | SS",
-        "🇫🇮 FI 02 | SS"
+        "🇦🇹 AT 05 | Trojan",
+        "🇩🇪 DE 04 | Trojan"
       ]
     },
     {
@@ -182,81 +175,35 @@
       "tag": "dns-out"
     },
     {
-      "tag": "🏳️ GB 02 | VLESS",
-      "type": "vless",
-      "server": "217.163.76.118",
-      "server_port": 2083,
-      "uuid": "41f37ced-2021-4111-93a8-82d57ff2eb5b",
-      "transport": {
-        "type": "ws",
-        "path": "/?ed",
-        "headers": {}
-      },
-      "tls": {
-        "enabled": true,
-        "server_name": "fl0.lizardshop.org",
-        "insecure": false
-      }
-    },
-    {
-      "tag": "🇳🇱 NL 05 | VLESS",
-      "type": "vless",
-      "server": "20.103.221.187",
+      "tag": "🇺🇸 US 01 | SS",
+      "type": "shadowsocks",
+      "server": "37.19.198.236",
       "server_port": 443,
-      "uuid": "4b616b6f-6f6c-4e65-7773-b8e2c9f3d541",
-      "transport": {
-        "type": "ws",
-        "path": "/",
-        "headers": {}
-      },
-      "tls": {
-        "enabled": true,
-        "server_name": "literate-funicular-xr59q5x9v7g6c995w-443.app.github.dev",
-        "insecure": false
-      }
-    },
-    {
-      "tag": "🇷🇺 RU 07 | VLESS",
-      "type": "vless",
-      "server": "51.250.106.197",
-      "server_port": 443,
-      "uuid": "Fluffy_VPN-757700MA",
-      "flow": "xtls-rprx-vision"
-    },
-    {
-      "tag": "CDN Trojan 04",
-      "type": "trojan",
-      "server": "104.20.6.134",
-      "server_port": 443,
-      "password": "/humanity",
-      "tls": {
-        "enabled": true,
-        "server_name": "www.calmloud.com",
-        "insecure": false
-      }
+      "method": "aes-128-gcm",
+      "password": "shadowsocks"
     },
     {
       "tag": "CDN Trojan 01",
       "type": "trojan",
-      "server": "www.gossipglove.com",
-      "server_port": 443,
-      "password": "/humanity",
+      "server": "22b.net",
+      "server_port": 2087,
+      "password": "/trojan",
       "tls": {
         "enabled": true,
-        "server_name": "www.gossipglove.com",
-        "insecure": true
+        "server_name": "store.timimi.dpdns.org",
+        "insecure": false
       }
     },
     {
-      "tag": "CDN Trojan 06",
+      "tag": "CDN Trojan 02",
       "type": "trojan",
-      "server": "172.235.63.252",
+      "server": "172.236.220.10",
       "server_port": 443,
-      "password": "/bX_lNHWoW6ywq82mI=KUr+8i__VSp0Hs_E",
+      "password": "/s_WEN9lMmufG+qDIsn-4C7JOVAnDdbS3Ui",
       "tls": {
         "enabled": true,
-        "server_name": "172.235.63.252",
-        "insecure": true
+        "server_name": "172.236.220.10",
+        "insecure": false
       }
     },
     {
@@ -272,61 +219,28 @@
       }
     },
     {
-      "tag": "CDN Trojan 03-1",
+      "tag": "🇦🇹 AT 05 | Trojan",
       "type": "trojan",
-      "server": "172.236.220.10",
-      "server_port": 443,
-      "password": "s_WEN9lMmufG+qDIsn-4C7JOVAnDdbS3Ui",
+      "server": "104.143.0.117",
+      "server_port": 8443,
+      "password": "/433e785b-2077-47f7-a43d-985f63dd18d1",
       "tls": {
         "enabled": true,
-        "server_name": "172.236.220.10",
+        "server_name": "vpn.rnmcnm.com",
         "insecure": true
       }
     },
     {
-      "tag": "CDN Trojan 04-1",
+      "tag": "🇩🇪 DE 04 | Trojan",
       "type": "trojan",
-      "server": "172.238.120.124",
+      "server": "172.104.237.100",
       "server_port": 443,
-      "password": "r-_YbwF.j0TtHVewoFIppramjAnmSfqYzJ",
+      "password": "/VPTFm=oZ++SuNT+jMRqGZqrAnWq-r8KJyY",
       "tls": {
         "enabled": true,
-        "server_name": "172.238.120.124",
+        "server_name": "172.104.237.100",
         "insecure": true
       }
-    },
-    {
-      "tag": "🇺🇸 US 01 | SS",
-      "type": "shadowsocks",
-      "server": "37.19.198.236",
-      "server_port": 443,
-      "method": "aes-128-gcm",
-      "password": "shadowsocks"
-    },
-    {
-      "tag": "🇺🇸 US 06 | VMess",
-      "type": "vmess",
-      "server": "82.198.246.37",
-      "server_port": 180,
-      "uuid": "d13fc2f5-3e05-4795-81eb-44143a09e552",
-      "security": "auto",
-      "alter_id": 0
-    },
-    {
-      "tag": "🇨🇦 CA 01 | SS",
-      "type": "shadowsocks",
-      "server": "15.223.186.62",
-      "server_port": 443,
-      "method": "aes-256-cfb",
-      "password": "amazonskr05"
-    },
-    {
-      "tag": "🇫🇮 FI 02 | SS",
-      "type": "shadowsocks",
-      "server": "109.107.182.229",
-      "server_port": 51544,
-      "method": "chacha20-ietf-poly1305",
-      "password": "MZeSTvpl2uoey1R0frhPyJ"
     }
   ],
   "route": {
