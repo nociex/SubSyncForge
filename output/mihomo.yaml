@@ -14,96 +14,93 @@ geox-url:
   mmdb: "https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/country.mmdb"
 
 proxies:
-  - name: "CDN VLESS 01"
+  - name: "🏳️ GB 02 | VLESS"
     type: "vless"
-    server: "172.65.111.43"
-    port: 22
-    uuid: "8a38623a-3e7f-5598-bdc9-894cbad4c5b6"
+    server: "217.163.76.118"
+    port: 2083
+    uuid: "41f37ced-2021-4111-93a8-82d57ff2eb5b"
+    network: "ws"
+    servername: "fl0.lizardshop.org"
+  - name: "🇳🇱 NL 05 | VLESS"
+    type: "vless"
+    server: "20.103.221.187"
+    port: 443
+    uuid: "4b616b6f-6f6c-4e65-7773-b8e2c9f3d541"
+    network: "ws"
+    servername: "literate-funicular-xr59q5x9v7g6c995w-443.app.github.dev"
+  - name: "🇷🇺 RU 07 | VLESS"
+    type: "vless"
+    server: "51.250.106.197"
+    port: 443
+    uuid: "Fluffy_VPN-757700MA"
+    flow: "xtls-rprx-vision"
     network: "tcp"
-    servername: "172.65.111.43"
-  - name: "CDN VLESS 05"
-    type: "vless"
-    server: "172.66.47.45"
-    port: 2083
-    uuid: "d342d11e-d424-4583-b36e-524ab1f0afa4"
-    network: "ws"
-    servername: "wk1.f1w.de5.net"
-  - name: "CDN VLESS 04"
-    type: "vless"
-    server: "198.41.208.203"
-    port: 80
-    uuid: "a22bff60-a40a-4250-bde2-4c660e363b47"
-    network: "ws"
-    servername: "198.41.208.203"
-  - name: "CDN VLESS 02"
-    type: "vless"
-    server: "172.66.44.211"
-    port: 2083
-    uuid: "d342d11e-d424-4583-b36e-524ab1f0afa4"
-    network: "ws"
-    servername: "wk1.f1w.de5.net"
-  - name: "🇺🇸 US 03 | VLESS"
-    type: "vless"
-    server: "72.167.230.30"
-    port: 8880
-    uuid: "6202b230-417c-4d8e-b624-0f71afa9c75d"
-    network: "ws"
-    servername: "72.167.230.30"
+    servername: "max.ru"
+  - name: "CDN Trojan 04"
+    type: "trojan"
+    server: "104.20.6.134"
+    port: 443
+    password: "/humanity"
+    sni: "www.calmloud.com"
+  - name: "CDN Trojan 01"
+    type: "trojan"
+    server: "www.gossipglove.com"
+    port: 443
+    password: "/humanity"
+    sni: "www.gossipglove.com"
+    skip-cert-verify: true
+  - name: "CDN Trojan 06"
+    type: "trojan"
+    server: "172.235.63.252"
+    port: 443
+    password: "/bX_lNHWoW6ywq82mI=KUr+8i__VSp0Hs_E"
+    sni: "172.235.63.252"
+    skip-cert-verify: true
+  - name: "CDN Trojan 03"
+    type: "trojan"
+    server: "172.238.120.124"
+    port: 443
+    password: "/r-_YbwF.j0TtHVewoFIppramjAnmSfqYzJ"
+    sni: "172.238.120.124"
+  - name: "CDN Trojan 03"
+    type: "trojan"
+    server: "172.236.220.10"
+    port: 443
+    password: "s_WEN9lMmufG+qDIsn-4C7JOVAnDdbS3Ui"
+    sni: "172.236.220.10"
+    skip-cert-verify: true
+  - name: "CDN Trojan 04"
+    type: "trojan"
+    server: "172.238.120.124"
+    port: 443
+    password: "r-_YbwF.j0TtHVewoFIppramjAnmSfqYzJ"
+    skip-cert-verify: true
   - name: "🇺🇸 US 01 | SS"
     type: "ss"
     server: "37.19.198.236"
     port: 443
     cipher: "aes-128-gcm"
     password: "shadowsocks"
+  - name: "🇺🇸 US 06 | VMess"
+    type: "vmess"
+    server: "82.198.246.37"
+    port: 180
+    uuid: "d13fc2f5-3e05-4795-81eb-44143a09e552"
+    alterId: 0
+    cipher: "auto"
+    network: "tcp"
   - name: "🇨🇦 CA 01 | SS"
     type: "ss"
     server: "15.223.186.62"
     port: 443
     cipher: "aes-256-cfb"
     password: "amazonskr05"
-  - name: "🇷🇺 RU 06 | SS"
-    type: "ss"
-    server: "45.140.169.216"
-    port: 30129
-    cipher: "aes-256-gcm"
-    password: "c5fcdf7829112cb4"
-  - name: "🇿🇦 ZA 07 | SS"
-    type: "ss"
-    server: "20.164.221.1"
-    port: 443
-    cipher: "chacha20-ietf-poly1305"
-    password: "dhUfc0noSQDTLOAR"
   - name: "🇫🇮 FI 02 | SS"
     type: "ss"
     server: "109.107.182.229"
     port: 51544
     cipher: "chacha20-ietf-poly1305"
     password: "MZeSTvpl2uoey1R0frhPyJ"
-  - name: "🇫🇮 FI 03 | SS"
-    type: "ss"
-    server: "195.133.2.2"
-    port: 34898
-    cipher: "chacha20-ietf-poly1305"
-    password: "v2LIewZzNUsIrqODr22FVc"
-  - name: "🏳️ 其他 05 | SS"
-    type: "ss"
-    server: "r3mrcg001286ek2.cybervena.com"
-    port: 50099
-    cipher: "chacha20-ietf-poly1305"
-    password: "7e731ec3-f8e1-43f6-92cf-3978d14705c4"
-  - name: "CDN Trojan 08"
-    type: "trojan"
-    server: "172.238.120.124"
-    port: 443
-    password: "/r-_YbwF.j0TtHVewoFIppramjAnmSfqYzJ"
-    sni: "172.238.120.124"
-  - name: "🇫🇷 FR 04 | Trojan"
-    type: "trojan"
-    server: "217.69.2.107"
-    port: 443
-    password: "YGWIMlg.W1wRWQkRDcKfjZY7sng09aC=Yh"
-    sni: "www.weavenet.click"
-    skip-cert-verify: true
 
 proxy-groups:
   - name: 🚀 节点选择
