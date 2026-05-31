@@ -148,21 +148,26 @@
       "type": "selector",
       "tag": "us-group",
       "outbounds": [
-        "🇺🇸 US 01 | SS",
-        "🇺🇸 US 08 | VMess"
+        "🇺🇸 US 03 | VLESS",
+        "🇺🇸 US 01 | SS"
       ]
     },
     {
       "type": "selector",
       "tag": "others-group",
       "outbounds": [
+        "CDN VLESS 01",
+        "CDN VLESS 05",
+        "CDN VLESS 04",
+        "CDN VLESS 02",
+        "🇨🇦 CA 01 | SS",
+        "🇷🇺 RU 06 | SS",
+        "🇿🇦 ZA 07 | SS",
         "🇫🇮 FI 02 | SS",
-        "🏳️ 其他 04 | SS",
-        "🇨🇦 CA 03 | SS",
-        "🇨🇦 CA 07 | SS",
-        "🏳️ GB 01 | VMess",
-        "🏳️ 其他 09 | VMess",
-        "🇫🇷 FR 06 | Trojan"
+        "🇫🇮 FI 03 | SS",
+        "🏳️ 其他 05 | SS",
+        "CDN Trojan 08",
+        "🇫🇷 FR 04 | Trojan"
       ]
     },
     {
@@ -178,6 +183,79 @@
       "tag": "dns-out"
     },
     {
+      "tag": "CDN VLESS 01",
+      "type": "vless",
+      "server": "172.65.111.43",
+      "server_port": 22,
+      "uuid": "8a38623a-3e7f-5598-bdc9-894cbad4c5b6"
+    },
+    {
+      "tag": "CDN VLESS 05",
+      "type": "vless",
+      "server": "172.66.47.45",
+      "server_port": 2083,
+      "uuid": "d342d11e-d424-4583-b36e-524ab1f0afa4",
+      "transport": {
+        "type": "ws",
+        "path": "/fp=chrome",
+        "headers": {
+          "Host": "wk1.f1w.de5.net"
+        }
+      },
+      "tls": {
+        "enabled": true,
+        "server_name": "wk1.f1w.de5.net",
+        "insecure": false
+      }
+    },
+    {
+      "tag": "CDN VLESS 04",
+      "type": "vless",
+      "server": "198.41.208.203",
+      "server_port": 80,
+      "uuid": "a22bff60-a40a-4250-bde2-4c660e363b47",
+      "transport": {
+        "type": "ws",
+        "path": "/mpmva3e8rtr6v7qq",
+        "headers": {
+          "Host": "index.harmony715.workers.dev"
+        }
+      }
+    },
+    {
+      "tag": "CDN VLESS 02",
+      "type": "vless",
+      "server": "172.66.44.211",
+      "server_port": 2083,
+      "uuid": "d342d11e-d424-4583-b36e-524ab1f0afa4",
+      "transport": {
+        "type": "ws",
+        "path": "/",
+        "headers": {
+          "Host": "wk1.f1w.de5.net"
+        }
+      },
+      "tls": {
+        "enabled": true,
+        "server_name": "wk1.f1w.de5.net",
+        "insecure": false
+      }
+    },
+    {
+      "tag": "🇺🇸 US 03 | VLESS",
+      "type": "vless",
+      "server": "72.167.230.30",
+      "server_port": 8880,
+      "uuid": "6202b230-417c-4d8e-b624-0f71afa9c75d",
+      "transport": {
+        "type": "ws",
+        "path": "/",
+        "headers": {
+          "Host": "vms.lifetime51.workers.dev"
+        }
+      }
+    },
+    {
       "tag": "🇺🇸 US 01 | SS",
       "type": "shadowsocks",
       "server": "37.19.198.236",
@@ -186,13 +264,28 @@
       "password": "shadowsocks"
     },
     {
-      "tag": "🇺🇸 US 08 | VMess",
-      "type": "vmess",
-      "server": "82.198.246.37",
-      "server_port": 180,
-      "uuid": "d13fc2f5-3e05-4795-81eb-44143a09e552",
-      "security": "auto",
-      "alter_id": 0
+      "tag": "🇨🇦 CA 01 | SS",
+      "type": "shadowsocks",
+      "server": "15.223.186.62",
+      "server_port": 443,
+      "method": "aes-256-cfb",
+      "password": "amazonskr05"
+    },
+    {
+      "tag": "🇷🇺 RU 06 | SS",
+      "type": "shadowsocks",
+      "server": "45.140.169.216",
+      "server_port": 30129,
+      "method": "aes-256-gcm",
+      "password": "c5fcdf7829112cb4\r��"
+    },
+    {
+      "tag": "🇿🇦 ZA 07 | SS",
+      "type": "shadowsocks",
+      "server": "20.164.221.1",
+      "server_port": 443,
+      "method": "chacha20-ietf-poly1305",
+      "password": "dhUfc0noSQDTLOAR"
     },
     {
       "tag": "🇫🇮 FI 02 | SS",
@@ -203,7 +296,15 @@
       "password": "MZeSTvpl2uoey1R0frhPyJ"
     },
     {
-      "tag": "🏳️ 其他 04 | SS",
+      "tag": "🇫🇮 FI 03 | SS",
+      "type": "shadowsocks",
+      "server": "195.133.2.2",
+      "server_port": 34898,
+      "method": "chacha20-ietf-poly1305",
+      "password": "v2LIewZzNUsIrqODr22FVc"
+    },
+    {
+      "tag": "🏳️ 其他 05 | SS",
       "type": "shadowsocks",
       "server": "r3mrcg001286ek2.cybervena.com",
       "server_port": 50099,
@@ -211,41 +312,19 @@
       "password": "7e731ec3-f8e1-43f6-92cf-3978d14705c4"
     },
     {
-      "tag": "🇨🇦 CA 03 | SS",
-      "type": "shadowsocks",
-      "server": "15.223.186.62",
+      "tag": "CDN Trojan 08",
+      "type": "trojan",
+      "server": "172.238.120.124",
       "server_port": 443,
-      "method": "aes-256-cfb",
-      "password": "amazonskr05"
+      "password": "/r-_YbwF.j0TtHVewoFIppramjAnmSfqYzJ",
+      "tls": {
+        "enabled": true,
+        "server_name": "172.238.120.124",
+        "insecure": false
+      }
     },
     {
-      "tag": "🇨🇦 CA 07 | SS",
-      "type": "shadowsocks",
-      "server": "35.182.57.53",
-      "server_port": 443,
-      "method": "aes-256-cfb",
-      "password": "amazonskr05"
-    },
-    {
-      "tag": "🏳️ GB 01 | VMess",
-      "type": "vmess",
-      "server": "94.237.60.189",
-      "server_port": 443,
-      "uuid": "33453d72-e5a3-4e58-b66b-079c11dc7a18",
-      "security": "auto",
-      "alter_id": 0
-    },
-    {
-      "tag": "🏳️ 其他 09 | VMess",
-      "type": "vmess",
-      "server": "v29.hdacd.com",
-      "server_port": 30829,
-      "uuid": "cbb3f877-d1fb-344c-87a9-d153bffd5484",
-      "security": "auto",
-      "alter_id": 2
-    },
-    {
-      "tag": "🇫🇷 FR 06 | Trojan",
+      "tag": "🇫🇷 FR 04 | Trojan",
       "type": "trojan",
       "server": "217.69.2.107",
       "server_port": 443,
