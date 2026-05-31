@@ -14,43 +14,52 @@ geox-url:
   mmdb: "https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/country.mmdb"
 
 proxies:
+  - name: "CDN VLESS 01"
+    type: "vless"
+    server: "172.65.111.43"
+    port: 22
+    uuid: "8a38623a-3e7f-5598-bdc9-894cbad4c5b6"
+    network: "tcp"
+    servername: "172.65.111.43"
+  - name: "CDN VLESS 03"
+    type: "vless"
+    server: "cf.9999669.xyz"
+    port: 2087
+    uuid: "77777777-8a3e-6666-b6d1-a9c5f0e8b3a2"
+    network: "ws"
+    servername: "fgnix832fx.fx6hsv0.ccwu.cc"
+  - name: "🇳🇱 NL 04 | VLESS"
+    type: "vless"
+    server: "51.158.206.86"
+    port: 23576
+    uuid: "48ff2b70-e180-582f-8866-d9a2edeed5f5"
+    flow: "xtls-rprx-vision"
+    network: "tcp"
+    servername: "fuck.rkn"
   - name: "🇺🇸 US 01 | SS"
     type: "ss"
     server: "37.19.198.236"
     port: 443
     cipher: "aes-128-gcm"
     password: "shadowsocks"
-  - name: "CDN Trojan 01"
+  - name: "🇺🇸 US 05 | Trojan"
     type: "trojan"
-    server: "22b.net"
-    port: 2087
-    password: "/trojan"
-    sni: "store.timimi.dpdns.org"
-  - name: "CDN Trojan 02"
-    type: "trojan"
-    server: "172.236.220.10"
+    server: "130.94.107.171"
     port: 443
-    password: "/s_WEN9lMmufG+qDIsn-4C7JOVAnDdbS3Ui"
-    sni: "172.236.220.10"
-  - name: "CDN Trojan 03"
+    password: "/s.wRSE4ANZp4=4h.=B_9Qbetw6XUc0V1SV"
+    sni: "www.logger-guard.click"
+  - name: "🇫🇷 FR 02 | Trojan"
     type: "trojan"
-    server: "172.238.120.124"
+    server: "217.69.2.107"
     port: 443
-    password: "/r-_YbwF.j0TtHVewoFIppramjAnmSfqYzJ"
-    sni: "172.238.120.124"
-  - name: "🇦🇹 AT 05 | Trojan"
+    password: "/YGWIMlg.W1wRWQkRDcKfjZY7sng09aC=Yh"
+    sni: "www.weavenet.click"
+  - name: "🇨🇳 CN 06 | Trojan"
     type: "trojan"
-    server: "104.143.0.117"
-    port: 8443
-    password: "/433e785b-2077-47f7-a43d-985f63dd18d1"
-    sni: "vpn.rnmcnm.com"
-    skip-cert-verify: true
-  - name: "🇩🇪 DE 04 | Trojan"
-    type: "trojan"
-    server: "172.104.237.100"
+    server: "130.94.65.52"
     port: 443
-    password: "/VPTFm=oZ++SuNT+jMRqGZqrAnWq-r8KJyY"
-    sni: "172.104.237.100"
+    password: "/IbezlLAYfrLRwFn9.mHn5FDwk1asLi599U"
+    sni: "www.static-cast.click"
     skip-cert-verify: true
 
 proxy-groups:
