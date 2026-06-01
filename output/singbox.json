@@ -120,7 +120,7 @@
       "type": "selector",
       "tag": "hk-group",
       "outbounds": [
-        "DIRECT"
+        "🇭🇰 HK 05 | Trojan"
       ]
     },
     {
@@ -148,20 +148,20 @@
       "type": "selector",
       "tag": "us-group",
       "outbounds": [
-        "🇺🇸 US 02 | VLESS",
-        "🇺🇸 US 01 | SS"
+        "🇺🇸 US 01 | SS",
+        "🇺🇸 US 01 | VMess",
+        "🇺🇸 US 02 | VMess"
       ]
     },
     {
       "type": "selector",
       "tag": "others-group",
       "outbounds": [
-        "CDN VLESS 01",
-        "🇫🇮 FI 01 | SS",
-        "🏳️ 其他 04 | SS",
-        "🇫🇷 FR 02 | Trojan",
-        "CDN Trojan 04",
-        "CDN Trojan 03"
+        "🏳️ 其他 06 | VMess",
+        "🏳️ 其他 07 | VMess",
+        "🏳️ 其他 09 | VMess",
+        "🏳️ 其他 04 | Trojan",
+        "CDN Trojan 08"
       ]
     },
     {
@@ -177,25 +177,6 @@
       "tag": "dns-out"
     },
     {
-      "tag": "🇺🇸 US 02 | VLESS",
-      "type": "vless",
-      "server": "216.24.57.1",
-      "server_port": 443,
-      "uuid": "6e593426-1a8e-4226-984f-0ea174e218c7",
-      "transport": {
-        "type": "ws",
-        "path": "/id-pusat",
-        "headers": {
-          "Host": "dl.cvs.freefiremobile.com.cyylr.eu.cc"
-        }
-      },
-      "tls": {
-        "enabled": true,
-        "server_name": "dl.cvs.freefiremobile.com.cyylr.eu.cc",
-        "insecure": false
-      }
-    },
-    {
       "tag": "🇺🇸 US 01 | SS",
       "type": "shadowsocks",
       "server": "37.19.198.236",
@@ -204,74 +185,84 @@
       "password": "shadowsocks"
     },
     {
-      "tag": "CDN VLESS 01",
-      "type": "vless",
-      "server": "a1-tss.pages.dev",
-      "server_port": 443,
-      "uuid": "f86f5a03-3872-46b5-bf03-a50388a0261d",
-      "transport": {
-        "type": "ws",
-        "path": "/",
-        "headers": {
-          "Host": "a1-tss.pages.dev"
-        }
-      },
-      "tls": {
-        "enabled": true,
-        "server_name": "a1-tss.pages.dev",
-        "insecure": false
-      }
+      "tag": "🇺🇸 US 01 | VMess",
+      "type": "vmess",
+      "server": "82.198.246.214",
+      "server_port": 180,
+      "uuid": "d13fc2f5-3e05-4795-81eb-44143a09e552",
+      "security": "auto",
+      "alter_id": 0
     },
     {
-      "tag": "🇫🇮 FI 01 | SS",
-      "type": "shadowsocks",
-      "server": "109.107.182.229",
-      "server_port": 51544,
-      "method": "chacha20-ietf-poly1305",
-      "password": "MZeSTvpl2uoey1R0frhPyJ"
+      "tag": "🇺🇸 US 02 | VMess",
+      "type": "vmess",
+      "server": "82.198.246.37",
+      "server_port": 180,
+      "uuid": "d13fc2f5-3e05-4795-81eb-44143a09e552",
+      "security": "auto",
+      "alter_id": 0
     },
     {
-      "tag": "🏳️ 其他 04 | SS",
-      "type": "shadowsocks",
-      "server": "li.feng3d.com",
-      "server_port": 8388,
-      "method": "aes-256-gcm",
-      "password": "feng3d@ss2025"
+      "tag": "🏳️ 其他 06 | VMess",
+      "type": "vmess",
+      "server": "v6.hdacd.com",
+      "server_port": 30806,
+      "uuid": "cbb3f877-d1fb-344c-87a9-d153bffd5484",
+      "security": "auto",
+      "alter_id": 2
     },
     {
-      "tag": "🇫🇷 FR 02 | Trojan",
+      "tag": "🏳️ 其他 07 | VMess",
+      "type": "vmess",
+      "server": "v33.hdacd.com",
+      "server_port": 30833,
+      "uuid": "cbb3f877-d1fb-344c-87a9-d153bffd5484",
+      "security": "auto",
+      "alter_id": 2
+    },
+    {
+      "tag": "🏳️ 其他 09 | VMess",
+      "type": "vmess",
+      "server": "world.t.51guangtaobao.com",
+      "server_port": 2512,
+      "uuid": "1d3d868e-ae7b-3762-b9d9-a7f267494c7e",
+      "security": "auto",
+      "alter_id": 0
+    },
+    {
+      "tag": "🏳️ 其他 04 | Trojan",
       "type": "trojan",
-      "server": "217.69.2.107",
-      "server_port": 443,
-      "password": "YGWIMlg.W1wRWQkRDcKfjZY7sng09aC=Yh",
+      "server": "a.twodnwnpoe.xyz",
+      "server_port": 40017,
+      "password": "da292191-b895-3264-b41c-200512b8f965",
       "tls": {
         "enabled": true,
-        "server_name": "www.weavenet.click",
+        "server_name": "water.waittomorrow.top",
         "insecure": true
       }
     },
     {
-      "tag": "CDN Trojan 04",
-      "type": "trojan",
-      "server": "172.237.145.189",
-      "server_port": 443,
-      "password": "/A3uIh_5NqMg3hFa.gDYWT.afz0UuJ6=VIM",
-      "tls": {
-        "enabled": true,
-        "server_name": "172.237.145.189",
-        "insecure": false
-      }
-    },
-    {
-      "tag": "CDN Trojan 03",
+      "tag": "CDN Trojan 08",
       "type": "trojan",
       "server": "172.238.120.124",
       "server_port": 443,
-      "password": "/r-_YbwF.j0TtHVewoFIppramjAnmSfqYzJ",
+      "password": "r-_YbwF.j0TtHVewoFIppramjAnmSfqYzJ",
       "tls": {
         "enabled": true,
         "server_name": "172.238.120.124",
-        "insecure": false
+        "insecure": true
+      }
+    },
+    {
+      "tag": "🇭🇰 HK 05 | Trojan",
+      "type": "trojan",
+      "server": "a.twodnwnpoe.xyz",
+      "server_port": 40015,
+      "password": "da292191-b895-3264-b41c-200512b8f965",
+      "tls": {
+        "enabled": true,
+        "server_name": "1.lossyesterday.xyz",
+        "insecure": true
       }
     }
   ],

@@ -14,57 +14,72 @@ geox-url:
   mmdb: "https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/country.mmdb"
 
 proxies:
-  - name: "🇺🇸 US 02 | VLESS"
-    type: "vless"
-    server: "216.24.57.1"
-    port: 443
-    uuid: "6e593426-1a8e-4226-984f-0ea174e218c7"
-    network: "ws"
-    servername: "dl.cvs.freefiremobile.com.cyylr.eu.cc"
   - name: "🇺🇸 US 01 | SS"
     type: "ss"
     server: "37.19.198.236"
     port: 443
     cipher: "aes-128-gcm"
     password: "shadowsocks"
-  - name: "CDN VLESS 01"
-    type: "vless"
-    server: "a1-tss.pages.dev"
-    port: 443
-    uuid: "f86f5a03-3872-46b5-bf03-a50388a0261d"
-    network: "ws"
-    servername: "a1-tss.pages.dev"
-  - name: "🇫🇮 FI 01 | SS"
-    type: "ss"
-    server: "109.107.182.229"
-    port: 51544
-    cipher: "chacha20-ietf-poly1305"
-    password: "MZeSTvpl2uoey1R0frhPyJ"
-  - name: "🏳️ 其他 04 | SS"
-    type: "ss"
-    server: "li.feng3d.com"
-    port: 8388
-    cipher: "aes-256-gcm"
-    password: "feng3d@ss2025"
-  - name: "🇫🇷 FR 02 | Trojan"
+  - name: "🇺🇸 US 01 | VMess"
+    type: "vmess"
+    server: "82.198.246.214"
+    port: 180
+    uuid: "d13fc2f5-3e05-4795-81eb-44143a09e552"
+    alterId: 0
+    cipher: "auto"
+    network: "tcp"
+  - name: "🇺🇸 US 02 | VMess"
+    type: "vmess"
+    server: "82.198.246.37"
+    port: 180
+    uuid: "d13fc2f5-3e05-4795-81eb-44143a09e552"
+    alterId: 0
+    cipher: "auto"
+    network: "tcp"
+  - name: "🏳️ 其他 06 | VMess"
+    type: "vmess"
+    server: "v6.hdacd.com"
+    port: 30806
+    uuid: "cbb3f877-d1fb-344c-87a9-d153bffd5484"
+    alterId: 2
+    cipher: "auto"
+    network: "tcp"
+  - name: "🏳️ 其他 07 | VMess"
+    type: "vmess"
+    server: "v33.hdacd.com"
+    port: 30833
+    uuid: "cbb3f877-d1fb-344c-87a9-d153bffd5484"
+    alterId: 2
+    cipher: "auto"
+    network: "tcp"
+  - name: "🏳️ 其他 09 | VMess"
+    type: "vmess"
+    server: "world.t.51guangtaobao.com"
+    port: 2512
+    uuid: "1d3d868e-ae7b-3762-b9d9-a7f267494c7e"
+    alterId: 0
+    cipher: "auto"
+    network: "tcp"
+  - name: "🏳️ 其他 04 | Trojan"
     type: "trojan"
-    server: "217.69.2.107"
-    port: 443
-    password: "YGWIMlg.W1wRWQkRDcKfjZY7sng09aC=Yh"
-    sni: "www.weavenet.click"
+    server: "a.twodnwnpoe.xyz"
+    port: 40017
+    password: "da292191-b895-3264-b41c-200512b8f965"
+    sni: "water.waittomorrow.top"
     skip-cert-verify: true
-  - name: "CDN Trojan 04"
-    type: "trojan"
-    server: "172.237.145.189"
-    port: 443
-    password: "/A3uIh_5NqMg3hFa.gDYWT.afz0UuJ6=VIM"
-    sni: "172.237.145.189"
-  - name: "CDN Trojan 03"
+  - name: "CDN Trojan 08"
     type: "trojan"
     server: "172.238.120.124"
     port: 443
-    password: "/r-_YbwF.j0TtHVewoFIppramjAnmSfqYzJ"
-    sni: "172.238.120.124"
+    password: "r-_YbwF.j0TtHVewoFIppramjAnmSfqYzJ"
+    skip-cert-verify: true
+  - name: "🇭🇰 HK 05 | Trojan"
+    type: "trojan"
+    server: "a.twodnwnpoe.xyz"
+    port: 40015
+    password: "da292191-b895-3264-b41c-200512b8f965"
+    sni: "1.lossyesterday.xyz"
+    skip-cert-verify: true
 
 proxy-groups:
   - name: 🚀 节点选择
