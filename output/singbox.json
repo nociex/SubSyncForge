@@ -148,7 +148,7 @@
       "type": "selector",
       "tag": "us-group",
       "outbounds": [
-        "🇺🇸 US 01 | VMess",
+        "🇺🇸 US 02 | VLESS",
         "🇺🇸 US 01 | SS"
       ]
     },
@@ -156,12 +156,12 @@
       "type": "selector",
       "tag": "others-group",
       "outbounds": [
+        "CDN VLESS 01",
+        "🇫🇮 FI 01 | SS",
         "🏳️ 其他 04 | SS",
-        "🇳🇱 NL 01 | VLESS",
         "🇫🇷 FR 02 | Trojan",
-        "🇨🇳 CN 03 | Trojan",
         "CDN Trojan 04",
-        "🏳️ BG 03 | Trojan"
+        "CDN Trojan 03"
       ]
     },
     {
@@ -177,13 +177,23 @@
       "tag": "dns-out"
     },
     {
-      "tag": "🇺🇸 US 01 | VMess",
-      "type": "vmess",
-      "server": "104.233.214.176",
-      "server_port": 13581,
-      "uuid": "d4d715a6-0a2e-4304-df2f-d5efd85a5a5d",
-      "security": "auto",
-      "alter_id": 0
+      "tag": "🇺🇸 US 02 | VLESS",
+      "type": "vless",
+      "server": "216.24.57.1",
+      "server_port": 443,
+      "uuid": "6e593426-1a8e-4226-984f-0ea174e218c7",
+      "transport": {
+        "type": "ws",
+        "path": "/id-pusat",
+        "headers": {
+          "Host": "dl.cvs.freefiremobile.com.cyylr.eu.cc"
+        }
+      },
+      "tls": {
+        "enabled": true,
+        "server_name": "dl.cvs.freefiremobile.com.cyylr.eu.cc",
+        "insecure": false
+      }
     },
     {
       "tag": "🇺🇸 US 01 | SS",
@@ -194,6 +204,33 @@
       "password": "shadowsocks"
     },
     {
+      "tag": "CDN VLESS 01",
+      "type": "vless",
+      "server": "a1-tss.pages.dev",
+      "server_port": 443,
+      "uuid": "f86f5a03-3872-46b5-bf03-a50388a0261d",
+      "transport": {
+        "type": "ws",
+        "path": "/",
+        "headers": {
+          "Host": "a1-tss.pages.dev"
+        }
+      },
+      "tls": {
+        "enabled": true,
+        "server_name": "a1-tss.pages.dev",
+        "insecure": false
+      }
+    },
+    {
+      "tag": "🇫🇮 FI 01 | SS",
+      "type": "shadowsocks",
+      "server": "109.107.182.229",
+      "server_port": 51544,
+      "method": "chacha20-ietf-poly1305",
+      "password": "MZeSTvpl2uoey1R0frhPyJ"
+    },
+    {
       "tag": "🏳️ 其他 04 | SS",
       "type": "shadowsocks",
       "server": "li.feng3d.com",
@@ -202,48 +239,31 @@
       "password": "feng3d@ss2025"
     },
     {
-      "tag": "🇳🇱 NL 01 | VLESS",
-      "type": "vless",
-      "server": "20.103.221.187",
-      "server_port": 443,
-      "uuid": "4b616b6f-6f6c-4e65-7773-b8e2c9f3d541",
-      "transport": {
-        "type": "ws",
-        "path": "/",
-        "headers": {}
-      },
-      "tls": {
-        "enabled": true,
-        "server_name": "studious-bassoon-gx45w7rj6j7jfwp4g-443.app.github.dev",
-        "insecure": false
-      }
-    },
-    {
       "tag": "🇫🇷 FR 02 | Trojan",
       "type": "trojan",
       "server": "217.69.2.107",
       "server_port": 443,
-      "password": "/YGWIMlg.W1wRWQkRDcKfjZY7sng09aC=Yh",
+      "password": "YGWIMlg.W1wRWQkRDcKfjZY7sng09aC=Yh",
       "tls": {
         "enabled": true,
         "server_name": "www.weavenet.click",
-        "insecure": false
-      }
-    },
-    {
-      "tag": "🇨🇳 CN 03 | Trojan",
-      "type": "trojan",
-      "server": "130.94.92.144",
-      "server_port": 443,
-      "password": "/oUAfbL8z87q-mhgjZ6g7mWQobf9=b7ut_F",
-      "tls": {
-        "enabled": true,
-        "server_name": "www.node-finder.click",
         "insecure": true
       }
     },
     {
       "tag": "CDN Trojan 04",
+      "type": "trojan",
+      "server": "172.237.145.189",
+      "server_port": 443,
+      "password": "/A3uIh_5NqMg3hFa.gDYWT.afz0UuJ6=VIM",
+      "tls": {
+        "enabled": true,
+        "server_name": "172.237.145.189",
+        "insecure": false
+      }
+    },
+    {
+      "tag": "CDN Trojan 03",
       "type": "trojan",
       "server": "172.238.120.124",
       "server_port": 443,
@@ -252,18 +272,6 @@
         "enabled": true,
         "server_name": "172.238.120.124",
         "insecure": false
-      }
-    },
-    {
-      "tag": "🏳️ BG 03 | Trojan",
-      "type": "trojan",
-      "server": "130.94.97.11",
-      "server_port": 443,
-      "password": "Z3_=ewk_+l1U4OT4usQ5=o2vFfk95yfy1V",
-      "tls": {
-        "enabled": true,
-        "server_name": "www.selectnet.click",
-        "insecure": true
       }
     }
   ],

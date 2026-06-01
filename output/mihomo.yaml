@@ -14,59 +14,57 @@ geox-url:
   mmdb: "https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/country.mmdb"
 
 proxies:
-  - name: "🇺🇸 US 01 | VMess"
-    type: "vmess"
-    server: "104.233.214.176"
-    port: 13581
-    uuid: "d4d715a6-0a2e-4304-df2f-d5efd85a5a5d"
-    alterId: 0
-    cipher: "auto"
-    network: "tcp"
+  - name: "🇺🇸 US 02 | VLESS"
+    type: "vless"
+    server: "216.24.57.1"
+    port: 443
+    uuid: "6e593426-1a8e-4226-984f-0ea174e218c7"
+    network: "ws"
+    servername: "dl.cvs.freefiremobile.com.cyylr.eu.cc"
   - name: "🇺🇸 US 01 | SS"
     type: "ss"
     server: "37.19.198.236"
     port: 443
     cipher: "aes-128-gcm"
     password: "shadowsocks"
+  - name: "CDN VLESS 01"
+    type: "vless"
+    server: "a1-tss.pages.dev"
+    port: 443
+    uuid: "f86f5a03-3872-46b5-bf03-a50388a0261d"
+    network: "ws"
+    servername: "a1-tss.pages.dev"
+  - name: "🇫🇮 FI 01 | SS"
+    type: "ss"
+    server: "109.107.182.229"
+    port: 51544
+    cipher: "chacha20-ietf-poly1305"
+    password: "MZeSTvpl2uoey1R0frhPyJ"
   - name: "🏳️ 其他 04 | SS"
     type: "ss"
     server: "li.feng3d.com"
     port: 8388
     cipher: "aes-256-gcm"
     password: "feng3d@ss2025"
-  - name: "🇳🇱 NL 01 | VLESS"
-    type: "vless"
-    server: "20.103.221.187"
-    port: 443
-    uuid: "4b616b6f-6f6c-4e65-7773-b8e2c9f3d541"
-    network: "ws"
-    servername: "studious-bassoon-gx45w7rj6j7jfwp4g-443.app.github.dev"
   - name: "🇫🇷 FR 02 | Trojan"
     type: "trojan"
     server: "217.69.2.107"
     port: 443
-    password: "/YGWIMlg.W1wRWQkRDcKfjZY7sng09aC=Yh"
+    password: "YGWIMlg.W1wRWQkRDcKfjZY7sng09aC=Yh"
     sni: "www.weavenet.click"
-  - name: "🇨🇳 CN 03 | Trojan"
-    type: "trojan"
-    server: "130.94.92.144"
-    port: 443
-    password: "/oUAfbL8z87q-mhgjZ6g7mWQobf9=b7ut_F"
-    sni: "www.node-finder.click"
     skip-cert-verify: true
   - name: "CDN Trojan 04"
+    type: "trojan"
+    server: "172.237.145.189"
+    port: 443
+    password: "/A3uIh_5NqMg3hFa.gDYWT.afz0UuJ6=VIM"
+    sni: "172.237.145.189"
+  - name: "CDN Trojan 03"
     type: "trojan"
     server: "172.238.120.124"
     port: 443
     password: "/r-_YbwF.j0TtHVewoFIppramjAnmSfqYzJ"
     sni: "172.238.120.124"
-  - name: "🏳️ BG 03 | Trojan"
-    type: "trojan"
-    server: "130.94.97.11"
-    port: 443
-    password: "Z3_=ewk_+l1U4OT4usQ5=o2vFfk95yfy1V"
-    sni: "www.selectnet.click"
-    skip-cert-verify: true
 
 proxy-groups:
   - name: 🚀 节点选择
