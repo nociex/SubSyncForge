@@ -148,19 +148,14 @@
       "type": "selector",
       "tag": "us-group",
       "outbounds": [
-        "🇺🇸 US 01 | SS",
-        "🇺🇸 US 05 | Trojan"
+        "🇺🇸 US 01 | SS"
       ]
     },
     {
       "type": "selector",
       "tag": "others-group",
       "outbounds": [
-        "CDN VLESS 01",
-        "CDN VLESS 03",
-        "🇳🇱 NL 04 | VLESS",
-        "🇫🇷 FR 02 | Trojan",
-        "🇨🇳 CN 06 | Trojan"
+        "DIRECT"
       ]
     },
     {
@@ -176,82 +171,12 @@
       "tag": "dns-out"
     },
     {
-      "tag": "CDN VLESS 01",
-      "type": "vless",
-      "server": "172.65.111.43",
-      "server_port": 22,
-      "uuid": "8a38623a-3e7f-5598-bdc9-894cbad4c5b6"
-    },
-    {
-      "tag": "CDN VLESS 03",
-      "type": "vless",
-      "server": "cf.9999669.xyz",
-      "server_port": 2087,
-      "uuid": "77777777-8a3e-6666-b6d1-a9c5f0e8b3a2",
-      "transport": {
-        "type": "ws",
-        "path": "/",
-        "headers": {
-          "Host": "fgnix832fx.fx6hsv0.ccwu.cc"
-        }
-      },
-      "tls": {
-        "enabled": true,
-        "server_name": "fgnix832fx.fx6hsv0.ccwu.cc",
-        "insecure": false
-      }
-    },
-    {
-      "tag": "🇳🇱 NL 04 | VLESS",
-      "type": "vless",
-      "server": "51.158.206.86",
-      "server_port": 23576,
-      "uuid": "48ff2b70-e180-582f-8866-d9a2edeed5f5",
-      "flow": "xtls-rprx-vision"
-    },
-    {
       "tag": "🇺🇸 US 01 | SS",
       "type": "shadowsocks",
       "server": "37.19.198.236",
       "server_port": 443,
       "method": "aes-128-gcm",
       "password": "shadowsocks"
-    },
-    {
-      "tag": "🇺🇸 US 05 | Trojan",
-      "type": "trojan",
-      "server": "130.94.107.171",
-      "server_port": 443,
-      "password": "/s.wRSE4ANZp4=4h.=B_9Qbetw6XUc0V1SV",
-      "tls": {
-        "enabled": true,
-        "server_name": "www.logger-guard.click",
-        "insecure": false
-      }
-    },
-    {
-      "tag": "🇫🇷 FR 02 | Trojan",
-      "type": "trojan",
-      "server": "217.69.2.107",
-      "server_port": 443,
-      "password": "/YGWIMlg.W1wRWQkRDcKfjZY7sng09aC=Yh",
-      "tls": {
-        "enabled": true,
-        "server_name": "www.weavenet.click",
-        "insecure": false
-      }
-    },
-    {
-      "tag": "🇨🇳 CN 06 | Trojan",
-      "type": "trojan",
-      "server": "130.94.65.52",
-      "server_port": 443,
-      "password": "/IbezlLAYfrLRwFn9.mHn5FDwk1asLi599U",
-      "tls": {
-        "enabled": true,
-        "server_name": "www.static-cast.click",
-        "insecure": true
-      }
     }
   ],
   "route": {
