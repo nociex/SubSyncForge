@@ -148,6 +148,7 @@
       "type": "selector",
       "tag": "us-group",
       "outbounds": [
+        "🇺🇸 US 01 | VMess",
         "🇺🇸 US 01 | SS"
       ]
     },
@@ -155,7 +156,12 @@
       "type": "selector",
       "tag": "others-group",
       "outbounds": [
-        "DIRECT"
+        "🏳️ 其他 04 | SS",
+        "🇳🇱 NL 01 | VLESS",
+        "🇫🇷 FR 02 | Trojan",
+        "🇨🇳 CN 03 | Trojan",
+        "CDN Trojan 04",
+        "🏳️ BG 03 | Trojan"
       ]
     },
     {
@@ -171,12 +177,94 @@
       "tag": "dns-out"
     },
     {
+      "tag": "🇺🇸 US 01 | VMess",
+      "type": "vmess",
+      "server": "104.233.214.176",
+      "server_port": 13581,
+      "uuid": "d4d715a6-0a2e-4304-df2f-d5efd85a5a5d",
+      "security": "auto",
+      "alter_id": 0
+    },
+    {
       "tag": "🇺🇸 US 01 | SS",
       "type": "shadowsocks",
       "server": "37.19.198.236",
       "server_port": 443,
       "method": "aes-128-gcm",
       "password": "shadowsocks"
+    },
+    {
+      "tag": "🏳️ 其他 04 | SS",
+      "type": "shadowsocks",
+      "server": "li.feng3d.com",
+      "server_port": 8388,
+      "method": "aes-256-gcm",
+      "password": "feng3d@ss2025"
+    },
+    {
+      "tag": "🇳🇱 NL 01 | VLESS",
+      "type": "vless",
+      "server": "20.103.221.187",
+      "server_port": 443,
+      "uuid": "4b616b6f-6f6c-4e65-7773-b8e2c9f3d541",
+      "transport": {
+        "type": "ws",
+        "path": "/",
+        "headers": {}
+      },
+      "tls": {
+        "enabled": true,
+        "server_name": "studious-bassoon-gx45w7rj6j7jfwp4g-443.app.github.dev",
+        "insecure": false
+      }
+    },
+    {
+      "tag": "🇫🇷 FR 02 | Trojan",
+      "type": "trojan",
+      "server": "217.69.2.107",
+      "server_port": 443,
+      "password": "/YGWIMlg.W1wRWQkRDcKfjZY7sng09aC=Yh",
+      "tls": {
+        "enabled": true,
+        "server_name": "www.weavenet.click",
+        "insecure": false
+      }
+    },
+    {
+      "tag": "🇨🇳 CN 03 | Trojan",
+      "type": "trojan",
+      "server": "130.94.92.144",
+      "server_port": 443,
+      "password": "/oUAfbL8z87q-mhgjZ6g7mWQobf9=b7ut_F",
+      "tls": {
+        "enabled": true,
+        "server_name": "www.node-finder.click",
+        "insecure": true
+      }
+    },
+    {
+      "tag": "CDN Trojan 04",
+      "type": "trojan",
+      "server": "172.238.120.124",
+      "server_port": 443,
+      "password": "/r-_YbwF.j0TtHVewoFIppramjAnmSfqYzJ",
+      "tls": {
+        "enabled": true,
+        "server_name": "172.238.120.124",
+        "insecure": false
+      }
+    },
+    {
+      "tag": "🏳️ BG 03 | Trojan",
+      "type": "trojan",
+      "server": "130.94.97.11",
+      "server_port": 443,
+      "password": "Z3_=ewk_+l1U4OT4usQ5=o2vFfk95yfy1V",
+      "tls": {
+        "enabled": true,
+        "server_name": "www.selectnet.click",
+        "insecure": true
+      }
     }
   ],
   "route": {

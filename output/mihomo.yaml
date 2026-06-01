@@ -14,12 +14,59 @@ geox-url:
   mmdb: "https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/country.mmdb"
 
 proxies:
+  - name: "🇺🇸 US 01 | VMess"
+    type: "vmess"
+    server: "104.233.214.176"
+    port: 13581
+    uuid: "d4d715a6-0a2e-4304-df2f-d5efd85a5a5d"
+    alterId: 0
+    cipher: "auto"
+    network: "tcp"
   - name: "🇺🇸 US 01 | SS"
     type: "ss"
     server: "37.19.198.236"
     port: 443
     cipher: "aes-128-gcm"
     password: "shadowsocks"
+  - name: "🏳️ 其他 04 | SS"
+    type: "ss"
+    server: "li.feng3d.com"
+    port: 8388
+    cipher: "aes-256-gcm"
+    password: "feng3d@ss2025"
+  - name: "🇳🇱 NL 01 | VLESS"
+    type: "vless"
+    server: "20.103.221.187"
+    port: 443
+    uuid: "4b616b6f-6f6c-4e65-7773-b8e2c9f3d541"
+    network: "ws"
+    servername: "studious-bassoon-gx45w7rj6j7jfwp4g-443.app.github.dev"
+  - name: "🇫🇷 FR 02 | Trojan"
+    type: "trojan"
+    server: "217.69.2.107"
+    port: 443
+    password: "/YGWIMlg.W1wRWQkRDcKfjZY7sng09aC=Yh"
+    sni: "www.weavenet.click"
+  - name: "🇨🇳 CN 03 | Trojan"
+    type: "trojan"
+    server: "130.94.92.144"
+    port: 443
+    password: "/oUAfbL8z87q-mhgjZ6g7mWQobf9=b7ut_F"
+    sni: "www.node-finder.click"
+    skip-cert-verify: true
+  - name: "CDN Trojan 04"
+    type: "trojan"
+    server: "172.238.120.124"
+    port: 443
+    password: "/r-_YbwF.j0TtHVewoFIppramjAnmSfqYzJ"
+    sni: "172.238.120.124"
+  - name: "🏳️ BG 03 | Trojan"
+    type: "trojan"
+    server: "130.94.97.11"
+    port: 443
+    password: "Z3_=ewk_+l1U4OT4usQ5=o2vFfk95yfy1V"
+    sni: "www.selectnet.click"
+    skip-cert-verify: true
 
 proxy-groups:
   - name: 🚀 节点选择
