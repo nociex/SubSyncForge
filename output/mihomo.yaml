@@ -14,57 +14,13 @@ geox-url:
   mmdb: "https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/country.mmdb"
 
 proxies:
-  - name: "CDN VLESS 01"
-    type: "vless"
-    server: "172.65.111.43"
-    port: 22
-    uuid: "monacoVPN"
-    network: "tcp"
-    servername: "172.65.111.43"
-  - name: "CDN VLESS 03"
-    type: "vless"
-    server: "104.25.242.61"
-    port: 443
-    uuid: "a6f1755f-0140-4bea-8727-0db1bed7c4df"
-    network: "ws"
-    servername: "juzi.qea.ccwu.cc"
-  - name: "🇪🇸 ES 02 | SS"
-    type: "ss"
-    server: "5.188.181.201"
-    port: 9014
-    cipher: "aes-256-cfb"
-    password: "KnJGad3FqTvjqbaX"
-  - name: "🏳️ 其他 05 | VMess"
-    type: "vmess"
-    server: "v33.hdacd.com"
-    port: 30833
-    uuid: "cbb3f877-d1fb-344c-87a9-d153bffd5484"
-    alterId: 2
-    cipher: "auto"
-    network: "tcp"
-  - name: "🏳️ 其他 06 | VMess"
-    type: "vmess"
-    server: "v6.hdacd.com"
-    port: 30806
-    uuid: "cbb3f877-d1fb-344c-87a9-d153bffd5484"
-    alterId: 2
-    cipher: "auto"
-    network: "tcp"
-  - name: "🏳️ 其他 07 | VMess"
-    type: "vmess"
-    server: "world.t.51guangtaobao.com"
-    port: 2512
-    uuid: "1d3d868e-ae7b-3762-b9d9-a7f267494c7e"
-    alterId: 0
-    cipher: "auto"
-    network: "tcp"
   - name: "🇺🇸 US 01 | SS"
     type: "ss"
     server: "37.19.198.236"
     port: 443
     cipher: "aes-128-gcm"
     password: "shadowsocks"
-  - name: "🇺🇸 US 01 | VMess"
+  - name: "🇺🇸 US 06 | VMess"
     type: "vmess"
     server: "82.198.246.37"
     port: 180
@@ -72,48 +28,42 @@ proxies:
     alterId: 0
     cipher: "auto"
     network: "tcp"
-  - name: "🇺🇸 US 06 | Trojan"
-    type: "trojan"
-    server: "130.94.107.171"
-    port: 443
-    password: "/s.wRSE4ANZp4=4h.=B_9Qbetw6XUc0V1SV"
-    sni: "www.logger-guard.click"
-  - name: "🏳️ 其他 02 | SS"
+  - name: "🇪🇸 ES 02 | SS"
     type: "ss"
-    server: "r3mrcg001269pz2.cybervena.com"
-    port: 50099
+    server: "5.188.181.201"
+    port: 9014
+    cipher: "aes-256-cfb"
+    password: "KnJGad3FqTvjqbaX"
+  - name: "🇩🇪 DE 01 | SS"
+    type: "ss"
+    server: "185.129.84.12"
+    port: 443
     cipher: "chacha20-ietf-poly1305"
-    password: "7e731ec3-f8e1-43f6-92cf-3978d14705c4"
-  - name: "CDN Trojan 02"
-    type: "trojan"
-    server: "104.20.6.134"
-    port: 443
-    password: "/humanity"
-    sni: "www.calmloud.com"
-  - name: "CDN Trojan 04"
-    type: "trojan"
-    server: "172.237.145.189"
-    port: 443
-    password: "/A3uIh_5NqMg3hFa.gDYWT.afz0UuJ6=VIM"
-    sni: "172.237.145.189"
-  - name: "CDN Trojan 05"
-    type: "trojan"
-    server: "172.235.63.252"
-    port: 443
-    password: "/bX_lNHWoW6ywq82mI=KUr+8i__VSp0Hs_E"
-    sni: "172.235.63.252"
-  - name: "🇵🇱 PL 07 | Trojan"
+    password: "DQHK4mtugy7xMNChJjB9Jm"
+  - name: "🇫🇷 FR 03 | SS"
+    type: "ss"
+    server: "45.92.218.56"
+    port: 1080
+    cipher: "chacha20-ietf-poly1305"
+    password: "RjG_Pd534ZVJRMdODjCNMA"
+  - name: "🇫🇮 FI 04 | SS"
+    type: "ss"
+    server: "109.107.182.229"
+    port: 51544
+    cipher: "chacha20-ietf-poly1305"
+    password: "NMao3laQtxBnEgzbuJ0khb"
+  - name: "🇵🇱 PL 02 | Trojan"
     type: "trojan"
     server: "64.176.65.85"
     port: 443
-    password: "/iGccGWTMHtoXtBhGYK4mogg7iIUhGbcvCf"
-    sni: "64.176.65.85"
-  - name: "CDN Trojan 04"
+    password: "iGccGWTMHtoXtBhGYK4mogg7iIUhGbcvCf"
+    skip-cert-verify: true
+  - name: "CDN Trojan 05"
     type: "trojan"
-    server: "172.236.220.10"
+    server: "172.237.145.189"
     port: 443
-    password: "s_WEN9lMmufG+qDIsn-4C7JOVAnDdbS3Ui"
-    sni: "172.236.220.10"
+    password: "A3uIh_5NqMg3hFa.gDYWT.afz0UuJ6=VIM"
+    sni: "172.237.145.189"
     skip-cert-verify: true
 
 proxy-groups:

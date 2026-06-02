@@ -149,26 +149,19 @@
       "tag": "us-group",
       "outbounds": [
         "🇺🇸 US 01 | SS",
-        "🇺🇸 US 01 | VMess",
-        "🇺🇸 US 06 | Trojan"
+        "🇺🇸 US 06 | VMess"
       ]
     },
     {
       "type": "selector",
       "tag": "others-group",
       "outbounds": [
-        "CDN VLESS 01",
-        "CDN VLESS 03",
         "🇪🇸 ES 02 | SS",
-        "🏳️ 其他 05 | VMess",
-        "🏳️ 其他 06 | VMess",
-        "🏳️ 其他 07 | VMess",
-        "🏳️ 其他 02 | SS",
-        "CDN Trojan 02",
-        "CDN Trojan 04",
-        "CDN Trojan 05",
-        "🇵🇱 PL 07 | Trojan",
-        "CDN Trojan 04-1"
+        "🇩🇪 DE 01 | SS",
+        "🇫🇷 FR 03 | SS",
+        "🇫🇮 FI 04 | SS",
+        "🇵🇱 PL 02 | Trojan",
+        "CDN Trojan 05"
       ]
     },
     {
@@ -184,30 +177,21 @@
       "tag": "dns-out"
     },
     {
-      "tag": "CDN VLESS 01",
-      "type": "vless",
-      "server": "172.65.111.43",
-      "server_port": 22,
-      "uuid": "monacoVPN"
+      "tag": "🇺🇸 US 01 | SS",
+      "type": "shadowsocks",
+      "server": "37.19.198.236",
+      "server_port": 443,
+      "method": "aes-128-gcm",
+      "password": "shadowsocks"
     },
     {
-      "tag": "CDN VLESS 03",
-      "type": "vless",
-      "server": "104.25.242.61",
-      "server_port": 443,
-      "uuid": "a6f1755f-0140-4bea-8727-0db1bed7c4df",
-      "transport": {
-        "type": "ws",
-        "path": "/",
-        "headers": {
-          "Host": "juzi.qea.ccwu.cc"
-        }
-      },
-      "tls": {
-        "enabled": true,
-        "server_name": "juzi.qea.ccwu.cc",
-        "insecure": false
-      }
+      "tag": "🇺🇸 US 06 | VMess",
+      "type": "vmess",
+      "server": "82.198.246.37",
+      "server_port": 180,
+      "uuid": "d13fc2f5-3e05-4795-81eb-44143a09e552",
+      "security": "auto",
+      "alter_id": 0
     },
     {
       "tag": "🇪🇸 ES 02 | SS",
@@ -218,126 +202,50 @@
       "password": "KnJGad3FqTvjqbaX"
     },
     {
-      "tag": "🏳️ 其他 05 | VMess",
-      "type": "vmess",
-      "server": "v33.hdacd.com",
-      "server_port": 30833,
-      "uuid": "cbb3f877-d1fb-344c-87a9-d153bffd5484",
-      "security": "auto",
-      "alter_id": 2
-    },
-    {
-      "tag": "🏳️ 其他 06 | VMess",
-      "type": "vmess",
-      "server": "v6.hdacd.com",
-      "server_port": 30806,
-      "uuid": "cbb3f877-d1fb-344c-87a9-d153bffd5484",
-      "security": "auto",
-      "alter_id": 2
-    },
-    {
-      "tag": "🏳️ 其他 07 | VMess",
-      "type": "vmess",
-      "server": "world.t.51guangtaobao.com",
-      "server_port": 2512,
-      "uuid": "1d3d868e-ae7b-3762-b9d9-a7f267494c7e",
-      "security": "auto",
-      "alter_id": 0
-    },
-    {
-      "tag": "🇺🇸 US 01 | SS",
+      "tag": "🇩🇪 DE 01 | SS",
       "type": "shadowsocks",
-      "server": "37.19.198.236",
+      "server": "185.129.84.12",
       "server_port": 443,
-      "method": "aes-128-gcm",
-      "password": "shadowsocks"
-    },
-    {
-      "tag": "🇺🇸 US 01 | VMess",
-      "type": "vmess",
-      "server": "82.198.246.37",
-      "server_port": 180,
-      "uuid": "d13fc2f5-3e05-4795-81eb-44143a09e552",
-      "security": "auto",
-      "alter_id": 0
-    },
-    {
-      "tag": "🇺🇸 US 06 | Trojan",
-      "type": "trojan",
-      "server": "130.94.107.171",
-      "server_port": 443,
-      "password": "/s.wRSE4ANZp4=4h.=B_9Qbetw6XUc0V1SV",
-      "tls": {
-        "enabled": true,
-        "server_name": "www.logger-guard.click",
-        "insecure": false
-      }
-    },
-    {
-      "tag": "🏳️ 其他 02 | SS",
-      "type": "shadowsocks",
-      "server": "r3mrcg001269pz2.cybervena.com",
-      "server_port": 50099,
       "method": "chacha20-ietf-poly1305",
-      "password": "7e731ec3-f8e1-43f6-92cf-3978d14705c4"
+      "password": "DQHK4mtugy7xMNChJjB9Jm"
     },
     {
-      "tag": "CDN Trojan 02",
-      "type": "trojan",
-      "server": "104.20.6.134",
-      "server_port": 443,
-      "password": "/humanity",
-      "tls": {
-        "enabled": true,
-        "server_name": "www.calmloud.com",
-        "insecure": false
-      }
+      "tag": "🇫🇷 FR 03 | SS",
+      "type": "shadowsocks",
+      "server": "45.92.218.56",
+      "server_port": 1080,
+      "method": "chacha20-ietf-poly1305",
+      "password": "RjG_Pd534ZVJRMdODjCNMA"
     },
     {
-      "tag": "CDN Trojan 04",
+      "tag": "🇫🇮 FI 04 | SS",
+      "type": "shadowsocks",
+      "server": "109.107.182.229",
+      "server_port": 51544,
+      "method": "chacha20-ietf-poly1305",
+      "password": "NMao3laQtxBnEgzbuJ0khb"
+    },
+    {
+      "tag": "🇵🇱 PL 02 | Trojan",
       "type": "trojan",
-      "server": "172.237.145.189",
+      "server": "64.176.65.85",
       "server_port": 443,
-      "password": "/A3uIh_5NqMg3hFa.gDYWT.afz0UuJ6=VIM",
+      "password": "iGccGWTMHtoXtBhGYK4mogg7iIUhGbcvCf",
       "tls": {
         "enabled": true,
-        "server_name": "172.237.145.189",
-        "insecure": false
+        "server_name": "64.176.65.85",
+        "insecure": true
       }
     },
     {
       "tag": "CDN Trojan 05",
       "type": "trojan",
-      "server": "172.235.63.252",
+      "server": "172.237.145.189",
       "server_port": 443,
-      "password": "/bX_lNHWoW6ywq82mI=KUr+8i__VSp0Hs_E",
+      "password": "A3uIh_5NqMg3hFa.gDYWT.afz0UuJ6=VIM",
       "tls": {
         "enabled": true,
-        "server_name": "172.235.63.252",
-        "insecure": false
-      }
-    },
-    {
-      "tag": "🇵🇱 PL 07 | Trojan",
-      "type": "trojan",
-      "server": "64.176.65.85",
-      "server_port": 443,
-      "password": "/iGccGWTMHtoXtBhGYK4mogg7iIUhGbcvCf",
-      "tls": {
-        "enabled": true,
-        "server_name": "64.176.65.85",
-        "insecure": false
-      }
-    },
-    {
-      "tag": "CDN Trojan 04-1",
-      "type": "trojan",
-      "server": "172.236.220.10",
-      "server_port": 443,
-      "password": "s_WEN9lMmufG+qDIsn-4C7JOVAnDdbS3Ui",
-      "tls": {
-        "enabled": true,
-        "server_name": "172.236.220.10",
+        "server_name": "172.237.145.189",
         "insecure": true
       }
     }
