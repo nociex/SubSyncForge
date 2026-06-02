@@ -14,40 +14,71 @@ geox-url:
   mmdb: "https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/country.mmdb"
 
 proxies:
+  - name: "CDN VLESS 03"
+    type: "vless"
+    server: "104.17.172.209"
+    port: 443
+    uuid: "06b65903-406d-4a41-8463-6fd5c0ee7798"
+    network: "ws"
+    servername: "sni.skylee4.cloudns.ch"
+  - name: "CDN VLESS 04"
+    type: "vless"
+    server: "151.101.193.57"
+    port: 80
+    uuid: "2c15f192-3812-98db-85a2-88cd7d02b868"
+    network: "ws"
+    servername: "151.101.193.57"
+  - name: "CDN VLESS 01"
+    type: "vless"
+    server: "172.65.111.43"
+    port: 22
+    uuid: "monacoVPN"
+    network: "tcp"
+    servername: "172.65.111.43"
+  - name: "CDN VLESS 06"
+    type: "vless"
+    server: "162.159.13.245"
+    port: 443
+    uuid: "a6f1755f-0140-4bea-8727-0db1bed7c4df"
+    network: "ws"
+    servername: "juzi.qea.ccwu.cc"
+  - name: "CDN VLESS 02"
+    type: "vless"
+    server: "france.cloudpath.live"
+    port: 443
+    uuid: "a1fbffe9-8e5a-5a0e-9333-045d32eccd59"
+    network: "tcp"
+    servername: "microsoft.com"
+  - name: "🇺🇸 US 05 | Trojan"
+    type: "trojan"
+    server: "45.79.8.17"
+    port: 443
+    password: "/rXyShM8Jni+5Sbq3k4gkyr5Lq0zOMRL2Uf"
+    sni: "45.79.8.17"
   - name: "🇺🇸 US 01 | SS"
     type: "ss"
     server: "37.19.198.236"
     port: 443
     cipher: "aes-128-gcm"
     password: "shadowsocks"
-  - name: "🇺🇸 US 01 | VMess"
-    type: "vmess"
-    server: "82.198.246.37"
-    port: 180
-    uuid: "d13fc2f5-3e05-4795-81eb-44143a09e552"
-    alterId: 0
-    cipher: "auto"
-    network: "tcp"
-  - name: "🇺🇸 US 05 | VMess"
-    type: "vmess"
-    server: "82.198.246.214"
-    port: 180
-    uuid: "d13fc2f5-3e05-4795-81eb-44143a09e552"
-    alterId: 0
-    cipher: "auto"
-    network: "tcp"
-  - name: "🏳️ 其他 03 | SS"
-    type: "ss"
-    server: "r3mrcg001269pz2.cybervena.com"
-    port: 50099
-    cipher: "chacha20-ietf-poly1305"
-    password: "7e731ec3-f8e1-43f6-92cf-3978d14705c4"
-  - name: "CDN Trojan 02"
+  - name: "🇩🇪 DE 07 | Trojan"
+    type: "trojan"
+    server: "172.104.237.100"
+    port: 443
+    password: "/VPTFm=oZ++SuNT+jMRqGZqrAnWq-r8KJyY"
+    sni: "172.104.237.100"
+  - name: "CDN Trojan 08"
     type: "trojan"
     server: "172.238.120.124"
     port: 443
-    password: "r-_YbwF.j0TtHVewoFIppramjAnmSfqYzJ"
-    skip-cert-verify: true
+    password: "/r-_YbwF.j0TtHVewoFIppramjAnmSfqYzJ"
+    sni: "172.238.120.124"
+  - name: "CDN Trojan 09"
+    type: "trojan"
+    server: "172.236.220.10"
+    port: 443
+    password: "/s_WEN9lMmufG+qDIsn-4C7JOVAnDdbS3Ui"
+    sni: "172.236.220.10"
 
 proxy-groups:
   - name: 🚀 节点选择
