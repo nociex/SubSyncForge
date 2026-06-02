@@ -22,63 +22,31 @@ proxies:
     password: "shadowsocks"
   - name: "🇺🇸 US 01 | VMess"
     type: "vmess"
-    server: "82.198.246.214"
-    port: 180
-    uuid: "d13fc2f5-3e05-4795-81eb-44143a09e552"
-    alterId: 0
-    cipher: "auto"
-    network: "tcp"
-  - name: "🇺🇸 US 02 | VMess"
-    type: "vmess"
     server: "82.198.246.37"
     port: 180
     uuid: "d13fc2f5-3e05-4795-81eb-44143a09e552"
     alterId: 0
     cipher: "auto"
     network: "tcp"
-  - name: "🏳️ 其他 06 | VMess"
+  - name: "🇺🇸 US 05 | VMess"
     type: "vmess"
-    server: "v6.hdacd.com"
-    port: 30806
-    uuid: "cbb3f877-d1fb-344c-87a9-d153bffd5484"
-    alterId: 2
-    cipher: "auto"
-    network: "tcp"
-  - name: "🏳️ 其他 07 | VMess"
-    type: "vmess"
-    server: "v33.hdacd.com"
-    port: 30833
-    uuid: "cbb3f877-d1fb-344c-87a9-d153bffd5484"
-    alterId: 2
-    cipher: "auto"
-    network: "tcp"
-  - name: "🏳️ 其他 09 | VMess"
-    type: "vmess"
-    server: "world.t.51guangtaobao.com"
-    port: 2512
-    uuid: "1d3d868e-ae7b-3762-b9d9-a7f267494c7e"
+    server: "82.198.246.214"
+    port: 180
+    uuid: "d13fc2f5-3e05-4795-81eb-44143a09e552"
     alterId: 0
     cipher: "auto"
     network: "tcp"
-  - name: "🏳️ 其他 04 | Trojan"
-    type: "trojan"
-    server: "a.twodnwnpoe.xyz"
-    port: 40017
-    password: "da292191-b895-3264-b41c-200512b8f965"
-    sni: "water.waittomorrow.top"
-    skip-cert-verify: true
-  - name: "CDN Trojan 08"
+  - name: "🏳️ 其他 03 | SS"
+    type: "ss"
+    server: "r3mrcg001269pz2.cybervena.com"
+    port: 50099
+    cipher: "chacha20-ietf-poly1305"
+    password: "7e731ec3-f8e1-43f6-92cf-3978d14705c4"
+  - name: "CDN Trojan 02"
     type: "trojan"
     server: "172.238.120.124"
     port: 443
     password: "r-_YbwF.j0TtHVewoFIppramjAnmSfqYzJ"
-    skip-cert-verify: true
-  - name: "🇭🇰 HK 05 | Trojan"
-    type: "trojan"
-    server: "a.twodnwnpoe.xyz"
-    port: 40015
-    password: "da292191-b895-3264-b41c-200512b8f965"
-    sni: "1.lossyesterday.xyz"
     skip-cert-verify: true
 
 proxy-groups:

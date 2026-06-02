@@ -120,7 +120,7 @@
       "type": "selector",
       "tag": "hk-group",
       "outbounds": [
-        "🇭🇰 HK 05 | Trojan"
+        "DIRECT"
       ]
     },
     {
@@ -150,18 +150,15 @@
       "outbounds": [
         "🇺🇸 US 01 | SS",
         "🇺🇸 US 01 | VMess",
-        "🇺🇸 US 02 | VMess"
+        "🇺🇸 US 05 | VMess"
       ]
     },
     {
       "type": "selector",
       "tag": "others-group",
       "outbounds": [
-        "🏳️ 其他 06 | VMess",
-        "🏳️ 其他 07 | VMess",
-        "🏳️ 其他 09 | VMess",
-        "🏳️ 其他 04 | Trojan",
-        "CDN Trojan 08"
+        "🏳️ 其他 03 | SS",
+        "CDN Trojan 02"
       ]
     },
     {
@@ -187,15 +184,6 @@
     {
       "tag": "🇺🇸 US 01 | VMess",
       "type": "vmess",
-      "server": "82.198.246.214",
-      "server_port": 180,
-      "uuid": "d13fc2f5-3e05-4795-81eb-44143a09e552",
-      "security": "auto",
-      "alter_id": 0
-    },
-    {
-      "tag": "🇺🇸 US 02 | VMess",
-      "type": "vmess",
       "server": "82.198.246.37",
       "server_port": 180,
       "uuid": "d13fc2f5-3e05-4795-81eb-44143a09e552",
@@ -203,46 +191,24 @@
       "alter_id": 0
     },
     {
-      "tag": "🏳️ 其他 06 | VMess",
+      "tag": "🇺🇸 US 05 | VMess",
       "type": "vmess",
-      "server": "v6.hdacd.com",
-      "server_port": 30806,
-      "uuid": "cbb3f877-d1fb-344c-87a9-d153bffd5484",
-      "security": "auto",
-      "alter_id": 2
-    },
-    {
-      "tag": "🏳️ 其他 07 | VMess",
-      "type": "vmess",
-      "server": "v33.hdacd.com",
-      "server_port": 30833,
-      "uuid": "cbb3f877-d1fb-344c-87a9-d153bffd5484",
-      "security": "auto",
-      "alter_id": 2
-    },
-    {
-      "tag": "🏳️ 其他 09 | VMess",
-      "type": "vmess",
-      "server": "world.t.51guangtaobao.com",
-      "server_port": 2512,
-      "uuid": "1d3d868e-ae7b-3762-b9d9-a7f267494c7e",
+      "server": "82.198.246.214",
+      "server_port": 180,
+      "uuid": "d13fc2f5-3e05-4795-81eb-44143a09e552",
       "security": "auto",
       "alter_id": 0
     },
     {
-      "tag": "🏳️ 其他 04 | Trojan",
-      "type": "trojan",
-      "server": "a.twodnwnpoe.xyz",
-      "server_port": 40017,
-      "password": "da292191-b895-3264-b41c-200512b8f965",
-      "tls": {
-        "enabled": true,
-        "server_name": "water.waittomorrow.top",
-        "insecure": true
-      }
+      "tag": "🏳️ 其他 03 | SS",
+      "type": "shadowsocks",
+      "server": "r3mrcg001269pz2.cybervena.com",
+      "server_port": 50099,
+      "method": "chacha20-ietf-poly1305",
+      "password": "7e731ec3-f8e1-43f6-92cf-3978d14705c4"
     },
     {
-      "tag": "CDN Trojan 08",
+      "tag": "CDN Trojan 02",
       "type": "trojan",
       "server": "172.238.120.124",
       "server_port": 443,
@@ -250,18 +216,6 @@
       "tls": {
         "enabled": true,
         "server_name": "172.238.120.124",
-        "insecure": true
-      }
-    },
-    {
-      "tag": "🇭🇰 HK 05 | Trojan",
-      "type": "trojan",
-      "server": "a.twodnwnpoe.xyz",
-      "server_port": 40015,
-      "password": "da292191-b895-3264-b41c-200512b8f965",
-      "tls": {
-        "enabled": true,
-        "server_name": "1.lossyesterday.xyz",
         "insecure": true
       }
     }
