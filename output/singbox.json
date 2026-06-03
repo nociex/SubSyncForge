@@ -148,18 +148,17 @@
       "type": "selector",
       "tag": "us-group",
       "outbounds": [
-        "🇺🇸 US 01 | SS"
+        "🇺🇸 US 01 | SS",
+        "🇺🇸 US 04 | Trojan"
       ]
     },
     {
       "type": "selector",
       "tag": "others-group",
       "outbounds": [
-        "CDN VLESS 04",
         "CDN VLESS 01",
         "CDN Trojan 02",
-        "CDN Trojan 03",
-        "🏳️ CL 05 | Trojan"
+        "CDN Trojan 03"
       ]
     },
     {
@@ -175,77 +174,17 @@
       "tag": "dns-out"
     },
     {
-      "tag": "CDN VLESS 04",
+      "tag": "CDN VLESS 01",
       "type": "vless",
-      "server": "162.159.13.20",
-      "server_port": 443,
-      "uuid": "a6f1755f-0140-4bea-8727-0db1bed7c4df",
+      "server": "172.67.211.74",
+      "server_port": 80,
+      "uuid": "e84064cc-617f-4ba8-aa6f-13e920fd2610",
       "transport": {
         "type": "ws",
         "path": "/",
         "headers": {
-          "Host": "juzi.qea.ccwu.cc"
+          "Host": "main.boobie.eu.cc"
         }
-      },
-      "tls": {
-        "enabled": true,
-        "server_name": "juzi.qea.ccwu.cc",
-        "insecure": false
-      }
-    },
-    {
-      "tag": "CDN VLESS 01",
-      "type": "vless",
-      "server": "172.66.47.45",
-      "server_port": 443,
-      "uuid": "fc965ad9-bdd7-4815-ad71-b39ec5972dc1",
-      "transport": {
-        "type": "ws",
-        "path": "/tsghdws",
-        "headers": {
-          "Host": "octopusss4.com"
-        }
-      },
-      "tls": {
-        "enabled": true,
-        "server_name": "octopusss4.com",
-        "insecure": false
-      }
-    },
-    {
-      "tag": "CDN Trojan 02",
-      "type": "trojan",
-      "server": "104.20.6.134",
-      "server_port": 443,
-      "password": "/humanity",
-      "tls": {
-        "enabled": true,
-        "server_name": "www.calmloud.com",
-        "insecure": false
-      }
-    },
-    {
-      "tag": "CDN Trojan 03",
-      "type": "trojan",
-      "server": "www.ignitelimit.com",
-      "server_port": 443,
-      "password": "/humanity",
-      "tls": {
-        "enabled": true,
-        "server_name": "www.ignitelimit.com",
-        "insecure": false
-      }
-    },
-    {
-      "tag": "🏳️ CL 05 | Trojan",
-      "type": "trojan",
-      "server": "130.94.104.210",
-      "server_port": 443,
-      "password": "/lTs6OZOMoqYAkDEbK10t-tE8KMjuREBW3m",
-      "tls": {
-        "enabled": true,
-        "server_name": "www.cdn-structure.click",
-        "insecure": false
       }
     },
     {
@@ -255,6 +194,42 @@
       "server_port": 443,
       "method": "aes-128-gcm",
       "password": "shadowsocks"
+    },
+    {
+      "tag": "🇺🇸 US 04 | Trojan",
+      "type": "trojan",
+      "server": "130.94.107.171",
+      "server_port": 443,
+      "password": "/s.wRSE4ANZp4=4h.=B_9Qbetw6XUc0V1SV",
+      "tls": {
+        "enabled": true,
+        "server_name": "www.logger-guard.click",
+        "insecure": false
+      }
+    },
+    {
+      "tag": "CDN Trojan 02",
+      "type": "trojan",
+      "server": "172.237.145.189",
+      "server_port": 443,
+      "password": "/A3uIh_5NqMg3hFa.gDYWT.afz0UuJ6=VIM",
+      "tls": {
+        "enabled": true,
+        "server_name": "172.237.145.189",
+        "insecure": false
+      }
+    },
+    {
+      "tag": "CDN Trojan 03",
+      "type": "trojan",
+      "server": "172.236.220.10",
+      "server_port": 443,
+      "password": "/s_WEN9lMmufG+qDIsn-4C7JOVAnDdbS3Ui",
+      "tls": {
+        "enabled": true,
+        "server_name": "172.236.220.10",
+        "insecure": false
+      }
     }
   ],
   "route": {

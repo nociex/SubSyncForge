@@ -14,44 +14,37 @@ geox-url:
   mmdb: "https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/country.mmdb"
 
 proxies:
-  - name: "CDN VLESS 04"
-    type: "vless"
-    server: "162.159.13.20"
-    port: 443
-    uuid: "a6f1755f-0140-4bea-8727-0db1bed7c4df"
-    network: "ws"
-    servername: "juzi.qea.ccwu.cc"
   - name: "CDN VLESS 01"
     type: "vless"
-    server: "172.66.47.45"
-    port: 443
-    uuid: "fc965ad9-bdd7-4815-ad71-b39ec5972dc1"
+    server: "172.67.211.74"
+    port: 80
+    uuid: "e84064cc-617f-4ba8-aa6f-13e920fd2610"
     network: "ws"
-    servername: "octopusss4.com"
-  - name: "CDN Trojan 02"
-    type: "trojan"
-    server: "104.20.6.134"
-    port: 443
-    password: "/humanity"
-    sni: "www.calmloud.com"
-  - name: "CDN Trojan 03"
-    type: "trojan"
-    server: "www.ignitelimit.com"
-    port: 443
-    password: "/humanity"
-    sni: "www.ignitelimit.com"
-  - name: "🏳️ CL 05 | Trojan"
-    type: "trojan"
-    server: "130.94.104.210"
-    port: 443
-    password: "/lTs6OZOMoqYAkDEbK10t-tE8KMjuREBW3m"
-    sni: "www.cdn-structure.click"
+    servername: "172.67.211.74"
   - name: "🇺🇸 US 01 | SS"
     type: "ss"
     server: "37.19.198.236"
     port: 443
     cipher: "aes-128-gcm"
     password: "shadowsocks"
+  - name: "🇺🇸 US 04 | Trojan"
+    type: "trojan"
+    server: "130.94.107.171"
+    port: 443
+    password: "/s.wRSE4ANZp4=4h.=B_9Qbetw6XUc0V1SV"
+    sni: "www.logger-guard.click"
+  - name: "CDN Trojan 02"
+    type: "trojan"
+    server: "172.237.145.189"
+    port: 443
+    password: "/A3uIh_5NqMg3hFa.gDYWT.afz0UuJ6=VIM"
+    sni: "172.237.145.189"
+  - name: "CDN Trojan 03"
+    type: "trojan"
+    server: "172.236.220.10"
+    port: 443
+    password: "/s_WEN9lMmufG+qDIsn-4C7JOVAnDdbS3Ui"
+    sni: "172.236.220.10"
 
 proxy-groups:
   - name: 🚀 节点选择
