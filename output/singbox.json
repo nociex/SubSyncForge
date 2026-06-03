@@ -155,13 +155,11 @@
       "type": "selector",
       "tag": "others-group",
       "outbounds": [
-        "CDN VLESS 02",
-        "CDN VMess 01",
-        "🏳️ 其他 04 | VMess",
-        "CDN Trojan 06",
-        "🏳️ CL 07 | Trojan",
-        "CDN Trojan 05",
-        "🇫🇷 FR 03 | Trojan"
+        "CDN VLESS 04",
+        "CDN VLESS 01",
+        "CDN Trojan 02",
+        "CDN Trojan 03",
+        "🏳️ CL 05 | Trojan"
       ]
     },
     {
@@ -177,9 +175,28 @@
       "tag": "dns-out"
     },
     {
-      "tag": "CDN VLESS 02",
+      "tag": "CDN VLESS 04",
       "type": "vless",
-      "server": "162.159.36.5",
+      "server": "162.159.13.20",
+      "server_port": 443,
+      "uuid": "a6f1755f-0140-4bea-8727-0db1bed7c4df",
+      "transport": {
+        "type": "ws",
+        "path": "/",
+        "headers": {
+          "Host": "juzi.qea.ccwu.cc"
+        }
+      },
+      "tls": {
+        "enabled": true,
+        "server_name": "juzi.qea.ccwu.cc",
+        "insecure": false
+      }
+    },
+    {
+      "tag": "CDN VLESS 01",
+      "type": "vless",
+      "server": "172.66.47.45",
       "server_port": 443,
       "uuid": "fc965ad9-bdd7-4815-ad71-b39ec5972dc1",
       "transport": {
@@ -196,61 +213,31 @@
       }
     },
     {
-      "tag": "CDN VMess 01",
-      "type": "vmess",
-      "server": "usaapp1.jisuyun.top",
-      "server_port": 2053,
-      "uuid": "4b80aa86-4354-40bb-d2a3-47126cff0bea",
-      "security": "auto",
-      "alter_id": 0,
-      "transport": {
-        "type": "ws",
-        "path": "/usavm",
-        "headers": {
-          "Host": "usaapp1.jisuyun.top"
-        }
-      },
-      "tls": {
-        "enabled": true,
-        "server_name": "usaapp1.jisuyun.top",
-        "insecure": false
-      }
-    },
-    {
-      "tag": "🏳️ 其他 04 | VMess",
-      "type": "vmess",
-      "server": "renderer-stream-1-411.mirra.now",
-      "server_port": 443,
-      "uuid": "df9c9355-b02c-4c12-909d-0dbeb725d52b",
-      "security": "auto",
-      "alter_id": 0,
-      "transport": {
-        "type": "ws",
-        "path": "/api/v1/gpu-stream/socket",
-        "headers": {
-          "Host": "renderer-stream-1-411.mirra.now"
-        }
-      },
-      "tls": {
-        "enabled": true,
-        "server_name": "renderer-stream-1-411.mirra.now",
-        "insecure": false
-      }
-    },
-    {
-      "tag": "CDN Trojan 06",
+      "tag": "CDN Trojan 02",
       "type": "trojan",
-      "server": "104.16.7.70",
+      "server": "104.20.6.134",
       "server_port": 443,
       "password": "/humanity",
       "tls": {
         "enabled": true,
-        "server_name": "www.calmlunch.com",
+        "server_name": "www.calmloud.com",
         "insecure": false
       }
     },
     {
-      "tag": "🏳️ CL 07 | Trojan",
+      "tag": "CDN Trojan 03",
+      "type": "trojan",
+      "server": "www.ignitelimit.com",
+      "server_port": 443,
+      "password": "/humanity",
+      "tls": {
+        "enabled": true,
+        "server_name": "www.ignitelimit.com",
+        "insecure": false
+      }
+    },
+    {
+      "tag": "🏳️ CL 05 | Trojan",
       "type": "trojan",
       "server": "130.94.104.210",
       "server_port": 443,
@@ -258,30 +245,6 @@
       "tls": {
         "enabled": true,
         "server_name": "www.cdn-structure.click",
-        "insecure": true
-      }
-    },
-    {
-      "tag": "CDN Trojan 05",
-      "type": "trojan",
-      "server": "172.237.145.189",
-      "server_port": 443,
-      "password": "/A3uIh_5NqMg3hFa.gDYWT.afz0UuJ6=VIM",
-      "tls": {
-        "enabled": true,
-        "server_name": "172.237.145.189",
-        "insecure": false
-      }
-    },
-    {
-      "tag": "🇫🇷 FR 03 | Trojan",
-      "type": "trojan",
-      "server": "217.69.2.107",
-      "server_port": 443,
-      "password": "/YGWIMlg.W1wRWQkRDcKfjZY7sng09aC=Yh",
-      "tls": {
-        "enabled": true,
-        "server_name": "www.weavenet.click",
         "insecure": false
       }
     },

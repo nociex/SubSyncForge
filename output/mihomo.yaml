@@ -14,64 +14,38 @@ geox-url:
   mmdb: "https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/country.mmdb"
 
 proxies:
-  - name: "CDN VLESS 02"
+  - name: "CDN VLESS 04"
     type: "vless"
-    server: "162.159.36.5"
+    server: "162.159.13.20"
+    port: 443
+    uuid: "a6f1755f-0140-4bea-8727-0db1bed7c4df"
+    network: "ws"
+    servername: "juzi.qea.ccwu.cc"
+  - name: "CDN VLESS 01"
+    type: "vless"
+    server: "172.66.47.45"
     port: 443
     uuid: "fc965ad9-bdd7-4815-ad71-b39ec5972dc1"
     network: "ws"
     servername: "octopusss4.com"
-  - name: "CDN VMess 01"
-    type: "vmess"
-    server: "usaapp1.jisuyun.top"
-    port: 2053
-    uuid: "4b80aa86-4354-40bb-d2a3-47126cff0bea"
-    alterId: 0
-    cipher: "auto"
-    network: "ws"
-    tls: true
-    ws-opts:
-      path: "/usavm"
-      headers:
-        Host: "usaapp1.jisuyun.top"
-  - name: "🏳️ 其他 04 | VMess"
-    type: "vmess"
-    server: "renderer-stream-1-411.mirra.now"
-    port: 443
-    uuid: "df9c9355-b02c-4c12-909d-0dbeb725d52b"
-    alterId: 0
-    cipher: "auto"
-    network: "ws"
-    tls: true
-    ws-opts:
-      path: "/api/v1/gpu-stream/socket"
-      headers:
-        Host: "renderer-stream-1-411.mirra.now"
-  - name: "CDN Trojan 06"
+  - name: "CDN Trojan 02"
     type: "trojan"
-    server: "104.16.7.70"
+    server: "104.20.6.134"
     port: 443
     password: "/humanity"
-    sni: "www.calmlunch.com"
-  - name: "🏳️ CL 07 | Trojan"
+    sni: "www.calmloud.com"
+  - name: "CDN Trojan 03"
+    type: "trojan"
+    server: "www.ignitelimit.com"
+    port: 443
+    password: "/humanity"
+    sni: "www.ignitelimit.com"
+  - name: "🏳️ CL 05 | Trojan"
     type: "trojan"
     server: "130.94.104.210"
     port: 443
     password: "/lTs6OZOMoqYAkDEbK10t-tE8KMjuREBW3m"
     sni: "www.cdn-structure.click"
-    skip-cert-verify: true
-  - name: "CDN Trojan 05"
-    type: "trojan"
-    server: "172.237.145.189"
-    port: 443
-    password: "/A3uIh_5NqMg3hFa.gDYWT.afz0UuJ6=VIM"
-    sni: "172.237.145.189"
-  - name: "🇫🇷 FR 03 | Trojan"
-    type: "trojan"
-    server: "217.69.2.107"
-    port: 443
-    password: "/YGWIMlg.W1wRWQkRDcKfjZY7sng09aC=Yh"
-    sni: "www.weavenet.click"
   - name: "🇺🇸 US 01 | SS"
     type: "ss"
     server: "37.19.198.236"
