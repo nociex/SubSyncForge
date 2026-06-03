@@ -14,6 +14,52 @@ geox-url:
   mmdb: "https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/country.mmdb"
 
 proxies:
+  - name: "CDN VLESS 06"
+    type: "vless"
+    server: "172.66.3.201"
+    port: 443
+    uuid: "a6f1755f-0140-4bea-8727-0db1bed7c4df"
+    network: "ws"
+    servername: "juzi.qea.ccwu.cc"
+  - name: "🇪🇸 ES 02 | SS"
+    type: "ss"
+    server: "5.188.181.201"
+    port: 9014
+    cipher: "aes-256-cfb"
+    password: "KnJGad3FqTvjqbaX"
+  - name: "🏳️ 其他 04 | VMess"
+    type: "vmess"
+    server: "renderer-stream-1-411.mirra.now"
+    port: 443
+    uuid: "df9c9355-b02c-4c12-909d-0dbeb725d52b"
+    alterId: 0
+    cipher: "auto"
+    network: "ws"
+    tls: true
+    ws-opts:
+      path: "/api/v1/gpu-stream/socket"
+      headers:
+        Host: "renderer-stream-1-411.mirra.now"
+  - name: "CDN VLESS 05"
+    type: "vless"
+    server: "nuclear.us.kg"
+    port: 443
+    uuid: "2bcfbfba-b446-4ad5-93ad-72af9e008f61"
+    network: "ws"
+    servername: "nuclear.us.kg"
+  - name: "CDN VMess 07"
+    type: "vmess"
+    server: "yg7.ygkkk.dpdns.org"
+    port: 8443
+    uuid: "c1a8dee0-bdad-4b6d-9926-5e15c3c8ed7d"
+    alterId: 0
+    cipher: "auto"
+    network: "ws"
+    tls: true
+    ws-opts:
+      path: "/c1a8dee0-bdad-4b6d-9926-5e15c3c8ed7d-vm"
+      headers:
+        Host: "marco-visibility-tops-estimate.trycloudflare.com"
   - name: "🇺🇸 US 01 | SS"
     type: "ss"
     server: "37.19.198.236"
@@ -28,43 +74,48 @@ proxies:
     alterId: 0
     cipher: "auto"
     network: "tcp"
-  - name: "🇪🇸 ES 02 | SS"
-    type: "ss"
-    server: "5.188.181.201"
-    port: 9014
-    cipher: "aes-256-cfb"
-    password: "KnJGad3FqTvjqbaX"
+  - name: "🇺🇸 US 03 | Trojan"
+    type: "trojan"
+    server: "130.94.107.171"
+    port: 443
+    password: "/s.wRSE4ANZp4=4h.=B_9Qbetw6XUc0V1SV"
+    sni: "www.logger-guard.click"
   - name: "🇩🇪 DE 01 | SS"
     type: "ss"
     server: "185.129.84.12"
     port: 443
     cipher: "chacha20-ietf-poly1305"
     password: "DQHK4mtugy7xMNChJjB9Jm"
-  - name: "🇫🇷 FR 03 | SS"
-    type: "ss"
-    server: "45.92.218.56"
-    port: 1080
-    cipher: "chacha20-ietf-poly1305"
-    password: "RjG_Pd534ZVJRMdODjCNMA"
-  - name: "🇫🇮 FI 04 | SS"
+  - name: "🇫🇮 FI 02 | SS"
     type: "ss"
     server: "109.107.182.229"
     port: 51544
     cipher: "chacha20-ietf-poly1305"
     password: "NMao3laQtxBnEgzbuJ0khb"
-  - name: "🇵🇱 PL 02 | Trojan"
+  - name: "ISP Shadowsocks 04"
+    type: "ss"
+    server: "r3mrcg001286ek2.cybervena.com"
+    port: 50099
+    cipher: "chacha20-ietf-poly1305"
+    password: "7e731ec3-f8e1-43f6-92cf-3978d14705c4"
+  - name: "🇫🇷 FR 05 | SS"
+    type: "ss"
+    server: "45.92.218.56"
+    port: 1080
+    cipher: "chacha20-ietf-poly1305"
+    password: "RjG_Pd534ZVJRMdODjCNMA"
+  - name: "CDN Trojan 01"
     type: "trojan"
-    server: "64.176.65.85"
+    server: "172.235.63.252"
     port: 443
-    password: "iGccGWTMHtoXtBhGYK4mogg7iIUhGbcvCf"
-    skip-cert-verify: true
-  - name: "CDN Trojan 05"
+    password: "/bX_lNHWoW6ywq82mI=KUr+8i__VSp0Hs_E"
+    sni: "172.235.63.252"
+  - name: "CDN Trojan 02"
     type: "trojan"
-    server: "172.237.145.189"
+    server: "172.238.120.124"
     port: 443
-    password: "A3uIh_5NqMg3hFa.gDYWT.afz0UuJ6=VIM"
-    sni: "172.237.145.189"
-    skip-cert-verify: true
+    password: "/r-_YbwF.j0TtHVewoFIppramjAnmSfqYzJ"
+    sni: "172.238.120.124"
 
 proxy-groups:
   - name: 🚀 节点选择
