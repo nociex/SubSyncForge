@@ -155,13 +155,7 @@
       "type": "selector",
       "tag": "others-group",
       "outbounds": [
-        "CDN Trojan 01",
-        "🇵🇱 PL 03 | Trojan",
-        "🏳️ CL 04 | Trojan",
-        "CDN Trojan 06",
-        "CDN Trojan 07",
-        "🇩🇪 DE 02 | Trojan",
-        "CDN VLESS 05"
+        "DIRECT"
       ]
     },
     {
@@ -177,103 +171,12 @@
       "tag": "dns-out"
     },
     {
-      "tag": "CDN Trojan 01",
-      "type": "trojan",
-      "server": "104.20.6.134",
-      "server_port": 443,
-      "password": "/humanity",
-      "tls": {
-        "enabled": true,
-        "server_name": "www.calmloud.com",
-        "insecure": false
-      }
-    },
-    {
-      "tag": "🇵🇱 PL 03 | Trojan",
-      "type": "trojan",
-      "server": "64.176.65.85",
-      "server_port": 443,
-      "password": "/iGccGWTMHtoXtBhGYK4mogg7iIUhGbcvCf",
-      "tls": {
-        "enabled": true,
-        "server_name": "64.176.65.85",
-        "insecure": false
-      }
-    },
-    {
-      "tag": "🏳️ CL 04 | Trojan",
-      "type": "trojan",
-      "server": "130.94.104.210",
-      "server_port": 443,
-      "password": "/lTs6OZOMoqYAkDEbK10t-tE8KMjuREBW3m",
-      "tls": {
-        "enabled": true,
-        "server_name": "www.cdn-structure.click",
-        "insecure": false
-      }
-    },
-    {
-      "tag": "CDN Trojan 06",
-      "type": "trojan",
-      "server": "172.238.19.11",
-      "server_port": 443,
-      "password": "/E_hUHrn0+6VeZO=v9=fLgoPDXZWGfcrejg",
-      "tls": {
-        "enabled": true,
-        "server_name": "172.238.19.11",
-        "insecure": false
-      }
-    },
-    {
-      "tag": "CDN Trojan 07",
-      "type": "trojan",
-      "server": "cyylr.eu.cc",
-      "server_port": 443,
-      "password": "/cf3d48cf-750c-4f18-89a7-f81d2e153fbe",
-      "tls": {
-        "enabled": true,
-        "server_name": "blog.webex.com.cyylr.eu.cc",
-        "insecure": false
-      }
-    },
-    {
-      "tag": "🇩🇪 DE 02 | Trojan",
-      "type": "trojan",
-      "server": "172.104.237.100",
-      "server_port": 443,
-      "password": "/VPTFm=oZ++SuNT+jMRqGZqrAnWq-r8KJyY",
-      "tls": {
-        "enabled": true,
-        "server_name": "172.104.237.100",
-        "insecure": false
-      }
-    },
-    {
       "tag": "🇺🇸 US 01 | SS",
       "type": "shadowsocks",
       "server": "37.19.198.236",
       "server_port": 443,
       "method": "aes-128-gcm",
       "password": "shadowsocks"
-    },
-    {
-      "tag": "CDN VLESS 05",
-      "type": "vless",
-      "server": "support.zoom.us.cyylr.eu.cc",
-      "server_port": 443,
-      "uuid": "cc752a3e-1537-4e86-bb50-1b897bf7b33c",
-      "transport": {
-        "type": "ws",
-        "path": "/sg-melbi",
-        "headers": {
-          "Host": "support.zoom.us.cyylr.eu.cc"
-        }
-      },
-      "tls": {
-        "enabled": true,
-        "server_name": "support.zoom.us.cyylr.eu.cc",
-        "insecure": false
-      }
     }
   ],
   "route": {
