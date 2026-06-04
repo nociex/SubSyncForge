@@ -148,19 +148,15 @@
       "type": "selector",
       "tag": "us-group",
       "outbounds": [
-        "🇺🇸 US 01 | SS",
-        "🇺🇸 US 05 | Trojan"
+        "🇺🇸 US 01 | SS"
       ]
     },
     {
       "type": "selector",
       "tag": "others-group",
       "outbounds": [
-        "CDN VLESS 02",
-        "CDN Trojan 01",
-        "CDN Trojan 03",
-        "🏳️ CL 04 | Trojan",
-        "🇨🇳 CN 06 | Trojan"
+        "🏳️ CL 01 | Trojan",
+        "🇨🇳 CN 02 | Trojan"
       ]
     },
     {
@@ -176,50 +172,15 @@
       "tag": "dns-out"
     },
     {
-      "tag": "CDN VLESS 02",
-      "type": "vless",
-      "server": "172.67.70.149",
+      "tag": "🇺🇸 US 01 | SS",
+      "type": "shadowsocks",
+      "server": "37.19.198.236",
       "server_port": 443,
-      "uuid": "fc965ad9-bdd7-4815-ad71-b39ec5972dc1",
-      "transport": {
-        "type": "ws",
-        "path": "/tsghdws",
-        "headers": {
-          "Host": "octopusss4.com"
-        }
-      },
-      "tls": {
-        "enabled": true,
-        "server_name": "octopusss4.com",
-        "insecure": false
-      }
+      "method": "aes-128-gcm",
+      "password": "shadowsocks"
     },
     {
-      "tag": "CDN Trojan 01",
-      "type": "trojan",
-      "server": "104.20.6.134",
-      "server_port": 443,
-      "password": "/humanity",
-      "tls": {
-        "enabled": true,
-        "server_name": "www.calmloud.com",
-        "insecure": false
-      }
-    },
-    {
-      "tag": "CDN Trojan 03",
-      "type": "trojan",
-      "server": "172.238.120.124",
-      "server_port": 443,
-      "password": "/r-_YbwF.j0TtHVewoFIppramjAnmSfqYzJ",
-      "tls": {
-        "enabled": true,
-        "server_name": "172.238.120.124",
-        "insecure": false
-      }
-    },
-    {
-      "tag": "🏳️ CL 04 | Trojan",
+      "tag": "🏳️ CL 01 | Trojan",
       "type": "trojan",
       "server": "130.94.104.210",
       "server_port": 443,
@@ -231,27 +192,7 @@
       }
     },
     {
-      "tag": "🇺🇸 US 01 | SS",
-      "type": "shadowsocks",
-      "server": "37.19.198.236",
-      "server_port": 443,
-      "method": "aes-128-gcm",
-      "password": "shadowsocks"
-    },
-    {
-      "tag": "🇺🇸 US 05 | Trojan",
-      "type": "trojan",
-      "server": "130.94.107.171",
-      "server_port": 443,
-      "password": "/s.wRSE4ANZp4=4h.=B_9Qbetw6XUc0V1SV",
-      "tls": {
-        "enabled": true,
-        "server_name": "www.logger-guard.click",
-        "insecure": false
-      }
-    },
-    {
-      "tag": "🇨🇳 CN 06 | Trojan",
+      "tag": "🇨🇳 CN 02 | Trojan",
       "type": "trojan",
       "server": "130.94.68.100",
       "server_port": 443,
@@ -259,7 +200,7 @@
       "tls": {
         "enabled": true,
         "server_name": "www.rolll.click",
-        "insecure": true
+        "insecure": false
       }
     }
   ],
