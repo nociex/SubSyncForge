@@ -14,12 +14,50 @@ geox-url:
   mmdb: "https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/country.mmdb"
 
 proxies:
+  - name: "CDN VLESS 02"
+    type: "vless"
+    server: "172.67.70.149"
+    port: 443
+    uuid: "fc965ad9-bdd7-4815-ad71-b39ec5972dc1"
+    network: "ws"
+    servername: "octopusss4.com"
+  - name: "CDN Trojan 01"
+    type: "trojan"
+    server: "104.20.6.134"
+    port: 443
+    password: "/humanity"
+    sni: "www.calmloud.com"
+  - name: "CDN Trojan 03"
+    type: "trojan"
+    server: "172.238.120.124"
+    port: 443
+    password: "/r-_YbwF.j0TtHVewoFIppramjAnmSfqYzJ"
+    sni: "172.238.120.124"
+  - name: "🏳️ CL 04 | Trojan"
+    type: "trojan"
+    server: "130.94.104.210"
+    port: 443
+    password: "/lTs6OZOMoqYAkDEbK10t-tE8KMjuREBW3m"
+    sni: "www.cdn-structure.click"
   - name: "🇺🇸 US 01 | SS"
     type: "ss"
     server: "37.19.198.236"
     port: 443
     cipher: "aes-128-gcm"
     password: "shadowsocks"
+  - name: "🇺🇸 US 05 | Trojan"
+    type: "trojan"
+    server: "130.94.107.171"
+    port: 443
+    password: "/s.wRSE4ANZp4=4h.=B_9Qbetw6XUc0V1SV"
+    sni: "www.logger-guard.click"
+  - name: "🇨🇳 CN 06 | Trojan"
+    type: "trojan"
+    server: "130.94.68.100"
+    port: 443
+    password: "/l64tlWoGT6USQr=3WnjWedzvVSHXn8TNTE"
+    sni: "www.rolll.click"
+    skip-cert-verify: true
 
 proxy-groups:
   - name: 🚀 节点选择
