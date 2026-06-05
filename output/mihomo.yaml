@@ -14,12 +14,63 @@ geox-url:
   mmdb: "https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/country.mmdb"
 
 proxies:
+  - name: "CDN VLESS 02"
+    type: "vless"
+    server: "172.64.146.68"
+    port: 443
+    uuid: "fc965ad9-bdd7-4815-ad71-b39ec5972dc1"
+    network: "ws"
+    servername: "octopusss4.com"
+  - name: "🏳️ GE 08 | VLESS"
+    type: "vless"
+    server: "72.56.59.177"
+    port: 443
+    uuid: "afcac633-0e1a-46c3-bef2-cc01cc0097c8"
+    flow: "xtls-rprx-vision"
+    network: "tcp"
+    servername: "r1.mizulina.top"
   - name: "🇺🇸 US 01 | SS"
     type: "ss"
     server: "37.19.198.236"
     port: 443
     cipher: "aes-128-gcm"
     password: "shadowsocks"
+  - name: "ISP Shadowsocks 06"
+    type: "ss"
+    server: "r3mrcg00129437x.cybervena.com"
+    port: 50099
+    cipher: "chacha20-ietf-poly1305"
+    password: "7e731ec3-f8e1-43f6-92cf-3978d14705c47"
+  - name: "CDN Trojan 01"
+    type: "trojan"
+    server: "172.237.145.189"
+    port: 443
+    password: "/A3uIh_5NqMg3hFa.gDYWT.afz0UuJ6=VIM"
+    sni: "172.237.145.189"
+  - name: "CDN Trojan 03"
+    type: "trojan"
+    server: "172.238.120.124"
+    port: 443
+    password: "/r-_YbwF.j0TtHVewoFIppramjAnmSfqYzJ"
+    sni: "172.238.120.124"
+  - name: "CDN Trojan 04"
+    type: "trojan"
+    server: "172.236.220.10"
+    port: 443
+    password: "/s_WEN9lMmufG+qDIsn-4C7JOVAnDdbS3Ui"
+    sni: "172.236.220.10"
+  - name: "🇵🇱 PL 05 | Trojan"
+    type: "trojan"
+    server: "64.176.65.85"
+    port: 443
+    password: "/iGccGWTMHtoXtBhGYK4mogg7iIUhGbcvCf"
+    sni: "64.176.65.85"
+  - name: "🇨🇳 CN 07 | Trojan"
+    type: "trojan"
+    server: "130.94.68.100"
+    port: 443
+    password: "/l64tlWoGT6USQr=3WnjWedzvVSHXn8TNTE"
+    sni: "www.rolll.click"
 
 proxy-groups:
   - name: 🚀 节点选择

@@ -155,7 +155,14 @@
       "type": "selector",
       "tag": "others-group",
       "outbounds": [
-        "DIRECT"
+        "CDN VLESS 02",
+        "🏳️ GE 08 | VLESS",
+        "ISP Shadowsocks 06",
+        "CDN Trojan 01",
+        "CDN Trojan 03",
+        "CDN Trojan 04",
+        "🇵🇱 PL 05 | Trojan",
+        "🇨🇳 CN 07 | Trojan"
       ]
     },
     {
@@ -171,12 +178,112 @@
       "tag": "dns-out"
     },
     {
+      "tag": "CDN VLESS 02",
+      "type": "vless",
+      "server": "172.64.146.68",
+      "server_port": 443,
+      "uuid": "fc965ad9-bdd7-4815-ad71-b39ec5972dc1",
+      "transport": {
+        "type": "ws",
+        "path": "/tsghdws",
+        "headers": {
+          "Host": "octopusss4.com"
+        }
+      },
+      "tls": {
+        "enabled": true,
+        "server_name": "octopusss4.com",
+        "insecure": false
+      }
+    },
+    {
+      "tag": "🏳️ GE 08 | VLESS",
+      "type": "vless",
+      "server": "72.56.59.177",
+      "server_port": 443,
+      "uuid": "afcac633-0e1a-46c3-bef2-cc01cc0097c8",
+      "tls": {
+        "enabled": true,
+        "server_name": "r1.mizulina.top",
+        "insecure": false
+      },
+      "flow": "xtls-rprx-vision"
+    },
+    {
       "tag": "🇺🇸 US 01 | SS",
       "type": "shadowsocks",
       "server": "37.19.198.236",
       "server_port": 443,
       "method": "aes-128-gcm",
       "password": "shadowsocks"
+    },
+    {
+      "tag": "ISP Shadowsocks 06",
+      "type": "shadowsocks",
+      "server": "r3mrcg00129437x.cybervena.com",
+      "server_port": 50099,
+      "method": "chacha20-ietf-poly1305",
+      "password": "7e731ec3-f8e1-43f6-92cf-3978d14705c47"
+    },
+    {
+      "tag": "CDN Trojan 01",
+      "type": "trojan",
+      "server": "172.237.145.189",
+      "server_port": 443,
+      "password": "/A3uIh_5NqMg3hFa.gDYWT.afz0UuJ6=VIM",
+      "tls": {
+        "enabled": true,
+        "server_name": "172.237.145.189",
+        "insecure": false
+      }
+    },
+    {
+      "tag": "CDN Trojan 03",
+      "type": "trojan",
+      "server": "172.238.120.124",
+      "server_port": 443,
+      "password": "/r-_YbwF.j0TtHVewoFIppramjAnmSfqYzJ",
+      "tls": {
+        "enabled": true,
+        "server_name": "172.238.120.124",
+        "insecure": false
+      }
+    },
+    {
+      "tag": "CDN Trojan 04",
+      "type": "trojan",
+      "server": "172.236.220.10",
+      "server_port": 443,
+      "password": "/s_WEN9lMmufG+qDIsn-4C7JOVAnDdbS3Ui",
+      "tls": {
+        "enabled": true,
+        "server_name": "172.236.220.10",
+        "insecure": false
+      }
+    },
+    {
+      "tag": "🇵🇱 PL 05 | Trojan",
+      "type": "trojan",
+      "server": "64.176.65.85",
+      "server_port": 443,
+      "password": "/iGccGWTMHtoXtBhGYK4mogg7iIUhGbcvCf",
+      "tls": {
+        "enabled": true,
+        "server_name": "64.176.65.85",
+        "insecure": false
+      }
+    },
+    {
+      "tag": "🇨🇳 CN 07 | Trojan",
+      "type": "trojan",
+      "server": "130.94.68.100",
+      "server_port": 443,
+      "password": "/l64tlWoGT6USQr=3WnjWedzvVSHXn8TNTE",
+      "tls": {
+        "enabled": true,
+        "server_name": "www.rolll.click",
+        "insecure": false
+      }
     }
   ],
   "route": {
