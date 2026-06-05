@@ -20,18 +20,12 @@ proxies:
     port: 443
     cipher: "aes-128-gcm"
     password: "shadowsocks"
-  - name: "🏳️ CL 01 | Trojan"
-    type: "trojan"
-    server: "130.94.104.210"
-    port: 443
-    password: "/lTs6OZOMoqYAkDEbK10t-tE8KMjuREBW3m"
-    sni: "www.cdn-structure.click"
-  - name: "🇨🇳 CN 02 | Trojan"
-    type: "trojan"
-    server: "130.94.68.100"
-    port: 443
-    password: "/l64tlWoGT6USQr=3WnjWedzvVSHXn8TNTE"
-    sni: "www.rolll.click"
+  - name: "🇪🇸 ES 02 | SS"
+    type: "ss"
+    server: "5.188.181.201"
+    port: 9014
+    cipher: "aes-256-cfb"
+    password: "KnJGad3FqTvjqbaX"
 
 proxy-groups:
   - name: 🚀 节点选择

@@ -155,8 +155,7 @@
       "type": "selector",
       "tag": "others-group",
       "outbounds": [
-        "🏳️ CL 01 | Trojan",
-        "🇨🇳 CN 02 | Trojan"
+        "🇪🇸 ES 02 | SS"
       ]
     },
     {
@@ -180,28 +179,12 @@
       "password": "shadowsocks"
     },
     {
-      "tag": "🏳️ CL 01 | Trojan",
-      "type": "trojan",
-      "server": "130.94.104.210",
-      "server_port": 443,
-      "password": "/lTs6OZOMoqYAkDEbK10t-tE8KMjuREBW3m",
-      "tls": {
-        "enabled": true,
-        "server_name": "www.cdn-structure.click",
-        "insecure": false
-      }
-    },
-    {
-      "tag": "🇨🇳 CN 02 | Trojan",
-      "type": "trojan",
-      "server": "130.94.68.100",
-      "server_port": 443,
-      "password": "/l64tlWoGT6USQr=3WnjWedzvVSHXn8TNTE",
-      "tls": {
-        "enabled": true,
-        "server_name": "www.rolll.click",
-        "insecure": false
-      }
+      "tag": "🇪🇸 ES 02 | SS",
+      "type": "shadowsocks",
+      "server": "5.188.181.201",
+      "server_port": 9014,
+      "method": "aes-256-cfb",
+      "password": "KnJGad3FqTvjqbaX"
     }
   ],
   "route": {
