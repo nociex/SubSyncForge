@@ -134,7 +134,7 @@
       "type": "selector",
       "tag": "sg-group",
       "outbounds": [
-        "🇸🇬 SG 06 | VLESS"
+        "DIRECT"
       ]
     },
     {
@@ -148,9 +148,7 @@
       "type": "selector",
       "tag": "us-group",
       "outbounds": [
-        "🇺🇸 US 01 | SS",
-        "🇺🇸 US 02 | Trojan",
-        "🇺🇸 US 05 | Trojan"
+        "🇺🇸 US 01 | SS"
       ]
     },
     {
@@ -159,8 +157,10 @@
       "outbounds": [
         "CDN Trojan 01",
         "CDN Trojan 03",
-        "🏳️ CL 04 | Trojan",
-        "🇨🇳 CN 07 | Trojan"
+        "CDN Trojan 05",
+        "🇨🇳 CN 06 | Trojan",
+        "CDN VLESS 02",
+        "ISP Shadowsocks 04"
       ]
     },
     {
@@ -176,39 +176,19 @@
       "tag": "dns-out"
     },
     {
-      "tag": "🇺🇸 US 01 | SS",
-      "type": "shadowsocks",
-      "server": "37.19.198.236",
-      "server_port": 443,
-      "method": "aes-128-gcm",
-      "password": "shadowsocks"
-    },
-    {
-      "tag": "🇺🇸 US 02 | Trojan",
-      "type": "trojan",
-      "server": "45.79.8.17",
-      "server_port": 443,
-      "password": "/rXyShM8Jni+5Sbq3k4gkyr5Lq0zOMRL2Uf",
-      "tls": {
-        "enabled": true,
-        "server_name": "45.79.8.17",
-        "insecure": false
-      }
-    },
-    {
-      "tag": "🇺🇸 US 05 | Trojan",
-      "type": "trojan",
-      "server": "130.94.107.171",
-      "server_port": 443,
-      "password": "/s.wRSE4ANZp4=4h.=B_9Qbetw6XUc0V1SV",
-      "tls": {
-        "enabled": true,
-        "server_name": "www.logger-guard.click",
-        "insecure": false
-      }
-    },
-    {
       "tag": "CDN Trojan 01",
+      "type": "trojan",
+      "server": "172.235.63.252",
+      "server_port": 443,
+      "password": "/bX_lNHWoW6ywq82mI=KUr+8i__VSp0Hs_E",
+      "tls": {
+        "enabled": true,
+        "server_name": "172.235.63.252",
+        "insecure": false
+      }
+    },
+    {
+      "tag": "CDN Trojan 03",
       "type": "trojan",
       "server": "172.237.145.189",
       "server_port": 443,
@@ -220,31 +200,19 @@
       }
     },
     {
-      "tag": "CDN Trojan 03",
+      "tag": "CDN Trojan 05",
       "type": "trojan",
-      "server": "172.238.120.124",
+      "server": "172.238.19.11",
       "server_port": 443,
-      "password": "/r-_YbwF.j0TtHVewoFIppramjAnmSfqYzJ",
+      "password": "/E_hUHrn0+6VeZO=v9=fLgoPDXZWGfcrejg",
       "tls": {
         "enabled": true,
-        "server_name": "172.238.120.124",
+        "server_name": "172.238.19.11",
         "insecure": false
       }
     },
     {
-      "tag": "🏳️ CL 04 | Trojan",
-      "type": "trojan",
-      "server": "130.94.104.210",
-      "server_port": 443,
-      "password": "/lTs6OZOMoqYAkDEbK10t-tE8KMjuREBW3m",
-      "tls": {
-        "enabled": true,
-        "server_name": "www.cdn-structure.click",
-        "insecure": false
-      }
-    },
-    {
-      "tag": "🇨🇳 CN 07 | Trojan",
+      "tag": "🇨🇳 CN 06 | Trojan",
       "type": "trojan",
       "server": "130.94.68.100",
       "server_port": 443,
@@ -256,21 +224,39 @@
       }
     },
     {
-      "tag": "🇸🇬 SG 06 | VLESS",
+      "tag": "CDN VLESS 02",
       "type": "vless",
-      "server": "8.219.2.255",
-      "server_port": 33284,
-      "uuid": "00000000-0000-4000-8000-000000000000",
+      "server": "hyperlink-free.poweredproyuz.com",
+      "server_port": 443,
+      "uuid": "2be7b933-c720-4838-a35a-740ae50987ee",
       "transport": {
         "type": "ws",
-        "path": "/@Marisa_kristi",
-        "headers": {}
+        "path": "/hyperlink-hyperlink-join-to-hyperlink-hyperlink_ch-hyperlink-hlink_robot-hyperlink",
+        "headers": {
+          "Host": "hyperlink-free.poweredproyuz.com"
+        }
       },
       "tls": {
         "enabled": true,
-        "server_name": "nn9jdg-k7yewrrk.acg.xx.kg",
+        "server_name": "hyperlink-free.poweredproyuz.com",
         "insecure": false
       }
+    },
+    {
+      "tag": "🇺🇸 US 01 | SS",
+      "type": "shadowsocks",
+      "server": "37.19.198.236",
+      "server_port": 443,
+      "method": "aes-128-gcm",
+      "password": "shadowsocks"
+    },
+    {
+      "tag": "ISP Shadowsocks 04",
+      "type": "shadowsocks",
+      "server": "r3mrcg00129437x.cybervena.com",
+      "server_port": 50099,
+      "method": "chacha20-ietf-poly1305",
+      "password": "7e731ec3-f8e1-43f6-92cf-3978d14705c47"
     }
   ],
   "route": {
