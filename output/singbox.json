@@ -155,7 +155,12 @@
       "type": "selector",
       "tag": "others-group",
       "outbounds": [
-        "DIRECT"
+        "CDN VLESS 02",
+        "CDN VLESS 06",
+        "CDN Trojan 01",
+        "CDN Trojan 03",
+        "CDN Trojan 04",
+        "🇨🇳 CN 05 | Trojan"
       ]
     },
     {
@@ -169,6 +174,92 @@
     {
       "type": "dns",
       "tag": "dns-out"
+    },
+    {
+      "tag": "CDN VLESS 02",
+      "type": "vless",
+      "server": "104.18.155.229",
+      "server_port": 443,
+      "uuid": "42026ed0-7d74-4585-8e46-0fe6aa4d665a",
+      "transport": {
+        "type": "ws",
+        "path": "/au-do",
+        "headers": {
+          "Host": "www.genflix.co.id.r3xxe.eu.cc"
+        }
+      },
+      "tls": {
+        "enabled": true,
+        "server_name": "www.genflix.co.id.r3xxe.eu.cc",
+        "insecure": false
+      }
+    },
+    {
+      "tag": "CDN VLESS 06",
+      "type": "vless",
+      "server": "151.101.108.223",
+      "server_port": 443,
+      "uuid": "3f88bde3-effd-4a49-bfa2-19fa4d0e1cc5",
+      "transport": {
+        "type": "ws",
+        "path": "/",
+        "headers": {
+          "Host": "fancii.global.ssl.fastly.net"
+        }
+      },
+      "tls": {
+        "enabled": true,
+        "server_name": "default.ssl.fastly.net",
+        "insecure": false
+      }
+    },
+    {
+      "tag": "CDN Trojan 01",
+      "type": "trojan",
+      "server": "104.16.7.70",
+      "server_port": 443,
+      "password": "/humanity",
+      "tls": {
+        "enabled": true,
+        "server_name": "www.ignitelimit.com",
+        "insecure": false
+      }
+    },
+    {
+      "tag": "CDN Trojan 03",
+      "type": "trojan",
+      "server": "172.238.120.124",
+      "server_port": 443,
+      "password": "/r-_YbwF.j0TtHVewoFIppramjAnmSfqYzJ",
+      "tls": {
+        "enabled": true,
+        "server_name": "172.238.120.124",
+        "insecure": false
+      }
+    },
+    {
+      "tag": "CDN Trojan 04",
+      "type": "trojan",
+      "server": "172.237.145.189",
+      "server_port": 443,
+      "password": "/A3uIh_5NqMg3hFa.gDYWT.afz0UuJ6=VIM",
+      "tls": {
+        "enabled": true,
+        "server_name": "172.237.145.189",
+        "insecure": false
+      }
+    },
+    {
+      "tag": "🇨🇳 CN 05 | Trojan",
+      "type": "trojan",
+      "server": "130.94.68.100",
+      "server_port": 443,
+      "password": "/l64tlWoGT6USQr=3WnjWedzvVSHXn8TNTE",
+      "tls": {
+        "enabled": true,
+        "server_name": "www.rolll.click",
+        "insecure": false
+      }
     },
     {
       "tag": "🇺🇸 US 01 | SS",

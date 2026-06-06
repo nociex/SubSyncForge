@@ -14,6 +14,44 @@ geox-url:
   mmdb: "https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/country.mmdb"
 
 proxies:
+  - name: "CDN VLESS 02"
+    type: "vless"
+    server: "104.18.155.229"
+    port: 443
+    uuid: "42026ed0-7d74-4585-8e46-0fe6aa4d665a"
+    network: "ws"
+    servername: "www.genflix.co.id.r3xxe.eu.cc"
+  - name: "CDN VLESS 06"
+    type: "vless"
+    server: "151.101.108.223"
+    port: 443
+    uuid: "3f88bde3-effd-4a49-bfa2-19fa4d0e1cc5"
+    network: "ws"
+    servername: "default.ssl.fastly.net"
+  - name: "CDN Trojan 01"
+    type: "trojan"
+    server: "104.16.7.70"
+    port: 443
+    password: "/humanity"
+    sni: "www.ignitelimit.com"
+  - name: "CDN Trojan 03"
+    type: "trojan"
+    server: "172.238.120.124"
+    port: 443
+    password: "/r-_YbwF.j0TtHVewoFIppramjAnmSfqYzJ"
+    sni: "172.238.120.124"
+  - name: "CDN Trojan 04"
+    type: "trojan"
+    server: "172.237.145.189"
+    port: 443
+    password: "/A3uIh_5NqMg3hFa.gDYWT.afz0UuJ6=VIM"
+    sni: "172.237.145.189"
+  - name: "🇨🇳 CN 05 | Trojan"
+    type: "trojan"
+    server: "130.94.68.100"
+    port: 443
+    password: "/l64tlWoGT6USQr=3WnjWedzvVSHXn8TNTE"
+    sni: "www.rolll.click"
   - name: "🇺🇸 US 01 | SS"
     type: "ss"
     server: "37.19.198.236"
