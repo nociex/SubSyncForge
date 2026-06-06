@@ -155,12 +155,7 @@
       "type": "selector",
       "tag": "others-group",
       "outbounds": [
-        "CDN Trojan 01",
-        "CDN Trojan 03",
-        "CDN Trojan 05",
-        "🇨🇳 CN 06 | Trojan",
-        "CDN VLESS 02",
-        "ISP Shadowsocks 04"
+        "DIRECT"
       ]
     },
     {
@@ -176,87 +171,12 @@
       "tag": "dns-out"
     },
     {
-      "tag": "CDN Trojan 01",
-      "type": "trojan",
-      "server": "172.235.63.252",
-      "server_port": 443,
-      "password": "/bX_lNHWoW6ywq82mI=KUr+8i__VSp0Hs_E",
-      "tls": {
-        "enabled": true,
-        "server_name": "172.235.63.252",
-        "insecure": false
-      }
-    },
-    {
-      "tag": "CDN Trojan 03",
-      "type": "trojan",
-      "server": "172.237.145.189",
-      "server_port": 443,
-      "password": "/A3uIh_5NqMg3hFa.gDYWT.afz0UuJ6=VIM",
-      "tls": {
-        "enabled": true,
-        "server_name": "172.237.145.189",
-        "insecure": false
-      }
-    },
-    {
-      "tag": "CDN Trojan 05",
-      "type": "trojan",
-      "server": "172.238.19.11",
-      "server_port": 443,
-      "password": "/E_hUHrn0+6VeZO=v9=fLgoPDXZWGfcrejg",
-      "tls": {
-        "enabled": true,
-        "server_name": "172.238.19.11",
-        "insecure": false
-      }
-    },
-    {
-      "tag": "🇨🇳 CN 06 | Trojan",
-      "type": "trojan",
-      "server": "130.94.68.100",
-      "server_port": 443,
-      "password": "/l64tlWoGT6USQr=3WnjWedzvVSHXn8TNTE",
-      "tls": {
-        "enabled": true,
-        "server_name": "www.rolll.click",
-        "insecure": false
-      }
-    },
-    {
-      "tag": "CDN VLESS 02",
-      "type": "vless",
-      "server": "hyperlink-free.poweredproyuz.com",
-      "server_port": 443,
-      "uuid": "2be7b933-c720-4838-a35a-740ae50987ee",
-      "transport": {
-        "type": "ws",
-        "path": "/hyperlink-hyperlink-join-to-hyperlink-hyperlink_ch-hyperlink-hlink_robot-hyperlink",
-        "headers": {
-          "Host": "hyperlink-free.poweredproyuz.com"
-        }
-      },
-      "tls": {
-        "enabled": true,
-        "server_name": "hyperlink-free.poweredproyuz.com",
-        "insecure": false
-      }
-    },
-    {
       "tag": "🇺🇸 US 01 | SS",
       "type": "shadowsocks",
       "server": "37.19.198.236",
       "server_port": 443,
       "method": "aes-128-gcm",
       "password": "shadowsocks"
-    },
-    {
-      "tag": "ISP Shadowsocks 04",
-      "type": "shadowsocks",
-      "server": "r3mrcg00129437x.cybervena.com",
-      "server_port": 50099,
-      "method": "chacha20-ietf-poly1305",
-      "password": "7e731ec3-f8e1-43f6-92cf-3978d14705c47"
     }
   ],
   "route": {

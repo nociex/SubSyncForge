@@ -14,49 +14,12 @@ geox-url:
   mmdb: "https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/country.mmdb"
 
 proxies:
-  - name: "CDN Trojan 01"
-    type: "trojan"
-    server: "172.235.63.252"
-    port: 443
-    password: "/bX_lNHWoW6ywq82mI=KUr+8i__VSp0Hs_E"
-    sni: "172.235.63.252"
-  - name: "CDN Trojan 03"
-    type: "trojan"
-    server: "172.237.145.189"
-    port: 443
-    password: "/A3uIh_5NqMg3hFa.gDYWT.afz0UuJ6=VIM"
-    sni: "172.237.145.189"
-  - name: "CDN Trojan 05"
-    type: "trojan"
-    server: "172.238.19.11"
-    port: 443
-    password: "/E_hUHrn0+6VeZO=v9=fLgoPDXZWGfcrejg"
-    sni: "172.238.19.11"
-  - name: "🇨🇳 CN 06 | Trojan"
-    type: "trojan"
-    server: "130.94.68.100"
-    port: 443
-    password: "/l64tlWoGT6USQr=3WnjWedzvVSHXn8TNTE"
-    sni: "www.rolll.click"
-  - name: "CDN VLESS 02"
-    type: "vless"
-    server: "hyperlink-free.poweredproyuz.com"
-    port: 443
-    uuid: "2be7b933-c720-4838-a35a-740ae50987ee"
-    network: "ws"
-    servername: "hyperlink-free.poweredproyuz.com"
   - name: "🇺🇸 US 01 | SS"
     type: "ss"
     server: "37.19.198.236"
     port: 443
     cipher: "aes-128-gcm"
     password: "shadowsocks"
-  - name: "ISP Shadowsocks 04"
-    type: "ss"
-    server: "r3mrcg00129437x.cybervena.com"
-    port: 50099
-    cipher: "chacha20-ietf-poly1305"
-    password: "7e731ec3-f8e1-43f6-92cf-3978d14705c47"
 
 proxy-groups:
   - name: 🚀 节点选择
