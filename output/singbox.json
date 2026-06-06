@@ -134,7 +134,7 @@
       "type": "selector",
       "tag": "sg-group",
       "outbounds": [
-        "DIRECT"
+        "🇸🇬 SG 06 | VLESS"
       ]
     },
     {
@@ -148,14 +148,19 @@
       "type": "selector",
       "tag": "us-group",
       "outbounds": [
-        "🇺🇸 US 01 | SS"
+        "🇺🇸 US 01 | SS",
+        "🇺🇸 US 02 | Trojan",
+        "🇺🇸 US 05 | Trojan"
       ]
     },
     {
       "type": "selector",
       "tag": "others-group",
       "outbounds": [
-        "DIRECT"
+        "CDN Trojan 01",
+        "CDN Trojan 03",
+        "🏳️ CL 04 | Trojan",
+        "🇨🇳 CN 07 | Trojan"
       ]
     },
     {
@@ -177,6 +182,95 @@
       "server_port": 443,
       "method": "aes-128-gcm",
       "password": "shadowsocks"
+    },
+    {
+      "tag": "🇺🇸 US 02 | Trojan",
+      "type": "trojan",
+      "server": "45.79.8.17",
+      "server_port": 443,
+      "password": "/rXyShM8Jni+5Sbq3k4gkyr5Lq0zOMRL2Uf",
+      "tls": {
+        "enabled": true,
+        "server_name": "45.79.8.17",
+        "insecure": false
+      }
+    },
+    {
+      "tag": "🇺🇸 US 05 | Trojan",
+      "type": "trojan",
+      "server": "130.94.107.171",
+      "server_port": 443,
+      "password": "/s.wRSE4ANZp4=4h.=B_9Qbetw6XUc0V1SV",
+      "tls": {
+        "enabled": true,
+        "server_name": "www.logger-guard.click",
+        "insecure": false
+      }
+    },
+    {
+      "tag": "CDN Trojan 01",
+      "type": "trojan",
+      "server": "172.237.145.189",
+      "server_port": 443,
+      "password": "/A3uIh_5NqMg3hFa.gDYWT.afz0UuJ6=VIM",
+      "tls": {
+        "enabled": true,
+        "server_name": "172.237.145.189",
+        "insecure": false
+      }
+    },
+    {
+      "tag": "CDN Trojan 03",
+      "type": "trojan",
+      "server": "172.238.120.124",
+      "server_port": 443,
+      "password": "/r-_YbwF.j0TtHVewoFIppramjAnmSfqYzJ",
+      "tls": {
+        "enabled": true,
+        "server_name": "172.238.120.124",
+        "insecure": false
+      }
+    },
+    {
+      "tag": "🏳️ CL 04 | Trojan",
+      "type": "trojan",
+      "server": "130.94.104.210",
+      "server_port": 443,
+      "password": "/lTs6OZOMoqYAkDEbK10t-tE8KMjuREBW3m",
+      "tls": {
+        "enabled": true,
+        "server_name": "www.cdn-structure.click",
+        "insecure": false
+      }
+    },
+    {
+      "tag": "🇨🇳 CN 07 | Trojan",
+      "type": "trojan",
+      "server": "130.94.68.100",
+      "server_port": 443,
+      "password": "/l64tlWoGT6USQr=3WnjWedzvVSHXn8TNTE",
+      "tls": {
+        "enabled": true,
+        "server_name": "www.rolll.click",
+        "insecure": false
+      }
+    },
+    {
+      "tag": "🇸🇬 SG 06 | VLESS",
+      "type": "vless",
+      "server": "8.219.2.255",
+      "server_port": 33284,
+      "uuid": "00000000-0000-4000-8000-000000000000",
+      "transport": {
+        "type": "ws",
+        "path": "/@Marisa_kristi",
+        "headers": {}
+      },
+      "tls": {
+        "enabled": true,
+        "server_name": "nn9jdg-k7yewrrk.acg.xx.kg",
+        "insecure": false
+      }
     }
   ],
   "route": {

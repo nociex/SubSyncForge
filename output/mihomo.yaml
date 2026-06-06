@@ -20,6 +20,49 @@ proxies:
     port: 443
     cipher: "aes-128-gcm"
     password: "shadowsocks"
+  - name: "🇺🇸 US 02 | Trojan"
+    type: "trojan"
+    server: "45.79.8.17"
+    port: 443
+    password: "/rXyShM8Jni+5Sbq3k4gkyr5Lq0zOMRL2Uf"
+    sni: "45.79.8.17"
+  - name: "🇺🇸 US 05 | Trojan"
+    type: "trojan"
+    server: "130.94.107.171"
+    port: 443
+    password: "/s.wRSE4ANZp4=4h.=B_9Qbetw6XUc0V1SV"
+    sni: "www.logger-guard.click"
+  - name: "CDN Trojan 01"
+    type: "trojan"
+    server: "172.237.145.189"
+    port: 443
+    password: "/A3uIh_5NqMg3hFa.gDYWT.afz0UuJ6=VIM"
+    sni: "172.237.145.189"
+  - name: "CDN Trojan 03"
+    type: "trojan"
+    server: "172.238.120.124"
+    port: 443
+    password: "/r-_YbwF.j0TtHVewoFIppramjAnmSfqYzJ"
+    sni: "172.238.120.124"
+  - name: "🏳️ CL 04 | Trojan"
+    type: "trojan"
+    server: "130.94.104.210"
+    port: 443
+    password: "/lTs6OZOMoqYAkDEbK10t-tE8KMjuREBW3m"
+    sni: "www.cdn-structure.click"
+  - name: "🇨🇳 CN 07 | Trojan"
+    type: "trojan"
+    server: "130.94.68.100"
+    port: 443
+    password: "/l64tlWoGT6USQr=3WnjWedzvVSHXn8TNTE"
+    sni: "www.rolll.click"
+  - name: "🇸🇬 SG 06 | VLESS"
+    type: "vless"
+    server: "8.219.2.255"
+    port: 33284
+    uuid: "00000000-0000-4000-8000-000000000000"
+    network: "ws"
+    servername: "nn9jdg-k7yewrrk.acg.xx.kg"
 
 proxy-groups:
   - name: 🚀 节点选择
