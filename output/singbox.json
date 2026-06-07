@@ -148,20 +148,17 @@
       "type": "selector",
       "tag": "us-group",
       "outbounds": [
-        "🇺🇸 US 01 | SS"
+        "🇺🇸 US 01 | SS",
+        "🇺🇸 US 04 | Trojan"
       ]
     },
     {
       "type": "selector",
       "tag": "others-group",
       "outbounds": [
-        "🇿🇦 ZA 07 | SS",
-        "🇳🇱 NL 01 | VLESS",
-        "CDN Trojan 02",
-        "CDN Trojan 05",
-        "🏳️ 其他 03 | Trojan",
-        "CDN Trojan 06",
-        "🇵🇱 PL 04 | Trojan"
+        "🇿🇦 ZA 01 | SS",
+        "🇵🇱 PL 02 | Trojan",
+        "🇨🇳 CN 03 | Trojan"
       ]
     },
     {
@@ -185,7 +182,19 @@
       "password": "shadowsocks"
     },
     {
-      "tag": "🇿🇦 ZA 07 | SS",
+      "tag": "🇺🇸 US 04 | Trojan",
+      "type": "trojan",
+      "server": "130.94.107.171",
+      "server_port": 443,
+      "password": "/s.wRSE4ANZp4=4h.=B_9Qbetw6XUc0V1SV",
+      "tls": {
+        "enabled": true,
+        "server_name": "www.logger-guard.click",
+        "insecure": false
+      }
+    },
+    {
+      "tag": "🇿🇦 ZA 01 | SS",
       "type": "shadowsocks",
       "server": "40.123.244.72",
       "server_port": 443,
@@ -193,63 +202,7 @@
       "password": "CULuHB2PKuvK6yEN"
     },
     {
-      "tag": "🇳🇱 NL 01 | VLESS",
-      "type": "vless",
-      "server": "130.12.242.102",
-      "server_port": 7443,
-      "uuid": "6ca8ea5b-e47f-4c19-adee-365456e1e87c",
-      "flow": "xtls-rprx-vision"
-    },
-    {
-      "tag": "CDN Trojan 02",
-      "type": "trojan",
-      "server": "www.calmloud.com",
-      "server_port": 443,
-      "password": "/humanity",
-      "tls": {
-        "enabled": true,
-        "server_name": "www.calmloud.com",
-        "insecure": true
-      }
-    },
-    {
-      "tag": "CDN Trojan 05",
-      "type": "trojan",
-      "server": "172.235.63.252",
-      "server_port": 443,
-      "password": "/bX_lNHWoW6ywq82mI=KUr+8i__VSp0Hs_E",
-      "tls": {
-        "enabled": true,
-        "server_name": "172.235.63.252",
-        "insecure": false
-      }
-    },
-    {
-      "tag": "🏳️ 其他 03 | Trojan",
-      "type": "trojan",
-      "server": "us-3.tr202605.com",
-      "server_port": 443,
-      "password": "/Tn9ytcFXsOnbUsJYKJ",
-      "tls": {
-        "enabled": true,
-        "server_name": "us-3.tr202605.com",
-        "insecure": false
-      }
-    },
-    {
-      "tag": "CDN Trojan 06",
-      "type": "trojan",
-      "server": "172.236.220.10",
-      "server_port": 443,
-      "password": "/s_WEN9lMmufG+qDIsn-4C7JOVAnDdbS3Ui",
-      "tls": {
-        "enabled": true,
-        "server_name": "172.236.220.10",
-        "insecure": false
-      }
-    },
-    {
-      "tag": "🇵🇱 PL 04 | Trojan",
+      "tag": "🇵🇱 PL 02 | Trojan",
       "type": "trojan",
       "server": "64.176.65.85",
       "server_port": 443,
@@ -257,6 +210,18 @@
       "tls": {
         "enabled": true,
         "server_name": "64.176.65.85",
+        "insecure": false
+      }
+    },
+    {
+      "tag": "🇨🇳 CN 03 | Trojan",
+      "type": "trojan",
+      "server": "130.94.92.144",
+      "server_port": 443,
+      "password": "/oUAfbL8z87q-mhgjZ6g7mWQobf9=b7ut_F",
+      "tls": {
+        "enabled": true,
+        "server_name": "www.node-finder.click",
         "insecure": false
       }
     }
