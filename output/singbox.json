@@ -148,7 +148,6 @@
       "type": "selector",
       "tag": "us-group",
       "outbounds": [
-        "🇺🇸 US 01 | Trojan",
         "🇺🇸 US 01 | SS"
       ]
     },
@@ -156,12 +155,13 @@
       "type": "selector",
       "tag": "others-group",
       "outbounds": [
-        "CDN Trojan 07",
-        "🇵🇱 PL 05 | Trojan",
+        "🇿🇦 ZA 07 | SS",
+        "🇳🇱 NL 01 | VLESS",
+        "CDN Trojan 02",
+        "CDN Trojan 05",
+        "🏳️ 其他 03 | Trojan",
         "CDN Trojan 06",
-        "ISP Shadowsocks 02",
-        "🇳🇱 NL 04 | VLESS",
-        "CDN VLESS 03"
+        "🇵🇱 PL 04 | Trojan"
       ]
     },
     {
@@ -177,18 +177,6 @@
       "tag": "dns-out"
     },
     {
-      "tag": "🇺🇸 US 01 | Trojan",
-      "type": "trojan",
-      "server": "45.79.8.17",
-      "server_port": 443,
-      "password": "/rXyShM8Jni+5Sbq3k4gkyr5Lq0zOMRL2Uf",
-      "tls": {
-        "enabled": true,
-        "server_name": "45.79.8.17",
-        "insecure": false
-      }
-    },
-    {
       "tag": "🇺🇸 US 01 | SS",
       "type": "shadowsocks",
       "server": "37.19.198.236",
@@ -197,26 +185,54 @@
       "password": "shadowsocks"
     },
     {
-      "tag": "CDN Trojan 07",
-      "type": "trojan",
-      "server": "172.238.120.124",
+      "tag": "🇿🇦 ZA 07 | SS",
+      "type": "shadowsocks",
+      "server": "40.123.244.72",
       "server_port": 443,
-      "password": "/r-_YbwF.j0TtHVewoFIppramjAnmSfqYzJ",
+      "method": "chacha20-ietf-poly1305",
+      "password": "CULuHB2PKuvK6yEN"
+    },
+    {
+      "tag": "🇳🇱 NL 01 | VLESS",
+      "type": "vless",
+      "server": "130.12.242.102",
+      "server_port": 7443,
+      "uuid": "6ca8ea5b-e47f-4c19-adee-365456e1e87c",
+      "flow": "xtls-rprx-vision"
+    },
+    {
+      "tag": "CDN Trojan 02",
+      "type": "trojan",
+      "server": "www.calmloud.com",
+      "server_port": 443,
+      "password": "/humanity",
       "tls": {
         "enabled": true,
-        "server_name": "172.238.120.124",
+        "server_name": "www.calmloud.com",
+        "insecure": true
+      }
+    },
+    {
+      "tag": "CDN Trojan 05",
+      "type": "trojan",
+      "server": "172.235.63.252",
+      "server_port": 443,
+      "password": "/bX_lNHWoW6ywq82mI=KUr+8i__VSp0Hs_E",
+      "tls": {
+        "enabled": true,
+        "server_name": "172.235.63.252",
         "insecure": false
       }
     },
     {
-      "tag": "🇵🇱 PL 05 | Trojan",
+      "tag": "🏳️ 其他 03 | Trojan",
       "type": "trojan",
-      "server": "64.176.65.85",
+      "server": "us-3.tr202605.com",
       "server_port": 443,
-      "password": "/iGccGWTMHtoXtBhGYK4mogg7iIUhGbcvCf",
+      "password": "/Tn9ytcFXsOnbUsJYKJ",
       "tls": {
         "enabled": true,
-        "server_name": "64.176.65.85",
+        "server_name": "us-3.tr202605.com",
         "insecure": false
       }
     },
@@ -233,37 +249,14 @@
       }
     },
     {
-      "tag": "ISP Shadowsocks 02",
-      "type": "shadowsocks",
-      "server": "r3mrcg001269pz2.cybervena.com",
-      "server_port": 50099,
-      "method": "chacha20-ietf-poly1305",
-      "password": "7e731ec3-f8e1-43f6-92cf-3978d14705c47"
-    },
-    {
-      "tag": "🇳🇱 NL 04 | VLESS",
-      "type": "vless",
-      "server": "130.12.242.102",
-      "server_port": 7443,
-      "uuid": "6ca8ea5b-e47f-4c19-adee-365456e1e87c",
-      "flow": "xtls-rprx-vision"
-    },
-    {
-      "tag": "CDN VLESS 03",
-      "type": "vless",
-      "server": "adf.ly",
+      "tag": "🇵🇱 PL 04 | Trojan",
+      "type": "trojan",
+      "server": "64.176.65.85",
       "server_port": 443,
-      "uuid": "1679af35-6dd6-4c09-ae3b-18f239217f3e",
-      "transport": {
-        "type": "ws",
-        "path": "/?ed=2560",
-        "headers": {
-          "Host": "rayan-007.parvin.dpdns.org"
-        }
-      },
+      "password": "/iGccGWTMHtoXtBhGYK4mogg7iIUhGbcvCf",
       "tls": {
         "enabled": true,
-        "server_name": "rAyAn-007.pArViN.DpDnS.OrG",
+        "server_name": "64.176.65.85",
         "insecure": false
       }
     }

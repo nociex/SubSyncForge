@@ -14,43 +14,19 @@ geox-url:
   mmdb: "https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/country.mmdb"
 
 proxies:
-  - name: "🇺🇸 US 01 | Trojan"
-    type: "trojan"
-    server: "45.79.8.17"
-    port: 443
-    password: "/rXyShM8Jni+5Sbq3k4gkyr5Lq0zOMRL2Uf"
-    sni: "45.79.8.17"
   - name: "🇺🇸 US 01 | SS"
     type: "ss"
     server: "37.19.198.236"
     port: 443
     cipher: "aes-128-gcm"
     password: "shadowsocks"
-  - name: "CDN Trojan 07"
-    type: "trojan"
-    server: "172.238.120.124"
-    port: 443
-    password: "/r-_YbwF.j0TtHVewoFIppramjAnmSfqYzJ"
-    sni: "172.238.120.124"
-  - name: "🇵🇱 PL 05 | Trojan"
-    type: "trojan"
-    server: "64.176.65.85"
-    port: 443
-    password: "/iGccGWTMHtoXtBhGYK4mogg7iIUhGbcvCf"
-    sni: "64.176.65.85"
-  - name: "CDN Trojan 06"
-    type: "trojan"
-    server: "172.236.220.10"
-    port: 443
-    password: "/s_WEN9lMmufG+qDIsn-4C7JOVAnDdbS3Ui"
-    sni: "172.236.220.10"
-  - name: "ISP Shadowsocks 02"
+  - name: "🇿🇦 ZA 07 | SS"
     type: "ss"
-    server: "r3mrcg001269pz2.cybervena.com"
-    port: 50099
+    server: "40.123.244.72"
+    port: 443
     cipher: "chacha20-ietf-poly1305"
-    password: "7e731ec3-f8e1-43f6-92cf-3978d14705c47"
-  - name: "🇳🇱 NL 04 | VLESS"
+    password: "CULuHB2PKuvK6yEN"
+  - name: "🇳🇱 NL 01 | VLESS"
     type: "vless"
     server: "130.12.242.102"
     port: 7443
@@ -58,13 +34,37 @@ proxies:
     flow: "xtls-rprx-vision"
     network: "tcp"
     servername: "www.microsoft.com"
-  - name: "CDN VLESS 03"
-    type: "vless"
-    server: "adf.ly"
+  - name: "CDN Trojan 02"
+    type: "trojan"
+    server: "www.calmloud.com"
     port: 443
-    uuid: "1679af35-6dd6-4c09-ae3b-18f239217f3e"
-    network: "ws"
-    servername: "rAyAn-007.pArViN.DpDnS.OrG"
+    password: "/humanity"
+    sni: "www.calmloud.com"
+    skip-cert-verify: true
+  - name: "CDN Trojan 05"
+    type: "trojan"
+    server: "172.235.63.252"
+    port: 443
+    password: "/bX_lNHWoW6ywq82mI=KUr+8i__VSp0Hs_E"
+    sni: "172.235.63.252"
+  - name: "🏳️ 其他 03 | Trojan"
+    type: "trojan"
+    server: "us-3.tr202605.com"
+    port: 443
+    password: "/Tn9ytcFXsOnbUsJYKJ"
+    sni: "us-3.tr202605.com"
+  - name: "CDN Trojan 06"
+    type: "trojan"
+    server: "172.236.220.10"
+    port: 443
+    password: "/s_WEN9lMmufG+qDIsn-4C7JOVAnDdbS3Ui"
+    sni: "172.236.220.10"
+  - name: "🇵🇱 PL 04 | Trojan"
+    type: "trojan"
+    server: "64.176.65.85"
+    port: 443
+    password: "/iGccGWTMHtoXtBhGYK4mogg7iIUhGbcvCf"
+    sni: "64.176.65.85"
 
 proxy-groups:
   - name: 🚀 节点选择
