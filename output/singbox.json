@@ -148,17 +148,14 @@
       "type": "selector",
       "tag": "us-group",
       "outbounds": [
-        "🇺🇸 US 01 | SS",
-        "🇺🇸 US 04 | Trojan"
+        "🇺🇸 US 01 | SS"
       ]
     },
     {
       "type": "selector",
       "tag": "others-group",
       "outbounds": [
-        "🇿🇦 ZA 01 | SS",
-        "🇵🇱 PL 02 | Trojan",
-        "🇨🇳 CN 03 | Trojan"
+        "DIRECT"
       ]
     },
     {
@@ -180,50 +177,6 @@
       "server_port": 443,
       "method": "aes-128-gcm",
       "password": "shadowsocks"
-    },
-    {
-      "tag": "🇺🇸 US 04 | Trojan",
-      "type": "trojan",
-      "server": "130.94.107.171",
-      "server_port": 443,
-      "password": "/s.wRSE4ANZp4=4h.=B_9Qbetw6XUc0V1SV",
-      "tls": {
-        "enabled": true,
-        "server_name": "www.logger-guard.click",
-        "insecure": false
-      }
-    },
-    {
-      "tag": "🇿🇦 ZA 01 | SS",
-      "type": "shadowsocks",
-      "server": "40.123.244.72",
-      "server_port": 443,
-      "method": "chacha20-ietf-poly1305",
-      "password": "CULuHB2PKuvK6yEN"
-    },
-    {
-      "tag": "🇵🇱 PL 02 | Trojan",
-      "type": "trojan",
-      "server": "64.176.65.85",
-      "server_port": 443,
-      "password": "/iGccGWTMHtoXtBhGYK4mogg7iIUhGbcvCf",
-      "tls": {
-        "enabled": true,
-        "server_name": "64.176.65.85",
-        "insecure": false
-      }
-    },
-    {
-      "tag": "🇨🇳 CN 03 | Trojan",
-      "type": "trojan",
-      "server": "130.94.92.144",
-      "server_port": 443,
-      "password": "/oUAfbL8z87q-mhgjZ6g7mWQobf9=b7ut_F",
-      "tls": {
-        "enabled": true,
-        "server_name": "www.node-finder.click",
-        "insecure": false
-      }
     }
   ],
   "route": {

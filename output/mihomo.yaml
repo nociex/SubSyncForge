@@ -20,30 +20,6 @@ proxies:
     port: 443
     cipher: "aes-128-gcm"
     password: "shadowsocks"
-  - name: "🇺🇸 US 04 | Trojan"
-    type: "trojan"
-    server: "130.94.107.171"
-    port: 443
-    password: "/s.wRSE4ANZp4=4h.=B_9Qbetw6XUc0V1SV"
-    sni: "www.logger-guard.click"
-  - name: "🇿🇦 ZA 01 | SS"
-    type: "ss"
-    server: "40.123.244.72"
-    port: 443
-    cipher: "chacha20-ietf-poly1305"
-    password: "CULuHB2PKuvK6yEN"
-  - name: "🇵🇱 PL 02 | Trojan"
-    type: "trojan"
-    server: "64.176.65.85"
-    port: 443
-    password: "/iGccGWTMHtoXtBhGYK4mogg7iIUhGbcvCf"
-    sni: "64.176.65.85"
-  - name: "🇨🇳 CN 03 | Trojan"
-    type: "trojan"
-    server: "130.94.92.144"
-    port: 443
-    password: "/oUAfbL8z87q-mhgjZ6g7mWQobf9=b7ut_F"
-    sni: "www.node-finder.click"
 
 proxy-groups:
   - name: 🚀 节点选择
