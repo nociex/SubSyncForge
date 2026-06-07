@@ -148,6 +148,7 @@
       "type": "selector",
       "tag": "us-group",
       "outbounds": [
+        "🇺🇸 US 01 | Trojan",
         "🇺🇸 US 01 | SS"
       ]
     },
@@ -155,12 +156,12 @@
       "type": "selector",
       "tag": "others-group",
       "outbounds": [
-        "CDN VLESS 02",
-        "CDN VLESS 06",
-        "CDN Trojan 01",
-        "CDN Trojan 03",
-        "CDN Trojan 04",
-        "🇨🇳 CN 05 | Trojan"
+        "CDN Trojan 07",
+        "🇵🇱 PL 05 | Trojan",
+        "CDN Trojan 06",
+        "ISP Shadowsocks 02",
+        "🇳🇱 NL 04 | VLESS",
+        "CDN VLESS 03"
       ]
     },
     {
@@ -176,57 +177,27 @@
       "tag": "dns-out"
     },
     {
-      "tag": "CDN VLESS 02",
-      "type": "vless",
-      "server": "104.18.155.229",
-      "server_port": 443,
-      "uuid": "42026ed0-7d74-4585-8e46-0fe6aa4d665a",
-      "transport": {
-        "type": "ws",
-        "path": "/au-do",
-        "headers": {
-          "Host": "www.genflix.co.id.r3xxe.eu.cc"
-        }
-      },
-      "tls": {
-        "enabled": true,
-        "server_name": "www.genflix.co.id.r3xxe.eu.cc",
-        "insecure": false
-      }
-    },
-    {
-      "tag": "CDN VLESS 06",
-      "type": "vless",
-      "server": "151.101.108.223",
-      "server_port": 443,
-      "uuid": "3f88bde3-effd-4a49-bfa2-19fa4d0e1cc5",
-      "transport": {
-        "type": "ws",
-        "path": "/",
-        "headers": {
-          "Host": "fancii.global.ssl.fastly.net"
-        }
-      },
-      "tls": {
-        "enabled": true,
-        "server_name": "default.ssl.fastly.net",
-        "insecure": false
-      }
-    },
-    {
-      "tag": "CDN Trojan 01",
+      "tag": "🇺🇸 US 01 | Trojan",
       "type": "trojan",
-      "server": "104.16.7.70",
+      "server": "45.79.8.17",
       "server_port": 443,
-      "password": "/humanity",
+      "password": "/rXyShM8Jni+5Sbq3k4gkyr5Lq0zOMRL2Uf",
       "tls": {
         "enabled": true,
-        "server_name": "www.ignitelimit.com",
+        "server_name": "45.79.8.17",
         "insecure": false
       }
     },
     {
-      "tag": "CDN Trojan 03",
+      "tag": "🇺🇸 US 01 | SS",
+      "type": "shadowsocks",
+      "server": "37.19.198.236",
+      "server_port": 443,
+      "method": "aes-128-gcm",
+      "password": "shadowsocks"
+    },
+    {
+      "tag": "CDN Trojan 07",
       "type": "trojan",
       "server": "172.238.120.124",
       "server_port": 443,
@@ -238,36 +209,63 @@
       }
     },
     {
-      "tag": "CDN Trojan 04",
+      "tag": "🇵🇱 PL 05 | Trojan",
       "type": "trojan",
-      "server": "172.237.145.189",
+      "server": "64.176.65.85",
       "server_port": 443,
-      "password": "/A3uIh_5NqMg3hFa.gDYWT.afz0UuJ6=VIM",
+      "password": "/iGccGWTMHtoXtBhGYK4mogg7iIUhGbcvCf",
       "tls": {
         "enabled": true,
-        "server_name": "172.237.145.189",
+        "server_name": "64.176.65.85",
         "insecure": false
       }
     },
     {
-      "tag": "🇨🇳 CN 05 | Trojan",
+      "tag": "CDN Trojan 06",
       "type": "trojan",
-      "server": "130.94.68.100",
+      "server": "172.236.220.10",
       "server_port": 443,
-      "password": "/l64tlWoGT6USQr=3WnjWedzvVSHXn8TNTE",
+      "password": "/s_WEN9lMmufG+qDIsn-4C7JOVAnDdbS3Ui",
       "tls": {
         "enabled": true,
-        "server_name": "www.rolll.click",
+        "server_name": "172.236.220.10",
         "insecure": false
       }
     },
     {
-      "tag": "🇺🇸 US 01 | SS",
+      "tag": "ISP Shadowsocks 02",
       "type": "shadowsocks",
-      "server": "37.19.198.236",
+      "server": "r3mrcg001269pz2.cybervena.com",
+      "server_port": 50099,
+      "method": "chacha20-ietf-poly1305",
+      "password": "7e731ec3-f8e1-43f6-92cf-3978d14705c47"
+    },
+    {
+      "tag": "🇳🇱 NL 04 | VLESS",
+      "type": "vless",
+      "server": "130.12.242.102",
+      "server_port": 7443,
+      "uuid": "6ca8ea5b-e47f-4c19-adee-365456e1e87c",
+      "flow": "xtls-rprx-vision"
+    },
+    {
+      "tag": "CDN VLESS 03",
+      "type": "vless",
+      "server": "adf.ly",
       "server_port": 443,
-      "method": "aes-128-gcm",
-      "password": "shadowsocks"
+      "uuid": "1679af35-6dd6-4c09-ae3b-18f239217f3e",
+      "transport": {
+        "type": "ws",
+        "path": "/?ed=2560",
+        "headers": {
+          "Host": "rayan-007.parvin.dpdns.org"
+        }
+      },
+      "tls": {
+        "enabled": true,
+        "server_name": "rAyAn-007.pArViN.DpDnS.OrG",
+        "insecure": false
+      }
     }
   ],
   "route": {
