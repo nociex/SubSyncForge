@@ -155,7 +155,10 @@
       "type": "selector",
       "tag": "others-group",
       "outbounds": [
-        "DIRECT"
+        "CDN Trojan 01",
+        "🇳🇱 NL 02 | SS",
+        "🇷🇺 RU 04 | VLESS",
+        "CDN VLESS 03"
       ]
     },
     {
@@ -171,12 +174,59 @@
       "tag": "dns-out"
     },
     {
+      "tag": "CDN Trojan 01",
+      "type": "trojan",
+      "server": "151.101.108.223",
+      "server_port": 443,
+      "password": "/dbyec1mkz198dzk9",
+      "tls": {
+        "enabled": true,
+        "server_name": "default.ssl.fastly.net",
+        "insecure": true
+      }
+    },
+    {
       "tag": "🇺🇸 US 01 | SS",
       "type": "shadowsocks",
       "server": "37.19.198.236",
       "server_port": 443,
       "method": "aes-128-gcm",
       "password": "shadowsocks"
+    },
+    {
+      "tag": "🇳🇱 NL 02 | SS",
+      "type": "shadowsocks",
+      "server": "130.49.161.18",
+      "server_port": 28474,
+      "method": "chacha20-ietf-poly1305",
+      "password": "_TusuE5i0EzyvWsQuTiKMMr_j_sduu2E\r��"
+    },
+    {
+      "tag": "🇷🇺 RU 04 | VLESS",
+      "type": "vless",
+      "server": "51.250.19.156",
+      "server_port": 443,
+      "uuid": "59341a57-7f08-4776-9f94-e4aab1461432",
+      "flow": "xtls-rprx-vision"
+    },
+    {
+      "tag": "CDN VLESS 03",
+      "type": "vless",
+      "server": "fans.liverpool.qzz.io",
+      "server_port": 2053,
+      "uuid": "2b8738de-1af5-4267-b101-c05707769ed4",
+      "transport": {
+        "type": "ws",
+        "path": "/eyJqdW5rIjoiZXlpMnFWRURmWkp5ZCIsInByb3RvY29sIjoidmwiLCJtb2RlIjoicHJveHlpcCIsInBhbmVsSVBzIjpbXX0=?ed=2560",
+        "headers": {
+          "Host": "fans.liverpool.qzz.io"
+        }
+      },
+      "tls": {
+        "enabled": true,
+        "server_name": "FaNs.livErpoOl.qZZ.io",
+        "insecure": false
+      }
     }
   ],
   "route": {
