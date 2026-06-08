@@ -14,40 +14,12 @@ geox-url:
   mmdb: "https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/country.mmdb"
 
 proxies:
-  - name: "CDN Trojan 01"
-    type: "trojan"
-    server: "151.101.108.223"
-    port: 443
-    password: "/dbyec1mkz198dzk9"
-    sni: "default.ssl.fastly.net"
-    skip-cert-verify: true
   - name: "🇺🇸 US 01 | SS"
     type: "ss"
     server: "37.19.198.236"
     port: 443
     cipher: "aes-128-gcm"
     password: "shadowsocks"
-  - name: "🇳🇱 NL 02 | SS"
-    type: "ss"
-    server: "130.49.161.18"
-    port: 28474
-    cipher: "chacha20-ietf-poly1305"
-    password: "_TusuE5i0EzyvWsQuTiKMMr_j_sduu2E"
-  - name: "🇷🇺 RU 04 | VLESS"
-    type: "vless"
-    server: "51.250.19.156"
-    port: 443
-    uuid: "59341a57-7f08-4776-9f94-e4aab1461432"
-    flow: "xtls-rprx-vision"
-    network: "tcp"
-    servername: "ads.x5.ru"
-  - name: "CDN VLESS 03"
-    type: "vless"
-    server: "fans.liverpool.qzz.io"
-    port: 2053
-    uuid: "2b8738de-1af5-4267-b101-c05707769ed4"
-    network: "ws"
-    servername: "FaNs.livErpoOl.qZZ.io"
 
 proxy-groups:
   - name: 🚀 节点选择
