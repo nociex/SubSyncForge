@@ -14,12 +14,38 @@ geox-url:
   mmdb: "https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/country.mmdb"
 
 proxies:
+  - name: "CDN VLESS 02"
+    type: "vless"
+    server: "172.66.47.45"
+    port: 443
+    uuid: "fc965ad9-bdd7-4815-ad71-b39ec5972dc1"
+    network: "ws"
+    servername: "octopusss4.com"
+  - name: "CDN Trojan 03"
+    type: "trojan"
+    server: "104.20.6.134"
+    port: 443
+    password: "/humanity"
+    sni: "www.calmloud.com"
+  - name: "CDN Trojan 01"
+    type: "trojan"
+    server: "www.multiplydose.com"
+    port: 443
+    password: "/humanity"
+    sni: "www.multiplydose.com"
+    skip-cert-verify: true
   - name: "🇺🇸 US 01 | SS"
     type: "ss"
     server: "37.19.198.236"
     port: 443
     cipher: "aes-128-gcm"
     password: "shadowsocks"
+  - name: "🇺🇸 US 04 | Trojan"
+    type: "trojan"
+    server: "45.79.8.17"
+    port: 443
+    password: "/rXyShM8Jni+5Sbq3k4gkyr5Lq0zOMRL2Uf"
+    sni: "45.79.8.17"
 
 proxy-groups:
   - name: 🚀 节点选择

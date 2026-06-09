@@ -148,14 +148,17 @@
       "type": "selector",
       "tag": "us-group",
       "outbounds": [
-        "🇺🇸 US 01 | SS"
+        "🇺🇸 US 01 | SS",
+        "🇺🇸 US 04 | Trojan"
       ]
     },
     {
       "type": "selector",
       "tag": "others-group",
       "outbounds": [
-        "DIRECT"
+        "CDN VLESS 02",
+        "CDN Trojan 03",
+        "CDN Trojan 01"
       ]
     },
     {
@@ -171,12 +174,67 @@
       "tag": "dns-out"
     },
     {
+      "tag": "CDN VLESS 02",
+      "type": "vless",
+      "server": "172.66.47.45",
+      "server_port": 443,
+      "uuid": "fc965ad9-bdd7-4815-ad71-b39ec5972dc1",
+      "transport": {
+        "type": "ws",
+        "path": "/tsghdws",
+        "headers": {
+          "Host": "octopusss4.com"
+        }
+      },
+      "tls": {
+        "enabled": true,
+        "server_name": "octopusss4.com",
+        "insecure": false
+      }
+    },
+    {
+      "tag": "CDN Trojan 03",
+      "type": "trojan",
+      "server": "104.20.6.134",
+      "server_port": 443,
+      "password": "/humanity",
+      "tls": {
+        "enabled": true,
+        "server_name": "www.calmloud.com",
+        "insecure": false
+      }
+    },
+    {
+      "tag": "CDN Trojan 01",
+      "type": "trojan",
+      "server": "www.multiplydose.com",
+      "server_port": 443,
+      "password": "/humanity",
+      "tls": {
+        "enabled": true,
+        "server_name": "www.multiplydose.com",
+        "insecure": true
+      }
+    },
+    {
       "tag": "🇺🇸 US 01 | SS",
       "type": "shadowsocks",
       "server": "37.19.198.236",
       "server_port": 443,
       "method": "aes-128-gcm",
       "password": "shadowsocks"
+    },
+    {
+      "tag": "🇺🇸 US 04 | Trojan",
+      "type": "trojan",
+      "server": "45.79.8.17",
+      "server_port": 443,
+      "password": "/rXyShM8Jni+5Sbq3k4gkyr5Lq0zOMRL2Uf",
+      "tls": {
+        "enabled": true,
+        "server_name": "45.79.8.17",
+        "insecure": false
+      }
     }
   ],
   "route": {
