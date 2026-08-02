@@ -155,7 +155,7 @@
       "type": "selector",
       "tag": "others-group",
       "outbounds": [
-        "DIRECT"
+        "🇪🇸 ES 02 | SS"
       ]
     },
     {
@@ -177,6 +177,14 @@
       "server_port": 443,
       "method": "aes-128-gcm",
       "password": "shadowsocks"
+    },
+    {
+      "tag": "🇪🇸 ES 02 | SS",
+      "type": "shadowsocks",
+      "server": "5.188.181.201",
+      "server_port": 9014,
+      "method": "aes-256-cfb",
+      "password": "KnJGad3FqTvjqbaX"
     }
   ],
   "route": {
