@@ -148,6 +148,9 @@
       "type": "selector",
       "tag": "us-group",
       "outbounds": [
+        "🇺🇸 US 05 | VMess",
+        "🇺🇸 US 25 | VMess",
+        "🇺🇸 US 22 | VMess",
         "🇺🇸 US 01 | SS"
       ]
     },
@@ -155,7 +158,22 @@
       "type": "selector",
       "tag": "others-group",
       "outbounds": [
-        "DIRECT"
+        "🏳️ GB 24 | VMess",
+        "🇨🇦 CA 21 | VMess",
+        "🇨🇦 CA 07 | VMess",
+        "🇨🇦 CA 08 | VMess",
+        "🇨🇦 CA 11 | VMess",
+        "🇨🇦 CA 09 | VMess",
+        "🇨🇦 CA 12 | VMess",
+        "🇨🇦 CA 14 | VMess",
+        "🇵🇱 PL 06 | VMess",
+        "🇪🇸 ES 13 | SS",
+        "🏳️ 其他 02 | VMess",
+        "🏳️ 其他 04 | VMess",
+        "🏳️ 其他 29 | VMess",
+        "🇷🇺 RU 20 | VMess",
+        "🇩🇪 DE 15 | VMess",
+        "🏳️ 其他 03 | Trojan"
       ]
     },
     {
@@ -171,12 +189,330 @@
       "tag": "dns-out"
     },
     {
+      "tag": "🏳️ GB 24 | VMess",
+      "type": "vmess",
+      "server": "25.25.25.0",
+      "server_port": 8880,
+      "uuid": "8e997404-cb62-4fa1-a8c9-c77a32f10153",
+      "security": "auto",
+      "alter_id": 0,
+      "transport": {
+        "type": "ws",
+        "path": "/",
+        "headers": {}
+      }
+    },
+    {
+      "tag": "🇺🇸 US 05 | VMess",
+      "type": "vmess",
+      "server": "108.162.198.24",
+      "server_port": 2096,
+      "uuid": "55d9ec38-1b8a-454b-981a-6acfe8f56d8c",
+      "security": "auto",
+      "alter_id": 0,
+      "transport": {
+        "type": "ws",
+        "path": "/",
+        "headers": {}
+      },
+      "tls": {
+        "enabled": true,
+        "server_name": "sni.meibidi.pp.ua",
+        "insecure": false
+      }
+    },
+    {
+      "tag": "🇺🇸 US 25 | VMess",
+      "type": "vmess",
+      "server": "162.159.45.232",
+      "server_port": 443,
+      "uuid": "3e2e3c21-3fc8-468f-9ab5-e782bdf5bf97",
+      "security": "auto",
+      "alter_id": 0,
+      "transport": {
+        "type": "ws",
+        "path": "/",
+        "headers": {}
+      },
+      "tls": {
+        "enabled": true,
+        "server_name": "l.ayovo.netlib.re",
+        "insecure": false
+      }
+    },
+    {
+      "tag": "🇺🇸 US 22 | VMess",
+      "type": "vmess",
+      "server": "162.159.44.142",
+      "server_port": 443,
+      "uuid": "3e2e3c21-3fc8-468f-9ab5-e782bdf5bf97",
+      "security": "auto",
+      "alter_id": 0,
+      "transport": {
+        "type": "ws",
+        "path": "/",
+        "headers": {}
+      },
+      "tls": {
+        "enabled": true,
+        "server_name": "l.ayovo.netlib.re",
+        "insecure": false
+      }
+    },
+    {
       "tag": "🇺🇸 US 01 | SS",
       "type": "shadowsocks",
       "server": "37.19.198.236",
       "server_port": 443,
       "method": "aes-128-gcm",
       "password": "shadowsocks"
+    },
+    {
+      "tag": "🇨🇦 CA 21 | VMess",
+      "type": "vmess",
+      "server": "104.21.224.5",
+      "server_port": 443,
+      "uuid": "3e2e3c21-3fc8-468f-9ab5-e782bdf5bf97",
+      "security": "auto",
+      "alter_id": 0,
+      "transport": {
+        "type": "ws",
+        "path": "/",
+        "headers": {}
+      },
+      "tls": {
+        "enabled": true,
+        "server_name": "l.ayovo.netlib.re",
+        "insecure": false
+      }
+    },
+    {
+      "tag": "🇨🇦 CA 07 | VMess",
+      "type": "vmess",
+      "server": "172.64.229.220",
+      "server_port": 2096,
+      "uuid": "55d9ec38-1b8a-454b-981a-6acfe8f56d8c",
+      "security": "auto",
+      "alter_id": 0,
+      "transport": {
+        "type": "ws",
+        "path": "/",
+        "headers": {}
+      },
+      "tls": {
+        "enabled": true,
+        "server_name": "sni.meibidi.pp.ua",
+        "insecure": false
+      }
+    },
+    {
+      "tag": "🇨🇦 CA 08 | VMess",
+      "type": "vmess",
+      "server": "104.18.185.26",
+      "server_port": 443,
+      "uuid": "3e2e3c21-3fc8-468f-9ab5-e782bdf5bf97",
+      "security": "auto",
+      "alter_id": 0,
+      "transport": {
+        "type": "ws",
+        "path": "/",
+        "headers": {}
+      },
+      "tls": {
+        "enabled": true,
+        "server_name": "l.ayovo.netlib.re",
+        "insecure": false
+      }
+    },
+    {
+      "tag": "🇨🇦 CA 11 | VMess",
+      "type": "vmess",
+      "server": "104.17.102.95",
+      "server_port": 2096,
+      "uuid": "55d9ec38-1b8a-454b-981a-6acfe8f56d8c",
+      "security": "auto",
+      "alter_id": 0,
+      "transport": {
+        "type": "ws",
+        "path": "/",
+        "headers": {}
+      },
+      "tls": {
+        "enabled": true,
+        "server_name": "sni.meibidi.pp.ua",
+        "insecure": false
+      }
+    },
+    {
+      "tag": "🇨🇦 CA 09 | VMess",
+      "type": "vmess",
+      "server": "162.159.16.63",
+      "server_port": 443,
+      "uuid": "3e2e3c21-3fc8-468f-9ab5-e782bdf5bf97",
+      "security": "auto",
+      "alter_id": 0,
+      "transport": {
+        "type": "ws",
+        "path": "/",
+        "headers": {}
+      },
+      "tls": {
+        "enabled": true,
+        "server_name": "l.ayovo.netlib.re",
+        "insecure": false
+      }
+    },
+    {
+      "tag": "🇨🇦 CA 12 | VMess",
+      "type": "vmess",
+      "server": "104.18.45.223",
+      "server_port": 443,
+      "uuid": "55d9ec38-1b8a-454b-981a-6acfe8f56d8c",
+      "security": "auto",
+      "alter_id": 0,
+      "transport": {
+        "type": "ws",
+        "path": "/",
+        "headers": {}
+      },
+      "tls": {
+        "enabled": true,
+        "server_name": "sni.meibidi.pp.ua",
+        "insecure": false
+      }
+    },
+    {
+      "tag": "🇨🇦 CA 14 | VMess",
+      "type": "vmess",
+      "server": "104.19.150.163",
+      "server_port": 8443,
+      "uuid": "55d9ec38-1b8a-454b-981a-6acfe8f56d8c",
+      "security": "auto",
+      "alter_id": 0,
+      "transport": {
+        "type": "ws",
+        "path": "/",
+        "headers": {}
+      },
+      "tls": {
+        "enabled": true,
+        "server_name": "sni.meibidi.pp.ua",
+        "insecure": false
+      }
+    },
+    {
+      "tag": "🇵🇱 PL 06 | VMess",
+      "type": "vmess",
+      "server": "144.31.1.127",
+      "server_port": 443,
+      "uuid": "02fb468f-21f2-460e-bfa1-ef52ae5e627f",
+      "security": "auto",
+      "alter_id": 0,
+      "tls": {
+        "enabled": true,
+        "server_name": "plcdn13.suio.me",
+        "insecure": false
+      }
+    },
+    {
+      "tag": "🇪🇸 ES 13 | SS",
+      "type": "shadowsocks",
+      "server": "5.188.181.201",
+      "server_port": 9014,
+      "method": "aes-256-cfb",
+      "password": "KnJGad3FqTvjqbaX"
+    },
+    {
+      "tag": "🏳️ 其他 02 | VMess",
+      "type": "vmess",
+      "server": "cf-cname.xingpingcn.top",
+      "server_port": 2096,
+      "uuid": "55d9ec38-1b8a-454b-981a-6acfe8f56d8c",
+      "security": "auto",
+      "alter_id": 0,
+      "transport": {
+        "type": "ws",
+        "path": "/",
+        "headers": {}
+      },
+      "tls": {
+        "enabled": true,
+        "server_name": "sni.meibidi.pp.ua",
+        "insecure": false
+      }
+    },
+    {
+      "tag": "🏳️ 其他 04 | VMess",
+      "type": "vmess",
+      "server": "vip3.kaixincloud.top",
+      "server_port": 2096,
+      "uuid": "55d9ec38-1b8a-454b-981a-6acfe8f56d8c",
+      "security": "auto",
+      "alter_id": 0,
+      "transport": {
+        "type": "ws",
+        "path": "/",
+        "headers": {}
+      },
+      "tls": {
+        "enabled": true,
+        "server_name": "sni.meibidi.pp.ua",
+        "insecure": false
+      }
+    },
+    {
+      "tag": "🏳️ 其他 29 | VMess",
+      "type": "vmess",
+      "server": "clean.photoggenic.ir",
+      "server_port": 8880,
+      "uuid": "8e997404-cb62-4fa1-a8c9-c77a32f10153",
+      "security": "auto",
+      "alter_id": 0,
+      "transport": {
+        "type": "ws",
+        "path": "/",
+        "headers": {}
+      }
+    },
+    {
+      "tag": "🇷🇺 RU 20 | VMess",
+      "type": "vmess",
+      "server": "51.250.42.73",
+      "server_port": 8443,
+      "uuid": "71031aa1-067e-425e-97f5-37875f838a10",
+      "security": "auto",
+      "alter_id": 0,
+      "tls": {
+        "enabled": true,
+        "server_name": "api-maps.yandex.ru",
+        "insecure": false
+      }
+    },
+    {
+      "tag": "🇩🇪 DE 15 | VMess",
+      "type": "vmess",
+      "server": "146.75.119.82",
+      "server_port": 80,
+      "uuid": "74542945-0d84-4797-a56e-e7f31b84c5be",
+      "security": "auto",
+      "alter_id": 0,
+      "transport": {
+        "type": "ws",
+        "path": "/",
+        "headers": {}
+      }
+    },
+    {
+      "tag": "🏳️ 其他 03 | Trojan",
+      "type": "trojan",
+      "server": "kfjdi.pages.dev",
+      "server_port": 443,
+      "password": "er668",
+      "tls": {
+        "enabled": true,
+        "server_name": "kfjdi.pages.dev",
+        "insecure": false
+      }
     }
   ],
   "route": {
