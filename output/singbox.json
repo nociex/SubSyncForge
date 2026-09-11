@@ -155,7 +155,7 @@
       "type": "selector",
       "tag": "others-group",
       "outbounds": [
-        "DIRECT"
+        "🏳️ 其他 02 | Trojan"
       ]
     },
     {
@@ -177,6 +177,18 @@
       "server_port": 443,
       "method": "aes-128-gcm",
       "password": "shadowsocks"
+    },
+    {
+      "tag": "🏳️ 其他 02 | Trojan",
+      "type": "trojan",
+      "server": "hyfuuf6.wsone.icu",
+      "server_port": 443,
+      "password": "M7v%w11Se*",
+      "tls": {
+        "enabled": true,
+        "server_name": "hyfuuf6.wsone.icu",
+        "insecure": true
+      }
     }
   ],
   "route": {
