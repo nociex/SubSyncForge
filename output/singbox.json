@@ -155,7 +155,8 @@
       "type": "selector",
       "tag": "others-group",
       "outbounds": [
-        "🏳️ 其他 02 | Trojan"
+        "🇪🇸 ES 02 | SS",
+        "🏳️ 其他 03 | Trojan"
       ]
     },
     {
@@ -179,7 +180,15 @@
       "password": "shadowsocks"
     },
     {
-      "tag": "🏳️ 其他 02 | Trojan",
+      "tag": "🇪🇸 ES 02 | SS",
+      "type": "shadowsocks",
+      "server": "5.188.181.201",
+      "server_port": 9014,
+      "method": "aes-256-cfb",
+      "password": "KnJGad3FqTvjqbaX"
+    },
+    {
+      "tag": "🏳️ 其他 03 | Trojan",
       "type": "trojan",
       "server": "hyfuuf6.wsone.icu",
       "server_port": 443,
