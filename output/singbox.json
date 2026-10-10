@@ -155,7 +155,8 @@
       "type": "selector",
       "tag": "others-group",
       "outbounds": [
-        "🇪🇸 ES 02 | SS"
+        "🇪🇸 ES 02 | SS",
+        "🏳️ 其他 03 | Trojan"
       ]
     },
     {
@@ -185,6 +186,18 @@
       "server_port": 9014,
       "method": "aes-256-cfb",
       "password": "KnJGad3FqTvjqbaX"
+    },
+    {
+      "tag": "🏳️ 其他 03 | Trojan",
+      "type": "trojan",
+      "server": "hyfuuf6.wsone.icu",
+      "server_port": 443,
+      "password": "M7v%w11Se*",
+      "tls": {
+        "enabled": true,
+        "server_name": "hyfuuf6.wsone.icu",
+        "insecure": true
+      }
     }
   ],
   "route": {
