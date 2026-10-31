@@ -148,14 +148,14 @@
       "type": "selector",
       "tag": "us-group",
       "outbounds": [
-        "🇺🇸 US 01 | SS"
+        "🇺🇸 US 02 | SS"
       ]
     },
     {
       "type": "selector",
       "tag": "others-group",
       "outbounds": [
-        "DIRECT"
+        "🇪🇸 ES 01 | SS"
       ]
     },
     {
@@ -171,7 +171,15 @@
       "tag": "dns-out"
     },
     {
-      "tag": "🇺🇸 US 01 | SS",
+      "tag": "🇪🇸 ES 01 | SS",
+      "type": "shadowsocks",
+      "server": "5.188.181.201",
+      "server_port": 9014,
+      "method": "aes-256-cfb",
+      "password": "KnJGad3FqTvjqbaX"
+    },
+    {
+      "tag": "🇺🇸 US 02 | SS",
       "type": "shadowsocks",
       "server": "37.19.198.236",
       "server_port": 443,
