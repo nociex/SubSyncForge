@@ -148,14 +148,14 @@
       "type": "selector",
       "tag": "us-group",
       "outbounds": [
-        "🇺🇸 US 01 | SS"
+        "DIRECT"
       ]
     },
     {
       "type": "selector",
       "tag": "others-group",
       "outbounds": [
-        "🇪🇸 ES 02 | SS"
+        "🇪🇸 ES 01 | SS"
       ]
     },
     {
@@ -171,15 +171,7 @@
       "tag": "dns-out"
     },
     {
-      "tag": "🇺🇸 US 01 | SS",
-      "type": "shadowsocks",
-      "server": "37.19.198.236",
-      "server_port": 443,
-      "method": "aes-128-gcm",
-      "password": "shadowsocks"
-    },
-    {
-      "tag": "🇪🇸 ES 02 | SS",
+      "tag": "🇪🇸 ES 01 | SS",
       "type": "shadowsocks",
       "server": "5.188.181.201",
       "server_port": 9014,
